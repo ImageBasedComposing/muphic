@@ -2,8 +2,12 @@
 #define MIDIZATOR_H
 
 #include <string>
+ 
+#include "Music.h"
 
 using namespace std;
+
+class Music;
 
 class Midizator
 {
@@ -11,7 +15,7 @@ class Midizator
         Midizator();
         virtual ~Midizator();
 
-        string toMidi(); //no recuerdo como evitar recursividad asiq ue no se como poner el music de aqui
+        string toMidi(Music* music); //no recuerdo como evitar recursividad asiq ue no se como poner el music de aqui
 
     protected:
     private:
