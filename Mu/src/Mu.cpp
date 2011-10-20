@@ -1,8 +1,14 @@
-#include "UsrConf.h"
-#include "Composer.h"
-#include <string>
+#include "Mu.h"
 
-using namespace std;
+Mu::Mu()
+{
+    //ctor
+}
+
+Mu::~Mu()
+{
+    //dtor
+}
 
 int main( int argc, const char* argv[] )
 {
@@ -11,4 +17,5 @@ int main( int argc, const char* argv[] )
     UsrConf* usrConf = NULL;
     Composer* comp = NULL;
 
+	return 0;
 }

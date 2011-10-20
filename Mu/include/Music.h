@@ -8,6 +8,8 @@
 
 using namespace std;
 
+class Midizator;
+
 class Music
 {
     public:
