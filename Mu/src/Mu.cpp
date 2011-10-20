@@ -1,6 +1,14 @@
+#include "UsrConf.h"
+#include "Composer.h"
+#include <string>
+
+using namespace std;
+
 int main( int argc, const char* argv[] )
 {
-    char* usr_conf;
-    char* pic;
+    std::string usrConfPath = "";
+    std::string pic = "";
+    UsrConf* usrConf = NULL;
+    Composer* comp = NULL;
 
 }

@@ -1,7 +1,10 @@
 #ifndef COMPOSER_H
 #define COMPOSER_H
 
+#include <string>
 #include "Conf.h"
+
+using namespace std;
 
 class Composer
 {
@@ -9,27 +12,27 @@ class Composer
         Composer();
         virtual ~Composer();
 
-        char* compose();
-        char* compose(char* picPath, char* usrConfPath);
+        string compose();
+        string compose(string picPath, string usrConfPath);
 
 /*------Getters------*/
         Conf* getConfig();
-        char* getUsrConfFile();
-        char* getPic();
-        char* getTempMIDIPath();
+        string getUsrConfFile();
+        string getPic();
+        string getTempMIDIPath();
 
 /*------Setters------*/
-        void setConfig(char* usrConfFile);          //Leemos el fichero de usuario y modificamos config
-        void setUsrConfFile(char* f);
-        void setPic(char* p);
-        void setTempMIDIPath(char* m);
+        void setConfig(string usrConfFile);          //Leemos el fichero de usuario y modificamos config
+        void setUsrConfFile(string f);
+        void setPic(string p);
+        void setTempMIDIPath(string m);
 
     protected:
 
     private:
-        char* usrConfFile;
-        char* pic;
-        char* tempMIDIPath;
+        string usrConfFile;
+        string pic;
+        string tempMIDIPath;
         Conf* config;
 };
 
