@@ -41,12 +41,20 @@
 		</Compiler>
 		<Unit filename="include\Composer.h" />
 		<Unit filename="include\Conf.h" />
+		<Unit filename="include\Midizator.h" />
+		<Unit filename="include\Music.h" />
+		<Unit filename="include\Simbolos.h" />
 		<Unit filename="include\UsrConf.h" />
+		<Unit filename="include\Voz.h" />
 		<Unit filename="include\XML_Interface.h" />
 		<Unit filename="src\Composer.cpp" />
 		<Unit filename="src\Conf.cpp" />
+		<Unit filename="src\Midizator.cpp" />
 		<Unit filename="src\Mu.cpp" />
+		<Unit filename="src\Music.cpp" />
+		<Unit filename="src\Simbolos.cpp" />
 		<Unit filename="src\UsrConf.cpp" />
+		<Unit filename="src\Voz.cpp" />
 		<Unit filename="src\XML_Interface.cpp" />
 		<Extensions>
 			<code_completion>
