@@ -9,3 +9,6 @@ Midizator::~Midizator()
 {
     //dtor
 }
+
+
+string Midizator::toMidi(Music* music) {}

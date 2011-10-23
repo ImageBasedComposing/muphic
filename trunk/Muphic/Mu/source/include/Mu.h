@@ -3,6 +3,7 @@
 
 #include "UsrConf.h"
 #include "Composer.h"
+
 #include <string>
 
 using namespace std;
@@ -14,6 +15,9 @@ class Mu
         virtual ~Mu();
 
     protected:
+
+        UsrConf* usrConf;
+        Composer* composer;
 
     private:
 
