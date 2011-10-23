@@ -3,12 +3,13 @@
 
 #include "Conf.h"
 
-class UsrConf: public Conf
+class UsrConf : public Conf
 {
     public:
         UsrConf();
         virtual ~UsrConf();
-        void read();
+        void read(std::string path);
+
     protected:
     private:
 };

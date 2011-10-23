@@ -9,3 +9,5 @@ UsrConf::~UsrConf()
 {
     //dtor
 }
+
+void UsrConf::read(std::string path) {}

@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Midizator.h"
-#include "Voz.h"
+#include "Voces.h"
 
 using namespace std;
 
@@ -13,6 +13,13 @@ class Midizator;
 class Music
 {
     public:
+
+        /* Por ahora definimos los tipos como enteros */
+
+        typedef int Clave;
+        typedef int Ritmo;
+        typedef int Tempo;
+
         Music();
         virtual ~Music();
 
@@ -21,8 +28,8 @@ class Music
 /*------Getters------*/
         string getName();
         string getcomposer();
-        Voz* getVoz();
-        int getMidizator(); //presupongoq ue lo manejaremos con algun tipo de clave
+        Voces* getVoces();
+        int getMidizator();
         int getTempo();
         int getRitmo();
         int getClave();
@@ -30,22 +37,24 @@ class Music
 /*------Setters------*/
         void setName(string n);
         void setComposer(string c);
-        void setVoz(); //todavia no sabemos parametros de entrada
+        void setVoces(Voces* voces);
         void setMidizator(int m);
-        void setTempo(int t);
-        void setRitmo(int r);
-        void setClave(int c);
+        void setTempo(Tempo t);
+        void setRitmo(Ritmo r);
+        void setClave(Clave c);
 
     protected:
 
     private:
         string name;
         string composer;
-        Voz* voz;
+
+        Voces* voces;
         Midizator* midizator;
-        int tempo;
-        int ritmo;
-        int clave;
+
+        Tempo tempo;
+        Ritmo ritmo;
+        Clave clave;
 };
 
 #endif // MUSIC_H
