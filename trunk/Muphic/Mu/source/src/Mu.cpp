@@ -15,7 +15,7 @@ int main( int argc, const char* argv[] )
     /* Toma de parámetros de entrada */
 
     std::string usrConfPath = "";
-    std::string pic = "";
+    std::string analyzedpic = "";
 
     /* Iniciar compositor y hacer que rule */
 
