@@ -37,8 +37,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\..\..\bin\Debug</OutDir>
-    <IncludePath>$(SolutionDir)\..\source\include;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)\..\..\bin\Debug</OutDir>
+    <IncludePath>$(ProjectDir)\..\source\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

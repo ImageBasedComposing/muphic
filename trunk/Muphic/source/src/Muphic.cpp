@@ -24,8 +24,9 @@ int main( int argc, const char* argv[] )
 	
 	if (argc < 2)
 	{
-		cout << "Too few arguments in function call";
+		cout << "Too few arguments in function call" << endl;
 		// showUsage();
+		system("PAUSE");
 		return 1;
 	}
 
@@ -50,7 +51,7 @@ int main( int argc, const char* argv[] )
 
 	std::string analyzedPicPath = changeExtension(picPath, "rec");
 
-    std::string muExeFile = phicExe + " " + usrConfPath + " " + analyzedPicPath;
+    std::string muExeFile = muExe + " " + usrConfPath + " " + analyzedPicPath;
     system(muExeFile.c_str());
 
     cout << "Finaliza la composicion" << endl;
