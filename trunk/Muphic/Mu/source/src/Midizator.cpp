@@ -11,4 +11,4 @@ Midizator::~Midizator()
 }
 
 
-string Midizator::toMidi(Music* music) {}
+string Midizator::toMidi(Music* music) { return NULL; }

@@ -11,14 +11,14 @@ Composer::~Composer()
 }
 
 
-string Composer::compose() {}
-string Composer::compose(string picPath, string usrConfPath) {}
+string Composer::compose() { return NULL; }
+string Composer::compose(string picPath, string usrConfPath) { return NULL; }
 
 /*------Getters------*/
-Conf* Composer::getConfig() {}
-string Composer::getUsrConfFile() {}
-string Composer::getPic() {}
-string Composer::getTmpMIDIPath() {}
+Conf* Composer::getConfig() { return NULL; }
+string Composer::getUsrConfFile() { return NULL; }
+string Composer::getPic() { return NULL; }
+string Composer::getTmpMIDIPath() { return NULL; }
 
 /*------Setters------*/
 void Composer::setConfig(string usrConfFile) {}
