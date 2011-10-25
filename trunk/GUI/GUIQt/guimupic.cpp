@@ -1,13 +1,5 @@
 #include "guimupic.h"
-#include "ui_guimupic.h"
 
-#include <QFile>
-#include <QMessageBox>
-#include <QFileDialog>
-
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QPixmap>
 
 GuiMupic::GuiMupic(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +11,17 @@ GuiMupic::GuiMupic(QWidget *parent) :
 GuiMupic::~GuiMupic()
 {
     delete ui;
+}
+
+void GuiMupic::initialize()
+{
+    newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
+    ui->graphicsView_Pic->setScene(newScene);
+
+    QPixmap pixImg(DEFAULT_PIC);
+    pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->graphicsView_Pic->scene()->addPixmap(pixImg);
+
 }
 
 void GuiMupic::on_toolButton_OutputMidi_clicked()
@@ -50,7 +53,9 @@ void GuiMupic::on_toolButton_InputPic_clicked()
          return;
         }
         ui->lineEdit_InputPic->setText(fileName);
-        QGraphicsScene * newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
+
+        delete newScene; newScene = NULL;
+        newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
         ui->graphicsView_Pic->setScene(newScene);
 
         QPixmap pixImg(fileName);
@@ -70,5 +75,4 @@ void GuiMupic::on_pushButton_Generate_clicked()
     const char * commandChar = bytes.data();
 
     system(commandChar);
-    //system("PicMu a");
 }
