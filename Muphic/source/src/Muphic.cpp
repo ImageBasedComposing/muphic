@@ -42,7 +42,9 @@ int main( int argc, const char* argv[] )
 	{
 		cout << "Too few arguments in function call" << endl;
 		showUsage();
-		system("PAUSE");
+		cin.get();
+		cin.ignore(cin.rdbuf()->in_avail());
+
 		return 1;
 	}
 
@@ -55,25 +57,25 @@ int main( int argc, const char* argv[] )
 
     /* Ejecutar phic */
 
-    cout << "Comienza el analisis de la imagen" << endl << endl;
+    cout << "Image analysis beginning" << endl << endl;
 
     std::string picExeFile = phicExe + " " + usrConfPath + " " + picPath;
     system(picExeFile.c_str());
 	
-    cout << endl << "Finaliza el analisis de la imagen" << endl;
+    cout << endl << "Image analysis completed" << endl;
 	cin.get();
 	cin.ignore(cin.rdbuf()->in_avail());
 
     /* Ejecutar mu*/
 
-    cout << "Comienza la composicion" << endl << endl;
+    cout << "Image-based composing beginning" << endl << endl;
 
 	std::string analyzedPicPath = changeExtension(picPath, "rec");
 
     std::string muExeFile = muExe + " " + usrConfPath + " " + analyzedPicPath;
     system(muExeFile.c_str());
 
-    cout << endl << "Finaliza la composicion" << endl;
+    cout << endl << "Image-based composing completed" << endl;
 	cin.get();
 	cin.ignore(cin.rdbuf()->in_avail());
 

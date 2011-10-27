@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)\..\..\bin\Debug</OutDir>
+    <OutDir>$(ProjectDir)\..\..\bin\Debug\</OutDir>
     <IncludePath>$(ProjectDir)\..\source\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -64,6 +64,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\source\include\Composer.h" />
+    <ClInclude Include="..\source\include\ComposerDemo.h" />
     <ClInclude Include="..\source\include\Conf.h" />
     <ClInclude Include="..\source\include\Midizator.h" />
     <ClInclude Include="..\source\include\Mu.h" />
@@ -77,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Composer.cpp" />
+    <ClCompile Include="..\source\src\ComposerDemo.cpp" />
     <ClCompile Include="..\source\src\Conf.cpp" />
     <ClCompile Include="..\source\src\Midizator.cpp" />
     <ClCompile Include="..\source\src\Mu.cpp" />

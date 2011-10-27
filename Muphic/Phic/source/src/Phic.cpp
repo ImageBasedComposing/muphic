@@ -12,7 +12,6 @@ Phic::~Phic()
 
 int main( int argc, const char* argv[] )
 {
-
-    cout << "..analizando.." << endl;
+    cout << "...analyzing..." << endl;
 	return 0;
 }
