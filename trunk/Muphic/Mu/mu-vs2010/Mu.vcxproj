@@ -38,7 +38,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)\..\..\bin\Debug\</OutDir>
-    <IncludePath>$(ProjectDir)\..\source\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\..\TinyXML\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -63,6 +64,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
+    <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
     <ClInclude Include="..\source\include\Composer.h" />
     <ClInclude Include="..\source\include\ComposerDemo.h" />
     <ClInclude Include="..\source\include\Conf.h" />
@@ -77,6 +80,10 @@
     <ClInclude Include="..\source\include\XML_Interface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\TinyXML\src\tinystr.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp" />
     <ClCompile Include="..\source\src\Composer.cpp" />
     <ClCompile Include="..\source\src\ComposerDemo.cpp" />
     <ClCompile Include="..\source\src\Conf.cpp" />

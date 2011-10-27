@@ -1,0 +1,198 @@
+<?xml version="1.0" standalone="yes"?>
+<shapes>
+	<figure>
+		<id>
+			<value> 1 </value>
+		</id>
+		
+		<color>
+			<RGB>
+				<R> 255 </R>
+				<G> 242 </G>
+				<B> 0 </B>
+			</RGB>
+			<gradient> 0 </gradient>
+		</color>
+		
+		<vertexList>
+			<vertex>
+				<position>
+					<x> 
+						<value> 16 </value>
+					</x>
+					<y> 
+						<value> 50 </value>
+					</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x> 
+						<value> 118 </value>
+					</x>
+					<y> 
+						<value> 50 </value>
+					</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x> 
+						<value> 118 </value>
+					</x>
+					<y> 
+						<value> 143 </value>
+					</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x> 
+						<value> 16 </value>
+					</x>
+					<y> 
+						<value> 143 </value>
+					</y>
+				</position>
+			</vertex>
+		</vertexList>
+		<canvas>
+			<figure>
+				<id>
+					<value> 2 </value>
+				</id>
+				
+				<color>
+					<RGB>
+						<R> 195 </R>
+						<G> 195 </G>
+						<B> 195	</B>
+					</RGB>
+					<gradient> 0 </gradient>
+				</color>
+				
+				<vertexList>
+					<vertex>
+						<position>
+							<x> 
+								<value> 33 </value>
+							</x>
+							<y> 
+								<value> 66 </value>
+							</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x> 
+								<value> 85 </value>
+							</x>
+							<y> 
+								<value> 118 </value>
+							</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x> 
+								<value> 33 </value>
+							</x>
+							<y> 
+								<value> 118 </value>
+							</y>
+						</position>
+					</vertex>
+				</vertexList>
+			</figure>
+		</canvas>
+	</figure>
+	
+	<figure>
+		<id>
+			<value> 3 </value>
+		</id>
+		
+		<color>
+			<RGB>
+				<R> 237 </R>
+				<G> 28 	</G>
+				<B> 36 	</B>
+			</RGB>
+			<gradient> 0 </gradient>
+		</color>
+		
+		<vertexList>
+			<arcVertex>
+				<center>
+					<position>
+						<x> 
+							<value> 193	</value>
+						</x>
+						<y> 
+							<value> 88	</value>
+						</y>
+					</position>
+				</center>
+			</arcVertex>
+			<vertex>
+				<position>
+					<x> 
+						<value> 144 </value>
+					</x>
+					<y> 
+						<value> 88 </value>
+					</y>
+				</position>
+			</vertex>
+		</vertexList>
+		<canvas>
+			<figure>
+				<id>
+					<value> 4 </value>
+				</id>
+				
+				<color>
+					<RGB>
+						<R> 34 </R>
+						<G> 177 </G>
+						<B> 76	</B>
+					</RGB>
+					<gradient> 0 </gradient>
+				</color>
+				
+				<vertexList>
+					<vertex>
+						<position>
+							<x> 
+								<value> 186 </value>
+							</x>
+							<y> 
+								<value> 104 </value>
+							</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x> 
+								<value> 209 </value>
+							</x>
+							<y> 
+								<value> 57 </value>
+							</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x> 
+								<value> 233 </value>
+							</x>
+							<y> 
+								<value> 104 </value>
+							</y>
+						</position>
+					</vertex>
+				</vertexList>
+			</figure>
+		</canvas>
+	</figure>
+</shapes>
