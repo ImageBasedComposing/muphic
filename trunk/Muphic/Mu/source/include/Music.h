@@ -27,21 +27,21 @@ class Music
 
 /*------Getters------*/
         string getName();
-        string getcomposer();
+        string getComposer();
         Voces* getVoces();
-        int getMidizator();
-        int getTempo();
-        int getRitmo();
-        int getClave();
+        Midizator* getMidizator();
+        Tempo* getTempo();
+        Ritmo* getRitmo();
+        Clave* getClave();
 
 /*------Setters------*/
         void setName(string n);
         void setComposer(string c);
         void setVoces(Voces* voces);
-        void setMidizator(int m);
-        void setTempo(Tempo t);
-        void setRitmo(Ritmo r);
-        void setClave(Clave c);
+        void setMidizator(Midizator* m);
+        void setTempo(Tempo* t);
+        void setRitmo(Ritmo* r);
+        void setClave(Clave* c);
 
     protected:
 
