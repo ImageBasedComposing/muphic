@@ -67,8 +67,9 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 void GuiMupic::on_pushButton_Generate_clicked()
 {
     QString picFile = ui->lineEdit_InputPic->text();
-    QString exeFile = "PicMu";
-    QString command = exeFile + " " + picFile;
+    QString userConfFile = "dummypath";
+    QString exeFile = "Muphic.exe";
+    QString command = exeFile + " " + userConfFile + " " + picFile;
 
     //conversion de QString a char *
     QByteArray   bytes  = command.toAscii();

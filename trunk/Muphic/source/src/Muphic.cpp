@@ -23,7 +23,7 @@ std::string getPath(std::string exeFile)
 	int i = exeFile.find_last_of("/\\");
 
 	if (i > 0)
-		return exeFile.substr(0, i);
+		return exeFile.substr(0, i) + "\\";
 	else
 		return "";
 }
@@ -52,8 +52,8 @@ int main( int argc, const char* argv[] )
     std::string picPath = argv[2];
 
 	std::string executionPath = getPath(argv[0]);
-    std::string phicExe = executionPath + "\\Phic.exe";
-    std::string muExe = executionPath + "\\Mu.exe";
+    std::string phicExe = executionPath + "Phic.exe";
+    std::string muExe = executionPath + "Mu.exe";
 
     /* Ejecutar phic */
 
