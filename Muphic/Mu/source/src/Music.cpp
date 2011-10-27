@@ -31,7 +31,17 @@ Midizator* Music::getMidizator()
 	return midizator;
 }
 
-Tempo* Music::getTempo()
+Music::Tempo Music::getTempo()
 {
 	return tempo;
+}
+
+Music::Ritmo Music::getRitmo()
+{
+	return ritmo;
+}
+
+Music::Clave Music::getClave()
+{
+	return clave;
 }
