@@ -37,7 +37,7 @@ class Music
 /*------Setters------*/
         void setName(string n);
         void setComposer(string c);
-        void setVoces(Voces* voces);
+        void setVoces(Voces* v);
         void setMidizator(Midizator* m);
         void setTempo(Tempo t);
         void setRitmo(Ritmo r);

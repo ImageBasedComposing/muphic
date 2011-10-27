@@ -45,3 +45,40 @@ Music::Clave Music::getClave()
 {
 	return clave;
 }
+
+//-----Setters-----//
+
+void Music::setName(string n)
+{
+	name = n;
+}
+
+void Music::setComposer(string c)
+{
+	composer = c;
+}
+
+void Music::setVoces(Voces* v)
+{
+	voces = v;
+}
+
+void Music::setMidizator(Midizator* m)
+{
+	midizator = m;
+}
+
+void Music::setTempo(Music::Tempo t)
+{
+	tempo = t;
+}
+
+void Music::setRitmo(Music::Ritmo r)
+{
+	ritmo = r;
+}
+
+void Music::setClave(Music::Clave c)
+{
+	clave = c;
+}
