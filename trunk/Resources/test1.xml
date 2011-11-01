@@ -1,105 +1,76 @@
 <?xml version="1.0" standalone="yes"?>
 <shapes>
 	<figure>
-		<id>
-			<value> 1 </value>
+		<id>1
 		</id>
 		
 		<color>
+			<name>Amarillo</name>
 			<RGB>
-				<R> 255 </R>
-				<G> 242 </G>
-				<B> 0 </B>
+				<R>255</R>
+				<G>242</G>
+				<B>0</B>
 			</RGB>
-			<gradient> 0 </gradient>
+			<gradient>0</gradient>
 		</color>
 		
-		<vertexList>
+		<vertexList num="4">
 			<vertex>
 				<position>
-					<x> 
-						<value> 16 </value>
-					</x>
-					<y> 
-						<value> 50 </value>
-					</y>
+					<x>16</x>
+					<y>50</y>
 				</position>
 			</vertex>
 			<vertex>
 				<position>
-					<x> 
-						<value> 118 </value>
-					</x>
-					<y> 
-						<value> 50 </value>
-					</y>
+					<x>118</x>
+					<y>50</y>
 				</position>
 			</vertex>
 			<vertex>
 				<position>
-					<x> 
-						<value> 118 </value>
-					</x>
-					<y> 
-						<value> 143 </value>
-					</y>
+					<x>118</x>
+					<y>143</y>
 				</position>
 			</vertex>
 			<vertex>
 				<position>
-					<x> 
-						<value> 16 </value>
-					</x>
-					<y> 
-						<value> 143 </value>
-					</y>
+					<x>16</x>
+					<y>143</y>
 				</position>
 			</vertex>
 		</vertexList>
 		<canvas>
 			<figure>
-				<id>
-					<value> 2 </value>
-				</id>
+				<id>2</id>
 				
 				<color>
+					<name>Gris</name>
 					<RGB>
-						<R> 195 </R>
-						<G> 195 </G>
-						<B> 195	</B>
+						<R>195</R>
+						<G>195</G>
+						<B>195</B>
 					</RGB>
-					<gradient> 0 </gradient>
+					<gradient>0</gradient>
 				</color>
 				
-				<vertexList>
+				<vertexList num="3">
 					<vertex>
 						<position>
-							<x> 
-								<value> 33 </value>
-							</x>
-							<y> 
-								<value> 66 </value>
-							</y>
+							<x>33</x>
+							<y>66</y>
 						</position>
 					</vertex>
 					<vertex>
 						<position>
-							<x> 
-								<value> 85 </value>
-							</x>
-							<y> 
-								<value> 118 </value>
-							</y>
+							<x>85</x>
+							<y>118</y>
 						</position>
 					</vertex>
 					<vertex>
 						<position>
-							<x> 
-								<value> 33 </value>
-							</x>
-							<y> 
-								<value> 118 </value>
-							</y>
+							<x>33</x>
+							<y>118</y>
 						</position>
 					</vertex>
 				</vertexList>
@@ -108,87 +79,63 @@
 	</figure>
 	
 	<figure>
-		<id>
-			<value> 3 </value>
-		</id>
+		<id>3</id>
 		
 		<color>
+			<name>Rojo</name>
 			<RGB>
-				<R> 237 </R>
-				<G> 28 	</G>
-				<B> 36 	</B>
+				<R>237</R>
+				<G>28</G>
+				<B>36</B>
 			</RGB>
-			<gradient> 0 </gradient>
+			<gradient>0</gradient>
 		</color>
 		
-		<vertexList>
-			<arcVertex>
-				<center>
-					<position>
-						<x> 
-							<value> 193	</value>
-						</x>
-						<y> 
-							<value> 88	</value>
-						</y>
-					</position>
-				</center>
-			</arcVertex>
+		<vertexList num="2">
+			<vertex arc="complete">
+				<position>
+					<x>193</x>
+					<y>88</y>
+				</position>
+			</vertex>
 			<vertex>
 				<position>
-					<x> 
-						<value> 144 </value>
-					</x>
-					<y> 
-						<value> 88 </value>
-					</y>
+					<x>144</x>
+					<y>88</y>
 				</position>
 			</vertex>
 		</vertexList>
 		<canvas>
 			<figure>
-				<id>
-					<value> 4 </value>
-				</id>
+				<id>4</id>
 				
 				<color>
+					<name>Verde</name>
 					<RGB>
-						<R> 34 </R>
-						<G> 177 </G>
-						<B> 76	</B>
+						<R>34</R>
+						<G>177</G>
+						<B>76</B>
 					</RGB>
-					<gradient> 0 </gradient>
+					<gradient>0</gradient>
 				</color>
 				
-				<vertexList>
+				<vertexList num="3">
 					<vertex>
 						<position>
-							<x> 
-								<value> 186 </value>
-							</x>
-							<y> 
-								<value> 104 </value>
-							</y>
+							<x>186</x>
+							<y>104</y>
 						</position>
 					</vertex>
 					<vertex>
 						<position>
-							<x> 
-								<value> 209 </value>
-							</x>
-							<y> 
-								<value> 57 </value>
-							</y>
+							<x>209</x>
+							<y>57</y>
 						</position>
 					</vertex>
 					<vertex>
 						<position>
-							<x> 
-								<value> 233 </value>
-							</x>
-							<y> 
-								<value> 104 </value>
-							</y>
+							<x>233</x>
+							<y>104</y>
 						</position>
 					</vertex>
 				</vertexList>
