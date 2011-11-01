@@ -46,7 +46,7 @@ int main( int argc, const char* argv[] )
 
 	Composer* comp = new ComposerDemo();
 
-    comp->compose();
+    comp->compose(analysedPic, usrConfPath);
 
 	return 0;
 }
