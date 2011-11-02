@@ -1,9 +1,9 @@
 #ifndef MUPHIC_H
 #define MUPHIC_H
 
-
 #include <string>
 #include <iostream>
+#include "aux_functions.h"
 
 using namespace std;
 

@@ -3,6 +3,9 @@
 
 #include "Composer.h"
 #include "TinyXML.h"
+#include "MidizatorABC.h"
+
+class MidizatorABC;
 
 struct Point {   
    int x; 

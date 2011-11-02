@@ -7,19 +7,22 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\Debug\Muphic" prefix_auto="1" extension_auto="1" />
+				<Option output="..\bin\Debug\Muphic" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="..\..\source\include" />
+					<Add directory="..\source\include" />
+					<Add directory="..\common\include" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="..\..\source\include" />
+					<Add directory="..\source\include" />
+					<Add directory="..\common\include" />
 				</ResourceCompiler>
 				<Linker>
-					<Add directory="..\..\source\include" />
+					<Add directory="..\source\include" />
+					<Add directory="..\common\include" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -38,8 +41,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="..\..\source\include\Muphic.h" />
-		<Unit filename="..\..\source\src\Muphic.cpp" />
+		<Unit filename="..\common\include\aux_functions.h" />
+		<Unit filename="..\source\include\Muphic.h" />
+		<Unit filename="..\source\src\Muphic.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

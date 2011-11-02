@@ -10,29 +10,10 @@ Muphic::~Muphic()
     //dtor
 }
 
-// works
-std::string changeExtension(std::string picPath, std::string extension)
-{
-	int i = picPath.find_last_of('.');
-
-	return picPath.substr(0, i) + '.' + extension;
-}
-
-std::string getPath(std::string exeFile)
-{
-	int i = exeFile.find_last_of("/\\");
-
-	if (i > 0)
-		return exeFile.substr(0, i) + "\\";
-	else
-		return "";
-}
-
 void showUsage()
 {
 	cout << "Muphic.exe userConfPath imagePath" << endl;
 }
-
 
 int main( int argc, const char* argv[] )
 {
@@ -70,7 +51,7 @@ int main( int argc, const char* argv[] )
 
     cout << "Image-based composing beginning" << endl << endl;
 
-	std::string analyzedPicPath = changeExtension(picPath, "rec");
+	std::string analyzedPicPath = changeExtension(picPath, "");
 
     std::string muExeFile = muExe + " " + usrConfPath + " " + analyzedPicPath;
     system(muExeFile.c_str());

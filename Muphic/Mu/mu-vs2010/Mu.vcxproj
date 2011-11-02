@@ -38,7 +38,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)\..\..\bin\Debug\</OutDir>
-    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\..\TinyXML\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\..\TinyXML\include;$(ProjectDir)\..\..\common\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\include\aux_functions.h" />
     <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
     <ClInclude Include="..\source\include\Composer.h" />

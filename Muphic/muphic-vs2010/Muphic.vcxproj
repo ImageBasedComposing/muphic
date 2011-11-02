@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\..\source\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\common\include;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)\..\bin\Debug\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -63,6 +63,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\include\aux_functions.h" />
     <ClInclude Include="..\source\include\Muphic.h" />
   </ItemGroup>
   <ItemGroup>
