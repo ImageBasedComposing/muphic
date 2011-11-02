@@ -7,23 +7,29 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\Debug\Mu" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\bin\Debug\Mu" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="..\..\source\include" />
+					<Add directory="..\source\include" />
+					<Add directory="..\..\common\include" />
+					<Add directory="..\..\TinyXML\include" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="..\..\source\include" />
+					<Add directory="..\source\include" />
+					<Add directory="..\..\common\include" />
+					<Add directory="..\..\TinyXML\include" />
 				</ResourceCompiler>
 				<Linker>
-					<Add directory="..\..\source\include" />
+					<Add directory="..\source\include" />
+					<Add directory="..\..\common\include" />
+					<Add directory="..\..\TinyXML\include" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\Mu" prefix_auto="1" extension_auto="1" />
+				<Option output="..\..\bin\Release\Mu" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\Release\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -38,28 +44,39 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="..\..\source\include\Composer.h" />
-		<Unit filename="..\..\source\include\Conf.h" />
-		<Unit filename="..\..\source\include\Midizator.h" />
-		<Unit filename="..\..\source\include\Mu.h" />
-		<Unit filename="..\..\source\include\Music.h" />
-		<Unit filename="..\..\source\include\Simbolo.h" />
-		<Unit filename="..\..\source\include\Simbolos.h" />
-		<Unit filename="..\..\source\include\UsrConf.h" />
-		<Unit filename="..\..\source\include\Voces.h" />
-		<Unit filename="..\..\source\include\Voz.h" />
-		<Unit filename="..\..\source\include\XML_Interface.h" />
-		<Unit filename="..\..\source\src\Composer.cpp" />
-		<Unit filename="..\..\source\src\Conf.cpp" />
-		<Unit filename="..\..\source\src\Midizator.cpp" />
-		<Unit filename="..\..\source\src\Mu.cpp" />
-		<Unit filename="..\..\source\src\Music.cpp" />
-		<Unit filename="..\..\source\src\Simbolo.cpp" />
-		<Unit filename="..\..\source\src\Simbolos.cpp" />
-		<Unit filename="..\..\source\src\UsrConf.cpp" />
-		<Unit filename="..\..\source\src\Voces.cpp" />
-		<Unit filename="..\..\source\src\Voz.cpp" />
-		<Unit filename="..\..\source\src\XML_Interface.cpp" />
+		<Unit filename="..\source\include\Composer.h" />
+		<Unit filename="..\source\include\ComposerDemo.h" />
+		<Unit filename="..\source\include\Conf.h" />
+		<Unit filename="..\source\include\Midizator.h" />
+		<Unit filename="..\source\include\MidizatorABC.h" />
+		<Unit filename="..\source\include\Mu.h" />
+		<Unit filename="..\source\include\Music.h" />
+		<Unit filename="..\source\include\Simbolo.h" />
+		<Unit filename="..\source\include\Simbolos.h" />
+		<Unit filename="..\source\include\UsrConf.h" />
+		<Unit filename="..\source\include\Voces.h" />
+		<Unit filename="..\source\include\Voz.h" />
+		<Unit filename="..\source\include\XML_Interface.h" />
+		<Unit filename="..\source\src\Composer.cpp" />
+		<Unit filename="..\source\src\ComposerDemo.cpp" />
+		<Unit filename="..\source\src\Conf.cpp" />
+		<Unit filename="..\source\src\Midizator.cpp" />
+		<Unit filename="..\source\src\MidizatorABC.cpp" />
+		<Unit filename="..\source\src\Mu.cpp" />
+		<Unit filename="..\source\src\Music.cpp" />
+		<Unit filename="..\source\src\Simbolo.cpp" />
+		<Unit filename="..\source\src\Simbolos.cpp" />
+		<Unit filename="..\source\src\UsrConf.cpp" />
+		<Unit filename="..\source\src\Voces.cpp" />
+		<Unit filename="..\source\src\Voz.cpp" />
+		<Unit filename="..\source\src\XML_Interface.cpp" />
+		<Unit filename="..\..\TinyXML\include\tinystr.h" />
+		<Unit filename="..\..\TinyXML\include\tinyxml.h" />
+		<Unit filename="..\..\TinyXML\src\tinystr.cpp" />
+		<Unit filename="..\..\TinyXML\src\tinyxml.cpp" />
+		<Unit filename="..\..\TinyXML\src\tinyxmlerror.cpp" />
+		<Unit filename="..\..\TinyXML\src\tinyxmlparser.cpp" />
+		<Unit filename="..\..\common\include\aux_functions.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

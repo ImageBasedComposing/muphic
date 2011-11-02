@@ -16,6 +16,7 @@ class Midizator
         virtual ~Midizator();
 
         virtual string toMidi(Music* music);
+		virtual string toMidi(std::string music, std::string converter = "");
 
     protected:
     private:

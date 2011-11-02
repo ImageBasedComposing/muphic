@@ -204,7 +204,15 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	fclose(fabc);
 
-	return pathABC;
+
+	/**
+		Paso a midi
+	**/
+
+	Midizator* abcMidi = new MidizatorABC();
+	string pathMidi = abcMidi->toMidi(pathABC);
+
+	return pathMidi;
 }
 
 

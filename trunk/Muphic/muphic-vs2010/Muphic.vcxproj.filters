@@ -18,6 +18,9 @@
     <ClInclude Include="..\source\include\Muphic.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\include\aux_functions.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Muphic.cpp">
