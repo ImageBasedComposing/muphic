@@ -2,7 +2,7 @@
 
 Voz::Voz()
 {
-    //ctor
+
 }
 
 Voz::~Voz()

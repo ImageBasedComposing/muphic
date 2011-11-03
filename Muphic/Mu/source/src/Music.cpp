@@ -2,7 +2,9 @@
 
 Music::Music()
 {
-    //ctor
+    name = "";
+	composer = "";
+	tempo = 1;
 }
 
 Music::~Music()
@@ -21,16 +23,6 @@ string Music::getComposer()
 	return composer;
 }
 
-Voces* Music::getVoces()
-{
-	return voces;
-}
-
-Midizator* Music::getMidizator()
-{
-	return midizator;
-}
-
 Music::Tempo Music::getTempo()
 {
 	return tempo;
@@ -46,6 +38,16 @@ Music::Clave Music::getClave()
 	return clave;
 }
 
+Voces* Music::getVoces()
+{
+	return voces;
+}
+
+Midizator* Music::getMidizator()
+{
+	return midizator;
+}
+
 //-----Setters-----//
 
 void Music::setName(string n)
@@ -56,16 +58,6 @@ void Music::setName(string n)
 void Music::setComposer(string c)
 {
 	composer = c;
-}
-
-void Music::setVoces(Voces* v)
-{
-	voces = v;
-}
-
-void Music::setMidizator(Midizator* m)
-{
-	midizator = m;
 }
 
 void Music::setTempo(Music::Tempo t)
@@ -81,4 +73,16 @@ void Music::setRitmo(Music::Ritmo r)
 void Music::setClave(Music::Clave c)
 {
 	clave = c;
+}
+
+void Music::setVoces(Voces* v)
+{
+	delete voces;
+	voces = v;
+}
+
+void Music::setMidizator(Midizator* m)
+{
+	delete midizator;
+	midizator = m;
 }
