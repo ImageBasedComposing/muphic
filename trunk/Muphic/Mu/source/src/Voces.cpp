@@ -29,7 +29,7 @@ void Voces::insert(Voz* v, int n)
 {
 	list<Voz*>::iterator it = voces.begin();
 
-	for(int i = 0; i = n; i++)
+	for(int i = 0; i < n; i++)
 	{
 		it++;
 	}
@@ -41,7 +41,7 @@ Voz* Voces::getAt(int n)
 {
 	list<Voz*>::iterator it = voces.begin();
 
-	for(int i = 0; i = n; i++)
+	for(int i = 0; i < n; i++)
 	{
 		it++;
 	}

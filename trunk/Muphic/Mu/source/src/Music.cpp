@@ -4,7 +4,9 @@ Music::Music()
 {
     name = "";
 	composer = "";
-	tempo = 1;
+
+	midizator = new Midizator();
+	voces = new Voces();
 }
 
 Music::~Music()

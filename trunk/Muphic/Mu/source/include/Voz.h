@@ -18,17 +18,17 @@ class Voz
 
 /*------Getters------*/
         int getInstrumento();
-        Simbolos getSimbolos();
+        Simbolos* getSimbolos();
 
 /*------Setters------*/
         void setInstrumento(int i);
-        void setSimbolos(Simbolos s);
+        void setSimbolos(Simbolos* s);
 
     protected:
 
     private:
         Instrumento instrumento;
-        Simbolos simbolos;
+        Simbolos* simbolos;
 };
 
 #endif // VOZ_H

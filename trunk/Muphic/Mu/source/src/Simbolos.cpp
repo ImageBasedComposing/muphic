@@ -30,7 +30,7 @@ void Simbolos::insert(Simbolo* s, int n)
 {
 	list<Simbolo*>::iterator it = simbolos.begin();
 
-	for(int i = 0; i = n; i++)
+	for(int i = 0; i < n; i++)
 	{
 		it++;
 	}
@@ -42,7 +42,7 @@ Simbolo* Simbolos::getAt(int n)
 {
 	list<Simbolo*>::iterator it = simbolos.begin();
 
-	for(int i = 0; i = n; i++)
+	for(int i = 0; i < n; i++)
 	{
 		it++;
 	}
