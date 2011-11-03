@@ -1,10 +1,12 @@
 #ifndef MIDIZATORABC_H
 #define MIDIZATORABC_H
 
+
 #include "Midizator.h"
 
 #include <string>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
