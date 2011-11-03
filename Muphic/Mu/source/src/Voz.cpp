@@ -2,7 +2,7 @@
 
 Voz::Voz()
 {
-
+	simbolos = new Simbolos();
 }
 
 Voz::~Voz()
@@ -16,7 +16,7 @@ int Voz::getInstrumento()
 	return instrumento;
 }
 
-Simbolos Voz::getSimbolos()
+Simbolos* Voz::getSimbolos()
 {
 	return simbolos;
 }
@@ -27,7 +27,7 @@ void Voz::setInstrumento(int i)
 	instrumento = i;
 }
 
-void Voz::setSimbolos(Simbolos s)
+void Voz::setSimbolos(Simbolos* s)
 {
 	simbolos = s;
 }
