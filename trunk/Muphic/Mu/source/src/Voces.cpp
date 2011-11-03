@@ -2,7 +2,7 @@
 
 Voces::Voces()
 {
-    //ctor	
+	voces.clear();
 }
 
 Voces::~Voces()
@@ -19,13 +19,13 @@ int Voces::size()
 	return voces.size();
 }
 
-void Voces::addElem(Voz* v)
+void Voces::pushBack(Voz* v)
 {
 	voces.push_back(v);
 }
 
 //Añade el elemento empujando el que estaba en n
-void Voces::addInPos(Voz* v, int n)
+void Voces::insert(Voz* v, int n)
 {
 	list<Voz*>::iterator it = voces.begin();
 
@@ -37,7 +37,7 @@ void Voces::addInPos(Voz* v, int n)
 	voces.insert(it,v);
 }
 
-Voz* Voces::getInPos(int n)
+Voz* Voces::getAt(int n)
 {
 	list<Voz*>::iterator it = voces.begin();
 

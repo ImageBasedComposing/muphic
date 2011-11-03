@@ -1,8 +1,9 @@
 #ifndef VOCES_H
 #define VOCES_H
 
-#include <list>
 #include "Voz.h"
+
+#include <list>
 
 using namespace std;
 
@@ -13,9 +14,12 @@ class Voces
         virtual ~Voces();
 
         /* envoltorio del vector stl */
-		void addElem(Voz* v);
-		void addInPos(Voz* v, int n);		//Añade un elemento en la pos n empujando el que ya estbaa
-		Voz* getInPos(int n);
+
+		void pushBack(Voz* v);
+		void insert(Voz* v, int n);		//Añade un elemento en la pos n empujando el que ya estaba
+
+		Voz* getAt(int n);
+
 		bool empty();
 		int size();
 
