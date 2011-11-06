@@ -2,13 +2,13 @@
 #define COMPOSER_DEMO__H
 
 #include "Composer.h"
-#include "TinyXML.h"
+#include "tinyxml.h"
 #include "MidizatorABC.h"
 
 class MidizatorABC;
 
-struct Point {   
-   int x; 
+struct Point {
+   int x;
    int y;
 };
 

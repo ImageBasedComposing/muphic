@@ -20,7 +20,7 @@ std::string getPath(std::string exeFile)
 	int i = exeFile.find_last_of("/\\");
 
 	if (i > 0)
-		return exeFile.substr(0, i) + "\\";
+		return exeFile.substr(0, i) + "/";
 	else
 		return "";
 }
