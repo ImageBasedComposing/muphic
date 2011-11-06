@@ -6,8 +6,6 @@
     #include <sys/wait.h>
 #endif
 
-#include <process.h>
-
 MidizatorABC::MidizatorABC()
 {
     //ctor
