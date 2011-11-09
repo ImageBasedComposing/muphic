@@ -1,5 +1,6 @@
 #include "Mu.h"
 #include "ComposerDemo.h"
+#include "Acorde.h"
 
 Mu::Mu()
 {
@@ -48,6 +49,7 @@ int main( int argc, const char* argv[] )
 	Composer* comp = new ComposerDemo();
 
     comp->compose(analysedPic, usrConfPath);
+
 
 	return 0;
 }

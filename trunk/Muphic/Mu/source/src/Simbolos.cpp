@@ -2,12 +2,12 @@
 
 Simbolos::Simbolos()
 {
-    //ctor
+    simbolos.clear();
 }
 
 Simbolos::~Simbolos()
 {
-    //dtor
+    simbolos.clear();
 }
 
 bool Simbolos::empty()
@@ -24,7 +24,6 @@ void Simbolos::pushBack(Simbolo* s)
 {
 	simbolos.push_back(s);
 }
-
 
 void Simbolos::insert(Simbolo* s, int n)
 {

@@ -7,7 +7,7 @@ Voces::Voces()
 
 Voces::~Voces()
 {
-    //dtor
+    voces.clear();
 }
 
 bool Voces::empty()

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef AUX_FUNCTIONS__H
 #define AUX_FUNCTIONS__H
 

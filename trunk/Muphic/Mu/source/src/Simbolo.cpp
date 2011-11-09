@@ -2,10 +2,28 @@
 
 Simbolo::Simbolo()
 {
-    //ctor
+	//por defecto
+    duracion = 16; // duracion de una negra
+}
+
+Simbolo::Simbolo(float duracion)
+{
+    this->duracion = duracion;
 }
 
 Simbolo::~Simbolo()
 {
-    //dtor
+
+}
+
+//------Getters------//
+float Simbolo::getDuracion()
+{
+	return duracion;
+}
+
+//------Setters------//
+void Simbolo::setDuracion(float d)
+{
+	duracion = d;
 }

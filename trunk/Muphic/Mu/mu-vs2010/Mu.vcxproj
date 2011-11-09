@@ -68,6 +68,7 @@
     <ClInclude Include="..\..\common\include\aux_functions.h" />
     <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
+    <ClInclude Include="..\source\include\Acorde.h" />
     <ClInclude Include="..\source\include\Composer.h" />
     <ClInclude Include="..\source\include\ComposerDemo.h" />
     <ClInclude Include="..\source\include\Conf.h" />
@@ -75,6 +76,10 @@
     <ClInclude Include="..\source\include\MidizatorABC.h" />
     <ClInclude Include="..\source\include\Mu.h" />
     <ClInclude Include="..\source\include\Music.h" />
+    <ClInclude Include="..\source\include\music_elements.h" />
+    <ClInclude Include="..\source\include\Nota.h" />
+    <ClInclude Include="..\source\include\Segmento.h" />
+    <ClInclude Include="..\source\include\Segmentos.h" />
     <ClInclude Include="..\source\include\Simbolo.h" />
     <ClInclude Include="..\source\include\Simbolos.h" />
     <ClInclude Include="..\source\include\UsrConf.h" />
@@ -87,6 +92,7 @@
     <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp" />
+    <ClCompile Include="..\source\src\Acorde.cpp" />
     <ClCompile Include="..\source\src\Composer.cpp" />
     <ClCompile Include="..\source\src\ComposerDemo.cpp" />
     <ClCompile Include="..\source\src\Conf.cpp" />
@@ -94,6 +100,9 @@
     <ClCompile Include="..\source\src\MidizatorABC.cpp" />
     <ClCompile Include="..\source\src\Mu.cpp" />
     <ClCompile Include="..\source\src\Music.cpp" />
+    <ClCompile Include="..\source\src\Nota.cpp" />
+    <ClCompile Include="..\source\src\Segmento.cpp" />
+    <ClCompile Include="..\source\src\Segmentos.cpp" />
     <ClCompile Include="..\source\src\Simbolo.cpp" />
     <ClCompile Include="..\source\src\Simbolos.cpp" />
     <ClCompile Include="..\source\src\UsrConf.cpp" />

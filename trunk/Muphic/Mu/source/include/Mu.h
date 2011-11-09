@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MU_H
 #define MU_H
 

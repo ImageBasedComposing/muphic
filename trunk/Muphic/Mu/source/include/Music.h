@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MUSIC_H
 #define MUSIC_H
 
@@ -5,6 +7,7 @@
 
 #include "Midizator.h"
 #include "Voces.h"
+#include "music_elements.h"
 
 using namespace std;
 
@@ -15,19 +18,19 @@ class Music
     public:
 
         /* TYPE DECLARATION */
-
+		/*
 			typedef int Clave;
-			struct Tempo {
+			struct Metrica {
 				int upper;
 				int lower;
-				Tempo(int a = 4, int b = 4)
+				Metrica(int a = 4, int b = 4)
 				{
 					upper = a;
 					lower = b;
 				}
 			};
-			typedef int Ritmo;
-
+			typedef int Tempo;
+			/*
 		/* TYPE DECLARATION */
 
         Music();
@@ -38,8 +41,6 @@ class Music
 /*------Getters------*/
         string getName();
         string getComposer();
-        Tempo getTempo();
-        Ritmo getRitmo();
         Clave getClave();
 
 		Voces* getVoces();
@@ -48,9 +49,7 @@ class Music
 /*------Setters------*/
         void setName(string n);
         void setComposer(string c);
-        void setTempo(Tempo t);
-        void setRitmo(Ritmo r);
-        void setClave(Clave c);
+		void setClave(Clave c);
 
 		void setVoces(Voces* v);
         void setMidizator(Midizator* m);
@@ -60,8 +59,6 @@ class Music
     private:
         string name;
         string composer;
-		Tempo tempo;
-        Ritmo ritmo;
         Clave clave;
 
         Voces* voces;
