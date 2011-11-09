@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MIDIZATORABC_H
 #define MIDIZATORABC_H
 

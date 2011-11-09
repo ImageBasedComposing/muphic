@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef XML_INTERFACE_H
 #define XML_INTERFACE_H
 

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef USRCONF_H
 #define USRCONF_H
 

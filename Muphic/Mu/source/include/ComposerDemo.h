@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef COMPOSER_DEMO__H
 #define COMPOSER_DEMO__H
 

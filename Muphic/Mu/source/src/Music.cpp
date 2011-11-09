@@ -11,7 +11,7 @@ Music::Music()
 
 Music::~Music()
 {
-    //dtor
+	delete voces;
 }
 
 //-----Getters-----//
@@ -25,17 +25,7 @@ string Music::getComposer()
 	return composer;
 }
 
-Music::Tempo Music::getTempo()
-{
-	return tempo;
-}
-
-Music::Ritmo Music::getRitmo()
-{
-	return ritmo;
-}
-
-Music::Clave Music::getClave()
+Clave Music::getClave()
 {
 	return clave;
 }
@@ -62,17 +52,8 @@ void Music::setComposer(string c)
 	composer = c;
 }
 
-void Music::setTempo(Music::Tempo t)
-{
-	tempo = t;
-}
 
-void Music::setRitmo(Music::Ritmo r)
-{
-	ritmo = r;
-}
-
-void Music::setClave(Music::Clave c)
+void Music::setClave(Clave c)
 {
 	clave = c;
 }

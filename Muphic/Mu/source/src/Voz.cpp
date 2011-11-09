@@ -2,12 +2,12 @@
 
 Voz::Voz()
 {
-	simbolos = new Simbolos();
+	segmentos = new Segmentos();
 }
 
 Voz::~Voz()
 {
-    //dtor
+    delete segmentos;
 }
 
 //-----Getters-----//
@@ -16,9 +16,9 @@ int Voz::getInstrumento()
 	return instrumento;
 }
 
-Simbolos* Voz::getSimbolos()
+Segmentos* Voz::getSegmentos()
 {
-	return simbolos;
+	return segmentos;
 }
 
 //-----Setters-----//
@@ -27,7 +27,7 @@ void Voz::setInstrumento(int i)
 	instrumento = i;
 }
 
-void Voz::setSimbolos(Simbolos* s)
+void Voz::setSegmentos(Segmentos* s)
 {
-	simbolos = s;
+	segmentos = s;
 }

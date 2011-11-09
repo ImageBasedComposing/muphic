@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef SIMBOLOS_H
 #define SIMBOLOS_H
 

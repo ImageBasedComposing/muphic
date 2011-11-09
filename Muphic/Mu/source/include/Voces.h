@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef VOCES_H
 #define VOCES_H
 

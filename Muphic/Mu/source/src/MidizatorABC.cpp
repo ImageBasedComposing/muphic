@@ -25,13 +25,13 @@ string MidizatorABC::toMidi(Music* music)
 	f->open(abcFile);
 
 	//Escribimos en el fichero
-	*f << "X:1\n";
+	/**f << "X:1\n";
 	*f << "T:" + fName << endl;
 	*f << "M:";
-	*f << music->getTempo().upper;
+	*f << music->getMetrica().upper;
 	*f << '/';
-	*f << music->getTempo().lower;
-	*f << endl;
+	*f << music->getMetrica().lower;
+	*f << endl;*/
 	//*f << "K:" + music->getClave();
 
 	f->close();

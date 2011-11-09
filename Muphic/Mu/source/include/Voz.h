@@ -1,7 +1,10 @@
+#pragma once
+
 #ifndef VOZ_H
 #define VOZ_H
 
-#include "Simbolos.h"
+#include "Segmentos.h"
+#include "music_elements.h"
 
 using namespace std;
 
@@ -11,24 +14,23 @@ class Voz
 
         /* Por ahora definimos los tipos como enteros */
 
-        typedef int Instrumento;
 
         Voz();
         virtual ~Voz();
 
 /*------Getters------*/
         int getInstrumento();
-        Simbolos* getSimbolos();
+        Segmentos* getSegmentos();
 
 /*------Setters------*/
         void setInstrumento(int i);
-        void setSimbolos(Simbolos* s);
+        void setSegmentos(Segmentos* s);
 
     protected:
 
     private:
         Instrumento instrumento;
-        Simbolos* simbolos;
+		Segmentos* segmentos;
 };
 
 #endif // VOZ_H
