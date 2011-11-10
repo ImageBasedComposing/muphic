@@ -31,6 +31,11 @@ Voces* Music::getVoces()
 	return voces;
 }
 
+pair<int,int> Music::getBaseLenght()
+{
+	return bl;
+}
+
 Midizator* Music::getMidizator()
 {
 	return midizator;
@@ -48,6 +53,10 @@ void Music::setComposer(string c)
 	composer = c;
 }
 
+void Music::setBaseLenght(pair<int,int> baseLenght)
+{
+	bl = baseLenght;
+}
 
 void Music::setVoces(Voces* v)
 {

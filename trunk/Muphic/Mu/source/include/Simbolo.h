@@ -7,8 +7,7 @@
 class Simbolo
 {
     public:
-        Simbolo();
-		Simbolo(float duracion);
+		Simbolo(float duracion = 16); // Arbitrario y por defecto
         virtual ~Simbolo();
 
 		/*------Getters------*/
