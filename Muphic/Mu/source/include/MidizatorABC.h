@@ -26,7 +26,10 @@ class MidizatorABC : public Midizator
 		string toMidi(std::string music, std::string converter = "");
 
     protected:
+
     private:
+		string transformNota(Nota* n);
+		string transformAcorde(Acorde* a);
 };
 
 #endif // MIDIZATORABC_H

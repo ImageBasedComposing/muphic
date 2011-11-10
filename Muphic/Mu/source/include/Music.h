@@ -7,6 +7,7 @@
 
 #include "Midizator.h"
 #include "Voces.h"
+#include "Acorde.h"
 #include "music_elements.h"
 
 using namespace std;
@@ -42,6 +43,7 @@ class Music
         string getName();
         string getComposer();
         Clave getClave();
+		pair<int,int> getBaseLenght();
 
 		Voces* getVoces();
         Midizator* getMidizator();
@@ -50,6 +52,7 @@ class Music
         void setName(string n);
         void setComposer(string c);
 		void setClave(Clave c);
+		void setBaseLenght(pair<int,int> baseLenght);
 
 		void setVoces(Voces* v);
         void setMidizator(Midizator* m);
@@ -59,8 +62,9 @@ class Music
     private:
         string name;
         string composer;
-
         Voces* voces;
+		pair<int,int> bl;
+
         Midizator* midizator;        
 };
 

@@ -24,15 +24,58 @@ string MidizatorABC::toMidi(Music* music)
 	ofstream* f = new ofstream();
 	f->open(abcFile);
 
-	//Escribimos en el fichero
-	/**f << "X:1\n";
+	// Escribimos en el fichero
+	// Cabecera
+	*f << "X:1\n";
 	*f << "T:" + fName << endl;
-	*f << "M:";
-	*f << music->getMetrica().upper;
-	*f << '/';
-	*f << music->getMetrica().lower;
-	*f << endl;*/
-	//*f << "K:" + music->getClave();
+	*f << "L:" << music->getBaseLenght().first << "/" << music->getBaseLenght().second << endl;
+
+	// Conseguimos las voces
+	Voz* v;
+	Segmento* s;
+	Simbolo* simb;
+	Nota* n;
+	Acorde* a;
+
+	for( int i = 0; i < music->getVoces()->size(); i++)
+	{
+		v = music->getVoces()->getAt(i);
+
+		*f << "V:" << i << endl;
+		*f << "K:" << v->getClave() << endl;
+		
+		// Trabajamos con cada segmento
+		for( int j = 0; j < v->getSegmentos()->size(); j++)
+		{
+			s = v->getSegmentos()->getAt(j);
+
+			*f << "M:" << s->getMetrica().upper << "/" << s->getMetrica().lower << endl;
+			
+			// Trabajamos con cada símbolo
+			for( int k = 0; k < s->getSimbolos()->size(); k++)
+			{
+				simb = s->getSimbolos()->getAt(k);
+
+				*f << "Q:" << simb->getDuracion() << endl;
+
+				// Trabajamos con notas
+				if(typeid(simb) == typeid(Nota))
+				{
+					n = (Nota*) simb;
+					
+					*f << transformNota(n) << " ";
+				} // Nota
+				// Trabajamos con acordes
+				else if(typeid(simb) == typeid(Acorde))
+				{
+					a = (Acorde*) simb;
+
+					*f << transformAcorde(a) << " ";
+				} // Acorde
+
+			} // Simbolos
+		} // Segmentos
+	} //VocesS
 
 	f->close();
 
@@ -110,4 +153,14 @@ string MidizatorABC::toMidi(std::string music, std::string converter)
     std::string output = changeExtension(music, "mid");
 
 	return output;
+}
+
+string MidizatorABC::transformNota(Nota* n)
+{
+	return "";
+}
+
+string MidizatorABC::transformAcorde(Acorde* a)
+{
+	return "";
 }
