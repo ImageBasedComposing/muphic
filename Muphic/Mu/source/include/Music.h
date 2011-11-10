@@ -59,7 +59,6 @@ class Music
     private:
         string name;
         string composer;
-        Clave clave;
 
         Voces* voces;
         Midizator* midizator;        

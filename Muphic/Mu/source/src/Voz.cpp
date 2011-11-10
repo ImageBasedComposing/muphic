@@ -21,6 +21,11 @@ Segmentos* Voz::getSegmentos()
 	return segmentos;
 }
 
+Clave Voz::getClave()
+{
+	return clave;
+}
+
 //-----Setters-----//
 void Voz::setInstrumento(int i)
 {
@@ -30,4 +35,9 @@ void Voz::setInstrumento(int i)
 void Voz::setSegmentos(Segmentos* s)
 {
 	segmentos = s;
+}
+
+void Voz::setClave(Clave c)
+{
+	clave = c;
 }
