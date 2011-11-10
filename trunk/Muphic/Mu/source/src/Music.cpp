@@ -25,10 +25,6 @@ string Music::getComposer()
 	return composer;
 }
 
-Clave Music::getClave()
-{
-	return clave;
-}
 
 Voces* Music::getVoces()
 {
@@ -52,11 +48,6 @@ void Music::setComposer(string c)
 	composer = c;
 }
 
-
-void Music::setClave(Clave c)
-{
-	clave = c;
-}
 
 void Music::setVoces(Voces* v)
 {
