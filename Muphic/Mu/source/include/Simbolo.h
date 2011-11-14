@@ -3,11 +3,12 @@
 #ifndef SIMBOLO_H
 #define SIMBOLO_H
 
+#include "music_elements.h"
 
 class Simbolo
 {
     public:
-		Simbolo(float duracion = 16); // Arbitrario y por defecto
+		Simbolo(float duracion = QUARTERNOTE);
         virtual ~Simbolo();
 
 		/*------Getters------*/

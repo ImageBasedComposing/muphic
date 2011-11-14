@@ -30,6 +30,8 @@ class MidizatorABC : public Midizator
     private:
 		string transformNota(Nota* n);
 		string transformAcorde(Acorde* a);
+
+		string imprimeNota(Simbolo* simbolo);
 };
 
 #endif // MIDIZATORABC_H
