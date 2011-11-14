@@ -2,7 +2,7 @@
 
 Music::Music()
 {
-    name = "";
+    name = "Untitled";
 	composer = "";
 
 	midizator = new Midizator();

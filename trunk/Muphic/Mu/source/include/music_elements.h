@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const int QUARTERNOTE = 16;
+
 typedef int Clave;
 struct Metrica {
 	int upper;

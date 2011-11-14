@@ -3,6 +3,7 @@
 
 Segmento::Segmento()
 {
+	tempo = 0; // ?
 	simbolos = new Simbolos();
 }
 
