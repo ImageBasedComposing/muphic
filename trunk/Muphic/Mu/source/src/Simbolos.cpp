@@ -8,6 +8,9 @@ Simbolos::Simbolos()
 Simbolos::~Simbolos()
 {
     simbolos.clear();
+	list<Simbolo*>::iterator it;
+	for (it = simbolos.begin(); it != simbolos.end(); it++)
+		delete (*it);
 }
 
 bool Simbolos::empty()

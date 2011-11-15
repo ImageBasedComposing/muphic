@@ -22,4 +22,233 @@ typedef int Tempo;
 
 typedef int Instrumento;
 
+//Tamaño de la escala cromática 12 semitonos:
+#define ESCALA 12 
+
+//Escala inicial, sirve para luego añadirle escalas.
+#define DO 1
+#define RE 3
+#define MI 5
+#define FA 6
+#define SOL 8
+#define LA 10
+#define SI 12
+//Por ejemplo, DO_C = DO + ESCALA * 3 = 37 (hemos subido 3 escalas el do, nos encontramos en el principio de la 4º escala)
+
+//Escala central del piano:
+#define DO_C 37
+#define RE_C 39
+#define MI_C 41
+#define FA_C 42
+#define SOL_C 44
+#define LA_C 46
+#define SI_C 48
+
+//Armaduras: 0    0     1     1     2     2     3     3     4     4     5      5      6     6     7     7
+enum Modos{ DOM, LAm, SOLM,  MIm,  REM,  SIm,  LAM, FASm,  MIM, DOSm,  SIM, SOLSm,  FASM, RESm, DOSM, LASm,  //Sostenidos
+					   FAM,  REm, SIBM, SOLm, MIBM,  DOm, LABM,  FAm, REBM,  SIBm, SOLBM, MIBm, DOBM, LABm}; //Bemoles
+//						FA#/SIb  |  DO#/MIb  | SOL#/LAb  |  RE#/REb  |  LA#/SOLb  |  MI#/DOb   |  SI#/FAb  | //los sostenidos o bemoles que hay en la armadura
+
+struct TablaEscala
+{
+	string t1;	//semitono 1er de la escala
+	string t2; //...
+	string t3;
+	string t4;
+	string t5;
+	string t6;
+	string t7;
+	string t8;
+	string t9;
+	string t10;
+	string t11;
+	string t12;
+	list< pair<int,int> > armadura;  //Sostenidos y bemoles de la tonalidad
+	list< pair<int,int> > accidentes;//Accidentes que se vacían cuando termina el compás.
+
+	TablaEscala()
+	{ //por defecto la escala Do Mayor
+		t1 = "c";  //DO
+		t2 = "";
+		t3 = "d";  //RE
+		t4 = "";
+		t5 = "e";  //MI
+		t6 = "f";  //FA
+		t7 = "";
+		t8 = "g";  //SOL
+		t9 = "";
+		t10 = "a"; //LA
+		t11 = "";
+		t12 = "b"; //SI
+		accidentes.clear();
+		armadura.clear();
+	}
+
+	// Devuelve el valor de una nota en la tabla
+	string getNota(int pos)
+	{
+		switch(pos){
+		case 1: return t1;
+		case 2: return t2;
+		case 3: return t3;
+		case 4: return t4;
+		case 5: return t5;
+		case 6: return t6;
+		case 7: return t7;
+		case 8: return t8;
+		case 9: return t9;
+		case 10: return t10;
+		case 11: return t11;
+		case 12: return t12;
+		default: return "";
+		}
+		return "";
+	}
+
+	// Cambia una nota en la tabla por la entrada
+	void setNota(int pos, string nota)
+	{
+		switch(pos){
+		case 1: t1 = nota; break;
+		case 2: t2 = nota; break;
+		case 3: t3 = nota; break;
+		case 4: t4 = nota; break;
+		case 5: t5 = nota; break;
+		case 6: t6 = nota; break;
+		case 7: t7 = nota; break;
+		case 8: t8 = nota; break;
+		case 9: t9 = nota; break;
+		case 10: t10 = nota; break;
+		case 11: t11 = nota; break;
+		case 12: t12 = nota; break;
+		default: break;
+		}
+	}
+
+	//Se trata de poner como cambian las posiciones dentro de la tabla. un sostenido es subir en uno una nota: (i+1, i)
+	bool addAccidente(int nuevaPos, int antPos)
+	{
+		if(getNota(nuevaPos) == "" && getNota(antPos) != "")
+		{
+			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
+			setNota(antPos, "");				//liberamos su antiguo espacio
+			accidentes.push_back(make_pair(nuevaPos, antPos));
+			return true;
+		}
+		return false;
+	}
+
+	//se trata de quitar un accidente, quita todos los repetidos también
+	bool removeAccidente(int nuevaPos, int antPos)
+	{
+		if(getNota(antPos) != "" && getNota(nuevaPos) == "")
+		{
+			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
+			setNota(antPos, "");				//liberamos su antiguo espacio
+			accidentes.remove(make_pair(nuevaPos, antPos)); //Suponemos no hay repetidos, porque si los hay, los elimina
+			return true;
+		}
+		return false;
+	}
+
+	//Buscamos en las listas.
+	bool findPairInList(list< pair<int,int> > lista, pair<int, int> parBuscado)
+	{
+		list< pair<int,int> >::iterator it = lista.begin();
+		bool found = false;
+		while(!found && it != lista.end())
+		{
+			found = (*it) == parBuscado;
+		}
+		return found;
+	}
+
+	TablaEscala(Modos m){
+		//La escala normal sin nada en la armadura:
+		t1 = "c";  //DO
+		t2 = "";
+		t3 = "d";  //RE
+		t4 = "";
+		t5 = "e";  //MI
+		t6 = "f";  //FA
+		t7 = "";
+		t8 = "g";  //SOL
+		t9 = "";
+		t10 = "a"; //LA
+		t11 = "";
+		t12 = "b"; //SI
+
+		armadura.clear();
+
+		switch(m){
+
+		//Las tonalidades con sostenidos:
+		case 15:
+		case 14:
+			t1 = "b"; //SI#
+			armadura.push_back(make_pair(1, 12));
+		case 13:
+		case 12:
+			t6 = "e"; //MI#
+			armadura.push_back(make_pair(6, 5));
+		case 11:
+		case 10:
+			t11 = "a"; //LA#
+			armadura.push_back(make_pair(11, 10));
+		case 9:
+		case 8:
+			t4 = "d";  //RE#
+			armadura.push_back(make_pair(4, 5));
+		case 7:
+		case 6:
+			t9 = "g";  //SOL#
+			armadura.push_back(make_pair(9, 8));
+		case 5:
+		case 4:
+			t2 = "c";  //DO#
+			armadura.push_back(make_pair(2, 1));
+		case 3:
+		case 2:
+			t7 = "f";  //FA#
+			armadura.push_back(make_pair(7, 6));
+			break;
+
+		//Las tonalidades con bemoles:
+		case 29:
+		case 28:
+			t5 = "f";  //FAb
+			armadura.push_back(make_pair(5, 6));
+		case 27:
+		case 26:
+			t12 = "c";  //DOb
+			armadura.push_back(make_pair(12, 1));
+		case 25:
+		case 24:
+			t7 = "g";  //SOLb
+			armadura.push_back(make_pair(7, 8));
+		case 23:
+		case 22:
+			t2 = "d"; //REb
+			armadura.push_back(make_pair(2, 3));
+		case 21:
+		case 20:
+			t9 = "a"; //LAb
+			armadura.push_back(make_pair(9, 10));
+		case 19:
+		case 18:
+			t4 = "e"; //MIb
+			armadura.push_back(make_pair(4, 5));
+		case 17:
+		case 16:
+			t11 = "b"; //SIb
+			armadura.push_back(make_pair(11, 12));
+			break;
+		default:
+			break; //No hay nada que hacer, tenemos o DOM o LAm
+		}
+	}
+
+	
+};
+
 #endif // MUSIC_ELEMS
