@@ -68,7 +68,7 @@ void GuiMupic::on_pushButton_Generate_clicked()
 {
     QString picFile = ui->lineEdit_InputPic->text();
     QString userConfFile = "dummypath";
-    QString exeFile = "Muphic.exe";
+    QString exeFile = "./Muphic";
     QString command = exeFile + " " + userConfFile + " " + picFile;
 
     //conversion de QString a char *
