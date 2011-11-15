@@ -3,6 +3,8 @@
 #ifndef MUSIC_ELEMS_H
 #define MUSIC_ELEMS_H
 
+#include <list>
+
 using namespace std;
 
 const int QUARTERNOTE = 16;
@@ -128,7 +130,7 @@ struct TablaEscala
 	//Se trata de poner como cambian las posiciones dentro de la tabla. un sostenido es subir en uno una nota: (i+1, i)
 	bool addAccidente(int nuevaPos, int antPos)
 	{
-		if(getNota(nuevaPos) == "" && getNota(antPos) != "")
+		if(getNota(nuevaPos).empty() && !(getNota(antPos).empty()))
 		{
 			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
 			setNota(antPos, "");				//liberamos su antiguo espacio
@@ -141,7 +143,7 @@ struct TablaEscala
 	//se trata de quitar un accidente, quita todos los repetidos también
 	bool removeAccidente(int nuevaPos, int antPos)
 	{
-		if(getNota(antPos) != "" && getNota(nuevaPos) == "")
+		if(!(getNota(antPos).empty()) && getNota(nuevaPos).empty())
 		{
 			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
 			setNota(antPos, "");				//liberamos su antiguo espacio
