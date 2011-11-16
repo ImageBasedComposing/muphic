@@ -7,6 +7,8 @@ Music::Music()
 
 	midizator = new Midizator();
 	voces = new Voces();
+	//Por defecto L=1/8, es decir, duración base corchea
+	bl = make_pair(1,8);
 }
 
 Music::~Music()

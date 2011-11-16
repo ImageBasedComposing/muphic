@@ -47,12 +47,15 @@ typedef int Instrumento;
 #define SI_C 48
 
 //Armaduras: 0    0     1     1     2     2     3     3     4     4     5      5      6     6     7     7
-enum Modos{ DOM, LAm, SOLM,  MIm,  REM,  SIm,  LAM, FASm,  MIM, DOSm,  SIM, SOLSm,  FASM, RESm, DOSM, LASm,  //Sostenidos
+enum Tonalidad{ DOM, LAm, SOLM,  MIm,  REM,  SIm,  LAM, FASm,  MIM, DOSm,  SIM, SOLSm,  FASM, RESm, DOSM, LASm,  //Sostenidos
 					   FAM,  REm, SIBM, SOLm, MIBM,  DOm, LABM,  FAm, REBM,  SIBm, SOLBM, MIBm, DOBM, LABm}; //Bemoles
 //						FA#/SIb  |  DO#/MIb  | SOL#/LAb  |  RE#/REb  |  LA#/SOLb  |  MI#/DOb   |  SI#/FAb  | //los sostenidos o bemoles que hay en la armadura
 
-struct TablaEscala
+
+//Clase que ayuda a la hora de transformar nuestros simbolos/sonidos en notas que reconoce ABC
+class TablaEscala
 {
+private:
 	string t1;	//semitono 1er de la escala
 	string t2; //...
 	string t3;
@@ -68,20 +71,33 @@ struct TablaEscala
 	list< pair<int,int> > armadura;  //Sostenidos y bemoles de la tonalidad
 	list< pair<int,int> > accidentes;//Accidentes que se vacían cuando termina el compás.
 
+	//Buscamos en las listas.
+	bool findPairInList(list< pair<int,int> > lista, pair<int, int> parBuscado)
+	{
+		list< pair<int,int> >::iterator it = lista.begin();
+		bool found = false;
+		while(!found && it != lista.end())
+		{
+			found = (*it) == parBuscado;
+		}
+		return found;
+	}
+
+public:
 	TablaEscala()
 	{ //por defecto la escala Do Mayor
-		t1 = "c";  //DO
+		t1 = "C";  //DO
 		t2 = "";
-		t3 = "d";  //RE
+		t3 = "D";  //RE
 		t4 = "";
-		t5 = "e";  //MI
-		t6 = "f";  //FA
+		t5 = "E";  //MI
+		t6 = "F";  //FA
 		t7 = "";
-		t8 = "g";  //SOL
+		t8 = "G";  //SOL
 		t9 = "";
-		t10 = "a"; //LA
+		t10 = "A"; //LA
 		t11 = "";
-		t12 = "b"; //SI
+		t12 = "B"; //SI
 		accidentes.clear();
 		armadura.clear();
 	}
@@ -107,6 +123,47 @@ struct TablaEscala
 		return "";
 	}
 
+	//Función que te devuelve el string asociado a una tonalidad dada.
+	std::string transformTonalidad(Tonalidad t)
+	{
+		switch(t){
+			case 0: return "C";
+			case 1: return "Am";
+				// Con sostenidos
+			case 2: return "G";
+			case 3: return "Em";
+			case 4: return "D";
+			case 5: return "Bm";
+			case 6: return "A";
+			case 7: return "F#m";
+			case 8: return "E";
+			case 9: return "C#m";
+			case 10: return "B";
+			case 11: return "G#m";
+			case 12: return "F#";
+			case 13: return "D#m";
+			case 14: return "C#";
+			case 15: return "A#m";
+				// Con bemoles
+			case 16: return "F";
+			case 17: return "Dm";
+			case 18: return "Bb";
+			case 19: return "Gm";
+			case 20: return "Eb";
+			case 21: return "Cm";
+			case 22: return "Ab";
+			case 23: return "Fm";
+			case 24: return "Db";
+			case 25: return "Bbm";
+			case 26: return "Gb";
+			case 27: return "Ebm";
+			case 28: return "Cb";
+			case 29: return "Abm";
+
+			default: return "";
+		}
+	}
+
 	// Cambia una nota en la tabla por la entrada
 	void setNota(int pos, string nota)
 	{
@@ -127,6 +184,60 @@ struct TablaEscala
 		}
 	}
 
+	//Funcion que te devuelve el candidato a ocupar la posicion dada con un accidente.
+	int setNuevaNota(int nuevaPos)
+	{
+		bool candidato1, candidato2;
+		int subNota = (nuevaPos-1)%ESCALA;
+		int superNota = (nuevaPos+1)%ESCALA;
+		
+		//la anterior está libre sin modificar? (suponemos que no vamos ha hacer nunca doble sostenido)
+		if(!getNota(subNota).empty()
+		&& !findPairInList(armadura, make_pair(subNota, (nuevaPos-2)%ESCALA)) 
+		&& !findPairInList(accidentes, make_pair(subNota, (nuevaPos-2)%ESCALA))) 
+		{
+			
+			if(!findPairInList(accidentes, make_pair(subNota, nuevaPos)))  //No podemos poner un sostenido sobre un bemol.
+			{
+				addAccidente(nuevaPos, subNota); //ponemos sostenido a la nota.
+				return nuevaPos-1; //devolvemos la nota anterior para que le ponga un sostenido
+			}
+			else //Si se ha disminuido la nota anterior respecto a la nueva, entonces podemos poner un becuadro
+			{
+				//removeAccidente(make_pair((nuevaPos-1)%ESCALA, nuevaPos))
+				candidato1 = true;
+			}
+		}
+		//la siguiente está libre sin modificar? (suponemos que no vamos ha hacer nunca doble bemol)
+		if(!getNota(superNota).empty()
+		&& !findPairInList(armadura, make_pair(superNota, (nuevaPos+2)%ESCALA)) 
+		&& !findPairInList(accidentes, make_pair(superNota, (nuevaPos+2)%ESCALA))) 
+		{
+			if(!findPairInList(accidentes, make_pair(superNota, nuevaPos))) //La nota superior no viene de abajo
+			{
+				addAccidente(nuevaPos, superNota); //ponemos sostenido a la nota.
+				return nuevaPos+1; //devolvemos la nota anterior para que le ponga un sostenido
+			}
+			else
+			{	//Podemos hacer un becuadro
+				candidato2 = true;
+			}
+		}
+
+		if(candidato1)
+		{
+			removeAccidente(subNota, nuevaPos);
+			return 0;  //cero especial, significa que hemos usado un becuadro
+		}
+		else if(candidato2)
+		{
+			removeAccidente(superNota, nuevaPos);
+			return 0;
+		}
+
+		return -1;  //No se ha conseguido nada
+	}
+
 	//Se trata de poner como cambian las posiciones dentro de la tabla. un sostenido es subir en uno una nota: (i+1, i)
 	bool addAccidente(int nuevaPos, int antPos)
 	{
@@ -143,7 +254,7 @@ struct TablaEscala
 	//se trata de quitar un accidente, quita todos los repetidos también
 	bool removeAccidente(int nuevaPos, int antPos)
 	{
-		if(!(getNota(antPos).empty()) && getNota(nuevaPos).empty())
+		if(getNota(nuevaPos).empty() && !(getNota(antPos).empty()))
 		{
 			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
 			setNota(antPos, "");				//liberamos su antiguo espacio
@@ -153,19 +264,7 @@ struct TablaEscala
 		return false;
 	}
 
-	//Buscamos en las listas.
-	bool findPairInList(list< pair<int,int> > lista, pair<int, int> parBuscado)
-	{
-		list< pair<int,int> >::iterator it = lista.begin();
-		bool found = false;
-		while(!found && it != lista.end())
-		{
-			found = (*it) == parBuscado;
-		}
-		return found;
-	}
-
-	TablaEscala(Modos m){
+	TablaEscala(Tonalidad m){
 		//La escala normal sin nada en la armadura:
 		t1 = "c";  //DO
 		t2 = "";
@@ -249,7 +348,6 @@ struct TablaEscala
 			break; //No hay nada que hacer, tenemos o DOM o LAm
 		}
 	}
-
 	
 };
 

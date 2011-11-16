@@ -42,7 +42,9 @@ class Music
 /*------Getters------*/
         string getName();
         string getComposer();
-        Clave getClave();
+		// Realmente nos da igual la clave que use, es meramente gráfico
+        //Clave getClave();
+
 		pair<int,int> getBaseLenght();
 
 		Voces* getVoces();
@@ -51,7 +53,9 @@ class Music
 /*------Setters------*/
         void setName(string n);
         void setComposer(string c);
-		void setClave(Clave c);
+		//void setClave(Clave c);
+
+		//Este es el campo L. Por defecto debe ser L=1/8
 		void setBaseLenght(pair<int,int> baseLenght);
 
 		void setVoces(Voces* v);

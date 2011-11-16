@@ -21,9 +21,9 @@ Segmentos* Voz::getSegmentos()
 	return segmentos;
 }
 
-Clave Voz::getClave()
+Tonalidad Voz::getTonalidad()
 {
-	return clave;
+	return tonalidad;
 }
 
 //-----Setters-----//
@@ -37,7 +37,7 @@ void Voz::setSegmentos(Segmentos* s)
 	segmentos = s;
 }
 
-void Voz::setClave(Clave c)
+void Voz::setTonalidad(Tonalidad k)
 {
-	clave = c;
+	tonalidad = k;
 }

@@ -21,18 +21,18 @@ class Voz
 /*------Getters------*/
         int getInstrumento();
         Segmentos* getSegmentos();
-		Clave getClave();
+		Tonalidad getTonalidad();
 
 /*------Setters------*/
         void setInstrumento(int i);
         void setSegmentos(Segmentos* s);
-		void setClave(Clave c);
+		void setTonalidad(Tonalidad c);
 
     protected:
 
     private:
         Instrumento instrumento;
-		Clave clave;
+		Tonalidad tonalidad;
 		Segmentos* segmentos;
 };
 

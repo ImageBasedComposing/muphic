@@ -8,18 +8,19 @@
 class Simbolo
 {
     public:
-		Simbolo(float duracion = QUARTERNOTE);
+		Simbolo(int duracion = QUARTERNOTE); //Por defecto una negra.
         virtual ~Simbolo();
 
 		/*------Getters------*/
-        virtual float getDuracion();
+        virtual int getDuracion();
 
 		/*------Setters------*/
-        virtual void setDuracion(float d);
+        virtual void setDuracion(int d);
 
     protected:
-
-		float duracion;
+		//Representa la duración del simbolo/sonido.
+		// 1 = semifusa; 2 = fusa; 4 = semicorchea; 8 = corchea; 16 = negra; 32 = blanca ...
+		int duracion;
     private:
 
 };

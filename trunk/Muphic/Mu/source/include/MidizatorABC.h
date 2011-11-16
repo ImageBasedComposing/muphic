@@ -28,10 +28,11 @@ class MidizatorABC : public Midizator
     protected:
 
     private:
-		string transformNota(Nota* n);
-		string transformAcorde(Acorde* a);
+		TablaEscala* tablaTransf;
 
-		string imprimeNota(Simbolo* simbolo);
+		string transformNota(Nota* n, pair<int,int> duracionBase);
+		string transformAcorde(Acorde* a, pair<int,int> duracionBase);
+		string imprimeNota(Simbolo* simbolo, pair<int,int> duracionBase);
 };
 
 #endif // MIDIZATORABC_H

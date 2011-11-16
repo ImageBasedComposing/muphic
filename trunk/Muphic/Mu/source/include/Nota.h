@@ -10,7 +10,7 @@ class Nota : public Simbolo
 	public:
 		Nota();
 		Nota(int tono);
-		Nota(float duracion, int tono);
+		Nota(int duracion, int tono);
 
 		~Nota();
 

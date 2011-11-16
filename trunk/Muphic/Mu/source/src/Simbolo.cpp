@@ -1,6 +1,6 @@
 #include "Simbolo.h"
 
-Simbolo::Simbolo(float duracion)
+Simbolo::Simbolo(int duracion)
 {
     this->duracion = duracion;
 }
@@ -11,13 +11,13 @@ Simbolo::~Simbolo()
 }
 
 //------Getters------//
-float Simbolo::getDuracion()
+int Simbolo::getDuracion()
 {
 	return duracion;
 }
 
 //------Setters------//
-void Simbolo::setDuracion(float d)
+void Simbolo::setDuracion(int d)
 {
 	duracion = d;
 }
