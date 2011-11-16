@@ -4,7 +4,9 @@
 #define FIGURAS_H
 
 #include "Figura.h"
+#include "tinyxml.h"
 #include <list>
+#include <string>
 
 using namespace std;
 
@@ -15,6 +17,8 @@ class Figuras
     public:
         Figuras();
         virtual ~Figuras();
+
+		void cargar(string rutaXML);
 
         /* Envoltorio de la lista stl */
 
@@ -36,6 +40,8 @@ class Figuras
     private:
 		list<Figura*> figuras;
 		list<Figura*> figPadre;
+
+		void cargarRec(TiXmlNode* f, Figura* padre = NULL);
 };
 
 #endif // FIGURAS_H

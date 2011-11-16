@@ -72,6 +72,8 @@
     <ClInclude Include="..\source\include\Composer.h" />
     <ClInclude Include="..\source\include\ComposerDemo.h" />
     <ClInclude Include="..\source\include\Conf.h" />
+    <ClInclude Include="..\source\include\Figura.h" />
+    <ClInclude Include="..\source\include\Figuras.h" />
     <ClInclude Include="..\source\include\Midizator.h" />
     <ClInclude Include="..\source\include\MidizatorABC.h" />
     <ClInclude Include="..\source\include\Mu.h" />
@@ -96,6 +98,8 @@
     <ClCompile Include="..\source\src\Composer.cpp" />
     <ClCompile Include="..\source\src\ComposerDemo.cpp" />
     <ClCompile Include="..\source\src\Conf.cpp" />
+    <ClCompile Include="..\source\src\Figura.cpp" />
+    <ClCompile Include="..\source\src\Figuras.cpp" />
     <ClCompile Include="..\source\src\Midizator.cpp" />
     <ClCompile Include="..\source\src\MidizatorABC.cpp" />
     <ClCompile Include="..\source\src\Mu.cpp" />

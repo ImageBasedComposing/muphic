@@ -36,6 +36,7 @@ class Figura
 		int getNumVertices();
 		int getId();
 		Figura* getParent();
+		int getArea();
 
 
 		/*------Setters------*/
@@ -43,6 +44,7 @@ class Figura
 		void setNumVertices(int n);
 		void setId(int id);
 		void setParent(Figura* p = NULL);
+		void setArea(int a);
 
     protected:
 		string color;
@@ -50,6 +52,7 @@ class Figura
 		list<Vertice*> listaVertices;
 		int id;
 		Figura* padre;
+		int area;
 		list<Figura*> hijos;
 
     private:
