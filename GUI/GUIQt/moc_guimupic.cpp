@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'guimupic.h'
 **
-** Created: Tue Nov 15 01:36:03 2011
+** Created: Wed Nov 16 23:55:44 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../GUIQt/guimupic.h"
+#include "guimupic.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'guimupic.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62

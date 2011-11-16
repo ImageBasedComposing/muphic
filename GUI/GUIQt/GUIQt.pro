@@ -9,6 +9,8 @@ QT       += core gui
 TARGET = GUIQt
 TEMPLATE = app
 
+CONFIF += qt warn_on static
+
 
 SOURCES += main.cpp\
         guimupic.cpp
