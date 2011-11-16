@@ -4,7 +4,7 @@
 Nota::Nota() : Simbolo()
 {	
 	//por defecto
-	tono = 25; // do en la segunda escala
+	tono = DO_C; // do en la tercera escala, DO central
 }
 
 Nota::Nota(int tono) : Simbolo()
@@ -12,7 +12,7 @@ Nota::Nota(int tono) : Simbolo()
 	this->tono = tono;
 }
 
-Nota::Nota(float duracion, int tono) : Simbolo(duracion)
+Nota::Nota(int duracion, int tono) : Simbolo(duracion)
 {
 	this->tono = tono;
 }

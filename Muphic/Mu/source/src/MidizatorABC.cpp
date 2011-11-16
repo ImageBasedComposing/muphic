@@ -8,7 +8,7 @@
 
 MidizatorABC::MidizatorABC()
 {
-    //ctor
+	//ctor
 }
 
 MidizatorABC::~MidizatorABC()
@@ -59,6 +59,7 @@ string MidizatorABC::toMidi(std::string music, std::string converter)
 
 string MidizatorABC::toMidi(Music* music)
 {
+	
 	string fName = music->getName();
 	string fileName = fName + ".abc";
 	char *const abcFile = const_cast<char*>(fileName.c_str());
@@ -70,8 +71,8 @@ string MidizatorABC::toMidi(Music* music)
 	// Cabecera
 	*f << "X:1\n";
 	*f << "T:" + fName << endl;
-	// you sure?
-	//*f << "M:" << music->getBaseLenght().first << "/" << music->getBaseLenght().second << endl;
+	*f << "L:" << music->getBaseLenght().first << "/" << music->getBaseLenght().second << endl;
+	*f << "%            End of header, start of tune body:" << endl;
 
 	// Conseguimos las voces
 	Voz* v;
@@ -81,14 +82,15 @@ string MidizatorABC::toMidi(Music* music)
 	Acorde* a;
 
 	// DURACION DEL COMPAS: negra * (first * negra / second)
-	float duracionCompas, duracionsimboriginal, tmpduracion, tmpnota1, tmpnota2;
+	int duracionCompas, duracionsimboriginal, tmpduracion, tmpnota1, tmpnota2;
 
 	for( int i = 0; i < music->getVoces()->size(); i++)
 	{
 		v = music->getVoces()->getAt(i);
-		
+		tablaTransf = new TablaEscala(v->getTonalidad());
 		*f << "V:" << i << endl;
-		*f << "K:" << v->getClave() << endl;
+		*f << "K:" << tablaTransf->transformTonalidad(v->getTonalidad()) << endl;
+		
 
 		tmpduracion = 0;
 
@@ -123,7 +125,7 @@ string MidizatorABC::toMidi(Music* music)
 						tmpnota2 = simb->getDuracion() - tmpnota1;
 
 						simb->setDuracion(tmpnota1);
-						*f << imprimeNota(simb);
+						*f << imprimeNota(simb, music->getBaseLenght());
 
 						// imprimir ligadura, fin de compás
 						// lo que queda de la nota se escribe en la siguiente iteración
@@ -141,7 +143,7 @@ string MidizatorABC::toMidi(Music* music)
 					{
 						// imprimir nota
 
-						*f << imprimeNota(simb);
+						*f << imprimeNota(simb, music->getBaseLenght());
 
 						if (tmpduracion == duracionCompas)
 						{
@@ -204,35 +206,92 @@ string MidizatorABC::toMidi(Music* music)
 }
 
 
-string MidizatorABC::imprimeNota(Simbolo* simbolo)
+string MidizatorABC::imprimeNota(Simbolo* simbolo, pair<int,int> duracionBase)
 {
 	// Trabajamos con notas
 	if (Nota* n = dynamic_cast<Nota *> (simbolo))
 	{
 		n = (Nota*) simbolo;
 					
-		return transformNota(n);
+		return transformNota(n, duracionBase);
 	} // Nota
 	// Trabajamos con acordes
 	else if (Acorde* a = dynamic_cast<Acorde *> (simbolo))
 	{
 		a = (Acorde*) simbolo;
 
-		return transformAcorde(a);
+		return transformAcorde(a, duracionBase);
 	} // Acorde
+	else
+	{
+		// LANZAR ERROR DE SÍMBOLO!!
+		return "";
+	}
 }
 
-string MidizatorABC::transformNota(Nota* n)
-{
+string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
+{  /*
 	// salida debug
 	std::stringstream ostr;
 	ostr << "a" << n->getDuracion() << " ";
 	return ostr.str();
 
 	//return "a";
+	*/
+	string nota = "";
+	int tono = n->getTono();
+	int tonoModif;
+
+	//Primero consultamos la tabla y ponemos accidentes si los necesita:
+	string aux = tablaTransf->getNota(tono%ESCALA);
+	if(aux.empty())
+	{ //No hay nota que sea como la que tenemos, pasamos a añadir accidente
+		tonoModif = tablaTransf->setNuevaNota(tono%ESCALA);
+		if( tonoModif != -1)
+		{
+			if( (tonoModif+1)%ESCALA == tono) //Le hemos puesto un sostenido
+				nota += "^";
+			else if ( tonoModif == 0)
+				nota += "=";
+			else
+				nota += "_";
+
+			aux += tablaTransf->getNota(tono%ESCALA);
+		}
+		else
+		{
+			//LANZAR ERROR DE TRANSCRIPCION!!
+		}		
+	}
+
+	//Ahora vamos a ver en que escala está:
+	int numEscala = tono/ESCALA;
+	switch(numEscala){
+		case 1: aux += ",";
+		case 2: aux += ",";
+		case 3: aux += ","; //Se van acumulando las ','
+		case 4: 
+			break; //Hasta aqui la escala central
+		case 5: aux = aux.c_str() + 32;  //Convertimos a Minusculas
+			break;
+		case 6: aux = aux.c_str() + 32; aux += "'";
+			break;
+		case 7: aux = aux.c_str() + 32; aux += "''";
+			break;
+		default: break; //La dejamos en la escala central.
+	}
+	nota += aux;
+
+	// Y por ultimo la duración de la nota.
+	int duracion = n->getDuracion();
+	duracion = duracion * (duracionBase.first/duracionBase.second); //Ej: 16(negra) * 1/8 (nuestra L:1/8) = 2.
+	printf(aux.c_str(),"%d",duracion);
+	nota += aux;
+
+	return nota;
 }
 
-string MidizatorABC::transformAcorde(Acorde* a)
+string MidizatorABC::transformAcorde(Acorde* a, pair<int,int> duracionBase)
 {
 	return "a";
 }
