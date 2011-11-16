@@ -80,6 +80,8 @@
     <ClInclude Include="..\source\include\Music.h" />
     <ClInclude Include="..\source\include\music_elements.h" />
     <ClInclude Include="..\source\include\Nota.h" />
+    <ClInclude Include="..\source\include\PatternGen.h" />
+    <ClInclude Include="..\source\include\Patterns.h" />
     <ClInclude Include="..\source\include\Segmento.h" />
     <ClInclude Include="..\source\include\Segmentos.h" />
     <ClInclude Include="..\source\include\Simbolo.h" />
@@ -105,6 +107,7 @@
     <ClCompile Include="..\source\src\Mu.cpp" />
     <ClCompile Include="..\source\src\Music.cpp" />
     <ClCompile Include="..\source\src\Nota.cpp" />
+    <ClCompile Include="..\source\src\PatternGen.cpp" />
     <ClCompile Include="..\source\src\Segmento.cpp" />
     <ClCompile Include="..\source\src\Segmentos.cpp" />
     <ClCompile Include="..\source\src\Simbolo.cpp" />
