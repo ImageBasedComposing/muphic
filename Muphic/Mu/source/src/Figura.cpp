@@ -15,6 +15,25 @@ string Figura::getColor()
 	return color;
 }
 
+int Figura::getNumVertices()
+{
+	return numVertices;
+}
+int Figura::getId()
+{
+	return id;
+}
+
+Figura* Figura::getParent()
+{
+	return padre;
+}
+
+int Figura::getArea()
+{
+	return area;
+}
+
 //------Setters------//
 void Figura::setColor(string c)
 {
@@ -33,6 +52,11 @@ void Figura::setId(int id)
 void Figura::setParent(Figura* p)
 {
 	padre = p;
+}
+
+void Figura::setArea(int a)
+{
+	area = a;
 }
 
 //------Envoltorio de la lista stl------//
