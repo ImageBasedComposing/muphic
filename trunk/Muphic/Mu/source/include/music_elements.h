@@ -4,6 +4,7 @@
 #define MUSIC_ELEMS_H
 
 #include <list>
+#include <string>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ typedef int Tempo;
 typedef int Instrumento;
 
 //Tamaño de la escala cromática 12 semitonos:
-#define ESCALA 12 
+#define ESCALA 12
 
 //Escala inicial, sirve para luego añadirle escalas.
 #define DO 1
@@ -190,13 +191,13 @@ public:
 		bool candidato1, candidato2;
 		int subNota = (nuevaPos-1)%ESCALA;
 		int superNota = (nuevaPos+1)%ESCALA;
-		
+
 		//la anterior está libre sin modificar? (suponemos que no vamos ha hacer nunca doble sostenido)
 		if(!getNota(subNota).empty()
-		&& !findPairInList(armadura, make_pair(subNota, (nuevaPos-2)%ESCALA)) 
-		&& !findPairInList(accidentes, make_pair(subNota, (nuevaPos-2)%ESCALA))) 
+		&& !findPairInList(armadura, make_pair(subNota, (nuevaPos-2)%ESCALA))
+		&& !findPairInList(accidentes, make_pair(subNota, (nuevaPos-2)%ESCALA)))
 		{
-			
+
 			if(!findPairInList(accidentes, make_pair(subNota, nuevaPos)))  //No podemos poner un sostenido sobre un bemol.
 			{
 				addAccidente(nuevaPos, subNota); //ponemos sostenido a la nota.
@@ -210,8 +211,8 @@ public:
 		}
 		//la siguiente está libre sin modificar? (suponemos que no vamos ha hacer nunca doble bemol)
 		if(!getNota(superNota).empty()
-		&& !findPairInList(armadura, make_pair(superNota, (nuevaPos+2)%ESCALA)) 
-		&& !findPairInList(accidentes, make_pair(superNota, (nuevaPos+2)%ESCALA))) 
+		&& !findPairInList(armadura, make_pair(superNota, (nuevaPos+2)%ESCALA))
+		&& !findPairInList(accidentes, make_pair(superNota, (nuevaPos+2)%ESCALA)))
 		{
 			if(!findPairInList(accidentes, make_pair(superNota, nuevaPos))) //La nota superior no viene de abajo
 			{
@@ -348,7 +349,7 @@ public:
 			break; //No hay nada que hacer, tenemos o DOM o LAm
 		}
 	}
-	
+
 };
 
 #endif // MUSIC_ELEMS
