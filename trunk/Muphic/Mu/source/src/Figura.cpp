@@ -126,6 +126,45 @@ Vertice* Figura::getVerticeAt(int n)
 	return *it;
 }
 
+Vertice* Figura::verticeSig(Vertice* v)
+{
+	list<Vertice*>::iterator it = listaVertices.begin();
+	int i = listaVertices.size();
+
+	while(v != *it && i >= 0)
+	{
+		it++;
+		i--;
+	}
+
+	if(i == 0)
+		return *listaVertices.begin();
+
+	return *(it++);
+}
+
+Vertice* Figura::verticeAnt(Vertice* v)
+{
+	list<Vertice*>::iterator it = listaVertices.begin();
+	list<Vertice*>::iterator aux = listaVertices.begin();
+
+	int i = listaVertices.size();
+
+	if(*it == v)
+		return *listaVertices.end();
+
+	it++;
+	i -= 1;
+
+	while(v != *it && i >= 0)
+	{
+		it++;
+		aux++;
+	}
+
+	return *aux;
+}
+
 Figura* Figura::getHijoAt(int n)
 {
 	list<Figura*>::iterator it = hijos.begin();
