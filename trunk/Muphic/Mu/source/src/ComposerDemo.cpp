@@ -1,8 +1,9 @@
 #include "ComposerDemo.h"
 
 
-ComposerDemo::ComposerDemo()
+ComposerDemo::ComposerDemo(Music* msc)
 {
+	music = msc;
 }
 
 ComposerDemo::~ComposerDemo()
@@ -15,16 +16,246 @@ string ComposerDemo::compose()
 	return "";
 }
 
-int ComposerDemo::distCualit(Vertex* v1, Vertex* v2)
-{
-	return 0;
-}
-
 string ComposerDemo::compose(string picPath, string usrConfPath)
 {
-	/**
-		Parte de ABC
-	**/
+	Voz* v1 = new Voz();
+	Voces* vs = new Voces();
+
+	//Cosas de la voz
+	v1->setInstrumento(1);
+	v1->setTonalidad(Tonalidad::REM);
+	vs->pushBack(v1);
+
+	//Cosas del segmento
+	Segmento* seg1 = new Segmento();
+	Metrica m;//4/4
+	seg1->setMetrica(m);
+	seg1->setTempo(180);
+	
+	Segmentos* segs = new Segmentos();
+	segs->pushBack(seg1);
+	v1->setSegmentos(segs);
+	
+	Simbolos* smb1 = new Simbolos();
+	Nota* n;
+	n = new Nota(32,(FA_C-2*ESCALA)); 
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(LA_C-2*ESCALA)); 
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(32, (RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA)); 
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(24,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(32, (MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(32,(FA_C-2*ESCALA)); 
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(LA_C-2*ESCALA)); 
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(32, (RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA)); 
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(24,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(32, (RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	/////////////////////////////////
+
+	n = new Nota(32,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C-3*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(LA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(32,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(24,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(32,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	/////////////////////////////////
+
+	n = new Nota(32,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C-3*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(16,(LA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(SOL_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(32,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(16,(FA_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	n = new Nota(24,(MI_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(8,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+	n = new Nota(32,(RE_C-2*ESCALA));
+	smb1->pushBack(n);
+
+	seg1->setSimbolos(smb1);
+	music->setVoces(vs);
+	music->setComposer("Us");
+	music->setBaseLenght(make_pair(1,32));
+
+	return music->toMidi();
+}
+
+/*
+string ComposerDemo::compose(string picPath, string usrConfPath)
+{
+	//
+	//	Parte de ABC
+	//
 
 	string abcFile= "";
 	//Añadimos id X: 1 por defecto
@@ -39,9 +270,9 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	abcFile += "L:1/8\n";
 
 
-	/**
-		Parte de XML
-	**/
+	//
+	//	Parte de XML
+	//
 
 	//Abrimos el archivo xml
 	TiXmlDocument doc((picPath+".xml").c_str());
@@ -114,9 +345,9 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 			numVerticesTotal += numVertices;
 		}
 
-		/**
-			Parte de ABC
-		**/
+		//
+		//	Parte de ABC
+		//
 
 		//8 corcheas disponible
 		int totalCompasPend = 8;
@@ -187,9 +418,9 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	
 
-	/**
-		Parte de ABC -> Fichero
-	**/
+	//
+	//	Parte de ABC -> Fichero
+	//
 
 	abcFile += "V:1\n";
 	abcFile += voice1;
@@ -205,14 +436,15 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	fclose(fabc);
 
 
-	/**
-		Paso a midi
-	**/
+	//
+	//	Paso a midi
+	//
 
 	Midizator* abcMidi = new MidizatorABC();
 	string pathMidi = abcMidi->toMidi(pathABC);
 
 	return pathMidi;
 }
+*/
 
 

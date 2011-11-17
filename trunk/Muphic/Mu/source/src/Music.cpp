@@ -11,9 +11,25 @@ Music::Music()
 	bl = make_pair(1,8);
 }
 
+Music::Music(Midizator * mdztor)
+{
+	name = "Untitled";
+	composer = "";
+
+	midizator = mdztor;
+	voces = new Voces();
+	//Por defecto L=1/8, es decir, duración base corchea
+	bl = make_pair(1,8);
+}
+
 Music::~Music()
 {
 	delete voces;
+}
+
+string Music::toMidi()
+{
+	return midizator->toMidi(this);
 }
 
 //-----Getters-----//

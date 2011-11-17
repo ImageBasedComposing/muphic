@@ -35,7 +35,7 @@ typedef int Instrumento;
 #define FA 6
 #define SOL 8
 #define LA 10
-#define SI 12
+#define SI 0
 //Por ejemplo, DO_C = DO + ESCALA * 3 = 37 (hemos subido 3 escalas el do, nos encontramos en el principio de la 4º escala)
 
 //Escala central del piano:
@@ -68,7 +68,7 @@ private:
 	string t9;
 	string t10;
 	string t11;
-	string t12;
+	string t0;
 	list< pair<int,int> > armadura;  //Sostenidos y bemoles de la tonalidad
 	list< pair<int,int> > accidentes;//Accidentes que se vacían cuando termina el compás.
 
@@ -98,7 +98,7 @@ public:
 		t9 = "";
 		t10 = "A"; //LA
 		t11 = "";
-		t12 = "B"; //SI
+		t0 = "B"; //SI
 		accidentes.clear();
 		armadura.clear();
 	}
@@ -118,7 +118,7 @@ public:
 		case 9: return t9;
 		case 10: return t10;
 		case 11: return t11;
-		case 12: return t12;
+		case 0: return t0;
 		default: return "";
 		}
 		return "";
@@ -180,7 +180,7 @@ public:
 		case 9: t9 = nota; break;
 		case 10: t10 = nota; break;
 		case 11: t11 = nota; break;
-		case 12: t12 = nota; break;
+		case 0: t0 = nota; break;
 		default: break;
 		}
 	}
@@ -278,7 +278,7 @@ public:
 		t9 = "";
 		t10 = "a"; //LA
 		t11 = "";
-		t12 = "b"; //SI
+		t0 = "b"; //SI
 
 		armadura.clear();
 
@@ -288,7 +288,7 @@ public:
 		case 15:
 		case 14:
 			t1 = "b"; //SI#
-			armadura.push_back(make_pair(1, 12));
+			armadura.push_back(make_pair(1, 0));
 		case 13:
 		case 12:
 			t6 = "e"; //MI#
@@ -322,8 +322,8 @@ public:
 			armadura.push_back(make_pair(5, 6));
 		case 27:
 		case 26:
-			t12 = "c";  //DOb
-			armadura.push_back(make_pair(12, 1));
+			t0 = "c";  //DOb
+			armadura.push_back(make_pair(0, 1));
 		case 25:
 		case 24:
 			t7 = "g";  //SOLb
@@ -343,7 +343,7 @@ public:
 		case 17:
 		case 16:
 			t11 = "b"; //SIb
-			armadura.push_back(make_pair(11, 12));
+			armadura.push_back(make_pair(11, 0));
 			break;
 		default:
 			break; //No hay nada que hacer, tenemos o DOM o LAm
