@@ -35,6 +35,7 @@ class Music
 		/* TYPE DECLARATION */
 
         Music();
+		Music(Midizator* mdztor);
         virtual ~Music();
 
         string toMidi();
@@ -42,6 +43,7 @@ class Music
 /*------Getters------*/
         string getName();
         string getComposer();
+
 		// Realmente nos da igual la clave que use, es meramente gráfico
         //Clave getClave();
 

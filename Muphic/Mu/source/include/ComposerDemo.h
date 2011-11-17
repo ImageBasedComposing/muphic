@@ -24,14 +24,15 @@ struct Vertex{
 class ComposerDemo : public Composer
 {
 	public:
-		ComposerDemo();
+		ComposerDemo(Music* msc);
 		~ComposerDemo();
 
 	    string compose();
         string compose(string picPath, string usrConfPath);
 
 	private:
-		int distCualit(Vertex* v1, Vertex* v2);
+		Music * music;
+		MidizatorABC * mdztor;
 };
 
 #endif // COMPOSER_DEMO__H

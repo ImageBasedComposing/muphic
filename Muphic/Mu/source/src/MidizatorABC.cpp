@@ -101,6 +101,7 @@ string MidizatorABC::toMidi(Music* music)
 
 			// en cada cambio de métrica se cambia la longitud de un compás
 			*f << "M:" << s->getMetrica().upper << "/" << s->getMetrica().lower << endl;
+			*f << "Q:" << s->getTempo() << endl;
 			duracionCompas = s->getMetrica().upper * (QUARTERNOTE * 4 / s->getMetrica().lower);
 
 			// Trabajamos con cada símbolo
@@ -239,12 +240,16 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 	//return "a";
 	*/
 	string nota = "";
-	int tono = n->getTono();
-	int tonoModif;
+	int tono = n->getTono(); //el tono que nos dan, si 0 es silencio
+	int tonoModif; //la nota que cambiamos para sacar el sonido/tono que nos piden
+	string aux; //Lo que recuperamos de la tabla
 
 	//Primero consultamos la tabla y ponemos accidentes si los necesita:
-	string aux = tablaTransf->getNota(tono%ESCALA);
-	if(aux.empty())
+	if(tono != 0)
+		aux = tablaTransf->getNota(tono%ESCALA);
+	else
+		aux = "z";
+	if(aux.empty()) //si no hemos recuperado una nota es que nos toca modificar alguna.
 	{ //No hay nota que sea como la que tenemos, pasamos a añadir accidente
 		tonoModif = tablaTransf->setNuevaNota(tono%ESCALA);
 		if( tonoModif != -1)
@@ -265,28 +270,35 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 	}
 
 	//Ahora vamos a ver en que escala está:
-	int numEscala = tono/ESCALA;
-	switch(numEscala){
-		case 1: aux += ",";
-		case 2: aux += ",";
-		case 3: aux += ","; //Se van acumulando las ','
-		case 4: 
-			break; //Hasta aqui la escala central
-		case 5: aux = aux.c_str() + 32;  //Convertimos a Minusculas
-			break;
-		case 6: aux = aux.c_str() + 32; aux += "'";
-			break;
-		case 7: aux = aux.c_str() + 32; aux += "''";
-			break;
-		default: break; //La dejamos en la escala central.
-	}
+	int numEscala = (tono-1)/ESCALA;
+	if(tono != 0)
+		switch(numEscala){
+			case 0: aux += ",";
+			case 1: aux += ",";
+			case 2: aux += ","; //Se van acumulando las ','
+			case 3: 
+				break; //Hasta aqui la escala central
+			case 4: aux = aux.c_str() + 32;  //Convertimos a Minusculas
+				break;
+			case 5: aux = aux.c_str() + 32; aux += "'";
+				break;
+			case 6: aux = aux.c_str() + 32; aux += "''";
+				break;
+			default: break; //La dejamos en la escala central o es un silencio y busca case -1
+		}
+	else //Es un silencio, no hace falta hacer lo de arriba
+		aux = "";
 	nota += aux;
 
 	// Y por ultimo la duración de la nota.
 	int duracion = n->getDuracion();
-	duracion = duracion * (duracionBase.first/duracionBase.second); //Ej: 16(negra) * 1/8 (nuestra L:1/8) = 2.
-	printf(aux.c_str(),"%d",duracion);
-	nota += aux;
+	duracion = (duracion * duracionBase.second) / 64; //Ej: 16(negra) * 8/64 (nuestra L:1/8) = 2.
+
+	stringstream convertString; // stringstream used for the conversion
+
+	convertString << duracion;//add the value of Number to the characters in the stream
+
+	nota += convertString.str();
 
 	return nota;
 }
