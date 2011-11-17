@@ -87,6 +87,7 @@
     <ClInclude Include="..\source\include\Simbolo.h" />
     <ClInclude Include="..\source\include\Simbolos.h" />
     <ClInclude Include="..\source\include\UsrConf.h" />
+    <ClInclude Include="..\source\include\Vertice.h" />
     <ClInclude Include="..\source\include\Voces.h" />
     <ClInclude Include="..\source\include\Voz.h" />
     <ClInclude Include="..\source\include\XML_Interface.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="..\source\src\Simbolo.cpp" />
     <ClCompile Include="..\source\src\Simbolos.cpp" />
     <ClCompile Include="..\source\src\UsrConf.cpp" />
+    <ClCompile Include="..\source\src\Vertice.cpp" />
     <ClCompile Include="..\source\src\Voces.cpp" />
     <ClCompile Include="..\source\src\Voz.cpp" />
     <ClCompile Include="..\source\src\XML_Interface.cpp" />

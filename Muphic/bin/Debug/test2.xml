@@ -94,7 +94,7 @@
 		</color>
 		
 		<vertexList num="2">
-			<vertex arc="complete">
+			<vertex type="center">
 				<position>
 					<x>193</x>
 					<y>88</y>

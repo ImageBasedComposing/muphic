@@ -52,8 +52,16 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		for( int i = 0; i < figura->getNumVertices(); i++)
 		{
 			v = new Vertice();
-			v->first = atoi(vertice->FirstChildElement("position")->FirstChildElement("x")->GetText());
-			v->second = atoi(vertice->FirstChildElement("position")->FirstChildElement("y")->GetText());
+			v->x = atoi(vertice->FirstChildElement("position")->FirstChildElement("x")->GetText());
+			v->y = atoi(vertice->FirstChildElement("position")->FirstChildElement("y")->GetText());
+
+			// Comprobamos que tenga atributo
+			if(vertice->ToElement()->Attribute("type") != 0)
+			{
+				string l = vertice->ToElement()->Attribute("type");
+				if(strcmp(vertice->ToElement()->Attribute("type"),"center") == 0)
+					v->centro = true;
+			}
 			figura->colocarVertice(v);
 			vertice = vertice->NextSibling("vertex");
 		}

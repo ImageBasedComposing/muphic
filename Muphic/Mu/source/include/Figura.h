@@ -5,10 +5,9 @@
 
 #include <list>
 #include <string>
+#include "Vertice.h"
 
 using namespace std;
-
-typedef pair<int,int> Vertice;
 
 class Figura
 {
@@ -24,6 +23,8 @@ class Figura
 		void insertarHijo(Figura* f, int n);
 
 		Vertice* getVerticeAt(int n);
+		Vertice* verticeSig(Vertice* v);
+		Vertice* verticeAnt(Vertice* v);
 		Figura* getHijoAt(int n);
 
 		bool emptyVertices();
