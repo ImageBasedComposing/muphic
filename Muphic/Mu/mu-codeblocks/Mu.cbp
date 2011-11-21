@@ -66,6 +66,7 @@
 		<Unit filename="../source/include/Simbolo.h" />
 		<Unit filename="../source/include/Simbolos.h" />
 		<Unit filename="../source/include/UsrConf.h" />
+		<Unit filename="../source/include/Vertice.h" />
 		<Unit filename="../source/include/Voces.h" />
 		<Unit filename="../source/include/Voz.h" />
 		<Unit filename="../source/include/XML_Interface.h" />
@@ -87,6 +88,7 @@
 		<Unit filename="../source/src/Simbolo.cpp" />
 		<Unit filename="../source/src/Simbolos.cpp" />
 		<Unit filename="../source/src/UsrConf.cpp" />
+		<Unit filename="../source/src/Vertice.cpp" />
 		<Unit filename="../source/src/Voces.cpp" />
 		<Unit filename="../source/src/Voz.cpp" />
 		<Unit filename="../source/src/XML_Interface.cpp" />

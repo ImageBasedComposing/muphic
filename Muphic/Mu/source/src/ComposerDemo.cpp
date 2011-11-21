@@ -23,7 +23,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	//Cosas de la voz
 	v1->setInstrumento(1);
-	v1->setTonalidad(Tonalidad::REM);
+	v1->setTonalidad(REM);
 	vs->pushBack(v1);
 
 	//Cosas del segmento
@@ -31,21 +31,21 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	Metrica m;//4/4
 	seg1->setMetrica(m);
 	seg1->setTempo(180);
-	
+
 	Segmentos* segs = new Segmentos();
 	segs->pushBack(seg1);
 	v1->setSegmentos(segs);
-	
+
 	Simbolos* smb1 = new Simbolos();
 	Nota* n;
-	n = new Nota(32,(FA_C-2*ESCALA)); 
+	n = new Nota(32,(FA_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(SOL_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(LA_C-2*ESCALA));
 	smb1->pushBack(n);
 
-	n = new Nota(16,(LA_C-2*ESCALA)); 
+	n = new Nota(16,(LA_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(SOL_C-2*ESCALA));
 	smb1->pushBack(n);
@@ -56,7 +56,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	n = new Nota(32, (RE_C-2*ESCALA));
 	smb1->pushBack(n);
-	n = new Nota(16,(MI_C-2*ESCALA)); 
+	n = new Nota(16,(MI_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(FA_C-2*ESCALA));
 	smb1->pushBack(n);
@@ -68,14 +68,14 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	n = new Nota(32, (MI_C-2*ESCALA));
 	smb1->pushBack(n);
 
-	n = new Nota(32,(FA_C-2*ESCALA)); 
+	n = new Nota(32,(FA_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(SOL_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(LA_C-2*ESCALA));
 	smb1->pushBack(n);
 
-	n = new Nota(16,(LA_C-2*ESCALA)); 
+	n = new Nota(16,(LA_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(SOL_C-2*ESCALA));
 	smb1->pushBack(n);
@@ -86,7 +86,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	n = new Nota(32, (RE_C-2*ESCALA));
 	smb1->pushBack(n);
-	n = new Nota(16,(MI_C-2*ESCALA)); 
+	n = new Nota(16,(MI_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(FA_C-2*ESCALA));
 	smb1->pushBack(n);
@@ -289,7 +289,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	//Por defecto vamos ha hacer 3 voces: Dos de Melodia y una de ritmo.
 	string voice1, voice2, voice3;
 	string color;
-	
+
 	TiXmlElement* vertex;
 	int numVerticesTotal = 0;
 	figura = shapesNode->FirstChild("figure");
@@ -299,7 +299,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 		Vertex** listaAux;
 		//Handle sirve para poder recorrer una estructura xml sin preocuparnos de la excepción null.
 		TiXmlHandle handle(figura);
-		
+
 		//Vamos a ver el color;
 		color = handle.FirstChildElement("color").FirstChildElement("name").ToElement()->GetText();
 
@@ -331,7 +331,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 				listaVertices[i] = listaAux[i];
 			}
 			delete listaAux;
-			
+
 
 			for( int i = 0; i < numVertices; i++)
 			{
@@ -406,7 +406,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 			voice1 += "|";
 			totalCompasPend = 8;
 		}//por cada vértice un compás
-					
+
 		for(int i = 0; i < numVerticesTotal; i++)
 		{
 			delete listaVertices[i];
@@ -416,7 +416,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	voice1 += "|"; //la doble barra del final
 
-	
+
 
 	//
 	//	Parte de ABC -> Fichero

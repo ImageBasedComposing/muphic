@@ -40,9 +40,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = ../../bin/Release/Mu
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/../source/src/Simbolos.o $(OBJDIR_DEBUG)/../source/src/Conf.o $(OBJDIR_DEBUG)/../source/src/Figura.o $(OBJDIR_DEBUG)/../source/src/Figuras.o $(OBJDIR_DEBUG)/../source/src/Midizator.o $(OBJDIR_DEBUG)/../source/src/MidizatorABC.o $(OBJDIR_DEBUG)/../source/src/Mu.o $(OBJDIR_DEBUG)/../source/src/Music.o $(OBJDIR_DEBUG)/../source/src/Nota.o $(OBJDIR_DEBUG)/../source/src/PatternGen.o $(OBJDIR_DEBUG)/../source/src/Segmento.o $(OBJDIR_DEBUG)/../source/src/Segmentos.o $(OBJDIR_DEBUG)/../source/src/Simbolo.o $(OBJDIR_DEBUG)/../source/src/ComposerDemo.o $(OBJDIR_DEBUG)/../source/src/UsrConf.o $(OBJDIR_DEBUG)/../source/src/Voces.o $(OBJDIR_DEBUG)/../source/src/Voz.o $(OBJDIR_DEBUG)/../source/src/XML_Interface.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../source/src/Acorde.o $(OBJDIR_DEBUG)/../source/src/Composer.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/../source/src/Simbolos.o $(OBJDIR_DEBUG)/../source/src/Conf.o $(OBJDIR_DEBUG)/../source/src/Figura.o $(OBJDIR_DEBUG)/../source/src/Figuras.o $(OBJDIR_DEBUG)/../source/src/Midizator.o $(OBJDIR_DEBUG)/../source/src/MidizatorABC.o $(OBJDIR_DEBUG)/../source/src/Mu.o $(OBJDIR_DEBUG)/../source/src/Music.o $(OBJDIR_DEBUG)/../source/src/Nota.o $(OBJDIR_DEBUG)/../source/src/PatternGen.o $(OBJDIR_DEBUG)/../source/src/Segmento.o $(OBJDIR_DEBUG)/../source/src/Segmentos.o $(OBJDIR_DEBUG)/../source/src/Simbolo.o $(OBJDIR_DEBUG)/../source/src/ComposerDemo.o $(OBJDIR_DEBUG)/../source/src/UsrConf.o $(OBJDIR_DEBUG)/../source/src/Vertice.o $(OBJDIR_DEBUG)/../source/src/Voces.o $(OBJDIR_DEBUG)/../source/src/Voz.o $(OBJDIR_DEBUG)/../source/src/XML_Interface.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../source/src/Acorde.o $(OBJDIR_DEBUG)/../source/src/Composer.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/../source/src/Simbolos.o $(OBJDIR_RELEASE)/../source/src/Conf.o $(OBJDIR_RELEASE)/../source/src/Figura.o $(OBJDIR_RELEASE)/../source/src/Figuras.o $(OBJDIR_RELEASE)/../source/src/Midizator.o $(OBJDIR_RELEASE)/../source/src/MidizatorABC.o $(OBJDIR_RELEASE)/../source/src/Mu.o $(OBJDIR_RELEASE)/../source/src/Music.o $(OBJDIR_RELEASE)/../source/src/Nota.o $(OBJDIR_RELEASE)/../source/src/PatternGen.o $(OBJDIR_RELEASE)/../source/src/Segmento.o $(OBJDIR_RELEASE)/../source/src/Segmentos.o $(OBJDIR_RELEASE)/../source/src/Simbolo.o $(OBJDIR_RELEASE)/../source/src/ComposerDemo.o $(OBJDIR_RELEASE)/../source/src/UsrConf.o $(OBJDIR_RELEASE)/../source/src/Voces.o $(OBJDIR_RELEASE)/../source/src/Voz.o $(OBJDIR_RELEASE)/../source/src/XML_Interface.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../source/src/Acorde.o $(OBJDIR_RELEASE)/../source/src/Composer.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/../source/src/Simbolos.o $(OBJDIR_RELEASE)/../source/src/Conf.o $(OBJDIR_RELEASE)/../source/src/Figura.o $(OBJDIR_RELEASE)/../source/src/Figuras.o $(OBJDIR_RELEASE)/../source/src/Midizator.o $(OBJDIR_RELEASE)/../source/src/MidizatorABC.o $(OBJDIR_RELEASE)/../source/src/Mu.o $(OBJDIR_RELEASE)/../source/src/Music.o $(OBJDIR_RELEASE)/../source/src/Nota.o $(OBJDIR_RELEASE)/../source/src/PatternGen.o $(OBJDIR_RELEASE)/../source/src/Segmento.o $(OBJDIR_RELEASE)/../source/src/Segmentos.o $(OBJDIR_RELEASE)/../source/src/Simbolo.o $(OBJDIR_RELEASE)/../source/src/ComposerDemo.o $(OBJDIR_RELEASE)/../source/src/UsrConf.o $(OBJDIR_RELEASE)/../source/src/Vertice.o $(OBJDIR_RELEASE)/../source/src/Voces.o $(OBJDIR_RELEASE)/../source/src/Voz.o $(OBJDIR_RELEASE)/../source/src/XML_Interface.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../source/src/Acorde.o $(OBJDIR_RELEASE)/../source/src/Composer.o
 
 all: Debug Release
 
@@ -104,6 +104,9 @@ $(OBJDIR_DEBUG)/../source/src/ComposerDemo.o: ../source/src/ComposerDemo.cpp
 
 $(OBJDIR_DEBUG)/../source/src/UsrConf.o: ../source/src/UsrConf.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/UsrConf.cpp -o $(OBJDIR_DEBUG)/../source/src/UsrConf.o
+
+$(OBJDIR_DEBUG)/../source/src/Vertice.o: ../source/src/Vertice.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Vertice.cpp -o $(OBJDIR_DEBUG)/../source/src/Vertice.o
 
 $(OBJDIR_DEBUG)/../source/src/Voces.o: ../source/src/Voces.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Voces.cpp -o $(OBJDIR_DEBUG)/../source/src/Voces.o
@@ -194,6 +197,9 @@ $(OBJDIR_RELEASE)/../source/src/ComposerDemo.o: ../source/src/ComposerDemo.cpp
 
 $(OBJDIR_RELEASE)/../source/src/UsrConf.o: ../source/src/UsrConf.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/UsrConf.cpp -o $(OBJDIR_RELEASE)/../source/src/UsrConf.o
+
+$(OBJDIR_RELEASE)/../source/src/Vertice.o: ../source/src/Vertice.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Vertice.cpp -o $(OBJDIR_RELEASE)/../source/src/Vertice.o
 
 $(OBJDIR_RELEASE)/../source/src/Voces.o: ../source/src/Voces.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Voces.cpp -o $(OBJDIR_RELEASE)/../source/src/Voces.o
