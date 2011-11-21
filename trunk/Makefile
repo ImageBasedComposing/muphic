@@ -4,3 +4,7 @@ all:
 	$(MAKE) -C ./Muphic/Phic/phic-codeblocks
 	$(MAKE) -C ./Muphic/Mu/mu-codeblocks
 	$(MAKE) -C ./GUI/GUIQt
+
+	mv ./GUI/GUIQt/GUIQt ./Muphic/bin/Debug/GUIQt_linux
+
+
