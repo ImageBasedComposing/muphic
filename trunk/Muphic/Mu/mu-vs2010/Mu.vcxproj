@@ -71,6 +71,7 @@
     <ClInclude Include="..\source\include\Acorde.h" />
     <ClInclude Include="..\source\include\Composer.h" />
     <ClInclude Include="..\source\include\ComposerDemo.h" />
+    <ClInclude Include="..\source\include\ComposerRitmo.h" />
     <ClInclude Include="..\source\include\Conf.h" />
     <ClInclude Include="..\source\include\Figura.h" />
     <ClInclude Include="..\source\include\Figuras.h" />
@@ -100,6 +101,7 @@
     <ClCompile Include="..\source\src\Acorde.cpp" />
     <ClCompile Include="..\source\src\Composer.cpp" />
     <ClCompile Include="..\source\src\ComposerDemo.cpp" />
+    <ClCompile Include="..\source\src\ComposerRitmo.cpp" />
     <ClCompile Include="..\source\src\Conf.cpp" />
     <ClCompile Include="..\source\src\Figura.cpp" />
     <ClCompile Include="..\source\src\Figuras.cpp" />

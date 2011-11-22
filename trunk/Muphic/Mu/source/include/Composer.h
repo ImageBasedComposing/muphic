@@ -30,13 +30,12 @@ class Composer
         virtual void setTmpMIDIPath(string m);
 
     protected:
-
-    private:
         string usrConfFile;
         string pic;
         string tmpMIDIPath;
 
         Conf* config;
+    private:
 };
 
 #endif // COMPOSER_H

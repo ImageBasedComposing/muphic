@@ -1,5 +1,6 @@
 #include "Mu.h"
 #include "ComposerDemo.h"
+#include "ComposerRitmo.h"
 #include "Acorde.h"
 
 Mu::Mu()
@@ -50,8 +51,10 @@ int main( int argc, const char* argv[] )
 	Music* m = new Music(mdztor);
 
 	Composer* comp = new ComposerDemo( m );
+	Composer* comp2 = new ComposerRitmo( m );
 
-    comp->compose(analysedPic, usrConfPath);
+    //comp->compose(analysedPic, usrConfPath);
+	comp2->compose(analysedPic, usrConfPath);
 
 
 	return 0;
