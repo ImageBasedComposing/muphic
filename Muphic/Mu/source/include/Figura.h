@@ -32,9 +32,10 @@ class Figura
 		int sizeVertices();
 		int sizeHijos();
 
+		static bool compare(Figura* f1, Figura* f2) {return f1->getArea() > f2->getArea();};
 		pair<int,int> getCentro();
 
-		/*------Getters------*/
+/*------Getters------*/
         string getColor();
 		int getNumVertices();
 		int getId();

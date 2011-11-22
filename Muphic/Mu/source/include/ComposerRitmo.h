@@ -40,11 +40,13 @@ class ComposerRitmo : public Composer
     protected:		
 		Figuras* figuras;
 		Music* ritmo;
+		static const int NUMSEGMENTOS = 20;
   
 	private:
 		int nota(Figuras* f);
 		void sumarArea(list<pair<string,int>>* cs, Figura * f);
 		void calcularSegmento(Figura* f, Segmento* segs, Nota* n);
+		void calcularPadres(Figura* f, list<pair<int,Segmento*>> segs, int nsegmentos, list<pair<int,Segmento*>>* segmentos);
 
 };
 

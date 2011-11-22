@@ -116,36 +116,40 @@ int Figuras::sizePadre()
 void Figuras::colocarFig(Figura* s)
 {
 	figuras.push_back(s);
+
+	figuras.sort(&Figura::compare);
 }
 
 void Figuras::colocarPadre(Figura* s)
 {
 	figPadres.push_back(s);
+
+	figPadres.sort(&Figura::compare);
 }
 
-void Figuras::insertFig(Figura* s, int n)
-{
-	list<Figura*>::iterator it = figuras.begin();
-
-	for(int i = 0; i < n; i++)
-	{
-		it++;
-	}
-
-	figuras.insert(it,s);
-}
-
-void Figuras::insertPadre(Figura* s, int n)
-{
-	list<Figura*>::iterator it = figPadres.begin();
-
-	for(int i = 0; i < n; i++)
-	{
-		it++;
-	}
-
-	figPadres.insert(it,s);
-}
+//void Figuras::insertFig(Figura* s, int n)
+//{
+//	list<Figura*>::iterator it = figuras.begin();
+//
+//	for(int i = 0; i < n; i++)
+//	{
+//		it++;
+//	}
+//
+//	figuras.insert(it,s);
+//}
+//
+//void Figuras::insertPadre(Figura* s, int n)
+//{
+//	list<Figura*>::iterator it = figPadres.begin();
+//
+//	for(int i = 0; i < n; i++)
+//	{
+//		it++;
+//	}
+//
+//	figPadres.insert(it,s);
+//}
 
 Figura* Figuras::getFigAt(int n)
 {

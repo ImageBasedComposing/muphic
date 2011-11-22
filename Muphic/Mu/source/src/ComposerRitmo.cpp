@@ -38,10 +38,11 @@ string ComposerRitmo::compose()
 	// Calculamos la nota
 	Nota* n = new Nota(nota(figuras));
 
-	int p = figuras->sizePadre();
+	int p = figuras->sizeFig();
 	Figura* f;
 	Segmento* seg = new Segmento();
-	list<Segmento*> segs;
+	list<pair<int,Segmento*>> segs;
+	pair<int,Segmento*> par;
 
 	for(int i = 0; i < p; i++)
 	{
@@ -50,20 +51,35 @@ string ComposerRitmo::compose()
 		seg1->setMetrica(m);
 		seg1->setTempo(180);
 		calcularSegmento(f,seg1,n);
-		segs.push_back(seg1);
+		par.first = f->getId();
+		par.second = seg1;
+		segs.push_back(par);
 	}
 
-	Segmentos* segmentos = new Segmentos();
+	list<pair<int,Segmento*>>* segmentos = new list<pair<int,Segmento*>>();
+	
+	int numPadres = figuras->sizePadre();
 
-	list<Segmento*>::iterator it = segs.begin();
+	int areaTotal = 0;
+	for(int n = 0; n < numPadres; n++)
+		areaTotal += figuras->getPadreAt(n)->getArea();
 
-	while(it!=segs.end())
+	int segmentosPadre;
+
+	for(int i = 0; i < numPadres; i++)
 	{
-		segmentos->pushBack(*it);
-		it++;
+		f = figuras->getPadreAt(i);
+		segmentosPadre = ((f->getArea()*NUMSEGMENTOS)/areaTotal);
+		calcularPadres(f,segs,segmentosPadre, segmentos);
+		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa
+		// Añado eso al ritmo final a patronizar
 	}
 
-	v1->setSegmentos(segmentos);
+	//Patronizo el ritmo final
+	Segmentos* s = new Segmentos();
+
+	//Lo añado a la voz
+	v1->setSegmentos(s);
 
 	Voces* vz = new Voces();
 	vz->pushBack(v1);
@@ -220,7 +236,7 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 			// Inserto blancas si no hay vertices y por debajo si hay
 			for(int k1 = 0; k1 < notas[k]; k1++)
 			{
-				s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),n->getTono());
+				s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),(n->getTono()));
 				ss->pushBack(s);
 			}
 		}
@@ -236,6 +252,45 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 		for(int f=0; f < 4; f++)
 			ss->pushBack(new Simbolo());
 		seg->setSimbolos(ss);
+	}
+}
+
+void ComposerRitmo::calcularPadres(Figura* f, list<pair<int,Segmento*>> segs, int nsegmentos, list<pair<int,Segmento*>>* segmentos)
+{
+	int areaPadre = f->getArea();
+	int id = f->getId();
+	Segmento* segmento;
+	bool encontrado= false;
+	int nSegRepartidos = 0;
+	int nSegDar;
+
+	// Busco el segmento que corresponde a este padre
+	list<pair<int,Segmento*>>::iterator it = segs.begin();
+	while(it != segs.end() && !encontrado)
+	{
+		if(id == it->first)
+		{
+			segmento = it->second;
+			encontrado = true;
+		}
+		it++;
+	}
+
+	// Es hoja (segun vlad)
+	if(f->sizeHijos() == 0)
+	{
+		segmentos->push_back(make_pair(nsegmentos,segmento));
+	}
+	// Tiene hijos
+	else
+	{
+		for(int i = 0; i < f->sizeHijos(); i++)
+		{
+			nSegDar = (nsegmentos * f->getHijoAt(i)->getArea()) / areaPadre;
+			nSegRepartidos += nSegDar;
+			calcularPadres(f->getHijoAt(i), segs, nSegDar, segmentos);
+		}
+		segmentos->push_back(make_pair(nsegmentos - nSegRepartidos,segmento));
 	}
 }
 

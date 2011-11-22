@@ -24,8 +24,8 @@ class Figuras
 
 		void colocarFig(Figura* f);
 		void colocarPadre(Figura* f);
-		void insertFig(Figura* s, int n);
-		void insertPadre(Figura* s, int n);
+		//void insertFig(Figura* s, int n);
+		//void insertPadre(Figura* s, int n);
 
 		Figura* getFigAt(int n);
 		Figura* getPadreAt(int n);

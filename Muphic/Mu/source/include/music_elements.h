@@ -405,18 +405,18 @@ class Scriabin
 	public:
 		Scriabin()
 		{
-			scriabin.push_back(pair<string,int>("Rojo",1));
-			scriabin.push_back(pair<string,int>("Naranja",8));
-			scriabin.push_back(pair<string,int>("Amarillo",3));
-			scriabin.push_back(pair<string,int>("Verde",10));
-			scriabin.push_back(pair<string,int>("Cian",5));
-			scriabin.push_back(pair<string,int>("Azul",12));
-			scriabin.push_back(pair<string,int>("AzulMarino",7));
-			scriabin.push_back(pair<string,int>("Purpura",2));
-			scriabin.push_back(pair<string,int>("Violeta",9));
-			scriabin.push_back(pair<string,int>("Morado",4));
-			scriabin.push_back(pair<string,int>("Salmon",11));
-			scriabin.push_back(pair<string,int>("Granate",6));
+			scriabin.push_back(pair<string,int>("Rojo",DO_C));
+			scriabin.push_back(pair<string,int>("Naranja",SOL_C));
+			scriabin.push_back(pair<string,int>("Amarillo",RE_C));
+			scriabin.push_back(pair<string,int>("Verde",LA_C));
+			scriabin.push_back(pair<string,int>("Cian",MI_C));
+			scriabin.push_back(pair<string,int>("Azul",SI_C));
+			scriabin.push_back(pair<string,int>("AzulMarino",SOL_C - 1));
+			scriabin.push_back(pair<string,int>("Purpura",RE_C - 1));
+			scriabin.push_back(pair<string,int>("Violeta",LA_C - 1));
+			scriabin.push_back(pair<string,int>("Morado",MI_C - 1));
+			scriabin.push_back(pair<string,int>("Salmon",SI_C - 1));
+			scriabin.push_back(pair<string,int>("Granate",FA_C));
 		}
 
 		~Scriabin(){};
