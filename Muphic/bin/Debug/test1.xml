@@ -40,6 +40,7 @@
 				</position>
 			</vertex>
 		</vertexList>
+		<area>4</area>
 		<canvas>
 			<figure>
 				<id>2</id>
@@ -74,6 +75,7 @@
 						</position>
 					</vertex>
 				</vertexList>
+				<area>1</area>
 			</figure>
 		</canvas>
 	</figure>
@@ -92,7 +94,7 @@
 		</color>
 		
 		<vertexList num="2">
-			<vertex arc="complete">
+			<vertex type="center">
 				<position>
 					<x>193</x>
 					<y>88</y>
@@ -105,6 +107,7 @@
 				</position>
 			</vertex>
 		</vertexList>
+		<area>5</area>
 		<canvas>
 			<figure>
 				<id>4</id>
@@ -139,6 +142,7 @@
 						</position>
 					</vertex>
 				</vertexList>
+				<area>2</area>
 			</figure>
 		</canvas>
 	</figure>

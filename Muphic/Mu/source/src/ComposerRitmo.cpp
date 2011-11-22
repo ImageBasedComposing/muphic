@@ -1,0 +1,285 @@
+#include "ComposerRitmo.h"
+
+ComposerRitmo::ComposerRitmo()
+{
+    //ctor
+}
+
+ComposerRitmo::ComposerRitmo(Music* m)
+{
+	ritmo = m;
+}
+
+ComposerRitmo::~ComposerRitmo()
+{
+    //dtor
+}
+
+
+string ComposerRitmo::compose() 
+{ 
+
+	figuras = new Figuras();
+	figuras->cargar(pic);
+
+	Voz* v1 = new Voz();
+	Voces* vs = new Voces();
+
+	//Cosas de la voz
+	v1->setInstrumento(1);
+
+	//Calculamos la tonalidad
+	v1->setTonalidad(REM);
+	vs->pushBack(v1);
+
+	//Cosas del segmento
+	Segmento* seg1 = new Segmento();
+	Metrica m;//4/4
+
+	// Calculamos la nota
+	Nota* n = new Nota(nota(figuras));
+
+	int p = figuras->sizePadre();
+	Figura* f;
+	Segmento* seg = new Segmento();
+	list<Segmento*> segs;
+
+	for(int i = 0; i < p; i++)
+	{
+		f = figuras->getFigAt(i);
+		seg1->setMetrica(m);
+		seg1->setTempo(180);
+		calcularSegmento(f,seg1,n);
+		segs.push_back(seg1);
+	}
+
+	Segmentos* segmentos = new Segmentos();
+
+	list<Segmento*>::iterator it = segs.begin();
+
+	while(it!=segs.end())
+	{
+		segmentos->pushBack(*it);
+		it++;
+	}
+
+	v1->setSegmentos(segmentos);
+
+	Voces* vz = new Voces();
+	vz->pushBack(v1);
+
+	ritmo->setVoces(vz);
+	ritmo->setComposer("Blah!");
+	ritmo->setName("Rithm");
+	ritmo->setBaseLenght(make_pair(1,16));
+
+	return ritmo->toMidi(); 
+}
+
+string ComposerRitmo::compose(string picPath, string usrConfPath)
+{ 
+	setPic(picPath);
+	setUsrConfFile(usrConfPath);
+
+	return compose();
+}
+
+/*------Funciones Privadas------*/
+int ComposerRitmo::nota(Figuras* f)
+{
+	int t = f->sizeFig();
+	int i = 0;
+	list<pair<string,int>>* colores = new list<pair<string,int>>();
+	pair<string,int>* par;
+
+	for(int i = 0; i < t; i++)
+	{
+		par = new pair<string,int>();
+		par->first = "";
+		par->second = 0;
+		colores->push_back(*par);
+	}
+
+	for(int j = 0; j < t; j++)
+	{
+		sumarArea(colores, f->getFigAt(j));
+	}
+
+	Scriabin* s = new Scriabin();
+
+	int aux = 0;
+	string sol = "";
+
+	list<pair<string,int>>::iterator it = colores->begin();
+
+	while(it != colores->end())
+	{
+		if(it->second > aux)
+		{
+			aux = it->second;
+			sol = it->first;
+		}
+		it++;
+	}
+
+	return s->getNota(sol);
+}
+
+void ComposerRitmo::sumarArea(list<pair<string,int>>* cs, Figura* f)
+{
+	bool encontrado = false;
+
+	list<pair<string,int>>::iterator it = cs->begin();
+
+	while(it != cs->end() && !encontrado)
+	{
+		if(strcmp(it->first.c_str(),f->getColor().c_str()) == 0)
+		{
+			it->second += f->getArea();
+			encontrado = true;
+		}
+		else if(strcmp(it->first.c_str(),"") == 0)
+		{
+			it->first = f->getColor();
+			it->second = f->getArea();
+			encontrado = true;
+		}
+
+		it++;
+	}
+}
+
+void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
+{
+	int t = f->sizeVertices();
+	pair<int,int> center;
+	center.first = 0;
+	center.second = 0;
+
+	Simbolos* ss = new Simbolos();
+	Nota* s;
+
+	if(t > 2)
+
+		// Calculo del centro
+		for(int i = 0; i < t; i++)
+		{
+			if(!f->getVerticeAt(i)->centro)
+			{
+				center.first += f->getVerticeAt(i)->x;
+				center.second += f->getVerticeAt(i)->y;
+			}
+
+		center.first = center.first / f->getNumVertices();
+		center.second = center.second / f->getNumVertices();
+
+		// Creación de notas
+
+		Vertice* v;
+		int notas[8] = {0,0,0,0,0,0,0,0};
+
+		for(int j = 0; j < t; j++)
+		{
+			v = f->getVerticeAt(j);
+
+			if(v->x < center.first && v->y > center.second && v->y < -v->x + center.first)
+			{
+				notas[0] += 1;
+			}
+			else if(v->x < center.first && v->y > center.second && v->y > -v->x + center.first)
+			{
+				notas[1] += 1;
+			}
+			else if(v->x > center.first && v->y > center.second && v->y > v->x - center.first)
+			{
+				notas[2] += 1;
+			}
+			else if(v->x > center.first && v->y > center.second && v->y < v->x - center.first)
+			{
+				notas[3] += 1;
+			}
+			else if(v->x > center.first && v->y < center.second && v->y > -v->x + center.first)
+			{
+				notas[4] += 1;
+			}
+			else if(v->x > center.first && v->y < center.second && v->y < -v->x + center.first)
+			{
+				notas[5] += 1;
+			}
+			else if(v->x < center.first && v->y < center.second && v->y < v->x - center.first)
+			{
+				notas[6] += 1;
+			}
+			else if(v->x < center.first && v->y < center.second && v->y > v->x - center.first)
+			{
+				notas[7] += 1;
+			}
+		} // for
+
+		double pownum = 2;
+
+		for(int k = 0; k < 8; k++)
+		{
+			// Inserto blancas si no hay vertices y por debajo si hay
+			for(int k1 = 0; k1 < (notas[k] + 1); k1++)
+			{
+				s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),n->getTono());
+				ss->pushBack(s);
+			}
+		}
+
+		seg->setSimbolos(ss);
+
+		}
+	// Para circulos
+	else
+	{
+		center.first = f->getVerticeAt(1)->x;
+		center.second = f->getVerticeAt(1)->y;
+		for(int f=0; f < 4; f++)
+			ss->pushBack(new Simbolo());
+	}
+	seg->setSimbolos(ss);
+}
+
+/*------Getters------*/
+Conf* ComposerRitmo::getConfig() 
+{
+	return config; 
+}
+
+string ComposerRitmo::getUsrConfFile() 
+{ 
+	return usrConfFile; 
+}
+
+string ComposerRitmo::getPic() 
+{ 
+	return pic; 
+}
+
+string ComposerRitmo::getTmpMIDIPath() 
+{ 
+	return tmpMIDIPath; 
+}
+
+/*------Setters------*/
+void ComposerRitmo::setConfig(string c)
+{
+	config->read(c);
+}
+
+void ComposerRitmo::setUsrConfFile(string f) 
+{
+	usrConfFile = f;
+}
+
+void ComposerRitmo::setPic(string p)
+{
+	pic = p;
+}
+
+void ComposerRitmo::setTmpMIDIPath(string m)
+{
+	tmpMIDIPath = m;
+}
