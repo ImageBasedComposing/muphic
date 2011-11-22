@@ -32,6 +32,8 @@ class Figura
 		int sizeVertices();
 		int sizeHijos();
 
+		pair<int,int> getCentro();
+
 		/*------Getters------*/
         string getColor();
 		int getNumVertices();

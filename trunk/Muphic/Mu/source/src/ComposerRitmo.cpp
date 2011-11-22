@@ -15,7 +15,6 @@ ComposerRitmo::~ComposerRitmo()
     //dtor
 }
 
-
 string ComposerRitmo::compose() 
 { 
 
@@ -33,7 +32,7 @@ string ComposerRitmo::compose()
 	vs->pushBack(v1);
 
 	//Cosas del segmento
-	Segmento* seg1 = new Segmento();
+	Segmento* seg1;// = new Segmento();
 	Metrica m;//4/4
 
 	// Calculamos la nota
@@ -46,6 +45,7 @@ string ComposerRitmo::compose()
 
 	for(int i = 0; i < p; i++)
 	{
+		seg1 = new Segmento();
 		f = figuras->getFigAt(i);
 		seg1->setMetrica(m);
 		seg1->setTempo(180);
@@ -160,18 +160,8 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 	Nota* s;
 
 	if(t > 2)
-
-		// Calculo del centro
-		for(int i = 0; i < t; i++)
-		{
-			if(!f->getVerticeAt(i)->centro)
-			{
-				center.first += f->getVerticeAt(i)->x;
-				center.second += f->getVerticeAt(i)->y;
-			}
-
-		center.first = center.first / f->getNumVertices();
-		center.second = center.second / f->getNumVertices();
+	{
+		center = f->getCentro();
 
 		// Creación de notas
 
@@ -182,35 +172,35 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 		{
 			v = f->getVerticeAt(j);
 
-			if(v->x < center.first && v->y > center.second && v->y < -v->x + center.first)
+			if(v->x < center.first && v->y > center.second && v->y <= -v->x + center.first + center.second)
 			{
 				notas[0] += 1;
 			}
-			else if(v->x < center.first && v->y > center.second && v->y > -v->x + center.first)
+			else if(v->x <= center.first && v->y > center.second && v->y > -v->x + center.first + center.second)
 			{
 				notas[1] += 1;
 			}
-			else if(v->x > center.first && v->y > center.second && v->y > v->x - center.first)
+			else if(v->x > center.first && v->y > center.second && v->y >= v->x + (-center.first + center.second))
 			{
 				notas[2] += 1;
 			}
-			else if(v->x > center.first && v->y > center.second && v->y < v->x - center.first)
+			else if(v->x > center.first && v->y >= center.second && v->y < v->x + (-center.first + center.second))
 			{
 				notas[3] += 1;
 			}
-			else if(v->x > center.first && v->y < center.second && v->y > -v->x + center.first)
+			else if(v->x > center.first && v->y < center.second && v->y >= -v->x + center.first + center.second)
 			{
 				notas[4] += 1;
 			}
-			else if(v->x > center.first && v->y < center.second && v->y < -v->x + center.first)
+			else if(v->x >= center.first && v->y < center.second && v->y < -v->x + center.first + center.second)
 			{
 				notas[5] += 1;
 			}
-			else if(v->x < center.first && v->y < center.second && v->y < v->x - center.first)
+			else if(v->x < center.first && v->y < center.second && v->y <= v->x + (-center.first + center.second))
 			{
 				notas[6] += 1;
 			}
-			else if(v->x < center.first && v->y < center.second && v->y > v->x - center.first)
+			else if(v->x < center.first && v->y <= center.second && v->y > v->x + (-center.first + center.second))
 			{
 				notas[7] += 1;
 			}
@@ -220,8 +210,15 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 
 		for(int k = 0; k < 8; k++)
 		{
+			if (notas[k] == 0)
+			{
+				s = new Nota(QUARTERNOTE, 0); //silencio si no hay nota en el octante (?)
+				ss->pushBack(s);
+				continue;
+			}
+
 			// Inserto blancas si no hay vertices y por debajo si hay
-			for(int k1 = 0; k1 < (notas[k] + 1); k1++)
+			for(int k1 = 0; k1 < notas[k]; k1++)
 			{
 				s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),n->getTono());
 				ss->pushBack(s);
@@ -238,8 +235,8 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 		center.second = f->getVerticeAt(1)->y;
 		for(int f=0; f < 4; f++)
 			ss->pushBack(new Simbolo());
+		seg->setSimbolos(ss);
 	}
-	seg->setSimbolos(ss);
 }
 
 /*------Getters------*/
