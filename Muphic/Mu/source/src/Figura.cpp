@@ -176,3 +176,44 @@ Figura* Figura::getHijoAt(int n)
 
 	return *it;
 }
+
+//-----Other funcs-----//
+
+// calcula el centro de una figura con más de dos vértices
+pair<int,int> Figura::getCentro()
+{
+	list<Vertice*>::iterator it = listaVertices.begin();
+	int xmax,ymax,xmin,ymin;
+
+	xmax = (*it)->x;
+	ymax = (*it)->y;
+	xmin = xmax;
+	ymin = ymax;
+
+	it++;
+
+	while( it != listaVertices.end())
+	{
+		if ((*it)->centro)
+			continue;
+
+		if ((*it)->x > xmax)
+			xmax = (*it)->x;
+		else if ((*it)->x < xmin)
+			xmin = (*it)->x;
+
+		if ((*it)->y > ymax)
+			ymax = (*it)->y;
+		else if ((*it)->y < ymin)
+			ymin = (*it)->y;
+		
+		it++;
+	}
+
+	pair<int,int> out;
+
+	out.first = (xmax + xmin) / 2;
+	out.second = (ymax + ymin) / 2;
+
+	return out;
+}

@@ -39,7 +39,7 @@ class Figuras
     protected:
     private:
 		list<Figura*> figuras;
-		list<Figura*> figPadre;
+		list<Figura*> figPadres;
 
 		void cargarRec(TiXmlNode* f, Figura* padre = NULL);
 };

@@ -100,7 +100,7 @@ bool Figuras::emptyFig()
 
 bool Figuras::emptyPadre()
 {
-	return figPadre.empty();
+	return figPadres.empty();
 }
 
 int Figuras::sizeFig()
@@ -110,7 +110,7 @@ int Figuras::sizeFig()
 
 int Figuras::sizePadre()
 {
-	return figPadre.size();
+	return figPadres.size();
 }
 
 void Figuras::colocarFig(Figura* s)
@@ -120,7 +120,7 @@ void Figuras::colocarFig(Figura* s)
 
 void Figuras::colocarPadre(Figura* s)
 {
-	figPadre.push_back(s);
+	figPadres.push_back(s);
 }
 
 void Figuras::insertFig(Figura* s, int n)
@@ -137,14 +137,14 @@ void Figuras::insertFig(Figura* s, int n)
 
 void Figuras::insertPadre(Figura* s, int n)
 {
-	list<Figura*>::iterator it = figPadre.begin();
+	list<Figura*>::iterator it = figPadres.begin();
 
 	for(int i = 0; i < n; i++)
 	{
 		it++;
 	}
 
-	figPadre.insert(it,s);
+	figPadres.insert(it,s);
 }
 
 Figura* Figuras::getFigAt(int n)
@@ -161,7 +161,7 @@ Figura* Figuras::getFigAt(int n)
 
 Figura* Figuras::getPadreAt(int n)
 {
-	list<Figura*>::iterator it = figPadre.begin();
+	list<Figura*>::iterator it = figPadres.begin();
 
 	for(int i = 0; i < n; i++)
 	{

@@ -35,7 +35,7 @@ typedef int Instrumento;
 #define FA 6
 #define SOL 8
 #define LA 10
-#define SI 0
+#define SI 12
 //Por ejemplo, DO_C = DO + ESCALA * 3 = 37 (hemos subido 3 escalas el do, nos encontramos en el principio de la 4º escala)
 
 //Escala central del piano:

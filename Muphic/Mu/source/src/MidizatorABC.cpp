@@ -289,7 +289,7 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 			default: break; //La dejamos en la escala central o es un silencio y busca case -1
 		}
 	else //Es un silencio, no hace falta hacer lo de arriba
-		aux = "";
+		aux += "";
 	nota += aux;
 
 	// Y por ultimo la duración de la nota.
