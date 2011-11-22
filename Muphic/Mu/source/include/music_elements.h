@@ -80,6 +80,7 @@ private:
 		while(!found && it != lista.end())
 		{
 			found = (*it) == parBuscado;
+			it++;
 		}
 		return found;
 	}
@@ -185,17 +186,30 @@ public:
 		}
 	}
 
+	bool swapNota(int pos1, int pos2)
+	{
+		if(pos1 > 11 || pos1 < 0 || pos2 > 11 || pos2 < 0)
+			return false;
+		else
+		{
+			string tAux = getNota(pos2);
+			setNota(pos2, getNota(pos1));
+			setNota(pos1, tAux);
+			return true;
+		}			
+	}
+
 	//Funcion que te devuelve el candidato a ocupar la posicion dada con un accidente.
 	int setNuevaNota(int nuevaPos)
 	{
-		bool candidato1, candidato2;
+		bool candidato1 = false, candidato2 = false;
 		int subNota = (nuevaPos-1)%ESCALA;
 		int superNota = (nuevaPos+1)%ESCALA;
 
 		//la anterior está libre sin modificar? (suponemos que no vamos ha hacer nunca doble sostenido)
-		if(!getNota(subNota).empty()
-		&& !findPairInList(armadura, make_pair(subNota, (nuevaPos-2)%ESCALA))
-		&& !findPairInList(accidentes, make_pair(subNota, (nuevaPos-2)%ESCALA)))
+		if(!getNota(subNota).empty() //Hay subnota para poder hacer #?
+		&& !findPairInList(armadura, make_pair(subNota, (nuevaPos-2)%ESCALA)) //Esa subnota no esté ya con #? en la armadura
+		&& !findPairInList(accidentes, make_pair(subNota, (nuevaPos-2)%ESCALA))) //Esa subnota no esté ya con #? en accidentes
 		{
 
 			if(!findPairInList(accidentes, make_pair(subNota, nuevaPos)))  //No podemos poner un sostenido sobre un bemol.
@@ -225,6 +239,7 @@ public:
 			}
 		}
 
+		//Vamos a usar becuadros:
 		if(candidato1)
 		{
 			removeAccidente(subNota, nuevaPos);
@@ -244,8 +259,9 @@ public:
 	{
 		if(getNota(nuevaPos).empty() && !(getNota(antPos).empty()))
 		{
-			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
-			setNota(antPos, "");				//liberamos su antiguo espacio
+			//setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
+			//setNota(antPos, "");				//liberamos su antiguo espacio
+			swapNota(nuevaPos, antPos);
 			accidentes.push_back(make_pair(nuevaPos, antPos));
 			return true;
 		}
@@ -255,14 +271,31 @@ public:
 	//se trata de quitar un accidente, quita todos los repetidos también
 	bool removeAccidente(int nuevaPos, int antPos)
 	{
-		if(getNota(nuevaPos).empty() && !(getNota(antPos).empty()))
+		if(!getNota(nuevaPos).empty() && getNota(antPos).empty())
 		{
-			setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
-			setNota(antPos, "");				//liberamos su antiguo espacio
+ 			//setNota(nuevaPos, getNota(antPos)); //ponemos la nueva nota
+			//setNota(antPos, "");				//liberamos su antiguo espacio
+			swapNota(antPos, nuevaPos);
 			accidentes.remove(make_pair(nuevaPos, antPos)); //Suponemos no hay repetidos, porque si los hay, los elimina
 			return true;
 		}
 		return false;
+	}
+
+	//Desacemos los cambios por los accidentes que hemos metido.
+	//Esto se debe hacer cada vez que cambiamos de compás.
+	void cleanAccidents()
+	{
+		if(!accidentes.empty())
+		{
+			list< pair<int,int> >::iterator it = accidentes.begin();
+			while(it != accidentes.end())
+			{
+				swapNota(it->first, it->second);
+				it++;
+			}
+			accidentes.clear();
+		}
 	}
 
 	TablaEscala(Tonalidad m){
@@ -287,30 +320,37 @@ public:
 		//Las tonalidades con sostenidos:
 		case 15:
 		case 14:
+			t0 = "";
 			t1 = "b"; //SI#
 			armadura.push_back(make_pair(1, 0));
 		case 13:
 		case 12:
+			t5 = "";
 			t6 = "e"; //MI#
 			armadura.push_back(make_pair(6, 5));
 		case 11:
 		case 10:
+			t10 = "";
 			t11 = "a"; //LA#
 			armadura.push_back(make_pair(11, 10));
 		case 9:
 		case 8:
+			t3 = "";
 			t4 = "d";  //RE#
 			armadura.push_back(make_pair(4, 5));
 		case 7:
 		case 6:
+			t8 = "";
 			t9 = "g";  //SOL#
 			armadura.push_back(make_pair(9, 8));
 		case 5:
 		case 4:
+			t1 = "";
 			t2 = "c";  //DO#
 			armadura.push_back(make_pair(2, 1));
 		case 3:
 		case 2:
+			t6 = "";
 			t7 = "f";  //FA#
 			armadura.push_back(make_pair(7, 6));
 			break;
@@ -318,30 +358,37 @@ public:
 		//Las tonalidades con bemoles:
 		case 29:
 		case 28:
+			t6 = "";
 			t5 = "f";  //FAb
 			armadura.push_back(make_pair(5, 6));
 		case 27:
 		case 26:
+			t1 = "";
 			t0 = "c";  //DOb
 			armadura.push_back(make_pair(0, 1));
 		case 25:
 		case 24:
+			t8 = "";
 			t7 = "g";  //SOLb
 			armadura.push_back(make_pair(7, 8));
 		case 23:
 		case 22:
+			t3 = "";
 			t2 = "d"; //REb
 			armadura.push_back(make_pair(2, 3));
 		case 21:
 		case 20:
+			t10 = "";
 			t9 = "a"; //LAb
 			armadura.push_back(make_pair(9, 10));
 		case 19:
 		case 18:
+			t5 = "";
 			t4 = "e"; //MIb
 			armadura.push_back(make_pair(4, 5));
 		case 17:
 		case 16:
+			t0 = "";
 			t11 = "b"; //SIb
 			armadura.push_back(make_pair(11, 0));
 			break;

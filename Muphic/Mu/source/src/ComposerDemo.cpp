@@ -38,7 +38,23 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 
 	Simbolos* smb1 = new Simbolos();
 	Nota* n;
-	n = new Nota(32,(FA_C-2*ESCALA));
+	n = new Nota(32,(LA_C));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C+1));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C));
+	smb1->pushBack(n);
+	
+	n = new Nota(16,(LA_C+1));
+	smb1->pushBack(n);	
+	n = new Nota(16,(LA_C+1));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C+1));
+	smb1->pushBack(n);
+	//////////// 9º Sinfonia Beethoven ////////////
+	/*n = new Nota(32,(FA_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(16,(SOL_C-2*ESCALA));
 	smb1->pushBack(n);
@@ -240,7 +256,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	n = new Nota(8,(RE_C-2*ESCALA));
 	smb1->pushBack(n);
 	n = new Nota(32,(RE_C-2*ESCALA));
-	smb1->pushBack(n);
+	smb1->pushBack(n);*/
 
 	seg1->setSimbolos(smb1);
 	music->setVoces(vs);
