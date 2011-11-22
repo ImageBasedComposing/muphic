@@ -10,6 +10,7 @@
 #include "Composer.h"
 #include "Music.h"
 #include "Figuras.h"
+#include "PatternGen.h"
 
 class Figuras;
 
