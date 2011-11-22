@@ -131,6 +131,7 @@ string MidizatorABC::toMidi(Music* music)
 						// imprimir ligadura, fin de compás
 						// lo que queda de la nota se escribe en la siguiente iteración
 						*f << "-|";
+						tablaTransf->cleanAccidents();
 					
 						// actualizar duracion de compas
 						tmpduracion = tmpnota2;
@@ -150,6 +151,7 @@ string MidizatorABC::toMidi(Music* music)
 						{
 							// imprimir barra de compas
 							*f << "|";
+							tablaTransf->cleanAccidents();
 
 							// reiniciar duracion de compas
 							tmpduracion = 0;
@@ -254,7 +256,7 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 		tonoModif = tablaTransf->setNuevaNota(tono%ESCALA);
 		if( tonoModif != -1)
 		{
-			if( (tonoModif+1)%ESCALA == tono) //Le hemos puesto un sostenido
+			if( (tonoModif+1) == tono%ESCALA) //Le hemos puesto un sostenido
 				nota += "^";
 			else if ( tonoModif == 0)
 				nota += "=";
