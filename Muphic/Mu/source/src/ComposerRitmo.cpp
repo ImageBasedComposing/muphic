@@ -66,12 +66,15 @@ string ComposerRitmo::compose()
 
 	int segmentosPadre;
 
+	PatternGen* patternGen = new PatternGen();
+
 	for(int i = 0; i < numPadres; i++)
 	{
 		f = figuras->getPadreAt(i);
 		segmentosPadre = ((f->getArea()*NUMSEGMENTOS)/areaTotal);
 		calcularPadres(f,segs,segmentosPadre, segmentos);
 		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa
+		//lista de pares <segmento*, int> = patternGen->getPattern(lista de pares <segmento*, int>);
 		// Añado eso al ritmo final a patronizar
 	}
 
