@@ -41,8 +41,8 @@ string ComposerRitmo::compose()
 	int p = figuras->sizeFig();
 	Figura* f;
 	Segmento* seg = new Segmento();
-	list<pair<int,Segmento*>> segs;
-	pair<int,Segmento*> par;
+	list<pair<Segmento*,int>> segs;
+	pair<Segmento*,int> par;
 
 	for(int i = 0; i < p; i++)
 	{
@@ -51,12 +51,12 @@ string ComposerRitmo::compose()
 		seg1->setMetrica(m);
 		seg1->setTempo(180);
 		calcularSegmento(f,seg1,n);
-		par.first = f->getId();
-		par.second = seg1;
+		par.second = f->getId();
+		par.first = seg1;
 		segs.push_back(par);
 	}
 
-	list<pair<int,Segmento*>>* segmentos = new list<pair<int,Segmento*>>();
+	list<pair<Segmento*,int>>* segmentos = new list<pair<Segmento*,int>>();
 	
 	int numPadres = figuras->sizePadre();
 
@@ -67,19 +67,29 @@ string ComposerRitmo::compose()
 	int segmentosPadre;
 
 	PatternGen* patternGen = new PatternGen();
+	list<pair<Segmento*,int>>* sol = new list<pair<Segmento*,int>>();
 
 	for(int i = 0; i < numPadres; i++)
 	{
 		f = figuras->getPadreAt(i);
 		segmentosPadre = ((f->getArea()*NUMSEGMENTOS)/areaTotal);
 		calcularPadres(f,segs,segmentosPadre, segmentos);
-		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa
-		//lista de pares <segmento*, int> = patternGen->getPattern(lista de pares <segmento*, int>);
-		// Añado eso al ritmo final a patronizar
+
+		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa y lo añado a la solución final
+		//CODIGO QUE FALLA
+		//sol->push_back(make_pair(&patternGen->getPattern(*segmentos),segmentosPadre));
 	}
 
 	//Patronizo el ritmo final
+	//CODIGO QUE FALLA
+	//sol = &patternGen->getPattern(*sol);
+
 	Segmentos* s = new Segmentos();
+
+	for (list< pair<Segmento*, int> >::iterator it = sol->begin(); it != sol->end(); it++)
+	{
+		s->pushBack(it->first);
+	}
 
 	//Lo añado a la voz
 	v1->setSegmentos(s);
@@ -258,7 +268,7 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 	}
 }
 
-void ComposerRitmo::calcularPadres(Figura* f, list<pair<int,Segmento*>> segs, int nsegmentos, list<pair<int,Segmento*>>* segmentos)
+void ComposerRitmo::calcularPadres(Figura* f, list<pair<Segmento*,int>> segs, int nsegmentos, list<pair<Segmento*,int>>* segmentos)
 {
 	int areaPadre = f->getArea();
 	int id = f->getId();
@@ -268,12 +278,12 @@ void ComposerRitmo::calcularPadres(Figura* f, list<pair<int,Segmento*>> segs, in
 	int nSegDar;
 
 	// Busco el segmento que corresponde a este padre
-	list<pair<int,Segmento*>>::iterator it = segs.begin();
+	list<pair<Segmento*,int>>::iterator it = segs.begin();
 	while(it != segs.end() && !encontrado)
 	{
-		if(id == it->first)
+		if(id == it->second)
 		{
-			segmento = it->second;
+			segmento = it->first;
 			encontrado = true;
 		}
 		it++;
@@ -282,7 +292,7 @@ void ComposerRitmo::calcularPadres(Figura* f, list<pair<int,Segmento*>> segs, in
 	// Es hoja (segun vlad)
 	if(f->sizeHijos() == 0)
 	{
-		segmentos->push_back(make_pair(nsegmentos,segmento));
+		segmentos->push_back(make_pair(segmento,nsegmentos));
 	}
 	// Tiene hijos
 	else
@@ -293,7 +303,7 @@ void ComposerRitmo::calcularPadres(Figura* f, list<pair<int,Segmento*>> segs, in
 			nSegRepartidos += nSegDar;
 			calcularPadres(f->getHijoAt(i), segs, nSegDar, segmentos);
 		}
-		segmentos->push_back(make_pair(nsegmentos - nSegRepartidos,segmento));
+		segmentos->push_back(make_pair(segmento,nsegmentos - nSegRepartidos));
 	}
 }
 
