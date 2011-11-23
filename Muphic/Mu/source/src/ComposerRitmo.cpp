@@ -66,7 +66,7 @@ string ComposerRitmo::compose()
 
 	int segmentosPadre;
 
-	PatternGen* patternGen = new PatternGen();
+	PatternGen<Segmento*>* patternGen = new PatternGen<Segmento*>();
 	list<pair<list<Segmento*>*,int>>* sol = new list<pair<list<Segmento*>*,int>>();
 	list<Segmento*>* aux = new list<Segmento*>();
 
@@ -77,7 +77,7 @@ string ComposerRitmo::compose()
 		calcularPadres(f,segs,segmentosPadre, segmentos);
 
 		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa y lo añado a la solución final
-		segmentos = &patternGen->getPattern(*segmentos);
+		segmentos = patternGen->getPattern(segmentos);
 
 		for (list< pair<Segmento*, int> >::iterator it = segmentos->begin(); it != segmentos->end(); it++)
 			aux->push_back(it->first);
@@ -86,8 +86,8 @@ string ComposerRitmo::compose()
 	}
 
 	//Patronizo el ritmo final
-	//DESCOMENTAR CUANDO ESTE LISTO PATRONIZER
-	//sol = &patternGen->getPattern(*sol);
+	PatternGen<list<Segmento*>*>* patternGen2 = new PatternGen<list<Segmento*>*>();
+	sol = patternGen2->getPattern(sol);
 
 	Segmentos* s = new Segmentos();
 	aux = new list<Segmento*>();
