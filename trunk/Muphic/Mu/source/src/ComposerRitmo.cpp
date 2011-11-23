@@ -67,7 +67,8 @@ string ComposerRitmo::compose()
 	int segmentosPadre;
 
 	PatternGen* patternGen = new PatternGen();
-	list<pair<Segmento*,int>>* sol = new list<pair<Segmento*,int>>();
+	list<pair<list<Segmento*>*,int>>* sol = new list<pair<list<Segmento*>*,int>>();
+	list<Segmento*>* aux = new list<Segmento*>();
 
 	for(int i = 0; i < numPadres; i++)
 	{
@@ -76,19 +77,26 @@ string ComposerRitmo::compose()
 		calcularPadres(f,segs,segmentosPadre, segmentos);
 
 		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa y lo añado a la solución final
-		//CODIGO QUE FALLA
-		//sol->push_back(make_pair(&patternGen->getPattern(*segmentos),segmentosPadre));
+		segmentos = &patternGen->getPattern(*segmentos);
+
+		for (list< pair<Segmento*, int> >::iterator it = segmentos->begin(); it != segmentos->end(); it++)
+			aux->push_back(it->first);
+
+		sol->push_back(make_pair(aux,segmentosPadre));
 	}
 
 	//Patronizo el ritmo final
-	//CODIGO QUE FALLA
+	//DESCOMENTAR CUANDO ESTE LISTO PATRONIZER
 	//sol = &patternGen->getPattern(*sol);
 
 	Segmentos* s = new Segmentos();
+	aux = new list<Segmento*>();
 
-	for (list< pair<Segmento*, int> >::iterator it = sol->begin(); it != sol->end(); it++)
+	for (list< pair<list<Segmento*>*, int> >::iterator it = sol->begin(); it != sol->end(); it++)
 	{
-		s->pushBack(it->first);
+		aux = it->first;
+		for (list<Segmento*>::iterator it2 = aux->begin(); it2 != aux->end(); it2++)
+			s->pushBack(*it2);
 	}
 
 	//Lo añado a la voz
