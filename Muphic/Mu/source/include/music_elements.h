@@ -300,18 +300,18 @@ public:
 
 	TablaEscala(Tonalidad m){
 		//La escala normal sin nada en la armadura:
-		t1 = "c";  //DO
+		t1 = "C";  //DO
 		t2 = "";
-		t3 = "d";  //RE
+		t3 = "D";  //RE
 		t4 = "";
-		t5 = "e";  //MI
-		t6 = "f";  //FA
+		t5 = "E";  //MI
+		t6 = "F";  //FA
 		t7 = "";
-		t8 = "g";  //SOL
+		t8 = "G";  //SOL
 		t9 = "";
-		t10 = "a"; //LA
+		t10 = "A"; //LA
 		t11 = "";
-		t0 = "b"; //SI
+		t0 = "B"; //SI
 
 		armadura.clear();
 
@@ -321,37 +321,37 @@ public:
 		case 15:
 		case 14:
 			t0 = "";
-			t1 = "b"; //SI#
+			t1 = "B"; //SI#
 			armadura.push_back(make_pair(1, 0));
 		case 13:
 		case 12:
 			t5 = "";
-			t6 = "e"; //MI#
+			t6 = "E"; //MI#
 			armadura.push_back(make_pair(6, 5));
 		case 11:
 		case 10:
 			t10 = "";
-			t11 = "a"; //LA#
+			t11 = "A"; //LA#
 			armadura.push_back(make_pair(11, 10));
 		case 9:
 		case 8:
 			t3 = "";
-			t4 = "d";  //RE#
+			t4 = "D";  //RE#
 			armadura.push_back(make_pair(4, 5));
 		case 7:
 		case 6:
 			t8 = "";
-			t9 = "g";  //SOL#
+			t9 = "G";  //SOL#
 			armadura.push_back(make_pair(9, 8));
 		case 5:
 		case 4:
 			t1 = "";
-			t2 = "c";  //DO#
+			t2 = "C";  //DO#
 			armadura.push_back(make_pair(2, 1));
 		case 3:
 		case 2:
 			t6 = "";
-			t7 = "f";  //FA#
+			t7 = "F";  //FA#
 			armadura.push_back(make_pair(7, 6));
 			break;
 
@@ -359,37 +359,37 @@ public:
 		case 29:
 		case 28:
 			t6 = "";
-			t5 = "f";  //FAb
+			t5 = "F";  //FAb
 			armadura.push_back(make_pair(5, 6));
 		case 27:
 		case 26:
 			t1 = "";
-			t0 = "c";  //DOb
+			t0 = "C";  //DOb
 			armadura.push_back(make_pair(0, 1));
 		case 25:
 		case 24:
 			t8 = "";
-			t7 = "g";  //SOLb
+			t7 = "G";  //SOLb
 			armadura.push_back(make_pair(7, 8));
 		case 23:
 		case 22:
 			t3 = "";
-			t2 = "d"; //REb
+			t2 = "D"; //REb
 			armadura.push_back(make_pair(2, 3));
 		case 21:
 		case 20:
 			t10 = "";
-			t9 = "a"; //LAb
+			t9 = "A"; //LAb
 			armadura.push_back(make_pair(9, 10));
 		case 19:
 		case 18:
 			t5 = "";
-			t4 = "e"; //MIb
+			t4 = "E"; //MIb
 			armadura.push_back(make_pair(4, 5));
 		case 17:
 		case 16:
 			t0 = "";
-			t11 = "b"; //SIb
+			t11 = "B"; //SIb
 			armadura.push_back(make_pair(11, 0));
 			break;
 		default:
