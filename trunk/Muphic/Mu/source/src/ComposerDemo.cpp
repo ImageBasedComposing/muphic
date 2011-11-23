@@ -24,21 +24,21 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	//Cosas de la voz
 	v1->setInstrumento(1);
 	v1->setTonalidad(REM);
-	vs->pushBack(v1);
 
 	//Cosas del segmento
 	Segmento* seg1 = new Segmento();
-	Metrica m;//4/4
-	seg1->setMetrica(m);
+	Metrica m2;//4/4
+	seg1->setMetrica(m2);
 	seg1->setTempo(180);
 
 	Segmentos* segs = new Segmentos();
-	segs->pushBack(seg1);
-	v1->setSegmentos(segs);
+	
 
 	Simbolos* smb1 = new Simbolos();
 	Nota* n;
-	n = new Nota(32,(LA_C));
+	n = new Nota(16,(LA_C+1));
+	smb1->pushBack(n);
+	n = new Nota(16,(LA_C));
 	smb1->pushBack(n);
 	n = new Nota(16,(LA_C+1));
 	smb1->pushBack(n);
@@ -53,6 +53,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	smb1->pushBack(n);
 	n = new Nota(16,(LA_C+1));
 	smb1->pushBack(n);
+
 	//////////// 9º Sinfonia Beethoven ////////////
 	/*n = new Nota(32,(FA_C-2*ESCALA));
 	smb1->pushBack(n);
@@ -259,9 +260,28 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	smb1->pushBack(n);*/
 
 	seg1->setSimbolos(smb1);
+	smb1->pushBack(n);
+	smb1->pushBack(n);
+	Segmento* seg2 = new Segmento();
+	Metrica m(2,4);//4/4
+	seg2->setMetrica(m);
+	seg2->setTempo(280);
+	seg2->setSimbolos(smb1);
+	Segmento* seg3 = new Segmento();
+	seg3->setMetrica(m);
+	seg3->setTempo(280);
+	seg3->setSimbolos(smb1);
+
+	segs->pushBack(seg1);
+	segs->pushBack(seg2);
+	segs->pushBack(seg3);
+	v1->setSegmentos(segs);
+	vs->pushBack(v1);
+
 	music->setVoces(vs);
 	music->setComposer("Us");
 	music->setBaseLenght(make_pair(1,32));
+	music->setName("CompDemo");
 
 	return music->toMidi();
 }
