@@ -19,7 +19,7 @@ class PatternGen
 
 		list< pair< T, int> >* getPattern(list< pair<T, int> >* partes);
 
-    protected:		
+    protected:
 
 		list< pair<int, float> > getPattern(list< pair<int, float> > partes);
     private:
@@ -55,21 +55,21 @@ list< pair< T, int> >* PatternGen<T>::getPattern(list< pair<T, int> >* partes)
 
 	int nsegmentos = 0;
 
-	for (list< pair<T, int> >::iterator it = partes->begin(); it != partes->end(); it++)
+	for (typename list< pair<T, int> >::iterator it = partes->begin(); it != partes->end(); it++)
 	{
 		tmpin.push_back(make_pair((int) (*it).first,(*it).second));
 		nsegmentos += (*it).second;
 	}
 
 	tmpout = getPattern(tmpin);
-	
+
 	int tmpSum = 0;
 	int i = 0;
 	int tmpSeg;
 	for (list< pair<int, float> >::iterator it = tmpout.begin(); it != tmpout.end(); it++)
 	{
 		tmpSum += (*it).second;
-		if (i == tmpout.size() - 1) 
+		if (i == tmpout.size() - 1)
 			tmpSeg = nsegmentos - tmpSum + (*it).second;
 		else
 			tmpSeg = (*it).second;

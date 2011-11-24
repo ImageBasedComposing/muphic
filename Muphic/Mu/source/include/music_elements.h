@@ -196,7 +196,7 @@ public:
 			setNota(pos2, getNota(pos1));
 			setNota(pos1, tAux);
 			return true;
-		}			
+		}
 	}
 
 	//Funcion que te devuelve el candidato a ocupar la posicion dada con un accidente.
@@ -423,7 +423,7 @@ class Scriabin
 
 		int getNota(string color)
 		{
-			list<pair<string,int>>::iterator it = scriabin.begin();
+			list< pair<string,int> >::iterator it = scriabin.begin();
 			bool found = false;
 			int sol = -1;
 
@@ -442,7 +442,7 @@ class Scriabin
 
 	protected:
 	private:
-		list<pair<string,int>> scriabin;
+		list< pair<string,int> > scriabin;
 };
 
 #endif // MUSIC_ELEMS

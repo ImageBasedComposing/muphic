@@ -15,8 +15,8 @@ ComposerRitmo::~ComposerRitmo()
     //dtor
 }
 
-string ComposerRitmo::compose() 
-{ 
+string ComposerRitmo::compose()
+{
 
 	figuras = new Figuras();
 	figuras->cargar(pic);
@@ -41,7 +41,7 @@ string ComposerRitmo::compose()
 	int p = figuras->sizeFig();
 	Figura* f;
 	Segmento* seg = new Segmento();
-	list<pair<Segmento*,int>> segs;
+	list< pair<Segmento*,int> > segs;
 	pair<Segmento*,int> par;
 
 	for(int i = 0; i < p; i++)
@@ -56,8 +56,8 @@ string ComposerRitmo::compose()
 		segs.push_back(par);
 	}
 
-	list<pair<Segmento*,int>>* segmentos = new list<pair<Segmento*,int>>();
-	
+	list< pair<Segmento*,int> >* segmentos = new list< pair<Segmento*,int> >();
+
 	int numPadres = figuras->sizePadre();
 
 	int areaTotal = 0;
@@ -67,7 +67,7 @@ string ComposerRitmo::compose()
 	int segmentosPadre;
 
 	PatternGen<Segmento*>* patternGen = new PatternGen<Segmento*>();
-	list<pair<list<Segmento*>*,int>>* sol = new list<pair<list<Segmento*>*,int>>();
+	list< pair<list<Segmento*>*,int> >* sol = new list< pair<list<Segmento*>*,int> >();
 	list<Segmento*>* aux = new list<Segmento*>();
 
 	for(int i = 0; i < numPadres; i++)
@@ -110,11 +110,11 @@ string ComposerRitmo::compose()
 	ritmo->setName("Rithm");
 	ritmo->setBaseLenght(make_pair(1,16));
 
-	return ritmo->toMidi(); 
+	return ritmo->toMidi();
 }
 
 string ComposerRitmo::compose(string picPath, string usrConfPath)
-{ 
+{
 	setPic(picPath);
 	setUsrConfFile(usrConfPath);
 
@@ -126,7 +126,7 @@ int ComposerRitmo::nota(Figuras* f)
 {
 	int t = f->sizeFig();
 	int i = 0;
-	list<pair<string,int>>* colores = new list<pair<string,int>>();
+	list< pair<string,int> >* colores = new list< pair<string,int> >();
 	pair<string,int>* par;
 
 	for(int i = 0; i < t; i++)
@@ -147,7 +147,7 @@ int ComposerRitmo::nota(Figuras* f)
 	int aux = 0;
 	string sol = "";
 
-	list<pair<string,int>>::iterator it = colores->begin();
+	list< pair<string,int> >::iterator it = colores->begin();
 
 	while(it != colores->end())
 	{
@@ -162,11 +162,11 @@ int ComposerRitmo::nota(Figuras* f)
 	return s->getNota(sol);
 }
 
-void ComposerRitmo::sumarArea(list<pair<string,int>>* cs, Figura* f)
+void ComposerRitmo::sumarArea(list< pair<string,int> >* cs, Figura* f)
 {
 	bool encontrado = false;
 
-	list<pair<string,int>>::iterator it = cs->begin();
+	list< pair<string,int> >::iterator it = cs->begin();
 
 	while(it != cs->end() && !encontrado)
 	{
@@ -276,7 +276,7 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 	}
 }
 
-void ComposerRitmo::calcularPadres(Figura* f, list<pair<Segmento*,int>> segs, int nsegmentos, list<pair<Segmento*,int>>* segmentos)
+void ComposerRitmo::calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos)
 {
 	int areaPadre = f->getArea();
 	int id = f->getId();
@@ -286,7 +286,7 @@ void ComposerRitmo::calcularPadres(Figura* f, list<pair<Segmento*,int>> segs, in
 	int nSegDar;
 
 	// Busco el segmento que corresponde a este padre
-	list<pair<Segmento*,int>>::iterator it = segs.begin();
+	list< pair<Segmento*,int> >::iterator it = segs.begin();
 	while(it != segs.end() && !encontrado)
 	{
 		if(id == it->second)
@@ -316,24 +316,24 @@ void ComposerRitmo::calcularPadres(Figura* f, list<pair<Segmento*,int>> segs, in
 }
 
 /*------Getters------*/
-Conf* ComposerRitmo::getConfig() 
+Conf* ComposerRitmo::getConfig()
 {
-	return config; 
+	return config;
 }
 
-string ComposerRitmo::getUsrConfFile() 
-{ 
-	return usrConfFile; 
+string ComposerRitmo::getUsrConfFile()
+{
+	return usrConfFile;
 }
 
-string ComposerRitmo::getPic() 
-{ 
-	return pic; 
+string ComposerRitmo::getPic()
+{
+	return pic;
 }
 
-string ComposerRitmo::getTmpMIDIPath() 
-{ 
-	return tmpMIDIPath; 
+string ComposerRitmo::getTmpMIDIPath()
+{
+	return tmpMIDIPath;
 }
 
 /*------Setters------*/
@@ -342,7 +342,7 @@ void ComposerRitmo::setConfig(string c)
 	config->read(c);
 }
 
-void ComposerRitmo::setUsrConfFile(string f) 
+void ComposerRitmo::setUsrConfFile(string f)
 {
 	usrConfFile = f;
 }
