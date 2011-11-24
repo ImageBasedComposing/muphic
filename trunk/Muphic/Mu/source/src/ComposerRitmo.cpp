@@ -56,7 +56,7 @@ string ComposerRitmo::compose()
 		segs.push_back(par);
 	}
 
-	list< pair<Segmento*,int> >* segmentos = new list< pair<Segmento*,int> >();
+	list< pair<Segmento*,int> >* segmentos;
 
 	int numPadres = figuras->sizePadre();
 
@@ -68,10 +68,11 @@ string ComposerRitmo::compose()
 
 	PatternGen<Segmento*>* patternGen = new PatternGen<Segmento*>();
 	list< pair<list<Segmento*>*,int> >* sol = new list< pair<list<Segmento*>*,int> >();
-	list<Segmento*>* aux = new list<Segmento*>();
+	list<Segmento*>* aux;
 
 	for(int i = 0; i < numPadres; i++)
 	{
+		segmentos  = new list< pair<Segmento*,int> >();
 		f = figuras->getPadreAt(i);
 		segmentosPadre = ((f->getArea()*NUMSEGMENTOS)/areaTotal);
 		calcularPadres(f,segs,segmentosPadre, segmentos);
@@ -79,20 +80,26 @@ string ComposerRitmo::compose()
 		// Patronizador ordena segmentos devueltos y me da 1 de los segmentos del programa y lo añado a la solución final
 		segmentos = patternGen->getPattern(segmentos);
 
+		aux = new list<Segmento*>();
+
 		for (list< pair<Segmento*, int> >::iterator it = segmentos->begin(); it != segmentos->end(); it++)
 			aux->push_back(it->first);
 
 		sol->push_back(make_pair(aux,segmentosPadre));
 	}
 
+	list< pair<list<Segmento*>*,int> >* sol2 = new list< pair<list<Segmento*>*,int> >();
+
 	//Patronizo el ritmo final
 	PatternGen<list<Segmento*>*>* patternGen2 = new PatternGen<list<Segmento*>*>();
-	sol = patternGen2->getPattern(sol);
+	sol2 = patternGen2->getPattern(sol);
+
+	delete sol;
 
 	Segmentos* s = new Segmentos();
 	aux = new list<Segmento*>();
 
-	for (list< pair<list<Segmento*>*, int> >::iterator it = sol->begin(); it != sol->end(); it++)
+	for (list< pair<list<Segmento*>*, int> >::iterator it = sol2->begin(); it != sol2->end(); it++)
 	{
 		aux = it->first;
 		for (list<Segmento*>::iterator it2 = aux->begin(); it2 != aux->end(); it2++)
@@ -271,7 +278,7 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 		center.first = f->getVerticeAt(1)->x;
 		center.second = f->getVerticeAt(1)->y;
 		for(int f=0; f < 4; f++)
-			ss->pushBack(new Simbolo());
+			ss->pushBack(new Nota((QUARTERNOTE*2),n->getTono()));
 		seg->setSimbolos(ss);
 	}
 }
