@@ -180,7 +180,7 @@ Figura* Figura::getHijoAt(int n)
 //-----Other funcs-----//
 
 // calcula el centro de una figura con más de dos vértices
-pair<int,int> Figura::getCentro()
+pair<int,int> Figura::getSimpleCenter()
 {
 	list<Vertice*>::iterator it = listaVertices.begin();
 	int xmax,ymax,xmin,ymin;
@@ -214,6 +214,32 @@ pair<int,int> Figura::getCentro()
 
 	out.first = (xmax + xmin) / 2;
 	out.second = (ymax + ymin) / 2;
+
+	return out;
+}
+
+// calcula el centro de una figura con más de dos vértices
+pair<int,int> Figura::getBarycenter()
+{
+	list<Vertice*>::iterator it = listaVertices.begin();
+	int xcont = 0;
+	int ycont = 0;
+
+	while( it != listaVertices.end())
+	{
+		if ((*it)->centro)
+			continue;
+
+		xcont += (*it)->x;
+		ycont += (*it)->y;
+
+		it++;
+	}
+
+	pair<int,int> out;
+
+	out.first = xcont / listaVertices.size();
+	out.second = ycont / listaVertices.size();
 
 	return out;
 }

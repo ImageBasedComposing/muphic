@@ -1,5 +1,7 @@
 #include "MidizatorABC.h"
 #include "aux_functions.h"
+#include "launcher.h"
+
 #include <sstream>
 #ifdef __LINUX
     #include <unistd.h>
@@ -26,6 +28,11 @@ string MidizatorABC::toMidi(std::string music, std::string converter)
 
 		std::string picExeFile = converter + " " + music;
 		system(picExeFile.c_str());
+		/*
+		Launcher* l = new Launcher();
+		string args[] = {"abc2midi.exe", music};
+
+		l->launch(2, args);*/
 
 	#endif
 
@@ -230,6 +237,12 @@ string MidizatorABC::toMidi(Music* music)
 
 		std::string picExeFile = converter + " " + fName + ".abc";
 		system(picExeFile.c_str());
+		/*
+		
+		Launcher* l = new Launcher();
+		string args[] = {converter, fName + ".abc"};
+
+		l->launch(2, args);*/
 
 	#endif
 

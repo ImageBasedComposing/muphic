@@ -205,7 +205,7 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 
 	if(t > 2)
 	{
-		center = f->getCentro();
+		center = f->getBarycenter();
 
 		// Creación de notas
 
