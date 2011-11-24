@@ -66,6 +66,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\include\aux_functions.h" />
+    <ClInclude Include="..\..\common\include\launcher.h" />
     <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
     <ClInclude Include="..\source\include\Acorde.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="..\source\include\XML_Interface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\src\launcher.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinystr.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp" />

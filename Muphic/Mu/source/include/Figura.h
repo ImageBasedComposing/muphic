@@ -33,7 +33,8 @@ class Figura
 		int sizeHijos();
 
 		static bool compare(Figura* f1, Figura* f2) {return f1->getArea() > f2->getArea();};
-		pair<int,int> getCentro();
+		pair<int,int> getSimpleCenter();
+		pair<int,int> getBarycenter();
 
 /*------Getters------*/
         string getColor();
