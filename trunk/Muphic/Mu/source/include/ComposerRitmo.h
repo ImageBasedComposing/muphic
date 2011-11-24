@@ -38,16 +38,16 @@ class ComposerRitmo : public Composer
         virtual void setPic(string p);
         virtual void setTmpMIDIPath(string m);
 
-    protected:		
+    protected:
 		Figuras* figuras;
 		Music* ritmo;
 		static const int NUMSEGMENTOS = 20;
-  
+
 	private:
 		int nota(Figuras* f);
-		void sumarArea(list<pair<string,int>>* cs, Figura * f);
+		void sumarArea(list< pair<string,int> >* cs, Figura * f);
 		void calcularSegmento(Figura* f, Segmento* segs, Nota* n);
-		void calcularPadres(Figura* f, list<pair<Segmento*,int>> segs, int nsegmentos, list<pair<Segmento*,int>>* segmentos);
+		void calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
 
 };
 
