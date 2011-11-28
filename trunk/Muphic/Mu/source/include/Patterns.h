@@ -7,23 +7,24 @@
 
 using namespace std;
 
+template <class T>
 class Pattern
 {
     public:
 		Pattern() {};
 		virtual ~Pattern() {};
 
-		virtual list< pair<int, float> > createPattern(list< pair<int, float> > partes) { return partes; }
+		virtual list< pair<T, float> > createPattern(list< pair<T, float> > partes) { return partes; }
 
     protected:
     private:
 };
 
-
-class SimplePattern : public Pattern
+template <class T>
+class SimplePattern : public Pattern<T>
 {
 	private:
-		static bool compare (pair<int, float> a, pair<int, float> b)
+		static bool compare (pair<T, float> a, pair<T, float> b)
 		{
 			return a.second > b.second;
 		};
@@ -33,30 +34,26 @@ class SimplePattern : public Pattern
 		SimplePattern() {};
 		virtual ~SimplePattern() {};
 
-		list< pair<int, float> > createPattern(list< pair<int, float> > partes)
+		list< pair<T, float> > createPattern(list< pair<T, float> > partes)
 		{
-			partes.sort(&SimplePattern::compare);
+            partes.sort(&SimplePattern::compare);
 
-			pair<int, float> tmp;
-			list< pair<int, float> >::iterator it = partes.end();
-			it--;
-			while (it != partes.begin())
-			{
-				it--;
-				(*it).second /= 2;
-				tmp = (*it);
-				partes.push_back(tmp);
-			}
-
-			return partes;
-		};
+            pair<T, float> tmp;
+            typename list< pair<T, float> >::iterator it = partes.end();
+            it--;
+            while (it != partes.begin())
+            {
+                it--;
+                (*it).second /= 2;
+                tmp = (*it);
+                partes.push_back(tmp);
+            }
+            return partes;
+        };
 
     protected:
     private:
 };
-
-
-
 
 
 

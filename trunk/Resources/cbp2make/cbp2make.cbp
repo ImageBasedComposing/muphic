@@ -299,6 +299,9 @@
 		<Unit filename="src/doc/makefile.dox">
 			<Option target="Doxygen" />
 		</Unit>
+		<Unit filename="src/doc/platforms.dox">
+			<Option target="Doxygen" />
+		</Unit>
 		<Unit filename="src/doc/toolchains.dox">
 			<Option target="Doxygen" />
 		</Unit>

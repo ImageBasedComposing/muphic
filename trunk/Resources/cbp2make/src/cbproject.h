@@ -67,6 +67,7 @@ class CCodeBlocksProject
   std::vector<CVirtualTarget*> m_VirtualTargetIndex;
   std::vector<CBuildUnit*> m_UnitIndex;
   std::vector<CToolChain*> m_ToolChainIndex;
+  std::vector<int> m_TargetToolChainIndex;
   //
   CDependencyInfo m_Dependencies;
   //CStringList m_MakefileText;

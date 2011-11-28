@@ -42,6 +42,7 @@ void CCodeBlocksBuildConfig::Clear(void)
  m_DefaultOptions.Clear();
  m_Targets.Clear();
  m_TargetNameCase = 0;
+ m_MacroVariableCase = 0;
  m_FlatObjectNames = false;
  m_FlatObjectPaths = false;
  m_MultilineObjects = false;
