@@ -3,6 +3,7 @@
 Voz::Voz()
 {
 	segmentos = new Segmentos();
+	this->instrumento = DEFAULT_INSTRUMENT;
 }
 
 Voz::~Voz()

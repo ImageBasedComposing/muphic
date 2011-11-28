@@ -77,6 +77,7 @@
     <ClInclude Include="..\source\include\Conf.h" />
     <ClInclude Include="..\source\include\Figura.h" />
     <ClInclude Include="..\source\include\Figuras.h" />
+    <ClInclude Include="..\source\include\instruments.h" />
     <ClInclude Include="..\source\include\Midizator.h" />
     <ClInclude Include="..\source\include\MidizatorABC.h" />
     <ClInclude Include="..\source\include\Mu.h" />

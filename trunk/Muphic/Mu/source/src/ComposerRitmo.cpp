@@ -31,7 +31,7 @@ Music* ComposerRitmo::composeMusic()
 	Voces* vs = new Voces();
 
 	//Cosas de la voz
-	v1->setInstrumento(1);
+	v1->setInstrumento(DRUMS);
 
 	//Calculamos la tonalidad
 	v1->setTonalidad(REM);
@@ -263,6 +263,8 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 
 		double pownum = 2;
 
+
+		
 		for(int k = 0; k < 8; k++)
 		{
 			if (notas[k] == 0)
@@ -273,9 +275,13 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 			}
 
 			// Inserto blancas si no hay vertices y por debajo si hay
+			int duracion = 0;
 			for(int k1 = 0; k1 < notas[k]; k1++)
 			{
-				s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),(n->getTono()));
+				// cambiamos lo de las notas para que haga cosas con la batera
+				//s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),(n->getTono()));
+				duracion = (QUARTERNOTE*2)/(int)pow(pownum,notas[k]);
+				s = new Nota(duracion,getDrumTone(duracion));
 				ss->pushBack(s);
 			}
 		}
@@ -288,11 +294,28 @@ void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
 	{
 		center.first = f->getVerticeAt(1)->x;
 		center.second = f->getVerticeAt(1)->y;
+		// cambiamos lo de las notas para que haga cosas con la batera
+		int duracion = 0;
 		for(int f=0; f < 4; f++)
-			ss->pushBack(new Nota((QUARTERNOTE*2),n->getTono()));
+		{
+			//ss->pushBack(new Nota((QUARTERNOTE*2),n->getTono()));
+			duracion = (QUARTERNOTE*2);
+			ss->pushBack(new Nota(duracion,getDrumTone(duracion)));
+		}
 		seg->setSimbolos(ss);
 	}
 }
+
+int ComposerRitmo::getDrumTone(int duracion)
+{
+	if (duracion >= QUARTERNOTE)
+		// pomm!
+		return MI + ESCALA;
+	else
+		// chss!
+		return LA + 2*ESCALA;
+}
+
 
 void ComposerRitmo::calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos)
 {

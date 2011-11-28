@@ -33,6 +33,7 @@ class MidizatorABC : public Midizator
 		string transformNota(Nota* n, pair<int,int> duracionBase);
 		string transformAcorde(Acorde* a, pair<int,int> duracionBase);
 		string imprimeNota(Simbolo* simbolo, pair<int,int> duracionBase);
+		string printInstrumento(Instrumento i);
 };
 
 #endif // MIDIZATORABC_H

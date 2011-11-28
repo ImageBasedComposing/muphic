@@ -3,15 +3,10 @@ T:Rithm
 L:1/16
 %            End of header, start of tune body:
 V:0
+%%MIDI channel 10
 K:D
 M:4/4
 Q:180
- | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | | ^B4 z4 B4 z4 | ^B4 B2 B2 z4 B4 | ^B4 z4 z4 B4 |
- z4 ^B4 z4 z4 | | | z4 ^B4 z4 B4 | z4 z4 ^B4 z4 | | | ^B4 z4 z4 B4 |
- z4 ^B4 z4 z4 | ^B4 z4 B4 z4 | ^B4 B2 B2 z4 B4 | | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | | ^B4 z4 B4 z4 |
- ^B4 B2 B2 z4 B4 | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | | | z4 ^B4 z4 B4 |
- z4 z4 ^B4 z4 | | | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | ^B4 z4 B4 z4 |
- ^B4 B2 B2 z4 B4 | | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | | ^B4 z4 B4 z4 |
- ^B4 B2 B2 z4 B4 | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | | | z4 ^B4 z4 B4 |
- z4 z4 ^B4 z4 | | | ^B4 z4 z4 B4 | z4 ^B4 z4 z4 | ^B4 z4 B4 z4 |
- ^B4 B2 B2 z4 B4 |]
+ E,,4 z4 E,,4 z4 | E,,4 A,2 A,2 z4 E,,4 | z4 E,,4 z4 E,,4 | z4 z4 E,,4 z4 | E,,4 z4 E,,4 z4 | E,,4 A,2 A,2 z4 E,,4 | E,,8 E,,8 |
+ E,,8 E,,8 | E,,4 z4 z4 E,,4 | z4 E,,4 z4 z4 | E,,8 E,,8 | E,,8 E,,8 | E,,4 z4 E,,4 z4 |
+ E,,4 A,2 A,2 z4 E,,4 | z4 E,,4 z4 E,,4 | z4 z4 E,,4 z4 | E,,4 z4 E,,4 z4 | E,,4 A,2 A,2 z4 E,,4 |]

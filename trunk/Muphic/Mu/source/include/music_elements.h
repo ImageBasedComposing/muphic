@@ -6,6 +6,7 @@
 #include <list>
 #include <string>
 #include "string.h"
+#include "instruments.h"
 
 using namespace std;
 
@@ -445,5 +446,6 @@ class Scriabin
 	private:
 		list< pair<string,int> > scriabin;
 };
+
 
 #endif // MUSIC_ELEMS
