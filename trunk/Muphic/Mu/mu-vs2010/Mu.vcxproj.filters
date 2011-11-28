@@ -99,7 +99,6 @@
     <ClInclude Include="..\..\common\include\launcher.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\instruments.h">
     <ClInclude Include="..\source\include\ComposerMultiple.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
