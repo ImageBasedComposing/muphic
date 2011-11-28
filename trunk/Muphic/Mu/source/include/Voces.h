@@ -13,6 +13,7 @@ class Voces
 {
     public:
         Voces();
+		Voces(Voces* v);
         virtual ~Voces();
 
         /* envoltorio del vector stl */

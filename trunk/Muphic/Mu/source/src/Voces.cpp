@@ -5,6 +5,14 @@ Voces::Voces()
 	voces.clear();
 }
 
+Voces::Voces(Voces* v)
+{
+	voces.clear();
+	
+	for(int i = 0; i < v->size(); i++)
+		voces.push_back(v->getAt(i));
+}
+
 Voces::~Voces()
 {
     voces.clear();
