@@ -66,10 +66,12 @@ void CProcessingMachine::DisplayHelpMessage(void)
  "\t\t\t [-unix] [-windows] [-mac] [--all-os] [-targets \"<target1>[,<target2>[, ...]]\"]\n"
  "\t\t\t [--flat-objects] [--flat-objpath] [--wrap-objects] [--wrap-options]\n"
  "\t\t\t [--with-deps] [--keep-objdir] [--keep-outdir] [--target-case keep|lower|upper]\n"
+ "\t\t\t [--macros-case keep|lower|upper]\n"
  "\t\tcbp2make -list -in <project_file_list> [-cfg <configuration>]\n"
  "\t\t\t [-unix] [-windows] [-mac] [--all-os] [-targets \"<target1>[,<target2>[, ...]]\"]\n"
  "\t\t\t [--flat-objects] [--flat-objpath] [--wrap-objects] [--wrap-options]\n"
  "\t\t\t [--with-deps] [--keep-objdir] [--keep-outdir] [--target-case keep|lower|upper]\n\n"
+ "\t\t\t [--macros-case keep|lower|upper]\n"
  "\tManage toolchains:\n"
  "\t\tcbp2make --config toolchain --add [-unix|-windows|-mac] -chain <toolchain>\n"
  "\t\tcbp2make --config toolchain --remove [-unix|-windows|-mac] -chain <toolchain>\n\n"
@@ -168,7 +170,8 @@ void CProcessingMachine::CreateConfiguration(void)
  PSC().InsertBooleanVariable("--with-deps");
  PSC().InsertBooleanVariable("--keep-objdir");
  PSC().InsertBooleanVariable("--keep-outdir");
- PSC().InsertStringVariable("--target-case","keep");
+ PSC().InsertStringVariable("--target-case","lower");
+ PSC().InsertStringVariable("--macros-case","upper");
  PSC().InsertStringVariable("--default-options");
  PSC().InsertStringVariable("-targets","");
 
@@ -623,6 +626,11 @@ bool CProcessingMachine::Configure(const CString& FileName)
   CString target_case_name = PSC().VarNamed("--target-case").GetString();
   m_BuildManager.Config().TargetNameCase() =
    GuessStr(target_case_name,"keep lower upper",target_case_name,false);
+ }
+ {
+  CString macros_case_name = PSC().VarNamed("--macros-case").GetString();
+  m_BuildManager.Config().MacroVariableCase() =
+   GuessStr(macros_case_name,"keep lower upper",macros_case_name,false);
  }
  m_BuildManager.Config().KeepObjectDirectories() = PSC().VarDefined("--keep-objdir");
  m_BuildManager.Config().KeepOutputDirectories() = PSC().VarDefined("--keep-outdir");

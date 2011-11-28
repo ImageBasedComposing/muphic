@@ -51,7 +51,7 @@ class CGlobalVariable
   CString& Cflags(void) { return m_Cflags; }
   CString& Lflags(void) { return m_Lflags; }
  public:
-  static CString Convert(const CString& Value);
+  static CString Convert(const CString& Value, const int Case = 0);
   int Count(void);
   CString GetField(const int Index);
   CString GetValue(const int Index);

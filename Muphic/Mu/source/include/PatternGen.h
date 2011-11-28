@@ -21,7 +21,7 @@ class PatternGen
 
     protected:
 
-		list< pair<int, float> > getPattern(list< pair<int, float> > partes);
+		list< pair<T, float> > getPattern(list< pair<T, float> > partes);
     private:
 };
 
@@ -36,12 +36,12 @@ PatternGen<T>::~PatternGen()
 }
 
 template <class T>
-list< pair<int, float> > PatternGen<T>::getPattern(list< pair<int, float> > partes)
+list< pair<T, float> > PatternGen<T>::getPattern(list< pair<T, float> > partes)
 {
 	// tratar la lista
 
 	// seleccionar patron (o algoritmo-que-hace-patrón) en función de la lista
-	Pattern* p = new SimplePattern();
+	Pattern<T>* p = new SimplePattern<T>();
 
 	//devolverlo
 	return p->createPattern(partes);
@@ -50,14 +50,14 @@ list< pair<int, float> > PatternGen<T>::getPattern(list< pair<int, float> > part
 template <class T>
 list< pair< T, int> >* PatternGen<T>::getPattern(list< pair<T, int> >* partes)
 {
-	list< pair<int, float> > tmpin, tmpout;
+	list< pair<T, float> > tmpin, tmpout;
 	list< pair<T, int> >* out = new list< pair<T, int> >();
 
 	int nsegmentos = 0;
 
 	for (typename list< pair<T, int> >::iterator it = partes->begin(); it != partes->end(); it++)
 	{
-		tmpin.push_back(make_pair((int) (*it).first,(*it).second));
+		tmpin.push_back(make_pair((*it).first,(*it).second));
 		nsegmentos += (*it).second;
 	}
 
@@ -66,7 +66,7 @@ list< pair< T, int> >* PatternGen<T>::getPattern(list< pair<T, int> >* partes)
 	int tmpSum = 0;
 	int i = 0;
 	int tmpSeg;
-	for (list< pair<int, float> >::iterator it = tmpout.begin(); it != tmpout.end(); it++)
+	for (typename list< pair<T, float> >::iterator it = tmpout.begin(); it != tmpout.end(); it++)
 	{
 		tmpSum += (*it).second;
 		if (i == tmpout.size() - 1)
@@ -74,7 +74,7 @@ list< pair< T, int> >* PatternGen<T>::getPattern(list< pair<T, int> >* partes)
 		else
 			tmpSeg = (*it).second;
 
-		out->push_back(make_pair((T) (*it).first,tmpSeg));
+		out->push_back(make_pair((*it).first,tmpSeg));
 		i++;
 	}
 

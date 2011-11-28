@@ -132,7 +132,7 @@ string ComposerRitmo::compose(string picPath, string usrConfPath)
 int ComposerRitmo::nota(Figuras* f)
 {
 	int t = f->sizeFig();
-	int i = 0;
+	//int i = 0;
 	list< pair<string,int> >* colores = new list< pair<string,int> >();
 	pair<string,int>* par;
 

@@ -20,6 +20,7 @@
 #include <iostream>
 //------------------------------------------------------------------------------
 #include "tinyxml.h"
+#include "stlfutils.h"
 #include "cbglobalvar.h"
 #include "cbhelper.h"
 //------------------------------------------------------------------------------
@@ -49,7 +50,7 @@ CString CGlobalVariable::GetValue(const int Index)
  return m_Fields.Variable(Index).GetString();
 }
 
-CString CGlobalVariable::Convert(const CString& Value)
+CString CGlobalVariable::Convert(const CString& Value, const int Case)
 {
  CString result, tmp; int state = 0;
  for (int i = 0, n = Value.GetLength(); i < n; i++)
@@ -98,7 +99,14 @@ CString CGlobalVariable::Convert(const CString& Value)
     {
      state = 0;
      CString gcv_name = SubStr(tmp,3,tmp.GetLength()-2);
-     CString mfv_name = UpperCase(MakefileFriendly(gcv_name));
+     //CString mfv_name = UpperCase(MakefileFriendly(gcv_name));
+     CString mfv_name = MakefileFriendly(gcv_name);
+     switch (Case)
+     {
+      case 1: { mfv_name = LowerCase(mfv_name); break; }
+      case 2: { mfv_name = UpperCase(mfv_name); break; }
+      default: break;
+     }
      result += "$("+mfv_name+")";
      tmp.Clear();
     }
@@ -128,7 +136,7 @@ CString CGlobalVariable::Include(void)
   }
   else
   {
-   return Base()+"/include";
+   return JoinPaths(Base(),"/include");
   }
  }
  return m_Include;
@@ -144,7 +152,7 @@ CString CGlobalVariable::Lib(void)
   }
   else
   {
-   return Base()+"/lib";
+   return JoinPaths(Base(),"/lib");
   }
  }
  return m_Lib;

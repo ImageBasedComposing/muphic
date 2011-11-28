@@ -57,6 +57,12 @@ string MidizatorABC::toMidi(std::string music, std::string converter)
             while(wait(&status) > 0);
          }
 
+        /*
+        Launcher* l = new Launcher();
+		string args[] = {"abc2midi_linux.exe", music};
+
+		l->launch(2, args);*/
+
      #endif
 
     std::string output = changeExtension(music, "mid");
@@ -66,7 +72,7 @@ string MidizatorABC::toMidi(std::string music, std::string converter)
 
 string MidizatorABC::toMidi(Music* music)
 {
-	
+
 	string fName = music->getName();
 	string fileName = fName + ".abc";
 	char *const abcFile = const_cast<char*>(fileName.c_str());
@@ -145,7 +151,7 @@ string MidizatorABC::toMidi(Music* music)
 				else
 					*f << "]";
 			}
-			
+
 
 			// Trabajamos con cada símbolo
 			for( int k = 0; k < s->getSimbolos()->size(); k++)
@@ -154,7 +160,7 @@ string MidizatorABC::toMidi(Music* music)
 
 				duracionsimboriginal = simb->getDuracion();
 				tmpduracion = tmpduracion + duracionsimboriginal; //tmpduracion lo que ocupa en nuevo sonido + los anteriores en un compas
-				
+
 
 				// encajar la nota a la métrica
 				do
@@ -165,7 +171,7 @@ string MidizatorABC::toMidi(Music* music)
 						// imprimir lo que quepa de la nota
 						tmpnota1 = duracionCompas - (tmpduracion - simb->getDuracion());
 						tmpnota2 = simb->getDuracion() - tmpnota1;
-						
+
 						if (tmpnota1 == 0) //En el caso que no quepa nada de la nota, se cierra compás y nos vamos al nuevo
 							*f << " |";
 						else
@@ -184,7 +190,7 @@ string MidizatorABC::toMidi(Music* music)
 							numCompasesLinea++;
 						}
 						tablaTransf->cleanAccidents();
-					
+
 						// actualizar duracion de compas
 						tmpduracion = tmpnota2;
 
@@ -193,7 +199,7 @@ string MidizatorABC::toMidi(Music* music)
 					}
 					// cabe la nota en el compás
 					// se acaba el compás?
-					else 
+					else
 					{
 						// imprimir nota
 
@@ -203,7 +209,7 @@ string MidizatorABC::toMidi(Music* music)
 						{
 							// imprimir barra de compas
 							*f << " |";
-							if (numCompasesLinea > 5 && k+1 < s->getSimbolos()->size()) 
+							if (numCompasesLinea > 5 && k+1 < s->getSimbolos()->size())
 							{//cuidado de no meter eol al final de la obra, que luego hay que poner "]"
 								*f << endl; //Salto de linea para no crear una linea enorme
 								numCompasesLinea = 0;
@@ -238,7 +244,7 @@ string MidizatorABC::toMidi(Music* music)
 		std::string picExeFile = converter + " " + fName + ".abc";
 		system(picExeFile.c_str());
 		/*
-		
+
 		Launcher* l = new Launcher();
 		string args[] = {converter, fName + ".abc"};
 
@@ -266,6 +272,11 @@ string MidizatorABC::toMidi(Music* music)
             int status;
             while(wait(&status) > 0);
         }
+        /*
+        Launcher* l = new Launcher();
+		string args[] = {"abc2midi_linux.exe", abcFile};
+
+		l->launch(2, args);*/
 
     #endif
 
@@ -279,7 +290,7 @@ string MidizatorABC::imprimeNota(Simbolo* simbolo, pair<int,int> duracionBase)
 	if (Nota* n = dynamic_cast<Nota *> (simbolo))
 	{
 		n = (Nota*) simbolo;
-					
+
 		return transformNota(n, duracionBase);
 	} // Nota
 	// Trabajamos con acordes
@@ -334,7 +345,7 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 		else
 		{
 			//LANZAR ERROR DE TRANSFORMACION!!
-		}		
+		}
 	}
 
 	//Ahora vamos a ver en que escala está:
@@ -344,9 +355,9 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 			case 0: sufijo += ",";
 			case 1: sufijo += ",";
 			case 2: sufijo += ","; //Se van acumulando las ','
-			case 3: 
+			case 3:
 				break; //Hasta aqui la escala central
-			case 6: sufijo += "'"; 
+			case 6: sufijo += "'";
 				break;
 			case 5: sufijo += "'";
 				break;

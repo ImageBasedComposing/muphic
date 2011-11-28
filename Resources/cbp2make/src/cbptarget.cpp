@@ -540,6 +540,17 @@ void CBuildTarget::Read(const TiXmlElement *TargetRoot)
  }
 }
 
+CString CBuildTarget::Name(const CString& Prefix, const int Case) const
+{
+ switch (Case)
+ {
+  default:
+  case 0: return Prefix+m_MFName;
+  case 1: return LowerCase(Prefix)+m_LCName;
+  case 2: return UpperCase(Prefix)+m_UCName;
+ }
+}
+
 CString CBuildTarget::Name(const CString& Prefix) const
 {
  switch (m_NameCase)

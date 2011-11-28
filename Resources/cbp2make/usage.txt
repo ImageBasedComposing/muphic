@@ -5,11 +5,13 @@ Usage syntax:
 			 [-unix] [-windows] [-mac] [--all-os] [-targets "<target1>[,<target2>[, ...]]"]
 			 [--flat-objects] [--flat-objpath] [--wrap-objects] [--wrap-options]
 			 [--with-deps] [--keep-objdir] [--keep-outdir] [--target-case keep|lower|upper]
+			 [--macros-case keep|lower|upper]
 		cbp2make -list -in <project_file_list> [-cfg <configuration>]
 			 [-unix] [-windows] [-mac] [--all-os] [-targets "<target1>[,<target2>[, ...]]"]
 			 [--flat-objects] [--flat-objpath] [--wrap-objects] [--wrap-options]
 			 [--with-deps] [--keep-objdir] [--keep-outdir] [--target-case keep|lower|upper]
 
+			 [--macros-case keep|lower|upper]
 	Manage toolchains:
 		cbp2make --config toolchain --add [-unix|-windows|-mac] -chain <toolchain>
 		cbp2make --config toolchain --remove [-unix|-windows|-mac] -chain <toolchain>

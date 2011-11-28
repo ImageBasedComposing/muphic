@@ -6,10 +6,12 @@
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
 
 #ifdef __LINUX
     #include <unistd.h>
     #include <sys/wait.h>
+    #include "string.h"
 #endif
 
 using namespace std;

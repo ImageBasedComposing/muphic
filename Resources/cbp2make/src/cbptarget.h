@@ -97,6 +97,7 @@ class CBuildTarget
   CString UCName(void) const { return m_UCName; }
   CString LCName(void) const { return m_LCName; }
   CString MFName(void) const { return m_MFName; }
+  CString Name(const CString& Prefix, const int Case) const;
   CString Name(const CString& Prefix) const;
   //
   CString TargetTypeName(const TargetType Type);

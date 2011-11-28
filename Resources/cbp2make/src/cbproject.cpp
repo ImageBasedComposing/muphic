@@ -460,92 +460,88 @@ void CCodeBlocksProject::UpdatePlatformIndex
  m_VirtualTargetIndex.clear();
  m_ToolChainIndex.clear();
  //
- if (m_SinglePlatform)
+ CString platform_name = Config.Platforms().Platform(Platform)->Name();
+ // add all targets for current platform to index
+ for (int i = 0, n = m_BuildTargets.size(); i < n; i++)
  {
-  for (int i = 0, n = m_BuildTargets.size(); i < n; i++)
+  CBuildTarget *target = m_BuildTargets[i];
+  CStringList platforms = target->Platforms();
+  bool add_target = ((platforms.GetCount()==0) ||
+   ((platforms.GetCount()>0) && (platforms.FindString(platform_name)>=0)));
+  add_target &= ((Config.Targets().GetCount()==0) ||
+   ((Config.Targets().GetCount()>0) && (Config.Targets().FindString(target->Title())>=0)));
+  if (add_target)
   {
-   CBuildTarget *target = m_BuildTargets[i];
-   bool add_target = ((Config.Targets().GetCount()==0) ||
-    ((Config.Targets().GetCount()>0) && (Config.Targets().FindString(target->Title())>=0)));
-   if (add_target)
-   {
-    m_BuildTargetIndex.push_back(target);
-   }
-  }
-  for (int i = 0, n = m_VirtualTargets.size(); i < n; i++)
-  {
-   m_VirtualTargetIndex.push_back(m_VirtualTargets[i]);
+   m_BuildTargetIndex.push_back(target);
   }
  }
- else
+ // add all virtual targets containing valid targets to index
+ for (int i = 0, ni = m_VirtualTargets.size(); i < ni; i++)
  {
-  CString platform_name = Config.Platforms().Platform(Platform)->Name();
-  // add all targets for current platform to index
-  for (int i = 0, n = m_BuildTargets.size(); i < n; i++)
+  bool done = false;
+  CVirtualTarget *v_target = m_VirtualTargets[i];
+  for (int j = 0, nj = v_target->Targets().GetCount(); j < nj; j++)
   {
-   CBuildTarget *target = m_BuildTargets[i];
-   CStringList platforms = target->Platforms();
-   bool add_target = ((platforms.GetCount()==0) ||
-    ((platforms.GetCount()>0) && (platforms.FindString(platform_name)>=0)));
-   add_target &= ((Config.Targets().GetCount()==0) ||
-    ((Config.Targets().GetCount()>0) && (Config.Targets().FindString(target->Title())>=0)));
-   if (add_target)
+   for (int k = 0, nk = m_BuildTargetIndex.size(); k < nk; k++)
    {
-    m_BuildTargetIndex.push_back(target);
-   }
-  }
-  // add all virtual targets containing valid targets to index
-  for (int i = 0, ni = m_VirtualTargets.size(); i < ni; i++)
-  {
-   bool done = false;
-   CVirtualTarget *v_target = m_VirtualTargets[i];
-   for (int j = 0, nj = v_target->Targets().GetCount(); j < nj; j++)
-   {
-    for (int k = 0, nk = m_BuildTargetIndex.size(); k < nk; k++)
+    CBuildTarget *target = m_BuildTargetIndex[k];
+    if (target->Title() == v_target->Targets().GetString(j))
     {
-     CBuildTarget *target = m_BuildTargetIndex[k];
-     if (target->Title() == v_target->Targets().GetString(j))
-     {
-      m_VirtualTargetIndex.push_back(v_target);
-      done = true; break;
-     }
+     m_VirtualTargetIndex.push_back(v_target);
+     done = true; break;
     }
-    if (done) break;
    }
    if (done) break;
   }
+  if (done) break;
  }
- // add all toolchains for valid targets to index
+ // collect unique toolchains for all targets
  Config.ToolChains().Lock();
- CPlatform::OS_Type platform = Config.Platforms().Platform(Platform)->OS();
- for (int i = 0, ni = Config.ToolChains().GetCount(platform); i < ni; i++)
+ //
+ m_TargetToolChainIndex.clear();
+ CStringList tc_names;
+ tc_names.Insert(m_Compiler);
+ for (int j = 0, nj = m_BuildTargetIndex.size(); j < nj; j++)
  {
-  CToolChain *tc = Config.ToolChains().ToolChain(platform,i);
-  //if (tc->OS()==platform)
-  //{
-  for (int j = 0, nj = m_BuildTargetIndex.size(); j < nj; j++)
+  CBuildTarget *target = m_BuildTargetIndex[j];
+  tc_names.Insert(target->Compiler());
+ }
+ tc_names.RemoveEmpty();
+ tc_names.RemoveDuplicates();
+ // add all uniqie toolchains to index
+ for (int j = 0, nj = tc_names.GetCount(); j < nj; j++)
+ {
+  CPlatform::OS_Type platform = Config.Platforms().Platform(Platform)->OS();
+  for (int i = 0, ni = Config.ToolChains().GetCount(platform); i < ni; i++)
   {
-   CBuildTarget *target = m_BuildTargetIndex[j];
-   if (tc->Alias() == target->Compiler())
+   CToolChain *tc = Config.ToolChains().ToolChain(platform,i);
+   if (tc->Alias() == tc_names[j])
    {
-    //std::cout<<"toolchain alias = "<<tc->m_Alias<<std::endl;
-    //std::cout<<"target compiler = "<<target->Compiler()<<std::endl;
+    //std::cout<<"unique toolchain index = "<<j<<std::endl;
+    //std::cout<<"toolchain index = "<<i<<std::endl;
+    //std::cout<<"toolchain alias = "<<tc->Alias().GetCString()<<std::endl;
     m_ToolChainIndex.push_back(tc);
     break;
    }
   }
-  if (tc->Alias() == m_Compiler)
-  {
-   //std::cout<<"toolchain alias = "<<tc->m_Alias<<std::endl;
-   //std::cout<<"default compiler = "<<m_Compiler<<std::endl;
-   if (std::find(m_ToolChainIndex.begin(),m_ToolChainIndex.end(),tc)==m_ToolChainIndex.end())
-   {
-    m_ToolChainIndex.push_back(tc);
-   }
-   //if (m_ToolChainIndex.IndexOf(tc)==INDEX_NOT_FOUND) m_ToolChainIndex.Insert(tc);
-  }
-  //}
  }
+ //std::cout<<std::endl;
+ // build per-target toolchain index
+ for (int j = 0, nj = m_BuildTargetIndex.size(); j < nj; j++)
+ {
+  CBuildTarget *target = m_BuildTargetIndex[j];
+  CString tc_name = target->Compiler();
+  if (tc_name.IsEmpty()) tc_name = m_Compiler;
+  int index = tc_names.FindString(tc_name);
+  if (index >= 0)
+  {
+   //std::cout<<"target title = "<<target->Title().GetCString()<<std::endl;
+   //std::cout<<"target compiler = "<<tc_name.GetCString()<<std::endl;
+   //std::cout<<"toolchain index = "<<index<<std::endl;
+   m_TargetToolChainIndex.push_back(index);
+  }
+ }
+ //std::cout<<std::endl;
 }
 
 void CCodeBlocksProject::UpdateTargetIndex
@@ -656,9 +652,22 @@ bool CCodeBlocksProject::GenerateMakefile
   m_Makefile.Header().Insert(FillStr("#",'-',"#",header_width));
   m_Makefile.Header().Insert("");
   section++;
+  // standard macros
+  CString STR_WRKDIR = DecorateVariableName("WorkDir",Config.MacroVariableCase());
+  CString STR_INC = DecorateVariableName("Inc",Config.MacroVariableCase());
+  CString STR_LIB = DecorateVariableName("Lib",Config.MacroVariableCase());
+  CString STR_DEP = DecorateVariableName("Dep",Config.MacroVariableCase());
+  CString STR_OBJ = DecorateVariableName("Obj",Config.MacroVariableCase());
+  CString STR_OUT = DecorateVariableName("Out",Config.MacroVariableCase());
+  CString STR_CFLAGS = DecorateVariableName("CFlags",Config.MacroVariableCase());
+  CString STR_RCFLAGS = DecorateVariableName("RCFlags",Config.MacroVariableCase());
+  CString STR_LDFLAGS = DecorateVariableName("LDFlags",Config.MacroVariableCase());
+  CString STR_RESINC = DecorateVariableName("ResInc",Config.MacroVariableCase());
+  CString STR_LIBDIR = DecorateVariableName("LibDir",Config.MacroVariableCase());
+  CString STR_OBJDIR = DecorateVariableName("ObjDir",Config.MacroVariableCase());
   // macros
   CString line = pl->EvalWorkDir();
-  m_Makefile.AddMacro("WRKDIR",line,section);
+  m_Makefile.AddMacro(STR_WRKDIR,line,section);
   section++;
   // declare environment variables
   if (m_Environment.GetCount())
@@ -679,16 +688,22 @@ bool CCodeBlocksProject::GenerateMakefile
     for (size_t j = 0; j < vset->Count(); j++)
     {
      CGlobalVariable *v = vset->Get(j);
-     m_Makefile.AddMacro(DecorateVariableName(v->Name()),v->Convert(v->Base()),section);
-     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".include"),v->Convert(v->Include()),section);
-     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".lib"),v->Convert(v->Lib()),section);
-     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".obj"),v->Convert(v->Obj()),section);
-     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".cflags"),v->Convert(v->Cflags()),section);
-     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".lflags"),v->Convert(v->Lflags()),section);
+     m_Makefile.AddMacro(DecorateVariableName(v->Name(),
+      Config.MacroVariableCase()),v->Convert(v->Base()),section);
+     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".include",
+      Config.MacroVariableCase()),v->Convert(v->Include()),section);
+     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".lib",
+      Config.MacroVariableCase()),v->Convert(v->Lib()),section);
+     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".obj",
+      Config.MacroVariableCase()),v->Convert(v->Obj()),section);
+     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".cflags",
+      Config.MacroVariableCase()),v->Convert(v->Cflags()),section);
+     m_Makefile.AddMacro(DecorateVariableName(v->Name()+".lflags",
+      Config.MacroVariableCase()),v->Convert(v->Lflags()),section);
      for (int k = 0; k < v->Count(); k++)
      {
-      m_Makefile.AddMacro(DecorateVariableName(v->Name()+"."+v->GetField(k)),
-                          v->Convert(v->GetValue(k)),section);
+      m_Makefile.AddMacro(DecorateVariableName(v->Name()+"."+v->GetField(k),
+       Config.MacroVariableCase()),v->Convert(v->GetValue(k)),section);
    }}}
    section++;
   }
@@ -702,7 +717,9 @@ bool CCodeBlocksProject::GenerateMakefile
    for (size_t j = 0; j < tc->ToolsCount(); j++)
    {
     CBuildTool *bt = tc->GetBuildTool(j);
-    m_Makefile.AddMacro(bt->MakeVariable()+tc_suffix,bt->Program(),section);
+    m_Makefile.AddMacro(
+     DecorateVariableName(bt->MakeVariable()+tc_suffix,Config.MacroVariableCase()),
+     bt->Program(),section);
    }
   }
   section++;
@@ -712,21 +729,21 @@ bool CCodeBlocksProject::GenerateMakefile
   {
    line += " -I"+pl->Pd(m_CompilerDirectories[i]);
   }
-  m_Makefile.AddMacro("INC",CGlobalVariable::Convert(line),section);
+  m_Makefile.AddMacro(STR_INC,CGlobalVariable::Convert(line,Config.MacroVariableCase()),section);
   line.Clear();
   for (int i = 0; i < m_CompilerOptions.GetCount(); i++)
   {
    line += " "+m_CompilerOptions[i];
   }
-  m_Makefile.AddMacro("CFLAGS",CGlobalVariable::Convert(line),section);
-  m_Makefile.AddMacro("RESINC","",section);
+  m_Makefile.AddMacro(STR_CFLAGS,CGlobalVariable::Convert(line,Config.MacroVariableCase()),section);
+  m_Makefile.AddMacro(STR_RESINC,"",section);
   //m_Makefile.AddMacro("RCFLAGS","",section);//not supported by CB build system
   line.Clear();
   for (int i = 0; i < m_LinkerDirectories.GetCount(); i++)
   {
    line += " -L"+pl->Pd(m_LinkerDirectories[i]);
   }
-  m_Makefile.AddMacro("LIBDIR",CGlobalVariable::Convert(line),section);
+  m_Makefile.AddMacro(STR_LIBDIR,CGlobalVariable::Convert(line,Config.MacroVariableCase()),section);
   line.Clear();
   for (int i = 0; i < m_LinkerLibraries.GetCount(); i++)
   {
@@ -741,36 +758,37 @@ bool CCodeBlocksProject::GenerateMakefile
     line += " "+pl->Pd(lib_name);
    }
   }
-  m_Makefile.AddMacro("LIB",CGlobalVariable::Convert(line),section);
+  m_Makefile.AddMacro(STR_LIB,CGlobalVariable::Convert(line,Config.MacroVariableCase()),section);
   line.Clear();
   for (int i = 0; i < m_LinkerOptions.GetCount(); i++)
   {
    line += " "+m_LinkerOptions[i];
   }
-  m_Makefile.AddMacro("LDFLAGS",CGlobalVariable::Convert(line),section);
+  m_Makefile.AddMacro(STR_LDFLAGS,CGlobalVariable::Convert(line,Config.MacroVariableCase()),section);
   section++;
   // per-target flags
   for (size_t t = 0; t < m_BuildTargetIndex.size(); t++)
   {
    CBuildTarget *target = m_BuildTargetIndex[t];
-   m_Makefile.AddMacro("INC_"+target->UCName(),
-    CGlobalVariable::Convert(pl->Pd(target->IncDirs(" $(INC)"))),section);
-   m_Makefile.AddMacro("CFLAGS_"+target->UCName(),
-    CGlobalVariable::Convert(pl->Pd(target->CFlags(" $(CFLAGS)"))),section);
-   m_Makefile.AddMacro("RESINC_"+target->UCName(),
-    CGlobalVariable::Convert(pl->Pd(target->ResDirs(" $(RESINC)"))),section);
-   m_Makefile.AddMacro("RCFLAGS_"+target->UCName(),
-    CGlobalVariable::Convert(pl->Pd(target->RCFlags(" $(RCFLAGS)"))),section);
-   m_Makefile.AddMacro("LIBDIR_"+target->UCName(),
-    CGlobalVariable::Convert(pl->Pd(target->LibDirs(" $(LIBDIR)"))),section);
-   m_Makefile.AddMacro("LIB_"+target->UCName(),
-    CGlobalVariable::Convert("$(LIB)"+pl->Pd(target->Libs(pl->OS()))),section);
-   m_Makefile.AddMacro("LDFLAGS_"+target->UCName(),
-    CGlobalVariable::Convert(pl->Pd(target->LdFlags(" $(LDFLAGS)"))),section);
+   m_Makefile.AddMacro(target->Name(STR_INC+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert(pl->Pd(target->IncDirs(" $("+STR_INC+")")),Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_CFLAGS+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert(pl->Pd(target->CFlags(" $("+STR_CFLAGS+")")),Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_RESINC+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert(pl->Pd(target->ResDirs(" $("+STR_RESINC+")")),Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_RCFLAGS+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert(pl->Pd(target->RCFlags(" $("+STR_RCFLAGS+")")),Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_LIBDIR+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert(pl->Pd(target->LibDirs(" $("+STR_LIBDIR+")")),Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_LIB+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert("$("+STR_LIB+")"+pl->Pd(target->Libs(pl->OS())),Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_LDFLAGS+"_",Config.MacroVariableCase()),
+    CGlobalVariable::Convert(pl->Pd(target->LdFlags(" $("+STR_LDFLAGS+")")),Config.MacroVariableCase()),section);
    line = pl->Pd(target->ObjectOutput());
    if (target->ObjectOutput().IsEmpty()) line += ".objs";
-   m_Makefile.AddMacro("OBJDIR_"+target->UCName(),CGlobalVariable::Convert(line),section);
-   m_Makefile.AddMacro("DEP_"+target->UCName(),pl->Pd(target->ExtDeps()),section);
+   m_Makefile.AddMacro(target->Name(STR_OBJDIR+"_",Config.MacroVariableCase()),
+                       CGlobalVariable::Convert(line,Config.MacroVariableCase()),section);
+   m_Makefile.AddMacro(target->Name(STR_DEP+"_",Config.MacroVariableCase()),pl->Pd(target->ExtDeps()),section);
    CString target_output = target->Output();
    /*
    if (target->m_AutoPrefix)
@@ -789,7 +807,7 @@ bool CCodeBlocksProject::GenerateMakefile
       target_output += "."+ext;
      }
     }
-    m_Makefile.AddMacro("OUT_"+target->UCName(),pl->Pd(target_output),section);
+    m_Makefile.AddMacro(target->Name(STR_OUT+"_",Config.MacroVariableCase()),pl->Pd(target_output),section);
    }
    section++;
   }
@@ -853,17 +871,12 @@ bool CCodeBlocksProject::GenerateMakefile
    CStringList before_build_commands = target->BeforeBuildCommands();
    CStringList after_build_commands = target->AfterBuildCommands();
    // setup suffix for toolchain if there are more than one toolchain
-   CToolChain *tc = 0; int tc_id = -1;
-   for (size_t i = 0; i < m_ToolChainIndex.size(); i++)
-   {
-    tc_id = i; tc = m_ToolChainIndex[i];
-    if (tc->Alias() == target->Compiler()) break;
-   }
-   if (0==tc) continue;
+   int tc_id = m_TargetToolChainIndex[t];
+   CToolChain *tc = m_ToolChainIndex[tc_id];
    CString tc_suffix;
    if (!single_toolchain) tc_suffix = IntToStr(tc_id);
    //
-   CString target_out_name = "$(OUT_"+target->UCName()+")";
+   CString target_out_name = "$("+target->Name(STR_OUT+"_",Config.MacroVariableCase())+")";
    CMakefileRule& rule_before = m_Makefile.AddRule(target->Name("before_"),section);
    CMakefileRule& rule_after = m_Makefile.AddRule(target->Name("after_"),section);
    CMakefileRule& rule_build_target = m_Makefile.AddRule(target->Name(""),section);
@@ -913,20 +926,20 @@ bool CCodeBlocksProject::GenerateMakefile
 #ifdef TARGET_WRKDIR_ENABLED
     if (!target->m_WorkingDirectory.IsEmpty())
     {
-     rule_after.Commands().Insert(pl->Cd()+" $(WRKDIR)");
+     rule_after.Commands().Insert(pl->Cd()+" $("+STR_WRKDIR+")");
     }
 #endif
    }
    if (CBuildTarget::ttCommands!=target->Type())
    {
-    CMakefileVariable& target_objects = m_Makefile.AddMacro("OBJ_"+target->UCName(),"",target_objects_section++);
+    CMakefileVariable& target_objects = m_Makefile.AddMacro(target->Name(STR_OBJ+"_",Config.MacroVariableCase()),"",target_objects_section++);
     target_objects.Multiline() = Config.MultilineObjects();
     // output binary name may be exactly same for different targets
     // and shouldn't be used as makefile rule name
     //CMakefileRule& rule_target_out = m_Makefile.AddRule(target_out_name,section);
     CMakefileRule& rule_target_out = m_Makefile.AddRule(target->Name("out_"),section);
-    rule_target_out.Dependencies().Insert("$(OBJ_"+target->UCName()+")");
-    rule_target_out.Dependencies().Insert("$(DEP_"+target->UCName()+")");
+    rule_target_out.Dependencies().Insert("$("+target->Name(STR_OBJ+"_",Config.MacroVariableCase())+")");
+    rule_target_out.Dependencies().Insert("$("+target->Name(STR_DEP+"_",Config.MacroVariableCase())+")");
     CStringList target_directories;
     CStringList clean_target_directories;
     CString binary_path = ExtractFilePath(target->Output());
@@ -940,11 +953,11 @@ bool CCodeBlocksProject::GenerateMakefile
     }
     CString object_extension = "x";
     //
-    cmd_args.SetStringVariable(TPL_LIB_DIRS,"$(LIBDIR_"+target->UCName()+")");
-    cmd_args.SetStringVariable(TPL_LIBS,"$(LIB_"+target->UCName()+")");
-    cmd_args.SetStringVariable(TPL_LNK_OBJECTS,"$(OBJ_"+target->UCName()+")");
+    cmd_args.SetStringVariable(TPL_LIB_DIRS,"$("+target->Name(STR_LIBDIR+"_",Config.MacroVariableCase())+")");
+    cmd_args.SetStringVariable(TPL_LIBS,"$("+target->Name(STR_LIB+"_",Config.MacroVariableCase())+")");
+    cmd_args.SetStringVariable(TPL_LNK_OBJECTS,"$("+target->Name(STR_OBJ+"_",Config.MacroVariableCase())+")");
     cmd_args.SetStringVariable(TPL_LNK_RES_OBJECTS,"");
-    cmd_args.SetStringVariable(TPL_LNK_OPTIONS,"$(LDFLAGS_"+target->UCName()+")");
+    cmd_args.SetStringVariable(TPL_LNK_OPTIONS,"$("+target->Name(STR_LDFLAGS+"_",Config.MacroVariableCase())+")");
     //
     switch (target->Type())
     {
@@ -955,8 +968,8 @@ bool CCodeBlocksProject::GenerateMakefile
       if (0!=linker)
       {
        // compose static linkage command
-       cmd_args.SetStringVariable(TPL_LIB_LINKER,"$("+linker->MakeVariable()+")");
-       cmd_args.SetStringVariable(TPL_STL_OUTPUT,"$(OUT_"+target->UCName()+")");
+       cmd_args.SetStringVariable(TPL_LIB_LINKER,"$("+DecorateVariableName(linker->MakeVariable()+tc_suffix,Config.MacroVariableCase())+")");
+       cmd_args.SetStringVariable(TPL_STL_OUTPUT,"$("+target->Name(STR_OUT+"_",Config.MacroVariableCase())+")");
        line = linker->MakeCommand(cmd_args);
        //
        rule_target_out.Commands().Insert(line);
@@ -980,8 +993,8 @@ bool CCodeBlocksProject::GenerateMakefile
       if (0!=linker)
       {
        // compose dynamic linkage command
-       cmd_args.SetStringVariable(TPL_LINKER,"$("+linker->MakeVariable()+tc_suffix+")");
-       cmd_args.SetStringVariable(TPL_EXE_OUTPUT,"$(OUT_"+target->UCName()+")");
+       cmd_args.SetStringVariable(TPL_LINKER,"$("+DecorateVariableName(linker->MakeVariable()+tc_suffix,Config.MacroVariableCase())+")");
+       cmd_args.SetStringVariable(TPL_EXE_OUTPUT,"$("+target->Name(STR_OUT+"_",Config.MacroVariableCase())+")");
        line = linker->MakeCommand(cmd_args);
        //
        rule_target_out.Commands().Insert(line);
@@ -1005,8 +1018,8 @@ bool CCodeBlocksProject::GenerateMakefile
       if (0!=linker)
       {
        // compose executable linkage command
-       cmd_args.SetStringVariable(TPL_LINKER,"$("+linker->MakeVariable()+tc_suffix+")");
-       cmd_args.SetStringVariable(TPL_EXE_OUTPUT,"$(OUT_"+target->UCName()+")");
+       cmd_args.SetStringVariable(TPL_LINKER,"$("+DecorateVariableName(linker->MakeVariable()+tc_suffix,Config.MacroVariableCase())+")");
+       cmd_args.SetStringVariable(TPL_EXE_OUTPUT,"$("+target->Name(STR_OUT+"_",Config.MacroVariableCase())+")");
        line = linker->MakeCommand(cmd_args);
        //
        rule_target_out.Commands().Insert(line);
@@ -1104,7 +1117,7 @@ bool CCodeBlocksProject::GenerateMakefile
         object_name = ExtractFileName(object_name);
        }
       }
-      CString object_prefix = "$(OBJDIR_"+target->UCName()+")";
+      CString object_prefix = "$("+target->Name(STR_OBJDIR+"_",Config.MacroVariableCase())+")";
       CString object_prefix_name = pl->Pd(JoinPaths(object_prefix,object_name));
       if (unit->DoLink())
       {
@@ -1131,13 +1144,13 @@ bool CCodeBlocksProject::GenerateMakefile
        }
       }
       // compose compilation command
-      cmd_args.SetStringVariable(TPL_COMPILER,"$("+compiler_var+tc_suffix+")");
-      cmd_args.SetStringVariable(TPL_INCLUDES,"$(INC_"+target->UCName()+")");
-      cmd_args.SetStringVariable(TPL_OPTIONS,"$(CFLAGS_"+target->UCName()+")");
+      cmd_args.SetStringVariable(TPL_COMPILER,"$("+DecorateVariableName(compiler_var+tc_suffix,Config.MacroVariableCase())+")");
+      cmd_args.SetStringVariable(TPL_INCLUDES,"$("+target->Name(STR_INC+"_",Config.MacroVariableCase())+")");
+      cmd_args.SetStringVariable(TPL_OPTIONS,"$("+target->Name(STR_CFLAGS+"_",Config.MacroVariableCase())+")");
       cmd_args.SetStringVariable(TPL_FILE,unit_name);
       cmd_args.SetStringVariable(TPL_OBJECT,object_prefix_name);
-      cmd_args.SetStringVariable(TPL_RES_COMPILER,"$("+compiler_var+tc_suffix+")");
-      cmd_args.SetStringVariable(TPL_RES_INCLUDES,"$(RESINC_"+target->UCName()+")");
+      cmd_args.SetStringVariable(TPL_RES_COMPILER,"$("+DecorateVariableName(compiler_var+tc_suffix,Config.MacroVariableCase())+")");
+      cmd_args.SetStringVariable(TPL_RES_INCLUDES,"$("+target->Name(STR_RESINC+"_",Config.MacroVariableCase())+")");
       cmd_args.SetStringVariable(TPL_RES_OUTPUT,object_prefix+object_name);
       line = compiler->MakeCommand(cmd_args);
       rule_unit.Commands().Insert(line);
@@ -1163,7 +1176,9 @@ bool CCodeBlocksProject::GenerateMakefile
     CMakefileRule& rule_clean_target = m_Makefile.AddRule(target->Name("clean_"),section);
     line.Clear();
     //if (pl->OS()==CPlatform::OS_Windows) line += "cmd /c ";
-    line += pl->MakefileCmd(pl->ForceRemoveFile("$(OBJ_"+target->UCName()+") $(OUT_"+target->UCName()+")"));
+    line += pl->MakefileCmd(pl->ForceRemoveFile(
+     "$("+target->Name(STR_OBJ+"_",Config.MacroVariableCase())+
+     ") $("+target->Name(STR_OUT+"_",Config.MacroVariableCase())+")"));
     rule_clean_target.Commands().Insert(line);
     // target directories
     target_directories.RemoveDuplicates();
@@ -1187,7 +1202,7 @@ bool CCodeBlocksProject::GenerateMakefile
    CMakefileRule& rule_v_target = m_Makefile.AddRule(v_target->Name("virtual_"),section);
    if (have_global_commands)//(m_BeforeBuildCommands.GetCount()>0)
    {
-    rule_v_target.Dependencies().Insert("before_build");
+    rule_v_target.Dependencies().Insert(DecorateTargetName("before_build",Config.TargetNameCase()));
    }
    for (int i = 0, n = v_target->Targets().GetCount(); i < n; i++)
    {
@@ -1195,7 +1210,7 @@ bool CCodeBlocksProject::GenerateMakefile
                                                    Config.TargetNameCase());
     if (have_global_commands)
     {
-     rule_v_target.Dependencies().Insert("build_"+child_target_name);
+     rule_v_target.Dependencies().Insert(DecorateTargetName("build_"+child_target_name,Config.TargetNameCase()));
     }
     else
     {
@@ -1204,7 +1219,7 @@ bool CCodeBlocksProject::GenerateMakefile
    }
    if (have_global_commands)//(m_AfterBuildCommands.GetCount()>0)
    {
-    rule_v_target.Dependencies().Insert("after_build");
+    rule_v_target.Dependencies().Insert(DecorateTargetName("after_build",Config.TargetNameCase()));
    }
   }
   section++;

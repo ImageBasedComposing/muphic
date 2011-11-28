@@ -11,8 +11,7 @@ Launcher::~Launcher()
 void add_strtoarray(char ***str_array, int *num_elements, const char *my_string)
 {
 	(*num_elements)++;
-	*str_array = (char **) realloc(*str_array,
-	(*num_elements)*sizeof(char *));
+	*str_array = (char **) realloc(*str_array, (*num_elements)*sizeof(char *));
 	(*str_array)[(*num_elements) - 1] = strdup(my_string);
 }
 
@@ -46,18 +45,29 @@ void Launcher::launch(int argc, string argv[], Options options)
 
 		const char *name = argv[0].c_str();
 		char **args = NULL;
+		int n = 0;
 
+        // crear lista de parámetros
 		for (int i = 0; i < argc; i++)
 		{
-			add_strtoarray(&args,&argc,argv[i].c_str());
+			add_strtoarray(&args,&n,argv[i].c_str());
+			/*n++;
+            args = (char **) realloc(args,n*sizeof(char *));
+            args[n - 1] = strdup(argv[i].c_str());*/
 		}
-		
+
+        // añadir 0 al final, importante
+		n++;
+        args = (char **) realloc(args,n*sizeof(char *));
+        args[n - 1] = (char*) 0;
+
+
         pid_t pid;
 
         if ((pid = fork()) ==-1)
             cout << "fork error";
          else if (pid == 0) {
-            execv(params[0], params);
+            execv(args[0], args);
             cout << "Return not expected. Must be an execv error.";
          }
          else

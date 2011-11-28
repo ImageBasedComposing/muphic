@@ -37,6 +37,7 @@ class CCodeBlocksBuildConfig
   CStringList m_Targets;
   CString m_DefaultOptions;
   int m_TargetNameCase;
+  int m_MacroVariableCase;
   bool m_FlatObjectNames;
   bool m_FlatObjectPaths;
   bool m_MultilineObjects;
@@ -53,6 +54,7 @@ class CCodeBlocksBuildConfig
   CStringList& Targets(void) { return m_Targets; }
   CString& DefaultOptions(void) { return m_DefaultOptions; }
   int& TargetNameCase(void) { return m_TargetNameCase; }
+  int& MacroVariableCase(void) { return m_MacroVariableCase; }
   bool& FlatObjectNames(void) { return m_FlatObjectNames; }
   bool& FlatObjectPaths(void) { return m_FlatObjectPaths; }
   bool& MultilineObjects(void) { return m_MultilineObjects; }
