@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef COMPOSERRITMO_H
-#define COMPOSERRITMO_H
+#ifndef COMPOSERMULTIPLE_H
+#define COMPOSERMULTIPLE_H
 
 #include <string>
 #include <iostream>
@@ -11,21 +11,21 @@
 #include "Music.h"
 #include "Figuras.h"
 #include "PatternGen.h"
+#include "ComposerRitmo.h"
 
+class ComposerRitmo;
 class Figuras;
 
 using namespace std;
 
-class ComposerRitmo : public Composer
+class ComposerMultiple : public Composer
 {
     public:
-        ComposerRitmo();
-		ComposerRitmo(Music* m);
-		ComposerRitmo(Music* m, int numSegmentos);
-        virtual ~ComposerRitmo();
+        ComposerMultiple();
+		ComposerMultiple(Music* m);
+        virtual ~ComposerMultiple();
 
-        virtual Music* composeMusic();
-		virtual string compose();
+        virtual string compose();
         virtual string compose(string picPath, string usrConfPath);
 
 /*------Getters------*/
@@ -42,15 +42,12 @@ class ComposerRitmo : public Composer
 
     protected:
 		Figuras* figuras;
-		Music* ritmo;
-		int NUMSEGMENTOS;
+		Music* musica;
+		ComposerRitmo* cr;
+
+		static const int NUMSEGMENTOS = 20;
 
 	private:
-		int nota(Figuras* f);
-		void sumarArea(list< pair<string,int> >* cs, Figura * f);
-		void calcularSegmento(Figura* f, Segmento* segs, Nota* n);
-		void calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
-
 };
 
-#endif // COMPOSER_H
+#endif // COMPOSERMULTIPLE_H

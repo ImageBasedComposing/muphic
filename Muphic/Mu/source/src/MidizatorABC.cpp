@@ -233,7 +233,7 @@ string MidizatorABC::toMidi(Music* music)
 
 			} // Simbolos
 		} // Segmentos
-		*f << "]"; //termina la obra para esta voz
+		*f << "]" << endl; //termina la obra para esta voz
 	} //VocesS
 	f->close();
 

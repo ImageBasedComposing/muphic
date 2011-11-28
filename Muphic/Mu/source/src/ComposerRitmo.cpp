@@ -10,14 +10,20 @@ ComposerRitmo::ComposerRitmo(Music* m)
 	ritmo = m;
 }
 
+ComposerRitmo::ComposerRitmo(Music* m, int numSeg)
+{
+	ritmo = m;
+	NUMSEGMENTOS = numSeg;
+}
+
 ComposerRitmo::~ComposerRitmo()
 {
     //dtor
 }
 
-string ComposerRitmo::compose()
+Music* ComposerRitmo::composeMusic()
 {
-
+	
 	figuras = new Figuras();
 	figuras->cargar(pic);
 
@@ -109,7 +115,7 @@ string ComposerRitmo::compose()
 	//Lo añado a la voz
 	v1->setSegmentos(s);
 
-	Voces* vz = new Voces();
+	Voces* vz = new Voces(ritmo->getVoces());
 	vz->pushBack(v1);
 
 	ritmo->setVoces(vz);
@@ -117,7 +123,12 @@ string ComposerRitmo::compose()
 	ritmo->setName("Rithm");
 	ritmo->setBaseLenght(make_pair(1,16));
 
-	return ritmo->toMidi();
+	return ritmo;
+}
+
+string ComposerRitmo::compose()
+{
+	return composeMusic()->toMidi();
 }
 
 string ComposerRitmo::compose(string picPath, string usrConfPath)
