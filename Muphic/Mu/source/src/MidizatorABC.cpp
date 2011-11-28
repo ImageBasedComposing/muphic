@@ -105,6 +105,7 @@ string MidizatorABC::toMidi(Music* music)
 		v = music->getVoces()->getAt(i);
 		tablaTransf = new TablaEscala(v->getTonalidad());
 		*f << "V:" << i << endl;
+		*f << printInstrumento(v->getInstrumento()) << endl;
 		*f << "K:" << tablaTransf->transformTonalidad(v->getTonalidad()); //<< endl; Ya se hace cuando se pone metrica por primera vez
 		lastTempo = 0;  //Por cada voz que se escriba el tempo y metrica.
 		lastMetricUpper = 0;
@@ -386,4 +387,21 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 string MidizatorABC::transformAcorde(Acorde* a, pair<int,int> duracionBase)
 {
 	return "a";
+}
+
+string MidizatorABC::printInstrumento(Instrumento i)
+{
+	std::ostringstream out;
+	out << "%%MIDI";
+
+	if (i < 128)
+	{
+		out << " program " << i;
+	}
+	else if (i == 128)
+	{
+		out << " channel 10";
+	}
+
+	return out.str();
 }

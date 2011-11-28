@@ -47,6 +47,7 @@ class ComposerRitmo : public Composer
 
 	private:
 		int nota(Figuras* f);
+		int getDrumTone(int duracion);
 		void sumarArea(list< pair<string,int> >* cs, Figura * f);
 		void calcularSegmento(Figura* f, Segmento* segs, Nota* n);
 		void calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);

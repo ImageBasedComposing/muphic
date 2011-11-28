@@ -17,15 +17,15 @@ ComposerMultiple::~ComposerMultiple()
 
 string ComposerMultiple::compose()
 {
-	cr = new ComposerRitmo(musica);
+	/*cr = new ComposerRitmo(musica);
 	cr->setPic(pic);
 	cr->setUsrConfFile(usrConfFile);
-	musica = cr->composeMusic();
+	musica = cr->composeMusic();*/
 
 	ComposerRitmo* cr2 = new ComposerRitmo(musica);
 	cr2->setPic(pic);
 	cr2->setUsrConfFile(usrConfFile);
-	musica = cr->composeMusic();
+	musica = cr2->composeMusic();
 
 	return musica->toMidi();
 }
