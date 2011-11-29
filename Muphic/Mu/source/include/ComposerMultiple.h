@@ -43,7 +43,6 @@ class ComposerMultiple : public Composer
     protected:
 		Figuras* figuras;
 		Music* musica;
-		ComposerRitmo* cr;
 
 		static const int NUMSEGMENTOS = 20;
 
