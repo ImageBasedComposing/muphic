@@ -6,6 +6,7 @@
 #include <list>
 #include <string>
 #include "Vertice.h"
+#include <stdlib.h>
 #include <time.h>
 #include <math.h>
 

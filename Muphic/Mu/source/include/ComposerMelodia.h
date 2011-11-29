@@ -7,6 +7,7 @@
 #include <iostream>
 #include <list>
 #include <math.h>
+#include "limits.h"
 #include "Composer.h"
 #include "Music.h"
 #include "Figuras.h"
