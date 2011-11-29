@@ -6,6 +6,7 @@
 #include "music_const.h"
 #include <list>
 #include <string>
+#include "string.h"
 #include "instruments.h"
 
 

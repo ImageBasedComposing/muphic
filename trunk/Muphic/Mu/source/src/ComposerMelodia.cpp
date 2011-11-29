@@ -58,7 +58,7 @@ Music* ComposerMelodia::composeMusic()
 		par.first = seg1;
 		segs.push_back(par);
 	}
-	
+
 	// Copiado de ritmos, sigue exactamente el mismo patron para mezclar los segmentos
 	list< pair<Segmento*,int> >* segmentos;
 
@@ -161,7 +161,7 @@ void ComposerMelodia::calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n)
 		// La añade al segmento
 		ss->pushBack(nAux);
 	}
-	
+
 	seg->setSimbolos(ss);
 }
 
@@ -180,9 +180,9 @@ int ComposerMelodia::calcDur(float longMedia, float longitud)
 
 	for(int i = 0; i < 7; i++)
 	{
-		if(std::abs(notas[i] - durAprox) < aux)
+		if(abs(notas[i] - durAprox) < aux)
 		{
-			aux = std::abs(notas[i] - durAprox);
+			aux = abs(notas[i] - durAprox);
 			sol = i;
 		}
 	}
