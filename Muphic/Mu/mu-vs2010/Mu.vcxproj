@@ -92,6 +92,7 @@
     <ClInclude Include="..\source\include\Segmentos.h" />
     <ClInclude Include="..\source\include\Simbolo.h" />
     <ClInclude Include="..\source\include\Simbolos.h" />
+    <ClInclude Include="..\source\include\TableScale.h" />
     <ClInclude Include="..\source\include\TableTransform.h" />
     <ClInclude Include="..\source\include\UsrConf.h" />
     <ClInclude Include="..\source\include\Vertice.h" />
