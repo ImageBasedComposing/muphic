@@ -105,6 +105,9 @@
     <ClInclude Include="..\source\include\instruments.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\include\ComposerMelodia.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
     <ClInclude Include="..\source\include\TableTransform.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -195,6 +198,9 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\source\src\ComposerMultiple.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\ComposerMelodia.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
