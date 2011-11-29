@@ -1,4 +1,5 @@
 all:
+	qmake -config release -o ./GUI/GUIQt/Makefile ./GUI/GUIQt/GUIQt.pro
 	$(MAKE) -C ./Muphic/abcmidi
 	$(MAKE) -C ./Muphic/muphic-codeblocks
 	$(MAKE) -C ./Muphic/Phic/phic-codeblocks
