@@ -5,6 +5,7 @@
 
 
 #include "Midizator.h"
+#include "TableTransform.h"
 
 #include <string>
 #include <iostream>
@@ -28,7 +29,7 @@ class MidizatorABC : public Midizator
     protected:
 
     private:
-		TablaEscala* tablaTransf;
+		TableTransform* tablaTransf;
 
 		string transformNota(Nota* n, pair<int,int> duracionBase);
 		string transformAcorde(Acorde* a, pair<int,int> duracionBase);
