@@ -23,8 +23,6 @@ void showUsage()
 
 int main( int argc, const char* argv[] )
 {
-    /* Toma de parámetros de entrada */
-
 	if (argc < 3)
 	{
 		cout << "Too few arguments in function call" << endl;

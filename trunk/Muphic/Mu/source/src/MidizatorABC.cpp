@@ -109,7 +109,7 @@ string MidizatorABC::toMidi(Music* music)
 	for( int i = 0; i < music->getVoces()->size(); i++)
 	{
 		v = music->getVoces()->getAt(i);
-		tablaTransf = new TablaEscala(v->getTonalidad());
+		tablaTransf = new TableTransform(v->getTonalidad());
 		*f << "V:" << i << endl;
 		*f << printInstrumento(v->getInstrumento()) << endl;
 		*f << "K:" << tablaTransf->transformTonalidad(v->getTonalidad()); //<< endl; Ya se hace cuando se pone metrica por primera vez
@@ -390,6 +390,8 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 	convertString << duracion;//add the value of Number to the characters in the stream
 
 	sufijo += convertString.str();
+
+	//Componemos la nota:
 
 	nota = " " + prefijo + nota + sufijo;
 
