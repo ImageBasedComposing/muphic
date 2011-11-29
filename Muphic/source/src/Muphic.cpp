@@ -1,9 +1,10 @@
 #include "Muphic.h"
-
+#include "launcher.h"
+/*
 #ifdef __LINUX
     #include <unistd.h>
     #include <sys/wait.h>
-#endif
+#endif*/
 
 Muphic::Muphic()
 {
@@ -46,6 +47,11 @@ int main( int argc, const char* argv[] )
 
         cout << "Image analysis beginning" << endl << endl;
 
+		Launcher* l = new Launcher();
+		string argsPhic[] = {phicExe, usrConfPath, picPath};
+		l->launch(3, argsPhic);
+
+		/*
         #ifdef __WINDOWS
 
             std::string picExeFile = phicExe + " " + usrConfPath + " " + picPath;
@@ -77,12 +83,12 @@ int main( int argc, const char* argv[] )
                 while(wait(&status) > 0);
             }
 
-        #endif
-
+        #endif*/
 
         cout << endl << "Image analysis completed" << endl;
         cin.get();
         cin.ignore(cin.rdbuf()->in_avail());
+
 
     /* Ejecutar mu*/
 
@@ -90,6 +96,11 @@ int main( int argc, const char* argv[] )
 
         std::string analyzedPicPath = changeExtension(picPath, "");
 
+		l = new Launcher();
+		string argsMu[] = {muExe, usrConfPath, analyzedPicPath};
+		l->launch(3, argsMu);
+
+		/*
         #ifdef __WINDOWS
 
             std::string muExeFile = muExe + " " + usrConfPath + " " + analyzedPicPath;
@@ -120,7 +131,7 @@ int main( int argc, const char* argv[] )
                 return 3;
             }
 
-        #endif
+        #endif*/
 
 
         cout << endl << "Image-based composing completed" << endl;

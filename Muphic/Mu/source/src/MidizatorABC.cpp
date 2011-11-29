@@ -21,18 +21,24 @@ MidizatorABC::~MidizatorABC()
 string MidizatorABC::toMidi(std::string music, std::string converter)
 {
 	if (converter == "")
-		converter = "abc2midi.exe";
+		converter = "abc2midi";
 
 
+	Launcher* l = new Launcher();
+	string args[] = {converter, music};
+
+	l->launch(2, args);
+
+/*
     #ifdef __WINDOWS
 
 		std::string picExeFile = converter + " " + music;
 		system(picExeFile.c_str());
-		/*
-		Launcher* l = new Launcher();
-		string args[] = {"abc2midi.exe", music};
+		
+		//Launcher* l = new Launcher();
+		//string args[] = {"abc2midi.exe", music};
 
-		l->launch(2, args);*/
+		//l->launch(2, args);
 
 	#endif
 
@@ -57,13 +63,13 @@ string MidizatorABC::toMidi(std::string music, std::string converter)
             while(wait(&status) > 0);
          }
 
-        /*
-        Launcher* l = new Launcher();
-		string args[] = {"abc2midi_linux.exe", music};
+        
+		//Launcher* l = new Launcher();
+		//string args[] = {"abc2midi_linux.exe", music};
 
-		l->launch(2, args);*/
+		//l->launch(2, args);
 
-     #endif
+     #endif*/
 
     std::string output = changeExtension(music, "mid");
 
@@ -238,18 +244,24 @@ string MidizatorABC::toMidi(Music* music)
 	} //VocesS
 	f->close();
 
-	string converter = "abc2midi.exe";
+	string converter = "abc2midi";
 
+	Launcher* l = new Launcher();
+	string args[] = {converter, fName + ".abc"};
+
+	l->launch(2, args);
+
+/*
 	#ifdef __WINDOWS
 
 		std::string picExeFile = converter + " " + fName + ".abc";
 		system(picExeFile.c_str());
-		/*
+		
 
-		Launcher* l = new Launcher();
-		string args[] = {converter, fName + ".abc"};
+		//Launcher* l = new Launcher();
+		//string args[] = {converter, fName + ".abc"};
 
-		l->launch(2, args);*/
+		//l->launch(2, args);
 
 	#endif
 
@@ -273,13 +285,13 @@ string MidizatorABC::toMidi(Music* music)
             int status;
             while(wait(&status) > 0);
         }
-        /*
-        Launcher* l = new Launcher();
-		string args[] = {"abc2midi_linux.exe", abcFile};
+        
+        //Launcher* l = new Launcher();
+		//string args[] = {"abc2midi_linux.exe", abcFile};
 
-		l->launch(2, args);*/
+		//l->launch(2, args);
 
-    #endif
+    #endif*/
 
     return fName + ".mid";
 }

@@ -9,12 +9,15 @@ QT       += core gui
 TARGET = GUIQt
 TEMPLATE = app
 
-CONFIF += qt warn_on static
-
 
 SOURCES += main.cpp\
-        guimupic.cpp
+        guimupic.cpp \
+    ../../Muphic/common/src/launcher.cpp
 
-HEADERS  += guimupic.h
+HEADERS  += guimupic.h \
+    ../../Muphic/common/include/launcher.h
 
 FORMS    += guimupic.ui
+
+INCLUDEPATH += ../../Muphic/common/include
+DEFINES += __LINUX=1

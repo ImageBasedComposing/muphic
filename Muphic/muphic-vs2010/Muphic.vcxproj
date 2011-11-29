@@ -65,9 +65,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\common\include\aux_functions.h" />
+    <ClInclude Include="..\common\include\launcher.h" />
     <ClInclude Include="..\source\include\Muphic.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\src\launcher.cpp" />
     <ClCompile Include="..\source\src\Muphic.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
