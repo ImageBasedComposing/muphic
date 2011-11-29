@@ -6,6 +6,10 @@
 #include <list>
 #include <string>
 #include "Vertice.h"
+#include <time.h>
+#include <math.h>
+
+#define PI 3.1415926535897932384626433832795
 
 using namespace std;
 
@@ -35,6 +39,8 @@ class Figura
 		static bool compare(Figura* f1, Figura* f2) {return f1->getArea() > f2->getArea();};
 		pair<int,int> getSimpleCenter();
 		pair<int,int> getBarycenter();
+
+		list< pair<float,float> > polarize();
 
 /*------Getters------*/
         string getColor();

@@ -14,17 +14,11 @@
 			<gradient>0</gradient>
 		</color>
 		
-		<vertexList num="6">
+		<vertexList num="4">
 			<vertex>
 				<position>
 					<x>16</x>
 					<y>50</y>
-				</position>
-			</vertex>
-			<vertex>
-				<position>
-					<x>86</x>
-					<y>40</y>
 				</position>
 			</vertex>
 			<vertex>
@@ -35,20 +29,14 @@
 			</vertex>
 			<vertex>
 				<position>
-					<x>78</x>
-					<y>55</y>
-				</position>
-			</vertex>
-			<vertex>
-				<position>
-					<x>100</x>
+					<x>118</x>
 					<y>143</y>
 				</position>
 			</vertex>
 			<vertex>
 				<position>
 					<x>16</x>
-					<y>123</y>
+					<y>143</y>
 				</position>
 			</vertex>
 		</vertexList>
