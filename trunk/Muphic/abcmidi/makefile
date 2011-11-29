@@ -28,7 +28,7 @@ LNK=gcc
 all : abc2midi.exe
 
 abc2midi.exe : parseabc.o store.o genmidi.o queues.o midifile.o parser2.o
-	$(LNK) -o ./../bin/Debug/abc2midi_linux.exe parseabc.o genmidi.o store.o \
+	$(LNK) -o ./../bin/Debug/abc2midi parseabc.o genmidi.o store.o \
 	queues.o midifile.o parser2.o
 
 abc2abc.exe : parseabc.o toabc.o

@@ -45,6 +45,8 @@
 			<Add directory="../common/include" />
 		</Linker>
 		<Unit filename="../common/include/aux_functions.h" />
+		<Unit filename="../common/include/launcher.h" />
+		<Unit filename="../common/src/launcher.cpp" />
 		<Unit filename="../source/include/Muphic.h" />
 		<Unit filename="../source/src/Muphic.cpp" />
 		<Extensions>

@@ -51,6 +51,7 @@
 		<Unit filename="../source/include/Acorde.h" />
 		<Unit filename="../source/include/Composer.h" />
 		<Unit filename="../source/include/ComposerDemo.h" />
+		<Unit filename="../source/include/ComposerMultiple.h" />
 		<Unit filename="../source/include/ComposerRitmo.h" />
 		<Unit filename="../source/include/Conf.h" />
 		<Unit filename="../source/include/Figura.h" />
@@ -71,10 +72,12 @@
 		<Unit filename="../source/include/Voces.h" />
 		<Unit filename="../source/include/Voz.h" />
 		<Unit filename="../source/include/XML_Interface.h" />
+		<Unit filename="../source/include/instruments.h" />
 		<Unit filename="../source/include/music_elements.h" />
 		<Unit filename="../source/src/Acorde.cpp" />
 		<Unit filename="../source/src/Composer.cpp" />
 		<Unit filename="../source/src/ComposerDemo.cpp" />
+		<Unit filename="../source/src/ComposerMultiple.cpp" />
 		<Unit filename="../source/src/ComposerRitmo.cpp" />
 		<Unit filename="../source/src/Conf.cpp" />
 		<Unit filename="../source/src/Figura.cpp" />

@@ -1,4 +1,5 @@
 #include "guimupic.h"
+#include "launcher.h"
 
 
 GuiMupic::GuiMupic(QWidget *parent) :
@@ -65,7 +66,7 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 }
 
 void GuiMupic::on_pushButton_Generate_clicked()
-{
+{/*
     QString picFile = ui->lineEdit_InputPic->text();
     QString userConfFile = "dummypath";
     QString exeFile = "./Muphic";
@@ -75,5 +76,15 @@ void GuiMupic::on_pushButton_Generate_clicked()
     QByteArray   bytes  = command.toAscii();
     const char * commandChar = bytes.data();
 
-    system(commandChar);
+    system(commandChar);*/
+
+    std::string exeFile = "Muphic";
+    std::string userConfFile = "dummypath";
+    std::string picFile = ui->lineEdit_InputPic->text().toStdString();
+
+    cout << exeFile << " " << userConfFile << " " << picFile << endl;
+
+    Launcher* l = new Launcher();
+    string args[] = {exeFile, userConfFile, picFile};
+    l->launch(3, args);
 }

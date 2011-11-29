@@ -23,7 +23,7 @@ void Launcher::launch(int argc, string argv[], Options options)
 
 		for (int i = 1; i < argc; i++)
 		{
-			exeFile += " " + argv[i];
+			exeFile += ".exe " + argv[i];
 		}
 
 		system(exeFile.c_str());
