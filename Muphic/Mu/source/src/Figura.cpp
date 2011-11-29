@@ -243,3 +243,86 @@ pair<int,int> Figura::getBarycenter()
 
 	return out;
 }
+
+// devuelve la figura como una lista de vértices en coordenadas psuedo-polares (ángulo y longitudes relativas, sin punto de origen)
+list< pair<float,float> > Figura::polarize()
+{
+	// initialize random
+	srand( time(NULL) );
+
+	// Choose initial vertex
+	int n = rand() % getNumVertices();
+	
+	// set iterator at initial vertex
+	list<Vertice*>::iterator it = listaVertices.begin();
+	for(int i = 0; i < n; i++)
+	{
+		it++;
+	}
+
+	Vertice* currentVertex;
+	Vertice* nextVertex;
+	n = 0;
+	pair<float, float> tmpVertex;
+	list< pair<float, float> > polarizedFigure;
+	float oldalpha = 0, newalpha = 0;
+	float length;
+	float angleIncr;
+	float cos;
+	float sin;
+	while (n < getNumVertices())
+	{
+		// get current vertex
+		currentVertex = (*it);
+		// get next vertex
+		it++;
+		if (it == listaVertices.end())
+			it = listaVertices.begin();
+		nextVertex = (*it);
+
+
+		// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
+		length = sqrt(pow((float) nextVertex->x - currentVertex->x, 2) + pow((float) nextVertex->y - currentVertex->y, 2));
+		
+		// angle = acos((x2 - x1) / module)
+		// it's important to check sin's behaviour as well
+		cos = ((float) nextVertex->x - currentVertex->x) / length;
+		sin = ((float) nextVertex->y - currentVertex->y) / length;
+		if (sin >= 0)
+		{
+			newalpha = acos(cos); // sin 0 gives angle 0, not 360
+		}
+		else
+		{
+			newalpha = 2*PI - acos(cos);
+		}
+		// cast to decimal angles
+		newalpha *= (180/PI);
+
+
+		// increment
+		angleIncr = newalpha - oldalpha;
+		// increments are limited to (-180, 180)
+		// case 1: 0 < increment < 180: left turn, stays as it is
+		// case 2: 180 <= increment: right turn
+		if (angleIncr >= 180)
+			angleIncr = -(360 - angleIncr); // right turns are negative increments
+		// case 3: increment <= -180: left turn
+		else if (angleIncr <= -180) 
+			angleIncr = 360 + angleIncr; // left turns are positive increments
+		// case 4: -180 < increment < 0: right turn, stays as it is
+
+		// put vertex
+		tmpVertex.first = angleIncr;
+		tmpVertex.second = length;
+		polarizedFigure.push_back(tmpVertex);
+
+		// current values are now old values
+		oldalpha = newalpha;
+
+		// advance
+		n++;
+	}
+
+	return polarizedFigure;
+}
