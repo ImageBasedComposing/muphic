@@ -247,29 +247,17 @@ pair<int,int> Figura::getBarycenter()
 // devuelve la figura como una lista de vértices en coordenadas psuedo-polares (ángulo y longitudes relativas, sin punto de origen)
 list< pair<float,float> > Figura::polarize()
 {
-	// initialize random
-	srand( time(NULL) );
-
-	// Choose initial vertex
-	int n = rand() % getNumVertices();
-	
 	// set iterator at initial vertex
 	list<Vertice*>::iterator it = listaVertices.begin();
-	for(int i = 0; i < n; i++)
-	{
-		it++;
-	}
-
+	// for now it's the first vertex, but that can change
 	Vertice* currentVertex;
 	Vertice* nextVertex;
-	n = 0;
+	int n = 0;
 	pair<float, float> tmpVertex;
 	list< pair<float, float> > polarizedFigure;
 	float oldalpha = 0, newalpha = 0;
 	float length;
 	float angleIncr;
-	float cos;
-	float sin;
 	while (n < getNumVertices())
 	{
 		// get current vertex
@@ -280,37 +268,14 @@ list< pair<float,float> > Figura::polarize()
 			it = listaVertices.begin();
 		nextVertex = (*it);
 
+		// module
+		length = vectorModule(currentVertex->x, nextVertex->x, currentVertex->y, nextVertex->y);
 
-		// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
-		length = sqrt(pow((float) nextVertex->x - currentVertex->x, 2) + pow((float) nextVertex->y - currentVertex->y, 2));
-		
 		// angle = acos((x2 - x1) / module)
-		// it's important to check sin's behaviour as well
-		cos = ((float) nextVertex->x - currentVertex->x) / length;
-		sin = ((float) nextVertex->y - currentVertex->y) / length;
-		if (sin >= 0)
-		{
-			newalpha = acos(cos); // sin 0 gives angle 0, not 360
-		}
-		else
-		{
-			newalpha = 2*PI - acos(cos);
-		}
-		// cast to decimal angles
-		newalpha *= (180/PI);
+		newalpha = vectorAngle(currentVertex->x, nextVertex->x, currentVertex->y, nextVertex->y, length);
 
-
-		// increment
-		angleIncr = newalpha - oldalpha;
-		// increments are limited to (-180, 180)
-		// case 1: 0 < increment < 180: left turn, stays as it is
-		// case 2: 180 <= increment: right turn
-		if (angleIncr >= 180)
-			angleIncr = -(360 - angleIncr); // right turns are negative increments
-		// case 3: increment <= -180: left turn
-		else if (angleIncr <= -180) 
-			angleIncr = 360 + angleIncr; // left turns are positive increments
-		// case 4: -180 < increment < 0: right turn, stays as it is
+		// turn angle
+		angleIncr = turnAngle(oldalpha, newalpha);
 
 		// put vertex
 		tmpVertex.first = angleIncr;
@@ -324,5 +289,72 @@ list< pair<float,float> > Figura::polarize()
 		n++;
 	}
 
+	// first vertex was fixed at 0º degrees, let's fix that
+	currentVertex = (*it); // startpoint vertex
+	it++;
+	// perhaps we didn't start at the first vertex
+	if (it == listaVertices.end())
+		it = listaVertices.begin();
+	nextVertex = (*it);		// next vertex
+
+	// angle
+	newalpha = vectorAngle(currentVertex->x, nextVertex->x, currentVertex->y, nextVertex->y, (*polarizedFigure.begin()).second);
+	// increment
+	angleIncr = turnAngle(oldalpha, newalpha);
+
+	// put vertex
+	(*polarizedFigure.begin()).first = angleIncr;
+
 	return polarizedFigure;
+}
+
+float Figura::vectorModule(int x1, int x2, int y1, int y2)
+{
+	// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
+	return sqrt(pow((float) x2 - x1, 2) + pow((float)y2 - y1, 2));
+
+}
+
+float Figura::vectorAngle(int x1, int x2, int y1, int y2, float module)
+{
+	// angle = acos((x2 - x1) / module)
+	// it's important to check sin's behaviour as well
+	float angle;
+	float cos = ((float) x2 - x1) / module;
+	float sin = ((float) y2 - y1) / module;
+	if (sin >= 0)
+	{
+		angle = acos(cos); // sin 0 gives angle 0, not 360
+	}
+	else
+	{
+		angle = 2*PI - acos(cos);
+	}
+	// cast to decimal angles
+	angle *= (180/PI);
+
+	return angle;
+}
+
+float Figura::vectorAngle(int x1, int x2, int y1, int y2)
+{
+	return vectorAngle(x1, x2, y1, y2, vectorModule(x1, x2, y1, y2));
+}
+
+float Figura::turnAngle(float alpha1, float alpha2)
+{
+	float angleIncr;
+	// increment
+	angleIncr = alpha2 - alpha1;
+	// increments are limited to (-180, 180)
+	// case 1: 0 < increment < 180: left turn, stays as it is
+	// case 2: 180 <= increment: right turn
+	if (angleIncr >= 180)
+		angleIncr = -(360 - angleIncr); // right turns are negative increments
+	// case 3: increment <= -180: left turn
+	else if (angleIncr <= -180) 
+		angleIncr = 360 + angleIncr; // left turns are positive increments
+	// case 4: -180 < increment < 0: right turn, stays as it is
+
+	return angleIncr;
 }

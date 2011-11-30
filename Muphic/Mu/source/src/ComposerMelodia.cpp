@@ -27,10 +27,10 @@ Music* ComposerMelodia::composeMusic()
 	Voces* vs = new Voces(melodia->getVoces());
 
 	//Cosas de la voz
-	v1->setInstrumento(TAIKO_DRUM);
+	v1->setInstrumento(DEFAULT_INSTRUMENT);
 
 	//Calculamos la tonalidad
-	v1->setTonalidad(REM);
+	v1->setTonalidad(DOM);
 
 	//Cosas del segmento
 	Segmento* seg1;// = new Segmento();
@@ -44,7 +44,7 @@ Music* ComposerMelodia::composeMusic()
 	Nota* nPpal;
 
 	// Recorro las figuras y calculo su melodía
-	for(int i = 0; i < figuras->sizeFig(); i++)
+	for(int i = 1; i < figuras->sizeFig(); i++)
 	{
 		seg1 = new Segmento();
 		f = figuras->getFigAt(i);
@@ -58,6 +58,29 @@ Music* ComposerMelodia::composeMusic()
 		par.first = seg1;
 		segs.push_back(par);
 	}
+
+
+	// debug shit
+	for (int h = 0; h < 10; h ++)
+	for(list< pair<Segmento*,int> >::iterator it = segs.begin(); it != segs.end(); it++)
+	{
+		v1->getSegmentos()->pushBack(it->first);
+	}
+
+
+	vs->pushBack(v1);
+	
+	melodia->setVoces(vs);
+	melodia->setComposer("MelodyComposer");
+	melodia->setName("Melodia");
+	melodia->setBaseLenght(make_pair(1,16));
+
+	return melodia;
+
+	// end debug shit
+
+
+
 
 	// Copiado de ritmos, sigue exactamente el mismo patron para mezclar los segmentos
 	list< pair<Segmento*,int> >* segmentos;
@@ -146,17 +169,30 @@ void ComposerMelodia::calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n)
 	Simbolos* ss = new Simbolos();
 
 	// Calculo la media de las longitudes
-	for(list< pair<float,float> >::iterator it; it != calc.end(); it++)
+	for(list< pair<float,float> >::iterator it = calc.begin(); it != calc.end(); it++)
 	{
 		longMedia += it->second;
 	}
 
 	longMedia = longMedia / calc.size();
 
-	for(list< pair<float,float> >::iterator it; it != calc.end(); it++)
+
+	// debug shit
+	int* esc = new int[5];
+	esc[0] = 2;
+	esc[1] = 3;
+	esc[2] = 2;
+	esc[3] = 2;
+	esc[4] = 3;
+	for(list< pair<float,float> >::iterator it = calc.begin(); it != calc.end(); it++)
 	{
 		// Crea la nota con la duracion y el tono que le corresponden
-		nAux = new Nota(calcDur(longMedia,it->second),calcTono(it->first,nPpal));
+		//nAux = new Nota(calcDur(longMedia,it->second),calcTono(it->first,nPpal));
+
+		nPpal->setTono(nPpal->getTono() + calcularNota(it->first, esc));
+
+		nAux = new Nota(calcDur(longMedia,it->second),nPpal->getTono());
+
 
 		// La añade al segmento
 		ss->pushBack(nAux);
@@ -169,6 +205,55 @@ int ComposerMelodia::calcTono(float angulo, Nota* nPpal)
 {
 	return DO_C;
 }
+
+
+// inicialmente escala es [+2,+3,+2,+2,+3]
+int ComposerMelodia::calcularNota(float angulo, int* esc)
+{
+	int desp = 3 * angulo / 180;
+
+	// calcular el desplazamiento a realizar
+	int i = 0;
+	int suma = 0;
+	while (i != desp)
+	{
+		if (desp > 0)
+			suma += esc[i];
+		else
+			suma -= esc[5 - i];
+
+		if (i < desp)	i++;
+		else			i--;
+	}
+
+	// modificar la escala
+
+	if (desp > 0)
+		i = desp;
+	else
+		i += 5;
+
+	int j = 0;
+	int tmp1, tmp2;
+	tmp1 = esc[4];
+	while (i != 0)
+	{
+		while (j + 1 != 5)
+		{			
+			tmp2 = esc[j + 1];
+			esc[j + 1] = esc[j];
+			esc[j] = tmp1;
+			tmp1 = tmp2;
+
+			j++;
+		}
+
+		i--;
+	}
+
+	return suma;
+}
+
 
 int ComposerMelodia::calcDur(float longMedia, float longitud)
 {

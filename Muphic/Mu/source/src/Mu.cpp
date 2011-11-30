@@ -56,6 +56,5 @@ int main( int argc, const char* argv[] )
     //comp->compose(analysedPic, usrConfPath);
 	comp2->compose(analysedPic, usrConfPath);
 
-
 	return 0;
 }

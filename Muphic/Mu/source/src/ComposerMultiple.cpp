@@ -1,4 +1,5 @@
 #include "ComposerMultiple.h"
+#include "ComposerMelodia.h"
 
 ComposerMultiple::ComposerMultiple()
 {
@@ -21,6 +22,11 @@ string ComposerMultiple::compose()
 	cr->setPic(pic);
 	cr->setUsrConfFile(usrConfFile);
 	musica = cr->composeMusic();
+
+	ComposerMelodia* cr1 = new ComposerMelodia(musica,NUMSEGMENTOS);
+	cr1->setPic(pic);
+	cr1->setUsrConfFile(usrConfFile);
+	musica = cr1->composeMusic();
 
 	return musica->toMidi();
 }
