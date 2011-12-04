@@ -3,6 +3,7 @@
 #ifndef MUSIC_CONST_H
 #define MUSIC_CONST_H
 
+
 // RESPECTO A LA DURACION/LENGTH DE NOTAS:
 
 #define SIXTEENTHNOTE 4  //semicorchea
@@ -67,20 +68,33 @@
 #define SI_S_C 49
 
 //Intervalos:
-#define P1 0	//PERFECT UNISON (Unisono/misma nota)
+#define PER1 0	//PERFECT UNISON (Unisono/misma nota)
 #define MIN2 1	//MINOR SECOND (Segunda menor)
-#define M2 2	//MAJOR SECOND (Segunda Mayor)
+#define MAJ2 2	//MAJOR SECOND (Segunda Mayor)
 #define MIN3 3	//MINOR THIRD (Tercera menor)
-#define M3 4	//MAJOR THIRD (Tercera Mayor)
-#define P4 5	//PERFECT FOURTH (Cuarta justa)
+#define MAJ3 4	//MAJOR THIRD (Tercera Mayor)
+#define PER4 5	//PERFECT FOURTH (Cuarta justa)
 #define AUM4 6  //AUGMENTED FOURTH or DIMINISHED FIFTH (Cuarta aumentada o quinta disminuida)
 #define DIM5 6
 #define TRIT 6  //Tambien llamada TRITONO
-#define P5 7	//PERFECT FIFTH (Quinta justa)
+#define PER5 7	//PERFECT FIFTH (Quinta justa)
 #define MIN6 8	//MINOR SIXTH (Sexta menor)
-#define M6 9	//MAJOR SIXTH (Sexta Mayor)
+#define MAJ6 9	//MAJOR SIXTH (Sexta Mayor)
 #define MIN7 10 //MINOR SEVENTH (Septima menor)
-#define M7 11	//MAJOR SEVENTH (Septima mayor)
-#define P8 12	//PERFECT OCTAVE (Octava justa)
+#define MAJ7 11	//MAJOR SEVENTH (Septima mayor)
+#define PER8 12	//PERFECT OCTAVE (Octava justa)
+
+
+// RESPECTO A LAS ESCALAS
+
+//Grados y Funciones musicales:
+#define TONICA 1;		//TONIC
+#define SUPERTONICA 2;	//SUPERTONIC
+#define MEDIANTE 3;		//MEDIANT
+#define SUBDOMINANTE 4; //SUBDOMINANT
+#define DOMINANTE 5;	//DOMINANT
+#define SUBMEDIANTE 6;	//SUBMEDIANT
+#define SUBTONICA 7;	//SUBTONIC
+#define SENSIBLE 7;		//LEADING TONE
 
 #endif
