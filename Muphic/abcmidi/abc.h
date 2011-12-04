@@ -2,6 +2,12 @@
 /* Copyright James Allwright 2000 */
 /* may be copied under the terms of the GNU public license */
 
+typedef enum {
+ABC2MIDI,
+ABC2ABC,
+YAPS,
+ABCMATCH} programname;
+
 /* define types of abc object */
 typedef enum {
 /* types of bar sign */
@@ -39,18 +45,23 @@ TITLE,
 CHANNEL,
 TRANSPOSE,
 RTRANSPOSE,
+GTRANSPOSE,
 GRACEON,
 GRACEOFF,
 SETGRACE,
 SETC,
+SETTRIM,
 GCHORD,
 GCHORDON,
 GCHORDOFF,
 VOICE,
 CHORDON,
 CHORDOFF,
+CHORDOFFEX,
 DRUMON,
 DRUMOFF,
+DRONEON,
+DRONEOFF,
 SLUR_TIE,
 TNOTE,
 /* broken rhythm */
@@ -70,11 +81,18 @@ PRINTLINE,
 NEWPAGE,
 LEFT_TEXT,
 CENTRE_TEXT,
-VSKIP
+VSKIP,
+COPYRIGHT,
+COMPOSER,
+ARPEGGIO,
+SPLITVOICE,
+META,
+PEDAL_ON,
+PEDAL_OFF,
 } featuretype;
 
 /* note decorations */
-#define DECSIZE 9
+#define DECSIZE 10
 extern char decorations[];
 #define STACCATO 0
 #define TENUTO 1
@@ -85,6 +103,7 @@ extern char decorations[];
 #define TRILL 6
 #define BOWUP 7
 #define BOWDOWN 8
+#define BREATH 9
 
 /* The vstring routines provide a simple way to handle */
 /* arbitrary length strings */

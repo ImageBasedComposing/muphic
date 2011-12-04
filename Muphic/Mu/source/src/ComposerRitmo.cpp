@@ -26,7 +26,7 @@ Music* ComposerRitmo::composeMusic()
 	Voces* vs = new Voces(ritmo->getVoces());
 
 	//Cosas de la voz
-	v1->setInstrumento(TAIKO_DRUM);
+	v1->setInstrumento(WOODBLOCK);
 
 	//Calculamos la tonalidad
 	v1->setTonalidad(REM);

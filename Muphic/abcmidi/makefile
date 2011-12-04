@@ -1,14 +1,17 @@
-# DJGPP (DOS port of gcc) Makefile for abcMIDI package 
+# Generic unix/gcc Makefile for abcMIDI package 
 # 
 #
-# compilation #ifdefs - you may need to change these defined to get
-#                       the code to compile with a different C compiler.
+# compilation #ifdefs - you need to compile with these defined to get
+#                       the code to compile with PCC.
 #
-# NOFTELL in midifile.c and tomidi.c selects a version of the file-writing
+# NOFTELL in midifile.c and genmidi.c selects a version of the file-writing
 #         code which doesn't use file seeking.
 #
 # PCCFIX in mftext.c midifile.c midi2abc.c
 #        comments out various things that aren't available in PCC
+#
+# ANSILIBS includes some ANSI header files (which gcc can live without,
+#          but other compilers may want).
 #
 # USE_INDEX causes index() to be used instead of strchr(). This is needed
 #           by some pre-ANSI C compilers.
@@ -16,101 +19,113 @@
 # ASCTIME causes asctime() to be used instead of strftime() in pslib.c.
 #         If ANSILIBS is not set, neither routine is used.
 #
-# ANSILIBS causes code to include some ANSI standard headers
-#
 # KANDR selects functions prototypes without argument prototypes.
+#       currently yaps will only compile in ANSI mode.
 #
+#
+# On running make, you may get the mysterious message :
+#
+# ', needed by `parseabc.o'. Stop `abc.h
+#
+# This means you are using GNU make and this file is in DOS text format. To
+# cure the problem, change this file from using PC-style end-of-line (carriage 
+# return and line feed) to unix style end-of-line (line feed).
+
 CC=gcc
-CFLAGS=-c -ansi -DANSILIBS -Wformat -Wtraditional
-# -ansi forces ANSI compliance
+#CFLAGS=-DANSILIBS -O2 
+CFLAGS=-DANSILIBS -g 
 LNK=gcc
+INSTALL=install
 
-all : abc2midi.exe
+prefix=/usr/local
+binaries=abc2midi midi2abc abc2abc mftext yaps midicopy abcmatch
 
-abc2midi.exe : parseabc.o store.o genmidi.o queues.o midifile.o parser2.o
-	$(LNK) -o ./../bin/Debug/abc2midi parseabc.o genmidi.o store.o \
-	queues.o midifile.o parser2.o
+docdir=share/doc/abcmidi
+bindir=bin
+mandir=share/man/man1
 
-abc2abc.exe : parseabc.o toabc.o
-	$(LNK) -o abc2abc.exe parseabc.o toabc.o
+all : abc2midi
 
-midi2abc.exe : midifile.o midi2abc.o 
-	$(LNK) midifile.o midi2abc.o -o midi2abc.exe
+abc2midi : parseabc.o store.o genmidi.o midifile.o queues.o parser2.o stresspat.o
+	$(LNK) -o ./../bin/Debug/abc2midi parseabc.o store.o genmidi.o queues.o \
+	parser2.o midifile.o stresspat.o
 
-mftext.exe : midifile.o mftext.o crack.o
-	$(LNK) midifile.o mftext.o crack.o -o mftext.exe
+abc2abc : parseabc.o toabc.o
+	$(LNK) -o abc2abc parseabc.o toabc.o
 
-yaps.exe : parseabc.o yapstree.o drawtune.o debug.o pslib.o position.o parser2.o
-	$(LNK) -o yaps.exe parseabc.o yapstree.o drawtune.o debug.o \
-	position.o pslib.o parser2.o
+midi2abc : midifile.o midi2abc.o 
+	$(LNK) midifile.o midi2abc.o -o midi2abc
 
-# common parser object code
-#
+mftext : midifile.o mftext.o crack.o
+	$(LNK) midifile.o mftext.o crack.o -o mftext
+
+yaps : parseabc.o yapstree.o drawtune.o debug.o pslib.o position.o parser2.o
+	$(LNK) -o yaps parseabc.o yapstree.o drawtune.o debug.o \
+	position.o pslib.o parser2.o -o yaps
+
+midicopy : midicopy.o
+	$(LNK) -o midicopy midicopy.o
+
+abcmatch : abcmatch.o matchsup.o parseabc.o
+	$(LNK) abcmatch.o matchsup.o parseabc.o -o abcmatch
+
 parseabc.o : parseabc.c abc.h parseabc.h
-	$(CC) $(CFLAGS) parseabc.c 
 
-parser2.o : parser2.c parseabc.h parser2.h
-	$(CC) $(CFLAGS) parser2.c
+parser2.o : parser2.c abc.h parseabc.h parser2.h
 
-# objects needed by abc2abc
-#
 toabc.o : toabc.c abc.h parseabc.h
-	$(CC) $(CFLAGS) toabc.c 
-
-# objects needed by abc2midi
-#
-store.o : store.c abc.h parseabc.h parser2.h genmidi.h 
-	$(CC) $(CFLAGS) store.c 
-
-genmidi.o : genmidi.c abc.h midifile.h genmidi.h
-	$(CC) $(CFLAGS) genmidi.c 
 
 # could use -DNOFTELL here
-tomidi.o : tomidi.c abc.h midifile.h
-	$(CC) $(CFLAGS) tomidi.c
+genmidi.o : genmidi.c abc.h midifile.h genmidi.h
 
-queues.o: queues.c genmidi.h
-	$(CC) $(CFLAGS) queues.c
+store.o : store.c abc.h parseabc.h midifile.h genmidi.h
 
-# common midifile library
-#
+queues.o : queues.c genmidi.h
+
 # could use -DNOFTELL here
 midifile.o : midifile.c midifile.h
-	$(CC) $(CFLAGS) midifile.c
+
+midi2abc.o : midi2abc.c midifile.h
+
+midicopy.o : midicopy.c midicopy.h
+
+abcmatch.o: abcmatch.c abc.h
+
+crack.o : crack.c
+
+mftext.o : mftext.c midifile.h
 
 # objects needed by yaps
 #
-yapstree.o: yapstree.c abc.h parseabc.h structs.h drawtune.h parser2.h
-	$(CC) $(CFLAGS) yapstree.c
+yapstree.o: yapstree.c abc.h parseabc.h structs.h drawtune.h
 
 drawtune.o: drawtune.c structs.h sizes.h abc.h drawtune.h
-	$(CC) $(CFLAGS) drawtune.c
 
 pslib.o: pslib.c drawtune.h
-	$(CC) $(CFLAGS) pslib.c
 
 position.o: position.c abc.h structs.h sizes.h
-	$(CC) $(CFLAGS) position.c
 
 debug.o: debug.c structs.h abc.h
-	$(CC) $(CFLAGS) debug.c
 
-# objects needed by midi2abc
+#objects for abcmatch
 #
-midi2abc.o : midi2abc.c midifile.h
-	$(CC) $(CFLAGS) midi2abc.c
+matchsup.o : matchsup.c abc.h parseabc.h parser2.h
 
-# objects for mftext
-#
-crack.o : crack.c
-	$(CC) $(CFLAGS) crack.c 
+clean :
+	rm *.o ${binaries}
 
-mftext.o : mftext.c midifile.h
-	$(CC) $(CFLAGS) mftext.c
+install: abc2midi midi2abc abc2abc mftext midicopy yaps abcmatch
+	test -d $(DESTDIR)${prefix}/${bindir} || mkdir -p $(DESTDIR)${prefix}/${bindir}
+	$(INSTALL) -m 755 ${binaries} $(DESTDIR)${prefix}/${bindir}
 
-clean:
-	del *.o
-	del *.exe
+	# install documentation
+	test -d $(DESTDIR)${PREFIX}/share/doc/abcmidi || mkdir -p $(DESTDIR)${prefix}/${docdir}
+	$(INSTALL) -m 644 doc/*.txt $(DESTDIR)${prefix}/${docdir}
+	$(INSTALL) -m 644 doc/AUTHORS $(DESTDIR)${prefix}/${docdir}
+	$(INSTALL) -m 644 doc/CHANGES $(DESTDIR)${prefix}/${docdir}
+	$(INSTALL) -m 644 VERSION $(DESTDIR)${prefix}/${docdir}
 
-zipfile: midi2abc.exe abc2midi.exe mftext.exe yaps.exe abc2abc.exe
-	zip pcexe2.zip *.exe readme.txt abcguide.txt demo.abc yaps.txt
+	# install manpages
+	test -d $(DESTDIR)${prefix}/${mandir} || mkdir -p $(DESTDIR)${prefix}/${mandir};
+	$(INSTALL) -m 644 doc/*.1 $(DESTDIR)${prefix}/${mandir}
+
