@@ -4,7 +4,7 @@
 # compilation #ifdefs - you need to define some of these to get
 #                       the code to compile with PCC.
 #
-# NOFTELL in midifile.c and tomidi.c selects a version of the file-writing
+# NOFTELL in midifile.c and genmidi.c selects a version of the file-writing
 #         code which doesn't use file seeking.
 #
 # PCCFIX in mftext.c midifile.c midi2abc.c
@@ -22,10 +22,10 @@ CC=pcc
 CFLAGS=-nPCCFIX -nNOFTELL -nUSE_INDEX -nKANDR
 LNK=pccl
 
-all : abc2midi.exe midi2abc.exe abc2abc.exe mftext.exe
+all : abc2midi.exe midi2abc.exe abc2abc.exe mftext.exe yaps.exe midicopy.exe abcmatch.exe
 
-abc2midi.exe : parseabc.o store.o genmidi.o queues.o midifile.o parser2.o
-	$(LNK) -Lc:\bin\pcc\ -Oabc2midi parseabc.o store.o genmidi.o queues.o midifile.o parser2.o
+abc2midi.exe : parseabc.o store.o genmidi.o queues.o midifile.o parser2.o stresspat.o
+	$(LNK) -Lc:\bin\pcc\ -Oabc2midi parseabc.o store.o genmidi.o queues.o midifile.o parser2.o stresspat.o
 
 abc2abc.exe : parseabc.o toabc.o
 	$(LNK) -Lc:\bin\pcc\ -Oabc2abc parseabc.o toabc.o
@@ -35,6 +35,9 @@ midi2abc.exe : midifile.o midi2abc.o
 
 mftext.exe : midifile.o mftext.o crack.o
 	$(LNK) -Lc:\bin\pcc\ midifile.o mftext.o crack.o -Omftext
+
+midicopy.exe: midicopy.o
+	$(LNK) -Lc:\bin\pcc\ midicopy.o -Omidicopy $(CFLAGS)
 
 parseabc.o : parseabc.c abc.h parseabc.h
 	$(CC) parseabc.c  $(CFLAGS)
@@ -47,6 +50,9 @@ toabc.o : toabc.c abc.h parseabc.h
 
 genmidi.o : genmidi.c abc.h midifile.h parseabc.h genmidi.h
 	$(CC) genmidi.c $(CFLAGS)
+
+stresspat.o : stresspat.c
+	$(CC) stresspat.c $(CFLAGS)
 
 store.o : store.c abc.h midifile.h parseabc.h
 	$(CC) store.c $(CFLAGS)
@@ -66,9 +72,18 @@ crack.o : crack.c
 mftext.o : mftext.c midifile.h
 	$(CC) mftext.c $(CFLAGS)
 
+midicopy.o : midicopy.c
+	$(CC) midicopy.c $(CFLAGS)
+
+abcmatch.o : abcmatch.c
+	$(CC) abcmatch.c $(CFLAGS)
+
+matchsup.o : matchsup.c
+	$(CC) matchsup.c $(CFLAGS)
+
 clean:
 	del *.exe
 	del *.o
 
-zipfile: abc2midi.exe midi2abc.exe abc2abc.exe mftext.exe
+zipfile: abc2midi.exe midi2abc.exe abc2abc.exe mftext.exe midicopy.exe abcmatch.exe
 	zip pcexe.zip *.exe readme.txt abcguide.txt demo.abc
