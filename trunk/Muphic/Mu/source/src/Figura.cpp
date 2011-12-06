@@ -2,6 +2,10 @@
 
 Figura::Figura()
 {
+	vistosidad = -1;
+	rgb.r = -1;
+	rgb.b = -1;
+	rgb.g = -1;
 }
 
 Figura::~Figura()
@@ -15,10 +19,16 @@ string Figura::getColor()
 	return color;
 }
 
+Color Figura::getRGB()
+{
+	return rgb;
+}
+
 int Figura::getNumVertices()
 {
 	return numVertices;
 }
+
 int Figura::getId()
 {
 	return id;
@@ -34,7 +44,19 @@ int Figura::getArea()
 	return area;
 }
 
+float Figura::getVistosidad()
+{
+	return vistosidad;
+}
+
 //------Setters------//
+void Figura::setRGB(int r, int g, int b)
+{
+	rgb.r = r;
+	rgb.g = g;
+	rgb.b = b;
+}
+
 void Figura::setColor(string c)
 {
 	color = c;
@@ -57,6 +79,22 @@ void Figura::setParent(Figura* p)
 void Figura::setArea(int a)
 {
 	area = a;
+}
+
+int Figura::calcularVistosidad()
+{
+	if (rgb.r == -1)
+		return -1;
+	else if (vistosidad == -1)
+	{
+		vistosidad = rgb.r*3 + rgb.g*2 + rgb.b;
+	}
+	return vistosidad;
+}
+
+void Figura::setVistosidad(float r, float g, float b)
+{
+	vistosidad = r*3+g*2+b;
 }
 
 //------Envoltorio de la lista stl------//
@@ -178,6 +216,7 @@ Figura* Figura::getHijoAt(int n)
 }
 
 //-----Other funcs-----//
+
 
 // calcula el centro de una figura con más de dos vértices
 pair<int,int> Figura::getSimpleCenter()

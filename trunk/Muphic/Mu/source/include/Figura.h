@@ -12,14 +12,22 @@
 
 using namespace std;
 
+struct Color{ float r; float g; float b;};
+
 class Figura
 {
     public:
 		Figura(); // Arbitrario y por defecto
         virtual ~Figura();
 
-		/* envoltorio de la lista stl */
+/*------Funciones Publicas------*/
+		static bool compare(Figura* f1, Figura* f2) {return f1->getVistosidad() > f2->getVistosidad();};
+		pair<int,int> getSimpleCenter();
+		pair<int,int> getBarycenter();
 
+		list< pair<float,float> > polarize();
+
+/*------envoltorio de la lista stl------*/
 		void colocarVertice(Vertice* v);
 		void colocarHijo(Figura* f);
 		void insertarVertice(Vertice* v, int n);		//Añade un elemento en la pos n empujando el que ya estaba
@@ -35,29 +43,30 @@ class Figura
 		int sizeVertices();
 		int sizeHijos();
 
-		static bool compare(Figura* f1, Figura* f2) {return f1->getArea() > f2->getArea();};
-		pair<int,int> getSimpleCenter();
-		pair<int,int> getBarycenter();
-
-		list< pair<float,float> > polarize();
-
 /*------Getters------*/
         string getColor();
+		Color getRGB();
 		int getNumVertices();
 		int getId();
 		Figura* getParent();
 		int getArea();
+		float getVistosidad();
 
 
-		/*------Setters------*/
-        void setColor(string c);
+/*------Setters------*/
+        void setRGB(int r, int , int b);
+		void setColor(string c);
 		void setNumVertices(int n);
 		void setId(int id);
 		void setParent(Figura* p = NULL);
 		void setArea(int a);
+		int calcularVistosidad();
+		void setVistosidad(float r, float g, float b);
 
     protected:
 		string color;
+		Color rgb;
+		float vistosidad;
 		int numVertices;
 		list<Vertice*> listaVertices;
 		int id;
