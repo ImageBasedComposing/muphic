@@ -43,7 +43,10 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		figura->setNumVertices(atoi(handle.FirstChildElement("vertexList").ToElement()->Attribute("num")));
 		figura->setParent(id);
 		figura->setColor(handle.FirstChildElement("color").FirstChildElement("name").ToElement()->GetText());
-
+		figura->setRGB(atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("R").ToElement()->GetText()),
+						 atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("G").ToElement()->GetText()),
+						 atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("B").ToElement()->GetText()));
+		figura->calcularVistosidad();
 		// Preparamos el tratamiento de vertices
 		Vertice* v;
 		TiXmlNode* vertice = f->FirstChildElement("vertexList")->FirstChildElement("vertex");
