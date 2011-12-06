@@ -16,6 +16,8 @@ struct Color{ float r; float g; float b;};
 
 class Figura
 {
+	friend class Figuras;
+
     public:
 		Figura(); // Arbitrario y por defecto
         virtual ~Figura();

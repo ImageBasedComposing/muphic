@@ -14,6 +14,8 @@ class Figura;
 
 class Figuras
 {
+	friend class Figura;
+
     public:
         Figuras();
         virtual ~Figuras();
@@ -35,6 +37,7 @@ class Figuras
 		int sizeFig();
 		int sizePadre();
 
+		pair<int,int> calcularCentro();
 
     protected:
     private:

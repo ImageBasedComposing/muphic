@@ -234,7 +234,10 @@ pair<int,int> Figura::getSimpleCenter()
 	while( it != listaVertices.end())
 	{
 		if ((*it)->centro)
+		{
+			it++;
 			continue;
+		}
 
 		if ((*it)->x > xmax)
 			xmax = (*it)->x;
@@ -267,7 +270,10 @@ pair<int,int> Figura::getBarycenter()
 	while( it != listaVertices.end())
 	{
 		if ((*it)->centro)
+		{
+			it++;
 			continue;
+		}
 
 		xcont += (*it)->x;
 		ycont += (*it)->y;

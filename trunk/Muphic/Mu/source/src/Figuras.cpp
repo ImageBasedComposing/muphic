@@ -178,6 +178,45 @@ Figura* Figuras::getPadreAt(int n)
 	return *it;
 }
 
+
+// recibe una lista de figuras con su vistosidad calculada y calcula su centro
+pair<int,int> Figuras::calcularCentro()
+{
+	// calculamos la vistosidad total para normalizar
+	float vistosidadTotal = 0;
+	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	{
+		vistosidadTotal += (*it)->getVistosidad();
+	}
+
+	// normalizamos la vistosidad de cada figura
+	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	{
+		(*it)->vistosidad /= vistosidadTotal;
+	}
+
+	
+	// suponemos un polígono formado por los baricentros de cada figura, y calculamos su centro teniendo en cuenta la vistosidad
+	pair<int,int> centerFigura;
+	pair<int,int> centerTotal;
+	centerTotal.first = 0;
+	centerTotal.second = 0;
+	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	{
+		centerFigura = (*it)->getBarycenter();
+		centerTotal.first += (*it)->vistosidad * centerFigura.first;
+		centerTotal.second += (*it)->vistosidad * centerFigura.second;
+	}
+	
+	return centerTotal;
+}
+
+
+
+
+
+
+
 ////Prueba descomentar
 //int main( int argc, const char* argv[] )
 //{
