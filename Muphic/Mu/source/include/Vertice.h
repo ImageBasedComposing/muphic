@@ -3,6 +3,8 @@
 #ifndef VERTICE_H
 #define VERTICE_H
 
+#include <utility>
+
 class Vertice
 {
     public:
@@ -12,6 +14,9 @@ class Vertice
 		int x;
 		int y;
 		bool centro;
+
+		//Devuelve el par x, y. Función para mayor comodidad al programador
+		std::pair<int,int> getPair();
 
     protected:
     private:

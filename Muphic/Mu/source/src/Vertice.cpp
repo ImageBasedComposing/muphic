@@ -10,3 +10,8 @@ Vertice::Vertice(int x, int y, bool centro)
 Vertice::~Vertice()
 {
 }
+
+std::pair<int,int> Vertice::getPair()
+{
+	return std::make_pair(x, y);
+}
