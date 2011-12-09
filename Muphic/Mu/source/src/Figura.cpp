@@ -50,7 +50,7 @@ float Figura::getVistosidad()
 }
 
 //------Setters------//
-void Figura::setRGB(int r, int g, int b)
+void Figura::setRGB(float r, float g, float b)
 {
 	rgb.r = r;
 	rgb.g = g;
@@ -150,6 +150,11 @@ void Figura::insertarHijo(Figura* f, int n)
 	}
 
 	hijos.insert(it,f);
+}
+
+void Figura::sortHijo()
+{
+	hijos.sort(compare);
 }
 
 Vertice* Figura::getVerticeAt(int n)

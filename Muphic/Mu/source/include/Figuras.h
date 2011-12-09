@@ -42,7 +42,7 @@ class Figuras
     protected:
 		int sheetWidth;
 		int sheetHeight;
-		int vistosidadTotal;
+		float vistosidadTotal;
 
     private:
 		list<Figura*> figuras;
