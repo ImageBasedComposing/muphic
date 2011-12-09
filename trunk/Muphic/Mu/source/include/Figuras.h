@@ -40,6 +40,10 @@ class Figuras
 		pair<int,int> calcularCentro();
 
     protected:
+		int sheetWidth;
+		int sheetHeight;
+		int vistosidadTotal;
+
     private:
 		list<Figura*> figuras;
 		list<Figura*> figPadres;

@@ -64,8 +64,8 @@ class Figura
 		void setId(int id);
 		void setParent(Figura* p = NULL);
 		void setArea(int a);
-		int calcularVistosidad();
-		void setVistosidad(float r, float g, float b);
+		int calcularVistosidad(int sHeight, int sWidth);
+		void setVistosidad(float v);
 
     protected:
 		string color;
@@ -87,7 +87,7 @@ class Figura
 		float turnAngle(float alpha1, float alpha2);
 
     private:
-
+		float distanceCenter(int sHeight, int sWidth);
 };
 
 #endif // FIGURA_H

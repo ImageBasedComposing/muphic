@@ -1,5 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <shapes>
+	<width>800</width>
+	<height>600</height>
 	<figure>
 		<id>1
 		</id>
