@@ -4,6 +4,9 @@
 #define PATTERNS_H
 
 #include <list>
+#include "Figura.h"
+
+class Figura;
 
 using namespace std;
 
@@ -24,7 +27,7 @@ template <class T>
 class SimplePattern : public Pattern<T>
 {
 	private:
-		static bool compare (pair<T, float> a, pair<T, float> b)
+		static bool compare (std::pair<T, float> a, std::pair<T, float> b)
 		{
 			return a.second > b.second;
 		};
@@ -34,12 +37,12 @@ class SimplePattern : public Pattern<T>
 		SimplePattern() {};
 		virtual ~SimplePattern() {};
 
-		list< pair<T, float> > createPattern(list< pair<T, float> > partes)
+		list< std::pair<T, float> > createPattern(std::list< std::pair<T, float> > partes)
 		{
             partes.sort(&SimplePattern::compare);
 
-            pair<T, float> tmp;
-            typename list< pair<T, float> >::iterator it = partes.end();
+            std::pair<T, float> tmp;
+            typename list< std::pair<T, float> >::iterator it = partes.end();
             it--;
             while (it != partes.begin())
             {
@@ -55,8 +58,36 @@ class SimplePattern : public Pattern<T>
     private:
 };
 
+// Pattern that works with figures, it doesnt admit templates due to the recursive nature of Figure
+class PriorityPattern : public Pattern<Figura*>
+{	public:
+		PriorityPattern() {};
+		virtual ~PriorityPattern() {};
 
+		list<Figura*> createPattern(std::list<Figura*> partes)
+		{
+			std::list<Figura*>* sol;
 
+			partes.sort(Figura::compare);
 
+			for(std::list<Figura*>::iterator it = partes.begin(); it != partes.end(); it++)
+			{
+				sol->push_back((*it));
+				createPatternRec((*it), sol);
+			}
+
+		}
+	
+	private:
+		void createPatternRec(Figura* f, std::list<Figura*>* sol)
+		{
+			f->sortHijo();
+			for(int i = 0; i < f->sizeHijos(); i++)
+			{
+				sol->push_back(f->getHijoAt(i));
+				createPatternRec(f->getHijoAt(i),sol);
+			}
+		}
+};
 
 #endif // PATTERNS_H

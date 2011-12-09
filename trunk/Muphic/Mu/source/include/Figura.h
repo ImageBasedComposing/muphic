@@ -36,6 +36,7 @@ class Figura
 		void colocarHijo(Figura* f);
 		void insertarVertice(Vertice* v, int n);		//Añade un elemento en la pos n empujando el que ya estaba
 		void insertarHijo(Figura* f, int n);
+		void sortHijo();
 
 		Vertice* getVerticeAt(int n);
 		Vertice* verticeSig(Vertice* v);
@@ -58,7 +59,7 @@ class Figura
 
 
 /*------Setters------*/
-        void setRGB(int r, int , int b);
+        void setRGB(float r, float , float b);
 		void setColor(string c);
 		void setNumVertices(int n);
 		void setId(int id);

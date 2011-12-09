@@ -17,12 +17,12 @@ class PatternGen
         PatternGen();
         virtual ~PatternGen();
 
-		list< pair< T, int> >* getPattern(list< pair<T, int> >* partes);
+		list< pair< T, int> >* getPattern(list< pair<T, int> >* partes);//, Pattern<T>* pattern = NULL);
 
     protected:
-
 		list< pair<T, float> > getPattern(list< pair<T, float> > partes);
-    private:
+    
+	private:
 };
 
 template <class T>
@@ -36,11 +36,14 @@ PatternGen<T>::~PatternGen()
 }
 
 template <class T>
-list< pair<T, float> > PatternGen<T>::getPattern(list< pair<T, float> > partes)
+list< pair<T, float> > PatternGen<T>::getPattern(list< pair<T, float> > partes)//, Pattern<T>* pattern)
 {
 	// tratar la lista
 
 	// seleccionar patron (o algoritmo-que-hace-patrón) en función de la lista
+	//if (pattern == NULL) Pattern<T>* p = new SimplePattern<T>();
+	//else
+	//	Pattern<T>* p = pattern;
 	Pattern<T>* p = new SimplePattern<T>();
 
 	//devolverlo

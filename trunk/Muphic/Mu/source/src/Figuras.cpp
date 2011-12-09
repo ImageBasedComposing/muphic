@@ -44,6 +44,9 @@ void Figuras::cargar(string rutaXML)
 	{
 		(*it)->setVistosidad(((*it)->getVistosidad() / vistosidadTotal)*100);
 	}
+
+	figPadres.sort(&Figura::compare);
+	figuras.sort(&Figura::compare);
 }
 
 void Figuras::cargarRec(TiXmlNode* f, Figura* id)
