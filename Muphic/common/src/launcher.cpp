@@ -12,7 +12,7 @@ void add_strtoarray(char ***str_array, int *num_elements, const char *my_string)
 {
 	(*num_elements)++;
 	*str_array = (char **) realloc(*str_array, (*num_elements)*sizeof(char *));
-	(*str_array)[(*num_elements) - 1] = strdup(my_string);
+	(*str_array)[(*num_elements) - 1] = _strdup(my_string);
 }
 
 void Launcher::launch(int argc, string argv[], Options options)

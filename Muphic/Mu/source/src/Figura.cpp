@@ -87,14 +87,14 @@ int Figura::calcularVistosidad()
 		return -1;
 	else if (vistosidad == -1)
 	{
-		vistosidad = rgb.r*3 + rgb.g*2 + rgb.b;
+		vistosidad = (rgb.r*3 + rgb.g*2 + rgb.b)*area;
 	}
 	return vistosidad;
 }
 
 void Figura::setVistosidad(float r, float g, float b)
 {
-	vistosidad = r*3+g*2+b;
+	vistosidad = (r*3+g*2+b)*area;
 }
 
 //------Envoltorio de la lista stl------//
@@ -219,7 +219,7 @@ Figura* Figura::getHijoAt(int n)
 
 
 // calcula el centro de una figura con más de dos vértices
-pair<int,int> Figura::getSimpleCenter()
+std::pair<int,int> Figura::getSimpleCenter()
 {
 	list<Vertice*>::iterator it = listaVertices.begin();
 	int xmax,ymax,xmin,ymin;
@@ -252,7 +252,7 @@ pair<int,int> Figura::getSimpleCenter()
 		it++;
 	}
 
-	pair<int,int> out;
+	std::pair<int,int> out;
 
 	out.first = (xmax + xmin) / 2;
 	out.second = (ymax + ymin) / 2;
@@ -261,36 +261,13 @@ pair<int,int> Figura::getSimpleCenter()
 }
 
 // calcula el centro de una figura con más de dos vértices
-pair<int,int> Figura::getBarycenter()
+std::pair<int,int> Figura::getBarycenter()
 {
-	list<Vertice*>::iterator it = listaVertices.begin();
-	int xcont = 0;
-	int ycont = 0;
-
-	while( it != listaVertices.end())
-	{
-		if ((*it)->centro)
-		{
-			it++;
-			continue;
-		}
-
-		xcont += (*it)->x;
-		ycont += (*it)->y;
-
-		it++;
-	}
-
-	pair<int,int> out;
-
-	out.first = xcont / listaVertices.size();
-	out.second = ycont / listaVertices.size();
-
-	return out;
+	return calculateBarycenter(listaVertices);
 }
 
 // devuelve la figura como una lista de vértices en coordenadas psuedo-polares (ángulo y longitudes relativas, sin punto de origen)
-list< pair<float,float> > Figura::polarize()
+list< std::pair<float,float> > Figura::polarize()
 {
 	// set iterator at initial vertex
 	list<Vertice*>::iterator it = listaVertices.begin();
@@ -298,7 +275,7 @@ list< pair<float,float> > Figura::polarize()
 	Vertice* currentVertex;
 	Vertice* nextVertex;
 	int n = 0;
-	pair<float, float> tmpVertex;
+	std::pair<float, float> tmpVertex;
 	list< pair<float, float> > polarizedFigure;
 	float oldalpha = 0, newalpha = 0;
 	float length;
