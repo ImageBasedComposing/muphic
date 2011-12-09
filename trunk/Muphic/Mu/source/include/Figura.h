@@ -6,9 +6,11 @@
 #include <list>
 #include <string>
 #include "Vertice.h"
-#include <math.h>
+#include "math_functions.h"
 
 #define PI 3.1415926535897932384626433832795
+
+class Vertice;
 
 using namespace std;
 
@@ -24,10 +26,10 @@ class Figura
 
 /*------Funciones Publicas------*/
 		static bool compare(Figura* f1, Figura* f2) {return f1->getVistosidad() > f2->getVistosidad();};
-		pair<int,int> getSimpleCenter();
-		pair<int,int> getBarycenter();
+		std::pair<int,int> getSimpleCenter();
+		std::pair<int,int> getBarycenter();
 
-		list< pair<float,float> > polarize();
+		list< std::pair<float,float> > polarize();
 
 /*------envoltorio de la lista stl------*/
 		void colocarVertice(Vertice* v);

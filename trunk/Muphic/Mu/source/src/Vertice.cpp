@@ -13,5 +13,5 @@ Vertice::~Vertice()
 
 std::pair<int,int> Vertice::getPair()
 {
-	return std::make_pair(x, y);
+	return make_pair(x, y);
 }
