@@ -22,10 +22,28 @@ void Figuras::cargar(string rutaXML)
 
 	// Vamos a Shapes
 	TiXmlNode* shapesNode = doc.FirstChild("shapes"); 
+
+	//Cargamos el ancho y el alto de la página
+	sheetWidth = atoi(shapesNode->FirstChild("width")->ToElement()->GetText());
+	sheetHeight = atoi(shapesNode->FirstChild("height")->ToElement()->GetText());
+	//Vamos a la primera figura
 	TiXmlNode* figuraNode = shapesNode->FirstChild("figure");
 
 	// Cargamos las figuras
 	cargarRec(figuraNode,NULL);
+
+	// Calculamos la vistosidad total de las figuras
+	vistosidadTotal = 0;
+	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	{
+		vistosidadTotal += (*it)->getVistosidad();
+	}
+
+	// Reestablecemos la vistosidad de las figuras normalizandola
+	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	{
+		(*it)->setVistosidad(((*it)->getVistosidad() / vistosidadTotal)*100);
+	}
 }
 
 void Figuras::cargarRec(TiXmlNode* f, Figura* id)
@@ -46,7 +64,6 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		figura->setRGB(atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("R").ToElement()->GetText()),
 						 atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("G").ToElement()->GetText()),
 						 atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("B").ToElement()->GetText()));
-		figura->calcularVistosidad();
 		// Preparamos el tratamiento de vertices
 		Vertice* v;
 		TiXmlNode* vertice = f->FirstChildElement("vertexList")->FirstChildElement("vertex");
@@ -69,8 +86,12 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 			vertice = vertice->NextSibling("vertex");
 		}
 
+		// Leemos su area
 		figura->setArea(atoi(handle.FirstChildElement("area").ToElement()->GetText()));
-
+		
+		// Calculamos su vistosidad
+		figura->calcularVistosidad(sheetHeight, sheetWidth);
+		
 		// Tratamos los casos específicos de figura hijo o figura padre
 		if(id != NULL)
 		{

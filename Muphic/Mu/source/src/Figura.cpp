@@ -81,20 +81,20 @@ void Figura::setArea(int a)
 	area = a;
 }
 
-int Figura::calcularVistosidad()
+int Figura::calcularVistosidad(int sHeight, int sWidth)
 {
 	if (rgb.r == -1)
 		return -1;
 	else if (vistosidad == -1)
 	{
-		vistosidad = (rgb.r*3 + rgb.g*2 + rgb.b)*area;
+		vistosidad = (rgb.r*3 + rgb.g*2 + rgb.b)*area*distanceCenter(sHeight, sWidth);
 	}
 	return vistosidad;
 }
 
-void Figura::setVistosidad(float r, float g, float b)
+void Figura::setVistosidad(float v)
 {
-	vistosidad = (r*3+g*2+b)*area;
+	vistosidad = v;
 }
 
 //------Envoltorio de la lista stl------//
@@ -379,4 +379,30 @@ float Figura::turnAngle(float alpha1, float alpha2)
 	// case 4: -180 < increment < 0: right turn, stays as it is
 
 	return angleIncr;
+}
+
+// Calculates the distance from the figure to the center of the drawing Sheet
+float Figura::distanceCenter(int sHeight, int sWidth)
+{
+	// We calculate the center of the drawing sheet
+	std::list<Vertice*> sheet;
+	sheet.push_back(new Vertice(0,0));
+	sheet.push_back(new Vertice(0,sHeight));
+	sheet.push_back(new Vertice(sWidth,0));
+	sheet.push_back(new Vertice(sWidth,sHeight));
+
+	std::pair<int,int> centro = calculateBarycenter(sheet);
+
+	std::list<Vertice*>::iterator it = listaVertices.begin();
+	float minDist = dist2DPoints((*it)->getPair(),centro);
+	
+	// We calculate the distance of the nearer vertex to the center
+	for(it; it != listaVertices.end(); it++)
+	{
+		if (minDist > dist2DPoints((*it)->getPair(),centro))
+			minDist = dist2DPoints((*it)->getPair(),centro);
+	}
+
+	// We return that distance
+	return minDist;
 }
