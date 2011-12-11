@@ -53,7 +53,8 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 	float proporDurDist = distTotal / dur;
 	vector< int > durVertice; //Las duraciones que dispone cada vértice
 	//Primero asignación de duraciones iniciales, luego lo recalibramos para usar toda la duración disponible
-	float fractPart, intPart;
+	float fractPart;
+	double intPart;
 	for(int i = 0; i < numVertices; i++)
 	{
 		fractPart = modf(distWithNext.at(i) / proporDurDist, &intPart);
@@ -81,7 +82,7 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 
 	//Ahora segun la duracion que nos han dado y los angulos que se forman con las aristas de la figura añadimos notas
 	float angle;
-	int step;	// El cambio de tono que vamos a hacer. 
+	int step;	// El cambio de tono que vamos a hacer.
 	Nota* lastNote,* note;
 	//La primera nota es el color de la figura (no disponemos de más info)
 	lastNote = new Nota(durVertice.at(0), scriabin->getNota(color));

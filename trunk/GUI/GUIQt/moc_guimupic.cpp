@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'guimupic.h'
 **
-** Created: Wed Nov 16 23:55:44 2011
+** Created: Sun Dec 11 01:27:55 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_GuiMupic[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -34,6 +34,8 @@ static const uint qt_meta_data_GuiMupic[] = {
       10,    9,    9,    9, 0x08,
       45,    9,    9,    9, 0x08,
       78,    9,    9,    9, 0x08,
+     111,    9,    9,    9, 0x08,
+     140,    9,    9,    9, 0x08,
 
        0        // eod
 };
@@ -42,6 +44,8 @@ static const char qt_meta_stringdata_GuiMupic[] = {
     "GuiMupic\0\0on_toolButton_OutputMidi_clicked()\0"
     "on_toolButton_InputPic_clicked()\0"
     "on_pushButton_Generate_clicked()\0"
+    "on_pushButton_Stop_clicked()\0"
+    "on_pushButton_Play_clicked()\0"
 };
 
 const QMetaObject GuiMupic::staticMetaObject = {
@@ -76,9 +80,11 @@ int GuiMupic::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: on_toolButton_OutputMidi_clicked(); break;
         case 1: on_toolButton_InputPic_clicked(); break;
         case 2: on_pushButton_Generate_clicked(); break;
+        case 3: on_pushButton_Stop_clicked(); break;
+        case 4: on_pushButton_Play_clicked(); break;
         default: ;
         }
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }

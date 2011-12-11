@@ -18,16 +18,12 @@ MidizatorABC::~MidizatorABC()
     //dtor
 }
 
-string MidizatorABC::toMidi(std::string music, std::string converter)
+string MidizatorABC::toMidi(std::string music)
 {
-	if (converter == "")
-		converter = "abc2midi";
-
-
 	Launcher* l = new Launcher();
-	string args[] = {converter, music};
+	string args[] = { music};
 
-	l->launch(2, args);
+	l->launch(1, Launcher::ABC2MIDI, args);
 
 /*
     #ifdef __WINDOWS
@@ -244,12 +240,11 @@ string MidizatorABC::toMidi(Music* music)
 	} //VocesS
 	f->close();
 
-	string converter = "abc2midi";
 
 	Launcher* l = new Launcher();
-	string args[] = {converter, fName + ".abc"};
+	string args[] = {fName + ".abc"};
 
-	l->launch(2, args);
+	l->launch(1, Launcher::ABC2MIDI, args);
 
 /*
 	#ifdef __WINDOWS

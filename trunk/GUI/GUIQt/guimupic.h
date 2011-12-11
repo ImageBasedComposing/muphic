@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "ui_guimupic.h"
+#include "launcher.h"
 
 #include <QFile>
 #include <QMessageBox>
@@ -36,9 +37,16 @@ private slots:
 
     void on_pushButton_Generate_clicked();
 
+    void on_pushButton_Stop_clicked();
+
+    void on_pushButton_Play_clicked();
+
 private:
     Ui::GuiMupic *ui;
     QGraphicsScene * newScene;
+
+    Launcher* l;
+    int pidPlay;
 };
 
 #endif // GUIMUPIC_H

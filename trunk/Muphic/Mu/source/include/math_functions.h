@@ -4,6 +4,7 @@
 #define MATH_FUNCTIONS__H
 
 #include <math.h>
+#include <stdlib.h>
 #include "Vertice.h"
 
 using namespace std;
