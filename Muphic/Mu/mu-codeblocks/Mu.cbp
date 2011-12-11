@@ -51,6 +51,8 @@
 		<Unit filename="../source/include/Acorde.h" />
 		<Unit filename="../source/include/Composer.h" />
 		<Unit filename="../source/include/ComposerDemo.h" />
+		<Unit filename="../source/include/ComposerFigMelody.h" />
+		<Unit filename="../source/include/ComposerFigRitmo.h" />
 		<Unit filename="../source/include/ComposerMelodia.h" />
 		<Unit filename="../source/include/ComposerMultiple.h" />
 		<Unit filename="../source/include/ComposerRitmo.h" />
@@ -76,6 +78,7 @@
 		<Unit filename="../source/include/Voz.h" />
 		<Unit filename="../source/include/XML_Interface.h" />
 		<Unit filename="../source/include/instruments.h" />
+		<Unit filename="../source/include/math_functions.h" />
 		<Unit filename="../source/include/music_const.h" />
 		<Unit filename="../source/include/music_elements.h" />
 		<Unit filename="../source/src/Acorde.cpp" />
@@ -103,6 +106,8 @@
 		<Unit filename="../source/src/Voces.cpp" />
 		<Unit filename="../source/src/Voz.cpp" />
 		<Unit filename="../source/src/XML_Interface.cpp" />
+		<Unit filename="../source/src/composerFigMelody.cpp" />
+		<Unit filename="../source/src/composerFigRitmo.cpp" />
 		<Unit filename="../../TinyXML/include/tinystr.h" />
 		<Unit filename="../../TinyXML/include/tinyxml.h" />
 		<Unit filename="../../TinyXML/src/tinystr.cpp" />

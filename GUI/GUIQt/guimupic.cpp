@@ -1,12 +1,13 @@
 #include "guimupic.h"
-#include "launcher.h"
-
 
 GuiMupic::GuiMupic(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GuiMupic)
 {
     ui->setupUi(this);
+
+    l = new Launcher();
+    pidPlay = -1;
 }
 
 GuiMupic::~GuiMupic()
@@ -66,25 +67,26 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 }
 
 void GuiMupic::on_pushButton_Generate_clicked()
-{/*
-    QString picFile = ui->lineEdit_InputPic->text();
-    QString userConfFile = "dummypath";
-    QString exeFile = "./Muphic";
-    QString command = exeFile + " " + userConfFile + " " + picFile;
-
-    //conversion de QString a char *
-    QByteArray   bytes  = command.toAscii();
-    const char * commandChar = bytes.data();
-
-    system(commandChar);*/
-
-    std::string exeFile = "Muphic";
+{
     std::string userConfFile = "dummypath";
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
 
-    cout << exeFile << " " << userConfFile << " " << picFile << endl;
+    std::string args[] = {userConfFile, picFile};
+    l->launch(2, Launcher::MUPHIC, args);
+}
 
-    Launcher* l = new Launcher();
-    string args[] = {exeFile, userConfFile, picFile};
-    l->launch(3, args);
+void GuiMupic::on_pushButton_Stop_clicked()
+{
+    l->killProcess(pidPlay);
+    pidPlay = -1;
+}
+
+void GuiMupic::on_pushButton_Play_clicked()
+{
+    if (pidPlay == -1)
+    {
+        std::string args[] = {"Melodia1.mid"};
+        //pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
+        l->launch(1, Launcher::MPLAYER, args);
+    }
 }

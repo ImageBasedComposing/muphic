@@ -24,7 +24,7 @@ class MidizatorABC : public Midizator
         string toMidi(Music* music);
 
 		//Recibe la path del fichero a convertir y la path del programa que se usara para ello
-		string toMidi(std::string music, std::string converter = "");
+		string toMidi(std::string music);
 
     protected:
 
