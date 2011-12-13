@@ -57,16 +57,16 @@ class SimplePattern : public Pattern<T>
     protected:
     private:
 };
-/*
+
 // Pattern that works with figures, it doesnt admit templates due to the recursive nature of Figure
 class PriorityPattern : public Pattern<Figura*>
 {	public:
 		PriorityPattern() {};
 		virtual ~PriorityPattern() {};
 
-		list<Figura*> createPattern(std::list<Figura*> partes)
+		list<Figura*> createPatternFig(std::list<Figura*> partes)
 		{
-			std::list<Figura*>* sol;
+			std::list<Figura*>* sol = new list<Figura*> ();
 
 			partes.sort(Figura::compare);
 
@@ -75,6 +75,8 @@ class PriorityPattern : public Pattern<Figura*>
 				sol->push_back((*it));
 				createPatternRec((*it), sol);
 			}
+
+			return (*sol);
 
 		}
 	
@@ -88,6 +90,6 @@ class PriorityPattern : public Pattern<Figura*>
 				createPatternRec(f->getHijoAt(i),sol);
 			}
 		}
-};*/
+};
 
 #endif // PATTERNS_H
