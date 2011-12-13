@@ -79,13 +79,7 @@ class Figura
 		int area;
 		list<Figura*> hijos;
 
-		//float vectorModule(int x1, int x2, int y1, int y2);					// module of a vector
-		float vectorAngle(int x1, int x2, int y1, int y2, float module);	// angle of two vectors, in decimal angles
-		float vectorAngle(int x1, int x2, int y1, int y2);
 
-		// given an angle alpha1, and a new angle alpha2, returns if the second one means a right turn (-180,0) or a left turn (0,180)
-		// works with decimal angles
-		float turnAngle(float alpha1, float alpha2);
 
     private:
 		float distanceCenter(int sHeight, int sWidth);

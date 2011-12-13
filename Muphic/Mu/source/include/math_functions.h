@@ -15,6 +15,13 @@
 
 #define PI 3.1415926535897932384626433832795
 
+
+inline float vectorModule(int x1, int x2, int y1, int y2)
+{
+	// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
+	return sqrt(pow((float) x2 - x1, 2) + pow((float)y2 - y1, 2));
+}
+
 // Distancia entre dos puntos en el mismo plano (2D)
 inline float dist2DPoints(std::pair<int, int> p1, std::pair<int, int> p2)
 {
@@ -58,6 +65,63 @@ inline float angleOf2Lines(std::pair<int, int> p1, std::pair<int, int> p2, std::
 	return alpha;
 }
 
+// returns the angle a vector (x2-x1,y2-y1) with the x axis
+inline float vectorAngle(int x1, int x2, int y1, int y2, float module)
+{
+	// angle = acos((x2 - x1) / module)
+	// it's important to check sin's behaviour as well
+	float angle;
+	float cos = ((float) x2 - x1) / module;
+	float sin = ((float) y2 - y1) / module;
+	if (sin >= 0)
+	{
+		angle = acos(cos); // sin 0 gives angle 0, not 360
+	}
+	else
+	{
+		angle = 2*PI - acos(cos);
+	}
+	// cast to decimal angles
+	angle *= (180/PI);
+
+	return angle;
+}
+
+// returns the angle a vector (x2-x1,y2-y1) with the x axis
+inline float vectorAngle(int x1, int x2, int y1, int y2)
+{
+	return vectorAngle(x1, x2, y1, y2, vectorModule(x1, x2, y1, y2));
+}
+
+// given an angle alpha1, and a new angle alpha2, returns if the second one means a right turn (-180,0) or a left turn (0,180)
+// works with decimal angles
+inline float turnAngle(float alpha1, float alpha2)
+{
+	float angleIncr;
+	// increment
+	angleIncr = alpha2 - alpha1;
+	// increments are limited to (-180, 180)
+	// case 1: 0 < increment < 180: left turn, stays as it is
+	// case 2: 180 <= increment: right turn
+	if (angleIncr >= 180)
+		angleIncr = -(360 - angleIncr); // right turns are negative increments
+	// case 3: increment <= -180: left turn
+	else if (angleIncr <= -180) 
+		angleIncr = 360 + angleIncr; // left turns are positive increments
+	// case 4: -180 < increment < 0: right turn, stays as it is
+
+	return angleIncr;
+}
+
+//Dados dos rectas de p1 a p2 y de p2 a p3, calcula su ángulo
+inline float angleOf2Lines2(std::pair<int, int> p1, std::pair<int, int> p2, std::pair<int, int> p3, std::pair<int, int> p4)
+{
+	float alpha1 = vectorAngle(p1.first, p2.first, p1.second, p2.second);
+	float alpha2 = vectorAngle(p3.first, p4.first, p3.second, p4.second);
+
+	return turnAngle(alpha1, alpha2);
+}
+
 //Dada una lista de vertices devuelve el baricentro de la figura.
 inline std::pair<int,int> calculateBarycenter(std::list<Vertice*> listaVertices)
 {
@@ -87,11 +151,6 @@ inline std::pair<int,int> calculateBarycenter(std::list<Vertice*> listaVertices)
 	return out;
 }
 
-inline float vectorModule(int x1, int x2, int y1, int y2)
-{
-	// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
-	return sqrt(pow((float) x2 - x1, 2) + pow((float)y2 - y1, 2));
-}
 
 // Dado un punto (x,y), y una división en ndiv sectores con centro (centerX, centerY), y comienzo initAlpha,
 // calcula en qué sector cae el punto
@@ -101,9 +160,10 @@ inline int locateLocalSector(int x, int y, int centerX, int centerY, int ndiv, f
 	float originY = centerY + (sin(initAlpha) * vectorModule(x, y, centerX, centerY));
 	float originX = centerX + (cos(initAlpha) * vectorModule(x, y, centerX, centerY));
 
-	float alpha = angleOf2Lines(make_pair(x,y), make_pair(centerX,centerY), make_pair(originX, originY));
+	float alpha = angleOf2Lines2(make_pair(centerX,centerY), make_pair(x,y), make_pair(centerX,centerY), make_pair(originX, originY));
 
-	alpha = 180 - (alpha * 180 / PI); // external angle
+	if (alpha < 0)
+		alpha = 360 + alpha; // external angle
 
 	if (alpha < 0)
 		alpha = 360 + alpha;
