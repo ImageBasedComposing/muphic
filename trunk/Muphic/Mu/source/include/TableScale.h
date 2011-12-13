@@ -167,11 +167,11 @@ public:
 
 
 		int prevtone = auxFirstNoteScale; //El tono que devolvemos
-		int step = 0;	// pasitos que damos en la escala
+		int step = scaleSteps.size()-1;	// pasitos que damos en la escala
 		while(prevtone >= absNote)
 		{ //Recorremos la escala hasta que superemos lasTone.
 			prevtone -= scaleSteps.at(step);
-			step = (step+1)%scaleSteps.size();
+			step = mod((step-1),scaleSteps.size());
 		}
 		//prevtone forma parte de la escala y además es el siguiente a lasTone
 		prevtone = prevtone + actualScale*ESCALA; //La ubicamos en la escala adecuada
@@ -206,6 +206,7 @@ public:
 			nexTone += scaleSteps.at(step);
 			step = (step+1)%scaleSteps.size();
 		}
+		steps--;
 		while (steps > 0)
 		{
 			nexTone += scaleSteps.at(step);
@@ -237,16 +238,17 @@ public:
 
 
 		int prevtone = auxFirstNoteScale; //El tono que devolvemos
-		int step = 0;	// pasitos que damos en la escala
+		int step = scaleSteps.size()-1;	// pasitos que damos en la escala
 		while(prevtone >= absNote)
-		{ //Recorremos la escala hasta que superemos lasTone.
+		{ //Recorremos la escala hasta que llegamos a la nota justamente previa a lastnote.
 			prevtone -= scaleSteps.at(step);
-			step = (step+1)%scaleSteps.size();
+			step = mod((step-1),scaleSteps.size());
 		}
+		steps--; //hemos bajado un escalón en la escala
 		while (steps > 0)
 		{
 			prevtone -= scaleSteps.at(step);
-			step = (step+1)%scaleSteps.size();
+			step = mod((step-1),scaleSteps.size());
 			steps--;
 		}
 		//prevtone forma parte de la escala y además es el siguiente a lasTone

@@ -6,10 +6,10 @@ V:0
 %%MIDI program 0
 K:C
 M:4/4
- D32 ^G,28 D4-| D26 A28 z10-| z3 z10 z9 C42-| C2 C43 A7 d7 ^G5-| ^G2]
+ D32 A,28 D4-| D26 G28 z10-| z3 z10 z9 C42-| C2 C43 A7 c7 G5-| G2]
 V:1
 %%MIDI program 115
 K:C
 M:4/4
- A,,,16 z16 z16 A,,,16 | A,,,16 z16 z16 A,,,16 | z16 A,,,16 z16 A,,,16 |
- z16 z16 A,,,16 z16 | A,,,0 A,,,0 A,,,0 A,,,0 A,,,16 z16 z16 A,,,16 | z16 A,,,16 z16 z16 |]
+ A19 A19 A9 A9 A8-| A11 A19 A9 A9 A6 A5 A5 | z10 A10 A2 A21 A21 |
+ A21 A21 A3 A7 A7 A5-| A2]

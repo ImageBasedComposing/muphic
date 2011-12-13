@@ -79,8 +79,6 @@ class Figura
 		int area;
 		list<Figura*> hijos;
 
-
-
     private:
 		float distanceCenter(int sHeight, int sWidth);
 };
