@@ -4,6 +4,7 @@
 #define MATH_FUNCTIONS__H
 
 #include <math.h>
+#include <float.h>
 #include <stdlib.h>
 #include "Vertice.h"
 
@@ -19,7 +20,21 @@ inline float dist2DPoints(std::pair<int, int> p1, std::pair<int, int> p2)
 // Devuelve la pendiente de una recta dados dos puntos de ella.
 inline float slopeOfLine(std::pair<int, int> p1, std::pair<int, int> p2)
 {
-	return float((p2.second - p1.second)) / float((p2.first - p1.first));
+	float upper = float(p2.second - p1.second);
+	float down = float(p2.first - p1.first);
+	if (upper == 0)
+		if(down < 0)
+			return -0.0;
+		else
+			return 0.0;
+	else
+		if(down == 0)
+			if(upper < 0)
+				return FLT_MAX; //Valor máximo de un float
+			else
+				return -FLT_MAX;
+		else
+			return upper/down;
 }
 
 //Dados dos rectas definidas por 3 vertices (el 2º es el punto de corte) devuelve el ángulo que forman.
@@ -33,7 +48,7 @@ inline float angleOf2Lines(std::pair<int, int> p1, std::pair<int, int> p2, std::
 	// tan a =  |_______| =  _______ ;  => a = atan(...)       ~~           atan2( _______ )
 	//			|1+m2*m1|	|1+m2*m1|											 (|1+m2*m1|)
 
-	float alpha = atan2(abs(m2 - m1) , abs(1+(m2*m1)));
+	float alpha = atan2((m2 - m1) , abs(1+(m2*m1)));
 
 	return alpha;
 }

@@ -366,10 +366,8 @@ string MidizatorABC::transformNota(Nota* n, pair<int,int> duracionBase)
 			case 3:
 				break; //Hasta aqui la escala central
 			case 6: sufijo += "'";
-				break;
 			case 5: sufijo += "'";
-				break;
-			case 4: nota = nota.c_str() + 32;  //Convertimos a Minusculas
+			case 4: nota = *(nota.c_str()) + 32;  //Convertimos a Minusculas, imprescindible que nota sea un string de una sola letra
 				break;
 			default: break; //La dejamos en la escala central, Posible error out of range
 		}

@@ -174,7 +174,7 @@ public:
 			step = (step+1)%scaleSteps.size();
 		}
 		//prevtone forma parte de la escala y además es el siguiente a lasTone
-		prevtone = prevtone + actualScale; //La ubicamos en la escala adecuada
+		prevtone = prevtone + actualScale*ESCALA; //La ubicamos en la escala adecuada
 
 		if(prevtone < 0)
 			return -1; //Es un error, se produce cuando no se puede bajar mas en la escala.
@@ -186,7 +186,7 @@ public:
 	int nextNTone(int lasTone, int steps)
 	{
 		steps = abs(steps);
-		if(lasTone == 0 || steps == 0)  //silencio o con 0 pasos es el propio tono
+		if(lasTone == 0 || steps == 0 || lasTone == -1)  //silencio o con 0 pasos es el propio tono
 			return lasTone;
 
 		int absNote = lasTone%PER8; //ESCALA Y PER8 es lo mismo, la escala es una octava
@@ -250,7 +250,7 @@ public:
 			steps--;
 		}
 		//prevtone forma parte de la escala y además es el siguiente a lasTone
-		prevtone = prevtone + actualScale; //La ubicamos en la escala adecuada
+		prevtone = prevtone + actualScale*ESCALA; //La ubicamos en la escala adecuada
 
 		if(prevtone < 0)
 			return -1; //Es un error, se produce cuando no se puede bajar mas en la escala.

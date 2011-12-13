@@ -94,7 +94,7 @@
 #define SUBDOMINANTE 4; //SUBDOMINANT
 #define DOMINANTE 5;	//DOMINANT
 #define SUBMEDIANTE 6;	//SUBMEDIANT
-#define SUBTONICA 7;	//SUBTONIC
+#define SUBTONICA 7;	//SUBTONIC  Doble notación, se puede poner las dos cosas.
 #define SENSIBLE 7;		//LEADING TONE
 
 #endif

@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 #include <list>
-#include <math.h>
+//#include "math_functions.h"
 #include "Composer.h"
 #include "Music.h"
 #include "Figuras.h"
