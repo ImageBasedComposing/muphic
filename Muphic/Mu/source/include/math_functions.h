@@ -5,10 +5,15 @@
 
 #include <math.h>
 #include <float.h>
+#include <list>
 #include <stdlib.h>
 #include "Vertice.h"
 
-using namespace std;
+
+//using namespace std;
+
+
+#define PI 3.1415926535897932384626433832795
 
 // Distancia entre dos puntos en el mismo plano (2D)
 inline float dist2DPoints(std::pair<int, int> p1, std::pair<int, int> p2)
@@ -81,5 +86,30 @@ inline std::pair<int,int> calculateBarycenter(std::list<Vertice*> listaVertices)
 
 	return out;
 }
+
+inline float vectorModule(int x1, int x2, int y1, int y2)
+{
+	// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
+	return sqrt(pow((float) x2 - x1, 2) + pow((float)y2 - y1, 2));
+}
+
+// Dado un punto (x,y), y una división en ndiv sectores con centro (centerX, centerY), y comienzo initAlpha,
+// calcula en qué sector cae el punto
+// input is in radians
+inline int locateLocalSector(int x, int y, int centerX, int centerY, int ndiv, float initAlpha)
+{
+	float originY = centerY + (sin(initAlpha) * vectorModule(x, y, centerX, centerY));
+	float originX = centerX + (cos(initAlpha) * vectorModule(x, y, centerX, centerY));
+
+	float alpha = angleOf2Lines(make_pair(x,y), make_pair(centerX,centerY), make_pair(originX, originY));
+
+	alpha = 180 - (alpha * 180 / PI); // external angle
+
+	if (alpha < 0)
+		alpha = 360 + alpha;
+
+	return ((int) alpha) % ndiv;
+}
+
 
 #endif // MATH_FUNCTIONS__H

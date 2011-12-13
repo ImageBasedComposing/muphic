@@ -3,6 +3,7 @@
 #ifndef COMPOSERFIGRITMO_H
 #define COMPOSERFIGRITMO_H
 
+#include "math_functions.h"
 
 #include "Figuras.h"
 #include "Segmento.h"
