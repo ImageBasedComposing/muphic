@@ -334,13 +334,12 @@ list< std::pair<float,float> > Figura::polarize()
 
 	return polarizedFigure;
 }
-
+/*
 float Figura::vectorModule(int x1, int x2, int y1, int y2)
 {
 	// module = ((x2 - x1)^2 + (y2 - y1)^2)^0.5
 	return sqrt(pow((float) x2 - x1, 2) + pow((float)y2 - y1, 2));
-
-}
+}*/
 
 float Figura::vectorAngle(int x1, int x2, int y1, int y2, float module)
 {
@@ -410,4 +409,29 @@ float Figura::distanceCenter(int sHeight, int sWidth)
 
 	// We return that distance
 	return minDist;
+}
+
+int* Figura::radialDivision(int ndiv, float initAlpha)
+{
+	pair<int, int> center = getBarycenter();
+
+	int* points = new int[ndiv];
+	int s = sizeVertices();
+	Vertice* p;
+	initAlpha = initAlpha * PI / 180; // radians
+
+	for (int i = 0; i < ndiv; i++)
+	{
+		points[i] = 0;
+	}
+
+	for (int i = 0; i < s; i++)
+	{
+		p = getVerticeAt(i);
+		if (!p->centro)
+		{
+			points[locateLocalSector(p->x, p->y, center.first, center.second, ndiv, initAlpha)]++;
+		}
+	}
+	return points;
 }

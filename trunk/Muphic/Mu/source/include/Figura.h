@@ -8,7 +8,6 @@
 #include "Vertice.h"
 #include "math_functions.h"
 
-#define PI 3.1415926535897932384626433832795
 
 class Vertice;
 
@@ -30,6 +29,7 @@ class Figura
 		std::pair<int,int> getBarycenter();
 
 		list< std::pair<float,float> > polarize();
+		int* Figura::radialDivision(int ndiv, float initAlpha);
 
 /*------envoltorio de la lista stl------*/
 		void colocarVertice(Vertice* v);
@@ -79,7 +79,7 @@ class Figura
 		int area;
 		list<Figura*> hijos;
 
-		float vectorModule(int x1, int x2, int y1, int y2);					// module of a vector
+		//float vectorModule(int x1, int x2, int y1, int y2);					// module of a vector
 		float vectorAngle(int x1, int x2, int y1, int y2, float module);	// angle of two vectors, in decimal angles
 		float vectorAngle(int x1, int x2, int y1, int y2);
 
