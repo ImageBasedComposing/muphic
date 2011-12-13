@@ -44,7 +44,7 @@ string ComposerTimothy::compose()
 		segs1->pushBack(seg);
 
 		seg = new Segmento();
-		fr->compMelodyFig((*it).first, seg, (*it).second);
+		fr->compRythmFig((*it).first, seg, (*it).second);
 		segs2->pushBack(seg);
 	}
 

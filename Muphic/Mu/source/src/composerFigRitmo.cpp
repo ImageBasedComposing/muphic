@@ -1,14 +1,17 @@
 #include "composerFigRitmo.h"
 
 
-bool ComposerFigRitmo::compMelodyFig(Figura* f, Segmento* seg, int dur)
+bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur)
 {
 	int t = f->sizeVertices();
 	pair<int,int> center;
 	center.first = 0;
 	center.second = 0;
+	int duracionTotal = 0;
+	int duracion;
 
-	Simbolos* ss = seg->getSimbolos();
+	//Simbolos* ss = seg->getSimbolos();
+	Simbolos* simbtmp = new Simbolos();
 	Nota* s;
 
 	if(t > 2)
@@ -18,83 +21,89 @@ bool ComposerFigRitmo::compMelodyFig(Figura* f, Segmento* seg, int dur)
 		// Creación de notas
 
 		Vertice* v;
-		int notas[8] = {0,0,0,0,0,0,0,0};
-
-		for(int j = 0; j < t; j++)
-		{
-			v = f->getVerticeAt(j);
-
-			if(v->x < center.first && v->y > center.second && v->y <= -v->x + center.first + center.second)
-			{
-				notas[0] += 1;
-			}
-			else if(v->x <= center.first && v->y > center.second && v->y > -v->x + center.first + center.second)
-			{
-				notas[1] += 1;
-			}
-			else if(v->x > center.first && v->y > center.second && v->y >= v->x + (-center.first + center.second))
-			{
-				notas[2] += 1;
-			}
-			else if(v->x > center.first && v->y >= center.second && v->y < v->x + (-center.first + center.second))
-			{
-				notas[3] += 1;
-			}
-			else if(v->x > center.first && v->y < center.second && v->y >= -v->x + center.first + center.second)
-			{
-				notas[4] += 1;
-			}
-			else if(v->x >= center.first && v->y < center.second && v->y < -v->x + center.first + center.second)
-			{
-				notas[5] += 1;
-			}
-			else if(v->x < center.first && v->y < center.second && v->y <= v->x + (-center.first + center.second))
-			{
-				notas[6] += 1;
-			}
-			else if(v->x < center.first && v->y <= center.second && v->y > v->x + (-center.first + center.second))
-			{
-				notas[7] += 1;
-			}
-		} // for
+		int nDiv = 8;
+		int * notas = f->radialDivision(nDiv, 90);
 
 		double pownum = 2;
-
-
 		
-		for(int k = 0; k < 8; k++)
+		for(int k = 0; k < nDiv; k++)
 		{
 			if (notas[k] == 0)
 			{
-				s = new Nota(QUARTERNOTE, 0); //silencio si no hay nota en el octante (?)
-				ss->pushBack(s);
+				duracion = QUARTERNOTE;
+				duracionTotal += duracion;
+
+				s = new Nota(duracion, 0); //silencio si no hay nota en el octante (?)
+				simbtmp->pushBack(s);
 				continue;
 			}
 
 			// Inserto blancas si no hay vertices y por debajo si hay
-			int duracion = 0;
+			duracion = 0;
+			
 			for(int k1 = 0; k1 < notas[k]; k1++)
 			{
-				s = new Nota((QUARTERNOTE*2)/(int)pow(pownum,notas[k]),getDrumTone(duracion));
-				ss->pushBack(s);
+				duracion = ((QUARTERNOTE*2)/(int)pow(pownum,notas[k])); 
+				duracionTotal += duracion;
+				s = new Nota(duracion,getDrumTone(duracion));
+				simbtmp->pushBack(s);
 			}
 		}
-
-		seg->setSimbolos(ss);
-
-		}
+	}
 	// Para circulos
 	else
 	{
 		center.first = f->getVerticeAt(1)->x;
 		center.second = f->getVerticeAt(1)->y;
 
-		int duracion = 0;
+		int duracion = dur / 4;
 		for(int f=0; f < 4; f++)
 		{
-			ss->pushBack(new Nota(duracion,getDrumTone(duracion)));
+			duracionTotal += duracion;
+			simbtmp->pushBack(new Nota(duracion,getDrumTone(duracion)));
 		}
-		seg->setSimbolos(ss);
+	}
+
+
+	float factor = 0;
+	int rep = 0;
+	if (duracionTotal > dur)
+	{
+		rep = 1;
+		factor = dur/ (float) duracionTotal;
+	}
+	else
+	{
+		// cuantas repeticiones caben
+		rep = dur / duracionTotal;
+
+		// calculamos cuánto hay que modificar el motivo para que las repeticiones sean exactas
+		float newDur = ((float) dur / (float) rep);
+		factor = newDur / (float) duracionTotal;
+	}
+
+	if (factor != 1)
+		for (int i = 0; i < simbtmp->size(); i++)
+		{
+			simbtmp->getAt(i)->setDuracion(simbtmp->getAt(i)->getDuracion()*factor);
+		}
+
+	// ahora repetimos el motivo rep veces y ya tira.
+	duracionTotal = 0;
+	for (int r = 0; r < rep; r++)
+	{
+		for (int i = 0; i < simbtmp->size(); i++)
+		{
+			seg->getSimbolos()->pushBack(simbtmp->getAt(i));
+			duracionTotal += simbtmp->getAt(i)->getDuracion();
+		}
+	}
+
+	// como utilizamos factor (float) como entero, quedará un resto por ahí que rezo que no moleste, lo pongo como negra
+	if (duracionTotal < dur)
+	{
+		seg->getSimbolos()->pushBack(new Nota(dur-duracionTotal, getDrumTone(dur-duracionTotal)));
+		duracionTotal += dur - duracionTotal;
 	}
 
 	return true;
@@ -103,5 +112,5 @@ bool ComposerFigRitmo::compMelodyFig(Figura* f, Segmento* seg, int dur)
 
 int ComposerFigRitmo::getDrumTone(int duracion)
 {
-	return LA; // por ejemplo
+	return LA_C; // por ejemplo
 }
