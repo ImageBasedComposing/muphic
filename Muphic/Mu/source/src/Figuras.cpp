@@ -42,7 +42,7 @@ void Figuras::cargar(string rutaXML)
 	// Reestablecemos la vistosidad de las figuras normalizandola
 	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
-		(*it)->setVistosidad(((*it)->getVistosidad() / vistosidadTotal)*100);
+		(*it)->setVistosidad(((*it)->getVistosidad() / vistosidadTotal));
 	}
 
 	figPadres.sort(&Figura::compare);

@@ -1,6 +1,7 @@
 #include "Mu.h"
 #include "ComposerDemo.h"
 #include "ComposerMultiple.h"
+#include "ComposerTimothy.h"
 #include "Acorde.h"
 
 Mu::Mu()
@@ -52,9 +53,12 @@ int main( int argc, const char* argv[] )
 
 	Composer* comp = new ComposerDemo( m );
 	Composer* comp2 = new ComposerMultiple( m );
+	Composer* compTimy = new ComposerTimothy();
 
     //comp->compose(analysedPic, usrConfPath);
-	comp2->compose(analysedPic, usrConfPath);
+	//comp2->compose(analysedPic, usrConfPath);
+
+	compTimy->compose(analysedPic, usrConfPath);
 
 	return 0;
 }
