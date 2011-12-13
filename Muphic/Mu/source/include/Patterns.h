@@ -57,7 +57,7 @@ class SimplePattern : public Pattern<T>
     protected:
     private:
 };
-
+/*
 // Pattern that works with figures, it doesnt admit templates due to the recursive nature of Figure
 class PriorityPattern : public Pattern<Figura*>
 {	public:
@@ -88,6 +88,6 @@ class PriorityPattern : public Pattern<Figura*>
 				createPatternRec(f->getHijoAt(i),sol);
 			}
 		}
-};
+};*/
 
 #endif // PATTERNS_H
