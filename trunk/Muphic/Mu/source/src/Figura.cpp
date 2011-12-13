@@ -341,49 +341,6 @@ float Figura::vectorModule(int x1, int x2, int y1, int y2)
 	return sqrt(pow((float) x2 - x1, 2) + pow((float)y2 - y1, 2));
 }*/
 
-float Figura::vectorAngle(int x1, int x2, int y1, int y2, float module)
-{
-	// angle = acos((x2 - x1) / module)
-	// it's important to check sin's behaviour as well
-	float angle;
-	float cos = ((float) x2 - x1) / module;
-	float sin = ((float) y2 - y1) / module;
-	if (sin >= 0)
-	{
-		angle = acos(cos); // sin 0 gives angle 0, not 360
-	}
-	else
-	{
-		angle = 2*PI - acos(cos);
-	}
-	// cast to decimal angles
-	angle *= (180/PI);
-
-	return angle;
-}
-
-float Figura::vectorAngle(int x1, int x2, int y1, int y2)
-{
-	return vectorAngle(x1, x2, y1, y2, vectorModule(x1, x2, y1, y2));
-}
-
-float Figura::turnAngle(float alpha1, float alpha2)
-{
-	float angleIncr;
-	// increment
-	angleIncr = alpha2 - alpha1;
-	// increments are limited to (-180, 180)
-	// case 1: 0 < increment < 180: left turn, stays as it is
-	// case 2: 180 <= increment: right turn
-	if (angleIncr >= 180)
-		angleIncr = -(360 - angleIncr); // right turns are negative increments
-	// case 3: increment <= -180: left turn
-	else if (angleIncr <= -180) 
-		angleIncr = 360 + angleIncr; // left turns are positive increments
-	// case 4: -180 < increment < 0: right turn, stays as it is
-
-	return angleIncr;
-}
 
 // Calculates the distance from the figure to the center of the drawing Sheet
 float Figura::distanceCenter(int sHeight, int sWidth)
