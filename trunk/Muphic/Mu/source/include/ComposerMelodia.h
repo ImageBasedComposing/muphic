@@ -6,12 +6,14 @@
 #include <string>
 #include <iostream>
 #include <list>
-#include <math.h>
+//#include "math_functions.h"
 #include "limits.h"
 #include "Composer.h"
 #include "Music.h"
 #include "Figuras.h"
 #include "PatternGen.h"
+
+#include "ComposerFigMelody.h"
 
 class Figuras;
 

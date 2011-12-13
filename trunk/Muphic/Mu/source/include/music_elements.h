@@ -59,7 +59,7 @@ class Scriabin
 		{
 			list< pair<string,int> >::iterator it = scriabin.begin();
 			bool found = false;
-			int sol = -1;
+			int sol = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
 
 			while(!found && it != scriabin.end())
 			{

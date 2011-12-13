@@ -5,8 +5,8 @@
 
 #include "Figura.h"
 #include "tinyxml.h"
-#include <list>
-#include <string>
+//#include <list>
+//#include <string>
 
 using namespace std;
 

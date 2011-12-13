@@ -46,21 +46,21 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 	vector< float > distWithNext;  //Distancias con el siguiente vertice.
 	for(int i = 0; i < numVertices; i++)
 	{
-		distWithNext.push_back( dist2DPoints(vertices.at(i)->getPair(), vertices.at(i%numVertices)->getPair()) );
+		distWithNext.push_back( dist2DPoints(vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair()) );
 		distTotal += distWithNext.back();
 	}
 	//Ahora vemos la proporción duración-Distancia 1 Dur = X Dist
 	float proporDurDist = distTotal / dur;
 	vector< int > durVertice; //Las duraciones que dispone cada vértice
 	//Primero asignación de duraciones iniciales, luego lo recalibramos para usar toda la duración disponible
-	float fractPart;
+	double fractPart;
 	double intPart;
 	for(int i = 0; i < numVertices; i++)
 	{
 		fractPart = modf(distWithNext.at(i) / proporDurDist, &intPart);
-		durVertice.push_back(intPart);
-		durActual = intPart;
-		distWithNext.at(i) = fractPart; //Dejamos la fraccion que nos ha quedado para los reajustes
+		durVertice.push_back((int)intPart);
+		durActual += (int)intPart;
+		distWithNext.at(i) = (float)fractPart; //Dejamos la fraccion que nos ha quedado para los reajustes
 	}
 	//Reajustes de la duracion. Simplemente se reasigna toda la duración que falta. Se puede mejorar con un filtro de poner cosas inteligentes (no negra+semifusa)
 	int candidato = 0;
@@ -87,11 +87,11 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 	//La primera nota es el color de la figura (no disponemos de más info)
 	lastNote = new Nota(durVertice.at(0), scriabin->getNota(color));
 	seg->getSimbolos()->pushBack(lastNote);
-	//Ahora el resto de vértices
-	for(int i = 0; i < numVertices; i++)
+	//Ahora el resto de vértices desde 1 a numVertices
+	for(int i = 1; i < numVertices; i++)
 	{
 		angle = angleOf2Lines(vertices.at((i-1)%numVertices)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair());
-		step = floor(sin(angle)*3); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
+		step = floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
 
 		if((step == 3 || step == -3) && durVertice.at(i) > QUARTERNOTE) //Usamos una nota intermedia (lo pide a gritos XD)
 		{
@@ -140,3 +140,4 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 
 	return true;
 }
+

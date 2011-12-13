@@ -43,17 +43,27 @@ Music* ComposerMelodia::composeMusic()
 	pair<Segmento*,int> par;
 	Nota* nPpal;
 
+	/***********************************************************************/
+	PentatonicMajScale scale;
+	TableScale* tbScale = new TableScale(scale.getScaleSteps(), DO);
+	ComposerFigMelody* compPrueba = new ComposerFigMelody(tbScale);
+	/******************************************************************/
+
 	// Recorro las figuras y calculo su melodía
-	for(int i = 1; i < figuras->sizeFig(); i++)
+	for(int i = 0; i < figuras->sizeFig(); i++)
 	{
 		seg1 = new Segmento();
 		f = figuras->getFigAt(i);
 		seg1->setMetrica(m);
 		seg1->setTempo(180);
 
+		/***********************************************************************/
+		compPrueba->compMelodyFig(f,seg1,HALFNOTE*2); //Un compas para cada figura, pero parece que no es lo correcto...
+		/******************************************************************/
+		/*
 		// Para cada figura saco la nota de su pentatonica y calculo su segmento de melodía
 		nPpal = new Nota(notaFigura(f));
-		calcularMelodiaFig(f,seg1,nPpal);
+		//calcularMelodiaFig(f,seg1,nPpal);*/
 		par.second = f->getId();
 		par.first = seg1;
 		segs.push_back(par);
@@ -73,7 +83,7 @@ Music* ComposerMelodia::composeMusic()
 	melodia->setVoces(vs);
 	melodia->setComposer("MelodyComposer");
 	melodia->setName("Melodia");
-	melodia->setBaseLenght(make_pair(1,16));
+	melodia->setBaseLenght(make_pair(1,32));
 
 	return melodia;
 
