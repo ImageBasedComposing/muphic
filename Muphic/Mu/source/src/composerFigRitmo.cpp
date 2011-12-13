@@ -21,7 +21,7 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur)
 		// Creación de notas
 
 		Vertice* v;
-		int nDiv = 8;
+		int nDiv = 3;
 		int * notas = f->radialDivision(nDiv, 90);
 
 		double pownum = 2;

@@ -168,5 +168,17 @@ inline int locateLocalSector(int x, int y, int centerX, int centerY, int ndiv, f
 	return ((int) alpha) % ndiv;
 }
 
+inline int mod(int num, int div)
+{
+	if(num < 0)
+	{
+		num = abs(num);
+		num = num%div;
+		num = -num;
+		num = num+div;
+	}
+	return num%div;
+}
+
 
 #endif // MATH_FUNCTIONS__H
