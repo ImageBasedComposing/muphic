@@ -163,10 +163,7 @@ inline int locateLocalSector(int x, int y, int centerX, int centerY, int ndiv, f
 	float alpha = angleOf2Lines2(make_pair(centerX,centerY), make_pair(x,y), make_pair(centerX,centerY), make_pair(originX, originY));
 
 	if (alpha < 0)
-		alpha = 360 + alpha; // external angle
-
-	if (alpha < 0)
-		alpha = 360 + alpha;
+		alpha = 360 + alpha; // positive angle
 
 	return ((int) alpha) % ndiv;
 }
