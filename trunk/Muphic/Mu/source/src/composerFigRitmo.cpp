@@ -1,7 +1,7 @@
 #include "composerFigRitmo.h"
 
 
-bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur)
+bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compas, bool quick)
 {
 	int t = f->sizeVertices();
 	pair<int,int> center;
@@ -21,12 +21,11 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur)
 		// Creación de notas
 
 		Vertice* v;
-		int nDiv = 3;
-		int * notas = f->radialDivision(nDiv, 90);
+		int * notas = f->radialDivision(compas, 90);
 
 		double pownum = 2;
 		
-		for(int k = 0; k < nDiv; k++)
+		for(int k = 0; k < compas; k++)
 		{
 			if (notas[k] == 0)
 			{
@@ -67,7 +66,7 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur)
 
 	float factor = 0;
 	int rep = 0;
-	if (duracionTotal > dur)
+	if (!quick || (duracionTotal > dur))
 	{
 		rep = 1;
 		factor = dur/ (float) duracionTotal;
