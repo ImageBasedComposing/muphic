@@ -2,10 +2,21 @@
 
 Figura::Figura()
 {
+	colorDifference = -1;
 	vistosidad = -1;
 	rgb.r = -1;
 	rgb.b = -1;
 	rgb.g = -1;
+
+	// vistosidad priority consts
+	A = 0.5;
+	B = 0.3;
+	C = 0.2;
+		
+	// Color priority consts
+	pR = 0.45;
+	pG = 0.35;
+	pB = 0.20;
 }
 
 Figura::~Figura()
@@ -49,6 +60,10 @@ float Figura::getVistosidad()
 	return vistosidad;
 }
 
+float Figura::getColorDifference()
+{
+	return colorDifference;
+}
 //------Setters------//
 void Figura::setRGB(float r, float g, float b)
 {
@@ -87,7 +102,7 @@ int Figura::calcularVistosidad(int sHeight, int sWidth)
 		return -1;
 	else if (vistosidad == -1)
 	{
-		vistosidad = (rgb.r*3 + rgb.g*2 + rgb.b)*area*distanceCenter(sHeight, sWidth);
+		vistosidad = A*getSaturation()*(rgb.r*pR + rgb.g*pG + rgb.b*pB) + B*area + C*distanceCenter(sHeight, sWidth);
 	}
 	return vistosidad;
 }
@@ -95,6 +110,11 @@ int Figura::calcularVistosidad(int sHeight, int sWidth)
 void Figura::setVistosidad(float v)
 {
 	vistosidad = v;
+}
+
+void Figura::setColorDifference(float c)
+{
+	colorDifference = c;
 }
 
 //------Envoltorio de la lista stl------//
@@ -366,6 +386,38 @@ float Figura::distanceCenter(int sHeight, int sWidth)
 
 	// We return that distance
 	return minDist;
+}
+
+float Figura::getSaturation()
+{
+	float max = -1;
+	float min = 500;
+
+	// We calculate the max and the min from the rgb values
+	if(rgb.r >= rgb.b)
+	{
+		min = rgb.b;
+		max = rgb.r;
+		if(rgb.r < rgb.g)
+			max = rgb.g;
+		if(rgb.b > rgb.g)
+			min = rgb.g;
+	}
+	else 
+	{
+		min = rgb.r;
+		max = rgb.b;
+		if(rgb.b <= rgb.g)
+			max = rgb.g;
+		if(rgb.r >= rgb.g)
+			min = rgb.g;
+	}
+
+	// We apply the formula to get the saturation if max = 0 then 0 else 1 - min / max
+	if(max == 0)
+		return 0;
+	else
+		return (1 - (min / max));
 }
 
 int* Figura::radialDivision(int ndiv, float initAlpha)
