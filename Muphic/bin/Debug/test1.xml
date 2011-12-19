@@ -9,8 +9,8 @@
 		<color>
 			<name>Amarillo</name>
 			<RGB>
-				<R>255</R>
-				<G>242</G>
+				<R>125</R>
+				<G>125</G>
 				<B>0</B>
 			</RGB>
 			<gradient>0</gradient>
@@ -88,9 +88,9 @@
 		<color>
 			<name>Rojo</name>
 			<RGB>
-				<R>237</R>
-				<G>28</G>
-				<B>36</B>
+				<R>255</R>
+				<G>0</G>
+				<B>0</B>
 			</RGB>
 			<gradient>0</gradient>
 		</color>

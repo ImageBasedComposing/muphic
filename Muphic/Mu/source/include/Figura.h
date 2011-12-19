@@ -56,6 +56,7 @@ class Figura
 		Figura* getParent();
 		int getArea();
 		float getVistosidad();
+		float getColorDifference();
 
 
 /*------Setters------*/
@@ -65,6 +66,7 @@ class Figura
 		void setId(int id);
 		void setParent(Figura* p = NULL);
 		void setArea(int a);
+		void setColorDifference(float c);
 		int calcularVistosidad(int sHeight, int sWidth);
 		void setVistosidad(float v);
 
@@ -79,8 +81,22 @@ class Figura
 		int area;
 		list<Figura*> hijos;
 
+		// Establishes the distance between this figure color and the average color of the sheet
+		float colorDifference;
+
     private:
 		float distanceCenter(int sHeight, int sWidth);
+		float getSaturation();
+
+		// vistosidad priority consts
+		float A;
+		float B;
+		float C;
+		
+		// Color priority consts
+		float pR;
+		float pG;
+		float pB;
 };
 
 #endif // FIGURA_H

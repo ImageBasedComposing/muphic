@@ -32,16 +32,28 @@ void Figuras::cargar(string rutaXML)
 	// Cargamos las figuras
 	cargarRec(figuraNode,NULL);
 
-	// Calculamos la vistosidad total de las figuras
+	// Calculamos la vistosidad y la media de colores total de las figuras
+	float rM = 0;
+	float gM = 0;
+	float bM = 0;
 	vistosidadTotal = 0;
 	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
+		rM += (*it)->getRGB().r;
+		gM += (*it)->getRGB().g;
+		bM += (*it)->getRGB().b;
 		vistosidadTotal += (*it)->getVistosidad();
 	}
 
-	// Reestablecemos la vistosidad de las figuras normalizandola
+	rM = (float) rM / figuras.size();
+	gM = (float) gM / figuras.size();
+	bM = (float) bM / figuras.size();
+
+	// Reestablecemos la vistosidad de las figuras normalizandola y la distancia del color
 	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
+		// Suma de las diferencias, en valor absoluto, de los valores rgb con los valores medios rgb de todas las figuras
+		(*it)->setColorDifference(abs(rM - (*it)->getRGB().r) + abs(gM - (*it)->getRGB().g) + abs(bM - (*it)->getRGB().b));
 		(*it)->setVistosidad(((*it)->getVistosidad() / vistosidadTotal));
 	}
 
