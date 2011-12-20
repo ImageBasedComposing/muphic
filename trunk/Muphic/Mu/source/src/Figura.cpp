@@ -3,7 +3,6 @@
 Figura::Figura()
 {
 	colorDifference = -1;
-	vistosidad = -1;
 	rgb.r = -1;
 	rgb.b = -1;
 	rgb.g = -1;
@@ -22,6 +21,11 @@ Figura::Figura()
 Figura::~Figura()
 {
 	listaVertices.clear();
+}
+
+bool Figura::compare(Figura* f1, Figura* f2)
+{
+	return f1->getId() > f2->getId();
 }
 
 //------Getters------//
@@ -53,11 +57,6 @@ Figura* Figura::getParent()
 int Figura::getArea()
 {
 	return area;
-}
-
-float Figura::getVistosidad()
-{
-	return vistosidad;
 }
 
 float Figura::getColorDifference()
@@ -94,22 +93,6 @@ void Figura::setParent(Figura* p)
 void Figura::setArea(int a)
 {
 	area = a;
-}
-
-float Figura::calcularVistosidad(int sHeight, int sWidth)
-{
-	if (rgb.r == -1)
-		return -1;
-	else if (vistosidad == -1)
-	{
-		vistosidad = A*getSaturation()*(rgb.r*pR + rgb.g*pG + rgb.b*pB) + B*area + C*(float)distanceCenter(sHeight, sWidth);
-	}
-	return vistosidad;
-}
-
-void Figura::setVistosidad(float v)
-{
-	vistosidad = v;
 }
 
 void Figura::setColorDifference(float c)
@@ -442,5 +425,11 @@ int* Figura::radialDivision(int ndiv, double initAlpha)
 			points[locateLocalSector(p->x, p->y, center.first, center.second, ndiv, initAlpha)]++;
 		}
 	}
+	
+
+	int a1 = points[0];
+	int a2 = points[1];
+	int a3 = points[2];
+	int a4 = points[3];
 	return points;
 }

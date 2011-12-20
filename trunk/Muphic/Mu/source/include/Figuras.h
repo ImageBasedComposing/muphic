@@ -3,14 +3,14 @@
 #ifndef FIGURAS_H
 #define FIGURAS_H
 
-#include "Figura.h"
+#include "FigureMusic.h"
 #include "tinyxml.h"
 //#include <list>
 //#include <string>
 
 using namespace std;
 
-class Figura;
+class FigureMusic;
 
 class Figuras
 {
@@ -24,13 +24,13 @@ class Figuras
 
         /* Envoltorio de la lista stl */
 
-		void colocarFig(Figura* f);
-		void colocarPadre(Figura* f);
+		void colocarFig(FigureMusic* f);
+		void colocarPadre(FigureMusic* f);
 		//void insertFig(Figura* s, int n);
 		//void insertPadre(Figura* s, int n);
 
-		Figura* getFigAt(int n);
-		Figura* getPadreAt(int n);
+		FigureMusic* getFigAt(int n);
+		FigureMusic* getPadreAt(int n);
 
 		bool emptyFig();
 		bool emptyPadre();
@@ -45,10 +45,10 @@ class Figuras
 		float vistosidadTotal;
 
     private:
-		list<Figura*> figuras;
-		list<Figura*> figPadres;
+		list<FigureMusic*> figuras;
+		list<FigureMusic*> figPadres;
 
-		void cargarRec(TiXmlNode* f, Figura* padre = NULL);
+		void cargarRec(TiXmlNode* f, FigureMusic* padre = NULL);
 };
 
 #endif // FIGURAS_H

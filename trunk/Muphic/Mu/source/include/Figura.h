@@ -24,7 +24,9 @@ class Figura
         virtual ~Figura();
 
 /*------Funciones Publicas------*/
-		static bool compare(Figura* f1, Figura* f2) {return f1->getVistosidad() > f2->getVistosidad();};
+
+		static bool compare(Figura* f1, Figura* f2);
+
 		std::pair<int,int> getSimpleCenter();
 		std::pair<int,int> getBarycenter();
 
@@ -67,13 +69,10 @@ class Figura
 		void setParent(Figura* p = NULL);
 		void setArea(int a);
 		void setColorDifference(float c);
-		float calcularVistosidad(int sHeight, int sWidth);
-		void setVistosidad(float v);
 
     protected:
 		string color;
 		Color rgb;
-		float vistosidad;
 		int numVertices;
 		list<Vertice*> listaVertices;
 		int id;
@@ -84,7 +83,6 @@ class Figura
 		// Establishes the distance between this figure color and the average color of the sheet
 		float colorDifference;
 
-    private:
 		double distanceCenter(int sHeight, int sWidth);
 		float getSaturation();
 
@@ -97,6 +95,9 @@ class Figura
 		float pR;
 		float pG;
 		float pB;
+
+    private:
+
 };
 
 #endif // FIGURA_H

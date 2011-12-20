@@ -157,15 +157,17 @@ inline std::pair<int,int> calculateBarycenter(std::list<Vertice*> listaVertices)
 // input is in radians
 inline int locateLocalSector(int x, int y, int centerX, int centerY, int ndiv, double initAlpha)
 {
-	double originY = centerY + (sin(initAlpha) * vectorModule(x, y, centerX, centerY));
-	double originX = centerX + (cos(initAlpha) * vectorModule(x, y, centerX, centerY));
+	double module = vectorModule(x, centerX, y, centerY);
+	double originY = centerY + (sin(initAlpha) * module);
+	double originX = centerX + (cos(initAlpha) * module);
 
 	double alpha = angleOf2Lines2(make_pair(centerX,centerY), make_pair(x,y), make_pair(centerX,centerY), make_pair(originX, originY));
 
 	if (alpha < 0)
 		alpha = 360 + alpha; // positive angle
 
-	return ((int) alpha) % ndiv;
+	float sectordiv = 360 / ndiv;
+	return (int) (alpha / sectordiv);
 }
 
 inline int mod(int num, int div)

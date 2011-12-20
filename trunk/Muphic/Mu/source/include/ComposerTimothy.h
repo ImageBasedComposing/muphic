@@ -48,7 +48,7 @@ class ComposerTimothy : public Composer
         Conf* config;
 
     private:
-		std::list< std::pair<Figura*, int> > calcularDuracion(std::list<Figura*> f);
+		std::list< std::pair<FigureMusic*, int> > calcularDuracion(std::list<FigureMusic*> f);
 };
 
 #endif // COMPOSERTIMOTHY_H

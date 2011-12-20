@@ -37,7 +37,7 @@ void Figuras::cargar(string rutaXML)
 	float gM = 0;
 	float bM = 0;
 	vistosidadTotal = 0;
-	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	for(std::list<FigureMusic*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
 		rM += (*it)->getRGB().r;
 		gM += (*it)->getRGB().g;
@@ -50,23 +50,23 @@ void Figuras::cargar(string rutaXML)
 	bM = (float) bM / figuras.size();
 
 	// Reestablecemos la vistosidad de las figuras normalizandola y la distancia del color
-	for(std::list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	for(std::list<FigureMusic*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
 		// Suma de las diferencias, en valor absoluto, de los valores rgb con los valores medios rgb de todas las figuras
 		(*it)->setColorDifference(abs(rM - (*it)->getRGB().r) + abs(gM - (*it)->getRGB().g) + abs(bM - (*it)->getRGB().b));
 		(*it)->setVistosidad(((*it)->getVistosidad() / vistosidadTotal));
 	}
 
-	figPadres.sort(&Figura::compare);
-	figuras.sort(&Figura::compare);
+	figPadres.sort(&FigureMusic::compare);
+	figuras.sort(&FigureMusic::compare);
 }
 
-void Figuras::cargarRec(TiXmlNode* f, Figura* id)
+void Figuras::cargarRec(TiXmlNode* f, FigureMusic* id)
 {
 	if(f != NULL)
 	{
 		// Creamos la nueva figura
-		Figura* figura = new Figura();
+		FigureMusic* figura = new FigureMusic();
 	
 		// Manipulamos el nodo xml
 		TiXmlHandle handle(f);
@@ -152,18 +152,18 @@ int Figuras::sizePadre()
 	return figPadres.size();
 }
 
-void Figuras::colocarFig(Figura* s)
+void Figuras::colocarFig(FigureMusic* s)
 {
 	figuras.push_back(s);
 
-	figuras.sort(&Figura::compare);
+	figuras.sort(&FigureMusic::compare);
 }
 
-void Figuras::colocarPadre(Figura* s)
+void Figuras::colocarPadre(FigureMusic* s)
 {
 	figPadres.push_back(s);
 
-	figPadres.sort(&Figura::compare);
+	figPadres.sort(&FigureMusic::compare);
 }
 
 //void Figuras::insertFig(Figura* s, int n)
@@ -190,9 +190,9 @@ void Figuras::colocarPadre(Figura* s)
 //	figPadres.insert(it,s);
 //}
 
-Figura* Figuras::getFigAt(int n)
+FigureMusic* Figuras::getFigAt(int n)
 {
-	list<Figura*>::iterator it = figuras.begin();
+	list<FigureMusic*>::iterator it = figuras.begin();
 
 	for(int i = 0; i < n; i++)
 	{
@@ -202,9 +202,9 @@ Figura* Figuras::getFigAt(int n)
 	return *it;
 }
 
-Figura* Figuras::getPadreAt(int n)
+FigureMusic* Figuras::getPadreAt(int n)
 {
-	list<Figura*>::iterator it = figPadres.begin();
+	list<FigureMusic*>::iterator it = figPadres.begin();
 
 	for(int i = 0; i < n; i++)
 	{
@@ -220,13 +220,13 @@ pair<int,int> Figuras::calcularCentro()
 {
 	// calculamos la vistosidad total para normalizar
 	float vistosidadTotal = 0;
-	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	for (list<FigureMusic*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
 		vistosidadTotal += (*it)->getVistosidad();
 	}
 
 	// normalizamos la vistosidad de cada figura
-	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	for (list<FigureMusic*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
 		(*it)->vistosidad /= vistosidadTotal;
 	}
@@ -237,7 +237,7 @@ pair<int,int> Figuras::calcularCentro()
 	pair<int,int> centerTotal;
 	centerTotal.first = 0;
 	centerTotal.second = 0;
-	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	for (list<FigureMusic*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
 		centerFigura = (*it)->getBarycenter();
 		centerTotal.first += (int)(*it)->vistosidad * centerFigura.first;

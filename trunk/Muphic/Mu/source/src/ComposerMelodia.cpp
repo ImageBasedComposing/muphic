@@ -37,7 +37,7 @@ Music* ComposerMelodia::composeMusic()
 	Metrica m;//4/4
 
 	// Cosas del compositor
-	Figura* f;
+	FigureMusic* f;
 	Segmento* seg = new Segmento();
 	list< pair<Segmento*,int> > segs;
 	pair<Segmento*,int> par;
@@ -169,7 +169,7 @@ string ComposerMelodia::compose(string picPath, string usrConfPath)
 }
 
 /*------Funciones Privadas------*/
-void ComposerMelodia::calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n)
+void ComposerMelodia::calcularMelodiaFig(FigureMusic* f, Segmento* seg, Nota* n)
 {
 	list< pair<double,double> > calc = f->polarize();
 	Nota* nPpal = new Nota(n->getDuracion(),n->getTono());
@@ -284,7 +284,7 @@ int ComposerMelodia::calcDur(double longMedia, double longitud)
 	return (int) notas[sol];
 }
 
-int ComposerMelodia::notaFigura(Figura* f)
+int ComposerMelodia::notaFigura(FigureMusic* f)
 {
 	int t = f->sizeHijos();
 	list< pair<string,int> >* colores = new list< pair<string,int> >();
@@ -302,7 +302,7 @@ int ComposerMelodia::notaFigura(Figura* f)
 
 	for(int j = 0; j < t; j++)
 	{
-		sumarArea(colores, f->getHijoAt(j));
+		sumarArea(colores, (FigureMusic*) f->getHijoAt(j));
 	}
 
 	Scriabin* s = new Scriabin();
@@ -325,7 +325,7 @@ int ComposerMelodia::notaFigura(Figura* f)
 	return s->getNota(sol);
 }
 
-void ComposerMelodia::sumarArea(list< pair<string,int> >* cs, Figura* f)
+void ComposerMelodia::sumarArea(list< pair<string,int> >* cs, FigureMusic* f)
 {
 	bool encontrado = false;
 
@@ -363,7 +363,7 @@ void ComposerMelodia::sumarArea(list< pair<string,int> >* cs, Figura* f)
 	}
 }
 
-void ComposerMelodia::calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos)
+void ComposerMelodia::calcularPadres(FigureMusic* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos)
 {
 	int areaPadre = f->getArea();
 	int id = f->getId();
@@ -396,7 +396,7 @@ void ComposerMelodia::calcularPadres(Figura* f, list< pair<Segmento*,int> > segs
 		{
 			nSegDar = (nsegmentos * f->getHijoAt(i)->getArea()) / areaPadre;
 			nSegRepartidos += nSegDar;
-			calcularPadres(f->getHijoAt(i), segs, nSegDar, segmentos);
+			calcularPadres((FigureMusic*) f->getHijoAt(i), segs, nSegDar, segmentos);
 		}
 		segmentos->push_back(make_pair(segmento,nsegmentos - nSegRepartidos));
 	}

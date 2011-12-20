@@ -48,12 +48,12 @@ class ComposerMelodia : public Composer
 		int NUMSEGMENTOS;
 
 	private:
-		void calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n);
+		void calcularMelodiaFig(FigureMusic* f, Segmento* seg, Nota* n);
 		int calcTono(float angulo, Nota* nPpal);
 		int calcDur(double longMedia, double longitud);
-		int notaFigura(Figura* f);
-		void sumarArea(list< pair<string,int> >* cs, Figura* f);
-		void calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
+		int notaFigura(FigureMusic* f);
+		void sumarArea(list< pair<string,int> >* cs, FigureMusic* f);
+		void calcularPadres(FigureMusic* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
 
 
 		// tmp shit
