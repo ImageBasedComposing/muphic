@@ -29,7 +29,7 @@ class Figura
 		std::pair<int,int> getBarycenter();
 
 		list< std::pair<float,float> > polarize();
-		int* Figura::radialDivision(int ndiv, float initAlpha);
+		int* radialDivision(int ndiv, float initAlpha);
 
 /*------envoltorio de la lista stl------*/
 		void colocarVertice(Vertice* v);
@@ -92,7 +92,7 @@ class Figura
 		float A;
 		float B;
 		float C;
-		
+
 		// Color priority consts
 		float pR;
 		float pG;

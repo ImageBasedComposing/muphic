@@ -1,4 +1,4 @@
-#include "composerFigRitmo.h"
+#include "ComposerFigRitmo.h"
 
 
 bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compas, bool quick)
@@ -24,7 +24,7 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compa
 		int * notas = f->radialDivision(compas, 90);
 
 		double pownum = 2;
-		
+
 		for(int k = 0; k < compas; k++)
 		{
 			if (notas[k] == 0)
@@ -39,10 +39,10 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compa
 
 			// Inserto blancas si no hay vertices y por debajo si hay
 			duracion = 0;
-			
+
 			for(int k1 = 0; k1 < notas[k]; k1++)
 			{
-				duracion = ((QUARTERNOTE*2)/(int)pow(pownum,notas[k])); 
+				duracion = ((QUARTERNOTE*2)/(int)pow(pownum,notas[k]));
 				duracionTotal += duracion;
 				s = new Nota(duracion,getDrumTone(duracion));
 				simbtmp->pushBack(s);

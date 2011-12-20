@@ -40,9 +40,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = ../../bin/Release/Mu
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/../source/src/MidizatorABC.o $(OBJDIR_DEBUG)/../source/src/Simbolo.o $(OBJDIR_DEBUG)/../source/src/Segmentos.o $(OBJDIR_DEBUG)/../source/src/Segmento.o $(OBJDIR_DEBUG)/../source/src/PatternGen.o $(OBJDIR_DEBUG)/../source/src/Nota.o $(OBJDIR_DEBUG)/../source/src/Music.o $(OBJDIR_DEBUG)/../source/src/Mu.o $(OBJDIR_DEBUG)/../source/src/Simbolos.o $(OBJDIR_DEBUG)/../source/src/Midizator.o $(OBJDIR_DEBUG)/../source/src/Figuras.o $(OBJDIR_DEBUG)/../source/src/Figura.o $(OBJDIR_DEBUG)/../source/src/Conf.o $(OBJDIR_DEBUG)/../source/src/ComposerRitmo.o $(OBJDIR_DEBUG)/../source/src/ComposerMultiple.o $(OBJDIR_DEBUG)/../source/src/ComposerMelodia.o $(OBJDIR_DEBUG)/../source/src/ComposerDemo.o $(OBJDIR_DEBUG)/../../common/src/launcher.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../source/src/Composer.o $(OBJDIR_DEBUG)/../source/src/composerFigRitmo.o $(OBJDIR_DEBUG)/../source/src/composerFigMelody.o $(OBJDIR_DEBUG)/../source/src/XML_Interface.o $(OBJDIR_DEBUG)/../source/src/Voz.o $(OBJDIR_DEBUG)/../source/src/Voces.o $(OBJDIR_DEBUG)/../source/src/Vertice.o $(OBJDIR_DEBUG)/../source/src/UsrConf.o $(OBJDIR_DEBUG)/../source/src/Acorde.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/../source/src/Midizator.o $(OBJDIR_DEBUG)/../source/src/Segmentos.o $(OBJDIR_DEBUG)/../source/src/Segmento.o $(OBJDIR_DEBUG)/../source/src/PatternGen.o $(OBJDIR_DEBUG)/../source/src/Nota.o $(OBJDIR_DEBUG)/../source/src/Music.o $(OBJDIR_DEBUG)/../source/src/Mu.o $(OBJDIR_DEBUG)/../source/src/MidizatorABC.o $(OBJDIR_DEBUG)/../source/src/Simbolo.o $(OBJDIR_DEBUG)/../source/src/Figuras.o $(OBJDIR_DEBUG)/../source/src/Figura.o $(OBJDIR_DEBUG)/../source/src/Conf.o $(OBJDIR_DEBUG)/../source/src/ComposerTimothy.o $(OBJDIR_DEBUG)/../source/src/ComposerRitmo.o $(OBJDIR_DEBUG)/../source/src/ComposerMultiple.o $(OBJDIR_DEBUG)/../source/src/ComposerMelodia.o $(OBJDIR_DEBUG)/../source/src/ComposerDemo.o $(OBJDIR_DEBUG)/../../common/src/launcher.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../source/src/Composer.o $(OBJDIR_DEBUG)/../source/src/composerFigRitmo.o $(OBJDIR_DEBUG)/../source/src/composerFigMelody.o $(OBJDIR_DEBUG)/../source/src/XML_Interface.o $(OBJDIR_DEBUG)/../source/src/Voz.o $(OBJDIR_DEBUG)/../source/src/Voces.o $(OBJDIR_DEBUG)/../source/src/Vertice.o $(OBJDIR_DEBUG)/../source/src/UsrConf.o $(OBJDIR_DEBUG)/../source/src/Simbolos.o $(OBJDIR_DEBUG)/../source/src/Acorde.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/../source/src/MidizatorABC.o $(OBJDIR_RELEASE)/../source/src/Simbolo.o $(OBJDIR_RELEASE)/../source/src/Segmentos.o $(OBJDIR_RELEASE)/../source/src/Segmento.o $(OBJDIR_RELEASE)/../source/src/PatternGen.o $(OBJDIR_RELEASE)/../source/src/Nota.o $(OBJDIR_RELEASE)/../source/src/Music.o $(OBJDIR_RELEASE)/../source/src/Mu.o $(OBJDIR_RELEASE)/../source/src/Simbolos.o $(OBJDIR_RELEASE)/../source/src/Midizator.o $(OBJDIR_RELEASE)/../source/src/Figuras.o $(OBJDIR_RELEASE)/../source/src/Figura.o $(OBJDIR_RELEASE)/../source/src/Conf.o $(OBJDIR_RELEASE)/../source/src/ComposerRitmo.o $(OBJDIR_RELEASE)/../source/src/ComposerMultiple.o $(OBJDIR_RELEASE)/../source/src/ComposerMelodia.o $(OBJDIR_RELEASE)/../source/src/ComposerDemo.o $(OBJDIR_RELEASE)/../../common/src/launcher.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../source/src/Composer.o $(OBJDIR_RELEASE)/../source/src/composerFigRitmo.o $(OBJDIR_RELEASE)/../source/src/composerFigMelody.o $(OBJDIR_RELEASE)/../source/src/XML_Interface.o $(OBJDIR_RELEASE)/../source/src/Voz.o $(OBJDIR_RELEASE)/../source/src/Voces.o $(OBJDIR_RELEASE)/../source/src/Vertice.o $(OBJDIR_RELEASE)/../source/src/UsrConf.o $(OBJDIR_RELEASE)/../source/src/Acorde.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/../source/src/Midizator.o $(OBJDIR_RELEASE)/../source/src/Segmentos.o $(OBJDIR_RELEASE)/../source/src/Segmento.o $(OBJDIR_RELEASE)/../source/src/PatternGen.o $(OBJDIR_RELEASE)/../source/src/Nota.o $(OBJDIR_RELEASE)/../source/src/Music.o $(OBJDIR_RELEASE)/../source/src/Mu.o $(OBJDIR_RELEASE)/../source/src/MidizatorABC.o $(OBJDIR_RELEASE)/../source/src/Simbolo.o $(OBJDIR_RELEASE)/../source/src/Figuras.o $(OBJDIR_RELEASE)/../source/src/Figura.o $(OBJDIR_RELEASE)/../source/src/Conf.o $(OBJDIR_RELEASE)/../source/src/ComposerTimothy.o $(OBJDIR_RELEASE)/../source/src/ComposerRitmo.o $(OBJDIR_RELEASE)/../source/src/ComposerMultiple.o $(OBJDIR_RELEASE)/../source/src/ComposerMelodia.o $(OBJDIR_RELEASE)/../source/src/ComposerDemo.o $(OBJDIR_RELEASE)/../../common/src/launcher.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../source/src/Composer.o $(OBJDIR_RELEASE)/../source/src/composerFigRitmo.o $(OBJDIR_RELEASE)/../source/src/composerFigMelody.o $(OBJDIR_RELEASE)/../source/src/XML_Interface.o $(OBJDIR_RELEASE)/../source/src/Voz.o $(OBJDIR_RELEASE)/../source/src/Voces.o $(OBJDIR_RELEASE)/../source/src/Vertice.o $(OBJDIR_RELEASE)/../source/src/UsrConf.o $(OBJDIR_RELEASE)/../source/src/Simbolos.o $(OBJDIR_RELEASE)/../source/src/Acorde.o
 
 all: debug release
 
@@ -61,11 +61,8 @@ debug: before_debug out_debug after_debug
 out_debug: $(OBJ_DEBUG) $(DEP_DEBUG)
 	$(LD) $(LDFLAGS_DEBUG) $(LIBDIR_DEBUG) $(OBJ_DEBUG) $(LIB_DEBUG) -o $(OUT_DEBUG)
 
-$(OBJDIR_DEBUG)/../source/src/MidizatorABC.o: ../source/src/MidizatorABC.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/MidizatorABC.cpp -o $(OBJDIR_DEBUG)/../source/src/MidizatorABC.o
-
-$(OBJDIR_DEBUG)/../source/src/Simbolo.o: ../source/src/Simbolo.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Simbolo.cpp -o $(OBJDIR_DEBUG)/../source/src/Simbolo.o
+$(OBJDIR_DEBUG)/../source/src/Midizator.o: ../source/src/Midizator.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Midizator.cpp -o $(OBJDIR_DEBUG)/../source/src/Midizator.o
 
 $(OBJDIR_DEBUG)/../source/src/Segmentos.o: ../source/src/Segmentos.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Segmentos.cpp -o $(OBJDIR_DEBUG)/../source/src/Segmentos.o
@@ -85,11 +82,11 @@ $(OBJDIR_DEBUG)/../source/src/Music.o: ../source/src/Music.cpp
 $(OBJDIR_DEBUG)/../source/src/Mu.o: ../source/src/Mu.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Mu.cpp -o $(OBJDIR_DEBUG)/../source/src/Mu.o
 
-$(OBJDIR_DEBUG)/../source/src/Simbolos.o: ../source/src/Simbolos.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Simbolos.cpp -o $(OBJDIR_DEBUG)/../source/src/Simbolos.o
+$(OBJDIR_DEBUG)/../source/src/MidizatorABC.o: ../source/src/MidizatorABC.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/MidizatorABC.cpp -o $(OBJDIR_DEBUG)/../source/src/MidizatorABC.o
 
-$(OBJDIR_DEBUG)/../source/src/Midizator.o: ../source/src/Midizator.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Midizator.cpp -o $(OBJDIR_DEBUG)/../source/src/Midizator.o
+$(OBJDIR_DEBUG)/../source/src/Simbolo.o: ../source/src/Simbolo.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Simbolo.cpp -o $(OBJDIR_DEBUG)/../source/src/Simbolo.o
 
 $(OBJDIR_DEBUG)/../source/src/Figuras.o: ../source/src/Figuras.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Figuras.cpp -o $(OBJDIR_DEBUG)/../source/src/Figuras.o
@@ -99,6 +96,9 @@ $(OBJDIR_DEBUG)/../source/src/Figura.o: ../source/src/Figura.cpp
 
 $(OBJDIR_DEBUG)/../source/src/Conf.o: ../source/src/Conf.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Conf.cpp -o $(OBJDIR_DEBUG)/../source/src/Conf.o
+
+$(OBJDIR_DEBUG)/../source/src/ComposerTimothy.o: ../source/src/ComposerTimothy.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/ComposerTimothy.cpp -o $(OBJDIR_DEBUG)/../source/src/ComposerTimothy.o
 
 $(OBJDIR_DEBUG)/../source/src/ComposerRitmo.o: ../source/src/ComposerRitmo.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/ComposerRitmo.cpp -o $(OBJDIR_DEBUG)/../source/src/ComposerRitmo.o
@@ -151,6 +151,9 @@ $(OBJDIR_DEBUG)/../source/src/Vertice.o: ../source/src/Vertice.cpp
 $(OBJDIR_DEBUG)/../source/src/UsrConf.o: ../source/src/UsrConf.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/UsrConf.cpp -o $(OBJDIR_DEBUG)/../source/src/UsrConf.o
 
+$(OBJDIR_DEBUG)/../source/src/Simbolos.o: ../source/src/Simbolos.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Simbolos.cpp -o $(OBJDIR_DEBUG)/../source/src/Simbolos.o
+
 $(OBJDIR_DEBUG)/../source/src/Acorde.o: ../source/src/Acorde.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../source/src/Acorde.cpp -o $(OBJDIR_DEBUG)/../source/src/Acorde.o
 
@@ -174,11 +177,8 @@ release: before_release out_release after_release
 out_release: $(OBJ_RELEASE) $(DEP_RELEASE)
 	$(LD) $(LDFLAGS_RELEASE) $(LIBDIR_RELEASE) $(OBJ_RELEASE) $(LIB_RELEASE) -o $(OUT_RELEASE)
 
-$(OBJDIR_RELEASE)/../source/src/MidizatorABC.o: ../source/src/MidizatorABC.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/MidizatorABC.cpp -o $(OBJDIR_RELEASE)/../source/src/MidizatorABC.o
-
-$(OBJDIR_RELEASE)/../source/src/Simbolo.o: ../source/src/Simbolo.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Simbolo.cpp -o $(OBJDIR_RELEASE)/../source/src/Simbolo.o
+$(OBJDIR_RELEASE)/../source/src/Midizator.o: ../source/src/Midizator.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Midizator.cpp -o $(OBJDIR_RELEASE)/../source/src/Midizator.o
 
 $(OBJDIR_RELEASE)/../source/src/Segmentos.o: ../source/src/Segmentos.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Segmentos.cpp -o $(OBJDIR_RELEASE)/../source/src/Segmentos.o
@@ -198,11 +198,11 @@ $(OBJDIR_RELEASE)/../source/src/Music.o: ../source/src/Music.cpp
 $(OBJDIR_RELEASE)/../source/src/Mu.o: ../source/src/Mu.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Mu.cpp -o $(OBJDIR_RELEASE)/../source/src/Mu.o
 
-$(OBJDIR_RELEASE)/../source/src/Simbolos.o: ../source/src/Simbolos.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Simbolos.cpp -o $(OBJDIR_RELEASE)/../source/src/Simbolos.o
+$(OBJDIR_RELEASE)/../source/src/MidizatorABC.o: ../source/src/MidizatorABC.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/MidizatorABC.cpp -o $(OBJDIR_RELEASE)/../source/src/MidizatorABC.o
 
-$(OBJDIR_RELEASE)/../source/src/Midizator.o: ../source/src/Midizator.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Midizator.cpp -o $(OBJDIR_RELEASE)/../source/src/Midizator.o
+$(OBJDIR_RELEASE)/../source/src/Simbolo.o: ../source/src/Simbolo.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Simbolo.cpp -o $(OBJDIR_RELEASE)/../source/src/Simbolo.o
 
 $(OBJDIR_RELEASE)/../source/src/Figuras.o: ../source/src/Figuras.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Figuras.cpp -o $(OBJDIR_RELEASE)/../source/src/Figuras.o
@@ -212,6 +212,9 @@ $(OBJDIR_RELEASE)/../source/src/Figura.o: ../source/src/Figura.cpp
 
 $(OBJDIR_RELEASE)/../source/src/Conf.o: ../source/src/Conf.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Conf.cpp -o $(OBJDIR_RELEASE)/../source/src/Conf.o
+
+$(OBJDIR_RELEASE)/../source/src/ComposerTimothy.o: ../source/src/ComposerTimothy.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/ComposerTimothy.cpp -o $(OBJDIR_RELEASE)/../source/src/ComposerTimothy.o
 
 $(OBJDIR_RELEASE)/../source/src/ComposerRitmo.o: ../source/src/ComposerRitmo.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/ComposerRitmo.cpp -o $(OBJDIR_RELEASE)/../source/src/ComposerRitmo.o
@@ -263,6 +266,9 @@ $(OBJDIR_RELEASE)/../source/src/Vertice.o: ../source/src/Vertice.cpp
 
 $(OBJDIR_RELEASE)/../source/src/UsrConf.o: ../source/src/UsrConf.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/UsrConf.cpp -o $(OBJDIR_RELEASE)/../source/src/UsrConf.o
+
+$(OBJDIR_RELEASE)/../source/src/Simbolos.o: ../source/src/Simbolos.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Simbolos.cpp -o $(OBJDIR_RELEASE)/../source/src/Simbolos.o
 
 $(OBJDIR_RELEASE)/../source/src/Acorde.o: ../source/src/Acorde.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../source/src/Acorde.cpp -o $(OBJDIR_RELEASE)/../source/src/Acorde.o

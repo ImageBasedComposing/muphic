@@ -56,6 +56,7 @@
 		<Unit filename="../source/include/ComposerMelodia.h" />
 		<Unit filename="../source/include/ComposerMultiple.h" />
 		<Unit filename="../source/include/ComposerRitmo.h" />
+		<Unit filename="../source/include/ComposerTimothy.h" />
 		<Unit filename="../source/include/Conf.h" />
 		<Unit filename="../source/include/Figura.h" />
 		<Unit filename="../source/include/Figuras.h" />
@@ -87,6 +88,7 @@
 		<Unit filename="../source/src/ComposerMelodia.cpp" />
 		<Unit filename="../source/src/ComposerMultiple.cpp" />
 		<Unit filename="../source/src/ComposerRitmo.cpp" />
+		<Unit filename="../source/src/ComposerTimothy.cpp" />
 		<Unit filename="../source/src/Conf.cpp" />
 		<Unit filename="../source/src/Figura.cpp" />
 		<Unit filename="../source/src/Figuras.cpp" />

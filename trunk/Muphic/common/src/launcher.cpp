@@ -232,10 +232,11 @@ int Launcher::launchAndGo(int argc, std::string argv[], Options options)
             execv(args[0], args);
             std::cout << "Return not expected. Must be an execv error.";
          }
-
-         free(args);
-
-         return pid;
+        else
+        {
+            free(args);
+            return pid;
+        }
 
      #endif
 
@@ -310,9 +311,10 @@ bool Launcher::killProcess(int pid)
 		return out;
 	#endif
 
-    #ifdef __LINUX
+        #ifdef __LINUX
 
-		int a = kill(pid, SIGKILL);
+                if (pid > 0)
+                        kill(pid, SIGKILL);
 
 	#endif
 

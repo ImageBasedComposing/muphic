@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'guimupic.h'
 **
-** Created: Sun Dec 11 01:27:55 2011
+** Created: Mon Dec 19 23:48:16 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!

@@ -6,5 +6,5 @@ mu=./Mu
 phic=./Phic
 qmake=qmake
 abc2midi=./abc2midi
-mplayer=timidity
+mplayer=./timidity
 
