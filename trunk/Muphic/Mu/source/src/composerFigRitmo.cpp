@@ -20,7 +20,6 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compa
 
 		// Creación de notas
 
-		Vertice* v;
 		int * notas = f->radialDivision(compas, 90);
 
 		double pownum = 2;
@@ -84,7 +83,7 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compa
 	if (factor != 1)
 		for (int i = 0; i < simbtmp->size(); i++)
 		{
-			simbtmp->getAt(i)->setDuracion(simbtmp->getAt(i)->getDuracion()*factor);
+			simbtmp->getAt(i)->setDuracion(simbtmp->getAt(i)->getDuracion()*(int)factor);
 		}
 
 	// ahora repetimos el motivo rep veces y ya tira.

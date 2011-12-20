@@ -9,14 +9,14 @@ Figura::Figura()
 	rgb.g = -1;
 
 	// vistosidad priority consts
-	A = 0.5;
-	B = 0.3;
-	C = 0.2;
+	A = 0.5f;
+	B = 0.3f;
+	C = 0.2f;
 		
 	// Color priority consts
-	pR = 0.45;
-	pG = 0.35;
-	pB = 0.20;
+	pR = 0.45f;
+	pG = 0.35f;
+	pB = 0.20f;
 }
 
 Figura::~Figura()
@@ -96,13 +96,13 @@ void Figura::setArea(int a)
 	area = a;
 }
 
-int Figura::calcularVistosidad(int sHeight, int sWidth)
+float Figura::calcularVistosidad(int sHeight, int sWidth)
 {
 	if (rgb.r == -1)
 		return -1;
 	else if (vistosidad == -1)
 	{
-		vistosidad = A*getSaturation()*(rgb.r*pR + rgb.g*pG + rgb.b*pB) + B*area + C*distanceCenter(sHeight, sWidth);
+		vistosidad = A*getSaturation()*(rgb.r*pR + rgb.g*pG + rgb.b*pB) + B*area + C*(float)distanceCenter(sHeight, sWidth);
 	}
 	return vistosidad;
 }
@@ -292,7 +292,7 @@ std::pair<int,int> Figura::getBarycenter()
 }
 
 // devuelve la figura como una lista de vértices en coordenadas psuedo-polares (ángulo y longitudes relativas, sin punto de origen)
-list< std::pair<float,float> > Figura::polarize()
+list< std::pair<double,double> > Figura::polarize()
 {
 	// set iterator at initial vertex
 	list<Vertice*>::iterator it = listaVertices.begin();
@@ -300,11 +300,11 @@ list< std::pair<float,float> > Figura::polarize()
 	Vertice* currentVertex;
 	Vertice* nextVertex;
 	int n = 0;
-	std::pair<float, float> tmpVertex;
-	list< pair<float, float> > polarizedFigure;
-	float oldalpha = 0, newalpha = 0;
-	float length;
-	float angleIncr;
+	std::pair<double, double> tmpVertex;
+	list< pair<double, double> > polarizedFigure;
+	double oldalpha = 0, newalpha = 0;
+	double length;
+	double angleIncr;
 	while (n < getNumVertices())
 	{
 		// get current vertex
@@ -363,7 +363,7 @@ float Figura::vectorModule(int x1, int x2, int y1, int y2)
 
 
 // Calculates the distance from the figure to the center of the drawing Sheet
-float Figura::distanceCenter(int sHeight, int sWidth)
+double Figura::distanceCenter(int sHeight, int sWidth)
 {
 	// We calculate the center of the drawing sheet
 	std::list<Vertice*> sheet;
@@ -375,7 +375,7 @@ float Figura::distanceCenter(int sHeight, int sWidth)
 	std::pair<int,int> centro = calculateBarycenter(sheet);
 
 	std::list<Vertice*>::iterator it = listaVertices.begin();
-	float minDist = dist2DPoints((*it)->getPair(),centro);
+	double minDist = dist2DPoints((*it)->getPair(),centro);
 	
 	// We calculate the distance of the nearer vertex to the center
 	for(it; it != listaVertices.end(); it++)
@@ -420,7 +420,7 @@ float Figura::getSaturation()
 		return (1 - (min / max));
 }
 
-int* Figura::radialDivision(int ndiv, float initAlpha)
+int* Figura::radialDivision(int ndiv, double initAlpha)
 {
 	pair<int, int> center = getBarycenter();
 
