@@ -42,6 +42,7 @@ class ComposerTimothy : public Composer
         string pic;
         string tmpMIDIPath;
 
+		//Duración de la obra musical:
 		static const int DURACION = WHOLE*4;
 
         Conf* config;

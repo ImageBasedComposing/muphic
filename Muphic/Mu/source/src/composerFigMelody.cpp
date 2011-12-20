@@ -40,6 +40,14 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 
 	//Tratamos primero el problema de la duración: Vamos a asociar longitudes entre vertices con la duración total que disponemos
 	int durActual = 0; //Duración que llevamos usado
+	int durBase = 1; //Duración base que vamos a usar
+	bool canSubdivide = true;
+	while(canSubdivide && durBase < SIXTEENTHNOTE)
+	{
+		canSubdivide = mod(dur,durBase*2) == 0;
+		if(canSubdivide)
+			durBase = durBase*2;
+	}
 
 	//Calculamos la longitud total de la figura
 	double distTotal = 0;
@@ -49,8 +57,10 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 		distWithNext.push_back( dist2DPoints(vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair()) );
 		distTotal += distWithNext.back();
 	}
-	//Ahora vemos la proporción duración-Distancia 1 Dur = X Dist
+	//Ahora vemos la proporción duración-Distancia 1 DurBase = X Dist
 	double proporDurDist = distTotal / dur;
+	proporDurDist = proporDurDist * durBase;
+
 	vector< int > durVertice; //Las duraciones que dispone cada vértice
 	//Primero asignación de duraciones iniciales, luego lo recalibramos para usar toda la duración disponible
 	double fractPart;
@@ -58,10 +68,11 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 	for(int i = 0; i < numVertices; i++)
 	{
 		fractPart = modf(distWithNext.at(i) / proporDurDist, &intPart);
-		durVertice.push_back((int)intPart);
-		durActual += (int)intPart;
+		durVertice.push_back((int)intPart*durBase);
+		durActual += (int)intPart*durBase;
 		distWithNext.at(i) = fractPart; //Dejamos la fraccion que nos ha quedado para los reajustes
 	}
+
 	//Reajustes de la duracion. Simplemente se reasigna toda la duración que falta. Se puede mejorar con un filtro de poner cosas inteligentes (no negra+semifusa)
 	int candidato = 0;
 	double propor = 0.0;
@@ -73,9 +84,9 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 				candidato = i;
 				propor = distWithNext.at(i);
 			}
-		distWithNext.at(candidato) = 0;
-		durVertice.at(candidato) += 1;
-		durActual++;
+		distWithNext.at(candidato) -= proporDurDist;
+		durVertice.at(candidato) += durBase;
+		durActual += durBase;
 	}
 
 		//Tono **************

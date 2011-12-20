@@ -99,10 +99,23 @@ string ComposerTimothy::compose(string picPath, string usrConfPath)
 /*------Otras Funciones------*/
 std::list< std::pair<Figura*, int> > ComposerTimothy::calcularDuracion(std::list<Figura*> f)
 {
+	//Normalizamos las duraciones:
+
+	int durBase = EIGHTHNOTE; //Duración base (mínimo indivisible)
+	int dur = DURACION / durBase; // Normalizamos la duración
+	int durAsigned = 0; //Duración que asignamos a cada figura
+	int durTotal = 0;
 	std::list< std::pair<Figura*, int> > sol;
 
 	for(std::list<Figura*>::iterator it = f.begin(); it != f.end(); it++)
-		sol.push_back(std::make_pair((*it),ceil(DURACION*(*it)->getVistosidad())));
+	{
+		durAsigned = floor(dur*(*it)->getVistosidad());
+		sol.push_back(std::make_pair((*it),durAsigned*durBase));
+		durTotal += durAsigned*durBase;
+	}
+
+	if(durTotal < DURACION)
+		sol.back().second += DURACION-durTotal;
 
 	return sol;
 }
