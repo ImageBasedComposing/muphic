@@ -77,12 +77,21 @@ void GuiMupic::on_pushButton_Generate_clicked()
 
 void GuiMupic::on_pushButton_Stop_clicked()
 {
-    l->killProcess(pidPlay);
-    pidPlay = -1;
+    if (pidPlay > 0)
+    {
+        l->killProcess(pidPlay);
+        pidPlay = -1;
+    }
 }
 
 void GuiMupic::on_pushButton_Play_clicked()
 {
+    if (pidPlay != -1)
+    {
+        l->killProcess(pidPlay);
+        pidPlay = -1;
+    }
+
     if (pidPlay == -1)
     {
         std::string args[] = {"./MelodyTimothy1.mid"};
