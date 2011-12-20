@@ -46,7 +46,7 @@ private:
     QGraphicsScene * newScene;
 
     Launcher* l;
-    int pidPlay;
+    pid_t pidPlay;
 };
 
 #endif // GUIMUPIC_H

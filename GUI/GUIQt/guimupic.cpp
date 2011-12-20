@@ -85,8 +85,9 @@ void GuiMupic::on_pushButton_Play_clicked()
 {
     if (pidPlay == -1)
     {
-        std::string args[] = {"Melodia1.mid"};
+        std::string args[] = {"./MelodyTimothy1.mid"};
         //pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
-        l->launch(1, Launcher::MPLAYER, args);
+
+        pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
     }
 }
