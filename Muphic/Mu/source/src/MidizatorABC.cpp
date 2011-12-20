@@ -25,48 +25,6 @@ string MidizatorABC::toMidi(std::string music)
 
 	l->launch(1, Launcher::ABC2MIDI, args);
 
-/*
-    #ifdef __WINDOWS
-
-		std::string picExeFile = converter + " " + music;
-		system(picExeFile.c_str());
-		
-		//Launcher* l = new Launcher();
-		//string args[] = {"abc2midi.exe", music};
-
-		//l->launch(2, args);
-
-	#endif
-
-
-    #ifdef __LINUX
-
-        converter = "abc2midi_linux.exe";
-        char *const params[] = {const_cast<char*>(converter.c_str()), const_cast<char*>(music.c_str()), NULL};
-
-
-        pid_t pid;
-
-        if ((pid = fork()) ==-1)
-            cout << "fork error";
-         else if (pid == 0) {
-            execv(params[0], params);
-            cout << "Return not expected. Must be an execv error.";
-         }
-         else
-         {
-            int status;
-            while(wait(&status) > 0);
-         }
-
-        
-		//Launcher* l = new Launcher();
-		//string args[] = {"abc2midi_linux.exe", music};
-
-		//l->launch(2, args);
-
-     #endif*/
-
     std::string output = changeExtension(music, "mid");
 
 	return output;
@@ -182,7 +140,19 @@ string MidizatorABC::toMidi(Music* music)
 
 							// imprimir ligadura, fin de compás
 							// lo que queda de la nota se escribe en la siguiente iteración
-							*f << "-|";
+							if (Nota* n = dynamic_cast<Nota *> (simb))
+							{
+								// si es silencio, no se liga
+								if (n->getTono() != 0)
+									*f << "-";
+							}
+							// si es acorde, se liga (¿?¿?)
+							else
+								*f << "-";
+							
+							// fin de compás
+							*f << "|";
+
 							if (numCompasesLinea > 5)
 							{
 								*f << endl; //Salto de linea para no crear una linea enorme
@@ -243,48 +213,6 @@ string MidizatorABC::toMidi(Music* music)
 	string args[] = {fName + ".abc"};
 
 	l->launch(1, Launcher::ABC2MIDI, args);
-
-/*
-	#ifdef __WINDOWS
-
-		std::string picExeFile = converter + " " + fName + ".abc";
-		system(picExeFile.c_str());
-		
-
-		//Launcher* l = new Launcher();
-		//string args[] = {converter, fName + ".abc"};
-
-		//l->launch(2, args);
-
-	#endif
-
-
-    #ifdef __LINUX
-
-		converter = "abc2midi_linux.exe";
-
-		char *const params[] = {const_cast<char*>(converter.c_str()), abcFile, NULL};
-
-        pid_t pid;
-
-        if ((pid = fork()) ==-1)
-            cout << "fork error";
-         else if (pid == 0) {
-            execv(params[0], params);
-            cout << "Return not expected. Must be an execv error.";
-        }
-         else
-        {
-            int status;
-            while(wait(&status) > 0);
-        }
-        
-        //Launcher* l = new Launcher();
-		//string args[] = {"abc2midi_linux.exe", abcFile};
-
-		//l->launch(2, args);
-
-    #endif*/
 
     return fName + ".mid";
 }

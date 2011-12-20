@@ -22,16 +22,16 @@ string ComposerTimothy::compose()
 	PriorityPattern* p = new PriorityPattern();
 	
 	// Auxiliary list to get the main figures
-	std::list<Figura*> padres;
+	std::list<FigureMusic*> padres;
 
 	for(int i = 0; i < fgs->sizePadre(); i++)
 		padres.push_back(fgs->getPadreAt(i));
 
 	// Pattern made from the list we retrieved
-	std::list<Figura*> fPatronizada = p->createPatternFig(padres);
+	std::list<FigureMusic*> fPatronizada = p->createPatternFig(padres);
 
 	// We calculate the duration we must assign to each figure
-	std::list< std::pair<Figura*, int> > aux = calcularDuracion(fPatronizada);
+	std::list< std::pair<FigureMusic*, int> > aux = calcularDuracion(fPatronizada);
 
 	// We create the scale by which we pretend to work, set by default to DOM
 	PentatonicMajScale scale;
@@ -47,7 +47,7 @@ string ComposerTimothy::compose()
 	Segmento* seg;
 
 	// We make the calls to the different composers with different figures sorted by vistosidad and with their timing assigned
-	for(std::list< std::pair<Figura*, int> >::iterator it = aux.begin(); it != aux.end(); it++)
+	for(std::list< std::pair<FigureMusic*, int> >::iterator it = aux.begin(); it != aux.end(); it++)
 	{
 		seg = new Segmento();
 		fm->compMelodyFig((*it).first, seg, (*it).second);
@@ -97,17 +97,19 @@ string ComposerTimothy::compose(string picPath, string usrConfPath)
 }
 
 /*------Otras Funciones------*/
-std::list< std::pair<Figura*, int> > ComposerTimothy::calcularDuracion(std::list<Figura*> f)
+std::list< std::pair<FigureMusic*, int> > ComposerTimothy::calcularDuracion(std::list<FigureMusic*> f)
 {
+	std::list< std::pair<FigureMusic*, int> > sol;
+
 	//Normalizamos las duraciones:
 
 	int durBase = EIGHTHNOTE; //Duración base (mínimo indivisible)
 	int dur = DURACION / durBase; // Normalizamos la duración
 	int durAsigned = 0; //Duración que asignamos a cada figura
 	int durTotal = 0;
-	std::list< std::pair<Figura*, int> > sol;
+	//std::list< std::pair<FigureMusic*, int> > sol;
 
-	for(std::list<Figura*>::iterator it = f.begin(); it != f.end(); it++)
+	for(std::list<FigureMusic*>::iterator it = f.begin(); it != f.end(); it++)
 	{
 		durAsigned = floor(dur*(*it)->getVistosidad());
 		sol.push_back(std::make_pair((*it),durAsigned*durBase));

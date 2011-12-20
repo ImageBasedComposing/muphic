@@ -137,39 +137,34 @@ void Launcher::launch(int argc, std::string argv[], Options options)
      #endif
 }
 
+
 int Launcher::launchAndGo(int argc, std::string argv[], Options options)
 {
     #ifdef __WINDOWS
 
-		std::string exeFile = argv[0];
+	std::vector<wchar_t> exeFile(argv[0].begin(), argv[0].end());
 
 		for (int i = 1; i < argc; i++)
 		{
-			exeFile += " " + argv[i];
+			exeFile.push_back(' ');
+			exeFile.insert(exeFile.end(), argv[i].begin(), argv[i].end());
 		}
+		exeFile.push_back('\0');
 
 		//system(exeFile.c_str());
 
-		STARTUPINFO si;
+		STARTUPINFOW si;
 		PROCESS_INFORMATION pi;
 
 		ZeroMemory( &si, sizeof(si) );
 		si.cb = sizeof(si);
 		ZeroMemory( &pi, sizeof(pi) );
 
-                std::cout << (WCHAR*) exeFile.c_str() << std::endl;
-                std::cout << "playsmf.exe Melodia1.mid" << std::endl;
-                std::cout << L"playsmf.exe Melodia1.mid" << std::endl;
-				/*
-
-
-				NEEDS REVISION
-
 		// Start the child process.
-		if( !CreateProcess( NULL,   // No module name (use command line)
-                        (LPSTR) exeFile.c_str(),        // Command line
-                        NULL,           // Process handle not inheritable
-                        NULL,           // Thread handle not inheritable
+		if( !CreateProcessW( NULL,   // No module name (use command line)
+            &(exeFile[0]),        // Command line
+            NULL,           // Process handle not inheritable
+            NULL,           // Thread handle not inheritable
 			FALSE,          // Set handle inheritance to FALSE
 			0,              // No creation flags
 			NULL,           // Use parent's environment block
@@ -180,7 +175,7 @@ int Launcher::launchAndGo(int argc, std::string argv[], Options options)
 		{
                         printf( "Error launching binary file:%d", GetLastError() );
 			return -1;
-		}*/
+		}
 
 
 		return (int) pi.hProcess;

@@ -4,9 +4,9 @@
 #define PATTERNS_H
 
 #include <list>
-#include "Figura.h"
+#include "FigureMusic.h"
 
-class Figura;
+class FigureMusic;
 
 using namespace std;
 
@@ -59,18 +59,18 @@ class SimplePattern : public Pattern<T>
 };
 
 // Pattern that works with figures, it doesnt admit templates due to the recursive nature of Figure
-class PriorityPattern : public Pattern<Figura*>
+class PriorityPattern : public Pattern<FigureMusic*>
 {	public:
 		PriorityPattern() {};
 		virtual ~PriorityPattern() {};
 
-		list<Figura*> createPatternFig(std::list<Figura*> partes)
+		list<FigureMusic*> createPatternFig(std::list<FigureMusic*> partes)
 		{
-			std::list<Figura*>* sol = new list<Figura*> ();
+			std::list<FigureMusic*>* sol = new list<FigureMusic*> ();
 
-			partes.sort(Figura::compare);
+			partes.sort(FigureMusic::compare);
 
-			for(std::list<Figura*>::iterator it = partes.begin(); it != partes.end(); it++)
+			for(std::list<FigureMusic*>::iterator it = partes.begin(); it != partes.end(); it++)
 			{
 				sol->push_back((*it));
 				createPatternRec((*it), sol);
@@ -81,13 +81,13 @@ class PriorityPattern : public Pattern<Figura*>
 		}
 	
 	private:
-		void createPatternRec(Figura* f, std::list<Figura*>* sol)
+		void createPatternRec(FigureMusic* f, std::list<FigureMusic*>* sol)
 		{
 			f->sortHijo();
 			for(int i = 0; i < f->sizeHijos(); i++)
 			{
-				sol->push_back(f->getHijoAt(i));
-				createPatternRec(f->getHijoAt(i),sol);
+				sol->push_back((FigureMusic*) f->getHijoAt(i));
+				createPatternRec((FigureMusic*) f->getHijoAt(i),sol);
 			}
 		}
 };

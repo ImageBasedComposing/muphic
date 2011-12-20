@@ -20,7 +20,7 @@ ComposerFigMelody::~ComposerFigMelody()
 }
 
 //Hacemos una melodia de duracion limitada y que sea a partir de la figura dada.
-bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
+bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 {
 	//Vemos el color y en que nos movemos.
 	string color = f->getColor();

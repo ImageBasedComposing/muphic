@@ -13,6 +13,7 @@
 #ifdef __WINDOWS
     #include <windows.h>
     #include <signal.h>
+	#include <vector>
 #endif
 
 #ifdef __LINUX

@@ -1,7 +1,7 @@
 #include "ComposerFigRitmo.h"
 
 
-bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compas, bool quick)
+bool ComposerFigRitmo::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int compas, bool quick)
 {
 	int t = f->sizeVertices();
 	pair<int,int> center;
@@ -83,7 +83,7 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compa
 	if (factor != 1)
 		for (int i = 0; i < simbtmp->size(); i++)
 		{
-			simbtmp->getAt(i)->setDuracion(simbtmp->getAt(i)->getDuracion()*(int)factor);
+			simbtmp->getAt(i)->setDuracion(simbtmp->getAt(i)->getDuracion()*factor);
 		}
 
 	// ahora repetimos el motivo rep veces y ya tira.
@@ -100,7 +100,7 @@ bool ComposerFigRitmo::compRythmFig(Figura* f, Segmento* seg, int dur, int compa
 	// como utilizamos factor (float) como entero, quedará un resto por ahí que rezo que no moleste, lo pongo como negra
 	if (duracionTotal < dur)
 	{
-		seg->getSimbolos()->pushBack(new Nota(dur-duracionTotal, getDrumTone(dur-duracionTotal)));
+		seg->getSimbolos()->pushBack(new Nota(dur-duracionTotal, 0));
 		duracionTotal += dur - duracionTotal;
 	}
 
