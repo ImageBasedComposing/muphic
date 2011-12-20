@@ -28,8 +28,8 @@ class Figura
 		std::pair<int,int> getSimpleCenter();
 		std::pair<int,int> getBarycenter();
 
-		list< std::pair<float,float> > polarize();
-		int* radialDivision(int ndiv, float initAlpha);
+		list< std::pair<double,double> > polarize();
+		int* radialDivision(int ndiv, double initAlpha);
 
 /*------envoltorio de la lista stl------*/
 		void colocarVertice(Vertice* v);
@@ -67,7 +67,7 @@ class Figura
 		void setParent(Figura* p = NULL);
 		void setArea(int a);
 		void setColorDifference(float c);
-		int calcularVistosidad(int sHeight, int sWidth);
+		float calcularVistosidad(int sHeight, int sWidth);
 		void setVistosidad(float v);
 
     protected:
@@ -85,7 +85,7 @@ class Figura
 		float colorDifference;
 
     private:
-		float distanceCenter(int sHeight, int sWidth);
+		double distanceCenter(int sHeight, int sWidth);
 		float getSaturation();
 
 		// vistosidad priority consts

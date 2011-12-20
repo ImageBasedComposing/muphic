@@ -93,8 +93,6 @@ string MidizatorABC::toMidi(Music* music)
 	Voz* v;
 	Segmento* s;
 	Simbolo* simb;
-	Nota* n;
-	Acorde* a;
 
 
 	// DURACION DEL COMPAS: negra * (first * negra / second)

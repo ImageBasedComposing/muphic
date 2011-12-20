@@ -50,14 +50,14 @@ class ComposerMelodia : public Composer
 	private:
 		void calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n);
 		int calcTono(float angulo, Nota* nPpal);
-		int calcDur(float longMedia, float longitud);
+		int calcDur(double longMedia, double longitud);
 		int notaFigura(Figura* f);
 		void sumarArea(list< pair<string,int> >* cs, Figura* f);
 		void calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
 
 
 		// tmp shit
-		int calcularNota(float angulo, int* escala);
+		int calcularNota(double angulo, int* escala);
 };
 
 #endif // COMPOSERMELODIA_H

@@ -76,9 +76,9 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		figura->setNumVertices(atoi(handle.FirstChildElement("vertexList").ToElement()->Attribute("num")));
 		figura->setParent(id);
 		figura->setColor(handle.FirstChildElement("color").FirstChildElement("name").ToElement()->GetText());
-		figura->setRGB(atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("R").ToElement()->GetText()),
-						 atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("G").ToElement()->GetText()),
-						 atoi(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("B").ToElement()->GetText()));
+		figura->setRGB((float)atof(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("R").ToElement()->GetText()),
+						 (float)atof(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("G").ToElement()->GetText()),
+						 (float)atof(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("B").ToElement()->GetText()));
 		// Preparamos el tratamiento de vertices
 		Vertice* v;
 		TiXmlNode* vertice = f->FirstChildElement("vertexList")->FirstChildElement("vertex");
@@ -240,8 +240,8 @@ pair<int,int> Figuras::calcularCentro()
 	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
 	{
 		centerFigura = (*it)->getBarycenter();
-		centerTotal.first += (*it)->vistosidad * centerFigura.first;
-		centerTotal.second += (*it)->vistosidad * centerFigura.second;
+		centerTotal.first += (int)(*it)->vistosidad * centerFigura.first;
+		centerTotal.second += (int)(*it)->vistosidad * centerFigura.second;
 	}
 	
 	return centerTotal;

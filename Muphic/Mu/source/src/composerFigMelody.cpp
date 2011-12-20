@@ -42,15 +42,15 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 	int durActual = 0; //Duración que llevamos usado
 
 	//Calculamos la longitud total de la figura
-	float distTotal = 0;
-	vector< float > distWithNext;  //Distancias con el siguiente vertice.
+	double distTotal = 0;
+	vector< double > distWithNext;  //Distancias con el siguiente vertice.
 	for(int i = 0; i < numVertices; i++)
 	{
 		distWithNext.push_back( dist2DPoints(vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair()) );
 		distTotal += distWithNext.back();
 	}
 	//Ahora vemos la proporción duración-Distancia 1 Dur = X Dist
-	float proporDurDist = distTotal / dur;
+	double proporDurDist = distTotal / dur;
 	vector< int > durVertice; //Las duraciones que dispone cada vértice
 	//Primero asignación de duraciones iniciales, luego lo recalibramos para usar toda la duración disponible
 	double fractPart;
@@ -60,11 +60,11 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 		fractPart = modf(distWithNext.at(i) / proporDurDist, &intPart);
 		durVertice.push_back((int)intPart);
 		durActual += (int)intPart;
-		distWithNext.at(i) = (float)fractPart; //Dejamos la fraccion que nos ha quedado para los reajustes
+		distWithNext.at(i) = fractPart; //Dejamos la fraccion que nos ha quedado para los reajustes
 	}
 	//Reajustes de la duracion. Simplemente se reasigna toda la duración que falta. Se puede mejorar con un filtro de poner cosas inteligentes (no negra+semifusa)
 	int candidato = 0;
-	float propor = 0.0;
+	double propor = 0.0;
 	while(durActual < dur)
 	{
 		for(int i = 0; i < numVertices; i++)
@@ -81,7 +81,7 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 		//Tono **************
 
 	//Ahora segun la duracion que nos han dado y los angulos que se forman con las aristas de la figura añadimos notas
-	float angle;
+	double angle;
 	int step;	// El cambio de tono que vamos a hacer.
 	Nota* lastNote,* note;
 	//La primera nota es el color de la figura (no disponemos de más info)
@@ -91,7 +91,7 @@ bool ComposerFigMelody::compMelodyFig(Figura* f, Segmento* seg, int dur)
 	for(int i = 1; i < numVertices; i++)
 	{
 		angle = angleOf2Lines(vertices.at(mod((i-1),numVertices))->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair());
-		step = floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
+		step = (int) floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
 
 		if((step == 3 || step == -3) && durVertice.at(i) > QUARTERNOTE+EIGHTHNOTE-1) //Usamos una nota intermedia (lo pide a gritos XD)
 		{

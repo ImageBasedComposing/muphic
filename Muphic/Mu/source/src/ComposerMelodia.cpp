@@ -41,7 +41,6 @@ Music* ComposerMelodia::composeMusic()
 	Segmento* seg = new Segmento();
 	list< pair<Segmento*,int> > segs;
 	pair<Segmento*,int> par;
-	Nota* nPpal;
 
 	/***********************************************************************/
 	PentatonicMajScale scale;
@@ -172,16 +171,16 @@ string ComposerMelodia::compose(string picPath, string usrConfPath)
 /*------Funciones Privadas------*/
 void ComposerMelodia::calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n)
 {
-	list< pair<float,float> > calc = f->polarize();
+	list< pair<double,double> > calc = f->polarize();
 	Nota* nPpal = new Nota(n->getDuracion(),n->getTono());
 	Nota* nAux;
 	float longMedia = 0;
 	Simbolos* ss = new Simbolos();
 
 	// Calculo la media de las longitudes
-	for(list< pair<float,float> >::iterator it = calc.begin(); it != calc.end(); it++)
+	for(list< pair<double,double> >::iterator it = calc.begin(); it != calc.end(); it++)
 	{
-		longMedia += it->second;
+		longMedia += (float)it->second;
 	}
 
 	longMedia = longMedia / calc.size();
@@ -194,7 +193,7 @@ void ComposerMelodia::calcularMelodiaFig(Figura* f, Segmento* seg, Nota* n)
 	esc[2] = 2;
 	esc[3] = 2;
 	esc[4] = 3;
-	for(list< pair<float,float> >::iterator it = calc.begin(); it != calc.end(); it++)
+	for(list< pair<double,double> >::iterator it = calc.begin(); it != calc.end(); it++)
 	{
 		// Crea la nota con la duracion y el tono que le corresponden
 		//nAux = new Nota(calcDur(longMedia,it->second),calcTono(it->first,nPpal));
@@ -218,9 +217,9 @@ int ComposerMelodia::calcTono(float angulo, Nota* nPpal)
 
 
 // inicialmente escala es [+2,+3,+2,+2,+3]
-int ComposerMelodia::calcularNota(float angulo, int* esc)
+int ComposerMelodia::calcularNota(double angulo, int* esc)
 {
-	int desp = 3 * angulo / 180;
+	int desp = 3 * (int)angulo / 180;
 
 	// calcular el desplazamiento a realizar
 	int i = 0;
@@ -265,10 +264,10 @@ int ComposerMelodia::calcularNota(float angulo, int* esc)
 }
 
 
-int ComposerMelodia::calcDur(float longMedia, float longitud)
+int ComposerMelodia::calcDur(double longMedia, double longitud)
 {
-	float durAprox = ( QUARTERNOTE * longitud ) / longMedia;
-	float aux = INT_MAX;
+	double durAprox = ( QUARTERNOTE * longitud ) / longMedia;
+	double aux = FLT_MAX;
 	int sol;
 
 	float notas[7] = {1,2,4,8,16,32,64};

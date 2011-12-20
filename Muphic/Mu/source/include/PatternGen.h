@@ -81,11 +81,11 @@ list< pair< T, int> >* PatternGen<T>::getPattern(list< pair<T, int> >* partes)
 	int tmpSeg;
 	for (typename list< pair<T, float> >::iterator it = tmpout.begin(); it != tmpout.end(); it++)
 	{
-		tmpSum += (*it).second;
+		tmpSum += (int)(*it).second;
 		if (i == tmpout.size() - 1)
-			tmpSeg = nsegmentos - tmpSum + (*it).second;
+			tmpSeg = nsegmentos - tmpSum + (int)(*it).second;
 		else
-			tmpSeg = (*it).second;
+			tmpSeg = (int)(*it).second;
 
 		out->push_back(make_pair((*it).first,tmpSeg));
 		i++;

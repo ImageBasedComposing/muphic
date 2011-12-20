@@ -281,7 +281,7 @@ public:
 		int auxNote = firstNote;
 		bool found = auxNote == absNote;
 		int i = 1;
-		while(i <= scaleSteps.size() && !found)
+		while(i <= (int)scaleSteps.size() && !found)
 		{
 			auxNote += scaleSteps.at(i-1);
 			i++;
