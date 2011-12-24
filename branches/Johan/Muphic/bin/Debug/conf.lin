@@ -1,0 +1,10 @@
+% Path of the programs used by the application
+% Feel free to change any path, just don't mess with the order
+% Do not delete any line, including this comments
+Muphic=./Muphic
+mu=./Mu
+phic=./Phic
+qmake=qmake
+abc2midi=./abc2midi
+mplayer=./timidity
+
