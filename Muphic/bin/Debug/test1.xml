@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <shapes>
-	<width>800</width>
-	<height>600</height>
+	<width>281</width>
+	<height>227</height>
 	<figure>
 		<id>1
 		</id>
@@ -9,8 +9,8 @@
 		<color>
 			<name>Amarillo</name>
 			<RGB>
-				<R>125</R>
-				<G>125</G>
+				<R>255</R>
+				<G>255</G>
 				<B>0</B>
 			</RGB>
 			<gradient>0</gradient>
@@ -41,6 +41,7 @@
 					<y>143</y>
 				</position>
 			</vertex>
+			
 		</vertexList>
 		<area>4</area>
 		<canvas>
