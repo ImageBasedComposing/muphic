@@ -10,7 +10,7 @@
 #include "limits.h"
 #include "Composer.h"
 #include "Music.h"
-#include "Figuras.h"
+#include "FiguresMusic.h"
 #include "PatternGen.h"
 
 #include "ComposerFigMelody.h"

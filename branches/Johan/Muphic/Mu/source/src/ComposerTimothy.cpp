@@ -14,8 +14,12 @@ ComposerTimothy::~ComposerTimothy()
 string ComposerTimothy::compose() 
 { 
 	// We read the figures from the XML
-	Figuras* fgs = new Figuras();
+	FiguresMusic* fgs = new FiguresMusic();
 	fgs->cargar(pic);
+
+	// We calculate figure visibility
+
+	fgs->calculateVisibility();
 
 	// We create the pattern with whom we will compose in this composer
 	//PatternGen<Figura*>* pg = new PatternGen<Figura*>();
@@ -25,7 +29,7 @@ string ComposerTimothy::compose()
 	std::list<FigureMusic*> padres;
 
 	for(int i = 0; i < fgs->sizePadre(); i++)
-		padres.push_back(fgs->getPadreAt(i));
+		padres.push_back((FigureMusic*)fgs->getPadreAt(i));
 
 	// Pattern made from the list we retrieved
 	std::list<FigureMusic*> fPatronizada = p->createPatternFig(padres);

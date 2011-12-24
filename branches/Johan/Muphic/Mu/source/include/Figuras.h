@@ -3,7 +3,7 @@
 #ifndef FIGURAS_H
 #define FIGURAS_H
 
-#include "FigureMusic.h"
+#include "Figura.h"
 #include "tinyxml.h"
 //#include <list>
 //#include <string>
@@ -24,13 +24,13 @@ class Figuras
 
         /* Envoltorio de la lista stl */
 
-		void colocarFig(FigureMusic* f);
-		void colocarPadre(FigureMusic* f);
+		void colocarFig(Figura* f);
+		void colocarPadre(Figura* f);
 		//void insertFig(Figura* s, int n);
 		//void insertPadre(Figura* s, int n);
 
-		FigureMusic* getFigAt(int n);
-		FigureMusic* getPadreAt(int n);
+		Figura* getFigAt(int n);
+		Figura* getPadreAt(int n);
 
 		bool emptyFig();
 		bool emptyPadre();
@@ -39,16 +39,21 @@ class Figuras
 
 		pair<int,int> calcularCentro();
 
+		/* Getters */
+		int getHeight();
+		int getWidth();
+		//list<Figura*>* getFiguras();
+		//list<Figura*>* getFigPadre();
+
     protected:
 		int sheetWidth;
 		int sheetHeight;
-		float vistosidadTotal;
+		list<Figura*> figuras;
+		list<Figura*> figPadres;
 
+		void cargarRec(TiXmlNode* f, Figura* padre = NULL);
+		virtual void createFigure(Figura* f);
     private:
-		list<FigureMusic*> figuras;
-		list<FigureMusic*> figPadres;
-
-		void cargarRec(TiXmlNode* f, FigureMusic* padre = NULL);
 };
 
 #endif // FIGURAS_H
