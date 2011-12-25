@@ -20,7 +20,7 @@ ComposerMelodia::~ComposerMelodia()
 /*------Funciones------*/
 Music* ComposerMelodia::composeMusic()
 {
-	figuras = new Figuras();
+	figuras = new FiguresMusic();
 	figuras->cargar(pic);
 
 	Voz* v1 = new Voz();
@@ -52,7 +52,7 @@ Music* ComposerMelodia::composeMusic()
 	for(int i = 0; i < figuras->sizeFig(); i++)
 	{
 		seg1 = new Segmento();
-		f = figuras->getFigAt(i);
+		f = (FigureMusic*)figuras->getFigAt(i);
 		seg1->setMetrica(m);
 		seg1->setTempo(180);
 
@@ -109,7 +109,7 @@ Music* ComposerMelodia::composeMusic()
 	for(int i = 0; i < numPadres; i++)
 	{
 		segmentos  = new list< pair<Segmento*,int> >();
-		f = figuras->getPadreAt(i);
+		f = (FigureMusic*) figuras->getPadreAt(i);
 		segmentosPadre = ((f->getArea()*NUMSEGMENTOS)/areaTotal);
 		calcularPadres(f,segs,segmentosPadre, segmentos);
 

@@ -5,7 +5,7 @@
 
 #include "Composer.h"
 #include "Music.h"
-#include "Figuras.h"
+#include "FiguresMusic.h"
 #include "PatternGen.h"
 #include "Patterns.h"
 #include "ComposerFigMelody.h"
@@ -13,6 +13,7 @@
 #include "MidizatorABC.h"
 
 class Patterns;
+class figuresMusic;
 
 using namespace std;
 

@@ -9,12 +9,12 @@
 //#include "math_functions.h"
 #include "Composer.h"
 #include "Music.h"
-#include "Figuras.h"
+#include "FiguresMusic.h"
 #include "PatternGen.h"
 #include "ComposerRitmo.h"
 
 class ComposerRitmo;
-class Figuras;
+class FiguresMusic;
 
 using namespace std;
 
@@ -41,7 +41,7 @@ class ComposerMultiple : public Composer
         virtual void setTmpMIDIPath(string m);
 
     protected:
-		Figuras* figuras;
+		FiguresMusic* figuras;
 		Music* musica;
 
 		static const int NUMSEGMENTOS = 20;
