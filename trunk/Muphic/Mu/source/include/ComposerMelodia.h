@@ -10,12 +10,12 @@
 #include "limits.h"
 #include "Composer.h"
 #include "Music.h"
-#include "Figuras.h"
+#include "FiguresMusic.h"
 #include "PatternGen.h"
 
 #include "ComposerFigMelody.h"
 
-class Figuras;
+class FiguresMusic;
 
 using namespace std;
 
@@ -43,7 +43,7 @@ class ComposerMelodia : public Composer
         void setTmpMIDIPath(string m);
 
     protected:
-		Figuras* figuras;
+		FiguresMusic* figuras;
 		Music* melodia;
 		int NUMSEGMENTOS;
 

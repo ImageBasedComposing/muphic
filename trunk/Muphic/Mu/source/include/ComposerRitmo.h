@@ -9,10 +9,10 @@
 //#include "math_functions.h"
 #include "Composer.h"
 #include "Music.h"
-#include "Figuras.h"
+#include "FiguresMusic.h"
 #include "PatternGen.h"
 
-class Figuras;
+class FiguresMusic;
 
 using namespace std;
 
@@ -40,16 +40,16 @@ class ComposerRitmo : public Composer
         void setTmpMIDIPath(string m);
 
     protected:
-		Figuras* figuras;
+		FiguresMusic* figuras;
 		Music* ritmo;
 		int NUMSEGMENTOS;
 
 	private:
-		int nota(Figuras* f);
+		int nota(FiguresMusic* f);
 		int getDrumTone(int duracion);
-		void sumarArea(list< pair<string,int> >* cs, Figura * f);
-		void calcularSegmento(Figura* f, Segmento* segs, Nota* n);
-		void calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
+		void sumarArea(list< pair<string,int> >* cs, FigureMusic * f);
+		void calcularSegmento(FigureMusic* f, Segmento* segs, Nota* n);
+		void calcularPadres(FigureMusic* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
 
 };
 
