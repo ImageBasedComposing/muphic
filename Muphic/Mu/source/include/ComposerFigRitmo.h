@@ -5,7 +5,7 @@
 
 #include "math_functions.h"
 
-#include "Figuras.h"
+#include "FiguresMusic.h"
 #include "FigureMusic.h"
 #include "Segmento.h"
 #include "Nota.h"

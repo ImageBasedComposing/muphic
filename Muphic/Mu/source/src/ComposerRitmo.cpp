@@ -19,7 +19,7 @@ ComposerRitmo::~ComposerRitmo()
 Music* ComposerRitmo::composeMusic()
 {
 	
-	figuras = new Figuras();
+	figuras = new FiguresMusic();
 	figuras->cargar(pic);
 
 	Voz* v1 = new Voz();
@@ -39,7 +39,7 @@ Music* ComposerRitmo::composeMusic()
 	Nota* n = new Nota(nota(figuras));
 
 	int p = figuras->sizeFig();
-	Figura* f;
+	FigureMusic* f;
 	Segmento* seg = new Segmento();
 	list< pair<Segmento*,int> > segs;
 	pair<Segmento*,int> par;
@@ -47,7 +47,7 @@ Music* ComposerRitmo::composeMusic()
 	for(int i = 0; i < p; i++)
 	{
 		seg1 = new Segmento();
-		f = figuras->getFigAt(i);
+		f = (FigureMusic*)figuras->getFigAt(i);
 		seg1->setMetrica(m);
 		seg1->setTempo(180);
 		calcularSegmento(f,seg1,n);
@@ -73,7 +73,7 @@ Music* ComposerRitmo::composeMusic()
 	for(int i = 0; i < numPadres; i++)
 	{
 		segmentos  = new list< pair<Segmento*,int> >();
-		f = figuras->getPadreAt(i);
+		f = (FigureMusic*) figuras->getPadreAt(i);
 		segmentosPadre = ((f->getArea()*NUMSEGMENTOS)/areaTotal);
 		calcularPadres(f,segs,segmentosPadre, segmentos);
 
@@ -133,7 +133,7 @@ string ComposerRitmo::compose(string picPath, string usrConfPath)
 }
 
 /*------Funciones Privadas------*/
-int ComposerRitmo::nota(Figuras* f)
+int ComposerRitmo::nota(FiguresMusic* f)
 {
 	int t = f->sizeFig();
 	//int i = 0;
@@ -150,7 +150,7 @@ int ComposerRitmo::nota(Figuras* f)
 
 	for(int j = 0; j < t; j++)
 	{
-		sumarArea(colores, f->getFigAt(j));
+		sumarArea(colores, (FigureMusic*)f->getFigAt(j));
 	}
 
 	Scriabin* s = new Scriabin();
@@ -173,7 +173,7 @@ int ComposerRitmo::nota(Figuras* f)
 	return s->getNota(sol);
 }
 
-void ComposerRitmo::sumarArea(list< pair<string,int> >* cs, Figura* f)
+void ComposerRitmo::sumarArea(list< pair<string,int> >* cs, FigureMusic* f)
 {
 	bool encontrado = false;
 
@@ -211,7 +211,7 @@ void ComposerRitmo::sumarArea(list< pair<string,int> >* cs, Figura* f)
 	}
 }
 
-void ComposerRitmo::calcularSegmento(Figura* f, Segmento* seg, Nota* n)
+void ComposerRitmo::calcularSegmento(FigureMusic* f, Segmento* seg, Nota* n)
 {
 	int t = f->sizeVertices();
 	pair<int,int> center;
@@ -324,7 +324,7 @@ int ComposerRitmo::getDrumTone(int duracion)
 }
 
 
-void ComposerRitmo::calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos)
+void ComposerRitmo::calcularPadres(FigureMusic* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos)
 {
 	int areaPadre = f->getArea();
 	int id = f->getId();
@@ -357,7 +357,7 @@ void ComposerRitmo::calcularPadres(Figura* f, list< pair<Segmento*,int> > segs, 
 		{
 			nSegDar = (nsegmentos * f->getHijoAt(i)->getArea()) / areaPadre;
 			nSegRepartidos += nSegDar;
-			calcularPadres(f->getHijoAt(i), segs, nSegDar, segmentos);
+			calcularPadres((FigureMusic*)f->getHijoAt(i), segs, nSegDar, segmentos);
 		}
 		segmentos->push_back(make_pair(segmento,nsegmentos - nSegRepartidos));
 	}

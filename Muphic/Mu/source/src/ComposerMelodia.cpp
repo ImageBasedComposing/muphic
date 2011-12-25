@@ -20,7 +20,7 @@ ComposerMelodia::~ComposerMelodia()
 /*------Funciones------*/
 Music* ComposerMelodia::composeMusic()
 {
-	figuras = new Figuras();
+	figuras = new FiguresMusic();
 	figuras->cargar(pic);
 
 	Voz* v1 = new Voz();

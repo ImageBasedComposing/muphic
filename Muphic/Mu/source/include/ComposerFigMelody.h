@@ -12,7 +12,7 @@
 #include "TableScale.h"
 
 
-class Figuras;
+class FiguresMusic;
 
 using namespace std;
 
@@ -32,9 +32,9 @@ class ComposerFigMelody
 		//Se pide que haga una melodia dada una figura. Devuelve el segmento con la melodia
 		bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur);
 		//Devuelve un segmento con la melodia a partir de una figura y la siguiente figura  a la que va a visitar.
-		bool compMelodyFig(FigureMusic* f, Segmento* seg, Figura* fNext, int dur);
+		bool compMelodyFig(FigureMusic* f, Segmento* seg, FigureMusic* fNext, int dur);
 		//Devuelve un segmento con melodia teniendo en cuenta tmb el ritmo. La duración del ritmo es la misma que la melodia.
-		bool compMelodyFig(FigureMusic* f, Segmento* seg, Figura* fNext, Segmento* rithm);
+		bool compMelodyFig(FigureMusic* f, Segmento* seg, FigureMusic* fNext, Segmento* rithm);
         
 /*------Getters------*/
 		inline Segmento* getLastSegment(){ return lastSeg;};
