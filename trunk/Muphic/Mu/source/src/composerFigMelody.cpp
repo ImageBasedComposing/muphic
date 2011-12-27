@@ -101,7 +101,7 @@ bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 	//Ahora el resto de vértices desde 1 a numVertices
 	for(int i = 1; i < numVertices; i++)
 	{
-		angle = angleOf2Lines(vertices.at(mod((i-1),numVertices))->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair());
+		angle = angleOf2Lines2(vertices.at(mod((i-1),numVertices))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair());
 		step = (int) floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
 
 		if((step == 3 || step == -3) && durVertice.at(i) > QUARTERNOTE+EIGHTHNOTE-1) //Usamos una nota intermedia (lo pide a gritos XD)
