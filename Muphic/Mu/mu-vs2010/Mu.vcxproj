@@ -81,6 +81,7 @@
     <ClInclude Include="..\source\include\Conf.h" />
     <ClInclude Include="..\source\include\Figura.h" />
     <ClInclude Include="..\source\include\Figuras.h" />
+    <ClInclude Include="..\source\include\FigureImg.h" />
     <ClInclude Include="..\source\include\FigureMusic.h" />
     <ClInclude Include="..\source\include\FiguresMusic.h" />
     <ClInclude Include="..\source\include\instruments.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="..\source\src\Conf.cpp" />
     <ClCompile Include="..\source\src\Figura.cpp" />
     <ClCompile Include="..\source\src\Figuras.cpp" />
+    <ClCompile Include="..\source\src\FigureImg.cpp" />
     <ClCompile Include="..\source\src\FigureMusic.cpp" />
     <ClCompile Include="..\source\src\FiguresMusic.cpp" />
     <ClCompile Include="..\source\src\Midizator.cpp" />
