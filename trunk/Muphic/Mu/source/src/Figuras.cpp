@@ -34,6 +34,146 @@ void Figuras::cargar(string rutaXML)
 	cargarRec(figuraNode,NULL);
 }
 
+void Figuras::guardar(string rutaXML)
+{
+	
+	TiXmlDocument doc;
+
+	// Header
+	TiXmlDeclaration * headerNode = new TiXmlDeclaration( "1.0", "", "yes" );
+	doc.LinkEndChild( headerNode );
+	
+	// First shapes node
+	TiXmlElement * shapesNode = new TiXmlElement( "shapes" );
+	doc.LinkEndChild( shapesNode );
+
+	// Image size
+	TiXmlElement * widthNode = new TiXmlElement( "width" );
+	TiXmlElement * heightNode = new TiXmlElement( "height" );
+	char size[10];
+	itoa(this->sheetWidth, size, 10);
+	widthNode->LinkEndChild( new TiXmlText(size)  );
+	itoa(this->sheetHeight, size, 10);
+	heightNode->LinkEndChild( new TiXmlText(size) );
+
+	shapesNode->LinkEndChild( widthNode );
+	shapesNode->LinkEndChild( heightNode );
+	
+
+	// Iterate father figures and add them to the xml doc
+	TiXmlElement* figureNode;
+	for (list<Figura*>::iterator it = figPadres.begin(); it != figPadres.end(); it++)
+	{
+		figureNode = new TiXmlElement("figure");
+		guardarRec(figureNode, (*it));
+		shapesNode->LinkEndChild( figureNode );
+	}
+
+	doc.SaveFile( "rutaXML" );
+}
+
+
+void Figuras::guardarRec(TiXmlElement* f, Figura* id)
+{
+
+	// write id
+	TiXmlElement * idNode = new TiXmlElement( "id" );
+	char intstr[10];
+	itoa(id->id, intstr, 10);
+	idNode->LinkEndChild( new TiXmlText(intstr)  );
+	f->LinkEndChild( idNode );
+
+	// write color
+	TiXmlElement * colorNode = new TiXmlElement( "color" );
+		//name
+		TiXmlElement * nameNode = new TiXmlElement( "name" );
+		nameNode->LinkEndChild( new TiXmlText("Dovahkiin") );
+		//rgb
+		TiXmlElement * rgbNode = new TiXmlElement( "RGB" );
+			// r
+			TiXmlElement * rNode = new TiXmlElement( "R" );
+			itoa(id->getRGB().r, intstr, 10);
+			rNode->LinkEndChild( new TiXmlText(intstr) );
+			//g
+			TiXmlElement * gNode = new TiXmlElement( "G" );
+			itoa(id->getRGB().g, intstr, 10);
+			gNode->LinkEndChild( new TiXmlText(intstr) );
+			// b
+			TiXmlElement * bNode = new TiXmlElement( "B" );
+			itoa(id->getRGB().b, intstr, 10);
+			bNode->LinkEndChild( new TiXmlText(intstr) );
+		rgbNode->LinkEndChild( rNode );
+		rgbNode->LinkEndChild( gNode );
+		rgbNode->LinkEndChild( bNode );
+		// gradient
+		TiXmlElement * gradientNode = new TiXmlElement( "gradient" );
+		gradientNode->LinkEndChild( new TiXmlText("0") );
+		// add all
+		colorNode->LinkEndChild( nameNode );
+		colorNode->LinkEndChild( rgbNode );
+		colorNode->LinkEndChild( gradientNode);
+	f->LinkEndChild( colorNode );
+
+
+	// write vertex list
+	TiXmlElement * vertexListNode = new TiXmlElement( "vertexList" );
+		// size attribute
+		itoa(id->listaVertices.size(), intstr, 10);
+		vertexListNode->SetAttribute("num", intstr);
+		// vertex nodes
+		TiXmlElement * vertexNode;
+		TiXmlElement * positionNode, * xNode, * yNode;
+		for (list<Vertice*>::iterator it = id->listaVertices.begin(); it != id->listaVertices.end(); it++)
+		{
+			vertexNode = new TiXmlElement("vertex");
+			//center vertex
+			if ((*it)->centro)
+			{
+				vertexNode->SetAttribute("type", "center");
+			}
+
+			// position
+			positionNode = new TiXmlElement("position");
+				// x position
+				xNode = new TiXmlElement("x");
+				itoa((*it)->x, intstr, 10);
+				xNode->LinkEndChild( new TiXmlText(intstr) );
+				// y position
+				yNode = new TiXmlElement("y");
+				itoa((*it)->y, intstr, 10);
+				yNode->LinkEndChild( new TiXmlText(intstr) );
+				// add position
+				positionNode->LinkEndChild( xNode );
+				positionNode->LinkEndChild( yNode );
+			// add info to node
+			vertexNode->LinkEndChild( positionNode );
+			vertexListNode->LinkEndChild( vertexNode );
+		}
+	f->LinkEndChild( vertexListNode );
+
+
+
+	// write area
+	TiXmlElement * areaNode = new TiXmlElement( "area" );
+	itoa(id->area, intstr, 10);
+	areaNode->LinkEndChild( new TiXmlText(intstr)  );
+	f->LinkEndChild( areaNode );
+
+	//  write children, if any
+	if (id->hijos.size() != 0)
+	{
+		TiXmlElement * canvasNode = new TiXmlElement( "canvas" );
+		TiXmlElement* figureNode;
+		for (list<Figura*>::iterator it = id->hijos.begin(); it != id->hijos.end(); it++)
+		{
+			figureNode = new TiXmlElement("figure");
+			guardarRec(figureNode, (*it));
+			canvasNode->LinkEndChild( figureNode );
+		}
+		f->LinkEndChild( canvasNode );
+	}
+}
+
 void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 {
 	if(f != NULL)
