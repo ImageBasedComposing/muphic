@@ -21,6 +21,7 @@ class Figuras
         virtual ~Figuras();
 
 		void cargar(string rutaXML);
+		void guardar(string rutaXML);
 
         /* Envoltorio de la lista stl */
 
@@ -52,6 +53,7 @@ class Figuras
 		list<Figura*> figPadres;
 
 		void cargarRec(TiXmlNode* f, Figura* padre = NULL);
+		void guardarRec(TiXmlElement* f, Figura* id);
 		virtual Figura* createFigure();
     private:
 };
