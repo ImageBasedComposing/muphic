@@ -7,7 +7,13 @@ Figuras::Figuras()
 
 Figuras::~Figuras()
 {
-    figuras.clear();
+    std::list<Figura*>::iterator it = figuras.begin();
+    while (it != figuras.end())
+    {
+        delete (*it);
+        it++;
+    }
+	figuras.clear();
 }
 
 // Funciones
