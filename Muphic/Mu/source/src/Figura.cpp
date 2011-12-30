@@ -20,6 +20,12 @@ Figura::Figura()
 
 Figura::~Figura()
 {
+    std::list<Vertice*>::iterator it = listaVertices.begin();
+    while (it != listaVertices.end())
+    {
+        delete (*it);
+        it++;
+    }
 	listaVertices.clear();
 }
 
@@ -367,6 +373,14 @@ double Figura::distanceCenter(int sHeight, int sWidth)
 			minDist = dist2DPoints((*it)->getPair(),centro);
 	}
 
+	// delete all shit
+    it = sheet.begin();
+    while (it != sheet.end())
+    {
+        delete (*it);
+        it++;
+    }
+	
 	// We return that distance
 	return minDist;
 }
