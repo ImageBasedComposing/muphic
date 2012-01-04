@@ -88,6 +88,7 @@
     <ClInclude Include="..\source\include\math_functions.h" />
     <ClInclude Include="..\source\include\Midizator.h" />
     <ClInclude Include="..\source\include\MidizatorABC.h" />
+    <ClInclude Include="..\source\include\MidizatorWAV.h" />
     <ClInclude Include="..\source\include\Mu.h" />
     <ClInclude Include="..\source\include\Music.h" />
     <ClInclude Include="..\source\include\music_const.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="..\source\src\FiguresMusic.cpp" />
     <ClCompile Include="..\source\src\Midizator.cpp" />
     <ClCompile Include="..\source\src\MidizatorABC.cpp" />
+    <ClCompile Include="..\source\src\MidizatorWAV.cpp" />
     <ClCompile Include="..\source\src\Mu.cpp" />
     <ClCompile Include="..\source\src\Music.cpp" />
     <ClCompile Include="..\source\src\Nota.cpp" />
