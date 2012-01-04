@@ -3,7 +3,7 @@
 
 Segmento::Segmento()
 {
-	tempo = 0; // ?
+	tempo = 120; // Andantino.
 	simbolos = new Simbolos();
 }
 
