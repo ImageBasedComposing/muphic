@@ -69,10 +69,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\include\aux_elements.h" />
     <ClInclude Include="..\source\include\Phic.h" />
+    <ClInclude Include="..\source\include\PolygonMaker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Phic.cpp" />
+    <ClCompile Include="..\source\src\PolygonMaker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
