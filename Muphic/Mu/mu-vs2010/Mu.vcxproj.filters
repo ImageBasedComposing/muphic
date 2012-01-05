@@ -42,9 +42,6 @@
     <ClInclude Include="..\source\include\Voz.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\XML_Interface.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\ComposerDemo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -78,19 +75,10 @@
     <ClInclude Include="..\source\include\Midizator.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\Figura.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Figuras.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\PatternGen.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\source\include\Patterns.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Vertice.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\source\include\ComposerRitmo.h">
@@ -120,9 +108,6 @@
     <ClInclude Include="..\source\include\ComposerFigMelody.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\math_functions.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\ComposerFigRitmo.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -135,10 +120,22 @@
     <ClInclude Include="..\source\include\FiguresMusic.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\FigureImg.h">
+    <ClInclude Include="..\source\include\MidizatorWAV.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\MidizatorWAV.h">
+    <ClInclude Include="..\..\common\include\Figura.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Figuras.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Vertice.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\math_functions.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\XML_Interface.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -173,9 +170,6 @@
     <ClCompile Include="..\source\src\Voz.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\XML_Interface.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\src\ComposerDemo.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -206,16 +200,7 @@
     <ClCompile Include="..\source\src\Nota.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Figuras.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Figura.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\src\PatternGen.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Vertice.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\source\src\ComposerRitmo.cpp">
@@ -245,10 +230,19 @@
     <ClCompile Include="..\source\src\FiguresMusic.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\FigureImg.cpp">
+    <ClCompile Include="..\source\src\MidizatorWAV.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\MidizatorWAV.cpp">
+    <ClCompile Include="..\..\common\src\Figura.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\src\Figuras.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\src\Vertice.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\src\XML_Interface.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
