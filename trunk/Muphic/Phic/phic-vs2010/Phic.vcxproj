@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\ext\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\..\TinyXML\include;$(ProjectDir)\..\source\include;$(ProjectDir)\..\ext\include;$(ProjectDir)\..\..\common\include;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)\..\..\bin\Debug\</OutDir>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;</ReferencePath>
     <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(ProjectDir)\..\ext\lib</LibraryPath>
@@ -69,11 +69,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\include\Figura.h" />
+    <ClInclude Include="..\..\common\include\Figuras.h" />
+    <ClInclude Include="..\..\common\include\math_functions.h" />
+    <ClInclude Include="..\..\common\include\Vertice.h" />
+    <ClInclude Include="..\..\common\include\XML_Interface.h" />
+    <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
+    <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
     <ClInclude Include="..\source\include\aux_elements.h" />
+    <ClInclude Include="..\source\include\FigureImg.h" />
     <ClInclude Include="..\source\include\Phic.h" />
     <ClInclude Include="..\source\include\PolygonMaker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\src\Figura.cpp" />
+    <ClCompile Include="..\..\common\src\Figuras.cpp" />
+    <ClCompile Include="..\..\common\src\Vertice.cpp" />
+    <ClCompile Include="..\..\common\src\XML_Interface.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinystr.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp" />
+    <ClCompile Include="..\source\src\FigureImg.cpp" />
     <ClCompile Include="..\source\src\Phic.cpp" />
     <ClCompile Include="..\source\src\PolygonMaker.cpp" />
   </ItemGroup>
