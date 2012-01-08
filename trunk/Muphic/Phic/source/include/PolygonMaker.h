@@ -13,11 +13,15 @@ class PolygonMaker
 		PolygonMaker();
 		virtual ~PolygonMaker();
 
-		std::vector< Polygon > makePolygons(std::vector< Mask > masks);
+		std::vector< Polygon >* makePolygons(std::vector< Mask >* masks);
+		void makePolygon(Mask m, FigureImg* f);
 
 	protected:
+		std::vector< Polygon >* polygon;
 	
 	private:
+		bool isBorder(int i, int j, Mask m);
+		std::pair<int,int> checkDirection(int i, int j, Mask m, int* dir);
 };
 
 #endif // POLYGONMAKER_H
