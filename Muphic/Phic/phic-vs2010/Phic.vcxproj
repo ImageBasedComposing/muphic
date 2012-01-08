@@ -80,6 +80,7 @@
     <ClInclude Include="..\source\include\FigureImg.h" />
     <ClInclude Include="..\source\include\Phic.h" />
     <ClInclude Include="..\source\include\PolygonMaker.h" />
+    <ClInclude Include="..\source\include\RegionMaker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\src\Figura.cpp" />
@@ -93,6 +94,7 @@
     <ClCompile Include="..\source\src\FigureImg.cpp" />
     <ClCompile Include="..\source\src\Phic.cpp" />
     <ClCompile Include="..\source\src\PolygonMaker.cpp" />
+    <ClCompile Include="..\source\src\RegionMaker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
