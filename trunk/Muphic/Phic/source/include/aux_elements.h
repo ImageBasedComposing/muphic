@@ -8,7 +8,7 @@
 
 using namespace std;
 
-typedef std::vector< std::vector<bool>* >* Mask;
-typedef std::pair<Mask,FigureImg*>* Polygon;
+typedef std::vector< std::vector<bool>* > Mask;
+typedef std::pair<Mask*,FigureImg*> Polygon;
 
 #endif // AUX_ELEMENTS__H
