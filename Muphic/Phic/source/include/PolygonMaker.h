@@ -21,8 +21,8 @@ class PolygonMaker
 		std::vector< Polygon > polygon;
 	
 	private:
-		static const int VAR = 4;		//The lower this number the better the polygon aproximation, won't work with 0
-		static const int ERR = 22;	//The error margin between the two vectors of a polygon, the lower this number the more exact the polygon will be
+		static const int VAR = 3;		//The lower this number the better the polygon aproximation, won't work with 0
+		static const int ERR = 5;	//The error margin between the two vectors of a polygon, the lower this number the more exact the polygon will be
 
 		bool isBorder(int i, int j, Mask* m);
 		std::pair<int,int> checkDirection(int i, int j, Mask* m, std::pair<int,int> initPos, int* dir, bool* isVertex);
