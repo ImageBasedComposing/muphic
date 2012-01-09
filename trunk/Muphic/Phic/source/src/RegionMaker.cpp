@@ -129,6 +129,23 @@ int** boolToIntMatrix(bool** a, int w, int h)
 	return out;
 }
 
+Mask* boolToMask(bool** a, int w, int h)
+{
+	bool ** out = createBoolMatrix(w,h);
+
+	Mask* m = new Mask();
+	vector<bool>* tmp;
+	for (int i = 0; i < w; i++)
+	{
+		tmp = new vector<bool>();
+		for (int j = 0; j < h; j++)
+			tmp->push_back(a[i][j]);
+		m->push_back(tmp);
+	}
+
+	return m;
+}
+
 int expand(int** src, bool** out, int i, int j, int w, int h)
 {
 	int n1, n2, n3, n4;
@@ -442,22 +459,24 @@ vector<Mask*> RegionMaker::makeRegions(std::string picPath)
 		}
 	}
 
-/*
+	/*
 	for (vector<bool**>::iterator it = finalRegions.begin(); it != finalRegions.end(); it++)
 	{
 		cout << "-" << endl;
 		showBoolMatrix(*it, img->width, img->height);
 		cout << endl;
 	}
-
 	*/
-	system("PAUSE");
 	
 
+	vector<Mask*> salida;
+	
+
+	for (vector<bool**>::iterator it = finalRegions.begin(); it != finalRegions.end(); it++)
+	{
+		salida.push_back(boolToMask(*it, img->width, img->height));
+	}
 
 
-
-
-	vector<Mask*> tetas;
-	return tetas;
+	return salida;
 }
