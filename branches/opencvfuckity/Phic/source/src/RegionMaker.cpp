@@ -146,66 +146,12 @@ Mask* boolToMask(bool** a, int w, int h)
 	return m;
 }
 
-int expand(int** src, bool** out, int i, int j, int w, int h)
-{
-	int n1, n2, n3, n4;
-	n1 = n2 = n3 = n4 = 0;
-
-	if (i < w-1 && src[i+1][j] > 0)
-	{
-		i++;					
-		// connected component gets bigger
-		out[i][j] = true;
-		// one more pixel visited
-		src[i][j] = -1;
-		// expand this way
-		n1 = 1 + expand(src, out, i, j, w, h);
-	}
-	
-	if (i > 0 && src[i-1][j] > 0)
-	{
-		i--;
-		// connected component gets bigger
-		out[i][j] = true;
-		// one more pixel visited
-		src[i][j] = -1;
-		// expand this way
-		n2 = 1 + expand(src, out, i, j, w, h);
-	}
-	
-	if (j < h-1 && src[i][j+1] > 0)
-	{
-		j++;
-		// connected component gets bigger
-		out[i][j] = true;
-		// one more pixel visited
-		src[i][j] = -1;
-		// expand this way
-		n3 = 1 + expand(src, out, i, j, w, h);
-	}
-	
-	if (j > 0 && src[i][j-1] > 0)
-	{
-		j--;
-		// connected component gets bigger
-		out[i][j] = true;
-		// one more pixel visited
-		src[i][j] = -1;
-		// expand this way
-		n4 = 1 + expand(src, out, i, j, w, h);
-	}
-
-
-	return n1 + n2 + n3 + n4;
-}
-
-
 // a breaks b into pieces, and modifies itself in the process
-vector<int**> cartessianProduct1on1(int** a, int** b, int w, int h)
+vector<bool**> cartessianProduct1on1(bool** a, bool** b, int w, int h)
 {
-	int ** onesBoth, ** onesB;
-	onesBoth = createMatrix(w,h);
-	onesB = createMatrix(w,h);
+	bool ** onesBoth, ** onesB;
+	onesBoth = createBoolMatrix(w,h);
+	onesB = createBoolMatrix(w,h);
 
 	for (int i = 0; i < w; i++)
 	{
@@ -224,27 +170,27 @@ vector<int**> cartessianProduct1on1(int** a, int** b, int w, int h)
 		}
 	}
 
-	vector<int**> sol;
-	if (!emptyMatrix(onesBoth, w, h))
+	vector<bool**> sol;
+	if (!emptyBoolMatrix(onesBoth, w, h))
 		sol.push_back(onesBoth);
-	if (!emptyMatrix(onesB, w, h))
+	if (!emptyBoolMatrix(onesB, w, h))
 		sol.push_back(onesB);
 
 	return sol;
 }
 
-vector<int**> cartessianProduct1onN(int** a, vector<int**> b, int w, int h)
+vector<bool**> cartessianProduct1onN(bool** a, vector<bool**> b, int w, int h)
 {
-	vector<int**> sol;
-	vector<int**> tmp;
+	vector<bool**> sol;
+	vector<bool**> tmp;
 
-	for (vector<int**>::iterator it = b.begin(); it != b.end(); it++)
+	for (vector<bool**>::iterator it = b.begin(); it != b.end(); it++)
 	{
 		// use a to break to pieces, add pieces to sol and keep going with a
 		tmp = cartessianProduct1on1(a, *it, w, h);
 		sol.insert(sol.end(), tmp.begin(), tmp.end());
 		
-		if (emptyMatrix(a, w, h))
+		if (emptyBoolMatrix(a, w, h))
 		{
 			it++;
 			sol.insert(sol.end(), it, b.end());
@@ -255,31 +201,31 @@ vector<int**> cartessianProduct1onN(int** a, vector<int**> b, int w, int h)
 	return sol;
 }
 
-vector<int**> cartessianProductNonN(vector<int**> a, vector<int**> b, int w, int h)
+vector<bool**> cartessianProductNonN(vector<bool**> a, vector<bool**> b, int w, int h)
 {
 	// a will break sol
-	vector<int**> sol;
-	vector<int**> tmp;
+	vector<bool**> sol;
+	vector<bool**> tmp;
 	
-	vector<int**> in;
+	vector<bool**> in;
 
 	// in will initially be a
-	for (vector<int**>::iterator it = a.begin(); it != a.end(); it++)
+	for (vector<bool**>::iterator it = a.begin(); it != a.end(); it++)
 	{
-		if (!emptyMatrix(*it, w, h))
+		if (!emptyBoolMatrix(*it, w, h))
 			in.push_back(*it);
 	}
 
 	// sol will initially be b
-	for (vector<int**>::iterator it = b.begin(); it != b.end(); it++)
+	for (vector<bool**>::iterator it = b.begin(); it != b.end(); it++)
 	{
-		if (!emptyMatrix(*it, w, h))
+		if (!emptyBoolMatrix(*it, w, h))
 			sol.push_back(*it);
 	}
 
 
 
-	vector<int**>::iterator i = in.begin();
+	vector<bool**>::iterator i = in.begin();
 	while (i != in.end())
 	{
 		tmp = cartessianProduct1onN(*i, sol, w, h);
@@ -288,9 +234,9 @@ vector<int**> cartessianProductNonN(vector<int**> a, vector<int**> b, int w, int
 	}
 
 	// the rest of a is added to sol
-	for (vector<int**>::iterator it = a.begin(); it != a.end(); it++)
+	for (vector<bool**>::iterator it = a.begin(); it != a.end(); it++)
 	{
-		if (!emptyMatrix(*it, w, h))
+		if (!emptyBoolMatrix(*it, w, h))
 			sol.push_back(*it);
 	}
 
@@ -298,14 +244,68 @@ vector<int**> cartessianProductNonN(vector<int**> a, vector<int**> b, int w, int
 }
 
 
+int expand(bool** src, bool** out, int i, int j, int w, int h)
+{
+	int n1, n2, n3, n4;
+	n1 = n2 = n3 = n4 = 0;
 
-vector<bool**> connectedComponents(int** matrix, int w, int h)
+	if (i < w-1 && src[i+1][j])
+	{
+		i++;					
+		// connected component gets bigger
+		out[i][j] = true;
+		// one more pixel visited
+		src[i][j] = false;
+		// expand this way
+		n1 = 1 + expand(src, out, i, j, w, h);
+	}
+	
+	if (i > 0 && src[i-1][j])
+	{
+		i--;
+		// connected component gets bigger
+		out[i][j] = true;
+		// one more pixel visited
+		src[i][j] = false;
+		// expand this way
+		n2 = 1 + expand(src, out, i, j, w, h);
+	}
+	
+	if (j < h-1 && src[i][j+1])
+	{
+		j++;
+		// connected component gets bigger
+		out[i][j] = true;
+		// one more pixel visited
+		src[i][j] = false;
+		// expand this way
+		n3 = 1 + expand(src, out, i, j, w, h);
+	}
+	
+	if (j > 0 && src[i][j-1])
+	{
+		j--;
+		// connected component gets bigger
+		out[i][j] = true;
+		// one more pixel visited
+		src[i][j] = false;
+		// expand this way
+		n4 = 1 + expand(src, out, i, j, w, h);
+	}
+
+
+	return n1 + n2 + n3 + n4;
+}
+
+
+vector<bool**> connectedComponents(bool** matrix, int w, int h)
 {
 	// count pixels
 	int total = 0;
 	for (int x = 0; x < w; x++)
 		for (int j = 0; j < h; j++)
-			total += matrix[x][j];
+			if (matrix[x][j])
+				total ++;
 
 	int n = 0;
 	int phase = 0;
@@ -329,7 +329,7 @@ vector<bool**> connectedComponents(int** matrix, int w, int h)
 					j = 0;
 					while (j < h && phase == 0)
 					{
-						if (matrix[i][j] > 0)
+						if (matrix[i][j])
 						{
 							// one more connected component found
 							currentMatrix = createBoolMatrix(w, h);
@@ -337,7 +337,7 @@ vector<bool**> connectedComponents(int** matrix, int w, int h)
 							out.push_back(currentMatrix);	
 							// one more pixel visited
 							n++;	
-							matrix[i][j] = -1;	
+							matrix[i][j] = false;	
 							phase = 1;
 						}
 						else
@@ -393,22 +393,31 @@ vector<Mask*> RegionMaker::makeRegions(std::string picPath)
 
 
 	// regions by channels
-	vector<int**> regionsR, regionsG, regionsB;
+	vector<bool**> regionsR, regionsG, regionsB;
 	float divisions = 3;
 
 	// each channel will have <division> regions
-	int** matrix;
-	for (int i = 0; i <= divisions; i++)
+	bool** matrix;
+	/*for (int i = 0; i <= divisions; i++)
 	{
-		matrix = createMatrix(img->width, img->height);
+		matrix = createBoolMatrix(img->width, img->height);
 		regionsR.push_back(matrix);
 
-		matrix = createMatrix(img->width, img->height);
+		matrix = createBoolMatrix(img->width, img->height);
 		regionsG.push_back(matrix);
 
-		matrix = createMatrix(img->width, img->height);
+		matrix = createBoolMatrix(img->width, img->height);
 		regionsB.push_back(matrix);
+	}*/
+	
+	vector<bool**> regionsTotalus;
+	double limit = divisions*divisions*divisions + divisions*divisions + divisions;
+	for (int i = 0; i <= limit; i++)
+	{
+		matrix = createBoolMatrix(img->width, img->height);
+		regionsTotalus.push_back(matrix);
 	}
+
 
 	// compute regions of each channel and put them in regionsR, regionsG & regionsB
 	CvScalar s;
@@ -422,24 +431,22 @@ vector<Mask*> RegionMaker::makeRegions(std::string picPath)
 			s = cvGet2D(img, i, j);
 
 			r = (int) s.val[2] / delta;
-			regionsR[r][i][j] = 1;
+			//regionsR[r][i][j] = true;
 			
 			g = (int) s.val[1] / delta;
-			regionsG[g][i][j] = 1;
+			//regionsG[g][i][j] = true;
 
 			b = (int) s.val[0] / delta;
-			regionsB[b][i][j] = 1;
+			//regionsB[b][i][j] = true;
 
-			//std::cout << "(" << s.val[0] << "," << s.val[1] << "," << s.val[2] << ") ";
+
+			regionsTotalus[r*divisions*divisions + g*divisions + b][i][j] = true;
 		}
-		std::cout << endl;
 	}
 
-	cout << endl;
-
 	// Cartessian product
-	
-	vector<int**> regionstmp, regionstmp2, regions;
+	/*
+	vector<bool**> regionstmp, regionstmp2, regions;
 	
 	regionstmp = cartessianProductNonN(regionsR, regionsG, img->width, img->height);
 	regionstmp2 = cartessianProductNonN(regionstmp, regionsB, img->width, img->height);
@@ -449,34 +456,55 @@ vector<Mask*> RegionMaker::makeRegions(std::string picPath)
 
 	vector<bool**> finalRegions;
 	vector<bool**>  tmp;
-	int** tmp2;
-	for (vector<int**>::iterator it = regions.begin(); it != regions.end(); it++)
+	for (vector<bool**>::iterator it = regions.begin(); it != regions.end(); it++)
 	{
-		if (!emptyMatrix(*it, img->width, img->height))
+		if (!emptyBoolMatrix(*it, img->width, img->height))
 		{
 			tmp = connectedComponents(*it, img->width, img->height);
 			finalRegions.insert(finalRegions.begin(), tmp.begin(), tmp.end());
 		}
 	}
 
+
+	*/
+	vector<bool**> a1;
+	vector<bool**>  a2;
+	for (vector<bool**>::iterator it = regionsTotalus.begin(); it != regionsTotalus.end(); it++)
+	{
+		if (!emptyBoolMatrix(*it, img->width, img->height))
+		{
+			a2 = connectedComponents(*it, img->width, img->height);
+			a1.insert(a1.end(), a2.begin(), a2.end());
+			//a1.push_back(*it);
+		}
+	}
+	
+	/*for (vector<bool**>::iterator it = a1.begin(); it != a1.end(); it++)
+	{
+		cout << "-" << endl;
+		showBoolMatrix(*it, img->width, img->height);
+		cout << endl;
+	}*/
 	/*
+	cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" << endl;
+	
 	for (vector<bool**>::iterator it = finalRegions.begin(); it != finalRegions.end(); it++)
 	{
 		cout << "-" << endl;
 		showBoolMatrix(*it, img->width, img->height);
 		cout << endl;
 	}
+	
+	
 	*/
-	
-
 	vector<Mask*> salida;
-	
 
-	for (vector<bool**>::iterator it = finalRegions.begin(); it != finalRegions.end(); it++)
+	
+	for (vector<bool**>::iterator it = a1.begin(); it != a1.end(); it++)
 	{
 		salida.push_back(boolToMask(*it, img->width, img->height));
 	}
 
-
+	system("PAUSE");
 	return salida;
 }
