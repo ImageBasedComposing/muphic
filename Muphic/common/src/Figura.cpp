@@ -70,7 +70,7 @@ float Figura::getColorDifference()
 	return colorDifference;
 }
 //------Setters------//
-void Figura::setRGB(float r, float g, float b)
+void Figura::setRGB(int r, int g, int b)
 {
 	rgb.r = r;
 	rgb.g = g;

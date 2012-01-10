@@ -7,13 +7,12 @@
 #include <string>
 #include "Vertice.h"
 #include "math_functions.h"
+#include "aux_structs.h"
 
 
 class Vertice;
 
 using namespace std;
-
-struct Color{ float r; float g; float b;};
 
 class Figura
 {
@@ -62,7 +61,7 @@ class Figura
 
 
 /*------Setters------*/
-        void setRGB(float r, float , float b);
+        void setRGB(int r, int g, int b);
 		void setColor(string c);
 		void setNumVertices(int n);
 		void setId(int id);

@@ -66,6 +66,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\include\aux_functions.h" />
+    <ClInclude Include="..\..\common\include\aux_structs.h" />
     <ClInclude Include="..\..\common\include\Figura.h" />
     <ClInclude Include="..\..\common\include\Figuras.h" />
     <ClInclude Include="..\..\common\include\launcher.h" />

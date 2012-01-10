@@ -138,6 +138,9 @@
     <ClInclude Include="..\..\common\include\XML_Interface.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\include\aux_structs.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Composer.cpp">

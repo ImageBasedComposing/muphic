@@ -11,6 +11,7 @@
 #include "ComposerFigMelody.h"
 #include "ComposerFigRitmo.h"
 #include "MidizatorABC.h"
+#include "MidizatorWAV.h"
 
 class Patterns;
 class figuresMusic;
