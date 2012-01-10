@@ -4,6 +4,8 @@
 #define MUSIC_ELEMS_H
 
 #include "music_const.h"
+#include "math_functions.h"
+#include "aux_structs.h"
 #include <list>
 #include <string>
 #include "string.h"
@@ -36,47 +38,56 @@ enum Tonalidad{ DOM, LAm, SOLM,  MIm,  REM,  SIm,  LAM, FASm,  MIM, DOSm,  SIM, 
 //Clase Scriabin que identifica colores por remodelar a RGB por ejemplo.
 class Scriabin
 {
+
 	public:
 		Scriabin()
 		{
-			scriabin.push_back(pair<string,int>("Rojo", DO_C));
-			scriabin.push_back(pair<string,int>("Naranja", SOL_C));
-			scriabin.push_back(pair<string,int>("Amarillo", RE_C));
-			scriabin.push_back(pair<string,int>("Verde", LA_C));
-			scriabin.push_back(pair<string,int>("Cian", MI_C));
-			scriabin.push_back(pair<string,int>("Azul", SI_C));
-			scriabin.push_back(pair<string,int>("AzulMarino", SOL_C - 1));
-			scriabin.push_back(pair<string,int>("Purpura", RE_C - 1));
-			scriabin.push_back(pair<string,int>("Violeta", LA_C - 1));
-			scriabin.push_back(pair<string,int>("Morado", MI_C - 1));
-			scriabin.push_back(pair<string,int>("Salmon", SI_C - 1));
-			scriabin.push_back(pair<string,int>("Granate", FA_C));
+			scriabin.push_back(pair<Color,int>(Color(255,0,0), DO_C)); //Rojo
+			scriabin.push_back(pair<Color,int>(Color(255,127,0), SOL_C)); //Naranja
+			scriabin.push_back(pair<Color,int>(Color(255,255,0), RE_C)); //Amarillo
+			scriabin.push_back(pair<Color,int>(Color(51,204,51), LA_C)); //Verde
+			scriabin.push_back(pair<Color,int>(Color(195,242,255), MI_C)); //Cian-Blanco
+			scriabin.push_back(pair<Color,int>(Color(142,201,255), SI_C)); //Azul
+			scriabin.push_back(pair<Color,int>(Color(127,139,253), SOL_F_C)); //AzulMarino
+			scriabin.push_back(pair<Color,int>(Color(144,0,255), RE_F_C)); //Purpura
+			scriabin.push_back(pair<Color,int>(Color(187,117,252), LA_F_C)); //Violeta
+			scriabin.push_back(pair<Color,int>(Color(183,70,139), MI_F_C)); //Morado
+			scriabin.push_back(pair<Color,int>(Color(169,103,124), SI_F_C)); //Salmon
+			scriabin.push_back(pair<Color,int>(Color(171,0,52), FA_C)); //Granate
 		}
 
 		~Scriabin(){};
 
-		int getNota(string color)
+		int getNota(Color color)
 		{
-			list< pair<string,int> >::iterator it = scriabin.begin();
+			list< pair<Color,int> >::iterator it = scriabin.begin();
 			bool found = false;
-			int sol = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
 
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			found = distBetter < minDist;
+			it++;
 			while(!found && it != scriabin.end())
 			{
-				if(strcmp(it->first.c_str(), color.c_str())==0)
-				{
-					sol = it->second;
-					found = true;
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+					found = distBetter < minDist; //Si mejora la distancia minima, automaticamente salimos
 				}
 				it++;
 			}
 
-			return sol;
+			return note;
 		}
 
 	protected:
 	private:
-		list< pair<string,int> > scriabin;
+		list< pair<Color,int> > scriabin;
 };
 
 

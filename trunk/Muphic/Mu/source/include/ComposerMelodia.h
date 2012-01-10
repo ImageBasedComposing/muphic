@@ -52,7 +52,7 @@ class ComposerMelodia : public Composer
 		int calcTono(float angulo, Nota* nPpal);
 		int calcDur(double longMedia, double longitud);
 		int notaFigura(FigureMusic* f);
-		void sumarArea(list< pair<string,int> >* cs, FigureMusic* f);
+		void sumarArea(list< pair<Color,int> >* cs, FigureMusic* f);
 		void calcularPadres(FigureMusic* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
 
 

@@ -48,7 +48,7 @@ int main( int argc, const char* argv[] )
 	// Introducing a brand new composer!!
 	// ~ * ~CoMp0zer d3M0!!~ * ~
 
-	MidizatorABC* mdztor = new MidizatorABC();
+	MidizatorWAV* mdztor = new MidizatorWAV();
 	Music* m = new Music(mdztor);
 
 	Composer* comp = new ComposerDemo( m );

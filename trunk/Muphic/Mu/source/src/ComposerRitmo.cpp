@@ -137,13 +137,13 @@ int ComposerRitmo::nota(FiguresMusic* f)
 {
 	int t = f->sizeFig();
 	//int i = 0;
-	list< pair<string,int> >* colores = new list< pair<string,int> >();
-	pair<string,int>* par;
+	list< pair<Color,int> >* colores = new list< pair<Color,int> >();
+	pair<Color,int>* par;
 
 	for(int i = 0; i < t; i++)
 	{
-		par = new pair<string,int>();
-		par->first = "";
+		par = new pair<Color,int>();
+		par->first = Color(-1,-1,-1);
 		par->second = 0;
 		colores->push_back(*par);
 	}
@@ -156,9 +156,9 @@ int ComposerRitmo::nota(FiguresMusic* f)
 	Scriabin* s = new Scriabin();
 
 	int aux = 0;
-	string sol = "";
+	Color sol;
 
-	list< pair<string,int> >::iterator it = colores->begin();
+	list< pair<Color,int> >::iterator it = colores->begin();
 
 	while(it != colores->end())
 	{
@@ -173,18 +173,18 @@ int ComposerRitmo::nota(FiguresMusic* f)
 	return s->getNota(sol);
 }
 
-void ComposerRitmo::sumarArea(list< pair<string,int> >* cs, FigureMusic* f)
+void ComposerRitmo::sumarArea(list< pair<Color,int> >* cs, FigureMusic* f)
 {
 	bool encontrado = false;
 
-	list< pair<string,int> >::iterator it = cs->begin();
+	list< pair<Color,int> >::iterator it = cs->begin();
 
 	while(it != cs->end() && !encontrado)
 	{
-		if(strcmp(it->first.c_str(),f->getColor().c_str()) == 0)
+		if(it->first.r == f->getRGB().r && it->first.g == f->getRGB().g && it->first.b == f->getRGB().b)
 		{
 			it->second += f->getArea();
-			
+
 			// Resto las areas de los hijos incrustados dentro de la figura f
 			for(int i = 0; i < f->sizeHijos(); i++)
 			{
@@ -193,9 +193,9 @@ void ComposerRitmo::sumarArea(list< pair<string,int> >* cs, FigureMusic* f)
 
 			encontrado = true;
 		}
-		else if(strcmp(it->first.c_str(),"") == 0)
+		else if(it->first.r < 0 || it->first.g < 0 || it->first.b < 0)
 		{
-			it->first = f->getColor();
+			it->first = f->getRGB();
 			it->second = f->getArea();
 
 			// Resto las areas de los hijos incrustados dentro de la figura f

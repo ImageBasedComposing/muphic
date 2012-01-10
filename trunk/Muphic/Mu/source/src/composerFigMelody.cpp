@@ -23,7 +23,7 @@ ComposerFigMelody::~ComposerFigMelody()
 bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 {
 	//Vemos el color y en que nos movemos.
-	string color = f->getColor();
+	Color color = f->getRGB();
 	Scriabin* scriabin = new Scriabin();
 
 	int nota = scriabin->getNota(color);
