@@ -1,0 +1,152 @@
+<?xml version="1.0" standalone="yes"?>
+<shapes>
+	<width>281</width>
+	<height>227</height>
+	<figure>
+		<id>1
+		</id>
+		
+		<color>
+			<name>Amarillo</name>
+			<RGB>
+				<R>255</R>
+				<G>255</G>
+				<B>0</B>
+			</RGB>
+			<gradient>0</gradient>
+		</color>
+		
+		<vertexList num="4">
+			<vertex>
+				<position>
+					<x>16</x>
+					<y>50</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x>118</x>
+					<y>50</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x>118</x>
+					<y>143</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x>16</x>
+					<y>143</y>
+				</position>
+			</vertex>
+			
+		</vertexList>
+		<area>4</area>
+		<canvas>
+			<figure>
+				<id>2</id>
+				
+				<color>
+					<name>Amarillo</name>
+					<RGB>
+						<R>195</R>
+						<G>195</G>
+						<B>195</B>
+					</RGB>
+					<gradient>0</gradient>
+				</color>
+				
+				<vertexList num="3">
+					<vertex>
+						<position>
+							<x>33</x>
+							<y>66</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x>85</x>
+							<y>118</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x>33</x>
+							<y>118</y>
+						</position>
+					</vertex>
+				</vertexList>
+				<area>1</area>
+			</figure>
+		</canvas>
+	</figure>
+	
+	<figure>
+		<id>3</id>
+		
+		<color>
+			<name>Rojo</name>
+			<RGB>
+				<R>255</R>
+				<G>0</G>
+				<B>0</B>
+			</RGB>
+			<gradient>0</gradient>
+		</color>
+		
+		<vertexList num="2">
+			<vertex type="center">
+				<position>
+					<x>193</x>
+					<y>88</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x>144</x>
+					<y>88</y>
+				</position>
+			</vertex>
+		</vertexList>
+		<area>5</area>
+		<canvas>
+			<figure>
+				<id>4</id>
+				
+				<color>
+					<name>Verde</name>
+					<RGB>
+						<R>34</R>
+						<G>177</G>
+						<B>76</B>
+					</RGB>
+					<gradient>0</gradient>
+				</color>
+				
+				<vertexList num="3">
+					<vertex>
+						<position>
+							<x>186</x>
+							<y>104</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x>209</x>
+							<y>57</y>
+						</position>
+					</vertex>
+					<vertex>
+						<position>
+							<x>233</x>
+							<y>104</y>
+						</position>
+					</vertex>
+				</vertexList>
+				<area>2</area>
+			</figure>
+		</canvas>
+	</figure>
+</shapes>

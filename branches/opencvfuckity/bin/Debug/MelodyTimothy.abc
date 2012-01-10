@@ -1,0 +1,15 @@
+X:1
+T:MelodyTimothy
+L:1/64
+%            End of header, start of tune body:
+V:0
+%%MIDI program 0
+K:C
+M:4/4
+ C36 C28-| C8 A16 c24 G16 | D24 A,16 D16 G8-| G8 D24 A,16 D16 |]
+V:1
+%%MIDI program 115
+K:C
+M:4/4
+ A18 A18 A18 A10-| A8 A14 z14 A14 A14 | A18 A18 A18 A10-|
+ A8 A14 z14 A14 A14 |]

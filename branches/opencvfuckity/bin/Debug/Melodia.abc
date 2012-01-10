@@ -1,0 +1,18 @@
+X:1
+T:Melodia
+L:1/32
+%            End of header, start of tune body:
+V:0
+%%MIDI program 115
+K:D
+M:4/4
+Q:180
+ D16 D16 | D16 D16 | D8 z8 z8 D8 | z8 D8 z8 z8 | D16 D16 | D16 D16 | D8 z8 z8 D8 |
+ D8 z8 z8 D8 | z8 D8 z8 D8 | z8 z8 D8 z8 | D8 z8 z8 D8 | D8 z8 z8 D8 | D16 D16 |
+ D16 D16 | D8 z8 z8 D8 | z8 D8 z8 z8 | D16 D16 | D16 D16 |]
+V:1
+%%MIDI program 0
+K:C
+M:4/4
+Q:180
+ D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 | D9 A,7 D8 G7 | C16 C16 | z13 z10 z9 | A11 c11 G10 |]
