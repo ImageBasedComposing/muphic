@@ -79,7 +79,9 @@ void on_trackbar(int){
 			first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, 2, 1);
 
 			int n = 0;
-			for( CvSeq* c=first_polygon; c!=NULL; c=c->h_next ){
+			CvSeq* cAux = contours;
+			double area;
+			for( CvSeq* c=first_polygon; c!=NULL; c=c->h_next){
 			//for( CvSeq* c=contours; c!=NULL; c=c->h_next ){
 				//cvCvtColor( img_8uc1, img_8uc3, CV_GRAY2BGR );
 				cvDrawContours(
@@ -106,9 +108,16 @@ void on_trackbar(int){
 					cvWaitKey();
 
 				pair<int,int> bar = f->getBarycenter();
+				// Cogemos el color del baricentro de la figura
 				CvScalar s = cvGet2D(g_copy, bar.first, bar.second);
 				f->setRGB(s.val[0], s.val[1], s.val[2]);
-				f->setArea(100);
+				// Calculamos el area de cada poligono
+				area = cvContourArea(cAux);
+				printf("Area: %f\n", area);
+				if(area == 0) area = 100;
+				f->setArea(area);
+				if(cAux!=NULL) //Cogemos el siguiente para la siguiente vuelta (es como un do-while)
+					cAux = cAux->h_next;
 				f->setId(++id);
 
 				if (padreDone)
