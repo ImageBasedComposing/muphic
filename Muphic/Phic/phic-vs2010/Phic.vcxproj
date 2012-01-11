@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\..\..\TinyXML\include;$(ProjectDir)\..\source\include;$(ProjectDir)\..\ext\include;$(ProjectDir)\..\..\common\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\..\TinyXML\include;$(ProjectDir)\..\source\include;$(ProjectDir)\..\ext\include;$(ProjectDir)\..\ext\include\opencv;$(ProjectDir)\..\..\common\include;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)\..\..\bin\Debug\</OutDir>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;</ReferencePath>
     <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(ProjectDir)\..\ext\lib</LibraryPath>

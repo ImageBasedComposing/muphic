@@ -75,7 +75,7 @@ void Figuras::guardar(string rutaXML)
 		shapesNode->LinkEndChild( figureNode );
 	}
 
-	doc.SaveFile( "rutaXML" );
+	doc.SaveFile( rutaXML.c_str() );
 }
 
 
