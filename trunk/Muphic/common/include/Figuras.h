@@ -46,6 +46,9 @@ class Figuras
 		//list<Figura*>* getFiguras();
 		//list<Figura*>* getFigPadre();
 
+		void setWidth(int h) {	sheetHeight = h; }
+		void setHeight(int w) { sheetWidth = w; }
+
     protected:
 		int sheetWidth;
 		int sheetHeight;
