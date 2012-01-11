@@ -1,0 +1,152 @@
+#include "Phic.h"
+
+/*#include "opencv2/opencv.hpp"
+#include "opencv2/opencv.hpp"
+#include "opencv2/imgproc/imgproc.hpp"*/
+
+//#include "RegionMaker.h"
+//#include "PolygonMaker.h"
+//#include "FigureImg.h"
+#include "cv.h"
+#include "highgui.h"
+class PolygonMaker;
+
+#include "Figuras.h"
+#include "FigureImg.h"
+
+
+Phic::Phic()
+{
+    //ctor
+}
+
+Phic::~Phic()
+{
+    //dtor
+}
+
+
+
+
+
+int g_thresh = 50;
+IplImage* g_image = NULL;
+
+void on_trackbar(int){
+
+	int id = 0;
+	CvMemStorage*   g_storage = NULL;
+	CvScalar red = CV_RGB(250,0,0);
+	CvScalar blue = CV_RGB(0,0,250);
+	IplImage* g_image = cvLoadImage( "1.png" );
+	IplImage* g_gray = NULL;
+
+	if( g_storage == NULL ){
+			g_gray = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+			g_storage = cvCreateMemStorage(0);
+	} else {
+			cvClearMemStorage( g_storage );
+	}
+
+	IplImage* g_copy = cvLoadImage( "1.png", 0 );
+	IplImage* g_contours = cvCreateImage( cvGetSize(g_gray), 8, 3 );
+
+	CvSeq* contours = 0;
+	cvCvtColor( g_image, g_gray, CV_BGR2GRAY );
+      
+
+	// CHOOSE FILTER
+
+	//cvAdaptiveThreshold(g_gray, g_gray,   double(255), CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 3, 3 );
+	//cvThreshold( g_gray, g_gray, g_thresh, 255, CV_THRESH_BINARY );
+	cvCanny( g_gray, g_gray, 1.0, 1.0, 3);
+	cvShowImage( "Contours", g_gray );
+	cvWaitKey();
+
+
+	cvFindContours( g_gray, g_storage, &contours, sizeof(CvContour), CV_RETR_LIST);
+	cvZero( g_gray );
+
+	Figuras* figuras = new Figuras();
+	figuras->setWidth(g_gray->width);
+	figuras->setHeight(g_gray->width);
+	Figura * f, * padre;
+	bool padreDone = false;
+        
+	CvSeq* first_polygon = NULL;
+	if( contours ){
+			//convert the pixel contours to line segments in a polygon.
+			first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, 2, 1);
+
+			int n = 0;
+			for( CvSeq* c=first_polygon; c!=NULL; c=c->h_next ){
+			//for( CvSeq* c=contours; c!=NULL; c=c->h_next ){
+				//cvCvtColor( img_8uc1, img_8uc3, CV_GRAY2BGR );
+				cvDrawContours(
+				g_contours,
+				c,
+				red,			// Red
+				blue,           // Blue
+				1,              // Vary max_level and compare results
+				1,
+				8 );
+				printf( "Contour #%dn", n );
+				cvShowImage( "Contours", g_contours );
+				printf( " %d elements:\n", c->total );
+
+				f = new FigureImg();
+
+				for( int i=0; i< c->total; ++i ){
+						CvPoint* p = CV_GET_SEQ_ELEM( CvPoint, c, i );
+						printf(" (%d,%d)\n", p->x, g_gray->height - p->y );
+						f->colocarVertice(new Vertice(p->x, g_gray->height - p->y, false));
+							
+				}
+				if (!padreDone)
+					cvWaitKey();
+
+				pair<int,int> bar = f->getBarycenter();
+				CvScalar s = cvGet2D(g_copy, bar.first, bar.second);
+				f->setRGB(s.val[0], s.val[1], s.val[2]);
+				f->setArea(100);
+				f->setId(++id);
+
+				if (padreDone)
+				{
+					figuras->colocarFig(f);
+					f->setParent(padre);
+					padre->colocarHijo(f);
+				}
+				else
+				{
+					figuras->colocarFig(f);
+					figuras->colocarPadre(f);
+					padre = f;
+					padreDone = true;
+				}
+				n++;
+			}
+	}
+	cvShowImage( "Contours", g_gray );
+
+	cvWaitKey();
+	figuras->guardar("test1.xml");
+}
+
+void test()
+{
+    cvNamedWindow( "Contours", 1 );
+    cvCreateTrackbar( "Threshold", "Contours", &g_thresh, 255, on_trackbar );
+    on_trackbar(0);
+}
+
+
+int main(int argc, char* argv[])
+{
+       
+
+	test();
+		
+	return 0;
+}
+
