@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_workspace_file>
-	<Workspace title="Workspace">
-		<Project filename="muphic-codeblocks/Muphic.cbp" />
-		<Project filename="Mu/mu-codeblocks/Mu.cbp" active="1" />
-		<Project filename="Phic/phic-codeblocks/Phic.cbp" />
-	</Workspace>
-</CodeBlocks_workspace_file>
