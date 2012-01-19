@@ -59,6 +59,7 @@ void on_trackbar(int){
 
 	//cvAdaptiveThreshold(g_gray, g_gray,   double(255), CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 3, 3 );
 	//cvThreshold( g_gray, g_gray, g_thresh, 255, CV_THRESH_BINARY );
+	
 	cvCanny( g_gray, g_gray, 1.0, 1.0, 3);
 	cvShowImage( "Contours", g_gray );
 	cvWaitKey();
@@ -83,7 +84,8 @@ void on_trackbar(int){
 			double area;
 			for( CvSeq* c=first_polygon; c!=NULL; c=c->h_next){
 			//for( CvSeq* c=contours; c!=NULL; c=c->h_next ){
-				//cvCvtColor( img_8uc1, img_8uc3, CV_GRAY2BGR );
+				//cvCvtColor(  g_contours,  g_contours, CV_GRAY2BGR );
+				cvZero( g_contours );
 				cvDrawContours(
 				g_contours,
 				c,
@@ -93,7 +95,7 @@ void on_trackbar(int){
 				1,
 				8 );
 				printf( "Contour #%dn", n );
-				cvShowImage( "Contours", g_contours );
+				
 				printf( " %d elements:\n", c->total );
 
 				f = new FigureImg();
@@ -104,21 +106,33 @@ void on_trackbar(int){
 						f->colocarVertice(new Vertice(p->x, g_gray->height - p->y, false));
 							
 				}
-				if (!padreDone)
-					cvWaitKey();
+				//if (!padreDone)
+					//cvWaitKey();
 
 				pair<int,int> bar = f->getBarycenter();
+				cout << n << " " << endl;
 				// Cogemos el color del baricentro de la figura
-				CvScalar s = cvGet2D(g_copy, bar.first, bar.second);
+				CvScalar s = cvGet2D(g_copy, bar.second, bar.first);
 				f->setRGB(s.val[0], s.val[1], s.val[2]);
 				// Calculamos el area de cada poligono
-				area = cvContourArea(cAux);
+				area = cvContourArea(c);
 				printf("Area: %f\n", area);
 				if(area == 0) area = 100;
 				f->setArea(area);
 				if(cAux!=NULL) //Cogemos el siguiente para la siguiente vuelta (es como un do-while)
 					cAux = cAux->h_next;
 				f->setId(++id);
+
+				if ((f->sizeVertices() < 3) || (f->getArea() < 50))
+				{				
+					n++;
+					continue;
+				}
+				else
+					cvWaitKey();
+
+
+				cvShowImage( "Contours", g_contours );
 
 				if (padreDone)
 				{
@@ -133,6 +147,7 @@ void on_trackbar(int){
 					padre = f;
 					padreDone = true;
 				}
+				//cvShowImage( "Contours", g_gray );
 				n++;
 			}
 	}
