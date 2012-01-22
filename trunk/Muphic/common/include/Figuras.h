@@ -7,6 +7,8 @@
 #include "tinyxml.h"
 //#include <list>
 //#include <string>
+#include "aux_functions.h"
+
 
 using namespace std;
 
