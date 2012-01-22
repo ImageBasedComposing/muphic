@@ -11,8 +11,8 @@ ComposerTimothy::~ComposerTimothy()
 }
 
 
-string ComposerTimothy::compose() 
-{ 
+string ComposerTimothy::compose()
+{
 	// We read the figures from the XML
 	FiguresMusic* fgs = new FiguresMusic();
 	fgs->cargar(pic);
@@ -24,7 +24,7 @@ string ComposerTimothy::compose()
 	// We create the pattern with whom we will compose in this composer
 	//PatternGen<Figura*>* pg = new PatternGen<Figura*>();
 	PriorityPattern* p = new PriorityPattern();
-	
+
 	// Auxiliary list to get the main figures
 	std::list<FigureMusic*> padres;
 
@@ -84,16 +84,16 @@ string ComposerTimothy::compose()
 	m->setBaseLenght(std::make_pair(1,WHOLE));
 	m->setName("MelodyTimothy");
 	m->setVoces(vs);
-	
+
 	// We assign the element that will create the music from our structures
-	m->setMidizator(new MidizatorWAV());
+	m->setMidizator(new MidizatorABC());
 
 	// We make the music using the midizator previously selected
-	return m->toMidi(); 
+	return m->toMidi();
 }
 
-string ComposerTimothy::compose(string picPath, string usrConfPath) 
-{	
+string ComposerTimothy::compose(string picPath, string usrConfPath)
+{
 	setPic(picPath);
 	setUsrConfFile(usrConfPath);
 

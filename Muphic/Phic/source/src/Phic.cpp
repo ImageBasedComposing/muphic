@@ -9,11 +9,12 @@
 //#include "FigureImg.h"
 #include "cv.h"
 #include "highgui.h"
-class PolygonMaker;
+//class PolygonMaker;
 
 #include "Figuras.h"
 #include "FigureImg.h"
 
+using namespace cv;
 
 Phic::Phic()
 {
@@ -53,7 +54,7 @@ void on_trackbar(int){
 
 	CvSeq* contours = 0;
 	cvCvtColor( g_image, g_gray, CV_BGR2GRAY );
-      
+
 
 	// CHOOSE FILTER
 
@@ -73,7 +74,7 @@ void on_trackbar(int){
 	figuras->setHeight(g_gray->width);
 	Figura * f, * padre;
 	bool padreDone = false;
-        
+
 	CvSeq* first_polygon = NULL;
 	if( contours ){
 			//convert the pixel contours to line segments in a polygon.
@@ -104,7 +105,7 @@ void on_trackbar(int){
 						CvPoint* p = CV_GET_SEQ_ELEM( CvPoint, c, i );
 						printf(" (%d,%d)\n", p->x, g_gray->height - p->y );
 						f->colocarVertice(new Vertice(p->x, g_gray->height - p->y, false));
-							
+
 				}
 				//if (!padreDone)
 					//cvWaitKey();
@@ -167,10 +168,10 @@ void test()
 
 int main(int argc, char* argv[])
 {
-       
+
 
 	test();
-		
+
 	return 0;
 }
 

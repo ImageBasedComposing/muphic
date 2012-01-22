@@ -24,7 +24,7 @@ class FiguresMusic:public Figuras
 
 		void calculateVisibility();
 
-		list<Figura*> FiguresMusic::sortMusicFigures(list<Figura*> figs);
+		list<Figura*> sortMusicFigures(list<Figura*> figs);
 
         /* Envoltorio de la lista stl */
 
