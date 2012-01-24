@@ -26,6 +26,69 @@ Phic::~Phic()
     //dtor
 }
 
+
+// f is the figure which we want to color
+// g_image is the source image
+// c is de contour of the figure
+// inv determines if we consider the inside or the outside of the figure
+// all determines if we consider the current contour (false) or all of the remaining (true)
+void setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, 	IplImage* maskAcum, bool inv, bool all)
+{
+	IplImage* mask = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+	cvZero( mask );
+
+	int howMany = 0;
+	if (all)
+		howMany = 1;
+
+	// if there are no contours, we use the mask given
+	if (c == NULL)
+		mask = maskAcum;
+	else
+		cvDrawContours( mask, c, CV_RGB(250,250,250), CV_RGB(250,250,250), howMany, CV_FILLED, 8 );
+
+	IplImage* mask1 = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+
+	// show image (inv if asked)
+	if (inv)
+	{
+		cvNot( mask, mask1 );
+		cvShowImage( "Contours", mask1 );
+
+	}
+	else
+		cvShowImage( "Contours", mask );
+
+	cvWaitKey();
+	CvScalar s;
+	Vec3b test;
+	cv::Mat image = mask;
+	int r, g, b, num;
+	r = g = b = 0;
+	num = 0;
+	for (int i=0; i<image.rows; i++)
+	{
+		for (int j=0; j<image.cols; j++)
+		{
+			s = cvGet2D(mask, i, j);
+			if ((s.val[0] == 0) != inv)
+				continue;
+
+			s = cvGet2D(g_image, i, j);
+
+			r += s.val[2];
+			
+			g += s.val[1];
+
+			b += s.val[0];
+
+			num++;
+		}
+	}
+	f->setRGB(r/num, g/num, b/num);
+}
+
+
 int g_thresh = 50;
 IplImage* g_image = NULL;
 int filtro = 2;
@@ -89,15 +152,15 @@ void on_trackbar(int)
 	Figuras* figuras = new Figuras();
 	figuras->setWidth(g_gray->width);
 	figuras->setHeight(g_gray->width);
-	Figura * f, * padre;
+	Figura * f, * padre, * father;
 	bool padreDone = false;
 
 	// We copy contour data to our figure type
 	CvSeq* first_polygon = NULL;
-	
 
 
-	IplImage* mask = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+	IplImage* maskAcum = cvCreateImage( cvGetSize(g_gray), 8, 1 );
+	cvZero( maskAcum );
 
 	if( contours )
 	{
@@ -107,6 +170,23 @@ void on_trackbar(int)
 		int n = 0;
 		CvSeq* cAux = contours;
 		double area;
+
+		 /*
+			// PRUEBA: añadir un rectángulo de fondo
+			father = new FigureImg();
+			father->colocarVertice(new Vertice(0, 0, false));
+			father->colocarVertice(new Vertice(g_gray->width, 0, false));
+			father->colocarVertice(new Vertice(g_gray->width, g_gray->height, false));
+			father->colocarVertice(new Vertice(0, g_gray->height, false));
+			father->setArea(g_gray->width*g_gray->height);
+			father->setId(++id);
+			// set color
+			//setColorFromImage(father, g_image, first_polygon, NULL, true, true);
+			figuras->colocarFig(father);
+			figuras->colocarPadre(father);
+			padre = father;
+			padreDone = true;
+			*/
 
 		for( CvSeq* c=first_polygon; c!=NULL; c=c->h_next)
 		{
@@ -126,7 +206,7 @@ void on_trackbar(int)
 			printf( " %d elements:\n", c->total );
 
 			f = new FigureImg();
-
+			
 			for( int i=0; i< c->total; ++i )
 			{
 				CvPoint* p = CV_GET_SEQ_ELEM( CvPoint, c, i );
@@ -159,64 +239,13 @@ void on_trackbar(int)
 			else
 				cvWaitKey();
 
+			// set color
+			setColorFromImage(f, g_image, c, NULL, false, false);
 
+			// paint surface, because it's big enough
+			//cvDrawContours(maskAcum,c,CV_RGB(250,250,250),CV_RGB(250,250,250),0,CV_FILLED,8);
 
-			// old get color
-			//pair<int,int> bar = f->getBarycenter();
-			//cout << n << " " << endl;
-
-			// Cogemos el color del baricentro de la figura
-			//CvScalar s = cvGet2D(g_image, bar.second, bar.first);
-			
-			//f->setRGB(s.val[0], s.val[1], s.val[2]);
-			//f->setRGB(rand()%255, rand()%255,rand()%255);
-
-
-
-			// new get colour
-
-			cvZero( mask );
-			cvDrawContours(
-				mask,
-				c,
-				blue,			// Red
-				blue,           // Blue
-				0,              // Vary max_level and compare results
-				CV_FILLED,//1,
-				8 );
-
-			cvShowImage( "Contours", mask );
-			cvWaitKey();
-			CvScalar s;
-			Vec3b test;
-			cv::Mat image = mask;
-			int r, g, b, num;
-			r = g = b = 0;
-			num = 0;
-			for (int i=0; i<image.rows; i++)
-			{
-				for (int j=0; j<image.cols; j++)
-				{
-					s = cvGet2D(mask, i, j);
-					if (s.val[0] == 0)
-						continue;
-
-					s = cvGet2D(g_image, i, j);
-
-					r += s.val[2];
-			
-					g += s.val[1];
-
-					b += s.val[0];
-
-					num++;
-				}
-			}
-			f->setRGB(r/num, g/num, b/num);
-
-
-			cvShowImage( "Contours", g_contours );
-
+			cvShowImage( "Contours", g_contours);
 			// We add the figure to our figure list
 			if (padreDone)
 			{
@@ -236,6 +265,11 @@ void on_trackbar(int)
 		}
 	}
 	cvShowImage( "Contours", g_gray );
+
+
+	// colour background
+	//setColorFromImage(father, g_image, NULL, maskAcum, true, false);
+
 
 	figuras->getPadreAt(0)->sortHijo();
 	cvWaitKey();
