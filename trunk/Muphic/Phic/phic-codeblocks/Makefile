@@ -11,12 +11,12 @@ AR = ar
 LD = g++
 WINDRES = windres
 
-INC =  -I../source/include -I../ext/include/opencv -I../ext/include -I../../TinyXML/include -I../../common/include
+INC =  -I../source/include -I../ext/include/opencv -I../ext/include -I../../TinyXML/include -I../../common/include -I../ext/include-ext
 CFLAGS =  -Wall
 RESINC = 
-LIBDIR =  -L../source/include -L../ext/libs-gcc
-LIB = 
-LDFLAGS =  -lopencv_core -lopencv_highgui -lopencv_video -lopencv_ml -lopencv_legacy -lopencv_imgproc
+LIBDIR =  -L../source/include -L../ext/libs-gcc -L../ext/libs-gcc-ext -L../ext/include-ext
+LIB =  ../ext/libs-gcc/libopencv_core.so ../ext/libs-gcc/libopencv_highgui.so ../ext/libs-gcc/libopencv_imgproc.so
+LDFLAGS = 
 
 INC_DEBUG =  $(INC)
 CFLAGS_DEBUG =  $(CFLAGS) -g

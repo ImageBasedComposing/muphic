@@ -37,19 +37,19 @@
 			<Add directory="../ext/include" />
 			<Add directory="../../TinyXML/include" />
 			<Add directory="../../common/include" />
+			<Add directory="../ext/include-ext" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="../source/include" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="-lopencv_core" />
-			<Add option="-lopencv_highgui" />
-			<Add option="-lopencv_video" />
-			<Add option="-lopencv_ml" />
-			<Add option="-lopencv_legacy" />
-			<Add option="-lopencv_imgproc" />
+			<Add library="../ext/libs-gcc/libopencv_core.so" />
+			<Add library="../ext/libs-gcc/libopencv_highgui.so" />
+			<Add library="../ext/libs-gcc/libopencv_imgproc.so" />
 			<Add directory="../source/include" />
 			<Add directory="../ext/libs-gcc" />
+			<Add directory="../ext/libs-gcc-ext" />
+			<Add directory="../ext/include-ext" />
 		</Linker>
 		<Unit filename="../source/include/FigureImg.h" />
 		<Unit filename="../source/include/Phic.h" />
