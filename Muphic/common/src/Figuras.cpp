@@ -193,7 +193,7 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 
 		// Conseguimos los atributos de la figura
 		figura->setId(atoi(handle.FirstChildElement("id").ToElement()->GetText()));
-		figura->setNumVertices(atoi(handle.FirstChildElement("vertexList").ToElement()->Attribute("num")));
+		int sizeVertices = atoi(handle.FirstChildElement("vertexList").ToElement()->Attribute("num"));
 		figura->setParent(id);
 		figura->setColor(handle.FirstChildElement("color").FirstChildElement("name").ToElement()->GetText());
 		figura->setRGB((float)atof(handle.FirstChildElement("color").FirstChildElement("RGB").FirstChildElement("R").ToElement()->GetText()),
@@ -204,7 +204,7 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		TiXmlNode* vertice = f->FirstChildElement("vertexList")->FirstChildElement("vertex");
 
 		// Conseguimos la lista de vértices de la figura
-		for( int i = 0; i < figura->getNumVertices(); i++)
+		for( int i = 0; i < sizeVertices; i++)
 		{
 			v = new Vertice();
 			v->x = atoi(vertice->FirstChildElement("position")->FirstChildElement("x")->GetText());
