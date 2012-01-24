@@ -16,6 +16,8 @@ Figura::Figura()
 	pR = 0.45f;
 	pG = 0.35f;
 	pB = 0.20f;
+
+	numVertices = 0;
 }
 
 Figura::~Figura()
@@ -31,7 +33,9 @@ Figura::~Figura()
 
 bool Figura::compare(Figura* f1, Figura* f2)
 {
-	return f1->getId() > f2->getId();
+	return f1->getArea() > f2->getArea();
+	//return f1->sizeVertices() < f2->sizeVertices();
+	//return f1->getId() > f2->getId();
 }
 
 //------Getters------//
@@ -47,6 +51,7 @@ Color Figura::getRGB()
 
 int Figura::getNumVertices()
 {
+	//return listaVertices.size();
 	return numVertices;
 }
 
@@ -130,6 +135,7 @@ int Figura::sizeHijos()
 void Figura::colocarVertice(Vertice* v)
 {
 	listaVertices.push_back(v);
+	numVertices++;
 }
 
 void Figura::colocarHijo(Figura* f)

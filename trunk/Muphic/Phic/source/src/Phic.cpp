@@ -32,12 +32,13 @@ int filtro = 2;
 
 void on_trackbar(int)
 {
+	srand( time(NULL));
 
 	// We create Image Data
 	int id = 0;
 	CvMemStorage*   g_storage = NULL;
 	CvScalar red = CV_RGB(250,0,0);
-	CvScalar blue = CV_RGB(0,0,250);
+	CvScalar blue = CV_RGB(250,250,250);
 	IplImage* g_image = cvLoadImage( "1.png" );
 	IplImage* g_gray = NULL;
 
@@ -94,6 +95,10 @@ void on_trackbar(int)
 	// We copy contour data to our figure type
 	CvSeq* first_polygon = NULL;
 	
+
+
+	IplImage* mask = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+
 	if( contours )
 	{
 		//convert the pixel contours to line segments in a polygon.
@@ -114,7 +119,7 @@ void on_trackbar(int)
 				red,			// Red
 				blue,           // Blue
 				1,              // Vary max_level and compare results
-				1,
+				CV_FILLED,//1,
 				8 );
 			printf( "Contour #%dn", n );
 				
@@ -130,13 +135,6 @@ void on_trackbar(int)
 			}
 			//if (!padreDone)
 				//cvWaitKey();
-
-			pair<int,int> bar = f->getBarycenter();
-			cout << n << " " << endl;
-
-			// Cogemos el color del baricentro de la figura
-			CvScalar s = cvGet2D(g_copy, bar.second, bar.first);
-			f->setRGB(s.val[0], s.val[1], s.val[2]);
 				
 			// Calculamos el area de cada poligono
 			area = cvContourArea(c);
@@ -161,6 +159,62 @@ void on_trackbar(int)
 			else
 				cvWaitKey();
 
+
+
+			// old get color
+			//pair<int,int> bar = f->getBarycenter();
+			//cout << n << " " << endl;
+
+			// Cogemos el color del baricentro de la figura
+			//CvScalar s = cvGet2D(g_image, bar.second, bar.first);
+			
+			//f->setRGB(s.val[0], s.val[1], s.val[2]);
+			//f->setRGB(rand()%255, rand()%255,rand()%255);
+
+
+
+			// new get colour
+
+			cvZero( mask );
+			cvDrawContours(
+				mask,
+				c,
+				blue,			// Red
+				blue,           // Blue
+				0,              // Vary max_level and compare results
+				CV_FILLED,//1,
+				8 );
+
+			cvShowImage( "Contours", mask );
+			cvWaitKey();
+			CvScalar s;
+			Vec3b test;
+			cv::Mat image = mask;
+			int r, g, b, num;
+			r = g = b = 0;
+			num = 0;
+			for (int i=0; i<image.rows; i++)
+			{
+				for (int j=0; j<image.cols; j++)
+				{
+					s = cvGet2D(mask, i, j);
+					if (s.val[0] == 0)
+						continue;
+
+					s = cvGet2D(g_image, i, j);
+
+					r += s.val[2];
+			
+					g += s.val[1];
+
+					b += s.val[0];
+
+					num++;
+				}
+			}
+			f->setRGB(r/num, g/num, b/num);
+
+
 			cvShowImage( "Contours", g_contours );
 
 			// We add the figure to our figure list
@@ -183,6 +237,7 @@ void on_trackbar(int)
 	}
 	cvShowImage( "Contours", g_gray );
 
+	figuras->getPadreAt(0)->sortHijo();
 	cvWaitKey();
 	figuras->guardar("test1.xml");
 }
