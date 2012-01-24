@@ -34,6 +34,10 @@ void Figuras::cargar(string rutaXML)
 	sheetWidth = atoi(shapesNode->FirstChild("width")->ToElement()->GetText());
 	sheetHeight = atoi(shapesNode->FirstChild("height")->ToElement()->GetText());
 
+	//Reiniciamos el total de area y vertices
+	totalArea = 0;
+	totalVertices = 0;
+
 	//Vamos a la primera figura
 	TiXmlNode* figuraNode = shapesNode->FirstChild("figure");
 
@@ -237,6 +241,10 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		// Añadimos la figura a la lista de figuras
 		colocarFig(figura);
 
+		//Añadimos al total de vertices y area
+		totalVertices += figura->getNumVertices();
+		totalArea += figura->getArea();
+
 		// Si la figura tiene figuras en su interior hacemos la llamada recursiva pertinente
 		if(handle.FirstChildElement("canvas").ToElement())
 		{
@@ -374,6 +382,16 @@ int Figuras::getHeight()
 int Figuras::getWidth()
 {
 	return sheetWidth;
+}
+
+int Figuras::getTotalVertices()
+{
+	return totalVertices;
+}
+
+int Figuras::getTotalArea()
+{
+	return totalArea;
 }
 
 //list<Figura*>* Figuras::getFiguras()

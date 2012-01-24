@@ -45,15 +45,23 @@ class Figuras
 		/* Getters */
 		int getHeight();
 		int getWidth();
+		int getTotalVertices();
+		int getTotalArea();
 		//list<Figura*>* getFiguras();
 		//list<Figura*>* getFigPadre();
 
 		void setWidth(int h) {	sheetHeight = h; }
 		void setHeight(int w) { sheetWidth = w; }
+		void setTotalVertices(int v) { totalVertices = v; }
+		void setTotalArea(int a) { totalArea = a; }
 
     protected:
 		int sheetWidth;
 		int sheetHeight;
+		//Numero total de vértices
+		int totalVertices;
+		//Area que abarcan todas las figuras
+		int totalArea;
 		list<Figura*> figuras;
 		list<Figura*> figPadres;
 
