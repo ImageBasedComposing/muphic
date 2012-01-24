@@ -11,7 +11,7 @@ Figura::Figura()
 	A = 0.5f;
 	B = 0.3f;
 	C = 0.2f;
-		
+
 	// Color priority consts
 	pR = 0.45f;
 	pG = 0.35f;
@@ -262,7 +262,7 @@ std::pair<int,int> Figura::getSimpleCenter()
 			ymax = (*it)->y;
 		else if ((*it)->y < ymin)
 			ymin = (*it)->y;
-		
+
 		it++;
 	}
 
@@ -365,7 +365,7 @@ double Figura::distanceCenter(int sHeight, int sWidth)
 
 	std::list<Vertice*>::iterator it = listaVertices.begin();
 	double minDist = dist2DPoints((*it)->getPair(),centro);
-	
+
 	// We calculate the distance of the nearer vertex to the center
 	for(it; it != listaVertices.end(); it++)
 	{
@@ -380,7 +380,7 @@ double Figura::distanceCenter(int sHeight, int sWidth)
         delete (*it);
         it++;
     }
-	
+
 	// We return that distance
 	return minDist;
 }
@@ -400,7 +400,7 @@ float Figura::getSaturation()
 		if(rgb.b > rgb.g)
 			min = rgb.g;
 	}
-	else 
+	else
 	{
 		min = rgb.r;
 		max = rgb.b;
@@ -436,10 +436,11 @@ int* Figura::radialDivision(int ndiv, double initAlpha)
 		p = getVerticeAt(i);
 		if (!p->centro)
 		{
-			points[locateLocalSector(p->x, p->y, center.first, center.second, ndiv, initAlpha)]++;
+			//points[locateLocalSector(p->x, p->y, center.first, center.second, ndiv, initAlpha)]++;
+			points [0]++;
 		}
 	}
-	
+
 
 	int a1 = points[0];
 	int a2 = points[1];
