@@ -86,7 +86,7 @@ string ComposerTimothy::compose()
 	m->setVoces(vs);
 
 	// We assign the element that will create the music from our structures
-	m->setMidizator(new MidizatorABC());
+	m->setMidizator(new MidizatorWAV());
 
 	// We make the music using the midizator previously selected
 	return m->toMidi();
