@@ -21,6 +21,8 @@ string ComposerTimothy::compose()
 
 	fgs->calculateVisibility();
 
+	DURACION = fgs->getTotalVertices()*SIXTEENTHNOTE;
+
 	// We create the pattern with whom we will compose in this composer
 	//PatternGen<Figura*>* pg = new PatternGen<Figura*>();
 	PriorityPattern* p = new PriorityPattern();
@@ -87,6 +89,7 @@ string ComposerTimothy::compose()
 
 	// We assign the element that will create the music from our structures
 	m->setMidizator(new MidizatorWAV());
+
 	m->toMidi();
 
 	m->setMidizator(new MidizatorABC());
