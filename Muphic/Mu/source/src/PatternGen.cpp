@@ -1,4 +1,0 @@
-#include "PatternGen.h"
-
-
-// deprecated

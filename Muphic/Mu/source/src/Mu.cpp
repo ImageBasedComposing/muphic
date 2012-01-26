@@ -1,8 +1,8 @@
 #include "Mu.h"
-#include "ComposerDemo.h"
-#include "ComposerMultiple.h"
-#include "ComposerTimothy.h"
-#include "Acorde.h"
+#include "Compositors/ComposerDemo.h"
+#include "Compositors/ComposerMultiple.h"
+#include "Compositors/ComposerTimothy.h"
+#include "Music/Acorde.h"
 
 Mu::Mu()
 {

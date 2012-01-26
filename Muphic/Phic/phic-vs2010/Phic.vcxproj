@@ -73,7 +73,6 @@
     <ClInclude Include="..\..\common\include\Figuras.h" />
     <ClInclude Include="..\..\common\include\math_functions.h" />
     <ClInclude Include="..\..\common\include\Vertice.h" />
-    <ClInclude Include="..\..\common\include\XML_Interface.h" />
     <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
     <ClInclude Include="..\source\include\aux_elements.h" />
@@ -86,7 +85,6 @@
     <ClCompile Include="..\..\common\src\Figura.cpp" />
     <ClCompile Include="..\..\common\src\Figuras.cpp" />
     <ClCompile Include="..\..\common\src\Vertice.cpp" />
-    <ClCompile Include="..\..\common\src\XML_Interface.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinystr.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp" />
