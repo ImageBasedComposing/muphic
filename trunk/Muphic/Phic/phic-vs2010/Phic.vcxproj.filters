@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de código fuente\Commons">
+      <UniqueIdentifier>{982afcff-96bf-4596-a673-424718692959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Commons">
+      <UniqueIdentifier>{89d9e000-2c4c-4003-827a-ebb31d5a467b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\TinyXML">
+      <UniqueIdentifier>{20f013c1-a7cf-4415-b409-733a4ead97b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\TinyXML">
+      <UniqueIdentifier>{e61bc628-5446-4356-b043-8b2e444557ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\include\Phic.h">
@@ -21,35 +33,32 @@
     <ClInclude Include="..\source\include\PolygonMaker.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\aux_elements.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\FigureImg.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\Figura.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\Figuras.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\Vertice.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\math_functions.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\TinyXML\include\tinystr.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\TinyXML\include\tinyxml.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\XML_Interface.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\source\include\RegionMaker.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\aux_elements.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Figura.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Figuras.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\math_functions.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Vertice.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\include\tinyxml.h">
+      <Filter>Archivos de encabezado\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\TinyXML\include\tinystr.h">
+      <Filter>Archivos de encabezado\TinyXML</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,32 +71,29 @@
     <ClCompile Include="..\source\src\FigureImg.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\src\Figuras.cpp">
+    <ClCompile Include="..\source\src\RegionMaker.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\src\Figura.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Commons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\src\Figuras.cpp">
+      <Filter>Archivos de código fuente\Commons</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\src\Vertice.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\common\src\XML_Interface.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Commons</Filter>
     </ClCompile>
     <ClCompile Include="..\..\TinyXML\src\tinystr.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\TinyXML</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\RegionMaker.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp">
+      <Filter>Archivos de código fuente\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp">
+      <Filter>Archivos de código fuente\TinyXML</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

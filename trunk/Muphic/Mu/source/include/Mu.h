@@ -4,7 +4,7 @@
 #define MU_H
 
 #include "UsrConf.h"
-#include "Composer.h"
+#include "Compositors/Composer.h"
 
 #include <string>
 #include <iostream>

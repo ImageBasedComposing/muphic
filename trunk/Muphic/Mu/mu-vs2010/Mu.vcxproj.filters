@@ -13,240 +13,264 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Archivos de código fuente\Music">
+      <UniqueIdentifier>{6028e36f-ed99-484b-a637-6099dd200d10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Compositors">
+      <UniqueIdentifier>{5a5660bf-e606-497e-a533-a38d829756ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Music">
+      <UniqueIdentifier>{ca28a60d-73ce-4bdb-a9af-0da1a6b408ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Compositors">
+      <UniqueIdentifier>{097db09f-fa0c-4be5-baa9-df5a772fdd1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\TinyXML">
+      <UniqueIdentifier>{5a20ebae-391b-44c3-bfda-1880c38b9095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Commons">
+      <UniqueIdentifier>{75363557-a929-402b-a7d3-7ad3a740e3f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Outputs">
+      <UniqueIdentifier>{48f4f957-76ea-4744-916c-babd22d051be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Outputs">
+      <UniqueIdentifier>{6e558cf0-ea2a-4123-ba34-c6b39fe55026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Commons">
+      <UniqueIdentifier>{39073c2f-5218-4177-bcb3-d9b2987d3e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\TinyXML">
+      <UniqueIdentifier>{26bdeca8-4bed-4f1b-8a53-35a0a7499690}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\include\Composer.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\Conf.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\source\include\Mu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\Music.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Simbolo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Simbolos.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\UsrConf.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\Voces.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\source\include\Music\Acorde.h">
+      <Filter>Archivos de encabezado\Music</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\Voz.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\source\include\Music\FigureMusic.h">
+      <Filter>Archivos de encabezado\Music</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\ComposerDemo.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\source\include\Music\FiguresMusic.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\instruments.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Music.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\music_const.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\music_elements.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Nota.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Segmento.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Segmentos.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Simbolo.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Simbolos.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\TableScale.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Voces.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Music\Voz.h">
+      <Filter>Archivos de encabezado\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Output\Midizator.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Output\MidizatorABC.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Output\MidizatorWAV.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Output\TableTransform.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\TinyXML\include\tinystr.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\TinyXML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\MidizatorABC.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\TinyXML</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\include\aux_functions.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Segmento.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Segmentos.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\music_elements.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Acorde.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Nota.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Midizator.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\PatternGen.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Patterns.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\ComposerRitmo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\launcher.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\ComposerMultiple.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\instruments.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\ComposerMelodia.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\TableTransform.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\music_const.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\TableScale.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\ComposerFigMelody.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\ComposerFigRitmo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\ComposerTimothy.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\FigureMusic.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\FiguresMusic.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\MidizatorWAV.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\Figura.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\Figuras.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\Vertice.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\math_functions.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\common\include\XML_Interface.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Commons</Filter>
     </ClInclude>
     <ClInclude Include="..\..\common\include\aux_structs.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Figura.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Figuras.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\math_functions.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\launcher.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\Composer.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerDemo.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerFigMelody.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerFigRitmo.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerMelodia.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerMultiple.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerRitmo.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerTimothy.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\PatternGen.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\Patterns.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\include\Vertice.h">
+      <Filter>Archivos de encabezado\Commons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\src\Composer.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Conf.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Midizator.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\src\Mu.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Music.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Simbolo.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Simbolos.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\source\src\UsrConf.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Voces.cpp">
+    <ClCompile Include="..\source\src\Conf.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Voz.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Acorde.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\ComposerDemo.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\FigureMusic.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\TinyXML\src\tinystr.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\FiguresMusic.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Music.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Nota.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Segmento.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\MidizatorABC.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Segmentos.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Segmento.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Simbolo.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Segmentos.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Simbolos.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Acorde.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Voces.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Nota.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Music\Voz.cpp">
+      <Filter>Archivos de código fuente\Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\PatternGen.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\Composer.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\ComposerRitmo.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\ComposerDemo.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\src\launcher.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\composerFigMelody.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\ComposerMultiple.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\composerFigRitmo.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\ComposerMelodia.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\ComposerMelodia.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\composerFigMelody.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\ComposerMultiple.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\composerFigRitmo.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\ComposerRitmo.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\ComposerTimothy.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\ComposerTimothy.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\FigureMusic.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Compositors\PatternGen.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\FiguresMusic.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Output\Midizator.cpp">
+      <Filter>Archivos de código fuente\Outputs</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\MidizatorWAV.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\source\src\Output\MidizatorABC.cpp">
+      <Filter>Archivos de código fuente\Outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\Output\MidizatorWAV.cpp">
+      <Filter>Archivos de código fuente\Outputs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\src\Figura.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Commons</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\src\Figuras.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Commons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\src\launcher.cpp">
+      <Filter>Archivos de código fuente\Commons</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\src\Vertice.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\Commons</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\src\XML_Interface.cpp">
-      <Filter>Archivos de código fuente</Filter>
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp">
+      <Filter>Archivos de código fuente\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\src\tinystr.cpp">
+      <Filter>Archivos de código fuente\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp">
+      <Filter>Archivos de código fuente\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp">
+      <Filter>Archivos de código fuente\TinyXML</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
