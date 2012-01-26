@@ -454,3 +454,82 @@ int* Figura::radialDivision(int ndiv, double initAlpha)
 	int a4 = points[3];
 	return points;
 }
+
+/*
+bool Figura::isPointInside(Vertice* v)
+{
+	// set iterator at initial vertex
+	list<Vertice*>::iterator it = listaVertices.begin();
+	Vertice* currentVertex, * nextVertex;
+	int n = 0;
+
+	Vertice* ca = new Vertice();
+	Vertice* normal = new Vertice();
+	int dotscalar;
+
+	bool inside = true;
+	while (n < getNumVertices() && inside)
+	{
+		// get current vertex
+		currentVertex = (*it);
+		// get next vertex
+		it++;
+		if (it == listaVertices.end())
+			it = listaVertices.begin();
+		nextVertex = (*it);
+
+		//
+		//	dot scalar between ca (vector from currentVertex to given point v)
+		//	and the vector perpendicular to the current edge (normal)
+		//
+		//	if > 0, its outside, whereas if < 0 it's inside
+		//	= 0 means it's parallel, which is inside
+		//
+		ca->x = ( v->x - currentVertex->x );
+		ca->y = ( v->y - currentVertex->y );
+
+
+		// DEPENDS ON THE DIRECTION WERE MOVING
+		// 
+		normal->x = currentVertex->y - nextVertex->y;
+		normal->y = nextVertex->x - currentVertex->x;
+
+		dotscalar = normal->x * ca->x + normal->y * ca->y;
+
+		if (dotscalar > 0)
+			inside = false;
+		else
+			inside = true;
+
+		// advance
+		n++;
+	}
+
+	return inside;
+}*/
+
+
+bool Figura::isPointInside(Vertice* v)
+{
+  int i, j = 0;
+  bool c = false;
+  for (i = 0, j = listaVertices.size()-1; i < listaVertices.size(); j = i++) {
+    if ( ((getVerticeAt(i)->y >v->y) != (getVerticeAt(j)->y >v->y)) &&
+	 (v->x < (getVerticeAt(j)->x - getVerticeAt(i)->x) * (v->y-getVerticeAt(i)->y) / (getVerticeAt(j)->y-getVerticeAt(i)->y) + getVerticeAt(i)->x) )
+       c = !c;
+  }
+
+  return c;
+}
+
+bool Figura::isFigureInside(Figura* f)
+{
+	std::list<Vertice*>::iterator it;
+	bool inside = true;
+	for(it = f->listaVertices.begin(); inside && it != f->listaVertices.end(); it++)
+	{
+		inside = isPointInside(*it);
+	}
+
+	return inside;
+}

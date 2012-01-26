@@ -410,9 +410,40 @@ Figura* Figuras::createFigure()
 	return f;
 }
 
-////Prueba descomentar
-//int main( int argc, const char* argv[] )
-//{
-//	Figuras* f = new Figuras();
-//	f->cargar("test2");
-//}
+
+#include <iostream>
+bool Figuras::setSonParentStructure()
+{
+	// if figPadres is not empty, delete it
+	if (figPadres.size() != 0)
+		figPadres.clear();//return false;
+
+
+	Figura* figure;
+	Figura* tmp;
+	bool a;
+
+	for (int j = 0; j < sizeFig() - 1; j++)
+	{
+		figure = getFigAt(j);
+		for (int i = j + 1; i < sizeFig(); i++)
+		{
+			tmp = getFigAt(i);
+			if (figure->getId() == 258)
+				int b = 3;
+			if (tmp->getId() == 108)
+				int c = 2;
+			a = figure->isFigureInside(tmp);
+			if (a)
+				cout << "yes ";
+			a = tmp->isFigureInside(figure);
+			if (a)
+				cout << "sey ";
+
+			cout << i;
+			cout << endl;
+		}
+	}
+
+	return true;
+}

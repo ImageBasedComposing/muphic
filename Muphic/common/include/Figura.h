@@ -95,8 +95,10 @@ class Figura
 		float pG;
 		float pB;
 
-    private:
+    public:
 
+		bool isPointInside(Vertice* v);
+		bool isFigureInside(Figura* f);
 };
 
 #endif // FIGURA_H

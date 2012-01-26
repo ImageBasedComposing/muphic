@@ -68,7 +68,9 @@ class Figuras
 		void cargarRec(TiXmlNode* f, Figura* padre = NULL);
 		void guardarRec(TiXmlElement* f, Figura* id);
 		virtual Figura* createFigure();
-    private:
+
+    public:
+		bool setSonParentStructure();
 };
 
 #endif // FIGURAS_H
