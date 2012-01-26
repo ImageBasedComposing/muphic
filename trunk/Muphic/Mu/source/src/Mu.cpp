@@ -60,9 +60,10 @@ int main( int argc, const char* argv[] )
 
 	compTimy->compose(analysedPic, usrConfPath);
 
-	/*Figuras* f = new Figuras();
+/*
+	Figuras* f = new Figuras();
 	f->cargar("test1");
-	f->guardar("test.xml");*/
+	f->setSonParentStructure();*/
 
 	return 0;
 }

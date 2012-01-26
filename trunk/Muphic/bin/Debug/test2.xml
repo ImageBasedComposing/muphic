@@ -1,5 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
 <shapes>
+	<width>281</width>
+	<height>227</height>
 	<figure>
 		<id>1
 		</id>
@@ -8,7 +10,7 @@
 			<name>Amarillo</name>
 			<RGB>
 				<R>255</R>
-				<G>242</G>
+				<G>255</G>
 				<B>0</B>
 			</RGB>
 			<gradient>0</gradient>
@@ -39,6 +41,7 @@
 					<y>143</y>
 				</position>
 			</vertex>
+			
 		</vertexList>
 		<area>4</area>
 		<canvas>
@@ -46,7 +49,7 @@
 				<id>2</id>
 				
 				<color>
-					<name>Gris</name>
+					<name>Amarillo</name>
 					<RGB>
 						<R>195</R>
 						<G>195</G>
@@ -86,9 +89,9 @@
 		<color>
 			<name>Rojo</name>
 			<RGB>
-				<R>237</R>
-				<G>28</G>
-				<B>36</B>
+				<R>255</R>
+				<G>0</G>
+				<B>0</B>
 			</RGB>
 			<gradient>0</gradient>
 		</color>
