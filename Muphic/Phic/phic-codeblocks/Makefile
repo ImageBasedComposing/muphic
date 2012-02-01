@@ -40,9 +40,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = ../../bin/Release/Phic
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../../common/src/Vertice.o $(OBJDIR_DEBUG)/../../common/src/Figuras.o $(OBJDIR_DEBUG)/../../common/src/Figura.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../source/src/Phic.o $(OBJDIR_DEBUG)/../source/src/FigureImg.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/../../common/src/Vertice.o $(OBJDIR_DEBUG)/../../common/src/Figuras.o $(OBJDIR_DEBUG)/../../common/src/Figura.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../source/src/Phic.o $(OBJDIR_DEBUG)/../source/src/FigureImg.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../../common/src/Vertice.o $(OBJDIR_RELEASE)/../../common/src/Figuras.o $(OBJDIR_RELEASE)/../../common/src/Figura.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../source/src/Phic.o $(OBJDIR_RELEASE)/../source/src/FigureImg.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/../../common/src/Vertice.o $(OBJDIR_RELEASE)/../../common/src/Figuras.o $(OBJDIR_RELEASE)/../../common/src/Figura.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../source/src/Phic.o $(OBJDIR_RELEASE)/../source/src/FigureImg.o
 
 all: debug release
 
@@ -50,8 +50,8 @@ clean: clean_debug clean_release
 
 before_debug: 
 	test -d ../../bin/Debug || mkdir -p ../../bin/Debug
-	test -d $(OBJDIR_DEBUG)/../../TinyXML/src || mkdir -p $(OBJDIR_DEBUG)/../../TinyXML/src
 	test -d $(OBJDIR_DEBUG)/../../common/src || mkdir -p $(OBJDIR_DEBUG)/../../common/src
+	test -d $(OBJDIR_DEBUG)/../../TinyXML/src || mkdir -p $(OBJDIR_DEBUG)/../../TinyXML/src
 	test -d $(OBJDIR_DEBUG)/../source/src || mkdir -p $(OBJDIR_DEBUG)/../source/src
 
 after_debug: 
@@ -61,9 +61,6 @@ debug: before_debug out_debug after_debug
 out_debug: $(OBJ_DEBUG) $(DEP_DEBUG)
 	$(LD) $(LDFLAGS_DEBUG) $(LIBDIR_DEBUG) $(OBJ_DEBUG) $(LIB_DEBUG) -o $(OUT_DEBUG)
 
-$(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o: ../../TinyXML/src/tinyxmlparser.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../TinyXML/src/tinyxmlparser.cpp -o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o
-
 $(OBJDIR_DEBUG)/../../common/src/Vertice.o: ../../common/src/Vertice.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/Vertice.cpp -o $(OBJDIR_DEBUG)/../../common/src/Vertice.o
 
@@ -72,6 +69,9 @@ $(OBJDIR_DEBUG)/../../common/src/Figuras.o: ../../common/src/Figuras.cpp
 
 $(OBJDIR_DEBUG)/../../common/src/Figura.o: ../../common/src/Figura.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/Figura.cpp -o $(OBJDIR_DEBUG)/../../common/src/Figura.o
+
+$(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o: ../../TinyXML/src/tinyxmlparser.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../TinyXML/src/tinyxmlparser.cpp -o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o
 
 $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o: ../../TinyXML/src/tinyxmlerror.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../TinyXML/src/tinyxmlerror.cpp -o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o
@@ -91,14 +91,14 @@ $(OBJDIR_DEBUG)/../source/src/FigureImg.o: ../source/src/FigureImg.cpp
 clean_debug: 
 	rm -f $(OBJ_DEBUG) $(OUT_DEBUG)
 	rm -rf ../../bin/Debug
-	rm -rf $(OBJDIR_DEBUG)/../../TinyXML/src
 	rm -rf $(OBJDIR_DEBUG)/../../common/src
+	rm -rf $(OBJDIR_DEBUG)/../../TinyXML/src
 	rm -rf $(OBJDIR_DEBUG)/../source/src
 
 before_release: 
 	test -d ../../bin/Release || mkdir -p ../../bin/Release
-	test -d $(OBJDIR_RELEASE)/../../TinyXML/src || mkdir -p $(OBJDIR_RELEASE)/../../TinyXML/src
 	test -d $(OBJDIR_RELEASE)/../../common/src || mkdir -p $(OBJDIR_RELEASE)/../../common/src
+	test -d $(OBJDIR_RELEASE)/../../TinyXML/src || mkdir -p $(OBJDIR_RELEASE)/../../TinyXML/src
 	test -d $(OBJDIR_RELEASE)/../source/src || mkdir -p $(OBJDIR_RELEASE)/../source/src
 
 after_release: 
@@ -108,9 +108,6 @@ release: before_release out_release after_release
 out_release: $(OBJ_RELEASE) $(DEP_RELEASE)
 	$(LD) $(LDFLAGS_RELEASE) $(LIBDIR_RELEASE) $(OBJ_RELEASE) $(LIB_RELEASE) -o $(OUT_RELEASE)
 
-$(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o: ../../TinyXML/src/tinyxmlparser.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../TinyXML/src/tinyxmlparser.cpp -o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o
-
 $(OBJDIR_RELEASE)/../../common/src/Vertice.o: ../../common/src/Vertice.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/Vertice.cpp -o $(OBJDIR_RELEASE)/../../common/src/Vertice.o
 
@@ -119,6 +116,9 @@ $(OBJDIR_RELEASE)/../../common/src/Figuras.o: ../../common/src/Figuras.cpp
 
 $(OBJDIR_RELEASE)/../../common/src/Figura.o: ../../common/src/Figura.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/Figura.cpp -o $(OBJDIR_RELEASE)/../../common/src/Figura.o
+
+$(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o: ../../TinyXML/src/tinyxmlparser.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../TinyXML/src/tinyxmlparser.cpp -o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o
 
 $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o: ../../TinyXML/src/tinyxmlerror.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../TinyXML/src/tinyxmlerror.cpp -o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o
@@ -138,8 +138,8 @@ $(OBJDIR_RELEASE)/../source/src/FigureImg.o: ../source/src/FigureImg.cpp
 clean_release: 
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)
 	rm -rf ../../bin/Release
-	rm -rf $(OBJDIR_RELEASE)/../../TinyXML/src
 	rm -rf $(OBJDIR_RELEASE)/../../common/src
+	rm -rf $(OBJDIR_RELEASE)/../../TinyXML/src
 	rm -rf $(OBJDIR_RELEASE)/../source/src
 
 .PHONY: before_debug after_debug clean_debug before_release after_release clean_release
