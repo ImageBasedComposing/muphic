@@ -49,7 +49,7 @@
 				<id>2</id>
 				
 				<color>
-					<name>Amarillo</name>
+					<name>Gris</name>
 					<RGB>
 						<R>195</R>
 						<G>195</G>
@@ -96,17 +96,29 @@
 			<gradient>0</gradient>
 		</color>
 		
-		<vertexList num="2">
-			<vertex type="center">
+		<vertexList num="4">
+			<vertex>
 				<position>
-					<x>193</x>
-					<y>88</y>
+					<x>270</x>
+					<y>50</y>
 				</position>
 			</vertex>
 			<vertex>
 				<position>
-					<x>144</x>
-					<y>88</y>
+					<x>150</x>
+					<y>50</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x>150</x>
+					<y>150</y>
+				</position>
+			</vertex>
+			<vertex>
+				<position>
+					<x>270</x>
+					<y>150</y>
 				</position>
 			</vertex>
 		</vertexList>

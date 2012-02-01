@@ -411,39 +411,93 @@ Figura* Figuras::createFigure()
 }
 
 
-#include <iostream>
-bool Figuras::setSonParentStructure()
+void Figuras::showParentSonStructure(list<Figura*> padres, int level)
 {
-	// if figPadres is not empty, delete it
-	if (figPadres.size() != 0)
-		figPadres.clear();//return false;
-
-
-	Figura* figure;
-	Figura* tmp;
-	bool a;
-
-	for (int j = 0; j < sizeFig() - 1; j++)
+	for (list<Figura*>::iterator it = padres.begin(); it != padres.end(); it++)
 	{
-		figure = getFigAt(j);
-		for (int i = j + 1; i < sizeFig(); i++)
+		for (int i = 0; i < level; i++)
 		{
-			tmp = getFigAt(i);
-			if (figure->getId() == 258)
-				int b = 3;
-			if (tmp->getId() == 108)
-				int c = 2;
-			a = figure->isFigureInside(tmp);
-			if (a)
-				cout << "yes ";
-			a = tmp->isFigureInside(figure);
-			if (a)
-				cout << "sey ";
+			cout << "  ";
+		}
+		cout << (*it)->sizeVertices() << " " << (*it)->getColor() << endl;
+		showParentSonStructure((*it)->hijos, level + 1);
+	}
+}
 
-			cout << i;
-			cout << endl;
+
+void Figuras::addToParentSonStructure(Figura* f, list<Figura*> & padres)
+{
+	list<Figura*> deletables;
+	list<Figura*>::iterator it = padres.begin();
+	bool done = false;
+	while (it != padres.end() && !done)
+	{
+		// case 1: f is inside it
+		if ((*it)->isFigureInside(f))
+		{
+			// f may be the son of one of it's children
+			addToParentSonStructure(f, (*it)->hijos);
+			// f is inside this figure and we have finished
+			done = true;
+		}
+		// case 2: it is inside f
+		else if (f->isFigureInside(*it))
+		{
+			// it is f's son
+			f->colocarHijo(*it);
+			// it does not belong to this level anymore, we'll delete it later
+			deletables.push_back(*it);
+			// f may contain more figures, so duh
+			it++;
+		}
+		// none of that happens
+		else
+		{
+			it++;
 		}
 	}
 
-	return true;
+	// let's delete those duplicates
+	it = deletables.begin();
+	while (it != deletables.end())
+	{
+		padres.remove(*it);
+	}
+
+	// if noone contains f, it means f belongs to this level
+	if (!done)
+	{
+		padres.push_back(f);
+	}
+}
+
+
+void Figuras::setParentSonStructure()
+{
+	// if figPadres is not empty, delete it
+	if (figPadres.size() != 0)
+	{
+		figPadres.clear();
+
+		for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+		{
+			(*it)->hijos.clear();
+		}
+	}
+	
+
+	list<Figura*>::iterator it = figuras.begin();
+
+	// first figure is the initial solution
+	figPadres.push_back(*it);
+	it++;
+	for (it; it != figuras.end(); it++)
+	{
+		addToParentSonStructure((*it), figPadres);
+	}
+
+
+	showParentSonStructure(figPadres, 0);
+
+	system("PAUSE");
 }
