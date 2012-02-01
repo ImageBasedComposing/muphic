@@ -8,7 +8,7 @@
 //#include <list>
 //#include <string>
 #include "aux_functions.h"
-
+#include <iostream>
 
 using namespace std;
 
@@ -70,7 +70,9 @@ class Figuras
 		virtual Figura* createFigure();
 
     public:
-		bool setSonParentStructure();
+		void setParentSonStructure();
+		void addToParentSonStructure(Figura* f, list<Figura*> & padres);
+		void showParentSonStructure(list<Figura*> padres, int level);
 };
 
 #endif // FIGURAS_H

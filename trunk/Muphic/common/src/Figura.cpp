@@ -33,9 +33,9 @@ Figura::~Figura()
 
 bool Figura::compare(Figura* f1, Figura* f2)
 {
-	return f1->getArea() > f2->getArea();
+	//return f1->getArea() > f2->getArea();
 	//return f1->sizeVertices() < f2->sizeVertices();
-	//return f1->getId() > f2->getId();
+	return f1->getId() > f2->getId();
 }
 
 //------Getters------//

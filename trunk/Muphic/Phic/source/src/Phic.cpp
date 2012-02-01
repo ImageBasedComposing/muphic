@@ -250,13 +250,13 @@ void on_trackbar(int)
 			if (padreDone)
 			{
 				figuras->colocarFig(f);
-				f->setParent(padre);
-				padre->colocarHijo(f);
+				//f->setParent(padre);
+				//padre->colocarHijo(f);
 			}
 			else
 			{
 				figuras->colocarFig(f);
-				figuras->colocarPadre(f);
+				//figuras->colocarPadre(f);
 				padre = f;
 				padreDone = true;
 			}
@@ -271,7 +271,8 @@ void on_trackbar(int)
 	//setColorFromImage(father, g_image, NULL, maskAcum, true, false);
 
 
-	figuras->getPadreAt(0)->sortHijo();
+	//figuras->getPadreAt(0)->sortHijo();
+	figuras->setParentSonStructure();
 	cvWaitKey();
 	figuras->guardar("test1.xml");
 }
