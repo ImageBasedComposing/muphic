@@ -394,6 +394,11 @@ int Figuras::getTotalArea()
 	return totalArea;
 }
 
+list<Figura*> Figuras::getPadres()
+{
+    return figPadres;
+}
+
 //list<Figura*>* Figuras::getFiguras()
 //{
 //	return &figuras;

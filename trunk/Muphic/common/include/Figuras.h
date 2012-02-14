@@ -5,8 +5,6 @@
 
 #include "Figura.h"
 #include "tinyxml.h"
-//#include <list>
-//#include <string>
 #include "aux_functions.h"
 #include <iostream>
 
@@ -47,6 +45,7 @@ class Figuras
 		int getWidth();
 		int getTotalVertices();
 		int getTotalArea();
+                list<Figura*> getPadres();
 		//list<Figura*>* getFiguras();
 		//list<Figura*>* getFigPadre();
 

@@ -5,6 +5,7 @@
 
 #include "ui_guimupic.h"
 #include "launcher.h"
+#include "polygonwidget.h"
 
 #include <QFile>
 #include <QMessageBox>
@@ -30,6 +31,8 @@ public:
 
     void initialize();
 
+    void paintEvent(QPaintEvent*);
+
 private slots:
     void on_toolButton_OutputMidi_clicked();
 
@@ -44,6 +47,7 @@ private slots:
 private:
     Ui::GuiMupic *ui;
     QGraphicsScene * newScene;
+    PolygonWidget * poly;
 
     Launcher* l;
     pid_t pidPlay;

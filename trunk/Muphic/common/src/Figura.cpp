@@ -235,6 +235,16 @@ Figura* Figura::getHijoAt(int n)
 	return *it;
 }
 
+list<Vertice*> Figura::getVertices()
+{
+    return listaVertices;
+}
+
+list<Figura*> Figura::getHijos()
+{
+    return hijos;
+}
+
 //-----Other funcs-----//
 
 

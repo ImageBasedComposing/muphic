@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Sun Dec 11 01:27:53 2011
+** Created: Wed 15. Feb 00:46:52 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -30,6 +30,7 @@
 #include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include "polygonwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -56,6 +57,7 @@ public:
     QPushButton *pushButton_Play;
     QPushButton *pushButton_Stop;
     QSlider *horizontalSlider;
+    PolygonWidget *polyWidget;
     QMenuBar *menuBar;
     QMenu *menuAbout;
     QStatusBar *statusBar;
@@ -64,12 +66,12 @@ public:
     {
         if (GuiMupic->objectName().isEmpty())
             GuiMupic->setObjectName(QString::fromUtf8("GuiMupic"));
-        GuiMupic->resize(281, 378);
+        GuiMupic->resize(517, 381);
         centralWidget = new QWidget(GuiMupic);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 258, 313));
+        layoutWidget->setGeometry(QRect(10, 10, 251, 313));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -181,10 +183,13 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
+        polyWidget = new PolygonWidget(centralWidget);
+        polyWidget->setObjectName(QString::fromUtf8("polyWidget"));
+        polyWidget->setGeometry(QRect(270, 10, 161, 311));
         GuiMupic->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GuiMupic);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 281, 21));
+        menuBar->setGeometry(QRect(0, 0, 517, 21));
         menuAbout = new QMenu(menuBar);
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         GuiMupic->setMenuBar(menuBar);

@@ -58,6 +58,8 @@ class Figura
 		int getArea();
 		float getVistosidad();
 		float getColorDifference();
+                list<Vertice*> getVertices();
+                list<Figura*> getHijos();
 
 
 /*------Setters------*/

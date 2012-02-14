@@ -8,6 +8,16 @@ GuiMupic::GuiMupic(QWidget *parent) :
 
     l = new Launcher();
     pidPlay = -1;
+
+    //ui->verticalLayout->addWidget(poly, 200, 200, 200, 200);
+    /*poly = new PolygonWidget(this);
+    QGridLayout * mainLayout = new QGridLayout();
+    mainLayout->setColumnStretch(0, 1);
+    mainLayout->setColumnStretch(3, 1);
+    mainLayout->setRowMinimumHeight(8, 6);
+    mainLayout->addWidget(poly, 200, 10, 200, 200);
+
+    ui->setLayout(mainLayout);*/
 }
 
 GuiMupic::~GuiMupic()
@@ -82,7 +92,18 @@ void GuiMupic::on_pushButton_Stop_clicked()
         l->killProcess(pidPlay);
         pidPlay = -1;
     }
+
 }
+
+void GuiMupic::paintEvent(QPaintEvent*)
+{/*
+  QPainter painter(this);
+  painter.setRenderHint(QPainter::Antialiasing, true);
+  painter.setPen(QPen(Qt::black, 12, Qt::DashDotLine, Qt::RoundCap));
+  painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
+  painter.drawEllipse(80, 80, 400, 240);*/
+}
+
 
 void GuiMupic::on_pushButton_Play_clicked()
 {
