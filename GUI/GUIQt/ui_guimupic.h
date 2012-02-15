@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Wed 15. Feb 00:46:52 2012
+** Created: Wed 15. Feb 12:00:33 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGraphicsView>
+#include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -57,6 +58,7 @@ public:
     QPushButton *pushButton_Play;
     QPushButton *pushButton_Stop;
     QSlider *horizontalSlider;
+    QGroupBox *groupBox;
     PolygonWidget *polyWidget;
     QMenuBar *menuBar;
     QMenu *menuAbout;
@@ -66,7 +68,7 @@ public:
     {
         if (GuiMupic->objectName().isEmpty())
             GuiMupic->setObjectName(QString::fromUtf8("GuiMupic"));
-        GuiMupic->resize(517, 381);
+        GuiMupic->resize(447, 371);
         centralWidget = new QWidget(GuiMupic);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
@@ -183,13 +185,16 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        polyWidget = new PolygonWidget(centralWidget);
+        groupBox = new QGroupBox(centralWidget);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(270, 10, 171, 311));
+        polyWidget = new PolygonWidget(groupBox);
         polyWidget->setObjectName(QString::fromUtf8("polyWidget"));
-        polyWidget->setGeometry(QRect(270, 10, 161, 311));
+        polyWidget->setGeometry(QRect(10, 20, 151, 281));
         GuiMupic->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GuiMupic);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 517, 21));
+        menuBar->setGeometry(QRect(0, 0, 447, 21));
         menuAbout = new QMenu(menuBar);
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         GuiMupic->setMenuBar(menuBar);
@@ -215,6 +220,7 @@ public:
         pushButton_Generate->setText(QApplication::translate("GuiMupic", "Generate", 0, QApplication::UnicodeUTF8));
         pushButton_Play->setText(QString());
         pushButton_Stop->setText(QString());
+        groupBox->setTitle(QApplication::translate("GuiMupic", "Analysis output", 0, QApplication::UnicodeUTF8));
         menuAbout->setTitle(QApplication::translate("GuiMupic", "About", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

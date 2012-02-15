@@ -37,7 +37,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\common\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\common\include;$(IncludePath);$(ProjectDir)\..\TinyXML\include;</IncludePath>
     <OutDir>$(ProjectDir)\..\bin\Debug\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -66,11 +66,19 @@
   <ItemGroup>
     <ClInclude Include="..\common\include\aux_functions.h" />
     <ClInclude Include="..\common\include\launcher.h" />
+    <ClInclude Include="..\common\include\UsrConf.h" />
     <ClInclude Include="..\source\include\Muphic.h" />
+    <ClInclude Include="..\TinyXML\include\tinystr.h" />
+    <ClInclude Include="..\TinyXML\include\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\src\launcher.cpp" />
+    <ClCompile Include="..\common\src\UsrConf.cpp" />
     <ClCompile Include="..\source\src\Muphic.cpp" />
+    <ClCompile Include="..\TinyXML\src\tinystr.cpp" />
+    <ClCompile Include="..\TinyXML\src\tinyxml.cpp" />
+    <ClCompile Include="..\TinyXML\src\tinyxmlerror.cpp" />
+    <ClCompile Include="..\TinyXML\src\tinyxmlparser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

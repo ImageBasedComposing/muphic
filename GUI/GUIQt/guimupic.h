@@ -6,6 +6,7 @@
 #include "ui_guimupic.h"
 #include "launcher.h"
 #include "polygonwidget.h"
+#include "UsrConf.h"
 
 #include <QFile>
 #include <QMessageBox>

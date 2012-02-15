@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     ../../Muphic/TinyXML/src/tinyxmlerror.cpp \
     ../../Muphic/TinyXML/src/tinyxml.cpp \
     ../../Muphic/TinyXML/src/tinystr.cpp \
-    polygonwidget.cpp
+    polygonwidget.cpp \
+    ../../Muphic/common/src/UsrConf.cpp
 
 HEADERS  += guimupic.h \
     ../../Muphic/common/include/launcher.h \
@@ -36,13 +37,16 @@ HEADERS  += guimupic.h \
     ../../Muphic/TinyXML/include/tinyxml.h \
     ../../Muphic/TinyXML/include/tinystr.h \
     ../../Muphic/TinyXML/include/tinyxml.h \
-    polygonwidget.h
+    polygonwidget.h \
+    ../../Muphic/common/include/UsrConf.h
 
 FORMS    += guimupic.ui
 
 INCLUDEPATH += ../../Muphic/common/include
 INCLUDEPATH += ../../Muphic/TinyXML/include
-DEFINES += __LINUX=1
+DEFINES += __WINDOWS=1
+
+
 
 
 

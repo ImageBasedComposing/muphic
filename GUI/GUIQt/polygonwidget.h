@@ -21,6 +21,10 @@ public slots:
 
 protected:
     Escena* scene;
+    bool loaded;
+
+public:
+    void load(std::string path);
 };
 
 #endif // POLYGONWIDGET_H
