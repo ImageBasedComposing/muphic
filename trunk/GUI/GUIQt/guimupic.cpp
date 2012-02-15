@@ -9,15 +9,7 @@ GuiMupic::GuiMupic(QWidget *parent) :
     l = new Launcher();
     pidPlay = -1;
 
-    //ui->verticalLayout->addWidget(poly, 200, 200, 200, 200);
-    /*poly = new PolygonWidget(this);
-    QGridLayout * mainLayout = new QGridLayout();
-    mainLayout->setColumnStretch(0, 1);
-    mainLayout->setColumnStretch(3, 1);
-    mainLayout->setRowMinimumHeight(8, 6);
-    mainLayout->addWidget(poly, 200, 10, 200, 200);
-
-    ui->setLayout(mainLayout);*/
+    //ui->polyWidget->
 }
 
 GuiMupic::~GuiMupic()
@@ -73,6 +65,22 @@ void GuiMupic::on_toolButton_InputPic_clicked()
         QPixmap pixImg(fileName);
         pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
         ui->graphicsView_Pic->scene()->addPixmap(pixImg);
+
+
+
+        // TESTO!
+
+        UsrConf* usrConf = new UsrConf();
+        usrConf->setPhicActive(true);
+        usrConf->setPhicDebug(true);
+        usrConf->setMuActive(false);
+        //std::string name = changeExtension(fileName.toStdString(), "xml");
+        usrConf->write("user_conf.xml");
+
+        /*std::string args[] = {"user_conf.xml", fileName.toStdString()};
+        l->launch(2, Launcher::MUPHIC, args);*/
+
+        ui->polyWidget->load(fileName.toStdString());
     }
 }
 

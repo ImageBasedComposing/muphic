@@ -84,7 +84,6 @@
     <ClInclude Include="..\source\include\Compositors\ComposerTimothy.h" />
     <ClInclude Include="..\source\include\Compositors\PatternGen.h" />
     <ClInclude Include="..\source\include\Compositors\Patterns.h" />
-    <ClInclude Include="..\source\include\Conf.h" />
     <ClInclude Include="..\source\include\Mu.h" />
     <ClInclude Include="..\source\include\Music\Acorde.h" />
     <ClInclude Include="..\source\include\Music\FigureMusic.h" />
@@ -105,7 +104,6 @@
     <ClInclude Include="..\source\include\Output\MidizatorABC.h" />
     <ClInclude Include="..\source\include\Output\MidizatorWAV.h" />
     <ClInclude Include="..\source\include\Output\TableTransform.h" />
-    <ClInclude Include="..\source\include\UsrConf.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\src\Figura.cpp" />
@@ -125,7 +123,6 @@
     <ClCompile Include="..\source\src\Compositors\ComposerRitmo.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerTimothy.cpp" />
     <ClCompile Include="..\source\src\Compositors\PatternGen.cpp" />
-    <ClCompile Include="..\source\src\Conf.cpp" />
     <ClCompile Include="..\source\src\Mu.cpp" />
     <ClCompile Include="..\source\src\Music\Acorde.cpp" />
     <ClCompile Include="..\source\src\Music\FigureMusic.cpp" />
@@ -141,7 +138,6 @@
     <ClCompile Include="..\source\src\Output\Midizator.cpp" />
     <ClCompile Include="..\source\src\Output\MidizatorABC.cpp" />
     <ClCompile Include="..\source\src\Output\MidizatorWAV.cpp" />
-    <ClCompile Include="..\source\src\UsrConf.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

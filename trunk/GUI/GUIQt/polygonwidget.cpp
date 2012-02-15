@@ -6,13 +6,19 @@ PolygonWidget::PolygonWidget(QWidget *parent) :
     QWidget(parent)
 {
     scene = new Escena(0,0,0,0);
-    scene->cargar("test1");
-
-
-    /*QScrollArea* scrollArea = new QScrollArea();
-    scrollArea->setWidget(this);*/
+    loaded = false;
 }
 
+void PolygonWidget::load(std::string path)
+{
+    if (!loaded)
+    {
+        std::string xmlPath = changeExtension(path, "");
+        scene->cargar(xmlPath);
+        loaded = true;
+        repaint();
+    }
+}
 
 void PolygonWidget::paintEvent(QPaintEvent *event)
 {
@@ -23,5 +29,6 @@ void PolygonWidget::paintEvent(QPaintEvent *event)
     painter->setBrush(QBrush(Qt::green, Qt::SolidPattern));
     painter->drawEllipse(80, 80, 400, 240);
     delete painter;*/
-    scene->render(this);
+    if (loaded)
+        scene->render(this);
 }
