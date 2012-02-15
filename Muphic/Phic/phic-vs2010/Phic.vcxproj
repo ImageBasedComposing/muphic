@@ -69,9 +69,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\include\aux_functions.h" />
     <ClInclude Include="..\..\common\include\Figura.h" />
     <ClInclude Include="..\..\common\include\Figuras.h" />
     <ClInclude Include="..\..\common\include\math_functions.h" />
+    <ClInclude Include="..\..\common\include\UsrConf.h" />
     <ClInclude Include="..\..\common\include\Vertice.h" />
     <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
@@ -84,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\common\src\Figura.cpp" />
     <ClCompile Include="..\..\common\src\Figuras.cpp" />
+    <ClCompile Include="..\..\common\src\UsrConf.cpp" />
     <ClCompile Include="..\..\common\src\Vertice.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinystr.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />

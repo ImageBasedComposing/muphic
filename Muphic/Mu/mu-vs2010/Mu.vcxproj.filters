@@ -162,6 +162,9 @@
     <ClInclude Include="..\source\include\Mu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\include\UsrConf.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Mu.cpp">
@@ -259,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp">
       <Filter>Archivos de código fuente\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\src\UsrConf.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

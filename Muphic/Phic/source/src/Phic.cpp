@@ -1,20 +1,7 @@
 #include "Phic.h"
 
-/*#include "opencv2/opencv.hpp"
-#include "opencv2/opencv.hpp"
-#include "opencv2/imgproc/imgproc.hpp"*/
 
-//#include "RegionMaker.h"
-//#include "PolygonMaker.h"
-//#include "FigureImg.h"
-#include "cv.h"
-#include "highgui.h"
-//class PolygonMaker;
 
-#include "Figuras.h"
-#include "FigureImg.h"
-
-using namespace cv;
 
 Phic::Phic()
 {
@@ -24,7 +11,20 @@ Phic::Phic()
 Phic::~Phic()
 {
     //dtor
+	delete usrConf;
 }
+
+
+void Phic::setUsrConfPath(std::string p)
+{
+	usrConfPath = p;
+}
+
+void Phic::setPicPath(std::string p)
+{
+	picPath = p;
+}
+
 
 
 // f is the figure which we want to color
@@ -32,7 +32,7 @@ Phic::~Phic()
 // c is de contour of the figure
 // inv determines if we consider the inside or the outside of the figure
 // all determines if we consider the current contour (false) or all of the remaining (true)
-void setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, 	IplImage* maskAcum, bool inv, bool all)
+void Phic::setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImage* maskAcum, bool inv, bool all)
 {
 	IplImage* mask = cvCreateImage( cvGetSize( g_image ), 8, 1 );
 	cvZero( mask );
@@ -53,13 +53,19 @@ void setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, 	IplImage* maskAc
 	if (inv)
 	{
 		cvNot( mask, mask1 );
-		cvShowImage( "Contours", mask1 );
+		if (usrConf->getPhicDebug())
+			cvShowImage( "Contours", mask1 );
 
 	}
 	else
-		cvShowImage( "Contours", mask );
+	{
+		if (usrConf->getPhicDebug())
+			cvShowImage( "Contours", mask );
+	}
 
-	cvWaitKey();
+	if (usrConf->getPhicDebug())
+		cvWaitKey();
+
 	CvScalar s;
 	Vec3b test;
 	cv::Mat image = mask;
@@ -89,11 +95,7 @@ void setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, 	IplImage* maskAc
 }
 
 
-int g_thresh = 50;
-IplImage* g_image = NULL;
-int filtro = 2;
-
-void on_trackbar(int)
+void Phic::on_trackbar(int)
 {
 	srand( time(NULL));
 
@@ -102,7 +104,7 @@ void on_trackbar(int)
 	CvMemStorage*   g_storage = NULL;
 	CvScalar red = CV_RGB(250,0,0);
 	CvScalar blue = CV_RGB(250,250,250);
-	IplImage* g_image = cvLoadImage( "1.png" );
+	IplImage* g_image = cvLoadImage( picPath.c_str() );
 	IplImage* g_gray = NULL;
 
 	// We load the image
@@ -116,7 +118,7 @@ void on_trackbar(int)
 		cvClearMemStorage( g_storage );
 	}
 
-	IplImage* g_copy = cvLoadImage( "1.png", 0 );
+	IplImage* g_copy = cvLoadImage( picPath.c_str(), 0 );
 	IplImage* g_contours = cvCreateImage( cvGetSize(g_gray), 8, 3 );
 
 	CvSeq* contours = 0;
@@ -140,9 +142,12 @@ void on_trackbar(int)
 			break;
 	}
 
-	// We show the resulting image from apliying the filter
-	cvShowImage( "Contours", g_gray );
-	cvWaitKey();
+	if (usrConf->getPhicDebug())
+	{
+		// We show the resulting image from apliying the filter
+		cvShowImage( "Contours", g_gray );
+		cvWaitKey();
+	}
 
 	// We look for image contours
 	cvFindContours( g_gray, g_storage, &contours, sizeof(CvContour), CV_RETR_LIST);
@@ -201,16 +206,23 @@ void on_trackbar(int)
 				1,              // Vary max_level and compare results
 				CV_FILLED,//1,
 				8 );
-			printf( "Contour #%dn", n );
+
+			if (usrConf->getPhicDebug())
+			{
+				printf( "Contour #%dn", n );
 				
-			printf( " %d elements:\n", c->total );
+				printf( " %d elements:\n", c->total );
+			}
 
 			f = new FigureImg();
 			
 			for( int i=0; i< c->total; ++i )
 			{
 				CvPoint* p = CV_GET_SEQ_ELEM( CvPoint, c, i );
-				printf(" (%d,%d)\n", p->x, g_gray->height - p->y );
+
+				if (usrConf->getPhicDebug())
+					printf(" (%d,%d)\n", p->x, g_gray->height - p->y );
+
 				f->colocarVertice(new Vertice(p->x, g_gray->height - p->y, false));
 			}
 			//if (!padreDone)
@@ -237,7 +249,10 @@ void on_trackbar(int)
 				continue;
 			}
 			else
-				cvWaitKey();
+			{
+				if (usrConf->getPhicDebug())
+					cvWaitKey();
+			}
 
 			// set color
 			setColorFromImage(f, g_image, c, NULL, false, false);
@@ -245,7 +260,8 @@ void on_trackbar(int)
 			// paint surface, because it's big enough
 			//cvDrawContours(maskAcum,c,CV_RGB(250,250,250),CV_RGB(250,250,250),0,CV_FILLED,8);
 
-			cvShowImage( "Contours", g_contours);
+			if (usrConf->getPhicDebug())
+				cvShowImage( "Contours", g_contours);
 			// We add the figure to our figure list
 			if (padreDone)
 			{
@@ -264,7 +280,8 @@ void on_trackbar(int)
 			n++;
 		}
 	}
-	cvShowImage( "Contours", g_gray );
+	if (usrConf->getPhicDebug())
+		cvShowImage( "Contours", g_gray );
 
 
 	// colour background
@@ -273,23 +290,46 @@ void on_trackbar(int)
 
 	//figuras->getPadreAt(0)->sortHijo();
 	figuras->setParentSonStructure();
-	cvWaitKey();
-	figuras->guardar("test1.xml");
+
+	if (usrConf->getPhicDebug())
+		cvWaitKey();
+
+	std::string output = changeExtension(picPath, "xml");
+	figuras->guardar(output);
 }
 
-void test()
+void Phic::test()
 {
     cvNamedWindow( "Contours", 1 );
-    cvCreateTrackbar( "Threshold", "Contours", &g_thresh, 255, on_trackbar );
+    cvCreateTrackbar( "Threshold", "Contours", &g_thresh, 255, Phic::on_trackbar );
     on_trackbar(0);
 }
 
 
+void showUsage()
+{
+	cout << "Phic.exe userConfPath imagePath" << endl;
+}
+
 int main(int argc, char* argv[])
 {
+	if (argc < 3)
+	{
+		cout << "Too few arguments in function call" << endl;
+		showUsage();
+		cin.get();
+		cin.ignore(cin.rdbuf()->in_avail());
 
+		return 1;
+	}
 
-	test();
+	Phic* phic = new Phic();
+	phic->setUsrConfPath(argv[1]);
+    phic->setPicPath(argv[2]);
+	phic->usrConf = new UsrConf();
+	phic->usrConf->readPhic(argv[1]);
+
+	phic->test();
 
 	return 0;
 }

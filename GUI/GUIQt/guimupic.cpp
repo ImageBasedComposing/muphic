@@ -66,19 +66,17 @@ void GuiMupic::on_toolButton_InputPic_clicked()
         pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
         ui->graphicsView_Pic->scene()->addPixmap(pixImg);
 
-
-
-        // TESTO!
+        repaint();
 
         UsrConf* usrConf = new UsrConf();
         usrConf->setPhicActive(true);
-        usrConf->setPhicDebug(true);
+        usrConf->setPhicDebug(false);
         usrConf->setMuActive(false);
         //std::string name = changeExtension(fileName.toStdString(), "xml");
         usrConf->write("user_conf.xml");
 
-        /*std::string args[] = {"user_conf.xml", fileName.toStdString()};
-        l->launch(2, Launcher::MUPHIC, args);*/
+        std::string args[] = {"user_conf.xml", fileName.toStdString()};
+        l->launch(2, Launcher::MUPHIC, args);
 
         ui->polyWidget->load(fileName.toStdString());
     }
@@ -86,8 +84,14 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 
 void GuiMupic::on_pushButton_Generate_clicked()
 {
-    std::string userConfFile = "dummypath";
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
+
+    UsrConf* usrConf = new UsrConf();
+    usrConf->setPhicActive(false);
+    usrConf->setMuActive(true);
+    //std::string name = changeExtension(fileName.toStdString(), "xml");
+    usrConf->write("user_conf.xml");
+    std::string userConfFile = "user_conf.xml";
 
     std::string args[] = {userConfFile, picFile};
     l->launch(2, Launcher::MUPHIC, args);
