@@ -503,6 +503,4 @@ void Figuras::setParentSonStructure()
 
 
 	showParentSonStructure(figPadres, 0);
-
-	system("PAUSE");
 }

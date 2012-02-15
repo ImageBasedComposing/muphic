@@ -99,12 +99,15 @@ void UsrConf::write(std::string path)
     if (!phicActive)
     {
         phicNode->SetAttribute("none", "true");
+    }
+	else
+	{
         if (phicDebug)
         {
             TiXmlElement * debugNode = new TiXmlElement( "debug" );
             phicNode->LinkEndChild(debugNode);
         }
-    }
+	}
 
     TiXmlElement * muNode = new TiXmlElement( "mu_conf" );
     if (!muActive)

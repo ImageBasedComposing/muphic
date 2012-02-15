@@ -24,7 +24,7 @@ void showUsage()
 }
 
 int main( int argc, const char* argv[] )
-{/*
+{
 	if (argc < 3)
 	{
 		cout << "Too few arguments in function call" << endl;
@@ -33,26 +33,17 @@ int main( int argc, const char* argv[] )
 		cin.ignore(cin.rdbuf()->in_avail());
 
 		return 1;
-	}*/
+	}
 
-   /* std::string usrConfPath = argv[1];
-    std::string picPath = argv[2];*/
+    std::string usrConfPath = argv[1];
+    std::string picPath = argv[2];
 
-    std::string usrConfPath = "user_conf.xml";
-    std::string picPath = "test1";
+    /*std::string usrConfPath = "user_conf.xml";
+    std::string picPath = "test1";*/
 
 	std::string executionPath = getPath(argv[0]);
 
 	UsrConf* usrConf = new UsrConf();
-	usrConf->readMuphic(usrConfPath);
-
-	usrConf->setPhicActive(false);
-	usrConf->setMuActive(true);
-	usrConf->setPhicDebug(true);
-	usrConf->write(usrConfPath);
-	delete usrConf;
-
-	usrConf = new UsrConf();
 	usrConf->readMuphic(usrConfPath);
 
 	Launcher* l;
