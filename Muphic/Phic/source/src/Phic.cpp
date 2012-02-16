@@ -287,9 +287,8 @@ void Phic::on_trackbar(int)
 	// colour background
 	//setColorFromImage(father, g_image, NULL, maskAcum, true, false);
 
-
-	//figuras->getPadreAt(0)->sortHijo();
-	figuras->setParentSonStructure();
+	if (figuras->sizeFig() != 0)
+		figuras->setParentSonStructure();
 
 	if (usrConf->getPhicDebug())
 		cvWaitKey();
