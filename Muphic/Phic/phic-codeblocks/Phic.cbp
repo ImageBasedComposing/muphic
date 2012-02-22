@@ -62,14 +62,18 @@
 		<Unit filename="../../TinyXML/src/tinyxml.cpp" />
 		<Unit filename="../../TinyXML/src/tinyxmlerror.cpp" />
 		<Unit filename="../../TinyXML/src/tinyxmlparser.cpp" />
+		<Unit filename="../../common/include/Conf.h" />
 		<Unit filename="../../common/include/Figura.h" />
 		<Unit filename="../../common/include/Figuras.h" />
+		<Unit filename="../../common/include/UsrConf.h" />
 		<Unit filename="../../common/include/Vertice.h" />
 		<Unit filename="../../common/include/aux_functions.h" />
 		<Unit filename="../../common/include/aux_structs.h" />
 		<Unit filename="../../common/include/math_functions.h" />
+		<Unit filename="../../common/src/Conf.cpp" />
 		<Unit filename="../../common/src/Figura.cpp" />
 		<Unit filename="../../common/src/Figuras.cpp" />
+		<Unit filename="../../common/src/UsrConf.cpp" />
 		<Unit filename="../../common/src/Vertice.cpp" />
 		<Extensions>
 			<code_completion />

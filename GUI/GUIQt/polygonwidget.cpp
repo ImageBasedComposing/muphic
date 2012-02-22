@@ -1,7 +1,5 @@
 #include "polygonwidget.h"
 
-#include "QScrollArea.h"
-
 PolygonWidget::PolygonWidget(QWidget *parent) :
     QWidget(parent)
 {

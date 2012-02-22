@@ -40,9 +40,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = ../../bin/Release/Phic
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/../../common/src/Vertice.o $(OBJDIR_DEBUG)/../../common/src/Figuras.o $(OBJDIR_DEBUG)/../../common/src/Figura.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../source/src/Phic.o $(OBJDIR_DEBUG)/../source/src/FigureImg.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/../../common/src/Vertice.o $(OBJDIR_DEBUG)/../../common/src/UsrConf.o $(OBJDIR_DEBUG)/../../common/src/Figuras.o $(OBJDIR_DEBUG)/../../common/src/Figura.o $(OBJDIR_DEBUG)/../../common/src/Conf.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxml.o $(OBJDIR_DEBUG)/../../TinyXML/src/tinystr.o $(OBJDIR_DEBUG)/../source/src/Phic.o $(OBJDIR_DEBUG)/../source/src/FigureImg.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/../../common/src/Vertice.o $(OBJDIR_RELEASE)/../../common/src/Figuras.o $(OBJDIR_RELEASE)/../../common/src/Figura.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../source/src/Phic.o $(OBJDIR_RELEASE)/../source/src/FigureImg.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/../../common/src/Vertice.o $(OBJDIR_RELEASE)/../../common/src/UsrConf.o $(OBJDIR_RELEASE)/../../common/src/Figuras.o $(OBJDIR_RELEASE)/../../common/src/Figura.o $(OBJDIR_RELEASE)/../../common/src/Conf.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlerror.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxml.o $(OBJDIR_RELEASE)/../../TinyXML/src/tinystr.o $(OBJDIR_RELEASE)/../source/src/Phic.o $(OBJDIR_RELEASE)/../source/src/FigureImg.o
 
 all: debug release
 
@@ -64,11 +64,17 @@ out_debug: $(OBJ_DEBUG) $(DEP_DEBUG)
 $(OBJDIR_DEBUG)/../../common/src/Vertice.o: ../../common/src/Vertice.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/Vertice.cpp -o $(OBJDIR_DEBUG)/../../common/src/Vertice.o
 
+$(OBJDIR_DEBUG)/../../common/src/UsrConf.o: ../../common/src/UsrConf.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/UsrConf.cpp -o $(OBJDIR_DEBUG)/../../common/src/UsrConf.o
+
 $(OBJDIR_DEBUG)/../../common/src/Figuras.o: ../../common/src/Figuras.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/Figuras.cpp -o $(OBJDIR_DEBUG)/../../common/src/Figuras.o
 
 $(OBJDIR_DEBUG)/../../common/src/Figura.o: ../../common/src/Figura.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/Figura.cpp -o $(OBJDIR_DEBUG)/../../common/src/Figura.o
+
+$(OBJDIR_DEBUG)/../../common/src/Conf.o: ../../common/src/Conf.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../common/src/Conf.cpp -o $(OBJDIR_DEBUG)/../../common/src/Conf.o
 
 $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o: ../../TinyXML/src/tinyxmlparser.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c ../../TinyXML/src/tinyxmlparser.cpp -o $(OBJDIR_DEBUG)/../../TinyXML/src/tinyxmlparser.o
@@ -111,11 +117,17 @@ out_release: $(OBJ_RELEASE) $(DEP_RELEASE)
 $(OBJDIR_RELEASE)/../../common/src/Vertice.o: ../../common/src/Vertice.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/Vertice.cpp -o $(OBJDIR_RELEASE)/../../common/src/Vertice.o
 
+$(OBJDIR_RELEASE)/../../common/src/UsrConf.o: ../../common/src/UsrConf.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/UsrConf.cpp -o $(OBJDIR_RELEASE)/../../common/src/UsrConf.o
+
 $(OBJDIR_RELEASE)/../../common/src/Figuras.o: ../../common/src/Figuras.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/Figuras.cpp -o $(OBJDIR_RELEASE)/../../common/src/Figuras.o
 
 $(OBJDIR_RELEASE)/../../common/src/Figura.o: ../../common/src/Figura.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/Figura.cpp -o $(OBJDIR_RELEASE)/../../common/src/Figura.o
+
+$(OBJDIR_RELEASE)/../../common/src/Conf.o: ../../common/src/Conf.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../common/src/Conf.cpp -o $(OBJDIR_RELEASE)/../../common/src/Conf.o
 
 $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o: ../../TinyXML/src/tinyxmlparser.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c ../../TinyXML/src/tinyxmlparser.cpp -o $(OBJDIR_RELEASE)/../../TinyXML/src/tinyxmlparser.o
