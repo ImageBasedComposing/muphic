@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <string>
-#include "Music/music_elements.h"
+#include "Music/music_const.h"
 
 struct MajorScale
 {
@@ -93,8 +93,11 @@ struct PentatonicMinScale
 	vector<int> getScaleSteps(){	return scaleSteps;	}
 };
 
+/****************************************************************/
+
 class TableScale
 {
+
 private:
 	vector<int> scaleSteps; //Distancia para la siguiente nota medida en semitonos
 	int firstNote; //La nota por la que empieza la escala.
@@ -117,6 +120,27 @@ public:
 	}
 
 	//**************************************//
+
+	//Devuelve si la nota pertenece o no a la escala actual.
+	bool containsTone(int tone)
+	{
+		if( tone < 1 ) //Silencio o tono incorrecto
+			return false;
+
+		int absNote = tone%ESCALA;
+
+		int auxNote = firstNote;
+		bool found = auxNote%ESCALA == absNote;
+		int i = 1;
+		while(i <= (int)scaleSteps.size() && !found)
+		{
+			auxNote += scaleSteps.at(i-1);
+			i++;
+			found = auxNote%PER8 == absNote;
+		}
+
+		return found;
+	}
 
 	// Devuelve la siguiente nota en la escala dado la ultima nota.
 	int nextTone(int lasTone)
@@ -261,9 +285,11 @@ public:
 	}
 
 	//**********************************//
+	// FUNCIONES CON GRADOS
+	/* ATENCION, Funciones pensadas para escalas diatónicas (7 notas) */
 
 	// Devuelve el grado N de la escala. Ej: 5º Grado -> Dominante.
-	int getNDegree(int nDegree)
+	int getToneDegree(int nDegree)
 	{
 		int note = firstNote;
 		for(int i = 0; i < (nDegree-1); i++)
@@ -272,14 +298,15 @@ public:
 	}
 
 	// Devuelve el grado que es la nota si es que está en la escala. Sino devuelve 0.
-	int getDegreeNote(int note)
+	int getDegreeTone(int tone)
 	{
-		int absNote = note%ESCALA;
-		if(absNote == 0)
-			absNote = SI;
+		if( tone < 1 ) //Silencio o tono incorrecto
+			return 0;
+
+		int absNote = tone%ESCALA;
 
 		int auxNote = firstNote;
-		bool found = auxNote == absNote;
+		bool found = auxNote%ESCALA == absNote;
 		int i = 1;
 		while(i <= (int)scaleSteps.size() && !found)
 		{
@@ -293,6 +320,141 @@ public:
 
 		return i;
 	}
+
+	// Dado un grado, devuelve todos los tonos que pertenecen al acorde de grado.
+	//Especial el 5º Grado que tiene la 7º. Sino, son 3 notas.
+	vector<int> getTonesDegree(int nDegree)
+	{
+		int noteDegree = getToneDegree(nDegree);
+		vector<int> out;
+		out.push_back(noteDegree);
+		out.push_back(nextDegreeTone(nDegree, noteDegree));
+		out.push_back(nextNDegreeTone(nDegree, noteDegree, 2));
+		if(nDegree == DOMINANTE)
+			out.push_back(nextNDegreeTone(nDegree, noteDegree, 3));
+
+		return out;
+	}
+
+	// Devuelve la siguiente nota en el acorde del grado dado. Ejemplo: Grado 1º (Tonica) I -(next)> III -> V -> I(octava encima)
+	int nextDegreeTone(int nDegree, int lasTone)
+	{
+		int noteDegree = getToneDegree(nDegree);
+		int noteDegree2 = nextNTone(noteDegree, 2);
+		int noteDegree3;
+		if(nDegree == DOMINANTE)
+			noteDegree3 = nextNTone(noteDegree2, 4); //Ponemos la 7º
+		else
+			noteDegree3 = nextNTone(noteDegree2, 2);
+
+		if(lasTone%ESCALA == noteDegree3%ESCALA)
+			if(nDegree == DOMINANTE)
+				return nextNTone(lasTone, 1);
+			else
+				return nextNTone(lasTone, 3);
+		else
+			return nextNTone(lasTone, 2);
+	}
+
+	// Devuelve la nota previa dentro del acorde del grado de la escala
+	int prevDegreeTone(int nDegree, int lasTone)
+	{
+		int noteDegree = getToneDegree(nDegree);
+
+		if(lasTone%ESCALA == noteDegree%ESCALA)
+			if(nDegree == DOMINANTE)
+				return prevNTone(lasTone, 1);
+			else
+				return prevNTone(lasTone, 3);
+		else
+			return prevNTone(lasTone, 2);
+	}
+
+	// Devuelve la siguiente N nota dentro del acorde. ej: si steps=3 entonces subimos una octava
+	int nextNDegreeTone(int nDegree, int lasTone, int steps)
+	{
+		steps = abs(steps);
+		int nexTone = lasTone;
+		if(lasTone == 0 || steps == 0 || lasTone == -1)  //silencio o con 0 pasos es el propio tono
+			return nexTone;
+
+		for(int i = 0; i < steps; i++)
+			nexTone = nextDegreeTone(nDegree, nexTone);
+
+		return nexTone;
+
+		/*int i = 0;
+		int noteDegree = getToneDegree(nDegree);
+		int noteDegree2 = nextNTone(noteDegree, 2);
+		int noteDegree3 = nextNTone(noteDegree2, 2);
+		if( noteDegree%ESCALA == lasTone%ESCALA )
+			i = 0;
+		else if( noteDegree2%ESCALA == lasTone%ESCALA )
+				i = 1;
+		else
+				i = 2;
+
+		int step = 0; //Pasos que vamos a dar en la escala
+		while (steps > 0)
+		{
+			if( i < 2)
+				step = step + 2;
+			else
+				step = step + 3;		
+			steps--;
+			i = (i+1) % 3; 
+		}
+		nexTone = nextNTone(lasTone, step);
+
+		if(nexTone > ESCALA*7)  //No nos pasemos de la escala
+			return -1;  //ERROR!
+		else
+			return nexTone;*/
+	}
+
+	// Devuelve la N nota previa dentro del acorde.
+	int prevNDegreeTone(int nDegree, int lasTone, int steps)
+	{
+		steps = abs(steps);
+		int prevtone = lasTone;
+		if(lasTone == 0 || steps == 0 || lasTone == -1)  //silencio o con 0 pasos es el propio tono
+			return prevtone;
+
+		for(int i = 0; i < steps; i++)
+			prevtone = prevDegreeTone(nDegree, prevtone);
+
+		return prevtone;
+
+		/*int i = 0;
+		int noteDegree = getToneDegree(nDegree);
+		int noteDegree2 = nextNTone(noteDegree, 2);
+		int noteDegree3 = nextNTone(noteDegree2, 2);
+		if( noteDegree%ESCALA == lasTone%ESCALA )
+			i = 0;
+		else if( noteDegree2%ESCALA == lasTone%ESCALA )
+				i = 1;
+		else
+				i = 2;
+
+		int step = 0; //Pasos que vamos a dar en la escala
+		while (steps > 0)
+		{
+			if( i == 0)
+				step = step + 3;
+			else
+				step = step + 2;		
+			steps--;
+			i = (i+1) % 3; 
+		}
+		prevtone = prevNTone(lasTone, step);
+
+		if(prevtone < 0)
+			return -1; //ERROR, se produce cuando no se puede bajar mas en la escala.
+		else
+			return prevtone;*/
+	}
+
+
 
 };
 

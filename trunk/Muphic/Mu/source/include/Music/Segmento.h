@@ -16,12 +16,14 @@ class Segmento
 
 /*------Getters------*/
         Simbolos* getSimbolos();
+		Simbolo* getAt(int i);
 
         Metrica getMetrica();
 		Tempo getTempo();
 
 /*------Setters------*/
         void setSimbolos(Simbolos* s);
+		void addSimbolos(Simbolos* s);
 
 		void setTempo(Tempo t);
 		void setMetrica(Metrica m);

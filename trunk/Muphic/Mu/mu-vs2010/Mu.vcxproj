@@ -78,11 +78,14 @@
     <ClInclude Include="..\source\include\Compositors\Composer.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerDemo.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerFigMelody.h" />
+    <ClInclude Include="..\source\include\Compositors\ComposerFigMelody2.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerFigRitmo.h" />
+    <ClInclude Include="..\source\include\Compositors\ComposerFigRitmo2.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerMelodia.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerMultiple.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerRitmo.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerTimothy.h" />
+    <ClInclude Include="..\source\include\Compositors\ComposerTimothy2.h" />
     <ClInclude Include="..\source\include\Compositors\PatternGen.h" />
     <ClInclude Include="..\source\include\Compositors\Patterns.h" />
     <ClInclude Include="..\source\include\Mu.h" />
@@ -101,10 +104,10 @@
     <ClInclude Include="..\source\include\Music\TableScale.h" />
     <ClInclude Include="..\source\include\Music\Voces.h" />
     <ClInclude Include="..\source\include\Music\Voz.h" />
-    <ClInclude Include="..\source\include\Output\Midizator.h" />
-    <ClInclude Include="..\source\include\Output\MidizatorABC.h" />
-    <ClInclude Include="..\source\include\Output\MidizatorWAV.h" />
-    <ClInclude Include="..\source\include\Output\TableTransform.h" />
+    <ClInclude Include="..\source\include\Outputs\Midizator.h" />
+    <ClInclude Include="..\source\include\Outputs\MidizatorABC.h" />
+    <ClInclude Include="..\source\include\Outputs\MidizatorWAV.h" />
+    <ClInclude Include="..\source\include\Outputs\TableTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\src\Figura.cpp" />
@@ -119,11 +122,14 @@
     <ClCompile Include="..\source\src\Compositors\Composer.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerDemo.cpp" />
     <ClCompile Include="..\source\src\Compositors\composerFigMelody.cpp" />
+    <ClCompile Include="..\source\src\Compositors\composerFigMelody2.cpp" />
     <ClCompile Include="..\source\src\Compositors\composerFigRitmo.cpp" />
+    <ClCompile Include="..\source\src\Compositors\composerFigRitmo2.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerMelodia.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerMultiple.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerRitmo.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerTimothy.cpp" />
+    <ClCompile Include="..\source\src\Compositors\ComposerTimothy2.cpp" />
     <ClCompile Include="..\source\src\Compositors\PatternGen.cpp" />
     <ClCompile Include="..\source\src\Mu.cpp" />
     <ClCompile Include="..\source\src\Music\Acorde.cpp" />

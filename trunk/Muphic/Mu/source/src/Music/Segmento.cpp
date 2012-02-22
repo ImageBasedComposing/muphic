@@ -19,6 +19,11 @@ Simbolos* Segmento::getSimbolos()
 	return simbolos;
 }
 
+Simbolo* Segmento::getAt(int i)
+{
+	return simbolos->getAt(i);
+}
+
 Metrica Segmento::getMetrica()
 {
 	return metrica;
@@ -34,6 +39,13 @@ Tempo Segmento::getTempo()
 void Segmento::setSimbolos(Simbolos* s)
 {
 	simbolos = s;
+}
+
+void Segmento::addSimbolos(Simbolos* s)
+{
+	for(int i = 0; i < s->size(); i++)
+		simbolos->pushBack(s->getAt(i));
+
 }
 
 void Segmento::setMetrica(Metrica m)

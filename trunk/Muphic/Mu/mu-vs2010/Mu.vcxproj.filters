@@ -90,18 +90,6 @@
     <ClInclude Include="..\source\include\Music\Voz.h">
       <Filter>Archivos de encabezado\Music</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\Output\Midizator.h">
-      <Filter>Archivos de encabezado\Outputs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Output\MidizatorABC.h">
-      <Filter>Archivos de encabezado\Outputs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Output\MidizatorWAV.h">
-      <Filter>Archivos de encabezado\Outputs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Output\TableTransform.h">
-      <Filter>Archivos de encabezado\Outputs</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\TinyXML\include\tinystr.h">
       <Filter>Archivos de encabezado\TinyXML</Filter>
     </ClInclude>
@@ -164,6 +152,27 @@
     </ClInclude>
     <ClInclude Include="..\..\common\include\UsrConf.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerFigMelody2.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerFigRitmo2.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerTimothy2.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Outputs\Midizator.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Outputs\MidizatorABC.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Outputs\MidizatorWAV.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\include\Outputs\TableTransform.h">
+      <Filter>Archivos de encabezado\Outputs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +274,15 @@
     </ClCompile>
     <ClCompile Include="..\..\common\src\UsrConf.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\Compositors\composerFigMelody2.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\Compositors\composerFigRitmo2.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\Compositors\ComposerTimothy2.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
