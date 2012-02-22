@@ -67,7 +67,6 @@
 		<Unit filename="../source/include/Compositors/ComposerTimothy.h" />
 		<Unit filename="../source/include/Compositors/PatternGen.h" />
 		<Unit filename="../source/include/Compositors/Patterns.h" />
-		<Unit filename="../source/include/Conf.h" />
 		<Unit filename="../source/include/Mu.h" />
 		<Unit filename="../source/include/Music/Acorde.h" />
 		<Unit filename="../source/include/Music/FigureMusic.h" />
@@ -88,7 +87,6 @@
 		<Unit filename="../source/include/Outputs/MidizatorABC.h" />
 		<Unit filename="../source/include/Outputs/MidizatorWAV.h" />
 		<Unit filename="../source/include/Outputs/TableTransform.h" />
-		<Unit filename="../source/include/UsrConf.h" />
 		<Unit filename="../source/src/Compositors/Composer.cpp" />
 		<Unit filename="../source/src/Compositors/ComposerDemo.cpp" />
 		<Unit filename="../source/src/Compositors/ComposerMelodia.cpp" />
@@ -98,7 +96,6 @@
 		<Unit filename="../source/src/Compositors/PatternGen.cpp" />
 		<Unit filename="../source/src/Compositors/composerFigMelody.cpp" />
 		<Unit filename="../source/src/Compositors/composerFigRitmo.cpp" />
-		<Unit filename="../source/src/Conf.cpp" />
 		<Unit filename="../source/src/Mu.cpp" />
 		<Unit filename="../source/src/Music/Acorde.cpp" />
 		<Unit filename="../source/src/Music/FigureMusic.cpp" />
@@ -114,22 +111,25 @@
 		<Unit filename="../source/src/Output/Midizator.cpp" />
 		<Unit filename="../source/src/Output/MidizatorABC.cpp" />
 		<Unit filename="../source/src/Output/MidizatorWAV.cpp" />
-		<Unit filename="../source/src/UsrConf.cpp" />
 		<Unit filename="../../TinyXML/include/tinystr.h" />
 		<Unit filename="../../TinyXML/include/tinyxml.h" />
 		<Unit filename="../../TinyXML/src/tinystr.cpp" />
 		<Unit filename="../../TinyXML/src/tinyxml.cpp" />
 		<Unit filename="../../TinyXML/src/tinyxmlerror.cpp" />
 		<Unit filename="../../TinyXML/src/tinyxmlparser.cpp" />
+		<Unit filename="../../common/include/Conf.h" />
 		<Unit filename="../../common/include/Figura.h" />
 		<Unit filename="../../common/include/Figuras.h" />
+		<Unit filename="../../common/include/UsrConf.h" />
 		<Unit filename="../../common/include/Vertice.h" />
 		<Unit filename="../../common/include/aux_functions.h" />
 		<Unit filename="../../common/include/aux_structs.h" />
 		<Unit filename="../../common/include/launcher.h" />
 		<Unit filename="../../common/include/math_functions.h" />
+		<Unit filename="../../common/src/Conf.cpp" />
 		<Unit filename="../../common/src/Figura.cpp" />
 		<Unit filename="../../common/src/Figuras.cpp" />
+		<Unit filename="../../common/src/UsrConf.cpp" />
 		<Unit filename="../../common/src/Vertice.cpp" />
 		<Unit filename="../../common/src/launcher.cpp" />
 		<Extensions>

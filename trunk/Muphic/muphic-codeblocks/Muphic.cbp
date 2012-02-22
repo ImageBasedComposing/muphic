@@ -35,17 +35,30 @@
 			<Add option="-D__LINUX" />
 			<Add directory="../source/include" />
 			<Add directory="../common/include" />
+			<Add directory="../TinyXML/include" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="../source/include" />
 			<Add directory="../common/include" />
+			<Add directory="../TinyXML/include" />
 		</ResourceCompiler>
 		<Linker>
 			<Add directory="../source/include" />
 			<Add directory="../common/include" />
+			<Add directory="../TinyXML/include" />
 		</Linker>
+		<Unit filename="../TinyXML/include/tinystr.h" />
+		<Unit filename="../TinyXML/include/tinyxml.h" />
+		<Unit filename="../TinyXML/src/tinystr.cpp" />
+		<Unit filename="../TinyXML/src/tinyxml.cpp" />
+		<Unit filename="../TinyXML/src/tinyxmlerror.cpp" />
+		<Unit filename="../TinyXML/src/tinyxmlparser.cpp" />
+		<Unit filename="../common/include/Conf.h" />
+		<Unit filename="../common/include/UsrConf.h" />
 		<Unit filename="../common/include/aux_functions.h" />
 		<Unit filename="../common/include/launcher.h" />
+		<Unit filename="../common/src/Conf.cpp" />
+		<Unit filename="../common/src/UsrConf.cpp" />
 		<Unit filename="../common/src/launcher.cpp" />
 		<Unit filename="../source/include/Muphic.h" />
 		<Unit filename="../source/src/Muphic.cpp" />
