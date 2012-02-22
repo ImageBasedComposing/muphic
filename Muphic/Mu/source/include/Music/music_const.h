@@ -45,7 +45,7 @@
 #define SILENCIO 0
 
 //Escala central del piano:
-#define DO_F_C 36
+#define DO_F_C 36  //Es SI_C - ESCALA
 #define DO_C 37
 #define DO_S_C 38
 #define RE_F_C 38
@@ -65,7 +65,7 @@
 #define LA_S_C 47
 #define SI_F_C 47
 #define SI_C 48
-#define SI_S_C 49
+#define SI_S_C 49  //Al final es DO_C + ESCALA
 
 //Intervalos:
 #define PER1 0	//PERFECT UNISON (Unisono/misma nota)
@@ -88,13 +88,13 @@
 // RESPECTO A LAS ESCALAS
 
 //Grados y Funciones musicales:
-#define TONICA 1;		//TONIC
-#define SUPERTONICA 2;	//SUPERTONIC
-#define MEDIANTE 3;		//MEDIANT
-#define SUBDOMINANTE 4; //SUBDOMINANT
-#define DOMINANTE 5;	//DOMINANT
-#define SUBMEDIANTE 6;	//SUBMEDIANT
-#define SUBTONICA 7;	//SUBTONIC  Doble notación, se puede poner las dos cosas.
-#define SENSIBLE 7;		//LEADING TONE
+#define TONICA 1		//TONIC
+#define SUPERTONICA 2	//SUPERTONIC
+#define MEDIANTE 3		//MEDIANT
+#define SUBDOMINANTE 4  //SUBDOMINANT
+#define DOMINANTE 5		//DOMINANT
+#define SUBMEDIANTE 6	//SUBMEDIANT
+#define SUBTONICA 7		//SUBTONIC  Doble notación, se puede poner las dos cosas.
+#define SENSIBLE 7		//LEADING TONE
 
 #endif

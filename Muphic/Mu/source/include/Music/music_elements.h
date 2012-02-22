@@ -3,13 +3,14 @@
 #ifndef MUSIC_ELEMS_H
 #define MUSIC_ELEMS_H
 
-#include "music_const.h"
+#include "Music/music_const.h"
 #include "math_functions.h"
 #include "aux_structs.h"
 #include <list>
 #include <string>
 #include "string.h"
-#include "instruments.h"
+#include "Music/instruments.h"
+#include "Music/TableScale.h"
 
 
 using namespace std;
@@ -58,11 +59,12 @@ class Scriabin
 
 		~Scriabin(){};
 
+		//Devuelve la nota correspondiente al color según Scriabin
 		int getNota(Color color)
 		{
 			list< pair<Color,int> >::iterator it = scriabin.begin();
 			bool found = false;
-			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
 			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
 			double dist, distBetter;
 
@@ -85,10 +87,68 @@ class Scriabin
 			return note;
 		}
 
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		int getNota(Color color, TableScale* tb)
+		{
+			list< pair<Color,int> > scriabinPart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = scriabin.begin();
+			//Cogemos solo las notas que aparecen en la escala
+			while( it != scriabin.end() )
+			{
+				if( tb->containsTone(it->second) )
+					scriabinPart.push_back((*it));
+				it++;
+			}
+			
+			it = scriabinPart.begin();
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			it++;
+			while(it != scriabinPart.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+				}
+				it++;
+			}
+
+			return note;
+
+		}
+
 	protected:
 	private:
 		list< pair<Color,int> > scriabin;
 };
 
+inline bool isConsonantInterval(int firstNote, int secondNote)
+{
+	int interval = (secondNote - firstNote)%ESCALA;
+	switch(interval)
+	{
+		case PER1:
+		case MIN3:
+		case MAJ3:
+		case PER4:
+		case PER5:
+		case MIN6:
+		case MAJ6:
+		case PER8:
+			return true;
+		default:
+			return false;
+	}
+}
+
+inline bool isDissonantInterval(int firstNote, int secondNote)
+{
+	return !(isConsonantInterval(firstNote, secondNote));
+}
 
 #endif // MUSIC_ELEMS
