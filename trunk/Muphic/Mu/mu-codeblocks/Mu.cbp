@@ -60,11 +60,14 @@
 		<Unit filename="../source/include/Compositors/Composer.h" />
 		<Unit filename="../source/include/Compositors/ComposerDemo.h" />
 		<Unit filename="../source/include/Compositors/ComposerFigMelody.h" />
+		<Unit filename="../source/include/Compositors/ComposerFigMelody2.h" />
 		<Unit filename="../source/include/Compositors/ComposerFigRitmo.h" />
+		<Unit filename="../source/include/Compositors/ComposerFigRitmo2.h" />
 		<Unit filename="../source/include/Compositors/ComposerMelodia.h" />
 		<Unit filename="../source/include/Compositors/ComposerMultiple.h" />
 		<Unit filename="../source/include/Compositors/ComposerRitmo.h" />
 		<Unit filename="../source/include/Compositors/ComposerTimothy.h" />
+		<Unit filename="../source/include/Compositors/ComposerTimothy2.h" />
 		<Unit filename="../source/include/Compositors/PatternGen.h" />
 		<Unit filename="../source/include/Compositors/Patterns.h" />
 		<Unit filename="../source/include/Mu.h" />
@@ -93,9 +96,12 @@
 		<Unit filename="../source/src/Compositors/ComposerMultiple.cpp" />
 		<Unit filename="../source/src/Compositors/ComposerRitmo.cpp" />
 		<Unit filename="../source/src/Compositors/ComposerTimothy.cpp" />
+		<Unit filename="../source/src/Compositors/ComposerTimothy2.cpp" />
 		<Unit filename="../source/src/Compositors/PatternGen.cpp" />
 		<Unit filename="../source/src/Compositors/composerFigMelody.cpp" />
+		<Unit filename="../source/src/Compositors/composerFigMelody2.cpp" />
 		<Unit filename="../source/src/Compositors/composerFigRitmo.cpp" />
+		<Unit filename="../source/src/Compositors/composerFigRitmo2.cpp" />
 		<Unit filename="../source/src/Mu.cpp" />
 		<Unit filename="../source/src/Music/Acorde.cpp" />
 		<Unit filename="../source/src/Music/FigureMusic.cpp" />
