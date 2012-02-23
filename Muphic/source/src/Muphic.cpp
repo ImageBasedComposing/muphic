@@ -59,8 +59,8 @@ int main( int argc, const char* argv[] )
 		l->launch(2, Launcher::PHIC, argsPhic);
 
         cout << endl << "Image analysis completed" << endl;
-        cin.get();
-        cin.ignore(cin.rdbuf()->in_avail());
+        /*cin.get();
+        cin.ignore(cin.rdbuf()->in_avail());*/
 	}
 
 	if (usrConf->getMuActive())
@@ -76,8 +76,8 @@ int main( int argc, const char* argv[] )
 		l->launch(2, Launcher::MU, argsMu);
 
         cout << endl << "Image-based composing completed" << endl;
-        cin.get();
-        cin.ignore(cin.rdbuf()->in_avail());
+       /* cin.get();
+        cin.ignore(cin.rdbuf()->in_avail());*/
 	}
 
 	return 0;
