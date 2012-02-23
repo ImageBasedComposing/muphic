@@ -122,14 +122,25 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 	if(seg->getSimbolos()->size() < 2)
 		return decSimbolo((Nota*)seg->getAt(0), f->sizeVertices(), tableScale->getDegreeTone(scriabin->getNota(f->getRGB(), tableScale)));
 	
-	int pos = seg->getSimbolos()->size()-f->sizeVertices();
+	int pos;
+	if((f->sizeVertices()*4) < seg->getSimbolos()->size()) 
+		pos = seg->getSimbolos()->size()/2;
+	else if((f->sizeVertices()*2) < seg->getSimbolos()->size())
+		pos = seg->getSimbolos()->size() - f->sizeVertices()*2;
+	else
+		pos = seg->getSimbolos()->size() - f->sizeVertices();
+
 	Nota* n1, * n2;
 	Segmento* aux;
+	Simbolos* s = new Simbolos();
 	int degree = tableScale->getDegreeTone(scriabin->getNota(f->getRGB(), tableScale));
-	/*int durToMade = 0;
-	for(int i = 0; i < f->sizeVertices(); i++)
-		durToMade += ((Nota*)seg->getAt(seg->getSimbolos()->size() - i))->getDuracion();
-	vector<int> durations = patDurations(f->sizeVertices(), durToMade, 0);*/
+
+	//Silencios
+	for(int i = 0; i < pos-1; i++)
+		s->pushBack(new Nota(seg->getAt(i)->getDuracion(), 0));
+	out->setSimbolos(s);
+
+	//La decoracion
 	while( pos < seg->getSimbolos()->size() )
 	{
 		n1 = (Nota*)seg->getAt(pos-1);
@@ -138,10 +149,11 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 		aux = dec2Simbolos(n1, n2, degree);
 		out->addSimbolos(aux->getSimbolos());
 
-		pos++;
+		pos += 2;
 	}
 	
-
+	delete scriabin;
+	scriabin = NULL;
 	return out;
 
 }
@@ -217,12 +229,12 @@ Segmento* ComposerFigMelody2::dec2Simbolos(Nota* n1, Nota* n2, int degree)
 	int durMax = (n1->getDuracion()>n2->getDuracion())? n1->getDuracion() : n2->getDuracion();
 	if(durMin == durMax) durMin = durMin/2;
 	int durActual = 0;
-	int perCentDis = 30;
+	int perCentDis1 = 30*dissonant1.size();
 	//Ahora asignamos las notas a cada símbolo
 	Nota* n;
 	if(n1->getDuracion() < n2->getDuracion())
 	{
-		if(rand()%100 < perCentDis)
+		if(rand()%100 < perCentDis1)
 			if(n1->getDuracion() == durMin)
 			{
 				n = new Nota(durMin, dissonant1.at(rand()%dissonant1.size()));
@@ -252,7 +264,7 @@ Segmento* ComposerFigMelody2::dec2Simbolos(Nota* n1, Nota* n2, int degree)
 				dec->pushBack(n);
 				durActual += durMin*2;
 			}
-		n = new Nota(n1->getDuracion()+n2->getDuracion()-durActual, consonant1.at(rand()%consonant1.size()));
+		n = new Nota(n1->getDuracion()+n2->getDuracion() - durActual, consonant2.at(rand()%consonant2.size()));
 		dec->pushBack(n);
 	}
 	else
@@ -262,7 +274,7 @@ Segmento* ComposerFigMelody2::dec2Simbolos(Nota* n1, Nota* n2, int degree)
 		n = new Nota(durMin, consonant1.at(rand()%consonant1.size()));
 		dec->pushBack(n);
 		durActual += durMin*2;
-		n = new Nota(n1->getDuracion()+n2->getDuracion()-durActual, consonant1.at(rand()%consonant1.size()));
+		n = new Nota(n1->getDuracion()+n2->getDuracion() - durActual, consonant2.at(rand()%consonant2.size()));
 		dec->pushBack(n);
 	}
 
@@ -271,9 +283,24 @@ Segmento* ComposerFigMelody2::dec2Simbolos(Nota* n1, Nota* n2, int degree)
 
 }
 
-Segmento* ComposerFigMelody2::interMelodyFig(FigureMusic* f, Segmento* seg)
+Segmento* ComposerFigMelody2::emptyMelody(Segmento* seg)
 {
-	return NULL;
+	int dur = 0;
+	Segmento* out = new Segmento();
+	Simbolos* s = new Simbolos();
+	for(int i = 0; i < seg->getSimbolos()->size(); i++)
+		dur = dur + seg->getAt(i)->getDuracion();
+	while(dur > WHOLE)
+	{
+		s->pushBack(new Nota(WHOLE, 0));
+		dur = dur - WHOLE;
+	}
+	s->pushBack(new Nota(dur, 0));
+
+	out->setSimbolos(s);
+
+	return out;
+
 }
 
 vector<int> ComposerFigMelody2::patDurations(int numSimbols, int durTotal, int pattern)
@@ -316,6 +343,11 @@ vector<int> ComposerFigMelody2::patDurations(int numSimbols, int durTotal, int p
 		return aux;
 	}
 
+}
+
+Segmento* ComposerFigMelody2::interMelodyFig(FigureMusic* f, Segmento* seg)
+{
+	return NULL;
 }
 
 Nota* ComposerFigMelody2::getNextDegreeNote(int degree, double actualAngle, double lastAngle, Nota* lastNote, int durNote)

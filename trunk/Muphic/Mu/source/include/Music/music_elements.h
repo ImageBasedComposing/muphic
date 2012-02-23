@@ -129,7 +129,12 @@ class Scriabin
 
 inline bool isConsonantInterval(int firstNote, int secondNote)
 {
-	int interval = (secondNote - firstNote)%ESCALA;
+	int interval;
+	if(firstNote > secondNote) //Be carefull with which note is the first an the second
+		interval = (firstNote - secondNote)%ESCALA;
+	else
+		interval = (secondNote - firstNote)%ESCALA;
+
 	switch(interval)
 	{
 		case PER1:

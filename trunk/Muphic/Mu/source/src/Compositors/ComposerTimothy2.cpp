@@ -68,6 +68,13 @@ string ComposerTimothy2::compose()
 			segs1->pushBack(seg1);
 			segs2->pushBack(seg2);
 		}
+
+		if((*it)->sizeHijos() == 0)
+		{
+			seg2 = fm->emptyMelody(seg1);
+			segs2->pushBack(seg2);
+			segs1->pushBack(seg1);
+		}
 	}
 
 	// We make the calls to the different composers with different figures sorted by vistosidad and with their timing assigned
