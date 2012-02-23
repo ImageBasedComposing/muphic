@@ -37,6 +37,7 @@ class ComposerFigMelody2
 		Segmento* decMelodyFig(FigureMusic* f, Segmento* seg);
 		Segmento* decSimbolo(Nota* n, int numVert, int degree);
 		Segmento* dec2Simbolos(Nota* n1, Nota* n2, int degree);
+		Segmento* emptyMelody(Segmento* seg);
 		vector<int> patDurations(int numSimbols, int durTotal, int pattern);
 		Segmento* interMelodyFig(FigureMusic* f, Segmento* seg);
 
