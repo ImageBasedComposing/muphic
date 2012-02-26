@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Wed 15. Feb 23:27:16 2012
+** Created: Sun 26. Feb 19:44:38 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QGraphicsView>
+#include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -29,7 +30,6 @@
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
 #include <QtGui/QToolButton>
-#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 #include "polygonwidget.h"
 
@@ -40,7 +40,7 @@ class Ui_GuiMupic
 public:
     QWidget *centralWidget;
     QWidget *layoutWidget;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_2;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_InputPic;
     QLineEdit *lineEdit_InputPic;
@@ -49,7 +49,11 @@ public:
     QLabel *label_OutputMidi;
     QLineEdit *lineEdit_OutputMidi;
     QToolButton *toolButton_OutputMidi;
+    QHBoxLayout *horizontalLayout_5;
     QGraphicsView *graphicsView_Pic;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout;
+    PolygonWidget *polyWidget;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton_Generate;
     QSpacerItem *horizontalSpacer;
@@ -58,8 +62,6 @@ public:
     QPushButton *pushButton_Play;
     QPushButton *pushButton_Stop;
     QSlider *horizontalSlider;
-    QGroupBox *groupBox;
-    PolygonWidget *polyWidget;
     QMenuBar *menuBar;
     QMenu *menuAbout;
     QStatusBar *statusBar;
@@ -68,17 +70,18 @@ public:
     {
         if (GuiMupic->objectName().isEmpty())
             GuiMupic->setObjectName(QString::fromUtf8("GuiMupic"));
-        GuiMupic->resize(447, 371);
+        GuiMupic->resize(562, 431);
         centralWidget = new QWidget(GuiMupic);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 251, 313));
-        verticalLayout = new QVBoxLayout(layoutWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        layoutWidget->setGeometry(QRect(10, 10, 511, 361));
+        gridLayout_2 = new QGridLayout(layoutWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
@@ -100,7 +103,7 @@ public:
         horizontalLayout_4->addWidget(toolButton_InputPic);
 
 
-        verticalLayout->addLayout(horizontalLayout_4);
+        gridLayout_2->addLayout(horizontalLayout_4, 0, 0, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
@@ -121,8 +124,11 @@ public:
         horizontalLayout_3->addWidget(toolButton_OutputMidi);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
+        gridLayout_2->addLayout(horizontalLayout_3, 1, 0, 1, 1);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         graphicsView_Pic = new QGraphicsView(layoutWidget);
         graphicsView_Pic->setObjectName(QString::fromUtf8("graphicsView_Pic"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -134,7 +140,28 @@ public:
         graphicsView_Pic->setAutoFillBackground(true);
         graphicsView_Pic->setFrameShape(QFrame::StyledPanel);
 
-        verticalLayout->addWidget(graphicsView_Pic);
+        horizontalLayout_5->addWidget(graphicsView_Pic);
+
+        groupBox = new QGroupBox(layoutWidget);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy);
+        gridLayout = new QGridLayout(groupBox);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        polyWidget = new PolygonWidget(groupBox);
+        polyWidget->setObjectName(QString::fromUtf8("polyWidget"));
+        sizePolicy.setHeightForWidth(polyWidget->sizePolicy().hasHeightForWidth());
+        polyWidget->setSizePolicy(sizePolicy);
+
+        gridLayout->addWidget(polyWidget, 0, 0, 1, 1);
+
+
+        horizontalLayout_5->addWidget(groupBox);
+
+
+        gridLayout_2->addLayout(horizontalLayout_5, 2, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -155,7 +182,7 @@ public:
         horizontalLayout_2->addWidget(progressBar_Generate);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        gridLayout_2->addLayout(horizontalLayout_2, 3, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
@@ -183,18 +210,12 @@ public:
         horizontalLayout->addWidget(horizontalSlider);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        gridLayout_2->addLayout(horizontalLayout, 4, 0, 1, 1);
 
-        groupBox = new QGroupBox(centralWidget);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(270, 10, 171, 311));
-        polyWidget = new PolygonWidget(groupBox);
-        polyWidget->setObjectName(QString::fromUtf8("polyWidget"));
-        polyWidget->setGeometry(QRect(10, 20, 151, 281));
         GuiMupic->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GuiMupic);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 447, 21));
+        menuBar->setGeometry(QRect(0, 0, 562, 21));
         menuAbout = new QMenu(menuBar);
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         GuiMupic->setMenuBar(menuBar);
@@ -217,10 +238,10 @@ public:
         toolButton_InputPic->setText(QApplication::translate("GuiMupic", "...", 0, QApplication::UnicodeUTF8));
         label_OutputMidi->setText(QApplication::translate("GuiMupic", " Output Midi", 0, QApplication::UnicodeUTF8));
         toolButton_OutputMidi->setText(QApplication::translate("GuiMupic", "...", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("GuiMupic", "Analysis output", 0, QApplication::UnicodeUTF8));
         pushButton_Generate->setText(QApplication::translate("GuiMupic", "Generate", 0, QApplication::UnicodeUTF8));
         pushButton_Play->setText(QString());
         pushButton_Stop->setText(QString());
-        groupBox->setTitle(QApplication::translate("GuiMupic", "Analysis output", 0, QApplication::UnicodeUTF8));
         menuAbout->setTitle(QApplication::translate("GuiMupic", "About", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
