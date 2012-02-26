@@ -6,6 +6,8 @@ GuiMupic::GuiMupic(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->centralWidget->setLayout(ui->gridLayout_2);
+
     l = new Launcher();
     pidPlay = -1;
 

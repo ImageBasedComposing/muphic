@@ -44,7 +44,7 @@ FORMS    += guimupic.ui
 
 INCLUDEPATH += ../../Muphic/common/include
 INCLUDEPATH += ../../Muphic/TinyXML/include
-DEFINES += __LINUX=1
+DEFINES += __WINDOWS=1
 
 
 
