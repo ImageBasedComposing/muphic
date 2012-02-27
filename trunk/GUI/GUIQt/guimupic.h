@@ -45,11 +45,14 @@ private slots:
 
     void on_pushButton_Play_clicked();
 
+    void on_pushButton_Analyze_clicked();
+
 private:
     Ui::GuiMupic *ui;
     QGraphicsScene * newScene;
     PolygonWidget * poly;
 
+    QString imageFile;
     Launcher* l;
     pid_t pidPlay;
 };

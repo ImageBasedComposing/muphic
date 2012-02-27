@@ -6,6 +6,8 @@ UsrConf::UsrConf()
     phicActive = true;
     phicDebug = false;
 
+    phicFilterSelec = 2;    //Filtro Canny
+
     muActive = true;
 }
 
@@ -45,6 +47,11 @@ void UsrConf::readMuphic(std::string path)
 			phicActive = false;
 	}
 
+    if(phicActive)
+    {
+        phicFilterSelec = atoi(phicNode->FirstChild("filter")->ToElement()->GetText());
+    }
+
 	muNode->ToElement();
 
 	if(muNode->ToElement()->Attribute("none") != 0)
@@ -68,6 +75,7 @@ void UsrConf::readPhic(std::string path)
 	// Leemos los nodos
 	TiXmlNode* muphicNode = doc.FirstChild("muphic_conf");
 	TiXmlNode* phicNode = muphicNode->FirstChild("phic_conf");
+    phicFilterSelec = atoi(phicNode->FirstChild("filter")->ToElement()->GetText());
 
 
 	// Debug
@@ -107,6 +115,12 @@ void UsrConf::write(std::string path)
             TiXmlElement * debugNode = new TiXmlElement( "debug" );
             phicNode->LinkEndChild(debugNode);
         }
+
+        // We add the node for filter selection
+        TiXmlElement * phicFilterNode = new TiXmlElement( "filter" );
+        char a[1];
+        phicFilterNode->LinkEndChild(new TiXmlText(our_itoa(phicFilterSelec,a,10)));
+        phicNode->LinkEndChild(phicFilterNode);
 	}
 
     TiXmlElement * muNode = new TiXmlElement( "mu_conf" );
