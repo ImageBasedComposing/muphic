@@ -6,7 +6,7 @@ GuiMupic::GuiMupic(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->centralWidget->setLayout(ui->gridLayout_2);
+    ui->centralWidget->setLayout(ui->gridLayout_3);
 
     l = new Launcher();
     pidPlay = -1;
@@ -27,6 +27,9 @@ void GuiMupic::initialize()
     QPixmap pixImg(DEFAULT_PIC);
     pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     ui->graphicsView_Pic->scene()->addPixmap(pixImg);
+    imageFile = DEFAULT_PIC;
+
+    ui->pushButton_Generate->setEnabled(false);
 
 }
 
@@ -48,39 +51,27 @@ void GuiMupic::on_toolButton_OutputMidi_clicked()
 
 void GuiMupic::on_toolButton_InputPic_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "",
+    imageFile = QFileDialog::getOpenFileName(this, tr("Open File"), "",
         tr("(*.jpg *.png *.bmp)"));
 
-    if (fileName != "") {
-        QFile file(fileName);
+    if (imageFile != "") {
+        QFile file(imageFile);
         if (!file.exists()) {
          QMessageBox::critical(this, tr("Error"),
              tr("Could not open file, not exists"));
          return;
         }
-        ui->lineEdit_InputPic->setText(fileName);
+        ui->lineEdit_InputPic->setText(imageFile);
 
         delete newScene; newScene = NULL;
         newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
         ui->graphicsView_Pic->setScene(newScene);
 
-        QPixmap pixImg(fileName);
+        QPixmap pixImg(imageFile);
         pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
         ui->graphicsView_Pic->scene()->addPixmap(pixImg);
 
         repaint();
-
-        UsrConf* usrConf = new UsrConf();
-        usrConf->setPhicActive(true);
-        usrConf->setPhicDebug(false);
-        usrConf->setMuActive(false);
-        //std::string name = changeExtension(fileName.toStdString(), "xml");
-        usrConf->write("user_conf.xml");
-
-        std::string args[] = {"user_conf.xml", fileName.toStdString()};
-        l->launch(2, Launcher::MUPHIC, args);
-
-        ui->polyWidget->load(fileName.toStdString());
     }
 }
 
@@ -134,4 +125,28 @@ void GuiMupic::on_pushButton_Play_clicked()
 
         pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
     }
+}
+
+void GuiMupic::on_pushButton_Analyze_clicked()
+{
+     if (imageFile != "") {
+         QFile file(imageFile);
+         if (!file.exists()) {
+          QMessageBox::critical(this, tr("Error"),
+              tr("Could not open file, not exists"));
+          return;
+         }
+        UsrConf* usrConf = new UsrConf();
+        usrConf->setPhicActive(true);
+        usrConf->setPhicDebug(false);
+        usrConf->setMuActive(false);
+        //std::string name = changeExtension(imageFile.toStdString(), "xml");
+        usrConf->write("user_conf.xml");
+
+        std::string args[] = {"user_conf.xml", imageFile.toStdString()};
+        l->launch(2, Launcher::MUPHIC, args);
+
+        ui->polyWidget->load(imageFile.toStdString());
+        ui->pushButton_Generate->setEnabled(true);
+     }
 }

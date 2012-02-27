@@ -9,13 +9,13 @@ PolygonWidget::PolygonWidget(QWidget *parent) :
 
 void PolygonWidget::load(std::string path)
 {
-    if (!loaded)
-    {
+   // if (!loaded)
+    //{
         std::string xmlPath = changeExtension(path, "");
         scene->cargar(xmlPath);
         loaded = true;
         repaint();
-    }
+    //}
 }
 
 void PolygonWidget::paintEvent(QPaintEvent *event)

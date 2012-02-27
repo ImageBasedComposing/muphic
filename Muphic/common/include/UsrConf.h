@@ -5,6 +5,7 @@
 
 #include <string>
 #include "tinyxml.h"
+#include "aux_functions.h"
 //#include "Conf.h"
 
 class UsrConf/* : public Conf*/
@@ -27,6 +28,7 @@ class UsrConf/* : public Conf*/
 			// PHIC
 			bool getPhicActive();
 			bool getPhicDebug();
+            int  getPhicFilterSelect();
 			// MU
 			bool getMuActive();
 
@@ -38,6 +40,7 @@ class UsrConf/* : public Conf*/
                 // PHIC
                 void setPhicActive(bool b);
                 void setPhicDebug(bool b);
+                void setPhicFilterSelect(int fn);
                 // MU
                 void setMuActive(bool b);
 
@@ -46,7 +49,7 @@ class UsrConf/* : public Conf*/
 			// PHIC
 			bool phicActive;
 			bool phicDebug;
-
+            int  phicFilterSelec;
 			// MU
 			bool muActive;
     private:
