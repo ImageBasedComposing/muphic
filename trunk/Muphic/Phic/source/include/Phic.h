@@ -34,6 +34,8 @@ class Phic
 		static int g_thresh;
 		static IplImage* g_image;
 		static int filtro;
+		static int noise;
+		static int polSimp;
 
 		static std::string picPath;
 		std::string usrConfPath;
@@ -45,6 +47,8 @@ class Phic
 int Phic::g_thresh = 50;
 IplImage* Phic::g_image = NULL;
 int Phic::filtro = 2;
+int Phic::noise = 50;
+int Phic::polSimp = 2;
 UsrConf* Phic::usrConf = NULL;
 std::string Phic::picPath = "";
 

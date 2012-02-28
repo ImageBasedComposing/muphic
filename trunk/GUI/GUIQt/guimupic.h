@@ -47,10 +47,19 @@ private slots:
 
     void on_pushButton_Analyze_clicked();
 
+    void on_filterSelComboBox_currentIndexChanged(int index);
+
+    void on_horizontalSlider_2_sliderMoved(int position);
+
+    void on_horizontalSlider_3_sliderMoved(int position);
+
+    void on_horizontalSlider_6_sliderMoved(int position);
+
 private:
     Ui::GuiMupic *ui;
     QGraphicsScene * newScene;
     PolygonWidget * poly;
+    UsrConf * usrConf;
 
     QString imageFile;
     Launcher* l;

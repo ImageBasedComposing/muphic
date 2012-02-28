@@ -124,14 +124,17 @@ void Phic::on_trackbar(int)
 	CvSeq* contours = 0;
 	cvCvtColor( g_image, g_gray, CV_BGR2GRAY );
 
-
+	filtro = usrConf->getPhicFilterSelect();
+	g_thresh = usrConf->getPhicThresholdSelec();
+	noise = usrConf->getPhicNoiseSelec();
+	polSimp = usrConf->getPhicPolygonSimp();
 	// We choose the filter we will be using
 	switch(filtro)
 	{
-		case 0:
+		case 1:
 			cvAdaptiveThreshold(g_gray, g_gray,   double(255), CV_ADAPTIVE_THRESH_GAUSSIAN_C, CV_THRESH_BINARY, 3, 3 );
 			break;
-		case 1:
+		case 0:
 			cvThreshold( g_gray, g_gray, g_thresh, 255, CV_THRESH_BINARY );
 			break;
 		case 2:
@@ -170,7 +173,7 @@ void Phic::on_trackbar(int)
 	if( contours )
 	{
 		//convert the pixel contours to line segments in a polygon.
-		first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, 2, 1);
+		first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, polSimp, 1);
 
 		int n = 0;
 		CvSeq* cAux = contours;
@@ -243,7 +246,7 @@ void Phic::on_trackbar(int)
 			f->setId(++id);
 
 			// We set an area filter to skip noise figures
-			if ((f->sizeVertices() < 3) || (f->getArea() < 50))
+			if ((f->sizeVertices() < 3) || (f->getArea() < noise))
 			{				
 				n++;
 				continue;
