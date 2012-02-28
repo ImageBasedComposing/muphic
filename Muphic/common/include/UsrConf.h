@@ -28,7 +28,11 @@ class UsrConf/* : public Conf*/
 			// PHIC
 			bool getPhicActive();
 			bool getPhicDebug();
+            bool getMuDebug();
             int  getPhicFilterSelect();
+            int  getPhicThresholdSelec();
+            int  getPhicPolygonSimp();
+            int  getPhicNoiseSelec();
 			// MU
 			bool getMuActive();
 
@@ -40,7 +44,11 @@ class UsrConf/* : public Conf*/
                 // PHIC
                 void setPhicActive(bool b);
                 void setPhicDebug(bool b);
+                void setMuDebug(bool b);
                 void setPhicFilterSelect(int fn);
+                void setPhicThresholdSelec(int t);
+                void setPhicPolygonSimp(int i);
+                void setPhicNoiseSelec(int n);
                 // MU
                 void setMuActive(bool b);
 
@@ -50,8 +58,12 @@ class UsrConf/* : public Conf*/
 			bool phicActive;
 			bool phicDebug;
             int  phicFilterSelec;
+            int  phicThresholdSelec;
+            int  phicPolygonSimp;
+            int  phicNoiseSelec;
 			// MU
 			bool muActive;
+            bool muDebug;
     private:
 };
 

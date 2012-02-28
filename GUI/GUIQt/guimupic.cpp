@@ -16,11 +16,16 @@ GuiMupic::GuiMupic(QWidget *parent) :
 
 GuiMupic::~GuiMupic()
 {
+    delete usrConf;
     delete ui;
 }
 
 void GuiMupic::initialize()
 {
+    usrConf = new UsrConf();
+    usrConf->setPhicNoiseSelec(50);
+    usrConf->setPhicPolygonSimp(2);
+
     newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
     ui->graphicsView_Pic->setScene(newScene);
 
@@ -136,7 +141,7 @@ void GuiMupic::on_pushButton_Analyze_clicked()
               tr("Could not open file, not exists"));
           return;
          }
-        UsrConf* usrConf = new UsrConf();
+
         usrConf->setPhicActive(true);
         usrConf->setPhicDebug(false);
         usrConf->setMuActive(false);
@@ -149,4 +154,40 @@ void GuiMupic::on_pushButton_Analyze_clicked()
         ui->polyWidget->load(imageFile.toStdString());
         ui->pushButton_Generate->setEnabled(true);
      }
+}
+
+void GuiMupic::on_filterSelComboBox_currentIndexChanged(int index)
+{
+    usrConf->setPhicFilterSelect(index);
+    if( index == 0 )
+    {
+        ui->horizontalSlider_2->setEnabled(true);
+        ui->tLabel->setEnabled(true);
+    }
+    else
+    {
+        ui->horizontalSlider_2->setEnabled(false);
+        ui->tLabel->setEnabled(false);
+    }
+}
+
+void GuiMupic::on_horizontalSlider_2_sliderMoved(int position)
+{
+    usrConf->setPhicThresholdSelec(position);
+    char a[10];
+    ui->tLabel->setText(itoa(position,a,10));
+}
+
+void GuiMupic::on_horizontalSlider_3_sliderMoved(int position)
+{
+    usrConf->setPhicNoiseSelec(position);
+    char a[10];
+    ui->noiseLabel->setText(itoa(position,a,10));
+}
+
+void GuiMupic::on_horizontalSlider_6_sliderMoved(int position)
+{
+    usrConf->setPhicPolygonSimp(position);
+    char a[10];
+    ui->labelPolSimp->setText(itoa(position,a,10));
 }
