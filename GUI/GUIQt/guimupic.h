@@ -7,6 +7,7 @@
 #include "launcher.h"
 #include "polygonwidget.h"
 #include "UsrConf.h"
+#include "aux_functions.h"
 
 #include <QFile>
 #include <QMessageBox>
