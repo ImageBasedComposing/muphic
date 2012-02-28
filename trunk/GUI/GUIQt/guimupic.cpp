@@ -175,19 +175,19 @@ void GuiMupic::on_horizontalSlider_2_sliderMoved(int position)
 {
     usrConf->setPhicThresholdSelec(position);
     char a[10];
-    ui->tLabel->setText(itoa(position,a,10));
+    ui->tLabel->setText(our_itoa(position,a,10));
 }
 
 void GuiMupic::on_horizontalSlider_3_sliderMoved(int position)
 {
     usrConf->setPhicNoiseSelec(position);
     char a[10];
-    ui->noiseLabel->setText(itoa(position,a,10));
+    ui->noiseLabel->setText(our_itoa(position,a,10));
 }
 
 void GuiMupic::on_horizontalSlider_6_sliderMoved(int position)
 {
     usrConf->setPhicPolygonSimp(position);
     char a[10];
-    ui->labelPolSimp->setText(itoa(position,a,10));
+    ui->labelPolSimp->setText(our_itoa(position,a,10));
 }
