@@ -23,6 +23,8 @@ class ComposerFigMelody2
 
 		Segmento* lastSeg;
 		TableScale* tableScale;
+		vector< int > calcDurDirect(FigureMusic * f, vector< Vertice* > vertices);
+		vector< int > calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices);
 
     public:
 		ComposerFigMelody2();
@@ -32,7 +34,7 @@ class ComposerFigMelody2
 		//Se pide que haga una melodia dada una figura. Devuelve el segmento con la melodia
 		bool compMelodyFig(FigureMusic* f, Segmento* seg);
 		//Devuelve una nota dados los angulos y la duracion
-		Nota* getNextDegreeNote(int degree, double actualAngle, double lastAngle, Nota* lastNote, int durNote);
+		int getNextDegreeTone(int degree, double actualAngle, double lastAngle, int lastTone);
 
 		Segmento* decMelodyFig(FigureMusic* f, Segmento* seg);
 		Segmento* decSimbolo(Nota* n, int numVert, int degree);
