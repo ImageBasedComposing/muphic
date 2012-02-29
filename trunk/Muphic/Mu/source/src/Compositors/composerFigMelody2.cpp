@@ -22,12 +22,6 @@ ComposerFigMelody2::~ComposerFigMelody2()
 //Hacemos una melodia de duracion limitada y que sea a partir de la figura dada.
 bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg)
 {
-	//Vemos el color y en que nos movemos.
-	Color color = f->getRGB();
-	Scriabin* scriabin = new Scriabin();
-
-	//int nota = scriabin->getNota(color);
-
 	//Ordenamos los vertices de la figura teniendo en cuenta el focus... (nada por ahora) CAMBIAR!
 	vector< Vertice* > vertices;
 	int numVertices = f->getNumVertices();
@@ -38,14 +32,32 @@ bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg)
 
 		// Duracion ***************
 
-	//Vemos long lado medio, lado mayor y lado menor.
-	
+	vector< int > durations = calcDurDirect(f, vertices);
+
+
+		//Tono **************
+
+	vector< int > tones = calcTonesDiff(f, vertices);
+
+	//Añadimos las notas
+	for(int i = 0; i < vertices.size(); i++)
+		seg->getSimbolos()->pushBack(new Nota(durations.at(i), tones.at(i)));
+
+	return true;
+}
+
+//Dada unos vértices ordenados, devolvemos vector de duraciones.
+vector< int > ComposerFigMelody2::calcDurDirect(FigureMusic * f, vector< Vertice* > vertices)
+{
+
 	//Calculamos la longitud total de la figura
+	int numVertices = vertices.size();
 	double distTotal = 0, distMin = 9000000, distMax = 0;
 	vector< double > distWithNext;  //Distancias con el siguiente vertice.
 	for(int i = 0; i < numVertices; i++)
 	{
 		distWithNext.push_back( dist2DPoints(vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair()) );
+		//Vemos long lado medio, lado mayor y lado menor.
 		distMin = min(distMin, distWithNext.back());
 		distMax = max(distMax, distWithNext.back());
 		distTotal += distWithNext.back();
@@ -77,41 +89,50 @@ bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg)
 			;
 	}
 
+	return durVertice;
+}
 
-		//Tono **************
+vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices)
+{
+
+	vector<int> out;
+	//Vemos el color y en que nos movemos.
+	Color color = f->getRGB();
+	Scriabin* scriabin = new Scriabin();
 
 	//Ahora segun la duracion que nos han dado y los angulos que se forman con las aristas de la figura añadimos notas
 	double lastAngle, actualAngle;
 	int step;	// El cambio de tono que vamos a hacer. En pasos sobre la escala dada anteriormente
-	Nota* lastNote,* note;
+	int lastTone, tone;
 	//La primera nota es el color de la figura (no disponemos de más info)
-	lastNote = new Nota(durVertice.at(0), scriabin->getNota(color, tableScale));
+	lastTone = scriabin->getNota(color, tableScale);
+	out.push_back(lastTone);
 	MajorScale scale;
 	delete tableScale;
-	tableScale = new TableScale(scale.getScaleSteps(), lastNote->getTono());
-	int degree = tableScale->getDegreeTone(lastNote->getTono());
-	seg->getSimbolos()->pushBack(lastNote);
-	lastAngle = angleOf2Lines2(vertices.at(numVertices-1)->getPair(), vertices.at(0)->getPair(), vertices.at(0)->getPair(), vertices.at(1)->getPair());
+	//Cambiamos la escala a la nueva tonalidad.
+	tableScale = new TableScale(scale.getScaleSteps(), lastTone);
+	int degree = tableScale->getDegreeTone(lastTone);
+	lastAngle = angleOf2Lines2(vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair(), vertices.at(0)->getPair(), vertices.at(1)->getPair());
 	//Ahora el resto de vértices desde 1 a numVertices
-	for(int i = 1; i < numVertices; i++)
+	for(int i = 1; i < vertices.size(); i++)
 	{
-		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),numVertices))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair());
+		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
 		//step = (int) floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
 
-		note = getNextDegreeNote(degree, actualAngle, lastAngle, lastNote, durVertice.at(i));
+		tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
 
-		seg->getSimbolos()->pushBack(note);  //La nota respecto al vertice.
-		lastNote = note;
+		out.push_back(tone);  //La nota respecto al vertice.
+		lastTone = tone;
 		lastAngle = actualAngle;
 	}
-	lastNote = NULL;
-	note = NULL;
+
 	delete scriabin;
 	scriabin = NULL;
 
-	return true;
+	return out;
 }
 
+//Decora la melodía dada en seg con la figura de entrada. Devuelve la 2º voz
 Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 {
 	Segmento* out = new Segmento();
@@ -158,6 +179,7 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 
 }
 
+//Teniendo una nota (preferiblemente de larga duración) la decora con las notas que puede dado el grado.
 Segmento* ComposerFigMelody2::decSimbolo(Nota* n, int numVert, int degree)
 {
 	Segmento* out = new Segmento();
@@ -347,12 +369,36 @@ vector<int> ComposerFigMelody2::patDurations(int numSimbols, int durTotal, int p
 
 Segmento* ComposerFigMelody2::interMelodyFig(FigureMusic* f, Segmento* seg)
 {
-	return NULL;
+	Segmento* out = new Segmento();
+	Simbolos* s = new Simbolos();
+	//Ordenamos los vertices de la figura teniendo en cuenta el ...
+	vector< Vertice* > vertices;
+	int numVertices = f->getNumVertices();
+	for(int i = 0; i < numVertices; i++)
+		vertices.push_back(f->getVerticeAt(i));
+
+	//Componemos:
+
+		// Duracion ***************
+
+	vector< int > durations = calcDurDirect(f, vertices);
+
+
+		//Tono **************
+
+	vector< int > tones = calcTonesDiff(f, vertices);
+
+	//Añadimos las notas
+	for(int i = 0; i < vertices.size(); i++)
+		s->pushBack(new Nota(durations.at(i), tones.at(i)));
+
+	out->setSimbolos(s);
+	return out;
 }
 
-Nota* ComposerFigMelody2::getNextDegreeNote(int degree, double actualAngle, double lastAngle, Nota* lastNote, int durNote)
+int ComposerFigMelody2::getNextDegreeTone(int degree, double actualAngle, double lastAngle, int lastTone)
 {
-	Nota* note;
+	int note;
 	/*int alfa1 = PI/5; // 36º
 	int alfa2 = PI/3; // 60º
 	int alfa3 = PI/2; // 90º
@@ -364,24 +410,6 @@ Nota* ComposerFigMelody2::getNextDegreeNote(int degree, double actualAngle, doub
 
 	double diff = abs(actualAngle - lastAngle);
 
-	/*
-	// Nos movemos en la escala y no en el acorde
-	if(diff > alfa1)
-		if(diff > alfa2)
-			if(diff > alfa3)
-				if(diff > alfa4)
-					note = new Nota(durNote, tableScale->nextNTone(lastNote->getTono(),4));
-				else
-					note = new Nota(durNote, tableScale->nextNTone(lastNote->getTono(),3));
-			else
-				note = new Nota(durNote, tableScale->nextNTone(lastNote->getTono(),2));
-		else
-			note = new Nota(durNote, tableScale->nextNTone(lastNote->getTono(),1));
-	else
-		note = new Nota(durNote, lastNote->getTono());
-
-	*/
-
 	// Aqui nos movemos dentro del acorde del grado al que pertenece dentro de la escala diatónica
 
 	if(diff > alfa1)
@@ -389,26 +417,26 @@ Nota* ComposerFigMelody2::getNextDegreeNote(int degree, double actualAngle, doub
 			if(diff > alfa3)
 				if(diff > alfa4)
 					if(actualAngle > lastAngle)
-						note = new Nota(durNote, tableScale->nextNDegreeTone(degree, lastNote->getTono(),4));
+						note = tableScale->nextNDegreeTone(degree, lastTone,4);
 					else
-						note = new Nota(durNote, tableScale->prevNDegreeTone(degree, lastNote->getTono(),4));
+						note = tableScale->prevNDegreeTone(degree, lastTone,4);
 				else
 					if(actualAngle > lastAngle)
-						note = new Nota(durNote, tableScale->nextNDegreeTone(degree, lastNote->getTono(),3));
+						note = tableScale->nextNDegreeTone(degree, lastTone,3);
 					else
-						note = new Nota(durNote, tableScale->prevNDegreeTone(degree, lastNote->getTono(),3));
+						note = tableScale->prevNDegreeTone(degree, lastTone,3);
 			else
 				if(actualAngle > lastAngle)
-					note = new Nota(durNote, tableScale->nextNDegreeTone(degree, lastNote->getTono(),2));
+					note = tableScale->nextNDegreeTone(degree, lastTone,2);
 				else
-					note = new Nota(durNote, tableScale->prevNDegreeTone(degree, lastNote->getTono(),2));
+					note = tableScale->prevNDegreeTone(degree, lastTone,2);
 		else
 			if(actualAngle > lastAngle)
-				note = new Nota(durNote, tableScale->nextNDegreeTone(degree, lastNote->getTono(),1));
+				note = tableScale->nextNDegreeTone(degree, lastTone,1);
 			else
-				note = new Nota(durNote, tableScale->prevNDegreeTone(degree, lastNote->getTono(),1));
+				note = tableScale->prevNDegreeTone(degree, lastTone,1);
 	else
-		note = new Nota(durNote, lastNote->getTono());
+		note = lastTone;
 
 	return note;
 }
