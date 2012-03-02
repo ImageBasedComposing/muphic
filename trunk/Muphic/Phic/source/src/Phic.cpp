@@ -235,8 +235,8 @@ void Phic::on_trackbar(int)
 			area = cvContourArea(c);
 			printf("Area: %f\n", area);
 				
-			if(area == 0) 
-				area = 100;
+			/*if(area == 0) 
+				area = 100;*/
 				
 			f->setArea(area);
 				
