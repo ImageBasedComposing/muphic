@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Tue 28. Feb 19:01:21 2012
+** Created: Fri 9. Mar 13:27:53 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -55,13 +55,15 @@ public:
     QLineEdit *lineEdit_OutputMidi;
     QToolButton *toolButton_OutputMidi;
     QHBoxLayout *horizontalLayout_5;
+    QGroupBox *groupBox_4;
+    QGridLayout *gridLayout_4;
     QGraphicsView *graphicsView_Pic;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     PolygonWidget *polyWidget;
     QVBoxLayout *verticalLayout_5;
     QGroupBox *groupBox_2;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label;
@@ -70,18 +72,18 @@ public:
     QLabel *label_4;
     QSlider *horizontalSlider_3;
     QLabel *noiseLabel;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *label_2;
-    QSlider *horizontalSlider_2;
-    QLabel *tLabel;
-    QSpacerItem *horizontalSpacer_6;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label_3;
     QSlider *horizontalSlider_6;
     QLabel *labelPolSimp;
     QSpacerItem *horizontalSpacer_4;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_2;
+    QSlider *horizontalSlider_2;
+    QLabel *tLabel;
+    QSpacerItem *horizontalSpacer_6;
     QGroupBox *groupBox_3;
-    QWidget *widget1;
+    QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_12;
     QLabel *labelComposer;
@@ -109,6 +111,7 @@ public:
     QPushButton *pushButton_Play;
     QPushButton *pushButton_Stop;
     QSlider *horizontalSlider;
+    QSpacerItem *horizontalSpacer_5;
     QMenuBar *menuBar;
     QMenu *menuAbout;
     QStatusBar *statusBar;
@@ -117,14 +120,14 @@ public:
     {
         if (GuiMupic->objectName().isEmpty())
             GuiMupic->setObjectName(QString::fromUtf8("GuiMupic"));
-        GuiMupic->resize(994, 391);
+        GuiMupic->resize(1148, 430);
         actionExdit = new QAction(GuiMupic);
         actionExdit->setObjectName(QString::fromUtf8("actionExdit"));
         centralWidget = new QWidget(GuiMupic);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 1001, 337));
+        layoutWidget->setGeometry(QRect(10, 10, 1066, 377));
         gridLayout_3 = new QGridLayout(layoutWidget);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -181,11 +184,19 @@ public:
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        graphicsView_Pic = new QGraphicsView(layoutWidget);
-        graphicsView_Pic->setObjectName(QString::fromUtf8("graphicsView_Pic"));
+        groupBox_4 = new QGroupBox(layoutWidget);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(groupBox_4->sizePolicy().hasHeightForWidth());
+        groupBox_4->setSizePolicy(sizePolicy);
+        gridLayout_4 = new QGridLayout(groupBox_4);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        graphicsView_Pic = new QGraphicsView(groupBox_4);
+        graphicsView_Pic->setObjectName(QString::fromUtf8("graphicsView_Pic"));
         sizePolicy.setHeightForWidth(graphicsView_Pic->sizePolicy().hasHeightForWidth());
         graphicsView_Pic->setSizePolicy(sizePolicy);
         graphicsView_Pic->setMinimumSize(QSize(256, 194));
@@ -193,7 +204,10 @@ public:
         graphicsView_Pic->setAutoFillBackground(true);
         graphicsView_Pic->setFrameShape(QFrame::StyledPanel);
 
-        horizontalLayout_5->addWidget(graphicsView_Pic);
+        gridLayout_4->addWidget(graphicsView_Pic, 0, 0, 1, 1);
+
+
+        horizontalLayout_5->addWidget(groupBox_4);
 
         groupBox = new QGroupBox(layoutWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -218,7 +232,7 @@ public:
         gridLayout_2->addLayout(horizontalLayout_5, 2, 0, 1, 1);
 
 
-        gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 1);
+        gridLayout_3->addLayout(gridLayout_2, 0, 1, 1, 1);
 
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(6);
@@ -233,10 +247,10 @@ public:
         groupBox_2->setSizePolicy(sizePolicy1);
         groupBox_2->setMinimumSize(QSize(441, 128));
         groupBox_2->setMaximumSize(QSize(441, 128));
-        widget = new QWidget(groupBox_2);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(11, 24, 412, 92));
-        verticalLayout_4 = new QVBoxLayout(widget);
+        layoutWidget1 = new QWidget(groupBox_2);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(11, 24, 412, 92));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget1);
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
@@ -244,7 +258,7 @@ public:
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget1);
         label->setObjectName(QString::fromUtf8("label"));
         QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
@@ -254,7 +268,7 @@ public:
 
         horizontalLayout_6->addWidget(label);
 
-        filterSelComboBox = new QComboBox(widget);
+        filterSelComboBox = new QComboBox(layoutWidget1);
         filterSelComboBox->setObjectName(QString::fromUtf8("filterSelComboBox"));
 
         horizontalLayout_6->addWidget(filterSelComboBox);
@@ -263,12 +277,12 @@ public:
 
         horizontalLayout_6->addItem(horizontalSpacer);
 
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(layoutWidget1);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         horizontalLayout_6->addWidget(label_4);
 
-        horizontalSlider_3 = new QSlider(widget);
+        horizontalSlider_3 = new QSlider(layoutWidget1);
         horizontalSlider_3->setObjectName(QString::fromUtf8("horizontalSlider_3"));
         horizontalSlider_3->setMinimumSize(QSize(103, 0));
         horizontalSlider_3->setMaximum(100);
@@ -281,7 +295,7 @@ public:
 
         horizontalLayout_6->addWidget(horizontalSlider_3);
 
-        noiseLabel = new QLabel(widget);
+        noiseLabel = new QLabel(layoutWidget1);
         noiseLabel->setObjectName(QString::fromUtf8("noiseLabel"));
         QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy3.setHorizontalStretch(0);
@@ -298,55 +312,17 @@ public:
 
         verticalLayout_4->addLayout(horizontalLayout_6);
 
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setSpacing(6);
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        label_2 = new QLabel(widget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        horizontalLayout_8->addWidget(label_2);
-
-        horizontalSlider_2 = new QSlider(widget);
-        horizontalSlider_2->setObjectName(QString::fromUtf8("horizontalSlider_2"));
-        horizontalSlider_2->setEnabled(false);
-        horizontalSlider_2->setMaximum(200);
-        horizontalSlider_2->setValue(50);
-        horizontalSlider_2->setOrientation(Qt::Horizontal);
-        horizontalSlider_2->setTickPosition(QSlider::TicksBelow);
-        horizontalSlider_2->setTickInterval(10);
-
-        horizontalLayout_8->addWidget(horizontalSlider_2);
-
-        tLabel = new QLabel(widget);
-        tLabel->setObjectName(QString::fromUtf8("tLabel"));
-        tLabel->setEnabled(false);
-        sizePolicy3.setHeightForWidth(tLabel->sizePolicy().hasHeightForWidth());
-        tLabel->setSizePolicy(sizePolicy3);
-        tLabel->setMinimumSize(QSize(30, 0));
-        tLabel->setMaximumSize(QSize(30, 16777215));
-        tLabel->setFrameShape(QFrame::StyledPanel);
-        tLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        horizontalLayout_8->addWidget(tLabel);
-
-        horizontalSpacer_6 = new QSpacerItem(5, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
-
-        horizontalLayout_8->addItem(horizontalSpacer_6);
-
-
-        verticalLayout_4->addLayout(horizontalLayout_8);
-
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         sizePolicy2.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy2);
 
         horizontalLayout_7->addWidget(label_3);
 
-        horizontalSlider_6 = new QSlider(widget);
+        horizontalSlider_6 = new QSlider(layoutWidget1);
         horizontalSlider_6->setObjectName(QString::fromUtf8("horizontalSlider_6"));
         horizontalSlider_6->setMinimum(1);
         horizontalSlider_6->setMaximum(45);
@@ -357,7 +333,7 @@ public:
 
         horizontalLayout_7->addWidget(horizontalSlider_6);
 
-        labelPolSimp = new QLabel(widget);
+        labelPolSimp = new QLabel(layoutWidget1);
         labelPolSimp->setObjectName(QString::fromUtf8("labelPolSimp"));
         sizePolicy3.setHeightForWidth(labelPolSimp->sizePolicy().hasHeightForWidth());
         labelPolSimp->setSizePolicy(sizePolicy3);
@@ -375,14 +351,44 @@ public:
 
         verticalLayout_4->addLayout(horizontalLayout_7);
 
-        filterSelComboBox->raise();
-        label->raise();
-        label_2->raise();
-        horizontalSlider_2->raise();
-        label_3->raise();
-        label_4->raise();
-        horizontalSlider_3->raise();
-        noiseLabel->raise();
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        label_2 = new QLabel(layoutWidget1);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        horizontalLayout_8->addWidget(label_2);
+
+        horizontalSlider_2 = new QSlider(layoutWidget1);
+        horizontalSlider_2->setObjectName(QString::fromUtf8("horizontalSlider_2"));
+        horizontalSlider_2->setEnabled(true);
+        horizontalSlider_2->setMaximum(200);
+        horizontalSlider_2->setValue(50);
+        horizontalSlider_2->setOrientation(Qt::Horizontal);
+        horizontalSlider_2->setTickPosition(QSlider::TicksBelow);
+        horizontalSlider_2->setTickInterval(10);
+
+        horizontalLayout_8->addWidget(horizontalSlider_2);
+
+        tLabel = new QLabel(layoutWidget1);
+        tLabel->setObjectName(QString::fromUtf8("tLabel"));
+        tLabel->setEnabled(true);
+        sizePolicy3.setHeightForWidth(tLabel->sizePolicy().hasHeightForWidth());
+        tLabel->setSizePolicy(sizePolicy3);
+        tLabel->setMinimumSize(QSize(30, 0));
+        tLabel->setMaximumSize(QSize(30, 16777215));
+        tLabel->setFrameShape(QFrame::StyledPanel);
+        tLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_8->addWidget(tLabel);
+
+        horizontalSpacer_6 = new QSpacerItem(5, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_8->addItem(horizontalSpacer_6);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_8);
+
 
         verticalLayout_5->addWidget(groupBox_2);
 
@@ -392,10 +398,10 @@ public:
         groupBox_3->setSizePolicy(sizePolicy);
         groupBox_3->setMinimumSize(QSize(441, 128));
         groupBox_3->setMaximumSize(QSize(441, 128));
-        widget1 = new QWidget(groupBox_3);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(10, 23, 421, 80));
-        verticalLayout_3 = new QVBoxLayout(widget1);
+        layoutWidget2 = new QWidget(groupBox_3);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(10, 23, 421, 80));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -403,12 +409,12 @@ public:
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setSpacing(6);
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        labelComposer = new QLabel(widget1);
+        labelComposer = new QLabel(layoutWidget2);
         labelComposer->setObjectName(QString::fromUtf8("labelComposer"));
 
         horizontalLayout_12->addWidget(labelComposer);
 
-        comboBox = new QComboBox(widget1);
+        comboBox = new QComboBox(layoutWidget2);
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
         comboBox->setEnabled(false);
 
@@ -424,12 +430,12 @@ public:
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
-        labelInstruments = new QLabel(widget1);
+        labelInstruments = new QLabel(layoutWidget2);
         labelInstruments->setObjectName(QString::fromUtf8("labelInstruments"));
 
         horizontalLayout_13->addWidget(labelInstruments);
 
-        comboBox_2 = new QComboBox(widget1);
+        comboBox_2 = new QComboBox(layoutWidget2);
         comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
         comboBox_2->setEnabled(false);
 
@@ -445,12 +451,12 @@ public:
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setSpacing(6);
         horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        labelName = new QLabel(widget1);
+        labelName = new QLabel(layoutWidget2);
         labelName->setObjectName(QString::fromUtf8("labelName"));
 
         horizontalLayout_14->addWidget(labelName);
 
-        textEdit = new QTextEdit(widget1);
+        textEdit = new QTextEdit(layoutWidget2);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
         textEdit->setEnabled(false);
         QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -468,12 +474,12 @@ public:
 
         horizontalLayout_14->addItem(horizontalSpacer_2);
 
-        labelOutput = new QLabel(widget1);
+        labelOutput = new QLabel(layoutWidget2);
         labelOutput->setObjectName(QString::fromUtf8("labelOutput"));
 
         horizontalLayout_14->addWidget(labelOutput);
 
-        comboBox_3 = new QComboBox(widget1);
+        comboBox_3 = new QComboBox(layoutWidget2);
         comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
         comboBox_3->setEnabled(false);
 
@@ -482,18 +488,8 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_14);
 
-        groupBox_2->raise();
-        groupBox_2->raise();
-        groupBox_2->raise();
-        groupBox_2->raise();
-        labelComposer->raise();
-        comboBox->raise();
-        labelInstruments->raise();
-        comboBox_2->raise();
-        labelName->raise();
-        textEdit->raise();
-        labelOutput->raise();
-        comboBox_3->raise();
+        layoutWidget->raise();
+        groupBox->raise();
 
         verticalLayout_5->addWidget(groupBox_3);
 
@@ -502,17 +498,17 @@ public:
         verticalLayout_5->addItem(verticalSpacer);
 
 
-        gridLayout_3->addLayout(verticalLayout_5, 0, 1, 1, 1);
+        gridLayout_3->addLayout(verticalLayout_5, 0, 2, 1, 1);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
 
-        gridLayout_3->addLayout(verticalLayout_2, 0, 2, 1, 1);
+        gridLayout_3->addLayout(verticalLayout_2, 0, 3, 1, 1);
 
         horizontalSpacer_3 = new QSpacerItem(13, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
-        gridLayout_3->addItem(horizontalSpacer_3, 0, 3, 1, 1);
+        gridLayout_3->addItem(horizontalSpacer_3, 0, 4, 1, 1);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
@@ -574,12 +570,16 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
 
-        gridLayout_3->addLayout(verticalLayout, 1, 0, 1, 3);
+        gridLayout_3->addLayout(verticalLayout, 1, 1, 1, 3);
+
+        horizontalSpacer_5 = new QSpacerItem(10, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_5, 0, 0, 1, 1);
 
         GuiMupic->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GuiMupic);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 994, 21));
+        menuBar->setGeometry(QRect(0, 0, 1148, 21));
         menuAbout = new QMenu(menuBar);
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         GuiMupic->setMenuBar(menuBar);
@@ -607,6 +607,7 @@ public:
         toolButton_InputPic->setText(QApplication::translate("GuiMupic", "...", 0, QApplication::UnicodeUTF8));
         label_OutputMidi->setText(QApplication::translate("GuiMupic", " Output Midi", 0, QApplication::UnicodeUTF8));
         toolButton_OutputMidi->setText(QApplication::translate("GuiMupic", "...", 0, QApplication::UnicodeUTF8));
+        groupBox_4->setTitle(QApplication::translate("GuiMupic", "Input Image", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("GuiMupic", "Analysis output", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("GuiMupic", "Phic Options", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("GuiMupic", "Filter", 0, QApplication::UnicodeUTF8));
@@ -618,10 +619,10 @@ public:
         );
         label_4->setText(QApplication::translate("GuiMupic", "Noise Selection", 0, QApplication::UnicodeUTF8));
         noiseLabel->setText(QApplication::translate("GuiMupic", "50", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("GuiMupic", "Threshold", 0, QApplication::UnicodeUTF8));
-        tLabel->setText(QApplication::translate("GuiMupic", "50", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("GuiMupic", "Polygon Simplification", 0, QApplication::UnicodeUTF8));
         labelPolSimp->setText(QApplication::translate("GuiMupic", "2", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("GuiMupic", "Threshold", 0, QApplication::UnicodeUTF8));
+        tLabel->setText(QApplication::translate("GuiMupic", "50", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("GuiMupic", "Mu Options", 0, QApplication::UnicodeUTF8));
         labelComposer->setText(QApplication::translate("GuiMupic", "Composer", 0, QApplication::UnicodeUTF8));
         comboBox->clear();
