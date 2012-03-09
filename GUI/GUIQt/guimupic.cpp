@@ -34,6 +34,10 @@ void GuiMupic::initialize()
     ui->graphicsView_Pic->scene()->addPixmap(pixImg);
     imageFile = DEFAULT_PIC;
 
+    ui->horizontalSlider_2->setVisible(false);
+    ui->tLabel->setVisible(false);
+    ui->label_2->setVisible(false);
+
     ui->pushButton_Generate->setEnabled(false);
 
 }
@@ -161,13 +165,15 @@ void GuiMupic::on_filterSelComboBox_currentIndexChanged(int index)
     usrConf->setPhicFilterSelect(index);
     if( index == 0 )
     {
-        ui->horizontalSlider_2->setEnabled(true);
-        ui->tLabel->setEnabled(true);
+        ui->horizontalSlider_2->setVisible(true);
+        ui->tLabel->setVisible(true);
+        ui->label_2->setVisible(true);
     }
     else
     {
-        ui->horizontalSlider_2->setEnabled(false);
-        ui->tLabel->setEnabled(false);
+        ui->horizontalSlider_2->setVisible(false);
+        ui->tLabel->setVisible(false);
+        ui->label_2->setVisible(false);
     }
 }
 
