@@ -159,7 +159,7 @@ void Phic::on_trackbar(int)
 	// We create figure data
 	Figuras* figuras = new Figuras();
 	figuras->setWidth(g_gray->width);
-	figuras->setHeight(g_gray->width);
+	figuras->setHeight(g_gray->height);
 	Figura * f, * padre, * father;
 	bool padreDone = false;
 
@@ -178,23 +178,6 @@ void Phic::on_trackbar(int)
 		int n = 0;
 		CvSeq* cAux = contours;
 		double area;
-
-		 /*
-			// PRUEBA: añadir un rectángulo de fondo
-			father = new FigureImg();
-			father->colocarVertice(new Vertice(0, 0, false));
-			father->colocarVertice(new Vertice(g_gray->width, 0, false));
-			father->colocarVertice(new Vertice(g_gray->width, g_gray->height, false));
-			father->colocarVertice(new Vertice(0, g_gray->height, false));
-			father->setArea(g_gray->width*g_gray->height);
-			father->setId(++id);
-			// set color
-			//setColorFromImage(father, g_image, first_polygon, NULL, true, true);
-			figuras->colocarFig(father);
-			figuras->colocarPadre(father);
-			padre = father;
-			padreDone = true;
-			*/
 
 		for( CvSeq* c=first_polygon; c!=NULL; c=c->h_next)
 		{
@@ -228,17 +211,13 @@ void Phic::on_trackbar(int)
 
 				f->colocarVertice(new Vertice(p->x, g_gray->height - p->y, false));
 			}
-			//if (!padreDone)
-				//cvWaitKey();
-				
+
 			// Calculamos el area de cada poligono
 			area = cvContourArea(c);
 			printf("Area: %f\n", area);
 				
-			/*if(area == 0) 
-				area = 100;*/
-				
 			f->setArea(area);
+			double areapropr = area * 100 / (figuras->getWidth() * figuras->getHeight());
 				
 			if(cAux!=NULL) //Cogemos el siguiente para la siguiente vuelta (es como un do-while)
 				cAux = cAux->h_next;
@@ -246,7 +225,7 @@ void Phic::on_trackbar(int)
 			f->setId(++id);
 
 			// We set an area filter to skip noise figures
-			if ((f->sizeVertices() < 3) || (f->getArea() < noise))
+			if ((f->sizeVertices() < 3) || (areapropr < noise))
 			{				
 				n++;
 				continue;
@@ -260,26 +239,19 @@ void Phic::on_trackbar(int)
 			// set color
 			setColorFromImage(f, g_image, c, NULL, false, false);
 
-			// paint surface, because it's big enough
-			//cvDrawContours(maskAcum,c,CV_RGB(250,250,250),CV_RGB(250,250,250),0,CV_FILLED,8);
-
 			if (usrConf->getPhicDebug())
 				cvShowImage( "Contours", g_contours);
 			// We add the figure to our figure list
 			if (padreDone)
 			{
 				figuras->colocarFig(f);
-				//f->setParent(padre);
-				//padre->colocarHijo(f);
 			}
 			else
 			{
 				figuras->colocarFig(f);
-				//figuras->colocarPadre(f);
 				padre = f;
 				padreDone = true;
 			}
-			//cvShowImage( "Contours", g_gray );
 			n++;
 		}
 	}
@@ -288,7 +260,6 @@ void Phic::on_trackbar(int)
 
 
 	// colour background
-	//setColorFromImage(father, g_image, NULL, maskAcum, true, false);
 
 	if (figuras->sizeFig() != 0)
 		figuras->setParentSonStructure();

@@ -48,9 +48,9 @@ class Figuras
                 list<Figura*> getPadres();
 		//list<Figura*>* getFiguras();
 		//list<Figura*>* getFigPadre();
-
-		void setWidth(int h) {	sheetHeight = h; }
-		void setHeight(int w) { sheetWidth = w; }
+		
+		void setWidth(int w) { sheetWidth = w; }
+		void setHeight(int h) {	sheetHeight = h; }
 		void setTotalVertices(int v) { totalVertices = v; }
 		void setTotalArea(int a) { totalArea = a; }
 
