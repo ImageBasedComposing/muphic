@@ -35,6 +35,9 @@ void Escena::cargar(std::string file)
     f = new Figuras();
     f->cargar(file);
 
+    iWidth = f->getWidth();
+    iHeight = f->getHeight();
+
     specialCenter();
 }
 

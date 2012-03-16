@@ -24,7 +24,7 @@ friend class Figura;
 
         double xLeft, xRight, yTop, yBot;
         double centerX, centerY;
-        int clientW, clientH;
+        int clientW, clientH, iWidth, iHeight;
         float zoom;
 
         std::string name;
