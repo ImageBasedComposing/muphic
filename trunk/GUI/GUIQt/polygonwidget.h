@@ -12,6 +12,7 @@ class PolygonWidget : public QWidget
     Q_OBJECT
 public:
     explicit PolygonWidget(QWidget *parent = 0);
+    int iWidth, iHeight;
 
 signals:
 

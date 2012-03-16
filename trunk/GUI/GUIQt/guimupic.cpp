@@ -22,8 +22,10 @@ GuiMupic::~GuiMupic()
 
 void GuiMupic::initialize()
 {
+    //ui->scrollArea->setWidget(ui->polyWidget);
+
     usrConf = new UsrConf();
-    usrConf->setPhicNoiseSelec(50);
+    usrConf->setPhicNoiseSelec(1);
     usrConf->setPhicPolygonSimp(2);
 
     newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
@@ -156,6 +158,8 @@ void GuiMupic::on_pushButton_Analyze_clicked()
         l->launch(2, Launcher::MUPHIC, args);
 
         ui->polyWidget->load(imageFile.toStdString());
+        ui->polyWidget->setMinimumHeight(ui->polyWidget->iHeight);
+        ui->polyWidget->setMinimumWidth(ui->polyWidget->iWidth);
         ui->pushButton_Generate->setEnabled(true);
      }
 }

@@ -13,6 +13,8 @@ void PolygonWidget::load(std::string path)
     //{
         std::string xmlPath = changeExtension(path, "");
         scene->cargar(xmlPath);
+        iWidth = scene->iWidth;
+        iHeight = scene->iHeight;
         loaded = true;
         repaint();
     //}

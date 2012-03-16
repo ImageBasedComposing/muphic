@@ -19,12 +19,12 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1066</width>
-      <height>377</height>
+      <width>1036</width>
+      <height>393</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
-     <item row="0" column="1">
+     <item row="1" column="1">
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
@@ -142,13 +142,32 @@
            </property>
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0">
-             <widget class="PolygonWidget" name="polyWidget" native="true">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+             <widget class="QScrollArea" name="scrollArea">
+              <property name="widgetResizable">
+               <bool>true</bool>
               </property>
+              <widget class="PolygonWidget" name="polyWidget">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>217</width>
+                 <height>217</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>216</width>
+                 <height>217</height>
+                </size>
+               </property>
+              </widget>
              </widget>
             </item>
            </layout>
@@ -158,7 +177,7 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="2">
+     <item row="1" column="2">
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <property name="sizeConstraint">
         <enum>QLayout::SetFixedSize</enum>
@@ -274,7 +293,7 @@
                 <number>10</number>
                </property>
                <property name="value">
-                <number>50</number>
+                <number>1</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -311,7 +330,7 @@
                 <enum>QFrame::StyledPanel</enum>
                </property>
                <property name="text">
-                <string>50</string>
+                <string>1</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -679,8 +698,6 @@
            </item>
           </layout>
          </widget>
-         <zorder>layoutWidget</zorder>
-         <zorder>groupBox</zorder>
         </widget>
        </item>
        <item>
@@ -698,10 +715,10 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="3">
+     <item row="1" column="3">
       <layout class="QVBoxLayout" name="verticalLayout_2"/>
      </item>
-     <item row="0" column="4">
+     <item row="1" column="4">
       <spacer name="horizontalSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -717,7 +734,7 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="1" colspan="3">
+     <item row="2" column="1" colspan="3">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -803,7 +820,7 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="0">
+     <item row="1" column="0">
       <spacer name="horizontalSpacer_5">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -819,31 +836,26 @@
        </property>
       </spacer>
      </item>
+     <item row="0" column="1">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1148</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuAbout">
-    <property name="title">
-     <string>About</string>
-    </property>
-   </widget>
-   <addaction name="menuAbout"/>
-  </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionExdit">
-   <property name="text">
-    <string>Exit</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
