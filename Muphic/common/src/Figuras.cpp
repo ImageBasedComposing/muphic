@@ -467,6 +467,7 @@ void Figuras::addToParentSonStructure(Figura* f, list<Figura*> & padres)
 	while (it != deletables.end())
 	{
 		padres.remove(*it);
+		it++;
 	}
 
 	// if noone contains f, it means f belongs to this level

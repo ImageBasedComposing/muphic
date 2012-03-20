@@ -11,6 +11,8 @@
 #include "UsrConf.h"
 #include "aux_functions.h"
 
+#include "Analizer.h"
+
 using namespace cv;
 using namespace std;
 
