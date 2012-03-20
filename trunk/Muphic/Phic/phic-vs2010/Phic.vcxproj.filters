@@ -66,6 +66,9 @@
     <ClInclude Include="..\..\common\include\aux_functions.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\include\Analizer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Phic.cpp">
@@ -102,6 +105,9 @@
       <Filter>Archivos de código fuente\TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\src\UsrConf.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\Analizer.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

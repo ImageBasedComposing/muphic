@@ -77,6 +77,7 @@
     <ClInclude Include="..\..\common\include\Vertice.h" />
     <ClInclude Include="..\..\TinyXML\include\tinystr.h" />
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
+    <ClInclude Include="..\source\include\Analizer.h" />
     <ClInclude Include="..\source\include\aux_elements.h" />
     <ClInclude Include="..\source\include\FigureImg.h" />
     <ClInclude Include="..\source\include\Phic.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="..\..\TinyXML\src\tinyxml.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp" />
+    <ClCompile Include="..\source\src\Analizer.cpp" />
     <ClCompile Include="..\source\src\FigureImg.cpp" />
     <ClCompile Include="..\source\src\Phic.cpp" />
     <ClCompile Include="..\source\src\PolygonMaker.cpp" />
