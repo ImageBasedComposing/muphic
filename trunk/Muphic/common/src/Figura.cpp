@@ -134,6 +134,26 @@ int Figura::sizeHijos()
 
 void Figura::colocarVertice(Vertice* v)
 {
+	// update bounding box
+	if (xR > xL)
+	{
+		xL = xR = v->x;
+		yT = yB = v->x;
+	}
+	else
+	{
+		if (v->x < xL)
+			xL = v->x;
+		else if (v->x > xR)
+			xR = v->x;
+
+		if (v->y < yB)
+			yB = v->y;
+		else if (v->y > yT)
+			yT = v->y;
+	}
+	
+	// update vertex list
 	listaVertices.push_back(v);
 	numVertices++;
 }

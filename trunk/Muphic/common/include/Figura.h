@@ -33,7 +33,7 @@ class Figura
 		int* radialDivision(int ndiv, double initAlpha);
 
 /*------envoltorio de la lista stl------*/
-		void colocarVertice(Vertice* v);
+		virtual void colocarVertice(Vertice* v);
 		void colocarHijo(Figura* f);
 		void insertarVertice(Vertice* v, int n);		//Añade un elemento en la pos n empujando el que ya estaba
 		void insertarHijo(Figura* f, int n);
@@ -97,6 +97,9 @@ class Figura
 		float pG;
 		float pB;
 
+		// bounding box
+		int xL, xR, yT, yB;
+		
     public:
 
 		bool isPointInside(Vertice* v);

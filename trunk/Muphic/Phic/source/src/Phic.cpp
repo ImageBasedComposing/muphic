@@ -329,8 +329,9 @@ int main(int argc, char* argv[])
 		analizer->addFiguresfromPic(imagesrc, imagedest, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
 	}
 
-	
-	
+	//figuras->deleteReps();
+
+
 	if (figuras->sizeFig() != 0)
 		figuras->setParentSonStructure();
 
