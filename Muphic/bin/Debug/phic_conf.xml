@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes" ?>
+<muphic_conf>
+    <phic_conf>
+        <filter>2</filter>
+        <threshold>50</threshold>
+        <noise>1</noise>
+        <polSimp>2</polSimp>
+    </phic_conf>
+    <mu_conf none="true" />
+</muphic_conf>

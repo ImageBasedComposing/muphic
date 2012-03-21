@@ -7,6 +7,7 @@
 #include "tinyxml.h"
 #include "aux_functions.h"
 #include <iostream>
+#include <set>
 
 using namespace std;
 
@@ -72,6 +73,10 @@ class Figuras
 		void setParentSonStructure();
 		void addToParentSonStructure(Figura* f, list<Figura*> & padres);
 		void showParentSonStructure(list<Figura*> padres, int level);
+
+		bool fcAreSimilar(Figura* a, Figura* b, double eps);
+		// deletes repeated figures (destroys parent-son structure)
+		void deleteReps();
 };
 
 #endif // FIGURAS_H

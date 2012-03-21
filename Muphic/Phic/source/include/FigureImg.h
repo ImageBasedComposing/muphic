@@ -20,6 +20,7 @@ class FigureImg : public Figura
 
     protected:
 		
+
 	private:
 };
 

@@ -215,7 +215,7 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 		double area;
 
 		// iterate contours and create a figure for each one
-		Figura* f;
+		FigureImg* f;
 		int id = 0;
 		for( CvSeq* c = first_polygon; c != NULL; c = c->h_next)
 		{

@@ -505,3 +505,59 @@ void Figuras::setParentSonStructure()
 
 	showParentSonStructure(figPadres, 0);
 }
+
+bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
+{
+	double dL = a->xL - b->xL; double dR = a->xR - b->xR;
+	double dT = a->yT - b->yT; double dB = a->yB - b->yB;
+
+	if (dL < 0) dL = -dL; if (dR < 0) dR = -dR;
+	if (dT < 0) dT = -dT; if (dB < 0) dB = -dB;
+
+	double sum = dL + dT + dR + dB;
+		
+	return sum < eps;
+}
+
+void Figuras::deleteReps()
+{
+	// fast-check
+	set<Figura*> deletables;
+	list<Figura*>::iterator it;
+	list<Figura*>::iterator limit = figuras.end();
+	limit--;
+	list<Figura*>::iterator jt;
+	int i = 0;
+	int j = 0;
+	double eps;
+	double aprox = 5;
+	for (it = figuras.begin(); it != limit; it++)
+	{
+		jt = it; jt++;
+		j = i+1;
+		for (jt; jt != figuras.end(); jt++)
+		{
+			// eps is 100% of max area
+			eps = sqrt(aprox * max((*it)->area, (*jt)->area) / 100);
+
+			if (fcAreSimilar(*it, *jt, eps))
+			{
+				deletables.insert(*it);
+			}
+			j++;
+		}
+		i++;
+	}
+
+
+	// let's delete those duplicates
+	set<Figura*>::iterator dt;
+	dt = deletables.begin();
+	while (dt != deletables.end())
+	{
+		figuras.remove(*dt);
+		delete *dt;
+		dt++;
+	}
+
+}
