@@ -25,6 +25,7 @@ class ComposerFigMelody2
 		TableScale* tableScale;
 		vector< int > calcDurDirect(FigureMusic * f, vector< Vertice* > vertices);
 		vector< int > calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices);
+		vector< int > calcTonesCounterPoint(FigureMusic * f, vector< Vertice* > vertices, Segmento* seg1, int pos, vector<int> duraciones);
 
     public:
 		ComposerFigMelody2();

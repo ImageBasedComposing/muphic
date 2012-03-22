@@ -323,32 +323,83 @@ public:
 
 	// Dado un grado, devuelve todos los tonos que pertenecen al acorde de grado.
 	//Especial el 5º Grado que tiene la 7º. Sino, son 3 notas.
-	vector<int> getTonesDegree(int nDegree)
+	vector<int> getTonesDegree(int nDegree, bool seventh = false)
 	{
 		int noteDegree = getToneDegree(nDegree);
 		vector<int> out;
 		out.push_back(noteDegree);
-		out.push_back(nextDegreeTone(nDegree, noteDegree));
-		out.push_back(nextNDegreeTone(nDegree, noteDegree, 2));
-		if(nDegree == DOMINANTE)
-			out.push_back(nextNDegreeTone(nDegree, noteDegree, 3));
+		out.push_back(nextNTone(out.back(), 2));
+		out.push_back(nextNTone(out.back(), 2));
+		if(nDegree == DOMINANTE && seventh)
+			out.push_back(nextNTone(out.back(), 2));
 
 		return out;
 	}
 
+	//Devuelve la nota más cercana que pertenezca al grado dado.
+	//Si up, en caso de empate se coge la de arriba, sino la de abajo
+	int getDegreeToneNear(int nDegree, int lasTone, bool up)
+	{
+		int actualScale = (lasTone-1)/ESCALA; 
+		vector<int> tonesDegree = getTonesDegree(nDegree);
+		//Comprobamos primero si ya es un noteDegree
+		for(int i = 0; i < tonesDegree.size(); i++)
+			if((tonesDegree.at(i) % ESCALA) == (lasTone % ESCALA))
+				return lasTone;
+		//Buscamos la note degree más cercana
+		int interval = 0, minDist = ESCALA, pos = 0;
+		for(int i = 0; i < tonesDegree.size(); i++)
+		{
+			tonesDegree.at(i) += actualScale*ESCALA;
+			if( tonesDegree.at(i) >= lasTone )
+				interval = tonesDegree.at(i)-lasTone;
+			else
+				interval = lasTone-tonesDegree.at(i);
+			
+			if(interval > PER5)
+			{
+				interval = ESCALA - interval;
+				tonesDegree.at(i) -= ESCALA;
+			}
+			
+			if(minDist >= interval)
+			{
+				if(minDist > interval)
+				{//Si el intervalo es menor, pues es mas cercano
+					minDist = interval;
+					pos = i;
+				}
+				else if(up && tonesDegree.at(i) > tonesDegree.at(pos))
+				{//si el intervalo es el mismo, pero la nota está por encima
+					minDist = interval;
+					pos = i;
+				}
+				else if(!up && tonesDegree.at(i) < tonesDegree.at(pos))
+				{//si el intervalo es igual, pero la nota está por debajo
+					minDist = interval;
+					pos = i;
+				}
+			}	
+		}
+
+		return tonesDegree.at(pos);
+	}
+
 	// Devuelve la siguiente nota en el acorde del grado dado. Ejemplo: Grado 1º (Tonica) I -(next)> III -> V -> I(octava encima)
-	int nextDegreeTone(int nDegree, int lasTone)
+	int nextDegreeTone(int nDegree, int lasTone, bool seventh = false)
 	{
 		int noteDegree = getToneDegree(nDegree);
 		int noteDegree2 = nextNTone(noteDegree, 2);
 		int noteDegree3;
-		if(nDegree == DOMINANTE)
+		if(nDegree == DOMINANTE && seventh)
 			noteDegree3 = nextNTone(noteDegree2, 4); //Ponemos la 7º
 		else
 			noteDegree3 = nextNTone(noteDegree2, 2);
 
+		lasTone = getDegreeToneNear(nDegree, lasTone, false);
+
 		if(lasTone%ESCALA == noteDegree3%ESCALA)
-			if(nDegree == DOMINANTE)
+			if(nDegree == DOMINANTE && seventh)
 				return nextNTone(lasTone, 1);
 			else
 				return nextNTone(lasTone, 3);
@@ -357,12 +408,14 @@ public:
 	}
 
 	// Devuelve la nota previa dentro del acorde del grado de la escala
-	int prevDegreeTone(int nDegree, int lasTone)
+	int prevDegreeTone(int nDegree, int lasTone, bool seventh = false)
 	{
 		int noteDegree = getToneDegree(nDegree);
 
+		lasTone = getDegreeToneNear(nDegree, lasTone, true);
+
 		if(lasTone%ESCALA == noteDegree%ESCALA)
-			if(nDegree == DOMINANTE)
+			if(nDegree == DOMINANTE && seventh)
 				return prevNTone(lasTone, 1);
 			else
 				return prevNTone(lasTone, 3);
@@ -371,7 +424,7 @@ public:
 	}
 
 	// Devuelve la siguiente N nota dentro del acorde. ej: si steps=3 entonces subimos una octava
-	int nextNDegreeTone(int nDegree, int lasTone, int steps)
+	int nextNDegreeTone(int nDegree, int lasTone, int steps, bool seventh = false)
 	{
 		steps = abs(steps);
 		int nexTone = lasTone;
@@ -379,7 +432,7 @@ public:
 			return nexTone;
 
 		for(int i = 0; i < steps; i++)
-			nexTone = nextDegreeTone(nDegree, nexTone);
+			nexTone = nextDegreeTone(nDegree, nexTone, seventh);
 
 		return nexTone;
 
@@ -413,7 +466,7 @@ public:
 	}
 
 	// Devuelve la N nota previa dentro del acorde.
-	int prevNDegreeTone(int nDegree, int lasTone, int steps)
+	int prevNDegreeTone(int nDegree, int lasTone, int steps, bool seventh = false)
 	{
 		steps = abs(steps);
 		int prevtone = lasTone;
@@ -421,7 +474,7 @@ public:
 			return prevtone;
 
 		for(int i = 0; i < steps; i++)
-			prevtone = prevDegreeTone(nDegree, prevtone);
+			prevtone = prevDegreeTone(nDegree, prevtone, seventh);
 
 		return prevtone;
 

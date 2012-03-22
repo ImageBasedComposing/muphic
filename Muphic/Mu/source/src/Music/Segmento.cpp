@@ -24,6 +24,21 @@ Simbolo* Segmento::getAt(int i)
 	return simbolos->getAt(i);
 }
 
+bool Segmento::insert(int pos, Simbolo* s)
+{
+	if(simbolos->insert(pos, s))
+		duration += s->getDuracion();
+	else
+		return false;
+	return true;
+}
+
+void Segmento::pushBack(Simbolo* s)
+{
+	simbolos->pushBack(s);
+	duration += s->getDuracion();
+}
+
 Metrica Segmento::getMetrica()
 {
 	return metrica;
@@ -32,6 +47,11 @@ Metrica Segmento::getMetrica()
 Tempo Segmento::getTempo()
 {
 	return tempo;
+}
+
+int Segmento::getDuration()
+{
+	return duration;
 }
 
 //-----Setters-----//
@@ -56,4 +76,9 @@ void Segmento::setMetrica(Metrica m)
 void Segmento::setTempo(Tempo t)
 {
 	tempo = t;
+}
+
+void Segmento::setDuration(int dur)
+{
+	duration = dur;
 }

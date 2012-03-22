@@ -27,8 +27,11 @@ void Segmentos::pushBack(Segmento* s)
 }
 
 //Añade el elemento empujando el que estaba en n
-void Segmentos::insert(Segmento* s, int n)
+bool Segmentos::insert(int n, Segmento* s)
 {
+	if( segmentos.size() < n)
+		return false;
+
 	list<Segmento*>::iterator it = segmentos.begin();
 
 	for(int i = 0; i < n; i++)
@@ -36,11 +39,14 @@ void Segmentos::insert(Segmento* s, int n)
 		it++;
 	}
 
-	segmentos.insert(it,s);
+	segmentos.insert(it, s);
 }
 
 Segmento* Segmentos::getAt(int n)
 {
+	if( segmentos.size() < n )
+		return NULL;
+
 	list<Segmento*>::iterator it = segmentos.begin();
 
 	for(int i = 0; i < n; i++)
