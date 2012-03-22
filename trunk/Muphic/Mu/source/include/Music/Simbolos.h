@@ -18,7 +18,7 @@ class Simbolos
         /* envoltorio de la lista stl */
 
 		void pushBack(Simbolo* s);
-		void insert(Simbolo* s, int n);		//Añade un elemento en la pos n empujando el que ya estaba
+		bool insert(int n, Simbolo* s);		//Añade un elemento en la pos n empujando el que ya estaba
 
 		Simbolo* getAt(int n);
 

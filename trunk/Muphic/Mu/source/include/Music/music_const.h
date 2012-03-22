@@ -54,7 +54,7 @@
 #define MI_F_C 40
 #define MI_C 41
 #define FA_F_C 41
-#define MI_S_ 42
+#define MI_S_C 42
 #define FA_C 42
 #define FA_S_C 43
 #define SOL_F_C 43

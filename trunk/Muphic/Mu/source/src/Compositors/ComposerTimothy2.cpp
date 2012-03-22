@@ -41,7 +41,9 @@ string ComposerTimothy2::compose()
 
 	// We create the scale by which we pretend to work, set by default to DOM
 	MajorScale scale;
-	TableScale* tbScale = new TableScale(scale.getScaleSteps(), DO);
+	Scriabin sc;
+	TableScale* tbScaleBase = new TableScale(scale.getScaleSteps(), DO);
+	TableScale* tbScale = new TableScale(scale.getScaleSteps(), sc.getNota(padres.front()->getRGB(), tbScaleBase));
 
 	// We create the composers we will use to make the melody and rithm
 	ComposerFigMelody2* fm = new ComposerFigMelody2(tbScale);
@@ -76,6 +78,9 @@ string ComposerTimothy2::compose()
 			segs1->pushBack(seg1);
 		}
 	}
+
+	delete tbScaleBase;
+	delete tbScale;
 
 	// We make the calls to the different composers with different figures sorted by vistosidad and with their timing assigned
 	/*for(std::list< std::pair<FigureMusic*, int> >::iterator it = aux.begin(); it != aux.end(); it++)

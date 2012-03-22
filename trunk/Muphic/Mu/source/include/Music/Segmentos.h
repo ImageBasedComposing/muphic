@@ -18,7 +18,7 @@ class Segmentos
         /* envoltorio del vector stl */
 
 		void pushBack(Segmento* s);
-		void insert(Segmento* v, int n);		//Añade un elemento en la pos n empujando el que ya estaba
+		bool insert(int n, Segmento* s);		//Añade un elemento en la pos n empujando el que ya estaba
 
 		Segmento* getAt(int n);
 

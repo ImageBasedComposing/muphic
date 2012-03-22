@@ -28,8 +28,11 @@ void Simbolos::pushBack(Simbolo* s)
 	simbolos.push_back(s);
 }
 
-void Simbolos::insert(Simbolo* s, int n)
+bool Simbolos::insert(int n, Simbolo* s)
 {
+	if(simbolos.size() < n)
+		return false;
+
 	list<Simbolo*>::iterator it = simbolos.begin();
 
 	for(int i = 0; i < n; i++)
@@ -37,11 +40,14 @@ void Simbolos::insert(Simbolo* s, int n)
 		it++;
 	}
 
-	simbolos.insert(it,s);
+	simbolos.insert(it, s);
 }
 
 Simbolo* Simbolos::getAt(int n)
 {
+	if(simbolos.size() < n)
+		return NULL;
+
 	list<Simbolo*>::iterator it = simbolos.begin();
 
 	for(int i = 0; i < n; i++)

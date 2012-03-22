@@ -92,6 +92,7 @@ vector< int > ComposerFigMelody2::calcDurDirect(FigureMusic * f, vector< Vertice
 	return durVertice;
 }
 
+//Dada unos vértices ordenados, devolvemos vector de tonos.
 vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices)
 {
 
@@ -107,17 +108,16 @@ vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice
 	//La primera nota es el color de la figura (no disponemos de más info)
 	lastTone = scriabin->getNota(color, tableScale);
 	out.push_back(lastTone);
-	MajorScale scale;
+	/*MajorScale scale;	Salen cosas un poco bastante caca
 	delete tableScale;
 	//Cambiamos la escala a la nueva tonalidad.
-	tableScale = new TableScale(scale.getScaleSteps(), lastTone);
+	tableScale = new TableScale(scale.getScaleSteps(), lastTone);*/
 	int degree = tableScale->getDegreeTone(lastTone);
 	lastAngle = angleOf2Lines2(vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair(), vertices.at(0)->getPair(), vertices.at(1)->getPair());
 	//Ahora el resto de vértices desde 1 a numVertices
 	for(int i = 1; i < vertices.size(); i++)
 	{
 		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
-		//step = (int) floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
 
 		tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
 
@@ -132,17 +132,181 @@ vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice
 	return out;
 }
 
+vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector< Vertice* > vertices, Segmento* seg1, int pos, vector<int> duraciones)
+{
+
+	vector<int> out;
+	//Vemos el color y en que nos movemos.
+	Color color = f->getRGB();
+	Scriabin* scriabin = new Scriabin();
+
+	//Ahora segun la duracion que nos han dado y los angulos que se forman con las aristas de la figura añadimos notas
+	double lastAngle, actualAngle;
+	//int step;	// El cambio de tono que vamos a hacer. En pasos sobre la escala dada anteriormente
+	int lastTone, tone;
+	//La primera nota es el color de la figura (no disponemos de más info)
+	lastTone = scriabin->getNota(color, tableScale);
+	out.push_back(lastTone);
+	int degree = tableScale->getDegreeTone(lastTone);
+	lastAngle = angleOf2Lines2(vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair(), vertices.at(0)->getPair(), vertices.at(1)->getPair());
+	int movement1 = 0, movement2 = 0; //Movimiento de la voz igual=0, arriba=1, abajo=2
+	int lastMovement = 0, numSameMovement = 0;//MovDirecto = 0, MovContrario = 1, MovOblicuo = 2;
+	//int interval1;
+	//int interval2;
+	Nota* n1,* n2;
+	int pos1 = pos;
+	int i = 1;
+	int temp1 = 0, temp2 = 0;
+
+	n1 = (Nota*)seg1->getAt(pos1);
+	pos1++;
+	temp1 = n1->getDuracion();
+	n2 = (Nota*)seg1->getAt(pos1);
+	pos1++;
+	temp1 += n2->getDuracion();
+	temp2 = duraciones.at(0);
+	while(pos1 < seg1->size() && i < vertices.size())
+	{
+		temp2 += duraciones.at(i);
+		while(temp2 > temp1)
+		{
+			(*n1) = (*n2);
+			n2 = (Nota*)seg1->getAt(pos1);
+			temp1 += n2->getDuracion();
+			pos1++;
+		}
+
+		if(n1->getTono() < n2->getTono())
+			movement1 = 1;
+		else if(n1->getTono() > n2->getTono())
+			movement1 = 2;
+		else
+			movement1 = 0;
+
+		
+		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
+
+		tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
+
+		if(lastTone < tone)
+			movement2 = 1;
+		else if (lastTone > tone)
+			movement2 = 2;
+		else
+			movement2 = 0;
+
+		if(movement1 == movement2)
+		{ //Movimiento es Directo, ambas voces misma direccion
+			if(lastMovement == 0)
+			{
+				if(numSameMovement > 4)
+				{
+					if(movement1 == 0)
+					{
+						tone = getNextDegreeTone(degree, actualAngle+36, lastAngle, lastTone);
+						lastMovement = 2;
+						numSameMovement = 1;
+					}
+					else
+					{
+						tone = getNextDegreeTone(degree, lastAngle, actualAngle, lastTone);
+						lastMovement = 1;
+						numSameMovement = 1;
+					}
+				}
+				else
+				{
+					numSameMovement++;
+				}
+			}
+			else
+			{
+				lastMovement = 0;
+				numSameMovement = 1;
+			}
+		}
+		else if(movement1 == 0 || movement2 == 0)
+		{ //Movimiento es oblicuo, una voz estática la otra se mueve
+			if(lastMovement == 2)
+			{
+				if(numSameMovement > 4)
+				{
+					if(movement2 == 0)
+					{
+						tone = getNextDegreeTone(degree, actualAngle+36, lastAngle, lastTone);
+						if(movement1 == 1)
+							lastMovement = 0;
+						else
+							lastMovement = 1;
+						numSameMovement = 1;
+					}
+					else
+					{
+						tone = getNextDegreeTone(degree, lastAngle, actualAngle, lastTone);
+						lastMovement = 2;
+						numSameMovement = 1;
+					}
+				}
+				else
+				{
+					numSameMovement++;
+				}
+			}
+			else
+			{
+				lastMovement = 2;
+				numSameMovement++;
+			}
+		}
+		else
+		{ //Movimiento contrario, una sube y la otra baja o al revés
+			if(lastMovement == 1)
+			{
+				if(numSameMovement > 4)
+				{
+					tone = getNextDegreeTone(degree, lastAngle, actualAngle, lastTone);
+					lastMovement = 0;
+					numSameMovement = 1;
+				}
+				else
+				{
+					numSameMovement++;
+				}
+			}
+			else
+			{
+				lastMovement = 1;
+				numSameMovement++;
+			}
+		}
+
+
+		out.push_back(tone);  //La nota respecto al vertice.
+		lastTone = tone;
+		lastAngle = actualAngle;
+
+		i++;
+	}
+
+	delete scriabin;
+	scriabin = NULL;
+
+	return out;
+}
+
 //Decora la melodía dada en seg con la figura de entrada. Devuelve la 2º voz
 Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 {
 	Segmento* out = new Segmento();
 	Scriabin* scriabin = new Scriabin();
 
-	//Vamos a ir analizando el otro segmento de dos en dos notas.
-
+	//Si solo tenemos una nota, pues la decoramos como podamos:
 	if(seg->getSimbolos()->size() < 2)
 		return decSimbolo((Nota*)seg->getAt(0), f->sizeVertices(), tableScale->getDegreeTone(scriabin->getNota(f->getRGB(), tableScale)));
 	
+	//En caso de tener dos o mas notas:
+	//Primero vemos donde vamos a decorar la melodia:
+	//// Idea para realizar: Teniendo los baricentros o centros podemos calcular a que distancia están los baricentros de la padre y de la hija.
 	int pos;
 	if((f->sizeVertices()*4) < seg->getSimbolos()->size()) 
 		pos = seg->getSimbolos()->size()/2;
@@ -151,30 +315,37 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 	else
 		pos = seg->getSimbolos()->size() - f->sizeVertices();
 
-	Nota* n1, * n2;
-	Segmento* aux;
-	Simbolos* s = new Simbolos();
-	int degree = tableScale->getDegreeTone(scriabin->getNota(f->getRGB(), tableScale));
+	//Ahora compongamos la melodía y la unimos haciendo cambios para cumplir con las leyes de contrapunto:
+	//Creamos la melodía
+	vector< Vertice* > vertices;
+	int numVertices = f->getNumVertices();
+	for(int i = 0; i < numVertices; i++)
+		vertices.push_back(f->getVerticeAt(i));
+
+	vector< int > durations = calcDurDirect(f, vertices);
+	
+	vector< int > tones = calcTonesCounterPoint(f,vertices,seg,pos,durations);
 
 	//Silencios
 	for(int i = 0; i < pos-1; i++)
-		s->pushBack(new Nota(seg->getAt(i)->getDuracion(), 0));
-	out->setSimbolos(s);
+		out->pushBack(new Nota(seg->getAt(i)->getDuracion(), 0));
 
-	//La decoracion
-	while( pos < seg->getSimbolos()->size() )
+	//Añadimos las notas
+	for(int i = 0; i < vertices.size(); i++)
+		out->pushBack(new Nota(durations.at(i), tones.at(i)));
+
+	//Añadimos los silencios finales
+	while(out->getDuration() < seg->getDuration())
 	{
-		n1 = (Nota*)seg->getAt(pos-1);
-		n2 = (Nota*)seg->getAt(pos);
-
-		aux = dec2Simbolos(n1, n2, degree);
-		out->addSimbolos(aux->getSimbolos());
-
-		pos += 2;
+		if((seg->getDuration() - out->getDuration()) > WHOLE)
+			out->pushBack(new Nota(WHOLE, 0));
+		else
+			out->pushBack(new Nota(seg->getDuration() - out->getDuration(), 0));
 	}
-	
+
 	delete scriabin;
 	scriabin = NULL;
+
 	return out;
 
 }
@@ -403,6 +574,7 @@ int ComposerFigMelody2::getNextDegreeTone(int degree, double actualAngle, double
 	int alfa2 = PI/3; // 60º
 	int alfa3 = PI/2; // 90º
 	int alfa4 = PI; // 180º*/
+	int alfa0 = 18;
 	int alfa1 = 36; 
 	int alfa2 = 90; 
 	int alfa3 = 180; 
@@ -412,31 +584,37 @@ int ComposerFigMelody2::getNextDegreeTone(int degree, double actualAngle, double
 
 	// Aqui nos movemos dentro del acorde del grado al que pertenece dentro de la escala diatónica
 
-	if(diff > alfa1)
-		if(diff > alfa2)
-			if(diff > alfa3)
-				if(diff > alfa4)
-					if(actualAngle > lastAngle)
-						note = tableScale->nextNDegreeTone(degree, lastTone,4);
+	if(diff > alfa0)
+		if(diff > alfa1)
+			if(diff > alfa2)
+				if(diff > alfa3)
+					if(diff > alfa4)
+						if(actualAngle > lastAngle)
+							note = tableScale->nextNDegreeTone(degree, lastTone,4);
+						else
+							note = tableScale->prevNDegreeTone(degree, lastTone,4);
 					else
-						note = tableScale->prevNDegreeTone(degree, lastTone,4);
+						if(actualAngle > lastAngle)
+							note = tableScale->nextNDegreeTone(degree, lastTone,3);
+						else
+							note = tableScale->prevNDegreeTone(degree, lastTone,3);
 				else
 					if(actualAngle > lastAngle)
-						note = tableScale->nextNDegreeTone(degree, lastTone,3);
+						note = tableScale->nextNDegreeTone(degree, lastTone,2);
 					else
-						note = tableScale->prevNDegreeTone(degree, lastTone,3);
+						note = tableScale->prevNDegreeTone(degree, lastTone,2);
 			else
 				if(actualAngle > lastAngle)
-					note = tableScale->nextNDegreeTone(degree, lastTone,2);
+					note = tableScale->nextNDegreeTone(degree, lastTone,1);
 				else
-					note = tableScale->prevNDegreeTone(degree, lastTone,2);
+					note = tableScale->prevNDegreeTone(degree, lastTone,1);
 		else
 			if(actualAngle > lastAngle)
-				note = tableScale->nextNDegreeTone(degree, lastTone,1);
+				note = tableScale->nextTone(lastTone);
 			else
-				note = tableScale->prevNDegreeTone(degree, lastTone,1);
-	else
-		note = lastTone;
+				note = tableScale->prevTone(lastTone);
+		else
+			note = lastTone;
 
 	return note;
 }
