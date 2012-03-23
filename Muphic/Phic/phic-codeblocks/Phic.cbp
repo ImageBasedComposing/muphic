@@ -51,9 +51,11 @@
 			<Add directory="../ext/libs-gcc-ext" />
 			<Add directory="../ext/include-ext" />
 		</Linker>
+		<Unit filename="../source/include/Analizer.h" />
 		<Unit filename="../source/include/FigureImg.h" />
 		<Unit filename="../source/include/Phic.h" />
 		<Unit filename="../source/include/aux_elements.h" />
+		<Unit filename="../source/src/Analizer.cpp" />
 		<Unit filename="../source/src/FigureImg.cpp" />
 		<Unit filename="../source/src/Phic.cpp" />
 		<Unit filename="../../TinyXML/include/tinystr.h" />
