@@ -18,6 +18,10 @@ Figura::Figura()
 	pB = 0.20f;
 
 	numVertices = 0;
+
+
+	xR = -1;
+	xL = 1;
 }
 
 Figura::~Figura()
@@ -135,10 +139,10 @@ int Figura::sizeHijos()
 void Figura::colocarVertice(Vertice* v)
 {
 	// update bounding box
-	if (xR > xL)
+	if (xL > xR)
 	{
 		xL = xR = v->x;
-		yT = yB = v->x;
+		yT = yB = v->y;
 	}
 	else
 	{

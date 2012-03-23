@@ -506,6 +506,139 @@ void Figuras::setParentSonStructure()
 	showParentSonStructure(figPadres, 0);
 }
 
+
+bool** Figuras::fillMask(Figura* f)
+{
+	bool ** mask = new bool*[f->yT - f->yB + 1];
+
+	int nodes, *pixelX;
+	int nvertex = f->sizeVertices();
+	pixelX = new int[nvertex];
+	Vertice* currentvertex, * lastvertex;
+	list<Vertice*>::iterator it, jt;
+	int i, swap;
+	for (int pixelY = f->yB; pixelY < f->yT; pixelY++)
+	{
+		//  Build a list of nodes.
+		nodes = 0;
+		jt = f->listaVertices.end(); jt--;
+		for (it = f->listaVertices.begin(); it != f->listaVertices.end(); it++)
+		{
+			currentvertex = *it;
+			lastvertex = *jt;
+
+			if (currentvertex->y < pixelY && lastvertex->y >= pixelY 
+				|| lastvertex->y < pixelY && currentvertex->y >= pixelY)
+			{
+				pixelX[nodes++] = (int) (currentvertex->x + (pixelY - currentvertex->y) / (lastvertex->y - currentvertex->y) * (lastvertex->x - currentvertex->x));
+			}
+
+			jt = it;
+		}
+
+		//  Sort the nodes, via a simple “Bubble” sort.
+		i=0;
+		while (i < nodes-1) 
+		{
+			if (pixelX[i] > pixelX[i+1]) 
+			{
+				swap = pixelX[i]; 
+				pixelX[i] = pixelX[i+1]; 
+				pixelX[i+1] = swap; 
+				if (i)
+					i--; 
+			}
+			else 
+			{
+				i++; 
+			}
+		}
+
+
+		mask[pixelY - f->yB] = new bool[f->xR - f->xL + 1];
+		for (int j = 0; j < f->xR - f->xL + 1; j++)
+			mask[pixelY - f->yB][j] = false;
+
+		//  Fill the pixels between node pairs.		
+		for (i = 0; i < nodes; i += 2)
+		{
+			if (pixelX[i] >= f->xR)
+				break;
+			if (pixelX[i+1] > f->xL)
+			{
+				if (pixelX[i] < f->xL)
+					pixelX[i] = f->xL;
+				if (pixelX[i+1] > f->xR)
+					pixelX[i+1] = f->xR;
+				for (int j = pixelX[i]; j < pixelX[i+1]; j++)
+					mask[pixelY - f->yB][j - f->xR] = true;
+					
+			}
+		
+		}
+
+	}
+
+	return mask;
+}
+
+#include <fstream>
+
+bool Figuras::lcAreSimilar(Figura* a, Figura* b, double eps)
+{
+	Figura *main, *sub;
+
+	if (a->area > b->area)
+	{
+		main = a;
+		sub = b;
+	}
+	else
+	{
+		main = b;
+		sub = a;
+	}
+
+
+	ofstream myfile;
+  myfile.open ("te.txt");
+
+
+	bool** maskM = fillMask(main);
+	bool** maskS = fillMask(sub);
+
+
+	for (int i = 0; i < main->yT - main->yB; i++)
+	{
+		for (int j = 0; j < main->xR - main->xL; j++)
+			if (maskM[i][j])
+				myfile << "1" << " ";
+			else
+				myfile << " " << " ";
+		myfile << "|" << endl;
+	}
+	myfile << endl;
+	myfile << "________________________________________________________________________________________________";
+	myfile << endl;
+	for (int i = 0; i < sub->yT - sub->yB; i++)
+	{
+		for (int j = 0; j < sub->xR - sub->xL; j++)
+			if (maskS[i][j])
+				myfile << "1" << " ";
+			else
+				myfile << " " << " ";
+		myfile << "|" << endl;
+	}
+
+	//system("PAUSE");
+
+	  myfile.close();
+
+	// NEED MASKS!!!!
+
+	return false;
+}
+
 bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
 {
 	double dL = a->xL - b->xL; double dR = a->xR - b->xR;
@@ -537,12 +670,14 @@ void Figuras::deleteReps()
 		j = i+1;
 		for (jt; jt != figuras.end(); jt++)
 		{
-			// eps is 100% of max area
-			eps = sqrt(aprox * max((*it)->area, (*jt)->area) / 100);
+			// eps is aprox% of max area
+			eps = aprox * max((*it)->area, (*jt)->area) / 100;
 
-			if (fcAreSimilar(*it, *jt, eps))
+			//if (fcAreSimilar(*it, *jt, eps))
+			if (true)
 			{
-				deletables.insert(*it);
+				if (lcAreSimilar(*it, *jt, eps))
+					deletables.insert(*it);
 			}
 			j++;
 		}
