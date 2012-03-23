@@ -69,12 +69,15 @@ class Figuras
 		void guardarRec(TiXmlElement* f, Figura* id);
 		virtual Figura* createFigure();
 
+		bool** fillMask(Figura* f);
+
     public:
 		void setParentSonStructure();
 		void addToParentSonStructure(Figura* f, list<Figura*> & padres);
 		void showParentSonStructure(list<Figura*> padres, int level);
 
-		bool fcAreSimilar(Figura* a, Figura* b, double eps);
+		bool fcAreSimilar(Figura* a, Figura* b, double eps); // fastcheck
+		bool lcAreSimilar(Figura* a, Figura* b, double eps); // longcheck
 		// deletes repeated figures (destroys parent-son structure)
 		void deleteReps();
 };

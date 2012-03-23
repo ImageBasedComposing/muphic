@@ -1,8 +1,5 @@
 #include "Phic.h"
 
-
-
-
 Phic::Phic()
 {
     //ctor
@@ -302,7 +299,12 @@ int main(int argc, char* argv[])
 	phic->usrConf = new UsrConf();
 	phic->usrConf->readPhic(argv[1]);
 
-	//phic->test();
+	/*if (phic->usrConf->getPhicFilterSelect() != 2)
+	{
+		//phic->test();
+	}
+	else
+	{*/
 	Analizer* analizer = new Analizer();
 	analizer->debug = phic->usrConf->getPhicDebug();
 
@@ -310,9 +312,9 @@ int main(int argc, char* argv[])
 	Figuras* figuras = new Figuras();
 	figuras->setWidth(imagesrc->width);
 	figuras->setHeight(imagesrc->height);
+	
 
-
-	if (1) 
+	if (phic->usrConf->getPhicFilterSelect() == 1) 
 	{
 		IplImage* *images;
 		int n = 0;
