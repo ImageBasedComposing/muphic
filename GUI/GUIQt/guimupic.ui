@@ -786,7 +786,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_player">
          <item>
           <widget class="QPushButton" name="pushButton_Play">
            <property name="text">
@@ -795,6 +795,13 @@
            <property name="icon">
             <iconset>
              <normaloff>play.png</normaloff>play.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_pause">
+           <property name="text">
+            <string>Pause</string>
            </property>
           </widget>
          </item>
@@ -810,11 +817,17 @@
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider">
+          <widget class="QSlider" name="horizontalSlider_Seek">
+           <property name="maximum">
+            <number>999</number>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
+         </item>
+         <item>
+          <widget class="QLCDNumber" name="timeLcd"/>
          </item>
         </layout>
        </item>

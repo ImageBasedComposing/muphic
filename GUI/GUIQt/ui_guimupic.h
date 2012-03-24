@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Fri 16. Mar 10:36:40 2012
+** Created: Sat 24. Mar 19:40:29 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -20,6 +20,7 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
+#include <QtGui/QLCDNumber>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QMainWindow>
@@ -106,10 +107,12 @@ public:
     QPushButton *pushButton_Analyze;
     QPushButton *pushButton_Generate;
     QProgressBar *progressBar_Generate;
-    QHBoxLayout *horizontalLayout;
+    QHBoxLayout *horizontalLayout_player;
     QPushButton *pushButton_Play;
+    QPushButton *pushButton_pause;
     QPushButton *pushButton_Stop;
-    QSlider *horizontalSlider;
+    QSlider *horizontalSlider_Seek;
+    QLCDNumber *timeLcd;
     QSpacerItem *horizontalSpacer_5;
     QSpacerItem *verticalSpacer_2;
     QStatusBar *statusBar;
@@ -544,16 +547,21 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout_player = new QHBoxLayout();
+        horizontalLayout_player->setSpacing(6);
+        horizontalLayout_player->setObjectName(QString::fromUtf8("horizontalLayout_player"));
         pushButton_Play = new QPushButton(layoutWidget);
         pushButton_Play->setObjectName(QString::fromUtf8("pushButton_Play"));
         QIcon icon;
         icon.addFile(QString::fromUtf8("play.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_Play->setIcon(icon);
 
-        horizontalLayout->addWidget(pushButton_Play);
+        horizontalLayout_player->addWidget(pushButton_Play);
+
+        pushButton_pause = new QPushButton(layoutWidget);
+        pushButton_pause->setObjectName(QString::fromUtf8("pushButton_pause"));
+
+        horizontalLayout_player->addWidget(pushButton_pause);
 
         pushButton_Stop = new QPushButton(layoutWidget);
         pushButton_Stop->setObjectName(QString::fromUtf8("pushButton_Stop"));
@@ -561,16 +569,22 @@ public:
         icon1.addFile(QString::fromUtf8("stop.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_Stop->setIcon(icon1);
 
-        horizontalLayout->addWidget(pushButton_Stop);
+        horizontalLayout_player->addWidget(pushButton_Stop);
 
-        horizontalSlider = new QSlider(layoutWidget);
-        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
-        horizontalSlider->setOrientation(Qt::Horizontal);
+        horizontalSlider_Seek = new QSlider(layoutWidget);
+        horizontalSlider_Seek->setObjectName(QString::fromUtf8("horizontalSlider_Seek"));
+        horizontalSlider_Seek->setMaximum(999);
+        horizontalSlider_Seek->setOrientation(Qt::Horizontal);
 
-        horizontalLayout->addWidget(horizontalSlider);
+        horizontalLayout_player->addWidget(horizontalSlider_Seek);
+
+        timeLcd = new QLCDNumber(layoutWidget);
+        timeLcd->setObjectName(QString::fromUtf8("timeLcd"));
+
+        horizontalLayout_player->addWidget(timeLcd);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout_player);
 
 
         gridLayout_3->addLayout(verticalLayout, 2, 1, 1, 3);
@@ -642,6 +656,7 @@ public:
         pushButton_Analyze->setText(QApplication::translate("GuiMupic", "Analyze", 0, QApplication::UnicodeUTF8));
         pushButton_Generate->setText(QApplication::translate("GuiMupic", "Compose", 0, QApplication::UnicodeUTF8));
         pushButton_Play->setText(QString());
+        pushButton_pause->setText(QApplication::translate("GuiMupic", "Pause", 0, QApplication::UnicodeUTF8));
         pushButton_Stop->setText(QString());
     } // retranslateUi
 

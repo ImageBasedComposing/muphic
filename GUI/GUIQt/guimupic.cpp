@@ -10,8 +10,6 @@ GuiMupic::GuiMupic(QWidget *parent) :
 
     l = new Launcher();
     pidPlay = -1;
-
-    //ui->polyWidget->
 }
 
 GuiMupic::~GuiMupic()
@@ -42,6 +40,80 @@ void GuiMupic::initialize()
 
     ui->pushButton_Generate->setEnabled(false);
 
+    //Phonon thinguies
+    audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory,this);
+    mediaObject = new Phonon::MediaObject(this);
+    mediaObject->setTickInterval(1000);
+    connect(mediaObject, SIGNAL(tick(qint64)), this, SLOT(tick(qint64)));
+    connect(mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)),
+                this, SLOT(stateChanged(Phonon::State,Phonon::State)));
+    Phonon::createPath(mediaObject, audioOutput);
+
+    is_paused = false;
+    ui->pushButton_pause->setEnabled(false);
+    ui->timeLcd->display("00:00");
+
+    setupActions();
+}
+
+void GuiMupic::setupActions()
+{
+    playAction = new QAction(style()->standardIcon(QStyle::SP_MediaPlay), tr("Play"), this);
+    playAction->setShortcut(tr("Ctrl+P"));
+    playAction->setDisabled(true);
+    pauseAction = new QAction(style()->standardIcon(QStyle::SP_MediaPause), tr("Pause"), this);
+    pauseAction->setShortcut(tr("Ctrl+A"));
+    pauseAction->setDisabled(true);
+    stopAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop), tr("Stop"), this);
+    stopAction->setShortcut(tr("Ctrl+S"));
+    stopAction->setDisabled(true);
+
+    connect(playAction, SIGNAL(triggered()), mediaObject, SLOT(play()));
+    connect(pauseAction, SIGNAL(triggered()), mediaObject, SLOT(pause()) );
+    connect(stopAction, SIGNAL(triggered()), mediaObject, SLOT(stop()));
+}
+
+void GuiMupic::tick(qint64 time)
+{
+    QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
+
+    ui->timeLcd->display(displayTime.toString("mm:ss"));
+    ui->horizontalSlider_Seek->setSliderPosition(mediaObject->currentTime()*1000 / mediaObject->totalTime());
+}
+
+void GuiMupic::stateChanged(Phonon::State newState, Phonon::State /* oldState */)
+{
+    switch (newState) {
+        case Phonon::ErrorState:
+            if (mediaObject->errorType() == Phonon::FatalError) {
+                QMessageBox::warning(this, tr("Fatal Error"),
+                mediaObject->errorString());
+            } else {
+                QMessageBox::warning(this, tr("Error"),
+                mediaObject->errorString());
+            }
+            break;
+        case Phonon::PlayingState:
+                playAction->setEnabled(false);
+                pauseAction->setEnabled(true);
+                stopAction->setEnabled(true);
+                break;
+        case Phonon::StoppedState:
+                stopAction->setEnabled(false);
+                playAction->setEnabled(true);
+                pauseAction->setEnabled(false);
+                ui->timeLcd->display("00:00");
+                break;
+        case Phonon::PausedState:
+                pauseAction->setEnabled(false);
+                stopAction->setEnabled(true);
+                playAction->setEnabled(true);
+                break;
+        case Phonon::BufferingState:
+                break;
+        default:
+            ;
+    }
 }
 
 void GuiMupic::on_toolButton_OutputMidi_clicked()
@@ -101,14 +173,31 @@ void GuiMupic::on_pushButton_Generate_clicked()
     l->launch(2, Launcher::MUPHIC, args);
 }
 
+void GuiMupic::on_pushButton_pause_clicked()
+{
+    if(!is_paused)
+    {
+        mediaObject->pause();
+        mediaTime = mediaObject->currentTime();
+        is_paused = true;
+    }
+    else
+    {
+        mediaObject->seek(mediaTime);
+        mediaObject->play();
+        is_paused = false;
+    }
+}
+
 void GuiMupic::on_pushButton_Stop_clicked()
 {
-    if (pidPlay > 0)
+    /*if (pidPlay > 0)
     {
         l->killProcess(pidPlay);
         pidPlay = -1;
-    }
-
+    }*/
+    mediaObject->stop();
+    ui->pushButton_pause->setEnabled(false);
 }
 
 void GuiMupic::paintEvent(QPaintEvent*)
@@ -123,7 +212,7 @@ void GuiMupic::paintEvent(QPaintEvent*)
 
 void GuiMupic::on_pushButton_Play_clicked()
 {
-    if (pidPlay != -1)
+/*    if (pidPlay != -1)
     {
         l->killProcess(pidPlay);
         pidPlay = -1;
@@ -135,7 +224,22 @@ void GuiMupic::on_pushButton_Play_clicked()
         //pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
 
         pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
+    }*/
+
+    if(!is_paused)
+    {
+        mediaSource = new Phonon::MediaSource("./1.mp3");
+        mediaObject->setCurrentSource(*mediaSource);
+        mediaObject->play();
+        ui->pushButton_pause->setEnabled(true);
     }
+    else
+    {
+        mediaObject->seek(mediaTime);
+        mediaObject->play();
+        is_paused = false;
+    }
+
 }
 
 void GuiMupic::on_pushButton_Analyze_clicked()
@@ -200,4 +304,8 @@ void GuiMupic::on_horizontalSlider_6_sliderMoved(int position)
     usrConf->setPhicPolygonSimp(position);
     char a[10];
     ui->labelPolSimp->setText(our_itoa(position,a,10));
+}
+
+void GuiMupic::on_horizontalSlider_Seek_sliderMoved(int position)
+{
 }
