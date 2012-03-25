@@ -527,8 +527,8 @@ bool** Figuras::fillMask(Figura* f)
 			currentvertex = *it;
 			lastvertex = *jt;
 
-			if (currentvertex->y < pixelY && lastvertex->y >= pixelY 
-				|| lastvertex->y < pixelY && currentvertex->y >= pixelY)
+			if (currentvertex->y < (double) pixelY && lastvertex->y >= (double) pixelY 
+				|| lastvertex->y < (double) pixelY && currentvertex->y >= (double) pixelY)
 			{
 				pixelX[nodes++] = (int) (currentvertex->x + (pixelY - currentvertex->y) / (lastvertex->y - currentvertex->y) * (lastvertex->x - currentvertex->x));
 			}
@@ -571,7 +571,7 @@ bool** Figuras::fillMask(Figura* f)
 				if (pixelX[i+1] > f->xR)
 					pixelX[i+1] = f->xR;
 				for (int j = pixelX[i]; j < pixelX[i+1]; j++)
-					mask[pixelY - f->yB][j - f->xR] = true;
+					mask[pixelY - f->yB][j - f->xL] = true;
 					
 			}
 		
