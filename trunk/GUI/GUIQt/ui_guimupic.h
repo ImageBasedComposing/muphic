@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Sat 24. Mar 19:40:29 2012
+** Created: Tue 27. Mar 18:30:45 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -34,7 +34,9 @@
 #include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <volumebar.h>
 #include "polygonwidget.h"
+#include "seekbar.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -111,7 +113,8 @@ public:
     QPushButton *pushButton_Play;
     QPushButton *pushButton_pause;
     QPushButton *pushButton_Stop;
-    QSlider *horizontalSlider_Seek;
+    SeekBar *seekSlider;
+    VolumeBar *volumeSlider;
     QLCDNumber *timeLcd;
     QSpacerItem *horizontalSpacer_5;
     QSpacerItem *verticalSpacer_2;
@@ -571,12 +574,20 @@ public:
 
         horizontalLayout_player->addWidget(pushButton_Stop);
 
-        horizontalSlider_Seek = new QSlider(layoutWidget);
-        horizontalSlider_Seek->setObjectName(QString::fromUtf8("horizontalSlider_Seek"));
-        horizontalSlider_Seek->setMaximum(999);
-        horizontalSlider_Seek->setOrientation(Qt::Horizontal);
+        seekSlider = new SeekBar(layoutWidget);
+        seekSlider->setObjectName(QString::fromUtf8("seekSlider"));
 
-        horizontalLayout_player->addWidget(horizontalSlider_Seek);
+        horizontalLayout_player->addWidget(seekSlider);
+
+        volumeSlider = new VolumeBar(layoutWidget);
+        volumeSlider->setObjectName(QString::fromUtf8("volumeSlider"));
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(255);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(volumeSlider->sizePolicy().hasHeightForWidth());
+        volumeSlider->setSizePolicy(sizePolicy6);
+
+        horizontalLayout_player->addWidget(volumeSlider);
 
         timeLcd = new QLCDNumber(layoutWidget);
         timeLcd->setObjectName(QString::fromUtf8("timeLcd"));

@@ -817,12 +817,15 @@
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_Seek">
-           <property name="maximum">
-            <number>999</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          <widget class="SeekBar" name="seekSlider" native="true"/>
+         </item>
+         <item>
+          <widget class="VolumeBar" name="volumeSlider" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>255</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
           </widget>
          </item>
@@ -876,6 +879,18 @@
    <class>PolygonWidget</class>
    <extends>QWidget</extends>
    <header>polygonwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SeekBar</class>
+   <extends>QWidget</extends>
+   <header>seekbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VolumeBar</class>
+   <extends>QWidget</extends>
+   <header location="global">volumebar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

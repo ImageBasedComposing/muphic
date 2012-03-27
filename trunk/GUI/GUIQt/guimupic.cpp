@@ -52,6 +52,8 @@ void GuiMupic::initialize()
     is_paused = false;
     ui->pushButton_pause->setEnabled(false);
     ui->timeLcd->display("00:00");
+    ui->seekSlider->setMediaObject(mediaObject);
+    ui->volumeSlider->setAudioOutput(audioOutput);
 
     setupActions();
 }
@@ -78,7 +80,7 @@ void GuiMupic::tick(qint64 time)
     QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
 
     ui->timeLcd->display(displayTime.toString("mm:ss"));
-    ui->horizontalSlider_Seek->setSliderPosition(mediaObject->currentTime()*1000 / mediaObject->totalTime());
+    //ui->horizontalSlider_Seek->setSliderPosition(mediaObject->currentTime()*1000 / mediaObject->totalTime());
 }
 
 void GuiMupic::stateChanged(Phonon::State newState, Phonon::State /* oldState */)

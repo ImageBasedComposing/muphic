@@ -84,10 +84,8 @@ private:
     Launcher* l;
     pid_t pidPlay;
 
-    Phonon::SeekSlider *seekSlider;
     Phonon::MediaObject *mediaObject;
     Phonon::AudioOutput *audioOutput;
-    Phonon::VolumeSlider *volumeSlider;
     Phonon::MediaSource *mediaSource;
 
     bool is_paused;
