@@ -80,6 +80,8 @@ class Figuras
 		bool lcAreSimilar(Figura* a, Figura* b, double eps); // longcheck
 		// deletes repeated figures (destroys parent-son structure)
 		void deleteReps();
+		void showFig(Figura* f);
+		void showFigs();
 };
 
 #endif // FIGURAS_H
