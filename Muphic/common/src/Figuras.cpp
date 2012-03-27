@@ -599,44 +599,37 @@ bool Figuras::lcAreSimilar(Figura* a, Figura* b, double eps)
 		sub = a;
 	}
 
-
-	ofstream myfile;
-  myfile.open ("te.txt");
-
-
 	bool** maskM = fillMask(main);
 	bool** maskS = fillMask(sub);
 
-
-	for (int i = 0; i < main->yT - main->yB; i++)
+	bool cellM;
+	bool cellS;
+	int commonpixels = 0;
+	for (int i = 0; i < max(main->yT - main->yB, sub->yT - sub->yB) ; i++)
 	{
-		for (int j = 0; j < main->xR - main->xL; j++)
-			if (maskM[i][j])
-				myfile << "1" << " ";
+		for (int j = 0; j < max(main->xR - main->xL, sub->xR - sub->xL); j++)
+		{	
+			if (i >= (main->yT - main->yB) || j >= (main->xR - main->xL))
+				cellM = false;
 			else
-				myfile << " " << " ";
-		myfile << "|" << endl;
-	}
-	myfile << endl;
-	myfile << "________________________________________________________________________________________________";
-	myfile << endl;
-	for (int i = 0; i < sub->yT - sub->yB; i++)
-	{
-		for (int j = 0; j < sub->xR - sub->xL; j++)
-			if (maskS[i][j])
-				myfile << "1" << " ";
+				cellM = maskM[i][j];
+
+			if (i >= (sub->yT - sub->yB) || j >= (sub->xR - sub->xL))
+				cellS = false;
 			else
-				myfile << " " << " ";
-		myfile << "|" << endl;
+				cellS = maskS[i][j];
+
+			if (cellM && cellS)
+				commonpixels++;
+		}
 	}
 
-	//system("PAUSE");
+	if ((commonpixels - main->area) < 0)
+		commonpixels = main->area - commonpixels;
+	else
+		commonpixels = commonpixels - main->area;
 
-	  myfile.close();
-
-	// NEED MASKS!!!!
-
-	return false;
+	return commonpixels < eps;
 }
 
 bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
@@ -652,6 +645,48 @@ bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
 	return sum < eps;
 }
 
+void Figuras::showFig(Figura* f)
+{
+	ofstream myfile;
+	myfile.open ("te.txt");
+	bool** maskM = fillMask(f);
+
+	for (int i = 0; i < (f)->yT - (f)->yB; i++)
+	{
+		for (int j = 0; j < (f)->xR - (f)->xL; j++)
+			if (maskM[i][j])
+				myfile << "1" << " ";
+			else
+				myfile << " " << " ";
+		myfile << "|" << endl;
+	}	
+
+	myfile.close();
+}
+
+void Figuras::showFigs()
+{
+	for (list<Figura*>::iterator it = figuras.begin(); it != figuras.end(); it++)
+	{
+
+		ofstream myfile;
+		myfile.open ("te.txt");
+		bool** maskM = fillMask(*it);
+
+		for (int i = 0; i < (*it)->yT - (*it)->yB; i++)
+		{
+			for (int j = 0; j < (*it)->xR - (*it)->xL; j++)
+				if (maskM[i][j])
+					myfile << "1" << " ";
+				else
+					myfile << " " << " ";
+			myfile << "|" << endl;
+		}	
+
+		myfile.close();
+	}
+}
+
 void Figuras::deleteReps()
 {
 	// fast-check
@@ -664,17 +699,21 @@ void Figuras::deleteReps()
 	int j = 0;
 	double eps;
 	double aprox = 5;
+	int area1, area2;
 	for (it = figuras.begin(); it != limit; it++)
 	{
 		jt = it; jt++;
 		j = i+1;
+		showFig(*it);
+		showFig(*jt);
 		for (jt; jt != figuras.end(); jt++)
 		{
 			// eps is aprox% of max area
+			area1 = (*it)->area;
+			area2 = (*jt)->area;
 			eps = aprox * max((*it)->area, (*jt)->area) / 100;
 
-			//if (fcAreSimilar(*it, *jt, eps))
-			if (true)
+			if (fcAreSimilar(*it, *jt, eps/10))
 			{
 				if (lcAreSimilar(*it, *jt, eps))
 					deletables.insert(*it);
