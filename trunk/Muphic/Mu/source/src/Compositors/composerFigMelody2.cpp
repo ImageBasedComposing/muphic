@@ -37,11 +37,11 @@ bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg)
 
 		//Tono **************
 
-	vector< int > tones = calcTonesDiff(f, vertices);
+	vector< int > tones = calcTonesDiff(f, vertices, durations);
 
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
-		seg->getSimbolos()->pushBack(new Nota(durations.at(i), tones.at(i)));
+		seg->pushBack(new Nota(durations.at(i), tones.at(i)));
 
 	return true;
 }
@@ -93,7 +93,7 @@ vector< int > ComposerFigMelody2::calcDurDirect(FigureMusic * f, vector< Vertice
 }
 
 //Dada unos vértices ordenados, devolvemos vector de tonos.
-vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices)
+vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices, vector<int> duraciones)
 {
 
 	vector<int> out;
@@ -119,7 +119,7 @@ vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice
 	{
 		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
 
-		tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
+		tone = getNextTone(degree, actualAngle, lastAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 
 		out.push_back(tone);  //La nota respecto al vertice.
 		lastTone = tone;
@@ -165,12 +165,12 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 	pos1++;
 	temp1 += n2->getDuracion();
 	temp2 = duraciones.at(0);
-	while(pos1 < seg1->size() && i < vertices.size())
+	while(i < vertices.size() && (pos1 < seg1->size() || (pos1 = seg1->size() && (temp2+duraciones.at(i) <= temp1))))
 	{
 		temp2 += duraciones.at(i);
 		while(temp2 > temp1)
 		{
-			(*n1) = (*n2);
+			n1 = n2;
 			n2 = (Nota*)seg1->getAt(pos1);
 			temp1 += n2->getDuracion();
 			pos1++;
@@ -186,7 +186,7 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 		
 		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
 
-		tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
+		tone = getNextTone(degree, actualAngle, lastAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 
 		if(lastTone < tone)
 			movement2 = 1;
@@ -203,13 +203,13 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 				{
 					if(movement1 == 0)
 					{
-						tone = getNextDegreeTone(degree, actualAngle+36, lastAngle, lastTone);
+						tone = getNextTone(degree, actualAngle+36, lastAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 						lastMovement = 2;
 						numSameMovement = 1;
 					}
 					else
 					{
-						tone = getNextDegreeTone(degree, lastAngle, actualAngle, lastTone);
+						tone = getNextTone(degree, lastAngle, actualAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 						lastMovement = 1;
 						numSameMovement = 1;
 					}
@@ -233,7 +233,7 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 				{
 					if(movement2 == 0)
 					{
-						tone = getNextDegreeTone(degree, actualAngle+36, lastAngle, lastTone);
+						tone = getNextTone(degree, actualAngle+36, lastAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 						if(movement1 == 1)
 							lastMovement = 0;
 						else
@@ -242,7 +242,7 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 					}
 					else
 					{
-						tone = getNextDegreeTone(degree, lastAngle, actualAngle, lastTone);
+						tone = getNextTone(degree, lastAngle, actualAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 						lastMovement = 2;
 						numSameMovement = 1;
 					}
@@ -264,7 +264,7 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 			{
 				if(numSameMovement > 4)
 				{
-					tone = getNextDegreeTone(degree, lastAngle, actualAngle, lastTone);
+					tone = getNextTone(degree, lastAngle, actualAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 					lastMovement = 0;
 					numSameMovement = 1;
 				}
@@ -278,6 +278,12 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 				lastMovement = 1;
 				numSameMovement++;
 			}
+		}
+
+		//Comprobamos tmb que no haga muchas disonancias y feas
+		if(isDissonantInterval(tone, n2->getTono()) && duraciones.at(i) > EIGHTHNOTE)
+		{
+			tone = makeConsonant(n2->getTono(), tone);
 		}
 
 
@@ -303,17 +309,6 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 	//Si solo tenemos una nota, pues la decoramos como podamos:
 	if(seg->getSimbolos()->size() < 2)
 		return decSimbolo((Nota*)seg->getAt(0), f->sizeVertices(), tableScale->getDegreeTone(scriabin->getNota(f->getRGB(), tableScale)));
-	
-	//En caso de tener dos o mas notas:
-	//Primero vemos donde vamos a decorar la melodia:
-	//// Idea para realizar: Teniendo los baricentros o centros podemos calcular a que distancia están los baricentros de la padre y de la hija.
-	int pos;
-	if((f->sizeVertices()*4) < seg->getSimbolos()->size()) 
-		pos = seg->getSimbolos()->size()/2;
-	else if((f->sizeVertices()*2) < seg->getSimbolos()->size())
-		pos = seg->getSimbolos()->size() - f->sizeVertices()*2;
-	else
-		pos = seg->getSimbolos()->size() - f->sizeVertices();
 
 	//Ahora compongamos la melodía y la unimos haciendo cambios para cumplir con las leyes de contrapunto:
 	//Creamos la melodía
@@ -323,6 +318,23 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 		vertices.push_back(f->getVerticeAt(i));
 
 	vector< int > durations = calcDurDirect(f, vertices);
+
+	//En caso de tener dos o mas notas:
+	//Primero vemos donde vamos a decorar la melodia:
+	//// Idea para realizar: Teniendo los baricentros o centros podemos calcular a que distancia están los baricentros de la padre y de la hija.
+	int pos;
+	int durationTotal = 0;
+	for(int i = 0; i < durations.size(); i++)
+		durationTotal += durations.at(i);
+	if( seg->getDuration() <= durationTotal)
+	{
+		adaptDurations(&durations, seg->getDuration());
+		pos = 0;
+	}
+	else if(seg->getDuration() < (durationTotal*2))
+		pos = 0 + f->sizeVertices()/2;
+	else
+		pos = 0 + f->sizeVertices();
 	
 	vector< int > tones = calcTonesCounterPoint(f,vertices,seg,pos,durations);
 
@@ -351,6 +363,7 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 }
 
 //Teniendo una nota (preferiblemente de larga duración) la decora con las notas que puede dado el grado.
+//Se ha quedado obsoleto...
 Segmento* ComposerFigMelody2::decSimbolo(Nota* n, int numVert, int degree)
 {
 	Segmento* out = new Segmento();
@@ -395,6 +408,7 @@ Segmento* ComposerFigMelody2::decSimbolo(Nota* n, int numVert, int degree)
 
 }
 
+//Se ha quedado obsoleto...
 Segmento* ComposerFigMelody2::dec2Simbolos(Nota* n1, Nota* n2, int degree)
 {
 	Segmento* out = new Segmento();
@@ -480,22 +494,20 @@ Segmento* ComposerFigMelody2::emptyMelody(Segmento* seg)
 {
 	int dur = 0;
 	Segmento* out = new Segmento();
-	Simbolos* s = new Simbolos();
 	for(int i = 0; i < seg->getSimbolos()->size(); i++)
 		dur = dur + seg->getAt(i)->getDuracion();
 	while(dur > WHOLE)
 	{
-		s->pushBack(new Nota(WHOLE, 0));
+		out->pushBack(new Nota(WHOLE, 0));
 		dur = dur - WHOLE;
 	}
-	s->pushBack(new Nota(dur, 0));
-
-	out->setSimbolos(s);
+	out->pushBack(new Nota(dur, 0));
 
 	return out;
 
 }
 
+//obsoleto...
 vector<int> ComposerFigMelody2::patDurations(int numSimbols, int durTotal, int pattern)
 {
 	int durMedium = QUARTERNOTE;
@@ -557,7 +569,7 @@ Segmento* ComposerFigMelody2::interMelodyFig(FigureMusic* f, Segmento* seg)
 
 		//Tono **************
 
-	vector< int > tones = calcTonesDiff(f, vertices);
+	vector< int > tones = calcTonesDiff(f, vertices, durations);
 
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
@@ -574,10 +586,10 @@ int ComposerFigMelody2::getNextDegreeTone(int degree, double actualAngle, double
 	int alfa2 = PI/3; // 60º
 	int alfa3 = PI/2; // 90º
 	int alfa4 = PI; // 180º*/
-	int alfa0 = 18;
-	int alfa1 = 36; 
-	int alfa2 = 90; 
-	int alfa3 = 180; 
+	int alfa0 = 10;
+	int alfa1 = 30; 
+	int alfa2 = 120; 
+	int alfa3 = 240; 
 	int alfa4 = 360; 
 
 	double diff = abs(actualAngle - lastAngle);
@@ -593,29 +605,106 @@ int ComposerFigMelody2::getNextDegreeTone(int degree, double actualAngle, double
 							note = tableScale->nextNDegreeTone(degree, lastTone,4);
 						else
 							note = tableScale->prevNDegreeTone(degree, lastTone,4);
-					else
+					else // < alfa4
 						if(actualAngle > lastAngle)
 							note = tableScale->nextNDegreeTone(degree, lastTone,3);
 						else
 							note = tableScale->prevNDegreeTone(degree, lastTone,3);
-				else
+				else // < alfa3
 					if(actualAngle > lastAngle)
 						note = tableScale->nextNDegreeTone(degree, lastTone,2);
 					else
 						note = tableScale->prevNDegreeTone(degree, lastTone,2);
-			else
+			else // < alfa2
 				if(actualAngle > lastAngle)
 					note = tableScale->nextNDegreeTone(degree, lastTone,1);
 				else
 					note = tableScale->prevNDegreeTone(degree, lastTone,1);
-		else
+		else // < alfa1
 			if(actualAngle > lastAngle)
 				note = tableScale->nextTone(lastTone);
 			else
 				note = tableScale->prevTone(lastTone);
-		else
-			note = lastTone;
+	else // < alfa0
+		note = lastTone;
+
 
 	return note;
 }
 
+int ComposerFigMelody2::getNextTone(int degree, double actualAngle, double lastAngle, int lastTone, int actualDuration, int lastDuration)
+{
+	int tone;
+
+	tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
+
+	if((abs(lastTone - tone) > 2) && isDissonantInterval(lastTone, tone) && actualDuration >= lastDuration)
+	{
+		if(actualAngle > lastAngle)
+		{
+			actualAngle = actualAngle / 2;
+		}
+		else
+			lastAngle = lastAngle / 2;
+		tone = getNextDegreeTone(degree, actualAngle, lastAngle, lastTone);
+	}
+
+	return tone;
+}
+
+int ComposerFigMelody2::makeConsonant(int tone, int toneToModif)
+{
+	int out = toneToModif;
+
+	if(isConsonantInterval(tone, toneToModif))
+		return out; //Devolvemos ya el que tenemos
+	
+	while(isDissonantInterval(tone, out))
+	{
+		if(tone > toneToModif)
+			out = tableScale->prevTone(out);
+		else
+			out = tableScale->nextTone(out);
+	}
+
+	return out;
+
+}
+
+void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration)
+{
+	int durationTotal = 0;
+	for(int i = 0; i < durations->size(); i++)
+		durationTotal += durations->at(i);
+
+	int pos, posAux;
+	bool divided = false;
+	while(durationTotal > duration)
+	{
+		pos = rand() % durations->size();
+		if(durations->at(pos) < QUARTERNOTE)
+		{
+			posAux = (pos + 1) % durations->size();
+			while(!divided && posAux != pos)
+				if(durations->at(posAux) < QUARTERNOTE)
+					posAux = (posAux + 1) % durations->size();
+				else
+				{
+					durations->at(posAux) = durations->at(posAux) / 2;
+					durationTotal -= durations->at(posAux);
+					divided = true;
+				}
+			if(posAux == pos)
+			{
+				durations->at(posAux) = durations->at(posAux) / 2;
+				durationTotal -= durations->at(posAux);
+			}
+		}
+		else
+		{
+			durations->at(pos) = durations->at(pos) / 2;
+			durationTotal -= durations->at(pos);
+		}
+	}
+
+}
