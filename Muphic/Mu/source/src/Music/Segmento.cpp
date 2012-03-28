@@ -5,6 +5,7 @@ Segmento::Segmento()
 {
 	tempo = 120; // Andantino.
 	simbolos = new Simbolos();
+	duration = 0;
 }
 
 Segmento::~Segmento()
