@@ -292,19 +292,19 @@ int main(int argc, char* argv[])
 
 		return 1;
 	}
-
+	
 	Phic* phic = new Phic();
 	phic->setUsrConfPath(argv[1]);
     phic->setPicPath(argv[2]);
 	phic->usrConf = new UsrConf();
 	phic->usrConf->readPhic(argv[1]);
 
-	/*if (phic->usrConf->getPhicFilterSelect() != 2)
-	{
-		//phic->test();
-	}
-	else
-	{*/
+	//if (phic->usrConf->getPhicFilterSelect() != 2)
+	//{
+	//	//phic->test();
+	//}
+	//else
+	//{
 	Analizer* analizer = new Analizer();
 	analizer->debug = phic->usrConf->getPhicDebug();
 
@@ -331,7 +331,8 @@ int main(int argc, char* argv[])
 		analizer->addFiguresfromPic(imagesrc, imagedest, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
 	}
 
-	//figuras->deleteReps();
+	//figuras->showFigs();
+	figuras->deleteReps();
 
 
 	if (figuras->sizeFig() != 0)
@@ -343,6 +344,18 @@ int main(int argc, char* argv[])
 	std::string output = changeExtension(argv[2], "xml");
 
 	figuras->guardar(output);
+	
+
+
+	/*Figuras* figuras = new Figuras();
+
+	figuras->cargar("test1");
+
+	//figuras->showFigs();
+	figuras->deleteReps();
+
+
+	delete figuras;*/
 
 	return 0;
 }
