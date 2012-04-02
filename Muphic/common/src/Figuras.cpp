@@ -530,7 +530,7 @@ bool** Figuras::fillMask(Figura* f)
 			if (currentvertex->y < (double) pixelY && lastvertex->y >= (double) pixelY 
 				|| lastvertex->y < (double) pixelY && currentvertex->y >= (double) pixelY)
 			{
-				pixelX[nodes++] = (int) (currentvertex->x + (pixelY - currentvertex->y) / (lastvertex->y - currentvertex->y) * (lastvertex->x - currentvertex->x));
+				pixelX[nodes++] = (int) (currentvertex->x + (pixelY - currentvertex->y) * (lastvertex->x - currentvertex->x) / (lastvertex->y - currentvertex->y));
 			}
 
 			jt = it;
@@ -634,13 +634,28 @@ bool Figuras::lcAreSimilar(Figura* a, Figura* b, double eps)
 
 bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
 {
+	Figura* main, * sub;
+	if (a->area > b->area)
+	{
+		main = a;
+		sub = b;
+	}
+	else
+	{
+		main = b;
+		sub = a;
+	}
+
+
 	double dL = a->xL - b->xL; double dR = a->xR - b->xR;
 	double dT = a->yT - b->yT; double dB = a->yB - b->yB;
 
 	if (dL < 0) dL = -dL; if (dR < 0) dR = -dR;
 	if (dT < 0) dT = -dT; if (dB < 0) dB = -dB;
 
-	double sum = dL + dT + dR + dB;
+	//double sum = dL + dT + dR + dB;
+
+	double sum = (dL + dR)*(main->yT - main->yB) + (dT + dB)*(main->xR - main->xL);
 		
 	return sum < eps;
 }
@@ -672,6 +687,8 @@ void Figuras::showFigs()
 		ofstream myfile;
 		myfile.open ("te.txt");
 		bool** maskM = fillMask(*it);
+		myfile << (*it)->xL << " " << (*it)->xR;
+		myfile << (*it)->yT << " " << (*it)->yB;
 
 		for (int i = 0; i < (*it)->yT - (*it)->yB; i++)
 		{
@@ -696,29 +713,28 @@ void Figuras::deleteReps()
 	limit--;
 	list<Figura*>::iterator jt;
 	int i = 0;
-	int j = 0;
 	double eps;
-	double aprox = 5;
+	double aprox = 15;
 	int area1, area2;
 	for (it = figuras.begin(); it != limit; it++)
 	{
 		jt = it; jt++;
-		j = i+1;
-		showFig(*it);
-		showFig(*jt);
 		for (jt; jt != figuras.end(); jt++)
 		{
 			// eps is aprox% of max area
 			area1 = (*it)->area;
 			area2 = (*jt)->area;
+			showFig(*it);
+			showFig(*jt);
 			eps = aprox * max((*it)->area, (*jt)->area) / 100;
 
-			if (fcAreSimilar(*it, *jt, eps/10))
+			if (fcAreSimilar(*it, *jt, eps))
 			{
 				if (lcAreSimilar(*it, *jt, eps))
+				{
 					deletables.insert(*it);
+				}
 			}
-			j++;
 		}
 		i++;
 	}
