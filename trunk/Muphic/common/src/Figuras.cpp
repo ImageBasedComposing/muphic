@@ -284,6 +284,13 @@ void Figuras::colocarFig(Figura* s)
 	figuras.sort(&Figura::compare);
 }
 
+void Figuras::removeFig(Figura* f)
+{
+	figuras.remove(f);
+
+	figuras.sort(&Figura::compare);
+}
+
 void Figuras::colocarPadre(Figura* s)
 {
 	figPadres.push_back(s);
@@ -724,8 +731,8 @@ void Figuras::deleteReps()
 			// eps is aprox% of max area
 			area1 = (*it)->area;
 			area2 = (*jt)->area;
-			showFig(*it);
-			showFig(*jt);
+			//showFig(*it);
+			//showFig(*jt);
 			eps = aprox * max((*it)->area, (*jt)->area) / 100;
 
 			if (fcAreSimilar(*it, *jt, eps))
