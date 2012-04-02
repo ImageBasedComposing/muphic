@@ -31,6 +31,8 @@ class Figuras
 		//void insertFig(Figura* s, int n);
 		//void insertPadre(Figura* s, int n);
 
+		void removeFig(Figura* f);
+
 		Figura* getFigAt(int n);
 		Figura* getPadreAt(int n);
 

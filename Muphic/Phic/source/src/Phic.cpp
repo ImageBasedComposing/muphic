@@ -331,9 +331,19 @@ int main(int argc, char* argv[])
 		analizer->addFiguresfromPic(imagesrc, imagedest, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
 	}
 
-	//figuras->showFigs();
-	figuras->deleteReps();
+	
+	// NO BIG RECTANGLE BEHIND EVERYTHING
+	Figura* bigfigure = new Figura();
+	bigfigure->colocarVertice(new Vertice(1,1, false));
+	bigfigure->colocarVertice(new Vertice(figuras->getWidth(), 1, false));
+	bigfigure->colocarVertice(new Vertice(figuras->getWidth(), figuras->getHeight(), false));
+	bigfigure->colocarVertice(new Vertice(1, figuras->getHeight(), false));
+	figuras->colocarFig(bigfigure);
 
+
+	figuras->deleteReps();
+	figuras->removeFig(bigfigure);
+	delete bigfigure;
 
 	if (figuras->sizeFig() != 0)
 		figuras->setParentSonStructure();
@@ -345,7 +355,7 @@ int main(int argc, char* argv[])
 
 	figuras->guardar(output);
 	
-
+	//system("PAUSE");
 
 	/*Figuras* figuras = new Figuras();
 
