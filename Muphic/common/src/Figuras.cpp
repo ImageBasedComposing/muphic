@@ -660,11 +660,19 @@ bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
 	if (dL < 0) dL = -dL; if (dR < 0) dR = -dR;
 	if (dT < 0) dT = -dT; if (dB < 0) dB = -dB;
 
-	//double sum = dL + dT + dR + dB;
-
 	double sum = (dL + dR)*(main->yT - main->yB) + (dT + dB)*(main->xR - main->xL);
+
+	double dred = a->rgb.r - b->rgb.r;
+	double dgreen = a->rgb.g - b->rgb.g;
+	double dblue = a->rgb.b - b->rgb.b;
+
+	if (dred < 0) dred = -dred;
+	if (dgreen < 0) dgreen = -dgreen;
+	if (dblue < 0) dblue = -dblue; 
+
+	double colorcheck = dred + dgreen + dblue;
 		
-	return sum < eps;
+	return (sum < eps);// && (colorcheck < 30);
 }
 
 void Figuras::showFig(Figura* f)
@@ -731,8 +739,8 @@ void Figuras::deleteReps()
 			// eps is aprox% of max area
 			area1 = (*it)->area;
 			area2 = (*jt)->area;
-			//showFig(*it);
-			//showFig(*jt);
+			showFig(*it);
+			showFig(*jt);
 			eps = aprox * max((*it)->area, (*jt)->area) / 100;
 
 			if (fcAreSimilar(*it, *jt, eps))
