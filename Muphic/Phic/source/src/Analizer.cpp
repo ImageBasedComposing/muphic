@@ -205,6 +205,9 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 	// look for image contours
 	cvFindContours( mask, g_storage, &contours, sizeof(CvContour), CV_RETR_LIST);
 
+
+	
+
 	if( contours )
 	{
 		//convert the pixel contours to line segments in a polygon.
@@ -216,9 +219,14 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 
 		// iterate contours and create a figure for each one
 		FigureImg* f;
+		int currentmaxsize = MAX_SIZE;
+		Vertice* staticfigure = new Vertice[currentmaxsize];//  static aux Figure
+		int nstaticfigure;
 		int id = 0;
 		for( CvSeq* c = first_polygon; c != NULL; c = c->h_next)
 		{
+			nstaticfigure = 0;
+			
 			cvZero( g_contours );
 			cvDrawContours(
 				g_contours,
@@ -235,8 +243,6 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 				
 				printf( " %d elements:\n", c->total );
 			}
-
-			f = new FigureImg();
 			
 			for( int i=0; i< c->total; ++i )
 			{
@@ -245,7 +251,20 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 				if (debug)
 					printf(" (%d,%d)\n", p->x, img->height - p->y );
 
-				f->colocarVertice(new Vertice(p->x, img->height - p->y, false));
+				//if it's too big, resize to double
+				if (nstaticfigure >= currentmaxsize)
+				{
+					currentmaxsize = currentmaxsize*2;
+					Vertice* tmpf = new Vertice[currentmaxsize];
+					for (int i = 0; i < nstaticfigure; i++)
+						tmpf[i] = staticfigure[i];
+					delete [] staticfigure;
+					staticfigure = tmpf;
+				}
+
+				staticfigure[nstaticfigure].x = p->x;
+				staticfigure[nstaticfigure].y = img->height - p->y;
+				nstaticfigure++;
 			}
 
 			// Calculamos el area de cada poligono
@@ -253,16 +272,15 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 			if (debug)
 				printf("Area: %f\n", area);
 				
-			f->setArea(area);
+			//
 			double areapropr = area * 100 / (figuras->getWidth() * figuras->getHeight());
 				
 			if(cAux!=NULL) //Cogemos el siguiente para la siguiente vuelta (es como un do-while)
 				cAux = cAux->h_next;
-
-			f->setId(lastID++);
+			
 
 			// We set an area filter to skip noise figures
-			if ((f->sizeVertices() < 3) || (areapropr < noise))
+			if ((nstaticfigure < 3) || (areapropr < noise))
 			{				
 				n++;
 				continue;
@@ -272,6 +290,14 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 				if (debug)
 					cvWaitKey();
 			}
+
+			f = new FigureImg();
+			for (int i = 0; i < nstaticfigure; i++)
+			{
+				f->colocarVertice(new Vertice(staticfigure[i].x, staticfigure[i].y, false));
+			}
+			f->setArea(area);
+			f->setId(lastID++);
 
 			// set color
 			setColorFromImage(f, img, c, NULL, false, false);
