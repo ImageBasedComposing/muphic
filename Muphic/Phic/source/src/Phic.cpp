@@ -338,11 +338,11 @@ int main(int argc, char* argv[])
 	bigfigure->colocarVertice(new Vertice(figuras->getWidth(), 1, false));
 	bigfigure->colocarVertice(new Vertice(figuras->getWidth(), figuras->getHeight(), false));
 	bigfigure->colocarVertice(new Vertice(1, figuras->getHeight(), false));
-	//figuras->colocarFig(bigfigure);
+	figuras->colocarFig(bigfigure);
 
 
-	//figuras->deleteReps();
-	//figuras->removeFig(bigfigure);
+	figuras->deleteReps();
+	figuras->removeFig(bigfigure);
 	delete bigfigure;
 
 	if (figuras->sizeFig() != 0)
