@@ -9,6 +9,8 @@
 #include "Figuras.h"
 #include "FigureImg.h"
 
+#define MAX_SIZE 1000
+
 class Analizer
 {
 	protected:
