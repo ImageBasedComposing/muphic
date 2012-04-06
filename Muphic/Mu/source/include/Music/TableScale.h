@@ -294,6 +294,9 @@ public:
 		int note = firstNote;
 		for(int i = 0; i < (nDegree-1); i++)
 			note += scaleSteps.at(i % scaleSteps.size());
+		note = note % ESCALA;
+		if(note == 0)
+			note = SI;
 		return note;
 	}
 

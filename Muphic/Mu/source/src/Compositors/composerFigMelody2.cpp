@@ -65,6 +65,8 @@ vector< int > ComposerFigMelody2::calcDurDirect(FigureMusic * f, vector< Vertice
 	double mediumLong = distTotal / numVertices;
 	double maxLong = distMax;
 	double minLong = distMin;
+	if(distMin > (distMax /2) )
+		minLong = minLong / 2;
 
 	//Algoritmo NO diferencial
 	//Vamos a separar las longitudes en 3 tipos de duraciones:
@@ -322,24 +324,29 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 	//En caso de tener dos o mas notas:
 	//Primero vemos donde vamos a decorar la melodia:
 	//// Idea para realizar: Teniendo los baricentros o centros podemos calcular a que distancia están los baricentros de la padre y de la hija.
-	int pos;
-	int durationTotal = 0;
+	int pos = 0;
+	int durationTotal = 0, auxDur = 0;
+	bool findPos = false;
 	for(int i = 0; i < durations.size(); i++)
 		durationTotal += durations.at(i);
 	if( seg->getDuration() <= durationTotal)
 	{
 		adaptDurations(&durations, seg->getDuration());
-		pos = 0;
+		pos = 0; //Desde el principio
 	}
-	else if(seg->getDuration() < (durationTotal*2))
-		pos = 0 + f->sizeVertices()/2;
-	else
-		pos = 0 + f->sizeVertices();
+	else{
+		while(!findPos && pos < seg->size())
+		{
+			auxDur += seg->getAt(pos)->getDuracion() * 1.5; //Lo multiplicamos por 1.5 para estar seguros de no salirnos
+			findPos = (durationTotal + auxDur) > seg->getDuration();
+			pos++;
+		}
+	}
 	
 	vector< int > tones = calcTonesCounterPoint(f,vertices,seg,pos,durations);
 
 	//Silencios
-	for(int i = 0; i < pos-1; i++)
+	for(int i = 0; i < pos; i++)
 		out->pushBack(new Nota(seg->getAt(i)->getDuracion(), 0));
 
 	//Añadimos las notas
