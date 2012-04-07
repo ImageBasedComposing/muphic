@@ -14,6 +14,42 @@ Analizer::~Analizer()
     //dtor
 }
 
+void Analizer::analizeHSV(IplImage* imagesrc, IplImage** &images, int & nimages, int thresholdH, int thresholdS, int thresholdV)
+{
+	// Create image Data
+	CvMemStorage* g_storage = cvCreateMemStorage(0);
+	IplImage* hsvImage = cvCreateImage( cvGetSize( imagesrc ), 8, 3 );
+	IplImage* hImage = cvCreateImage( cvGetSize( imagesrc ), 8, 1 );
+	IplImage* sImage = cvCreateImage( cvGetSize( imagesrc ), 8, 1 );
+	IplImage* vImage = cvCreateImage( cvGetSize( imagesrc ), 8, 1 );
+
+	cvCvtColor( imagesrc, hsvImage , CV_BGR2HSV);  
+
+	cvSplit(hsvImage, hImage, sImage, vImage, NULL);
+
+	cvThreshold( hImage, hImage, thresholdH, 255, CV_THRESH_BINARY );
+	cvThreshold( sImage, sImage, thresholdS, 255, CV_THRESH_BINARY );
+	cvThreshold( vImage, vImage, thresholdV, 255, CV_THRESH_BINARY );
+
+
+	if (debug)
+	{
+		// We show the resulting image from apliying the filter
+		cvShowImage( "Contours", hImage );
+		cvWaitKey();
+		cvShowImage( "Contours", sImage );
+		cvWaitKey();
+		cvShowImage( "Contours", vImage );
+		cvWaitKey();
+	}
+
+	images = new IplImage*[3];
+	images[0] = hImage;
+	images[1] = sImage;
+	images[2] = vImage;
+	nimages = 3;
+}
+
 void Analizer::analizePerRegions(IplImage* imagesrc, int levels, IplImage** &images, int & nimages)
 {
 	// create all binary images
@@ -78,6 +114,9 @@ IplImage* Analizer::analizeByFilter(IplImage* imagesrc, int filter, int threshol
 	IplImage* mask = cvCreateImage( cvGetSize( imagesrc ), 8, 1 );
 	CvMemStorage* g_storage = cvCreateMemStorage(0);
 	cvCvtColor( imagesrc, mask, CV_BGR2GRAY );
+
+		cvShowImage( "Contours", mask );
+		cvWaitKey();
 
 	// We choose the filter we will be using
 	switch(filter)

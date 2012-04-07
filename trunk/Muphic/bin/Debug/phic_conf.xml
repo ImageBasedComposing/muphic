@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="yes" ?>
 <muphic_conf>
     <phic_conf>
-        <filter>1</filter>
+        <filter>0</filter>
         <threshold>50</threshold>
         <noise>1</noise>
         <polSimp>2</polSimp>
