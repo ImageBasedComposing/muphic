@@ -14,7 +14,7 @@
 class Analizer
 {
 	protected:
-		void setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImage* maskAcum, bool inv, bool all);
+		void setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImage* maskAcum, IplImage* maskHoles, bool inv, bool all);
 
 	public:
 
@@ -30,6 +30,7 @@ class Analizer
 
 		void addFiguresfromPics(IplImage* img, IplImage* *mask, int nmasks, Figuras* figuras, int polSimp, int noise);
 		void addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras, int polSimp, int noise);
+		void addFiguresfromPicv2(IplImage* img, IplImage* mask, Figuras* figuras, int polSimp, int noise);
 };
 
 

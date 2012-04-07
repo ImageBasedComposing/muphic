@@ -22,6 +22,9 @@ Figura::Figura()
 
 	xR = -1;
 	xL = 1;
+
+	nextSibling = prevSibling = NULL;
+	padre = NULL;
 }
 
 Figura::~Figura()
@@ -68,6 +71,29 @@ Figura* Figura::getParent()
 {
 	return padre;
 }
+
+Figura* Figura::getFirstSon()
+{	
+	if (hijos.size() > 0)
+	{
+		std::list<Figura*>::iterator it = hijos.begin();
+		return (*it);
+	}
+	else
+		return NULL;
+}
+
+Figura* Figura::getNextSibling()
+{
+	return nextSibling;
+}
+
+Figura* Figura::getPrevSibling()
+{
+	return prevSibling;
+}
+
+
 
 int Figura::getArea()
 {
@@ -164,6 +190,21 @@ void Figura::colocarVertice(Vertice* v)
 
 void Figura::colocarHijo(Figura* f)
 {
+	if (hijos.size() == 0)
+	{
+		f->prevSibling = NULL;
+	}
+	else
+	{
+		list<Figura*>::iterator it = hijos.end();
+		it--;
+		f->prevSibling = (*it);
+		(*it)->nextSibling = f;
+	}
+
+	f->nextSibling = NULL;
+	f->padre = this;
+
 	hijos.push_back(f);
 }
 

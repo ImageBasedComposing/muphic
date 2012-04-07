@@ -77,6 +77,7 @@ class Figuras
 		void setParentSonStructure();
 		void addToParentSonStructure(Figura* f, list<Figura*> & padres);
 		void showParentSonStructure(list<Figura*> padres, int level);
+		void renameStructure(list<Figura*> padres, Figura* padre);
 
 		bool fcAreSimilar(Figura* a, Figura* b, double eps); // fastcheck
 		bool lcAreSimilar(Figura* a, Figura* b, double eps); // longcheck
@@ -84,6 +85,8 @@ class Figuras
 		void deleteReps();
 		void showFig(Figura* f);
 		void showFigs();
+		void redoColorFig(Figura* f);
+		void redoColorFigs();
 };
 
 #endif // FIGURAS_H

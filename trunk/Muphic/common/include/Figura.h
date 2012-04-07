@@ -54,7 +54,12 @@ class Figura
 		Color getRGB();
 		int getNumVertices();
 		int getId();
+
 		Figura* getParent();
+		Figura* getFirstSon();
+		Figura* getNextSibling();
+		Figura* getPrevSibling();
+
 		int getArea();
 		float getVistosidad();
 		float getColorDifference();
@@ -78,6 +83,8 @@ class Figura
 		list<Vertice*> listaVertices;
 		int id;
 		Figura* padre;
+		Figura* nextSibling;
+		Figura* prevSibling;
 		int area;
 		list<Figura*> hijos;
 

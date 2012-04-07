@@ -422,6 +422,33 @@ Figura* Figuras::createFigure()
 	return f;
 }
 
+void Figuras::renameStructure(list<Figura*> padres, Figura* padre)
+{
+	list<Figura*>::iterator it = padres.begin();
+	list<Figura*>::iterator jt;
+	for (it; it != padres.end(); it++)
+	{
+		jt = it; jt++;
+
+		(*it)->padre = padre;
+
+		if (jt != padres.end())
+			(*it)->nextSibling = *jt;
+		else
+			(*it)->nextSibling = NULL;
+
+		jt = it;
+		if (jt == padres.begin())
+			(*it)->prevSibling = NULL;
+		else
+		{
+			jt--;
+			(*it)->prevSibling = *jt;
+		}
+
+		renameStructure((*it)->hijos, *it);
+	}
+}
 
 void Figuras::showParentSonStructure(list<Figura*> padres, int level)
 {
@@ -431,7 +458,7 @@ void Figuras::showParentSonStructure(list<Figura*> padres, int level)
 		{
 			cout << "  ";
 		}
-		cout << (*it)->sizeVertices() << " " << (*it)->getColor() << endl;
+		cout << (*it)->sizeVertices() << endl;
 		showParentSonStructure((*it)->hijos, level + 1);
 	}
 }
@@ -509,7 +536,7 @@ void Figuras::setParentSonStructure()
 		addToParentSonStructure((*it), figPadres);
 	}
 
-
+	renameStructure(figPadres, NULL);
 	showParentSonStructure(figPadres, 0);
 }
 
@@ -671,8 +698,8 @@ bool Figuras::fcAreSimilar(Figura* a, Figura* b, double eps)
 	if (dblue < 0) dblue = -dblue; 
 
 	double colorcheck = dred + dgreen + dblue;
-		
-	return (sum < eps);// && (colorcheck < 30);
+
+	return (sum < eps);// && (colorcheck < 20);
 }
 
 void Figuras::showFig(Figura* f)
@@ -765,4 +792,55 @@ void Figuras::deleteReps()
 		dt++;
 	}
 
+}
+
+void Figuras::redoColorFig(Figura* f)
+{
+	if (f->hijos.size() > 0)
+	{
+		double racum = 0;
+		double gacum = 0;
+		double bacum = 0;
+		double p;
+		double rarea = f->area;
+		for (list<Figura*>::iterator it = f->hijos.begin(); it != f->hijos.end(); it++)
+		{
+			rarea -= (*it)->area;
+			// prop. area
+			p = (*it)->area / (double) f->area;
+			racum += p*(*it)->rgb.r;
+			gacum += p*(*it)->rgb.g;
+			bacum += p*(*it)->rgb.b;
+		}
+
+		double rfinal = (double) f->rgb.r - racum;
+		double gfinal = (double) f->rgb.g - gacum;
+		double bfinal = (double) f->rgb.b - bacum;
+
+		f->rgb.r = rfinal * f->area / (double) rarea;
+		f->rgb.g = gfinal * f->area / (double) rarea;
+		f->rgb.b = bfinal * f->area / (double) rarea;
+	}
+}
+
+void Figuras::redoColorFigs()
+{
+	Figura* currentson = *(figPadres.begin());
+	while (currentson->getFirstSon() != 0) currentson = currentson->getFirstSon();
+
+	while (currentson != NULL)
+	{
+		// do shit
+		
+		redoColorFig(currentson);
+
+		if (currentson->getNextSibling())
+		{
+			currentson = currentson->getNextSibling();
+			// down till the end
+			while (currentson->getFirstSon() != 0) currentson = currentson->getFirstSon();				
+		}
+		else
+			currentson = currentson->getParent();
+	}
 }
