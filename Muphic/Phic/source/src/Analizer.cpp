@@ -63,16 +63,6 @@ void Analizer::analizePerRegions(IplImage* imagesrc, int levels, IplImage** &ima
 		for (int j = 0; j < levels; j++)
 			for (int k = 0; k < levels; k++)
 			{		
-				if (debug)
-				{/*
-					sprintf(titler, "r = (%d,%d)", (int) delta*i, (int) delta*(i+1));
-					sprintf(titleg, "g = (%d,%d)", (int) delta*j, (int) delta*(j+1));
-					sprintf(titleb, "b = (%d,%d)", (int) delta*k, (int) delta*(k+1));
-					cvPutText (regionCube[i][j][k],titler,cvPoint(5,10), &font, cvScalar(255,255,0));
-					cvPutText (regionCube[i][j][k],titleg,cvPoint(5,10 + 10), &font, cvScalar(255,255,0));
-					cvPutText (regionCube[i][j][k],titleb,cvPoint(5,10 + 20), &font, cvScalar(255,255,0));*/
-				}
-
 				cvShowImage("regions", regionCube[i][j][k]);
 
 				if (debug)
@@ -121,7 +111,7 @@ IplImage* Analizer::analizeByFilter(IplImage* imagesrc, int filter, int threshol
 // c is de contour of the figure
 // inv determines if we consider the inside or the outside of the figure
 // all determines if we consider the current contour (false) or all of the remaining (true)
-void Analizer::setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImage* maskAcum, bool inv, bool all)
+void Analizer::setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImage* maskAcum, IplImage* maskHoles, bool inv, bool all)
 {
 	IplImage* mask = cvCreateImage( cvGetSize( g_image ), 8, 1 );
 	cvZero( mask );
@@ -134,16 +124,24 @@ void Analizer::setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImag
 	if (c == NULL)
 		mask = maskAcum;
 	else
-		cvDrawContours( mask, c, CV_RGB(250,250,250), CV_RGB(250,250,250), howMany, CV_FILLED, 8 );
+	{
+		cvDrawContours( mask, c, CV_RGB(250,0,250), CV_RGB(0,0,0), 0, -1, 8 );
 
-	IplImage* mask1 = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+		if (maskHoles != NULL)
+		{
+			IplImage* tmp1 = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+			IplImage* tmp2 = cvCreateImage( cvGetSize( g_image ), 8, 1 );
+			cvSub(mask, maskHoles, mask);	
+
+		}
+	}
 
 	// show image (inv if asked)
 	if (inv)
 	{
-		cvNot( mask, mask1 );
+		cvNot( mask, mask );
 		if (debug)
-			cvShowImage( "Contours", mask1 );
+			cvShowImage( "Contours", mask );
 
 	}
 	else
@@ -155,7 +153,7 @@ void Analizer::setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImag
 	if (debug)
 		cvWaitKey();
 
-	CvScalar s;
+	CvScalar s, stmp;
 	cv::Vec3b test;
 	int r, g, b, num;
 
@@ -169,6 +167,7 @@ void Analizer::setColorFromImage(Figura* f, IplImage* g_image, CvSeq* c, IplImag
 
 			if ((s.val[0] == 0) != inv)
 				continue;
+			
 
 			s = cvGet2D(g_image, i, j);
 
@@ -189,8 +188,125 @@ void Analizer::addFiguresfromPics(IplImage* img, IplImage* *mask, int nmasks, Fi
 {
 	for (int i = 0; i < nmasks; i++)
 	{
-		addFiguresfromPic(img, mask[i], figuras, polSimp, noise);
+		addFiguresfromPicv2(img, mask[i], figuras, polSimp, noise);
 	}
+}
+
+
+void Analizer::addFiguresfromPicv2(IplImage* img, IplImage* mask, Figuras* figuras, int polSimp, int noise)
+{
+	// useful data
+	CvSeq* contours = NULL;
+	CvMemStorage* g_storage = cvCreateMemStorage(0);
+	IplImage* g_contours = cvCreateImage( cvGetSize(img), 8, 3 );
+	IplImage* previousshapes = cvCreateImage( cvGetSize( img ), 8, 1 );
+	IplImage* curcontour = cvCreateImage( cvGetSize( img ), 8, 1 );
+	//cvSet(previousshapes, cvScalar(0));
+	cvZero(previousshapes);
+	cvZero(curcontour);
+	CvScalar red = CV_RGB(250,0,0);
+	CvScalar blue = CV_RGB(0,250,250);
+
+	// look for image contours
+	cvFindContours( mask, g_storage, &contours, sizeof(CvContour), CV_RETR_TREE);
+
+	if( contours )
+	{
+		//convert the pixel contours to line segments in a polygon.
+		CvSeq* first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, polSimp, 1);
+
+		CvSeq* cAux = contours;
+		double area;
+
+
+		// iterate contours and create a figure for each one
+		FigureImg* f;
+		int currentmaxsize = MAX_SIZE;
+		Vertice* staticfigure = new Vertice[currentmaxsize];//  static aux Figure
+		int nstaticfigure;
+		int id = 0;
+
+		CvSeq* currentson;
+
+		currentson = first_polygon;
+		// down till the end
+		while (currentson->v_next) currentson = currentson->v_next;
+
+		while (currentson != NULL)
+		{
+			// iterate and duh
+			nstaticfigure = 0;
+			cvZero( g_contours );
+			cvDrawContours(
+				g_contours,
+				currentson,
+				red,			// Red
+				blue,			// Blue
+				3,				// Vary max_level and compare results
+				0,//CV_FILLED,//1,
+				8 );
+
+
+			if (debug)
+			{
+				printf( "New Contour with %d elements:\n", currentson->total );
+			}
+
+			// Calculamos el area de cada poligono
+			area = cvContourArea(currentson);
+			if (debug)
+				printf("Area: %f\n", area);
+				
+			//
+			double areapropr = area * 100 / (figuras->getWidth() * figuras->getHeight());
+				
+			if(cAux!=NULL) //Cogemos el siguiente para la siguiente vuelta (es como un do-while)
+				cAux = cAux->h_next;
+			
+
+			// We set an area filter to skip noise figures
+			if (!((currentson->total < 3) || (areapropr < noise)))
+			{				
+				f = new FigureImg();
+				for( int i=0; i< currentson->total; ++i )
+				{
+					CvPoint* p = CV_GET_SEQ_ELEM( CvPoint, currentson, i );
+
+					if (debug)
+						printf(" (%d,%d)\n", p->x, img->height - p->y );
+
+					f->colocarVertice(new Vertice(p->x, img->height - p->y, false));
+				}
+
+				f->setArea(area);
+				f->setId(lastID++);
+
+				// set color
+
+				setColorFromImage(f, img, currentson, NULL, NULL, false, false);
+
+				if (debug)
+				{
+					cvShowImage( "Contours", g_contours);
+					cvWaitKey();
+				}
+				
+				// add the figure to figure list
+				figuras->colocarFig(f);
+			}
+
+			
+			if (currentson->h_next)
+			{
+				currentson = currentson->h_next;
+				// down till the end
+				while (currentson->v_next) currentson = currentson->v_next;
+			}
+			else
+				currentson = currentson->v_prev;
+		}
+	}
+
 }
 
 void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras, int polSimp, int noise)
@@ -205,8 +321,6 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 	// look for image contours
 	cvFindContours( mask, g_storage, &contours, sizeof(CvContour), CV_RETR_LIST);
 
-
-	
 
 	if( contours )
 	{
@@ -233,8 +347,8 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 				c,
 				red,			// Red
 				blue,			// Blue
-				1,				// Vary max_level and compare results
-				CV_FILLED,//1,
+				-1,				// Vary max_level and compare results
+				1,//CV_FILLED,//1,
 				8 );
 
 			if (debug)
@@ -288,7 +402,7 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 			else
 			{
 				if (debug)
-					cvWaitKey();
+					;//cvWaitKey();
 			}
 
 			f = new FigureImg();
@@ -300,18 +414,20 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 			f->setId(lastID++);
 
 			// set color
-			setColorFromImage(f, img, c, NULL, false, false);
+
+			setColorFromImage(f, img, c, NULL, NULL, false, false);
 
 			if (debug)
+			{
 				cvShowImage( "Contours", g_contours);
-			
+				cvWaitKey();
+			}
+
 			// add the figure to figure list
 			figuras->colocarFig(f);
 
 			n++;
 		}
 	}
-	if (debug)
-		cvShowImage( "Contours", g_contours );
 
 }
