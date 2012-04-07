@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'guimupic.h'
 **
-** Created: Wed Feb 29 02:19:10 2012
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
+** Created: Sat Apr 7 09:20:40 2012
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'guimupic.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.6.2. It"
+#error "This file was generated using the moc from 4.7.4. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -20,10 +20,10 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_GuiMupic[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -41,6 +41,11 @@ static const uint qt_meta_data_GuiMupic[] = {
      262,  253,    9,    9, 0x08,
      301,  253,    9,    9, 0x08,
      340,  253,    9,    9, 0x08,
+     397,  379,    9,    9, 0x08,
+     444,  439,    9,    9, 0x08,
+     457,    9,    9,    9, 0x08,
+     472,    9,    9,    9, 0x08,
+     502,  253,    9,    9, 0x08,
 
        0        // eod
 };
@@ -56,6 +61,11 @@ static const char qt_meta_stringdata_GuiMupic[] = {
     "position\0on_horizontalSlider_2_sliderMoved(int)\0"
     "on_horizontalSlider_3_sliderMoved(int)\0"
     "on_horizontalSlider_6_sliderMoved(int)\0"
+    "newState,oldState\0"
+    "stateChanged(Phonon::State,Phonon::State)\0"
+    "time\0tick(qint64)\0setupActions()\0"
+    "on_pushButton_pause_clicked()\0"
+    "on_horizontalSlider_Seek_sliderMoved(int)\0"
 };
 
 const QMetaObject GuiMupic::staticMetaObject = {
@@ -97,9 +107,14 @@ int GuiMupic::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 7: on_horizontalSlider_2_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: on_horizontalSlider_3_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 9: on_horizontalSlider_6_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: stateChanged((*reinterpret_cast< Phonon::State(*)>(_a[1])),(*reinterpret_cast< Phonon::State(*)>(_a[2]))); break;
+        case 11: tick((*reinterpret_cast< qint64(*)>(_a[1]))); break;
+        case 12: setupActions(); break;
+        case 13: on_pushButton_pause_clicked(); break;
+        case 14: on_horizontalSlider_Seek_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 10;
+        _id -= 15;
     }
     return _id;
 }

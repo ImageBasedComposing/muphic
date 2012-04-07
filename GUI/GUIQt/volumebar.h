@@ -1,7 +1,8 @@
 #ifndef VOULMEBAR_H
 #define VOULMEBAR_H
 
-#include <Phonon/volumeslider.h>
+#include <phonon/volumeslider.h>
+//#include <Phonon/volumeslider.h>
 #include <QWidget>
 
 class VolumeBar : public Phonon::VolumeSlider

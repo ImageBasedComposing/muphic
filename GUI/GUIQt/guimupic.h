@@ -23,7 +23,14 @@
 #include <phonon/mediaobject.h>
 #include <phonon/volumeslider.h>
 #include <phonon/backendcapabilities.h>
-#include <phonon/MediaSource.h>
+#include <phonon/mediasource.h>
+
+//#include <phonon/audiooutput.h>
+//#include <phonon/seekslider.h>
+//#include <phonon/mediaobject.h>
+//#include <phonon/volumeslider.h>
+//#include <phonon/backendcapabilities.h>
+//#include <phonon/MediaSource.h>
 
 #define DEFAULT_PIC "./test1.png"
 

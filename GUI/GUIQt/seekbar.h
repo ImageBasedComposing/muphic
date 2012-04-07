@@ -1,7 +1,8 @@
 #ifndef SEEKBAR_H
 #define SEEKBAR_H
 
-#include <Phonon/SeekSlider.h>
+#include <phonon/seekslider.h>
+//#include <Phonon/SeekSlider.h>
 #include <QWidget>
 
 class SeekBar : public Phonon::SeekSlider
