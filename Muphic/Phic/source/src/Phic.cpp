@@ -46,12 +46,6 @@ int main(int argc, char* argv[])
 	phic->usrConf = new UsrConf();
 	phic->usrConf->readPhic(argv[1]);
 
-	//if (phic->usrConf->getPhicFilterSelect() != 2)
-	//{
-	//	//phic->test();
-	//}
-	//else
-	//{
 	Analizer* analizer = new Analizer();
 	analizer->debug = phic->usrConf->getPhicDebug();
 
@@ -60,12 +54,25 @@ int main(int argc, char* argv[])
 	figuras->setWidth(imagesrc->width);
 	figuras->setHeight(imagesrc->height);
 	
+	int nas;
+	IplImage** test;
 
 	if (phic->usrConf->getPhicFilterSelect() == 1) 
 	{
 		IplImage* *images;
 		int n = 0;
 
+		analizer->analizePerRegions(imagesrc, 3, images, n);
+
+		analizer->addFiguresfromPics(imagesrc, images, n, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
+	}
+	else if (phic->usrConf->getPhicFilterSelect() == 0) 
+	{
+		IplImage* *images;
+		int n = 0;
+		int thresholdH = 35, thresholdS = 20, thresholdV = 50;
+
+		analizer-> analizeHSV(imagesrc, images,n, thresholdH, thresholdS, thresholdV);
 		analizer->analizePerRegions(imagesrc, 3, images, n);
 
 		analizer->addFiguresfromPics(imagesrc, images, n, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());

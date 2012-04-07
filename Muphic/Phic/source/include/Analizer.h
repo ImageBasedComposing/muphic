@@ -24,7 +24,7 @@ class Analizer
 		Analizer();
 		~Analizer();
 
-
+		void analizeHSV(IplImage* imagesrc, IplImage** &images, int & nimages, int thresholdH, int thresholdS, int thresholdV);
 		IplImage* analizeByFilter(IplImage* imagesrc, int filter, int threshold = -1);
 		void analizePerRegions(IplImage* imagesrc, int levels, IplImage** &images, int& nimages);
 
