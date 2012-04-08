@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Sun 8. Apr 20:00:58 2012
+** Created: Mon 9. Apr 01:53:05 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -313,7 +313,7 @@ public:
         horizontalSlider_3->setMaximum(100);
         horizontalSlider_3->setSingleStep(1);
         horizontalSlider_3->setPageStep(10);
-        horizontalSlider_3->setValue(1);
+        horizontalSlider_3->setValue(0);
         horizontalSlider_3->setOrientation(Qt::Horizontal);
         horizontalSlider_3->setTickPosition(QSlider::TicksBelow);
         horizontalSlider_3->setTickInterval(10);
@@ -773,7 +773,7 @@ public:
          << QApplication::translate("GuiMupic", "Multiple Threshold", 0, QApplication::UnicodeUTF8)
         );
         label_4->setText(QApplication::translate("GuiMupic", "Noise Selection", 0, QApplication::UnicodeUTF8));
-        noiseLabel->setText(QApplication::translate("GuiMupic", "1", 0, QApplication::UnicodeUTF8));
+        noiseLabel->setText(QApplication::translate("GuiMupic", "0.0", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("GuiMupic", "Polygon Simplification", 0, QApplication::UnicodeUTF8));
         labelPolSimp->setText(QApplication::translate("GuiMupic", "2", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("GuiMupic", "Threshold", 0, QApplication::UnicodeUTF8));
