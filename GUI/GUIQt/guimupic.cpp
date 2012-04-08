@@ -531,14 +531,14 @@ void GuiMupic::on_horizontalSliderTH_sliderMoved(int position)
 
 void GuiMupic::on_horizontalSliderTS_sliderMoved(int position)
 {
-    usrConf->setPhicColorLevels(position);
+    usrConf->setPhicThresholdS(position);
     char a[10];
     ui->labelThresholdS->setText(our_itoa(position,a,10));
 }
 
 void GuiMupic::on_horizontalSliderTV_sliderMoved(int position)
 {
-    usrConf->setPhicColorLevels(position);
+    usrConf->setPhicThresholdV(position);
     char a[10];
     ui->labelThresholdV->setText(our_itoa(position,a,10));
 }
