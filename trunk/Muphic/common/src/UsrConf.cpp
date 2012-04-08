@@ -175,17 +175,17 @@ void UsrConf::write(std::string path)
 
         //Node for Threshold H setting
         TiXmlElement * phicThresholdHNode = new TiXmlElement( "thresholdH" );
-        phicThresholdHNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdSelec,a,10)));
+        phicThresholdHNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdH,a,10)));
         phicNode->LinkEndChild(phicThresholdHNode);
 
         //Node for Threshold S setting
         TiXmlElement * phicThresholdSNode = new TiXmlElement( "thresholdS" );
-        phicThresholdSNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdSelec,a,10)));
+        phicThresholdSNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdS,a,10)));
         phicNode->LinkEndChild(phicThresholdSNode);
 
         //Node for Threshold V setting
         TiXmlElement * phicThresholdVNode = new TiXmlElement( "thresholdV" );
-        phicThresholdVNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdSelec,a,10)));
+        phicThresholdVNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdV,a,10)));
         phicNode->LinkEndChild(phicThresholdVNode);
 	}
 
