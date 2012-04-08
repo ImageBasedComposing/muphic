@@ -501,11 +501,43 @@ void GuiMupic::on_horizontalSlider_2_sliderMoved(int position)
     ui->tLabel->setText(our_itoa(position,a,10));
 }
 
+
+// NOISE MINDFUCK!
 void GuiMupic::on_horizontalSlider_3_sliderMoved(int position)
 {
-    usrConf->setPhicNoiseSelec(position);
+    double poslog = 0;
+    if (position != 0)
+    {
+        int L0, Lf, l0, lf;
+
+        if (position <= 25)
+        {
+            L0 = 0; Lf = 25;
+            l0 = 0; lf = 1;
+        }
+        else if (position <= 50)
+        {
+            L0 = 25; Lf = 50;
+            l0 = 1; lf = 10;
+        }
+
+        else if (position <= 75)
+        {
+            L0 = 50; Lf = 75;
+            l0 = 10; lf = 50;
+        }
+        else
+        {
+            L0 = 75; Lf = 100;
+            l0 = 50; lf = 100;
+        }
+
+        poslog = (position - L0)*((lf - l0)/(double) (Lf - L0)) + l0;
+    }
+    usrConf->setPhicNoiseSelec(poslog);
     char a[10];
-    ui->noiseLabel->setText(our_itoa(position,a,10));
+    sprintf(a, "%3.1f",poslog);
+    ui->noiseLabel->setText(a);//our_itoa(poslog,a,10));
 }
 
 void GuiMupic::on_horizontalSlider_6_sliderMoved(int position)
