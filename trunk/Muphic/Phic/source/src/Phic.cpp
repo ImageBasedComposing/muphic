@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 	int nas;
 	IplImage** test;
 
-	if (phic->usrConf->getPhicFilterSelect() == 1) 
+	if (phic->usrConf->getPhicFilterSelect() == 3) 
 	{
 		IplImage* *images;
 		int n = 0;
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
 		analizer->addFiguresfromPics(imagesrc, images, n, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
 	}
-	else if (phic->usrConf->getPhicFilterSelect() == 0) 
+	else if (phic->usrConf->getPhicFilterSelect() == 4) 
 	{
 		IplImage* *images;
 		int n = 0;
