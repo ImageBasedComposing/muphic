@@ -115,9 +115,6 @@ IplImage* Analizer::analizeByFilter(IplImage* imagesrc, int filter, int threshol
 	CvMemStorage* g_storage = cvCreateMemStorage(0);
 	cvCvtColor( imagesrc, mask, CV_BGR2GRAY );
 
-		cvShowImage( "Contours", mask );
-		cvWaitKey();
-
 	// We choose the filter we will be using
 	switch(filter)
 	{
@@ -437,11 +434,6 @@ void Analizer::addFiguresfromPic(IplImage* img, IplImage* mask, Figuras* figuras
 			{				
 				n++;
 				continue;
-			}
-			else
-			{
-				if (debug)
-					;//cvWaitKey();
 			}
 
 			f = new FigureImg();

@@ -70,10 +70,8 @@ int main(int argc, char* argv[])
 	{
 		IplImage* *images;
 		int n = 0;
-		int thresholdH = 35, thresholdS = 20, thresholdV = 50;
 
-		analizer-> analizeHSV(imagesrc, images,n, thresholdH, thresholdS, thresholdV);
-		analizer->analizePerRegions(imagesrc, 3, images, n);
+		analizer-> analizeHSV(imagesrc, images,n, phic->usrConf->getPhicThresholdH(), phic->usrConf->getPhicThresholdS(), phic->usrConf->getPhicThresholdV());
 
 		analizer->addFiguresfromPics(imagesrc, images, n, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
 	}

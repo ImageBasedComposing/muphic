@@ -766,11 +766,11 @@ void Figuras::deleteReps()
 			// eps is aprox% of max area
 			area1 = (*it)->area;
 			area2 = (*jt)->area;
-			showFig(*it);
-			showFig(*jt);
+			//showFig(*it);
+			//showFig(*jt);
 			eps = aprox * max((*it)->area, (*jt)->area) / 100;
 
-			if (fcAreSimilar(*it, *jt, eps))
+			if (fcAreSimilar(*it, *jt, 2*eps))
 			{
 				if (lcAreSimilar(*it, *jt, eps))
 				{
@@ -825,22 +825,25 @@ void Figuras::redoColorFig(Figura* f)
 
 void Figuras::redoColorFigs()
 {
-	Figura* currentson = *(figPadres.begin());
-	while (currentson->getFirstSon() != 0) currentson = currentson->getFirstSon();
-
-	while (currentson != NULL)
+	if (figPadres.size() > 0)
 	{
-		// do shit
-		
-		redoColorFig(currentson);
+		Figura* currentson = *(figPadres.begin());
+		while (currentson->getFirstSon() != 0) currentson = currentson->getFirstSon();
 
-		if (currentson->getNextSibling())
+		while (currentson != NULL)
 		{
-			currentson = currentson->getNextSibling();
-			// down till the end
-			while (currentson->getFirstSon() != 0) currentson = currentson->getFirstSon();				
+			// do shit
+		
+			redoColorFig(currentson);
+
+			if (currentson->getNextSibling())
+			{
+				currentson = currentson->getNextSibling();
+				// down till the end
+				while (currentson->getFirstSon() != 0) currentson = currentson->getFirstSon();				
+			}
+			else
+				currentson = currentson->getParent();
 		}
-		else
-			currentson = currentson->getParent();
 	}
 }
