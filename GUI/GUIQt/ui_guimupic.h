@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Sat Apr 7 09:19:42 2012
+** Created: Sun 8. Apr 20:00:58 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -78,12 +78,26 @@ public:
     QLabel *label_3;
     QSlider *horizontalSlider_6;
     QLabel *labelPolSimp;
-    QSpacerItem *horizontalSpacer_4;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_2;
     QSlider *horizontalSlider_2;
     QLabel *tLabel;
-    QSpacerItem *horizontalSpacer_6;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_ThresholdH;
+    QSlider *horizontalSliderTH;
+    QLabel *labelThresholdH;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_ThresholdS;
+    QSlider *horizontalSliderTS;
+    QLabel *labelThresholdS;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_ThresholdV;
+    QSlider *horizontalSliderTV;
+    QLabel *labelThresholdV;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_ColorLevels;
+    QSlider *horizontalSlider_colorLevels;
+    QLabel *labelColorLevels;
     QGroupBox *groupBox_3;
     QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout_3;
@@ -101,7 +115,6 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QLabel *labelOutput;
     QComboBox *comboBox_3;
-    QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_2;
     QSpacerItem *horizontalSpacer_3;
     QVBoxLayout *verticalLayout;
@@ -124,12 +137,12 @@ public:
     {
         if (GuiMupic->objectName().isEmpty())
             GuiMupic->setObjectName(QString::fromUtf8("GuiMupic"));
-        GuiMupic->resize(1148, 430);
+        GuiMupic->resize(1064, 516);
         centralWidget = new QWidget(GuiMupic);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 1036, 393));
+        layoutWidget->setGeometry(QRect(10, 10, 1195, 481));
         gridLayout_3 = new QGridLayout(layoutWidget);
         gridLayout_3->setSpacing(6);
         gridLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -225,7 +238,7 @@ public:
         scrollArea->setWidgetResizable(true);
         polyWidget = new PolygonWidget();
         polyWidget->setObjectName(QString::fromUtf8("polyWidget"));
-        polyWidget->setGeometry(QRect(0, 0, 217, 217));
+        polyWidget->setGeometry(QRect(0, 0, 323, 303));
         QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -256,11 +269,12 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
         groupBox_2->setSizePolicy(sizePolicy2);
-        groupBox_2->setMinimumSize(QSize(441, 128));
-        groupBox_2->setMaximumSize(QSize(441, 128));
+        groupBox_2->setMinimumSize(QSize(441, 240));
+        groupBox_2->setMaximumSize(QSize(441, 16777215));
+        groupBox_2->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         layoutWidget1 = new QWidget(groupBox_2);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(11, 24, 412, 92));
+        layoutWidget1->setGeometry(QRect(10, 20, 412, 220));
         verticalLayout_4 = new QVBoxLayout(layoutWidget1);
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -355,10 +369,6 @@ public:
 
         horizontalLayout_7->addWidget(labelPolSimp);
 
-        horizontalSpacer_4 = new QSpacerItem(5, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
-
-        horizontalLayout_7->addItem(horizontalSpacer_4);
-
 
         verticalLayout_4->addLayout(horizontalLayout_7);
 
@@ -393,22 +403,146 @@ public:
 
         horizontalLayout_8->addWidget(tLabel);
 
-        horizontalSpacer_6 = new QSpacerItem(5, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
-
-        horizontalLayout_8->addItem(horizontalSpacer_6);
-
 
         verticalLayout_4->addLayout(horizontalLayout_8);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        label_ThresholdH = new QLabel(layoutWidget1);
+        label_ThresholdH->setObjectName(QString::fromUtf8("label_ThresholdH"));
+
+        horizontalLayout_9->addWidget(label_ThresholdH);
+
+        horizontalSliderTH = new QSlider(layoutWidget1);
+        horizontalSliderTH->setObjectName(QString::fromUtf8("horizontalSliderTH"));
+        horizontalSliderTH->setEnabled(true);
+        horizontalSliderTH->setMaximum(200);
+        horizontalSliderTH->setValue(35);
+        horizontalSliderTH->setOrientation(Qt::Horizontal);
+        horizontalSliderTH->setTickPosition(QSlider::TicksBelow);
+        horizontalSliderTH->setTickInterval(10);
+
+        horizontalLayout_9->addWidget(horizontalSliderTH);
+
+        labelThresholdH = new QLabel(layoutWidget1);
+        labelThresholdH->setObjectName(QString::fromUtf8("labelThresholdH"));
+        sizePolicy4.setHeightForWidth(labelThresholdH->sizePolicy().hasHeightForWidth());
+        labelThresholdH->setSizePolicy(sizePolicy4);
+        labelThresholdH->setMinimumSize(QSize(30, 0));
+        labelThresholdH->setFrameShape(QFrame::StyledPanel);
+        labelThresholdH->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_9->addWidget(labelThresholdH);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_9);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        label_ThresholdS = new QLabel(layoutWidget1);
+        label_ThresholdS->setObjectName(QString::fromUtf8("label_ThresholdS"));
+
+        horizontalLayout_10->addWidget(label_ThresholdS);
+
+        horizontalSliderTS = new QSlider(layoutWidget1);
+        horizontalSliderTS->setObjectName(QString::fromUtf8("horizontalSliderTS"));
+        horizontalSliderTS->setEnabled(true);
+        horizontalSliderTS->setMaximum(200);
+        horizontalSliderTS->setValue(20);
+        horizontalSliderTS->setOrientation(Qt::Horizontal);
+        horizontalSliderTS->setTickPosition(QSlider::TicksBelow);
+        horizontalSliderTS->setTickInterval(10);
+
+        horizontalLayout_10->addWidget(horizontalSliderTS);
+
+        labelThresholdS = new QLabel(layoutWidget1);
+        labelThresholdS->setObjectName(QString::fromUtf8("labelThresholdS"));
+        sizePolicy4.setHeightForWidth(labelThresholdS->sizePolicy().hasHeightForWidth());
+        labelThresholdS->setSizePolicy(sizePolicy4);
+        labelThresholdS->setMinimumSize(QSize(30, 0));
+        labelThresholdS->setFrameShape(QFrame::StyledPanel);
+        labelThresholdS->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_10->addWidget(labelThresholdS);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_10);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        label_ThresholdV = new QLabel(layoutWidget1);
+        label_ThresholdV->setObjectName(QString::fromUtf8("label_ThresholdV"));
+
+        horizontalLayout_11->addWidget(label_ThresholdV);
+
+        horizontalSliderTV = new QSlider(layoutWidget1);
+        horizontalSliderTV->setObjectName(QString::fromUtf8("horizontalSliderTV"));
+        horizontalSliderTV->setEnabled(true);
+        horizontalSliderTV->setMaximum(200);
+        horizontalSliderTV->setValue(50);
+        horizontalSliderTV->setOrientation(Qt::Horizontal);
+        horizontalSliderTV->setTickPosition(QSlider::TicksBelow);
+        horizontalSliderTV->setTickInterval(10);
+
+        horizontalLayout_11->addWidget(horizontalSliderTV);
+
+        labelThresholdV = new QLabel(layoutWidget1);
+        labelThresholdV->setObjectName(QString::fromUtf8("labelThresholdV"));
+        sizePolicy4.setHeightForWidth(labelThresholdV->sizePolicy().hasHeightForWidth());
+        labelThresholdV->setSizePolicy(sizePolicy4);
+        labelThresholdV->setMinimumSize(QSize(30, 0));
+        labelThresholdV->setFrameShape(QFrame::StyledPanel);
+        labelThresholdV->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_11->addWidget(labelThresholdV);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_11);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        label_ColorLevels = new QLabel(layoutWidget1);
+        label_ColorLevels->setObjectName(QString::fromUtf8("label_ColorLevels"));
+
+        horizontalLayout->addWidget(label_ColorLevels);
+
+        horizontalSlider_colorLevels = new QSlider(layoutWidget1);
+        horizontalSlider_colorLevels->setObjectName(QString::fromUtf8("horizontalSlider_colorLevels"));
+        horizontalSlider_colorLevels->setMinimum(1);
+        horizontalSlider_colorLevels->setMaximum(10);
+        horizontalSlider_colorLevels->setValue(3);
+        horizontalSlider_colorLevels->setOrientation(Qt::Horizontal);
+        horizontalSlider_colorLevels->setTickPosition(QSlider::TicksBelow);
+        horizontalSlider_colorLevels->setTickInterval(1);
+
+        horizontalLayout->addWidget(horizontalSlider_colorLevels);
+
+        labelColorLevels = new QLabel(layoutWidget1);
+        labelColorLevels->setObjectName(QString::fromUtf8("labelColorLevels"));
+        sizePolicy4.setHeightForWidth(labelColorLevels->sizePolicy().hasHeightForWidth());
+        labelColorLevels->setSizePolicy(sizePolicy4);
+        labelColorLevels->setMinimumSize(QSize(30, 0));
+        labelColorLevels->setFrameShape(QFrame::StyledPanel);
+        labelColorLevels->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout->addWidget(labelColorLevels);
+
+
+        verticalLayout_4->addLayout(horizontalLayout);
 
 
         verticalLayout_5->addWidget(groupBox_2);
 
         groupBox_3 = new QGroupBox(layoutWidget);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        sizePolicy.setHeightForWidth(groupBox_3->sizePolicy().hasHeightForWidth());
-        groupBox_3->setSizePolicy(sizePolicy);
+        sizePolicy2.setHeightForWidth(groupBox_3->sizePolicy().hasHeightForWidth());
+        groupBox_3->setSizePolicy(sizePolicy2);
         groupBox_3->setMinimumSize(QSize(441, 128));
-        groupBox_3->setMaximumSize(QSize(441, 128));
+        groupBox_3->setMaximumSize(QSize(441, 16777215));
         layoutWidget2 = new QWidget(groupBox_3);
         layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
         layoutWidget2->setGeometry(QRect(10, 23, 421, 80));
@@ -501,10 +635,6 @@ public:
 
 
         verticalLayout_5->addWidget(groupBox_3);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_5->addItem(verticalSpacer);
 
 
         gridLayout_3->addLayout(verticalLayout_5, 1, 2, 1, 1);
@@ -639,6 +769,8 @@ public:
          << QApplication::translate("GuiMupic", "Threshold", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("GuiMupic", "Adaptative Threshold", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("GuiMupic", "Canny", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("GuiMupic", "Hue Division", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("GuiMupic", "Multiple Threshold", 0, QApplication::UnicodeUTF8)
         );
         label_4->setText(QApplication::translate("GuiMupic", "Noise Selection", 0, QApplication::UnicodeUTF8));
         noiseLabel->setText(QApplication::translate("GuiMupic", "1", 0, QApplication::UnicodeUTF8));
@@ -646,6 +778,14 @@ public:
         labelPolSimp->setText(QApplication::translate("GuiMupic", "2", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("GuiMupic", "Threshold", 0, QApplication::UnicodeUTF8));
         tLabel->setText(QApplication::translate("GuiMupic", "50", 0, QApplication::UnicodeUTF8));
+        label_ThresholdH->setText(QApplication::translate("GuiMupic", "Threshold H", 0, QApplication::UnicodeUTF8));
+        labelThresholdH->setText(QApplication::translate("GuiMupic", "35", 0, QApplication::UnicodeUTF8));
+        label_ThresholdS->setText(QApplication::translate("GuiMupic", "Threshold S", 0, QApplication::UnicodeUTF8));
+        labelThresholdS->setText(QApplication::translate("GuiMupic", "20", 0, QApplication::UnicodeUTF8));
+        label_ThresholdV->setText(QApplication::translate("GuiMupic", "Threshold V", 0, QApplication::UnicodeUTF8));
+        labelThresholdV->setText(QApplication::translate("GuiMupic", "50", 0, QApplication::UnicodeUTF8));
+        label_ColorLevels->setText(QApplication::translate("GuiMupic", "Color levels", 0, QApplication::UnicodeUTF8));
+        labelColorLevels->setText(QApplication::translate("GuiMupic", "3", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("GuiMupic", "Mu Options", 0, QApplication::UnicodeUTF8));
         labelComposer->setText(QApplication::translate("GuiMupic", "Composer", 0, QApplication::UnicodeUTF8));
         comboBox->clear();

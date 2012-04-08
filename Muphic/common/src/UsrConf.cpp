@@ -54,6 +54,10 @@ void UsrConf::readMuphic(std::string path)
         phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
         phicNoiseSelec = atoi(phicNode->FirstChild("noise")->ToElement()->GetText());
         phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
+        phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
+        phicThresholdH = atoi(phicNode->FirstChild("thresholdH")->ToElement()->GetText());
+        phicThresholdS = atoi(phicNode->FirstChild("thresholdS")->ToElement()->GetText());
+        phicThresholdV = atoi(phicNode->FirstChild("thresholdV")->ToElement()->GetText());
     }
 
 	muNode->ToElement();
@@ -83,6 +87,10 @@ void UsrConf::readPhic(std::string path)
     phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
     phicNoiseSelec = atoi(phicNode->FirstChild("noise")->ToElement()->GetText());
     phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
+    phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
+    phicThresholdH = atoi(phicNode->FirstChild("thresholdH")->ToElement()->GetText());
+    phicThresholdS = atoi(phicNode->FirstChild("thresholdS")->ToElement()->GetText());
+    phicThresholdV = atoi(phicNode->FirstChild("thresholdV")->ToElement()->GetText());
 
 
 	// Debug
@@ -159,6 +167,26 @@ void UsrConf::write(std::string path)
         TiXmlElement * phicPolSimpNode = new TiXmlElement( "polSimp" );
         phicPolSimpNode->LinkEndChild(new TiXmlText(our_itoa(phicPolygonSimp,a,10)));
         phicNode->LinkEndChild(phicPolSimpNode);
+
+        //Node for color levels setting
+        TiXmlElement * phicColLvlNode = new TiXmlElement( "colLvl" );
+        phicColLvlNode->LinkEndChild(new TiXmlText(our_itoa(phicColorLevels,a,10)));
+        phicNode->LinkEndChild(phicColLvlNode);
+
+        //Node for Threshold H setting
+        TiXmlElement * phicThresholdHNode = new TiXmlElement( "thresholdH" );
+        phicThresholdHNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdSelec,a,10)));
+        phicNode->LinkEndChild(phicThresholdHNode);
+
+        //Node for Threshold S setting
+        TiXmlElement * phicThresholdSNode = new TiXmlElement( "thresholdS" );
+        phicThresholdSNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdSelec,a,10)));
+        phicNode->LinkEndChild(phicThresholdSNode);
+
+        //Node for Threshold V setting
+        TiXmlElement * phicThresholdVNode = new TiXmlElement( "thresholdV" );
+        phicThresholdVNode->LinkEndChild(new TiXmlText(our_itoa(phicThresholdSelec,a,10)));
+        phicNode->LinkEndChild(phicThresholdVNode);
 	}
 
     TiXmlElement * muNode = new TiXmlElement( "mu_conf" );
@@ -215,6 +243,26 @@ int UsrConf::getPhicPolygonSimp()
     return phicPolygonSimp;
 }
 
+int UsrConf::getPhicColorLevels()
+{
+    return phicColorLevels;
+}
+
+int UsrConf::getPhicThresholdH()
+{
+    return phicThresholdH;
+}
+
+int UsrConf::getPhicThresholdS()
+{
+    return phicThresholdS;
+}
+
+int UsrConf::getPhicThresholdV()
+{
+    return phicThresholdV;
+}
+
 bool UsrConf::getMuActive() 
 {
 	return muActive;
@@ -255,6 +303,26 @@ void UsrConf::setPhicPolygonSimp(int i)
 void UsrConf::setPhicNoiseSelec(int n)
 {
     phicNoiseSelec = n;
+}
+
+void UsrConf::setPhicColorLevels(int c)
+{
+    phicColorLevels = c;
+}
+
+void UsrConf::setPhicThresholdH(int t)
+{
+    phicThresholdH = t;
+}
+
+void UsrConf::setPhicThresholdS(int t)
+{
+    phicThresholdS = t;
+}
+
+void UsrConf::setPhicThresholdV(int t)
+{
+    phicThresholdV = t;
 }
 
 void UsrConf::setMuActive(bool b)
