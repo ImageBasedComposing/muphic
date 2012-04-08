@@ -25,6 +25,7 @@ void GuiMupic::initialize()
     usrConf = new UsrConf();
     usrConf->setPhicNoiseSelec(1);
     usrConf->setPhicPolygonSimp(2);
+    usrConf->setPhicColorLevels(3);
 
     newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
     ui->graphicsView_Pic->setScene(newScene);
@@ -34,9 +35,63 @@ void GuiMupic::initialize()
     ui->graphicsView_Pic->scene()->addPixmap(pixImg);
     imageFile = DEFAULT_PIC;
 
+    // We save sizes for dynamic interaction between options
+    hSlider_2_max = ui->horizontalSlider_2->maximumSize();
+    tlabel_max = ui->tLabel->maximumSize();
+    label_2_max = ui->label_2->maximumSize();
+    hSliderColorLevels_max = ui->horizontalSlider_colorLevels->maximumSize();
+    labelColorLevels_max = ui->labelColorLevels->maximumSize();
+    label_colorLevels_max = ui->label_ColorLevels->maximumSize();
+    labelThresholdH_max = ui->labelThresholdH->maximumSize();
+    label_ThresholdH_max = ui->label_ThresholdH->maximumSize();
+    hSliderThersholdH_max = ui->horizontalSliderTH->maximumSize();
+    labelThresholdS_max = ui->labelThresholdS->maximumSize();
+    label_ThresholdS_max = ui->label_ThresholdS->maximumSize();
+    hSliderThersholdS_max = ui->horizontalSliderTS->maximumSize();
+    labelThresholdV_max = ui->labelThresholdV->maximumSize();
+    label_ThresholdV_max = ui->label_ThresholdV->maximumSize();
+    hSliderThersholdV_max = ui->horizontalSliderTV->maximumSize();
+
+    //We deactivate threshold operations
     ui->horizontalSlider_2->setVisible(false);
+    ui->horizontalSlider_2->setMaximumSize(0,0);
     ui->tLabel->setVisible(false);
+    ui->tLabel->setMaximumSize(0,0);
     ui->label_2->setVisible(false);
+    ui->label_2->setMaximumSize(0,0);
+
+    //We deactivate colorLevels operations
+    ui->horizontalSlider_colorLevels->setVisible(false);
+    ui->horizontalSlider_colorLevels->setMaximumSize(0,0);
+    ui->labelColorLevels->setVisible(false);
+    ui->labelColorLevels->setMaximumSize(0,0);
+    ui->label_ColorLevels->setVisible(false);
+    ui->label_ColorLevels->setMaximumSize(0,0);
+
+    //We deactivate threshold H operations
+    ui->label_ThresholdH->setVisible(false);
+    ui->label_ThresholdH->setMaximumSize(0,0);
+    ui->labelThresholdH->setVisible(false);
+    ui->labelThresholdH->setMaximumSize(0,0);
+    ui->horizontalSliderTH->setVisible(false);
+    ui->horizontalSliderTH->setMaximumSize(0,0);
+
+    //We deactivate threshold S operations
+    ui->label_ThresholdS->setVisible(false);
+    ui->label_ThresholdS->setMaximumSize(0,0);
+    ui->labelThresholdS->setVisible(false);
+    ui->labelThresholdS->setMaximumSize(0,0);
+    ui->horizontalSliderTS->setVisible(false);
+    ui->horizontalSliderTS->setMaximumSize(0,0);
+
+    //We deactivate threshold V operations
+    ui->label_ThresholdV->setVisible(false);
+    ui->label_ThresholdV->setMaximumSize(0,0);
+    ui->labelThresholdV->setVisible(false);
+    ui->labelThresholdV->setMaximumSize(0,0);
+    ui->horizontalSliderTV->setVisible(false);
+    ui->horizontalSliderTV->setMaximumSize(0,0);
+
 
     ui->pushButton_Generate->setEnabled(false);
 
@@ -276,14 +331,166 @@ void GuiMupic::on_filterSelComboBox_currentIndexChanged(int index)
     if( index == 0 )
     {
         ui->horizontalSlider_2->setVisible(true);
+        ui->horizontalSlider_2->setMaximumSize(hSlider_2_max);
         ui->tLabel->setVisible(true);
+        ui->tLabel->setMaximumSize(tlabel_max);
         ui->label_2->setVisible(true);
+        ui->label_2->setMaximumSize(label_2_max);
+
+        //We deactivate color levels operations
+        ui->horizontalSlider_colorLevels->setVisible(false);
+        ui->horizontalSlider_colorLevels->setMaximumSize(0,0);
+        ui->labelColorLevels->setVisible(false);
+        ui->labelColorLevels->setMaximumSize(0,0);
+        ui->label_ColorLevels->setVisible(false);
+        ui->label_ColorLevels->setMaximumSize(0,0);
+
+        //We deactivate threshold H operations
+        ui->label_ThresholdH->setVisible(false);
+        ui->label_ThresholdH->setMaximumSize(0,0);
+        ui->labelThresholdH->setVisible(false);
+        ui->labelThresholdH->setMaximumSize(0,0);
+        ui->horizontalSliderTH->setVisible(false);
+        ui->horizontalSliderTH->setMaximumSize(0,0);
+
+        //We deactivate threshold S operations
+        ui->label_ThresholdS->setVisible(false);
+        ui->label_ThresholdS->setMaximumSize(0,0);
+        ui->labelThresholdS->setVisible(false);
+        ui->labelThresholdS->setMaximumSize(0,0);
+        ui->horizontalSliderTS->setVisible(false);
+        ui->horizontalSliderTS->setMaximumSize(0,0);
+
+        //We deactivate threshold V operations
+        ui->label_ThresholdV->setVisible(false);
+        ui->label_ThresholdV->setMaximumSize(0,0);
+        ui->labelThresholdV->setVisible(false);
+        ui->labelThresholdV->setMaximumSize(0,0);
+        ui->horizontalSliderTV->setVisible(false);
+        ui->horizontalSliderTV->setMaximumSize(0,0);
+    }
+    else if( index == 3 )
+    {
+        ui->horizontalSlider_2->setVisible(false);
+        ui->horizontalSlider_2->setMaximumSize(0,0);
+        ui->tLabel->setVisible(false);
+        ui->tLabel->setMaximumSize(0,0);
+        ui->label_2->setVisible(false);
+        ui->label_2->setMaximumSize(0,0);
+
+        //We activate color level operations
+        ui->horizontalSlider_colorLevels->setVisible(true);
+        ui->horizontalSlider_colorLevels->setMaximumSize(hSliderColorLevels_max);
+        ui->labelColorLevels->setVisible(true);
+        ui->labelColorLevels->setMaximumSize(labelColorLevels_max);
+        ui->label_ColorLevels->setVisible(true);
+        ui->label_ColorLevels->setMaximumSize(label_colorLevels_max);
+
+        //We deactivate threshold H operations
+        ui->label_ThresholdH->setVisible(false);
+        ui->label_ThresholdH->setMaximumSize(0,0);
+        ui->labelThresholdH->setVisible(false);
+        ui->labelThresholdH->setMaximumSize(0,0);
+        ui->horizontalSliderTH->setVisible(false);
+        ui->horizontalSliderTH->setMaximumSize(0,0);
+
+        //We deactivate threshold S operations
+        ui->label_ThresholdS->setVisible(false);
+        ui->label_ThresholdS->setMaximumSize(0,0);
+        ui->labelThresholdS->setVisible(false);
+        ui->labelThresholdS->setMaximumSize(0,0);
+        ui->horizontalSliderTS->setVisible(false);
+        ui->horizontalSliderTS->setMaximumSize(0,0);
+
+        //We deactivate threshold V operations
+        ui->label_ThresholdV->setVisible(false);
+        ui->label_ThresholdV->setMaximumSize(0,0);
+        ui->labelThresholdV->setVisible(false);
+        ui->labelThresholdV->setMaximumSize(0,0);
+        ui->horizontalSliderTV->setVisible(false);
+        ui->horizontalSliderTV->setMaximumSize(0,0);
+    }
+    else if( index == 4 )
+    {
+        ui->horizontalSlider_2->setVisible(false);
+        ui->horizontalSlider_2->setMaximumSize(0,0);
+        ui->tLabel->setVisible(false);
+        ui->tLabel->setMaximumSize(0,0);
+        ui->label_2->setVisible(false);
+        ui->label_2->setMaximumSize(0,0);
+
+        //We deactivate color level operations
+        ui->horizontalSlider_colorLevels->setVisible(false);
+        ui->horizontalSlider_colorLevels->setMaximumSize(0,0);
+        ui->labelColorLevels->setVisible(false);
+        ui->labelColorLevels->setMaximumSize(0,0);
+        ui->label_ColorLevels->setVisible(false);
+        ui->label_ColorLevels->setMaximumSize(0,0);
+
+        //We activate threshold H operations
+        ui->label_ThresholdH->setVisible(true);
+        ui->label_ThresholdH->setMaximumSize(label_ThresholdH_max);
+        ui->labelThresholdH->setVisible(true);
+        ui->labelThresholdH->setMaximumSize(labelThresholdH_max);
+        ui->horizontalSliderTH->setVisible(true);
+        ui->horizontalSliderTH->setMaximumSize(hSliderThersholdH_max);
+
+        //We activate threshold S operations
+        ui->label_ThresholdS->setVisible(true);
+        ui->label_ThresholdS->setMaximumSize(label_ThresholdS_max);
+        ui->labelThresholdS->setVisible(true);
+        ui->labelThresholdS->setMaximumSize(labelThresholdS_max);
+        ui->horizontalSliderTS->setVisible(true);
+        ui->horizontalSliderTS->setMaximumSize(hSliderThersholdS_max);
+
+        //We activate threshold V operations
+        ui->label_ThresholdV->setVisible(true);
+        ui->label_ThresholdV->setMaximumSize(label_ThresholdV_max);
+        ui->labelThresholdV->setVisible(true);
+        ui->labelThresholdV->setMaximumSize(labelThresholdV_max);
+        ui->horizontalSliderTV->setVisible(true);
+        ui->horizontalSliderTV->setMaximumSize(hSliderThersholdV_max);
     }
     else
     {
         ui->horizontalSlider_2->setVisible(false);
+        ui->horizontalSlider_2->setMaximumSize(0,0);
         ui->tLabel->setVisible(false);
+        ui->tLabel->setMaximumSize(0,0);
         ui->label_2->setVisible(false);
+        ui->label_2->setMaximumSize(0,0);
+
+        //We deactivate color level operations
+        ui->horizontalSlider_colorLevels->setVisible(false);
+        ui->horizontalSlider_colorLevels->setMaximumSize(0,0);
+        ui->labelColorLevels->setVisible(false);
+        ui->labelColorLevels->setMaximumSize(0,0);
+        ui->label_ColorLevels->setVisible(false);
+        ui->label_ColorLevels->setMaximumSize(0,0);
+
+        //We deactivate threshold H operations
+        ui->label_ThresholdH->setVisible(false);
+        ui->label_ThresholdH->setMaximumSize(0,0);
+        ui->labelThresholdH->setVisible(false);
+        ui->labelThresholdH->setMaximumSize(0,0);
+        ui->horizontalSliderTH->setVisible(false);
+        ui->horizontalSliderTH->setMaximumSize(0,0);
+
+        //We deactivate threshold S operations
+        ui->label_ThresholdS->setVisible(false);
+        ui->label_ThresholdS->setMaximumSize(0,0);
+        ui->labelThresholdS->setVisible(false);
+        ui->labelThresholdS->setMaximumSize(0,0);
+        ui->horizontalSliderTS->setVisible(false);
+        ui->horizontalSliderTS->setMaximumSize(0,0);
+
+        //We deactivate threshold V operations
+        ui->label_ThresholdV->setVisible(false);
+        ui->label_ThresholdV->setMaximumSize(0,0);
+        ui->labelThresholdV->setVisible(false);
+        ui->labelThresholdV->setMaximumSize(0,0);
+        ui->horizontalSliderTV->setVisible(false);
+        ui->horizontalSliderTV->setMaximumSize(0,0);
     }
 }
 
@@ -308,6 +515,30 @@ void GuiMupic::on_horizontalSlider_6_sliderMoved(int position)
     ui->labelPolSimp->setText(our_itoa(position,a,10));
 }
 
-void GuiMupic::on_horizontalSlider_Seek_sliderMoved(int position)
+void GuiMupic::on_horizontalSlider_colorLevels_sliderMoved(int position)
 {
+    usrConf->setPhicColorLevels(position);
+    char a[10];
+    ui->labelColorLevels->setText(our_itoa(position,a,10));
+}
+
+void GuiMupic::on_horizontalSliderTH_sliderMoved(int position)
+{
+    usrConf->setPhicThresholdH(position);
+    char a[10];
+    ui->labelThresholdH->setText(our_itoa(position,a,10));
+}
+
+void GuiMupic::on_horizontalSliderTS_sliderMoved(int position)
+{
+    usrConf->setPhicColorLevels(position);
+    char a[10];
+    ui->labelThresholdS->setText(our_itoa(position,a,10));
+}
+
+void GuiMupic::on_horizontalSliderTV_sliderMoved(int position)
+{
+    usrConf->setPhicColorLevels(position);
+    char a[10];
+    ui->labelThresholdV->setText(our_itoa(position,a,10));
 }

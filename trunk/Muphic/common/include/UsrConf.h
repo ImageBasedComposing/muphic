@@ -33,6 +33,10 @@ class UsrConf/* : public Conf*/
             int  getPhicThresholdSelec();
             int  getPhicPolygonSimp();
             int  getPhicNoiseSelec();
+            int  getPhicColorLevels();
+            int  getPhicThresholdH();
+            int  getPhicThresholdS();
+            int  getPhicThresholdV();
 			// MU
 			bool getMuActive();
 
@@ -49,6 +53,10 @@ class UsrConf/* : public Conf*/
                 void setPhicThresholdSelec(int t);
                 void setPhicPolygonSimp(int i);
                 void setPhicNoiseSelec(int n);
+                void setPhicColorLevels(int c);
+                void setPhicThresholdH(int t);
+                void setPhicThresholdS(int t);
+                void setPhicThresholdV(int t);
                 // MU
                 void setMuActive(bool b);
 
@@ -61,6 +69,10 @@ class UsrConf/* : public Conf*/
             int  phicThresholdSelec;
             int  phicPolygonSimp;
             int  phicNoiseSelec;
+            int  phicColorLevels;
+            int  phicThresholdH;
+            int  phicThresholdS;
+            int  phicThresholdV;
 			// MU
 			bool muActive;
             bool muDebug;

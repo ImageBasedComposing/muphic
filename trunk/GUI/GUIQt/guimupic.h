@@ -17,6 +17,7 @@
 #include <QGraphicsScene>
 #include <QPixmap>
 #include <QTime>
+#include <QSize>
 
 #include <phonon/audiooutput.h>
 #include <phonon/seekslider.h>
@@ -64,6 +65,8 @@ private slots:
 
     void on_horizontalSlider_6_sliderMoved(int position);
 
+    void on_horizontalSlider_colorLevels_sliderMoved(int position);
+
     void stateChanged(Phonon::State newState, Phonon::State oldState);
 
     void tick(qint64 time);
@@ -72,7 +75,11 @@ private slots:
 
     void on_pushButton_pause_clicked();
 
-    void on_horizontalSlider_Seek_sliderMoved(int position);
+    void on_horizontalSliderTS_sliderMoved(int position);
+
+    void on_horizontalSliderTH_sliderMoved(int position);
+
+    void on_horizontalSliderTV_sliderMoved(int position);
 
 private:
     Ui::GuiMupic *ui;
@@ -94,6 +101,22 @@ private:
     QAction *playAction;
     QAction *pauseAction;
     QAction *stopAction;
+
+    QSize label_2_max;
+    QSize tlabel_max;
+    QSize hSlider_2_max;
+    QSize labelColorLevels_max;
+    QSize label_colorLevels_max;
+    QSize hSliderColorLevels_max;
+    QSize labelThresholdH_max;
+    QSize label_ThresholdH_max;
+    QSize hSliderThersholdH_max;
+    QSize labelThresholdS_max;
+    QSize label_ThresholdS_max;
+    QSize hSliderThersholdS_max;
+    QSize labelThresholdV_max;
+    QSize label_ThresholdV_max;
+    QSize hSliderThersholdV_max;
 };
 
 #endif // GUIMUPIC_H
