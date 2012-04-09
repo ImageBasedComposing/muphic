@@ -2,7 +2,7 @@
 #include "Compositors/ComposerDemo.h"
 #include "Compositors/ComposerMultiple.h"
 #include "Compositors/ComposerTimothy2.h"
-#include "Launcher.h"
+#include "launcher.h"
 #include "Music/Acorde.h"
 
 Mu::Mu()
