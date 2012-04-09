@@ -7,3 +7,4 @@ phic=Phic.exe
 qmake=qmake.exe
 abc2midi=abc2midi.exe
 mplayer=playsmf
+timidity=timidity.exe

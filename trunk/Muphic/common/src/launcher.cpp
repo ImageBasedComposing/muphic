@@ -18,7 +18,7 @@ void Launcher::add_strtoarray(char ***str_array, int *num_elements, const char *
 
 std::string Launcher::parseConfFile(std::string file, Program pname)
 {
-        std::ifstream f(file.c_str(), std::ios::in);
+    std::ifstream f(file.c_str(), std::ios::in);
 
 	std::string tmpstring;
 	std::string tmpPath = "";

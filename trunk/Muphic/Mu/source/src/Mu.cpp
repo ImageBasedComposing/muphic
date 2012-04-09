@@ -2,6 +2,7 @@
 #include "Compositors/ComposerDemo.h"
 #include "Compositors/ComposerMultiple.h"
 #include "Compositors/ComposerTimothy2.h"
+#include "Launcher.h"
 #include "Music/Acorde.h"
 
 Mu::Mu()
@@ -61,6 +62,11 @@ int main( int argc, const char* argv[] )
 	//comp2->compose(analysedPic, usrConfPath);
 
 	compTimy->compose(analysedPic, usrConfPath);
+
+	Launcher* l = new Launcher();
+	string args[] = {"MelodyTimothy1.mid", "-Ow", "-o", "1.wav"};
+
+	l->launch(4, Launcher::TIMIDITY, args);
 
 	/*
 	Figuras* f = new Figuras();
