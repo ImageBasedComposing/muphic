@@ -258,6 +258,7 @@ void Analizer::addFiguresfromPicv2(IplImage* img, IplImage* mask, Figuras* figur
 		// iterate contours and create a figure for each one
 		FigureImg* f;
 		int currentmaxsize = MAX_SIZE;
+
 		Vertice* staticfigure = new Vertice[currentmaxsize];//  static aux Figure
 		int nstaticfigure;
 		int id = 0;

@@ -285,7 +285,7 @@ void GuiMupic::on_pushButton_Play_clicked()
 
     if(!is_paused)
     {
-        mediaSource = new Phonon::MediaSource("./1.mp3");
+        mediaSource = new Phonon::MediaSource("./1.wav");
         mediaObject->setCurrentSource(*mediaSource);
         mediaObject->play();
         ui->pushButton_pause->setEnabled(true);
