@@ -33,6 +33,12 @@ bool Simbolos::insert(int n, Simbolo* s)
 	if(simbolos.size() < n)
 		return false;
 
+	if(simbolos.size() == n)
+	{
+		pushBack(s);
+		return true;
+	}
+
 	list<Simbolo*>::iterator it = simbolos.begin();
 
 	for(int i = 0; i < n; i++)
@@ -41,6 +47,7 @@ bool Simbolos::insert(int n, Simbolo* s)
 	}
 
 	simbolos.insert(it, s);
+	return true;
 }
 
 Simbolo* Simbolos::getAt(int n)
