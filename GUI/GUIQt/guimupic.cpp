@@ -23,7 +23,7 @@ void GuiMupic::initialize()
     //ui->scrollArea->setWidget(ui->polyWidget);
 
     usrConf = new UsrConf();
-    usrConf->setPhicNoiseSelec(1);
+    usrConf->setPhicNoiseSelec(0);
     usrConf->setPhicPolygonSimp(2);
     usrConf->setPhicColorLevels(3);
 
