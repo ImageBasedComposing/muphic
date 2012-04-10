@@ -56,6 +56,8 @@ bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int
 	}
 	
 	int numNotas = simbtmp->size() - 1;
+	if(numNotas == 0)
+		numNotas++;
 
 	//Si tenemos demasiados vértices, destruimos los menos significativos
 	while( (numNotas*2) < distWithNext.size() )
