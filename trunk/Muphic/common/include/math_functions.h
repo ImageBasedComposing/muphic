@@ -188,5 +188,13 @@ inline int mod(int num, int div)
 	return num%div;
 }
 
+inline double radiusOfArea(double area)
+{
+	// area = PI * r2 -> area / PI = r2 -> sqrt(area/PI) = r
+	double out;
+	out = sqrt(area / PI);
+	return out;
+}
+
 
 #endif // MATH_FUNCTIONS__H

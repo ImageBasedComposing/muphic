@@ -17,12 +17,13 @@ class ComposerFigRitmo2
 		virtual ~ComposerFigRitmo2() {};
 
 		//Se pide que haga un ritmo dada una figura. Devuelve el segmento con el ritmo, de duracion dur
-		bool compRythmFig(FigureMusic* f, Segmento* seg, int dur, int compas = 4, bool quick = false);
+		bool compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur = WHOLE);
 
 	protected:
 
 	private:
-		int getDrumTone(int duracion);
+		int getDrumTone();
+		int getCymbalTone();
 };
 
 

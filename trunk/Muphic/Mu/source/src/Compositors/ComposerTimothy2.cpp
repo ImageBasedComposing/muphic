@@ -52,7 +52,8 @@ string ComposerTimothy2::compose()
 	// We create the segments where we will put the different notes from the melody
 	Segmentos* segs1 = new Segmentos();
 	Segmentos* segs2 = new Segmentos();
-	Segmento* seg1, * seg2;
+	Segmentos* segs3 = new Segmentos();
+	Segmento* seg1, * seg2, * seg3;
 	FigureMusic* child;
 
 	for(std::list< FigureMusic* >::iterator it = padres.begin(); it != padres.end(); it++)
@@ -77,6 +78,10 @@ string ComposerTimothy2::compose()
 			segs2->pushBack(seg2);
 			segs1->pushBack(seg1);
 		}
+
+		seg3 = new Segmento();
+		fr->compRythmFig((*it),seg3,seg1->getDuration(),WHOLE);
+		segs3->pushBack(seg3);
 	}
 
 	delete tbScaleBase;
@@ -97,18 +102,23 @@ string ComposerTimothy2::compose()
 	// We create the voices we will use in this song and we assign them the segments we created
 	Voz* v1 = new Voz();
 	v1->setSegmentos(segs1);
-	// TO DO BY EGGTOR
 	v1->setTonalidad(DOM);
 
 	Voz* v2 = new Voz();
 	v2->setSegmentos(segs2);
 	v2->setTonalidad(DOM);
-	//v2->setInstrumento(WOODBLOCK);
+
+	Voz* v3 = new Voz();
+	v3->setSegmentos(segs3);
+	v3->setTonalidad(DOM);
+	v3->setInstrumento(WOODBLOCK);
+
 
 	Voces* vs = new Voces();
 
 	vs->pushBack(v1);
 	vs->pushBack(v2);
+	vs->pushBack(v3);
 
 	// We set the parameters in music, and also we asign the voices previously created to this music
 	Music* m = new Music();

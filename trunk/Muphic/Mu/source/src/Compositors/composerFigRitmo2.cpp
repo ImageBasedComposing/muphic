@@ -1,7 +1,8 @@
 #include "Compositors/ComposerFigRitmo2.h"
+#include "math_functions.h"
 
 
-bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int compas, bool quick)
+bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur)
 {
 	int t = f->sizeVertices();
 	pair<int,int> center;
@@ -12,103 +13,183 @@ bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int
 
 	//Simbolos* ss = seg->getSimbolos();
 	Simbolos* simbtmp = new Simbolos();
+
+	//Primero rellenamos todo con la maxDur (que por defecto es redonda)
+	while (duracionTotal < dur)
+	{
+		if((dur - duracionTotal) < maxDur)
+		{
+			simbtmp->pushBack(new Nota(dur - duracionTotal, getDrumTone()));
+			duracionTotal += dur - duracionTotal;
+		}
+		else
+		{
+			simbtmp->pushBack(new Nota(maxDur, getDrumTone()));
+			duracionTotal += maxDur;
+		}
+		
+	}
+
+	//Ahora según van desviandose del círculo equivalente-en-area vamos
+	// cambiando la duracion de las notas.
+
+	//Hallar el radio y el centro del circulo equivalente-en-area:
+	double radio = radiusOfArea(f->getArea());
+	center = f->getBarycenter();
+
+	//Calculamos la longitud/desviación de cada vértice
+	int numVertices = f->sizeVertices();
+	double distTotal = 0, distMin = 9000000, distMax = 0;
+	int posMin;
+	vector< double > distWithNext;  //Distancias con el siguiente vertice.
+	for(int i = 0; i < numVertices; i++)
+	{
+		distWithNext.push_back( abs(dist2DPoints(center, f->getVerticeAt(i)->getPair()) - radio) );
+		//Vemos distancia medio vertice, mayor vertice y menor vertice.
+		if(distMin > distWithNext.back())
+		{
+			posMin = i;
+			distMin = distWithNext.back();
+		}
+		distMax = max(distMax, distWithNext.back());
+		distTotal += distWithNext.back();
+	}
+	
+	int numNotas = simbtmp->size() - 1;
+
+	//Si tenemos demasiados vértices, destruimos los menos significativos
+	while( (numNotas*2) < distWithNext.size() )
+	{
+		distWithNext.erase(distWithNext.begin() + posMin);
+		//Hallamos nuevo mínimo
+		distMin = distWithNext.at(0);
+		posMin = 0;
+		for(int i = 1; i < distWithNext.size(); i++)
+			if(distMin > distWithNext.at(i))
+			{
+				posMin = i;
+				distMin = distWithNext.at(i);
+			}
+
+	}
+
+	double dist1, dist2;
+	//Diferentes rangos
+	double range0 = ((distMax - distMin)/10) + distMin;
+	double range1 = ((distMax - distMin)/2) + distMin;
+	//double radio2 = radio*0.6;
 	Nota* s;
-
-	if(t > 2)
+	int notasAdded = 0, j = 0;
+	//Vamos descomponiendo el ritmo que teníamos.
+	for(int i = 0; i < numNotas-1; i++)
 	{
-		center = f->getBarycenter();
+		dist1 = distWithNext.at(j);
+		j++;
+		dist2 = distWithNext.at(j);
+		j++;
 
-		// Creación de notas
-
-		int * notas = f->radialDivision(compas, 90);
-
-		double pownum = 2;
-
-		for(int k = 0; k < compas; k++)
-		{
-			if (notas[k] == 0)
-			{
-				duracion = QUARTERNOTE;
-				duracionTotal += duracion;
-
-				s = new Nota(duracion, 0); //silencio si no hay nota en el octante (?)
-				simbtmp->pushBack(s);
-				continue;
+		if( dist1 > range1 )
+			if ( dist2 > range1 )
+			{ //dum(L), chuss, chuss
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/2);
+				//suenan platillos
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getCymbalTone()));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getCymbalTone()));
+				notasAdded++;
+			}
+			else if( dist2 > range0 )
+			{ //dum, dum, chuss(L)
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/4);
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion(),getDrumTone()));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()*2,getCymbalTone()));
+				notasAdded++;
+			}
+			else
+			{ //dum(L), z, chuss
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/2);
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,SILENCIO));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getCymbalTone()));
+				notasAdded++;
+			}
+		else if( dist1 > range0 )
+			if ( dist2 > range1 )
+			{ //dum(L), dum, chuss
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/2);
+				//suenan platillos
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getDrumTone()));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getCymbalTone()));
+				notasAdded++;
+			}
+			else if( dist2 > range0 )
+			{ //dum, dum, dum(L)
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/4);
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion(),getDrumTone()));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()*2,getDrumTone()));
+				notasAdded++;
+			}
+			else
+			{ //dum(L), z, dum
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/2);
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,SILENCIO));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getDrumTone()));
+				notasAdded++;
+			}
+		else 
+			if ( dist2 > range1 )
+			{ //dum(L), chuss, z
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/2);
+				//suenan platillos
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,getCymbalTone()));
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,SILENCIO));	
+				notasAdded++;
+			}
+			else if( dist2 > range0 )
+			{ //dum, dum, z(L)
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/4);
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion(),getDrumTone()));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()*2,SILENCIO));
+				notasAdded++;
+			}
+			else
+			{ //dum(L), z, z
+				s = (Nota*)simbtmp->getAt(i+notasAdded);
+				s->setDuracion(s->getDuracion()/2);
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,SILENCIO));	
+				notasAdded++;
+				simbtmp->insert(i+notasAdded+1, new Nota(s->getDuracion()/2,SILENCIO));
+				notasAdded++;
 			}
 
-			// Inserto blancas si no hay vertices y por debajo si hay
-			duracion = 0;
 
-			for(int k1 = 0; k1 < notas[k]; k1++)
-			{
-				duracion = ((QUARTERNOTE*2)/(int)pow(pownum,notas[k]));
-				duracionTotal += duracion;
-				s = new Nota(duracion,getDrumTone(duracion));
-				simbtmp->pushBack(s);
-			}
-		}
 	}
-	// Para circulos
-	else
-	{
-		center.first = f->getVerticeAt(1)->x;
-		center.second = f->getVerticeAt(1)->y;
-
-		int duracion = dur / 4;
-		for(int f=0; f < 4; f++)
-		{
-			duracionTotal += duracion;
-			simbtmp->pushBack(new Nota(duracion,getDrumTone(duracion)));
-		}
-	}
-
-
-	float factor = 0;
-	int rep = 0;
-	if (!quick || (duracionTotal > dur))
-	{
-		rep = 1;
-		factor = dur/ (float) duracionTotal;
-	}
-	else
-	{
-		// cuantas repeticiones caben
-		rep = dur / duracionTotal;
-
-		// calculamos cuánto hay que modificar el motivo para que las repeticiones sean exactas
-		float newDur = ((float) dur / (float) rep);
-		factor = newDur / (float) duracionTotal;
-	}
-
-	if (factor != 1)
-		for (int i = 0; i < simbtmp->size(); i++)
-		{
-			simbtmp->getAt(i)->setDuracion(simbtmp->getAt(i)->getDuracion()*factor);
-		}
-
-	// ahora repetimos el motivo rep veces y ya tira.
-	duracionTotal = 0;
-	for (int r = 0; r < rep; r++)
-	{
-		for (int i = 0; i < simbtmp->size(); i++)
-		{
-			seg->getSimbolos()->pushBack(simbtmp->getAt(i));
-			duracionTotal += simbtmp->getAt(i)->getDuracion();
-		}
-	}
-
-	// como utilizamos factor (float) como entero, quedará un resto por ahí que rezo que no moleste, lo pongo como negra
-	if (duracionTotal < dur)
-	{
-		seg->getSimbolos()->pushBack(new Nota(dur-duracionTotal, 0));
-		duracionTotal += dur - duracionTotal;
-	}
+	
+	seg->setSimbolos(simbtmp);
 
 	return true;
 }
 
+int ComposerFigRitmo2::getCymbalTone()
+{
+	return LA_C+ESCALA+ESCALA; // por ejemplo
+}
 
-int ComposerFigRitmo2::getDrumTone(int duracion)
+int ComposerFigRitmo2::getDrumTone()
 {
 	return LA_C; // por ejemplo
 }

@@ -60,12 +60,18 @@ int Segmento::getDuration()
 void Segmento::setSimbolos(Simbolos* s)
 {
 	simbolos = s;
+	duration = 0;
+	for(int i = 0; i < s->size(); i++)
+		duration += simbolos->getAt(i)->getDuracion();
 }
 
 void Segmento::addSimbolos(Simbolos* s)
 {
 	for(int i = 0; i < s->size(); i++)
+	{
 		simbolos->pushBack(s->getAt(i));
+		duration += s->getAt(i)->getDuracion();
+	}
 
 }
 
