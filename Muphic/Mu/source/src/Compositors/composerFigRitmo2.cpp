@@ -9,7 +9,7 @@ bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int
 	center.first = 0;
 	center.second = 0;
 	int duracionTotal = 0;
-	int duracion;
+	//int duracion;
 
 	//Simbolos* ss = seg->getSimbolos();
 	Simbolos* simbtmp = new Simbolos();
@@ -188,10 +188,10 @@ bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int
 
 int ComposerFigRitmo2::getCymbalTone()
 {
-	return LA_C+ESCALA+ESCALA; // por ejemplo
+	return 36; // por ejemplo
 }
 
 int ComposerFigRitmo2::getDrumTone()
 {
-	return LA_C; // por ejemplo
+	return 17; // por ejemplo
 }

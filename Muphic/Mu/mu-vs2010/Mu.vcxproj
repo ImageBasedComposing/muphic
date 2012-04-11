@@ -77,6 +77,7 @@
     <ClInclude Include="..\..\TinyXML\include\tinyxml.h" />
     <ClInclude Include="..\source\include\Compositors\Composer.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerDemo.h" />
+    <ClInclude Include="..\source\include\Compositors\ComposerFigBass2.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerFigMelody.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerFigMelody2.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerFigRitmo.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="..\..\TinyXML\src\tinyxmlparser.cpp" />
     <ClCompile Include="..\source\src\Compositors\Composer.cpp" />
     <ClCompile Include="..\source\src\Compositors\ComposerDemo.cpp" />
+    <ClCompile Include="..\source\src\Compositors\composerFigBass2.cpp" />
     <ClCompile Include="..\source\src\Compositors\composerFigMelody.cpp" />
     <ClCompile Include="..\source\src\Compositors\composerFigMelody2.cpp" />
     <ClCompile Include="..\source\src\Compositors\composerFigRitmo.cpp" />
