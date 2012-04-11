@@ -47,13 +47,15 @@ string ComposerTimothy2::compose()
 
 	// We create the composers we will use to make the melody and rithm
 	ComposerFigMelody2* fm = new ComposerFigMelody2(tbScale);
+	ComposerFigBass2* fb = new ComposerFigBass2(tbScale);
 	ComposerFigRitmo2* fr = new ComposerFigRitmo2();
 
 	// We create the segments where we will put the different notes from the melody
 	Segmentos* segs1 = new Segmentos();
 	Segmentos* segs2 = new Segmentos();
 	Segmentos* segs3 = new Segmentos();
-	Segmento* seg1, * seg2, * seg3;
+	Segmentos* segs4 = new Segmentos();
+	Segmento* seg1, * seg2, * seg3, * seg4;
 	FigureMusic* child;
 
 	for(std::list< FigureMusic* >::iterator it = padres.begin(); it != padres.end(); it++)
@@ -61,6 +63,13 @@ string ComposerTimothy2::compose()
 		seg1 = new Segmento();
 		
 		fm->compMelodyFig((*it), seg1); 
+
+		seg3 = new Segmento();
+		fb->compBassFig((*it),seg1->getDuration(),seg3);
+
+		seg4 = new Segmento();
+		fr->compRythmFig((*it),seg4,seg1->getDuration(),WHOLE);
+
 		for(int i = 0; i < (*it)->sizeHijos(); i++)
 		{
 			child = (FigureMusic*)(*it)->getHijoAt(i);
@@ -70,6 +79,8 @@ string ComposerTimothy2::compose()
 				seg2 = fm->interMelodyFig(child, seg);*/
 			segs1->pushBack(seg1);
 			segs2->pushBack(seg2);
+			segs3->pushBack(seg3);
+			segs4->pushBack(seg4);
 		}
 
 		if((*it)->sizeHijos() == 0)
@@ -77,11 +88,11 @@ string ComposerTimothy2::compose()
 			seg2 = fm->emptyMelody(seg1);
 			segs2->pushBack(seg2);
 			segs1->pushBack(seg1);
+			segs3->pushBack(seg3);
+			segs4->pushBack(seg4);
 		}
 
-		seg3 = new Segmento();
-		fr->compRythmFig((*it),seg3,seg1->getDuration(),WHOLE);
-		segs3->pushBack(seg3);
+
 	}
 
 	delete tbScaleBase;
@@ -103,15 +114,22 @@ string ComposerTimothy2::compose()
 	Voz* v1 = new Voz();
 	v1->setSegmentos(segs1);
 	v1->setTonalidad(DOM);
+	v1->setInstrumento(45);
 
 	Voz* v2 = new Voz();
 	v2->setSegmentos(segs2);
 	v2->setTonalidad(DOM);
+	v2->setInstrumento(73);
 
 	Voz* v3 = new Voz();
 	v3->setSegmentos(segs3);
 	v3->setTonalidad(DOM);
-	v3->setInstrumento(WOODBLOCK);
+	v3->setInstrumento(34);
+
+	Voz* v4 = new Voz();
+	v4->setSegmentos(segs4);
+	v4->setTonalidad(DOM);
+	v4->setInstrumento(128);
 
 
 	Voces* vs = new Voces();
@@ -119,6 +137,7 @@ string ComposerTimothy2::compose()
 	vs->pushBack(v1);
 	vs->pushBack(v2);
 	vs->pushBack(v3);
+	vs->pushBack(v4);
 
 	// We set the parameters in music, and also we asign the voices previously created to this music
 	Music* m = new Music();

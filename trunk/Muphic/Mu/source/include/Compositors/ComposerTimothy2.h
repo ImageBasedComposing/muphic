@@ -9,6 +9,7 @@
 #include "Compositors/PatternGen.h"
 #include "Compositors/Patterns.h"
 #include "Compositors/ComposerFigMelody2.h"
+#include "Compositors/ComposerFigBass2.h"
 #include "Compositors/ComposerFigRitmo2.h"
 #include "Outputs/MidizatorABC.h"
 #include "Outputs/MidizatorWAV.h"
