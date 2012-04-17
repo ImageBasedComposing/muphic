@@ -167,13 +167,16 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 	pos1++;
 	temp1 += n2->getDuracion();
 	temp2 = duraciones.at(0);
-	while(i < vertices.size() && (pos1 < seg1->size() || (pos1 = seg1->size() && (temp2+duraciones.at(i) <= temp1))))
+	while(i < vertices.size() ) //&& (pos1 < seg1->size() || (pos1 = seg1->size() && (temp2+duraciones.at(i) <= temp1)))
 	{
 		temp2 += duraciones.at(i);
 		while(temp2 > temp1)
 		{
 			n1 = n2;
-			n2 = (Nota*)seg1->getAt(pos1);
+			if( pos1 < seg1->size() )
+				n2 = (Nota*)seg1->getAt(pos1);
+			else
+				n2 = (Nota*)seg1->getAt(seg1->size()-1);
 			temp1 += n2->getDuracion();
 			pos1++;
 		}
@@ -341,6 +344,7 @@ Segmento* ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg)
 			findPos = (durationTotal + auxDur) > seg->getDuration();
 			pos++;
 		}
+		pos--;
 	}
 	
 	vector< int > tones = calcTonesCounterPoint(f,vertices,seg,pos,durations);
