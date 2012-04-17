@@ -217,6 +217,8 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 
 void GuiMupic::on_pushButton_Generate_clicked()
 {
+    mediaObject->clear();
+
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
 
     UsrConf* usrConf = new UsrConf();
@@ -254,6 +256,7 @@ void GuiMupic::on_pushButton_Stop_clicked()
         pidPlay = -1;
     }*/
     mediaObject->stop();
+    mediaObject->clear();
     ui->pushButton_pause->setEnabled(false);
 }
 

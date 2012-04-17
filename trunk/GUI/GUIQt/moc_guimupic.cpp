@@ -111,7 +111,6 @@ int GuiMupic::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 11: tick((*reinterpret_cast< qint64(*)>(_a[1]))); break;
         case 12: setupActions(); break;
         case 13: on_pushButton_pause_clicked(); break;
-        case 14: on_horizontalSlider_Seek_sliderMoved((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
         _id -= 15;
