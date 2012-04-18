@@ -153,8 +153,10 @@ string ComposerTimothy2::compose()
 
 	m->setMidizator(new MidizatorABC());
 
+	std::string out = m->toMidi(); 
+
 	// We make the music using the midizator previously selected
-	return m->toMidi();
+	return out;
 }
 
 string ComposerTimothy2::compose(string picPath, string usrConfPath)

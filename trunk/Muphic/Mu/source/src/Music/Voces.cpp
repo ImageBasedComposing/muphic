@@ -15,6 +15,12 @@ Voces::Voces(Voces* v)
 
 Voces::~Voces()
 {
+    std::list<Voz*>::iterator it = voces.begin();
+    while (it != voces.end())
+    {
+        delete (*it);
+        it++;
+    }
     voces.clear();
 }
 
