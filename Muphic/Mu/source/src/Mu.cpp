@@ -5,6 +5,7 @@
 #include "launcher.h"
 #include "Music/Acorde.h"
 
+
 Mu::Mu()
 {
     //ctor
@@ -51,11 +52,11 @@ int main( int argc, const char* argv[] )
 	// Introducing a brand new composer!!
 	// ~ * ~CoMp0zer d3M0!!~ * ~
 
-	MidizatorWAV* mdztor = new MidizatorWAV();
-	Music* m = new Music(mdztor);
+	//MidizatorWAV* mdztor = new MidizatorWAV();
+	//Music* m = new Music(mdztor);
 
-	Composer* comp = new ComposerDemo( m );
-	Composer* comp2 = new ComposerMultiple( m );
+	//Composer* comp = new ComposerDemo( m );
+	//Composer* comp2 = new ComposerMultiple( m );
 	Composer* compTimy = new ComposerTimothy2();
 
     //comp->compose(analysedPic, usrConfPath);
@@ -72,6 +73,10 @@ int main( int argc, const char* argv[] )
 	Figuras* f = new Figuras();
 	f->cargar("test1");
 	f->setParentSonStructure();*/
+
+	delete l;
+	delete compTimy;
+	delete usrConf;
 
 	return 0;
 }

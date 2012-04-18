@@ -8,7 +8,13 @@ Segmentos::Segmentos()
 
 Segmentos::~Segmentos()
 {
-	segmentos.clear();
+    std::list<Segmento*>::iterator it = segmentos.begin();
+    while (it != segmentos.end())
+    {
+        delete (*it);
+        it++;
+    }
+    segmentos.clear();
 }
 
 bool Segmentos::empty()

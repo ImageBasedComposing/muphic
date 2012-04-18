@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes" ?>
+<muphic_conf>
+    <phic_conf none="true" />
+    <mu_conf>
+        <debug />
+    </mu_conf>
+</muphic_conf>

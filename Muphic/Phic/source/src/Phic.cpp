@@ -108,6 +108,10 @@ int main(int argc, char* argv[])
 
 	figuras->guardar(output);
 
+	delete figuras;
+	delete analizer;
+	delete phic;
+
 	return 0;
 }
 
