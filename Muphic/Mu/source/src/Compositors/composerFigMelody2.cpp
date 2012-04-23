@@ -498,7 +498,7 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 	for(int i = 0; i < durations->size(); i++)
 		durationTotal += durations->at(i);
 
-	if(duration = 0) //Error
+	if(duration == 0) //Error
 		durationTotal = 0;
 
 	int pos, posAux;
