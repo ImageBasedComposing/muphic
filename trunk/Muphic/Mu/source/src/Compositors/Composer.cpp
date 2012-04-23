@@ -1,8 +1,11 @@
 #include "Compositors/Composer.h"
 
-Composer::Composer()
+Composer::Composer(ComposerVoice* fm, ComposerVoice* fm2, ComposerVoice* fb, ComposerVoice* fr)
 {
-    //ctor
+    this->fm = fm;
+	this->fm2 = fm2;
+	this->fb = fb;
+	this->fr = fr;
 }
 
 Composer::~Composer()

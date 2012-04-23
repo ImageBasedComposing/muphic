@@ -1,8 +1,24 @@
 #include "Compositors/ComposerFigRitmo2.h"
-#include "math_functions.h"
+
+/*------Constructoras------*/
+ComposerFigRitmo2::ComposerFigRitmo2(ColorSystem* sc) : ComposerVoice(sc)
+{
+	// ctor
+}
+
+ComposerFigRitmo2::ComposerFigRitmo2(ColorSystem* sc, TableScale* tbScale) : ComposerVoice(sc, tbScale)
+{
+	// ctor
+}
+
+/*------Destructora------*/
+ComposerFigRitmo2::~ComposerFigRitmo2()
+{
+	//// dtor
+}
 
 
-bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur)
+bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur)
 {
 	int t = f->sizeVertices();
 	pair<int,int> center;
@@ -188,10 +204,20 @@ bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int
 
 int ComposerFigRitmo2::getCymbalTone()
 {
-	return 36; // por ejemplo
+	return instruments.back();
 }
 
 int ComposerFigRitmo2::getDrumTone()
 {
-	return 17; // por ejemplo
+	return instruments.front();
+}
+
+void ComposerFigRitmo2::setCymbalTone(int c)
+{
+	instruments.back() = c;
+}
+
+void ComposerFigRitmo2::setDrumTone(int d)
+{
+	instruments.front() = d;
 }

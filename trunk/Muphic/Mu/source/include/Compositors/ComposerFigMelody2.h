@@ -3,65 +3,51 @@
 #ifndef COMPOSERFIGMELODY2_H
 #define COMPOSERFIGMELODY2_H
 
-#include "Compositors/Composer.h"
+#include "Compositors/ComposerVoice.h"
 #include "Music/music_elements.h"
-//#include "math_functions.h"
-#include "Music/FigureMusic.h"
-#include "Music/Segmento.h"
 #include "Music/Nota.h"
-#include "Music/TableScale.h"
 
 
 class FiguresMusic;
 
 using namespace std;
 
-class ComposerFigMelody2
+class ComposerFigMelody2 : public ComposerVoice
 {
 
 	protected:
 
-		Segmento* lastSeg;
-		TableScale* tableScale;
-		vector< int > calcDurDirect(FigureMusic * f, vector< Vertice* > vertices);
+		//Funciones auxiliares:
+		int getNextDegreeTone(int degree, double actualAngle, double lastAngle, int lastTone);
+		int getNextTone(int degree, double actualAngle, double lastAngle, int lastTone, int actualDuration, int lastDuration);
+		int makeConsonant(int tone, int toneToModif);
+		void adaptDurations(vector<int>* durations, int duration, int minDur = EIGHTHNOTE);
+		vector< int > calcDurDirect(FigureMusic * f, vector< Vertice* > vertices, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE);
 		vector< int > calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices, vector<int> duraciones);
 		vector< int > calcTonesCounterPoint(FigureMusic * f, vector< Vertice* > vertices, Segmento* seg1, int pos, vector<int> duraciones);
 
     public:
-		ComposerFigMelody2();
-		ComposerFigMelody2(TableScale* tbScale);
+		ComposerFigMelody2(ColorSystem* cs);
+		ComposerFigMelody2(ColorSystem* cs, TableScale* tbScale);
 		virtual ~ComposerFigMelody2();
 
 		//Se pide que haga una melodia dada una figura. Devuelve el segmento con la melodia
-		bool compMelodyFig(FigureMusic* f, Segmento* seg);
-		//Devuelve una nota dados los angulos y la duracion
-		int getNextDegreeTone(int degree, double actualAngle, double lastAngle, int lastTone);
-		int getNextTone(int degree, double actualAngle, double lastAngle, int lastTone, int actualDuration, int lastDuration);
-		int makeConsonant(int tone, int toneToModif);
-		void adaptDurations(vector<int>* durations, int duration);
+		inline bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur){ return compMelodyFig(f,seg,dur,HALFNOTE,EIGHTHNOTE);};
+		inline bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur, int maxDur){ return compMelodyFig(f,seg,dur,maxDur,EIGHTHNOTE);};
+		bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur);
+		inline bool decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur){ return decMelodyFig(f,seg1,seg,dur,HALFNOTE,EIGHTHNOTE);};
+		inline bool decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur){ return decMelodyFig(f,seg1,seg,dur,maxDur,EIGHTHNOTE);};
+		bool decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur, int minDur);
+		bool interMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE);
+		bool composeVoice(FigureMusic* f, Segmento* seg, int dur, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE, Segmento* seg1 = NULL);
+		
 
-		Segmento* decMelodyFig(FigureMusic* f, Segmento* seg);
-		Segmento* decSimbolo(Nota* n, int numVert, int degree);
-		Segmento* dec2Simbolos(Nota* n1, Nota* n2, int degree);
-		Segmento* emptyMelody(Segmento* seg);
-		vector<int> patDurations(int numSimbols, int durTotal, int pattern);
-		Segmento* interMelodyFig(FigureMusic* f, Segmento* seg);
+
 
 /*------Getters------*/
-		inline Segmento* getLastSegment(){ return lastSeg;};
 
 /*------Setters------*/
-		inline void setTableScale(TableScale* tb){ delete tableScale; tableScale = tb; };
 
-		//int calcTono(float angulo, Nota* nPpal);
-		//int calcDur(float longMedia, float longitud);
-		//int notaFigura(FigureMusic* f);
-		//void sumarArea(list< pair<string,int> >* cs, Figura* f);
-		//void calcularPadres(FigureMusic* f, list< pair<Segmento*,int> > segs, int nsegmentos, list< pair<Segmento*,int> >* segmentos);
-
-
-		//// tmp shit
-		//int calcularNota(float angulo, int* escala);
 };
 
 

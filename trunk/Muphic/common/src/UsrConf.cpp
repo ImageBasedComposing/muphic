@@ -112,6 +112,19 @@ void UsrConf::readMu(std::string path)
     // Leemos los nodos
     TiXmlNode* muphicNode = doc.FirstChild("muphic_conf");
     TiXmlNode* muNode = muphicNode->FirstChild("mu_conf");
+	muCompMix = atoi(muNode->FirstChild("compositorMix")->ToElement()->GetText());
+	muCompVoice1 = atoi(muNode->FirstChild("compositor_voice1")->ToElement()->GetText());
+	muCompVoice2 = atoi(muNode->FirstChild("compositor_voice2")->ToElement()->GetText());
+	muCompVoice3 = atoi(muNode->FirstChild("compositor_voice3")->ToElement()->GetText());
+	muCompVoice4 = atoi(muNode->FirstChild("compositor_voice4")->ToElement()->GetText());
+
+	muInstrVoice1 = atoi(muNode->FirstChild("instrument_voice1")->ToElement()->GetText());
+	muInstrVoice2 = atoi(muNode->FirstChild("instrument_voice2")->ToElement()->GetText());
+	muInstrVoice3 = atoi(muNode->FirstChild("instrument_voice3")->ToElement()->GetText());
+	muInstrVoice4 = atoi(muNode->FirstChild("instrument_voice4")->ToElement()->GetText());
+
+	muReconColors = atoi(muNode->FirstChild("color-system")->ToElement()->GetText());
+	muTempo = atoi(muNode->FirstChild("tempo")->ToElement()->GetText());
 
 
     // Debug
@@ -273,6 +286,61 @@ bool UsrConf::getMuDebug()
     return muDebug;
 }
 
+int UsrConf::getMuCompMix()
+{
+	return muCompMix;
+}
+
+int UsrConf::getMuCompVoice1()
+{
+	return muCompVoice1;
+}
+
+int UsrConf::getMuCompVoice2()
+{
+	return muCompVoice2;
+}
+
+int UsrConf::getMuCompVoice3()
+{
+	return muCompVoice3;
+}
+
+int UsrConf::getMuCompVoice4()
+{
+	return muCompVoice4;
+}
+
+int UsrConf::getMuInstrVoice1()
+{
+	return muInstrVoice1;
+}
+
+int UsrConf::getMuInstrVoice2()
+{
+	return muInstrVoice2;
+}
+
+int UsrConf::getMuInstrVoice3()
+{
+	return muInstrVoice3;
+}
+
+int UsrConf::getMuInstrVoice4()
+{
+	return muInstrVoice4;
+}
+
+int UsrConf::getMuReconColors()
+{
+	return muReconColors;
+}
+
+int UsrConf::getMuTempo()
+{
+	return muTempo;
+}
+
 // SETTERS
 
 void UsrConf::setPhicActive(bool b)
@@ -333,6 +401,61 @@ void UsrConf::setMuActive(bool b)
 void UsrConf::setMuDebug(bool b)
 {
         muDebug = b;
+}
+
+void UsrConf::setMuCompMix(int c)
+{
+	muCompMix = c;
+}
+
+void UsrConf::setMuCompVoice1(int c)
+{
+	muCompVoice1 = c;
+}
+
+void UsrConf::setMuCompVoice2(int c)
+{
+	muCompVoice2 = c;
+}
+
+void UsrConf::setMuCompVoice3(int c)
+{
+	muCompVoice3 = c;
+}
+
+void UsrConf::setMuCompVoice4(int c)
+{
+	muCompVoice4 = c;
+}
+
+void UsrConf::setMuInstrVoice1(int i)
+{
+	muInstrVoice1 = i;
+}
+
+void UsrConf::setMuInstrVoice2(int i)
+{
+	muInstrVoice2 = i;
+}
+
+void UsrConf::setMuInstrVoice3(int i)
+{
+	muInstrVoice3 = i;
+}
+
+void UsrConf::setMuInstrVoice4(int i)
+{
+	muInstrVoice4 = i;
+}
+
+void UsrConf::setMuReconColors(int cs)
+{
+	muReconColors = cs;
+}
+
+void UsrConf::setMuTempo(int t)
+{
+	muTempo = t;
 }
 
 

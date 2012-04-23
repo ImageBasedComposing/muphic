@@ -35,9 +35,28 @@ enum Tonalidad{ DOM, LAm, SOLM,  MIm,  REM,  SIm,  LAM, FASm,  MIM, DOSm,  SIM, 
 //							FA#/SIb  |  DO#/MIb  | SOL#/LAb  |  RE#/REb  |  LA#/SOLb  |  MI#/DOb   |  SI#/FAb  | //los sostenidos o bemoles que hay en la armadura
 
 
+//Clase padre para crear sistemas de colores
+class ColorSystem
+{
+
+	public:
+		ColorSystem()
+		{}
+
+		virtual ~ColorSystem(){};
+
+		//Devuelve la nota correspondiente al color según el sistema 
+		virtual int getNota(Color color){ return 0;}
+
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		virtual int getNota(Color color, TableScale* tb){ return 0;}
+
+	protected:
+	private:
+};
 
 //Clase Scriabin que identifica colores por remodelar a RGB por ejemplo.
-class Scriabin
+class Scriabin : public ColorSystem
 {
 
 	public:

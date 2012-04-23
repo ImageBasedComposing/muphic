@@ -5,13 +5,14 @@
 
 #include <string>
 #include "Conf.h"
+#include "Compositors/ComposerVoice.h"
 
 using namespace std;
 
 class Composer
 {
     public:
-        Composer();
+		Composer(ComposerVoice* fm = NULL, ComposerVoice* fm2 = NULL, ComposerVoice* fb = NULL, ComposerVoice* fr = NULL);
         virtual ~Composer();
 
         virtual string compose();
@@ -30,6 +31,11 @@ class Composer
         virtual void setTmpMIDIPath(string m);
 
     protected:
+		ComposerVoice* fm;
+		ComposerVoice* fm2;
+		ComposerVoice* fb;
+		ComposerVoice* fr;
+
         string usrConfFile;
         string pic;
         string tmpMIDIPath;

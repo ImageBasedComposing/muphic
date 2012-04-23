@@ -1,6 +1,7 @@
 #include "Compositors/ComposerTimothy2.h"
 
-ComposerTimothy2::ComposerTimothy2()
+ComposerTimothy2::ComposerTimothy2(ComposerVoice* fm, ComposerVoice* fm2, ComposerVoice* fb, ComposerVoice* fr) :
+Composer(fm, fm2, fb, fr)
 {
     //ctor
 }
@@ -25,7 +26,7 @@ string ComposerTimothy2::compose()
 
 	// We create the pattern with whom we will compose in this composer
 	//PatternGen<Figura*>* pg = new PatternGen<Figura*>();
-	PriorityPattern* p = new PriorityPattern();
+	//PriorityPattern* p = new PriorityPattern();
 
 	// Auxiliary list to get the main figures
 	std::list<FigureMusic*> padres;
@@ -34,10 +35,10 @@ string ComposerTimothy2::compose()
 		padres.push_back((FigureMusic*)fgs->getPadreAt(i));
 
 	// Pattern made from the list we retrieved
-	std::list<FigureMusic*> fPatronizada = p->createPatternFig(padres);
+	//std::list<FigureMusic*> fPatronizada = p->createPatternFig(padres);
 
 	// We calculate the duration we must assign to each figure
-	std::list< std::pair<FigureMusic*, int> > aux = calcularDuracion(fPatronizada);
+	//std::list< std::pair<FigureMusic*, int> > aux = calcularDuracion(fPatronizada);
 
 	// We create the scale by which we pretend to work, set by default to DOM
 	MajorScale scale;
@@ -46,9 +47,10 @@ string ComposerTimothy2::compose()
 	TableScale* tbScale = new TableScale(scale.getScaleSteps(), sc.getNota(padres.front()->getRGB(), tbScaleBase));
 
 	// We create the composers we will use to make the melody and rithm
-	ComposerFigMelody2* fm = new ComposerFigMelody2(tbScale);
-	ComposerFigBass2* fb = new ComposerFigBass2(tbScale);
-	ComposerFigRitmo2* fr = new ComposerFigRitmo2();
+	fm->setTableScale(tbScale);
+	fm2->setTableScale(tbScale);
+	fb->setTableScale(tbScale);
+	fr->setTableScale(tbScale);
 
 	// We create the segments where we will put the different notes from the melody
 	Segmentos* segs1 = new Segmentos();
@@ -57,24 +59,26 @@ string ComposerTimothy2::compose()
 	Segmentos* segs4 = new Segmentos();
 	Segmento* seg1, * seg2, * seg3, * seg4;
 	FigureMusic* child;
+	this->pic;
 
 	for(std::list< FigureMusic* >::iterator it = padres.begin(); it != padres.end(); it++)
 	{
 		seg1 = new Segmento();
 		
-		fm->compMelodyFig((*it), seg1); 
+		fm->compMelodyFig((*it), seg1, /*fake-int*/150); 
 
 		seg3 = new Segmento();
-		fb->compBassFig((*it),seg1->getDuration(),seg3);
+		fb->compBassFig((*it),seg3,seg1->getDuration());
 
 		seg4 = new Segmento();
-		fr->compRythmFig((*it),seg4,seg1->getDuration(),WHOLE);
+		fr->compRythmFig((*it),seg4,seg1->getDuration());
 
 		for(int i = 0; i < (*it)->sizeHijos(); i++)
 		{
 			child = (FigureMusic*)(*it)->getHijoAt(i);
+			seg2 = new Segmento();
 			if( isLittleFig(child, (*it)) )
-				seg2 = fm->decMelodyFig(child, seg1);
+				fm->decMelodyFig(child, seg1, seg2, seg1->getDuration());
 			/*else //isMediumFig
 				seg2 = fm->interMelodyFig(child, seg);*/
 			segs1->pushBack(seg1);
@@ -85,7 +89,7 @@ string ComposerTimothy2::compose()
 
 		if((*it)->sizeHijos() == 0)
 		{
-			seg2 = fm->emptyMelody(seg1);
+			seg2 = emptyMelody(seg1);
 			segs2->pushBack(seg2);
 			segs1->pushBack(seg1);
 			segs3->pushBack(seg3);
@@ -98,38 +102,26 @@ string ComposerTimothy2::compose()
 	delete tbScaleBase;
 	delete tbScale;
 
-	// We make the calls to the different composers with different figures sorted by vistosidad and with their timing assigned
-	/*for(std::list< std::pair<FigureMusic*, int> >::iterator it = aux.begin(); it != aux.end(); it++)
-	{
-		seg1 = new Segmento();
-		fm->compMelodyFig((*it).first, seg1, (*it).second);
-		segs1->pushBack(seg1);
-
-		seg1 = new Segmento();
-		fr->compRythmFig((*it).first, seg1, (*it).second);
-		segs2->pushBack(seg1);
-	}*/
-
 	// We create the voices we will use in this song and we assign them the segments we created
 	Voz* v1 = new Voz();
 	v1->setSegmentos(segs1);
 	v1->setTonalidad(DOM);
-	v1->setInstrumento(45);
+	v1->setInstrumento(fm->getInstrument());
 
 	Voz* v2 = new Voz();
 	v2->setSegmentos(segs2);
 	v2->setTonalidad(DOM);
-	v2->setInstrumento(73);
+	v2->setInstrumento(fm2->getInstrument());
 
 	Voz* v3 = new Voz();
 	v3->setSegmentos(segs3);
 	v3->setTonalidad(DOM);
-	v3->setInstrumento(34);
+	v3->setInstrumento(fb->getInstrument());
 
 	Voz* v4 = new Voz();
 	v4->setSegmentos(segs4);
 	v4->setTonalidad(DOM);
-	v4->setInstrumento(128);
+	v4->setInstrumento(DRUMS);
 
 
 	Voces* vs = new Voces();
@@ -143,7 +135,7 @@ string ComposerTimothy2::compose()
 	Music* m = new Music();
 	m->setComposer("Timothy");
 	m->setBaseLenght(std::make_pair(1,WHOLE));
-	m->setName("MelodyTimothy");
+	m->setName(getTmpMIDIPath());
 	m->setVoces(vs);
 
 	// We assign the element that will create the music from our structures
@@ -196,6 +188,24 @@ std::list< std::pair<FigureMusic*, int> > ComposerTimothy2::calcularDuracion(std
 bool ComposerTimothy2::isLittleFig(FigureMusic* child, FigureMusic* parent)
 {
 	return true;
+}
+
+//Crea un segmento que sea de la misma duración que el dado pero en silencio.
+Segmento* ComposerTimothy2::emptyMelody(Segmento* seg)
+{
+	int dur = 0;
+	Segmento* out = new Segmento();
+	for(int i = 0; i < seg->getSimbolos()->size(); i++)
+		dur = dur + seg->getAt(i)->getDuracion();
+	while(dur > WHOLE)
+	{
+		out->pushBack(new Nota(WHOLE, 0));
+		dur = dur - WHOLE;
+	}
+	out->pushBack(new Nota(dur, 0));
+
+	return out;
+
 }
 
 /*------Getters------*/

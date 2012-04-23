@@ -28,7 +28,6 @@ class UsrConf/* : public Conf*/
 			// PHIC
 			bool getPhicActive();
 			bool getPhicDebug();
-            bool getMuDebug();
             int  getPhicFilterSelect();
             int  getPhicThresholdSelec();
             int  getPhicPolygonSimp();
@@ -39,26 +38,49 @@ class UsrConf/* : public Conf*/
             int  getPhicThresholdV();
 			// MU
 			bool getMuActive();
+			bool getMuDebug();
+			int getMuCompMix();
+			int getMuCompVoice1();
+			int getMuCompVoice2();
+			int getMuCompVoice3();
+			int getMuCompVoice4();
+			int getMuInstrVoice1();
+			int getMuInstrVoice2();
+			int getMuInstrVoice3();
+			int getMuInstrVoice4();
+			int getMuReconColors();
+			int getMuTempo();
 
         // write
         void write(std::string path);
 
         // setters
         // MUPHIC
-                // PHIC
-                void setPhicActive(bool b);
-                void setPhicDebug(bool b);
-                void setMuDebug(bool b);
-                void setPhicFilterSelect(int fn);
-                void setPhicThresholdSelec(int t);
-                void setPhicPolygonSimp(int i);
-                void setPhicNoiseSelec(int n);
-                void setPhicColorLevels(int c);
-                void setPhicThresholdH(int t);
-                void setPhicThresholdS(int t);
-                void setPhicThresholdV(int t);
-                // MU
-                void setMuActive(bool b);
+            // PHIC
+            void setPhicActive(bool b);
+            void setPhicDebug(bool b);
+            void setPhicFilterSelect(int fn);
+            void setPhicThresholdSelec(int t);
+            void setPhicPolygonSimp(int i);
+            void setPhicNoiseSelec(int n);
+            void setPhicColorLevels(int c);
+            void setPhicThresholdH(int t);
+            void setPhicThresholdS(int t);
+            void setPhicThresholdV(int t);
+            // MU
+            void setMuActive(bool b);
+			void setMuDebug(bool b);
+			void setMuCompMix(int c);
+			void setMuCompVoice1(int c);
+			void setMuCompVoice2(int c);
+			void setMuCompVoice3(int c);
+			void setMuCompVoice4(int c);
+			void setMuInstrVoice1(int i);
+			void setMuInstrVoice2(int i);
+			void setMuInstrVoice3(int i);
+			void setMuInstrVoice4(int i);
+			void setMuReconColors(int cs);
+			void setMuTempo(int t);
 
     protected:
 		// MUPHIC
@@ -76,6 +98,18 @@ class UsrConf/* : public Conf*/
 			// MU
 			bool muActive;
             bool muDebug;
+			int muCompMix;
+			int muCompVoice1;
+			int muCompVoice2;
+			int muCompVoice3;
+			int muCompVoice4;
+			int muInstrVoice1;
+			int muInstrVoice2;
+			int muInstrVoice3;
+			int muInstrVoice4;
+			int muReconColors;
+			int muTempo;
+
     private:
 };
 

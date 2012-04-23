@@ -42,7 +42,7 @@ string MidizatorABC::toMidi(Music* music)
 
 	// Escribimos en el fichero
 	// Cabecera
-	*f << "X:1\n";
+	*f << "X:23\n";
 	*f << "T:" + fName << endl;
 	*f << "L:" << music->getBaseLenght().first << "/" << music->getBaseLenght().second << endl;
 	*f << "%            End of header, start of tune body:" << endl;
