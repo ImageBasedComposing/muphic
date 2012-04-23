@@ -214,6 +214,62 @@ void UsrConf::write(std::string path)
             TiXmlElement * debugNode = new TiXmlElement( "debug" );
             muNode->LinkEndChild(debugNode);
         }
+
+		//Node for ComposerMix
+		TiXmlElement* muCompMixNode = new TiXmlElement("compositorMix");
+		char a[10];
+		muCompMixNode->LinkEndChild(new TiXmlText(our_itoa(muCompMix,a,10)));
+		muNode->LinkEndChild(muCompMixNode);
+
+		//Node for ComposerVoice1
+		TiXmlElement* muCompVoice1Node = new TiXmlElement("compositor_voice1");
+		muCompVoice1Node->LinkEndChild(new TiXmlText(our_itoa(muCompVoice1,a,10)));
+		muNode->LinkEndChild(muCompVoice1Node);
+
+		//Node for ComposerVoice2
+		TiXmlElement* muCompVoice2Node = new TiXmlElement("compositor_voice2");
+		muCompVoice2Node->LinkEndChild(new TiXmlText(our_itoa(muCompVoice2,a,10)));
+		muNode->LinkEndChild(muCompVoice2Node);
+
+		//Node for ComposerVoice3
+		TiXmlElement* muCompVoice3Node = new TiXmlElement("compositor_voice3");
+		muCompVoice3Node->LinkEndChild(new TiXmlText(our_itoa(muCompVoice3,a,10)));
+		muNode->LinkEndChild(muCompVoice3Node);
+
+		//Node for ComposerVoice4
+		TiXmlElement* muCompVoice4Node = new TiXmlElement("compositor_voice4");
+		muCompVoice4Node->LinkEndChild(new TiXmlText(our_itoa(muCompVoice4,a,10)));
+		muNode->LinkEndChild(muCompVoice4Node);
+
+		//Node for InstrumentVoice1
+		TiXmlElement* muInstrVoice1Node = new TiXmlElement("instrument_voice1");
+		muInstrVoice1Node->LinkEndChild(new TiXmlText(our_itoa(muInstrVoice1,a,10)));
+		muNode->LinkEndChild(muInstrVoice1Node);
+
+		//Node for InstrumentVoice2
+		TiXmlElement* muInstrVoice2Node = new TiXmlElement("instrument_voice2");
+		muInstrVoice2Node->LinkEndChild(new TiXmlText(our_itoa(muInstrVoice2,a,10)));
+		muNode->LinkEndChild(muInstrVoice2Node);
+
+		//Node for InstrumentVoice3
+		TiXmlElement* muInstrVoice3Node = new TiXmlElement("instrument_voice3");
+		muInstrVoice3Node->LinkEndChild(new TiXmlText(our_itoa(muInstrVoice3,a,10)));
+		muNode->LinkEndChild(muInstrVoice3Node);
+
+		//Node for InstrumentVoice4
+		TiXmlElement* muInstrVoice4Node = new TiXmlElement("instrument_voice4");
+		muInstrVoice4Node->LinkEndChild(new TiXmlText(our_itoa(muInstrVoice4,a,10)));
+		muNode->LinkEndChild(muInstrVoice4Node);
+
+		//Node for ReconColors
+		TiXmlElement* muReconColorsNode = new TiXmlElement("color-system");
+		muReconColorsNode->LinkEndChild(new TiXmlText(our_itoa(muReconColors,a,10)));
+		muNode->LinkEndChild(muReconColorsNode);
+
+		//Node for Tempo
+		TiXmlElement* muTempoNode = new TiXmlElement("tempo");
+		muTempoNode->LinkEndChild(new TiXmlText(our_itoa(muTempo,a,10)));
+		muNode->LinkEndChild(muTempoNode);
     }
 
 

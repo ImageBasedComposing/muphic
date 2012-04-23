@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Mon 23. Apr 19:18:31 2012
+** Created: Mon 23. Apr 20:06:39 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -116,12 +116,12 @@ public:
     QLabel *labelColorLevels;
     QGroupBox *groupBox_3;
     QSplitter *splitter;
-    QWidget *widget;
+    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout_12;
     QLabel *label_reconColors;
     QComboBox *comboBox_reconColors;
     QSpacerItem *horizontalSpacer_4;
-    QWidget *widget1;
+    QWidget *layoutWidget3;
     QGridLayout *gridLayout_5;
     QGroupBox *groupBox_v1;
     QGridLayout *gridLayout_6;
@@ -147,7 +147,7 @@ public:
     QComboBox *comboBox_v4Composer;
     QLabel *label_v4Instrument;
     QComboBox *comboBox_v4Instrument;
-    QWidget *widget2;
+    QWidget *layoutWidget4;
     QHBoxLayout *horizontalLayout_13;
     QLabel *label_composerMix;
     QComboBox *comboBox_composerMixer;
@@ -673,19 +673,19 @@ public:
         splitter->setObjectName(QString::fromUtf8("splitter"));
         splitter->setGeometry(QRect(10, 20, 411, 261));
         splitter->setOrientation(Qt::Vertical);
-        widget = new QWidget(splitter);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        horizontalLayout_12 = new QHBoxLayout(widget);
+        layoutWidget2 = new QWidget(splitter);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        horizontalLayout_12 = new QHBoxLayout(layoutWidget2);
         horizontalLayout_12->setSpacing(6);
         horizontalLayout_12->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
         horizontalLayout_12->setContentsMargins(0, 0, 0, 0);
-        label_reconColors = new QLabel(widget);
+        label_reconColors = new QLabel(layoutWidget2);
         label_reconColors->setObjectName(QString::fromUtf8("label_reconColors"));
 
         horizontalLayout_12->addWidget(label_reconColors);
 
-        comboBox_reconColors = new QComboBox(widget);
+        comboBox_reconColors = new QComboBox(layoutWidget2);
         comboBox_reconColors->setObjectName(QString::fromUtf8("comboBox_reconColors"));
         QSizePolicy sizePolicy7(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
         sizePolicy7.setHorizontalStretch(0);
@@ -701,15 +701,15 @@ public:
 
         horizontalLayout_12->addItem(horizontalSpacer_4);
 
-        splitter->addWidget(widget);
-        widget1 = new QWidget(splitter);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        gridLayout_5 = new QGridLayout(widget1);
+        splitter->addWidget(layoutWidget2);
+        layoutWidget3 = new QWidget(splitter);
+        layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
+        gridLayout_5 = new QGridLayout(layoutWidget3);
         gridLayout_5->setSpacing(6);
         gridLayout_5->setContentsMargins(11, 11, 11, 11);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         gridLayout_5->setContentsMargins(0, 0, 0, 0);
-        groupBox_v1 = new QGroupBox(widget1);
+        groupBox_v1 = new QGroupBox(layoutWidget3);
         groupBox_v1->setObjectName(QString::fromUtf8("groupBox_v1"));
         QSizePolicy sizePolicy8(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
         sizePolicy8.setHorizontalStretch(0);
@@ -744,7 +744,7 @@ public:
 
         gridLayout_5->addWidget(groupBox_v1, 0, 0, 1, 1);
 
-        groupBox_v2 = new QGroupBox(widget1);
+        groupBox_v2 = new QGroupBox(layoutWidget3);
         groupBox_v2->setObjectName(QString::fromUtf8("groupBox_v2"));
         sizePolicy8.setHeightForWidth(groupBox_v2->sizePolicy().hasHeightForWidth());
         groupBox_v2->setSizePolicy(sizePolicy8);
@@ -776,7 +776,7 @@ public:
 
         gridLayout_5->addWidget(groupBox_v2, 0, 1, 1, 1);
 
-        groupBox_v3 = new QGroupBox(widget1);
+        groupBox_v3 = new QGroupBox(layoutWidget3);
         groupBox_v3->setObjectName(QString::fromUtf8("groupBox_v3"));
         sizePolicy8.setHeightForWidth(groupBox_v3->sizePolicy().hasHeightForWidth());
         groupBox_v3->setSizePolicy(sizePolicy8);
@@ -808,7 +808,7 @@ public:
 
         gridLayout_5->addWidget(groupBox_v3, 1, 0, 1, 1);
 
-        groupBox_v4 = new QGroupBox(widget1);
+        groupBox_v4 = new QGroupBox(layoutWidget3);
         groupBox_v4->setObjectName(QString::fromUtf8("groupBox_v4"));
         sizePolicy8.setHeightForWidth(groupBox_v4->sizePolicy().hasHeightForWidth());
         groupBox_v4->setSizePolicy(sizePolicy8);
@@ -840,22 +840,22 @@ public:
 
         gridLayout_5->addWidget(groupBox_v4, 1, 1, 1, 1);
 
-        splitter->addWidget(widget1);
-        widget2 = new QWidget(splitter);
-        widget2->setObjectName(QString::fromUtf8("widget2"));
-        horizontalLayout_13 = new QHBoxLayout(widget2);
+        splitter->addWidget(layoutWidget3);
+        layoutWidget4 = new QWidget(splitter);
+        layoutWidget4->setObjectName(QString::fromUtf8("layoutWidget4"));
+        horizontalLayout_13 = new QHBoxLayout(layoutWidget4);
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
-        label_composerMix = new QLabel(widget2);
+        label_composerMix = new QLabel(layoutWidget4);
         label_composerMix->setObjectName(QString::fromUtf8("label_composerMix"));
         label_composerMix->setMinimumSize(QSize(80, 0));
         label_composerMix->setMaximumSize(QSize(80, 16777215));
 
         horizontalLayout_13->addWidget(label_composerMix);
 
-        comboBox_composerMixer = new QComboBox(widget2);
+        comboBox_composerMixer = new QComboBox(layoutWidget4);
         comboBox_composerMixer->setObjectName(QString::fromUtf8("comboBox_composerMixer"));
 
         horizontalLayout_13->addWidget(comboBox_composerMixer);
@@ -864,7 +864,7 @@ public:
 
         horizontalLayout_13->addItem(horizontalSpacer_2);
 
-        label_tempo = new QLabel(widget2);
+        label_tempo = new QLabel(layoutWidget4);
         label_tempo->setObjectName(QString::fromUtf8("label_tempo"));
         sizePolicy5.setHeightForWidth(label_tempo->sizePolicy().hasHeightForWidth());
         label_tempo->setSizePolicy(sizePolicy5);
@@ -874,7 +874,7 @@ public:
 
         horizontalLayout_13->addWidget(label_tempo);
 
-        comboBox_v3Composer_3 = new QComboBox(widget2);
+        comboBox_v3Composer_3 = new QComboBox(layoutWidget4);
         comboBox_v3Composer_3->setObjectName(QString::fromUtf8("comboBox_v3Composer_3"));
         sizePolicy7.setHeightForWidth(comboBox_v3Composer_3->sizePolicy().hasHeightForWidth());
         comboBox_v3Composer_3->setSizePolicy(sizePolicy7);
@@ -887,18 +887,7 @@ public:
 
         horizontalLayout_13->addItem(horizontalSpacer_6);
 
-        splitter->addWidget(widget2);
-        label_reconColors->raise();
-        comboBox_reconColors->raise();
-        groupBox_v2->raise();
-        groupBox_v2->raise();
-        groupBox_v1->raise();
-        groupBox_v3->raise();
-        groupBox_v4->raise();
-        label_composerMix->raise();
-        comboBox_composerMixer->raise();
-        label_tempo->raise();
-        comboBox_v3Composer_3->raise();
+        splitter->addWidget(layoutWidget4);
 
         verticalLayout_5->addWidget(groupBox_3);
 
@@ -906,15 +895,13 @@ public:
         gridLayout_3->addLayout(verticalLayout_5, 1, 2, 1, 1);
 
         GuiMupic->setCentralWidget(centralWidget);
-        layoutWidget->raise();
-        groupBox_3->raise();
         statusBar = new QStatusBar(GuiMupic);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         GuiMupic->setStatusBar(statusBar);
 
         retranslateUi(GuiMupic);
 
-        filterSelComboBox->setCurrentIndex(3);
+        filterSelComboBox->setCurrentIndex(2);
         comboBox_reconColors->setCurrentIndex(2);
         comboBox_v1Composer->setCurrentIndex(2);
         comboBox_v1Instrument->setCurrentIndex(0);
