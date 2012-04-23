@@ -19,12 +19,21 @@
 #include <QTime>
 #include <QSize>
 
+/*
 #include <phonon/audiooutput.h>
 #include <phonon/seekslider.h>
 #include <phonon/mediaobject.h>
 #include <phonon/volumeslider.h>
 #include <phonon/backendcapabilities.h>
 #include <phonon/mediasource.h>
+*/
+
+#include <Phonon/AudioOutput>
+#include <Phonon/SeekSlider>
+#include <Phonon/MediaObject>
+#include <Phonon/VolumeSlider>
+#include <Phonon/BackendCapabilities>
+#include <Phonon/MediaSource>
 
 #define DEFAULT_PIC "./test1.png"
 
@@ -80,6 +89,28 @@ private slots:
     void on_horizontalSliderTH_sliderMoved(int position);
 
     void on_horizontalSliderTV_sliderMoved(int position);
+
+    void on_comboBox_reconColors_currentIndexChanged(int index);
+
+    void on_comboBox_v1Composer_currentIndexChanged(int index);
+
+    void on_comboBox_v1Instrument_currentIndexChanged(int index);
+
+    void on_comboBox_v2Composer_currentIndexChanged(int index);
+
+    void on_comboBox_v2Instruments_currentIndexChanged(int index);
+
+    void on_comboBox_v3Composer_currentIndexChanged(int index);
+
+    void on_comboBox_v3Instrument_currentIndexChanged(int index);
+
+    void on_comboBox_v4Composer_currentIndexChanged(int index);
+
+    void on_comboBox_v4Instrument_currentIndexChanged(int index);
+
+    void on_comboBox_composerMixer_currentIndexChanged(int index);
+
+    void on_comboBox_v3Composer_3_currentIndexChanged(int index);
 
 private:
     Ui::GuiMupic *ui;
