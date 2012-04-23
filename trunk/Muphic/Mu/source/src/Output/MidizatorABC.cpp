@@ -44,6 +44,7 @@ string MidizatorABC::toMidi(Music* music)
 	// Cabecera
 	*f << "X:23\n";
 	*f << "T:" + fName << endl;
+	*f << "M:" << "C" << endl;
 	*f << "L:" << music->getBaseLenght().first << "/" << music->getBaseLenght().second << endl;
 	*f << "%            End of header, start of tune body:" << endl;
 
@@ -71,6 +72,7 @@ string MidizatorABC::toMidi(Music* music)
 
 		tmpduracion = 0;
 
+		bool compasCompleto = false;
 		// Trabajamos con cada segmento
 		for( int j = 0; j < v->getSegmentos()->size(); j++)
 		{
@@ -111,7 +113,7 @@ string MidizatorABC::toMidi(Music* music)
 					*f << "]";
 			}
 
-
+			
 			// Trabajamos con cada símbolo
 			for( int k = 0; k < s->getSimbolos()->size(); k++)
 			{
@@ -127,6 +129,7 @@ string MidizatorABC::toMidi(Music* music)
 					// no cabe la nota en el compás
 					if (tmpduracion > duracionCompas)
 					{
+						compasCompleto = true;
 						// imprimir lo que quepa de la nota
 						tmpnota1 = duracionCompas - (tmpduracion - simb->getDuracion());
 						tmpnota2 = simb->getDuracion() - tmpnota1;
@@ -175,11 +178,12 @@ string MidizatorABC::toMidi(Music* music)
 						// imprimir nota
 
 						*f << imprimeNota(simb, music->getBaseLenght());
-
+						compasCompleto = false;
 						if (tmpduracion == duracionCompas)
 						{
 							// imprimir barra de compas
 							*f << " |";
+							compasCompleto = true;
 							if (numCompasesLinea > 5 && k+1 < s->getSimbolos()->size())
 							{//cuidado de no meter eol al final de la obra, que luego hay que poner "]"
 								*f << endl; //Salto de linea para no crear una linea enorme
@@ -204,7 +208,10 @@ string MidizatorABC::toMidi(Music* music)
 
 			} // Simbolos
 		} // Segmentos
-		*f << "]" << endl; //termina la obra para esta voz
+		if(compasCompleto)
+			*f << "|" << endl; //termina la obra para esta voz
+		else
+			*f << "||" << endl; //termina la obra para esta voz
 	} //VocesS
 	f->close();
 
