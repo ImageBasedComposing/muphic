@@ -389,7 +389,7 @@
              <item>
               <widget class="QComboBox" name="filterSelComboBox">
                <property name="currentIndex">
-                <number>3</number>
+                <number>2</number>
                </property>
                <item>
                 <property name="text">
@@ -913,7 +913,7 @@
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QLabel" name="label_reconColors">
@@ -977,7 +977,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="0" column="0">
              <widget class="QGroupBox" name="groupBox_v1">
@@ -1297,7 +1297,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
              <widget class="QLabel" name="label_composerMix">
@@ -1443,26 +1443,12 @@
            </layout>
           </widget>
          </widget>
-         <zorder>label_reconColors</zorder>
-         <zorder>comboBox_reconColors</zorder>
-         <zorder>groupBox_v2</zorder>
-         <zorder>groupBox_v2</zorder>
-         <zorder>groupBox_v1</zorder>
-         <zorder>groupBox_v3</zorder>
-         <zorder>groupBox_v4</zorder>
-         <zorder></zorder>
-         <zorder>label_composerMix</zorder>
-         <zorder>comboBox_composerMixer</zorder>
-         <zorder>label_tempo</zorder>
-         <zorder>comboBox_v3Composer_3</zorder>
         </widget>
        </item>
       </layout>
      </item>
     </layout>
    </widget>
-   <zorder>layoutWidget</zorder>
-   <zorder>groupBox_3</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>

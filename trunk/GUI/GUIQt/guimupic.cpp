@@ -28,17 +28,17 @@ void GuiMupic::initialize()
     usrConf->setPhicColorLevels(3);
 
     //We initialize Mu
-    usrConf->setMuReconColors(2);
+    usrConf->setMuReconColors(1);
     usrConf->setMuCompVoice1(2);
-    usrConf->setMuInstrVoice1(2);
+    usrConf->setMuInstrVoice1(45);
     usrConf->setMuCompVoice2(2);
-    usrConf->setMuInstrVoice2(2);
+    usrConf->setMuInstrVoice2(73);
     usrConf->setMuCompVoice3(2);
-    usrConf->setMuInstrVoice3(2);
+    usrConf->setMuInstrVoice3(34);
     usrConf->setMuCompVoice4(2);
-    usrConf->setMuInstrVoice4(2);
+    usrConf->setMuInstrVoice4(128);
     usrConf->setMuCompMix(2);
-    usrConf->setMuTempo(2);
+    usrConf->setMuTempo(120);
 
     newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
     ui->graphicsView_Pic->setScene(newScene);
@@ -234,8 +234,8 @@ void GuiMupic::on_pushButton_Generate_clicked()
 
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
 
-    UsrConf* usrConf = new UsrConf();
     usrConf->setPhicActive(false);
+    usrConf->setMuDebug(false);
     usrConf->setMuActive(true);
     //std::string name = changeExtension(fileName.toStdString(), "xml");
     usrConf->write("user_conf.xml");
