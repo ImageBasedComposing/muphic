@@ -177,6 +177,9 @@
     <ClInclude Include="..\source\include\Compositors\ComposerFigBass2.h">
       <Filter>Archivos de encabezado\Compositors</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\ComposerVoice.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Mu.cpp">

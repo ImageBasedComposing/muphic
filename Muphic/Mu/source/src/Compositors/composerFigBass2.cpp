@@ -1,22 +1,20 @@
 #include "Compositors/ComposerFigBass2.h"
 
 /*------Constructoras------*/
-ComposerFigBass2::ComposerFigBass2()
+ComposerFigBass2::ComposerFigBass2(ColorSystem* sc) : ComposerVoice(sc)
 {
 	// ctor
 }
 
-ComposerFigBass2::ComposerFigBass2(TableScale* tbScale)
+ComposerFigBass2::ComposerFigBass2(ColorSystem* sc, TableScale* tbScale) : ComposerVoice(sc, tbScale)
 {
-	tableScale = tbScale;
+	// ctor
 }
 
 /*------Destructora------*/
 ComposerFigBass2::~ComposerFigBass2()
 {
 	//// dtor
-	//delete tableScale;
-	//tableScale = NULL;
 }
 
 //Hacemos un bajo que respete las normas del contrapunto en cierta medida.
@@ -60,21 +58,20 @@ bool ComposerFigBass2::compBassFig(Segmento* seg1, Segmento* seg2, Segmento* seg
 
 	for(int i = 0; i < numNotes; i++)
 	{
-		tableScale->getToneDegree(1);
+		tb->getToneDegree(1);
 	}
 
 	return true;
 }
 
 //Hacemos un bajo simple que se basa en coger el color de la figura (y por tanto su función armónica)
-bool ComposerFigBass2::compBassFig(FigureMusic* f, int dur, Segmento* seg3, int maxDur, int minDur)
+bool ComposerFigBass2::compBassFig(FigureMusic* f, Segmento* seg3, int dur, int maxDur, int minDur)
 {
 	int duracionTotal = 0;
 
 	Simbolos* simbtmp = new Simbolos();
 
-	Scriabin sc;
-	int tonebass = (sc.getNota(f->getRGB(), tableScale) % ESCALA) + ESCALA;
+	int tonebass = (cs->getNota(f->getRGB(), tb) % ESCALA) + ESCALA;
 
 	while (duracionTotal < dur)
 	{
@@ -94,4 +91,9 @@ bool ComposerFigBass2::compBassFig(FigureMusic* f, int dur, Segmento* seg3, int 
 	seg3->setSimbolos(simbtmp);
 
 	return true;
+}
+
+bool ComposerFigBass2::composeVoice(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur, Segmento* seg1)
+{
+	return compBassFig(f,seg,dur,maxDur,minDur);
 }

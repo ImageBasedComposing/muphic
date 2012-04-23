@@ -2,6 +2,9 @@
 #include "Compositors/ComposerDemo.h"
 #include "Compositors/ComposerMultiple.h"
 #include "Compositors/ComposerTimothy2.h"
+#include "Compositors/ComposerFigMelody2.h"
+#include "Compositors/ComposerFigBass2.h"
+#include "Compositors/ComposerFigRitmo2.h"
 #include "launcher.h"
 #include "Music/Acorde.h"
 
@@ -46,36 +49,86 @@ int main( int argc, const char* argv[] )
 	usrConf->readMu(usrConfPath);
 
 	/* do thingies with usrconf */
+	//Color system we use in the composition:
+	ColorSystem* cs;
+	switch(usrConf->getMuReconColors()){
+		case 2:	
+			cs = new Scriabin(); break;
+		default : 
+			cs = new Scriabin();
+	}
+	//All the compositors:
+	ComposerVoice* compVoice1;
+	switch(usrConf->getMuCompVoice1()){
+		case 2:	
+			compVoice1 = new ComposerFigMelody2(cs); break;
+		default : 
+			compVoice1 = new ComposerFigMelody2(cs);
+	}
+	ComposerVoice* compVoice2;
+	switch(usrConf->getMuCompVoice2()){
+		case 2:	
+			compVoice2 = new ComposerFigMelody2(cs); break;
+		default : 
+			compVoice2 = new ComposerFigMelody2(cs);
+	}
+	ComposerVoice* compVoice3;
+	switch(usrConf->getMuCompVoice3()){
+		case 2:	
+			compVoice3 = new ComposerFigBass2(cs); break;
+		default : 
+			compVoice3 = new ComposerFigBass2(cs);
+	}
+	ComposerVoice* compVoice4;
+	switch(usrConf->getMuCompVoice4()){
+		case 2:	
+			compVoice4 = new ComposerFigRitmo2(cs); break;
+		default : 
+			compVoice4 = new ComposerFigRitmo2(cs);
+	}
 
+	//Now we assign the instruments
+	//Se podría hacer mientras se crea el compositor (dentro del switch)
+	vector<int> instruments;
+	instruments.clear();
+	instruments.push_back(PIZZICATO_STRINGS);
+	compVoice1->setInstruments(instruments);
+	instruments.clear();
+	instruments.push_back(FLUTE);
+	compVoice2->setInstruments(instruments);
+	instruments.clear();
+	instruments.push_back(ELECTRIC_BASS_PICK);
+	compVoice3->setInstruments(instruments);
+	instruments.clear();
+	instruments.push_back(17);
+	instruments.push_back(36);
+	compVoice4->setInstruments(instruments);
+	instruments.clear();
 
-	// DEBUGGING TIME
-	// Introducing a brand new composer!!
-	// ~ * ~CoMp0zer d3M0!!~ * ~
-
-	//MidizatorWAV* mdztor = new MidizatorWAV();
-	//Music* m = new Music(mdztor);
-
-	//Composer* comp = new ComposerDemo( m );
-	//Composer* comp2 = new ComposerMultiple( m );
-	Composer* compTimy = new ComposerTimothy2();
-
-    //comp->compose(analysedPic, usrConfPath);
-	//comp2->compose(analysedPic, usrConfPath);
-
-	compTimy->compose(analysedPic, usrConfPath);
+	//The compositor that is going to mix everything
+	Composer* compMix;
+	switch(usrConf->getMuCompMix()){
+		case 2:	
+			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4); break;
+		default : 
+			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4);
+	}
+	
+	compMix->setTmpMIDIPath(analysedPic);
+	compMix->compose(analysedPic, usrConfPath);
 
 	Launcher* l = new Launcher();
-	string args[] = {"MelodyTimothy1.mid", "-Ow", "-o", "1.wav"};
+	string args[] = {analysedPic+".mid", "-Ow", "-o", analysedPic+".wav"};
 
 	l->launch(4, Launcher::TIMIDITY, args);
 
-	/*
-	Figuras* f = new Figuras();
-	f->cargar("test1");
-	f->setParentSonStructure();*/
-
 	delete l;
-	delete compTimy;
+	delete compMix;
+	delete compVoice1;
+	delete compVoice2;
+	delete compVoice3;
+	delete compVoice4;
+	delete cs;
 	delete usrConf;
 
 	return 0;

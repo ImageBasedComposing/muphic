@@ -87,6 +87,7 @@
     <ClInclude Include="..\source\include\Compositors\ComposerRitmo.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerTimothy.h" />
     <ClInclude Include="..\source\include\Compositors\ComposerTimothy2.h" />
+    <ClInclude Include="..\source\include\Compositors\ComposerVoice.h" />
     <ClInclude Include="..\source\include\Compositors\PatternGen.h" />
     <ClInclude Include="..\source\include\Compositors\Patterns.h" />
     <ClInclude Include="..\source\include\Mu.h" />
