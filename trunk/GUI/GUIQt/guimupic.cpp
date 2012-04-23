@@ -27,6 +27,19 @@ void GuiMupic::initialize()
     usrConf->setPhicPolygonSimp(2);
     usrConf->setPhicColorLevels(3);
 
+    //We initialize Mu
+    usrConf->setMuReconColors(2);
+    usrConf->setMuCompVoice1(2);
+    usrConf->setMuInstrVoice1(2);
+    usrConf->setMuCompVoice2(2);
+    usrConf->setMuInstrVoice2(2);
+    usrConf->setMuCompVoice3(2);
+    usrConf->setMuInstrVoice3(2);
+    usrConf->setMuCompVoice4(2);
+    usrConf->setMuInstrVoice4(2);
+    usrConf->setMuCompMix(2);
+    usrConf->setMuTempo(2);
+
     newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
     ui->graphicsView_Pic->setScene(newScene);
 
@@ -576,4 +589,59 @@ void GuiMupic::on_horizontalSliderTV_sliderMoved(int position)
     usrConf->setPhicThresholdV(position);
     char a[10];
     ui->labelThresholdV->setText(our_itoa(position,a,10));
+}
+
+void GuiMupic::on_comboBox_reconColors_currentIndexChanged(int index)
+{
+    usrConf->setMuReconColors(index);
+}
+
+void GuiMupic::on_comboBox_v1Composer_currentIndexChanged(int index)
+{
+    usrConf->setMuCompVoice1(index);
+}
+
+void GuiMupic::on_comboBox_v1Instrument_currentIndexChanged(int index)
+{
+    usrConf->setMuInstrVoice1(index);
+}
+
+void GuiMupic::on_comboBox_v2Composer_currentIndexChanged(int index)
+{
+    usrConf->setMuCompVoice2(index);
+}
+
+void GuiMupic::on_comboBox_v2Instruments_currentIndexChanged(int index)
+{
+    usrConf->setMuInstrVoice2(index);
+}
+
+void GuiMupic::on_comboBox_v3Composer_currentIndexChanged(int index)
+{
+    usrConf->setMuCompVoice3(index);
+}
+
+void GuiMupic::on_comboBox_v3Instrument_currentIndexChanged(int index)
+{
+    usrConf->setMuInstrVoice3(index);
+}
+
+void GuiMupic::on_comboBox_v4Composer_currentIndexChanged(int index)
+{
+    usrConf->setMuCompVoice4(index);
+}
+
+void GuiMupic::on_comboBox_v4Instrument_currentIndexChanged(int index)
+{
+    usrConf->setMuInstrVoice4(index);
+}
+
+void GuiMupic::on_comboBox_composerMixer_currentIndexChanged(int index)
+{
+    usrConf->setMuCompMix(index);
+}
+
+void GuiMupic::on_comboBox_v3Composer_3_currentIndexChanged(int index)
+{
+    usrConf->setMuTempo(index);
 }

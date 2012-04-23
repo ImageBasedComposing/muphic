@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1064</width>
-    <height>516</height>
+    <width>1188</width>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1195</width>
-      <height>481</height>
+      <width>1171</width>
+      <height>631</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
@@ -151,8 +151,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>323</width>
-                 <height>303</height>
+                 <width>311</width>
+                 <height>453</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -176,6 +176,159 @@
         </layout>
        </item>
       </layout>
+     </item>
+     <item row="1" column="3">
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     </item>
+     <item row="1" column="4">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>13</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="1" colspan="3">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="pushButton_Analyze">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Analyze</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_Generate">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Compose</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QProgressBar" name="progressBar_Generate">
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_player">
+         <item>
+          <widget class="QPushButton" name="pushButton_Play">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>play.png</normaloff>play.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_pause">
+           <property name="text">
+            <string>Pause</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_Stop">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>stop.png</normaloff>stop.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="SeekBar" name="seekSlider" native="true"/>
+         </item>
+         <item>
+          <widget class="VolumeBar" name="volumeSlider" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>255</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLCDNumber" name="timeLcd"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item row="1" column="2">
       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -236,7 +389,7 @@
              <item>
               <widget class="QComboBox" name="filterSelComboBox">
                <property name="currentIndex">
-                <number>2</number>
+                <number>3</number>
                </property>
                <item>
                 <property name="text">
@@ -736,7 +889,7 @@
          <property name="minimumSize">
           <size>
            <width>441</width>
-           <height>128</height>
+           <height>300</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -748,328 +901,568 @@
          <property name="title">
           <string>Mu Options</string>
          </property>
-         <widget class="QWidget" name="layoutWidget">
+         <widget class="QSplitter" name="splitter">
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>23</y>
-            <width>421</width>
-            <height>80</height>
+            <y>20</y>
+            <width>411</width>
+            <height>261</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_12">
-             <item>
-              <widget class="QLabel" name="labelComposer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <widget class="QWidget" name="">
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <item>
+             <widget class="QLabel" name="label_reconColors">
+              <property name="text">
+               <string>Color System</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_reconColors">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <item>
                <property name="text">
-                <string>Composer</string>
+                <string>Demo1</string>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="currentIndex">
-                <number>1</number>
-               </property>
-               <item>
-                <property name="text">
-                 <string>Timothy Composer</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Multiple Composer</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_12">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_13">
-             <item>
-              <widget class="QLabel" name="labelInstruments">
+              </item>
+              <item>
                <property name="text">
-                <string>Instruments</string>
+                <string>Demo2</string>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox_2">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <item>
-                <property name="text">
-                 <string>Piano</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_13">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_14">
-             <item>
-              <widget class="QLabel" name="labelName">
+              </item>
+              <item>
                <property name="text">
-                <string>Name</string>
+                <string>Scriabin</string>
                </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTextEdit" name="textEdit">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="verticalScrollBarPolicy">
-                <enum>Qt::ScrollBarAlwaysOff</enum>
-               </property>
-               <property name="horizontalScrollBarPolicy">
-                <enum>Qt::ScrollBarAsNeeded</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="labelOutput">
-               <property name="text">
-                <string>Output</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox_3">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <item>
-                <property name="text">
-                 <string>.mid</string>
-                </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="">
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_v1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>179</width>
+                <height>83</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Voice 1</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_6">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_v1Composer">
+                 <property name="text">
+                  <string>Composer</string>
+                 </property>
+                </widget>
                </item>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboBox_v1Composer">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Demo1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Demo2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>FigMelody2</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_v1Instrument">
+                 <property name="text">
+                  <string>Instrument</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="comboBox_v1Instrument">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Strings</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Flute</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Electric Bass</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="groupBox_v2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>179</width>
+                <height>83</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Voice 2</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_8">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_v2Composer">
+                 <property name="text">
+                  <string>Composer</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboBox_v2Composer">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Demo1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Demo2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>FigMelody2</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_v2Instrument">
+                 <property name="text">
+                  <string>Instrument</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="comboBox_v2Instruments">
+                 <property name="currentIndex">
+                  <number>1</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Strings</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Flute</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Electric Bass</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QGroupBox" name="groupBox_v3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>179</width>
+                <height>83</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Voice 3</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_7">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_v3Composer">
+                 <property name="text">
+                  <string>Composer</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboBox_v3Composer">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Demo1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Demo2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>FigBass2</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_v3Instrument">
+                 <property name="text">
+                  <string>Instrument</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="comboBox_v3Instrument">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Strings</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Flute</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Electric Bass</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QGroupBox" name="groupBox_v4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>179</width>
+                <height>83</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Voice 4</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_v4Composer">
+                 <property name="text">
+                  <string>Composer</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboBox_v4Composer">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Demo1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Demo2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>FigRithm2</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_v4Instrument">
+                 <property name="text">
+                  <string>Instrument</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="comboBox_v4Instrument">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Demo1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Demo2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Drums &amp; Clanks</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="">
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <widget class="QLabel" name="label_composerMix">
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Composer Mixer</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_composerMixer">
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Demo1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Demo2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Timothy2</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>55</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_tempo">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Tempo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_v3Composer_3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>1/4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2/4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3/4</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
          </widget>
+         <zorder>label_reconColors</zorder>
+         <zorder>comboBox_reconColors</zorder>
+         <zorder>groupBox_v2</zorder>
+         <zorder>groupBox_v2</zorder>
+         <zorder>groupBox_v1</zorder>
+         <zorder>groupBox_v3</zorder>
+         <zorder>groupBox_v4</zorder>
+         <zorder></zorder>
+         <zorder>label_composerMix</zorder>
+         <zorder>comboBox_composerMixer</zorder>
+         <zorder>label_tempo</zorder>
+         <zorder>comboBox_v3Composer_3</zorder>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="1" column="3">
-      <layout class="QVBoxLayout" name="verticalLayout_2"/>
-     </item>
-     <item row="1" column="4">
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>13</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="2" column="1" colspan="3">
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QPushButton" name="pushButton_Analyze">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>150</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Analyze</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_Generate">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>150</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Compose</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QProgressBar" name="progressBar_Generate">
-           <property name="value">
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_player">
-         <item>
-          <widget class="QPushButton" name="pushButton_Play">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>play.png</normaloff>play.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_pause">
-           <property name="text">
-            <string>Pause</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_Stop">
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>stop.png</normaloff>stop.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="SeekBar" name="seekSlider" native="true"/>
-         </item>
-         <item>
-          <widget class="VolumeBar" name="volumeSlider" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>255</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLCDNumber" name="timeLcd"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="0">
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>10</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="1">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>10</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
     </layout>
    </widget>
+   <zorder>layoutWidget</zorder>
+   <zorder>groupBox_3</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
