@@ -18,7 +18,7 @@ class ComposerVoice
     public:
 		ComposerVoice(ColorSystem* cs){ this->cs = cs; this->tb = NULL;};
 		ComposerVoice(ColorSystem* cs, TableScale* tb){ this->cs = cs; this->tb = tb;};
-		virtual ~ComposerVoice(){}
+		virtual ~ComposerVoice(){};
 
 		//virtual bool composeVoice(FigureMusic* f, Segmento* seg, int dur, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE, Segmento* seg1 = NULL){return false;};
 		virtual bool composeVoice(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur){return false;};
@@ -50,7 +50,7 @@ class ComposerVoice
 		inline TableScale* getTableScale(){return tb;};
 		inline vector<int> getInstruments(){return instruments;};
 		inline int getInstrument(){return instruments.front();};
-		
+
 /*------Setters------*/
 		void setColorSystem(ColorSystem* cs){this->cs = cs;}
 		void setTableScale(TableScale* tb){this->tb = tb;};
@@ -60,8 +60,6 @@ class ComposerVoice
 		ColorSystem* cs;
 		TableScale* tb;
 		vector<int> instruments;
-
-    private:
 };
 
 #endif // COMPOSERVOICE_H
