@@ -301,7 +301,8 @@ void GuiMupic::on_pushButton_Play_clicked()
 
     if(!is_paused)
     {
-        mediaSource = new Phonon::MediaSource("./1.wav");
+        std::string analysedPic = changeExtension(imageFile.toStdString(), "");
+        mediaSource = new Phonon::MediaSource((analysedPic+".wav").c_str());
         mediaObject->setCurrentSource(*mediaSource);
         mediaObject->play();
         ui->pushButton_pause->setEnabled(true);
