@@ -7,6 +7,6 @@ all:
 	$(MAKE) -C ./GUI/GUIQt
 	mv ./GUI/GUIQt/GUIQt ./Muphic/bin/Debug/GUIQt_linux
 	$(MAKE) -C ./Muphic/timidity
-	mv ./Muphic/timidity/timidity/timidity ./Muphic/bin/Debug/timidity
+	mv ./Muphic/timidity/timidity/timidity ./Muphic/bin/Debug/
 
 
