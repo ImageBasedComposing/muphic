@@ -7,52 +7,64 @@
         <color>
             <name>Dovahkiin</name>
             <RGB>
-                <R>254</R>
-                <G>241</G>
-                <B>0</B>
+                <R>246</R>
+                <G>235</G>
+                <B>30</B>
             </RGB>
             <gradient>0</gradient>
         </color>
         <vertexList num="4">
             <vertex>
                 <position>
-                    <x>16</x>
-                    <y>144</y>
+                    <x>15</x>
+                    <y>143</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>117</x>
+                    <y>145</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>118</x>
+                    <y>52</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
                     <x>16</x>
                     <y>51</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>118</x>
-                    <y>51</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>118</x>
-                    <y>144</y>
                 </position>
             </vertex>
         </vertexList>
-        <area>9486</area>
+        <area>9436</area>
         <canvas>
             <figure>
                 <id>5</id>
                 <color>
                     <name>Dovahkiin</name>
                     <RGB>
-                        <R>197</R>
-                        <G>197</G>
-                        <B>186</B>
+                        <R>225</R>
+                        <G>219</G>
+                        <B>95</B>
                     </RGB>
                     <gradient>0</gradient>
                 </color>
-                <vertexList num="3">
+                <vertexList num="4">
+                    <vertex>
+                        <position>
+                            <x>85</x>
+                            <y>120</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>34</x>
+                            <y>120</y>
+                        </position>
+                    </vertex>
                     <vertex>
                         <position>
                             <x>32</x>
@@ -61,144 +73,174 @@
                     </vertex>
                     <vertex>
                         <position>
-                            <x>33</x>
-                            <y>120</y>
-                        </position>
-                    </vertex>
-                    <vertex>
-                        <position>
-                            <x>86</x>
-                            <y>119</y>
+                            <x>32</x>
+                            <y>118</y>
                         </position>
                     </vertex>
                 </vertexList>
-                <area>1405</area>
+                <area>0</area>
             </figure>
         </canvas>
     </figure>
     <figure>
-        <id>4</id>
+        <id>3</id>
         <color>
             <name>Dovahkiin</name>
             <RGB>
-                <R>230</R>
-                <G>31</G>
-                <B>38</B>
+                <R>198</R>
+                <G>56</G>
+                <B>46</B>
             </RGB>
             <gradient>0</gradient>
         </color>
         <vertexList num="16">
             <vertex>
                 <position>
-                    <x>186</x>
+                    <x>187</x>
+                    <y>139</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>203</x>
                     <y>138</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
-                    <x>167</x>
-                    <y>131</y>
+                    <x>220</x>
+                    <y>130</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
-                    <x>154</x>
-                    <y>119</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>146</x>
-                    <y>104</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>144</x>
-                    <y>83</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>150</x>
-                    <y>64</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>163</x>
-                    <y>49</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>181</x>
-                    <y>40</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>198</x>
-                    <y>39</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>218</x>
-                    <y>46</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>231</x>
-                    <y>58</y>
-                </position>
-            </vertex>
-            <vertex>
-                <position>
-                    <x>239</x>
-                    <y>73</y>
+                    <x>235</x>
+                    <y>114</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
                     <x>241</x>
-                    <y>95</y>
+                    <y>96</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
-                    <x>234</x>
-                    <y>115</y>
+                    <x>241</x>
+                    <y>81</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
-                    <x>221</x>
-                    <y>129</y>
+                    <x>235</x>
+                    <y>63</y>
                 </position>
             </vertex>
             <vertex>
                 <position>
-                    <x>204</x>
-                    <y>137</y>
+                    <x>220</x>
+                    <y>47</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>199</x>
+                    <y>39</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>180</x>
+                    <y>40</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>164</x>
+                    <y>48</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>149</x>
+                    <y>65</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>143</x>
+                    <y>84</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>145</x>
+                    <y>103</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>153</x>
+                    <y>118</y>
+                </position>
+            </vertex>
+            <vertex>
+                <position>
+                    <x>168</x>
+                    <y>132</y>
                 </position>
             </vertex>
         </vertexList>
-        <area>7450</area>
+        <area>7565</area>
         <canvas>
             <figure>
-                <id>1</id>
+                <id>2</id>
                 <color>
                     <name>Dovahkiin</name>
                     <RGB>
-                        <R>36</R>
-                        <G>174</G>
-                        <B>75</B>
+                        <R>151</R>
+                        <G>90</G>
+                        <B>52</B>
                     </RGB>
                     <gradient>0</gradient>
                 </color>
-                <vertexList num="3">
+                <vertexList num="8">
+                    <vertex>
+                        <position>
+                            <x>186</x>
+                            <y>106</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>207</x>
+                            <y>59</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>211</x>
+                            <y>58</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>233</x>
+                            <y>104</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>213</x>
+                            <y>61</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>209</x>
+                            <y>58</y>
+                        </position>
+                    </vertex>
                     <vertex>
                         <position>
                             <x>186</x>
@@ -207,57 +249,51 @@
                     </vertex>
                     <vertex>
                         <position>
-                            <x>210</x>
-                            <y>58</y>
-                        </position>
-                    </vertex>
-                    <vertex>
-                        <position>
                             <x>233</x>
-                            <y>105</y>
+                            <y>106</y>
                         </position>
                     </vertex>
                 </vertexList>
-                <area>1104</area>
+                <area>37</area>
             </figure>
             <figure>
                 <id>0</id>
                 <color>
                     <name>Dovahkiin</name>
                     <RGB>
-                        <R>0</R>
-                        <G>162</G>
-                        <B>232</B>
+                        <R>6</R>
+                        <G>158</G>
+                        <B>226</B>
                     </RGB>
                     <gradient>0</gradient>
                 </color>
                 <vertexList num="4">
                     <vertex>
                         <position>
-                            <x>153</x>
-                            <y>99</y>
+                            <x>152</x>
+                            <y>98</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>183</x>
+                            <y>100</y>
+                        </position>
+                    </vertex>
+                    <vertex>
+                        <position>
+                            <x>184</x>
+                            <y>75</y>
                         </position>
                     </vertex>
                     <vertex>
                         <position>
                             <x>153</x>
                             <y>74</y>
-                        </position>
-                    </vertex>
-                    <vertex>
-                        <position>
-                            <x>184</x>
-                            <y>74</y>
-                        </position>
-                    </vertex>
-                    <vertex>
-                        <position>
-                            <x>184</x>
-                            <y>99</y>
                         </position>
                     </vertex>
                 </vertexList>
-                <area>775</area>
+                <area>761</area>
             </figure>
         </canvas>
     </figure>
