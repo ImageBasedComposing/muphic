@@ -68,13 +68,11 @@ private slots:
 
     void on_filterSelComboBox_currentIndexChanged(int index);
 
-    void on_horizontalSlider_2_sliderMoved(int position);
+    void on_horizontalSlider_2_valueChanged(int position);
 
-    void on_horizontalSlider_3_sliderMoved(int position);
+    void on_horizontalSlider_6_valueChanged(int position);
 
-    void on_horizontalSlider_6_sliderMoved(int position);
-
-    void on_horizontalSlider_colorLevels_sliderMoved(int position);
+    void on_horizontalSlider_colorLevels_valueChanged(int position);
 
     void stateChanged(Phonon::State newState, Phonon::State oldState);
 
@@ -84,11 +82,11 @@ private slots:
 
     void on_pushButton_pause_clicked();
 
-    void on_horizontalSliderTS_sliderMoved(int position);
+    void on_horizontalSliderTS_valueChanged(int position);
 
-    void on_horizontalSliderTH_sliderMoved(int position);
+    void on_horizontalSliderTH_valueChanged(int position);
 
-    void on_horizontalSliderTV_sliderMoved(int position);
+    void on_horizontalSliderTV_valueChanged(int position);
 
     void on_comboBox_reconColors_currentIndexChanged(int index);
 
@@ -111,6 +109,8 @@ private slots:
     void on_comboBox_composerMixer_currentIndexChanged(int index);
 
     void on_comboBox_v3Composer_3_currentIndexChanged(int index);
+
+    void on_horizontalSlider_3_valueChanged(int value);
 
 private:
     Ui::GuiMupic *ui;
