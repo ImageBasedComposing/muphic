@@ -8,6 +8,7 @@ UsrConf::UsrConf()
 
     phicFilterSelec = 2;        //Filtro Canny
     phicThresholdSelec = 50;    //Mismo valor que en Phic
+	phicAnalysisDetail = 50;
 
     muActive = true;
 }
@@ -54,6 +55,7 @@ void UsrConf::readMuphic(std::string path)
         phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
         phicNoiseSelec = atoi(phicNode->FirstChild("noise")->ToElement()->GetText());
         phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
+		phicAnalysisDetail = atoi(phicNode->FirstChild("anlDet")->ToElement()->GetText());
         phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
         phicThresholdH = atoi(phicNode->FirstChild("thresholdH")->ToElement()->GetText());
         phicThresholdS = atoi(phicNode->FirstChild("thresholdS")->ToElement()->GetText());
@@ -87,6 +89,7 @@ void UsrConf::readPhic(std::string path)
     phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
     phicNoiseSelec = atoi(phicNode->FirstChild("noise")->ToElement()->GetText());
     phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
+	phicAnalysisDetail = atoi(phicNode->FirstChild("anlDet")->ToElement()->GetText());
     phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
     phicThresholdH = atoi(phicNode->FirstChild("thresholdH")->ToElement()->GetText());
     phicThresholdS = atoi(phicNode->FirstChild("thresholdS")->ToElement()->GetText());
@@ -180,6 +183,10 @@ void UsrConf::write(std::string path)
         TiXmlElement * phicPolSimpNode = new TiXmlElement( "polSimp" );
         phicPolSimpNode->LinkEndChild(new TiXmlText(our_itoa(phicPolygonSimp,a,10)));
         phicNode->LinkEndChild(phicPolSimpNode);
+
+        TiXmlElement * phicAnlDetNode = new TiXmlElement( "anlDet" );
+        phicPolSimpNode->LinkEndChild(new TiXmlText(our_itoa(phicAnalysisDetail,a,10)));
+        phicNode->LinkEndChild(phicAnlDetNode);
 
         //Node for color levels setting
         TiXmlElement * phicColLvlNode = new TiXmlElement( "colLvl" );
@@ -312,6 +319,10 @@ int UsrConf::getPhicPolygonSimp()
     return phicPolygonSimp;
 }
 
+int UsrConf::getPhicAnalysisDetail()
+{
+	return phicAnalysisDetail;
+}
 int UsrConf::getPhicColorLevels()
 {
     return phicColorLevels;
@@ -422,6 +433,11 @@ void UsrConf::setPhicThresholdSelec(int t)
 void UsrConf::setPhicPolygonSimp(int i)
 {
     phicPolygonSimp = i;
+}
+
+void UsrConf::setPhicAnalysisDetail(int i)
+{
+	phicAnalysisDetail = i;
 }
 
 void UsrConf::setPhicNoiseSelec(int n)

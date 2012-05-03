@@ -49,7 +49,33 @@ int main(int argc, char* argv[])
 	Analizer* analizer = new Analizer();
 	analizer->debug = phic->usrConf->getPhicDebug();
 
-	IplImage* imagesrc = cvLoadImage( argv[2] );
+	IplImage* originalImage = cvLoadImage( argv[2] );
+
+	CvSize size = cvGetSize( originalImage );
+
+
+	int analysisdepth = phic->usrConf->getPhicAnalysisDetail();
+	// input var goes from 0 to 100
+	// 0 means image is reduced A LOT
+	//int minpixels = 1;
+	// 100 means image is not reduced (lies, we reduce it to 1000 pixels minimum)
+	//int maxpixels = 1000;
+	// for now, let's use a simplified equation
+	double resizedpixels = analysisdepth * 9.99 + 1;
+
+	int maximgsize = max(size.height, size.width);
+
+	// compute scaling factor. We don't want to make images bigger, so minimum value is 1.
+	double factor = maximgsize / resizedpixels;
+
+	if (factor < 1) factor = 1;
+
+	size.height = size.height / factor;
+	size.width = size.width / factor;
+
+	IplImage* imagesrc = cvCreateImage( size, 8, 3 );
+
+	cvResize(originalImage, imagesrc);
 	Figuras* figuras = new Figuras();
 	figuras->setWidth(imagesrc->width);
 	figuras->setHeight(imagesrc->height);
