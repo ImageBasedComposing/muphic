@@ -5,6 +5,7 @@
         <threshold>116</threshold>
         <noise>1</noise>
         <polSimp>7</polSimp>
+		<anlDet>20</anlDet>
         <colLvl>44</colLvl>
         <thresholdH>0</thresholdH>
         <thresholdS>0</thresholdS>
