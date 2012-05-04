@@ -185,7 +185,7 @@ void UsrConf::write(std::string path)
         phicNode->LinkEndChild(phicPolSimpNode);
 
         TiXmlElement * phicAnlDetNode = new TiXmlElement( "anlDet" );
-        phicPolSimpNode->LinkEndChild(new TiXmlText(our_itoa(phicAnalysisDetail,a,10)));
+        phicAnlDetNode->LinkEndChild(new TiXmlText(our_itoa(phicAnalysisDetail,a,10)));
         phicNode->LinkEndChild(phicAnlDetNode);
 
         //Node for color levels setting
