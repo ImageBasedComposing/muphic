@@ -124,7 +124,7 @@ private:
 
     Phonon::MediaObject *mediaObject;
     Phonon::AudioOutput *audioOutput;
-    Phonon::MediaSource *mediaSource;
+    Phonon::MediaSource mediaSource;
 
     bool is_paused;
     qint64 mediaTime;
