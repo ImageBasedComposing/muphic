@@ -230,7 +230,8 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 
 void GuiMupic::on_pushButton_Generate_clicked()
 {
-    mediaObject->clear();
+    mediaSource = Phonon::MediaSource("");
+    mediaObject->setCurrentSource(mediaSource);
 
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
 
@@ -263,13 +264,9 @@ void GuiMupic::on_pushButton_pause_clicked()
 
 void GuiMupic::on_pushButton_Stop_clicked()
 {
-    /*if (pidPlay > 0)
-    {
-        l->killProcess(pidPlay);
-        pidPlay = -1;
-    }*/
     mediaObject->stop();
-    mediaObject->clear();
+    mediaSource = Phonon::MediaSource("");
+    mediaObject->setCurrentSource(mediaSource);
     ui->pushButton_pause->setEnabled(false);
 }
 
@@ -302,8 +299,8 @@ void GuiMupic::on_pushButton_Play_clicked()
     if(!is_paused)
     {
         std::string analysedPic = changeExtension(imageFile.toStdString(), "");
-        mediaSource = new Phonon::MediaSource((analysedPic+".wav").c_str());
-        mediaObject->setCurrentSource(*mediaSource);
+        mediaSource = Phonon::MediaSource((analysedPic+".wav").c_str());
+        mediaObject->setCurrentSource(mediaSource);
         mediaObject->play();
         ui->pushButton_pause->setEnabled(true);
     }
