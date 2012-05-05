@@ -24,6 +24,7 @@ void GuiMupic::initialize()
 
     //We create the config window
     muphicConfig = new MuphicConfig();
+    muphicConfig->setWindowTitle("Configuration");
     muphicConfig->show();
     muphicConfig->initialize();
 
