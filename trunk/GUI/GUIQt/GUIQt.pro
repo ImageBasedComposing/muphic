@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     polygonwidget.cpp \
     ../../Muphic/common/src/UsrConf.cpp \
     seekbar.cpp \
-    volumebar.cpp
+    volumebar.cpp \
+    muphicconfig.cpp
 
 HEADERS  += guimupic.h \
     ../../Muphic/common/include/launcher.h \
@@ -43,13 +44,15 @@ HEADERS  += guimupic.h \
     polygonwidget.h \
     ../../Muphic/common/include/UsrConf.h \
     seekbar.h \
-    volumebar.h
+    volumebar.h \
+    muphicconfig.h
 
-FORMS    += guimupic.ui
+FORMS    += guimupic.ui \
+    muphicconfig.ui
 
 INCLUDEPATH += ../../Muphic/common/include
 INCLUDEPATH += ../../Muphic/TinyXML/include
-DEFINES += __LINUX=1
+DEFINES += __WINDOWS=1
 
  wince*{
  DEPLOYMENT_PLUGIN += phonon_ds9 phonon_waveout
