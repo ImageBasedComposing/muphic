@@ -35,6 +35,7 @@ void MuphicConfig::initialize()
     usrConf->setMuInstrVoice4(128);
     usrConf->setMuCompMix(2);
     usrConf->setMuTempo(120);
+    usrConf->setPhicAnalysisDetail(50);
 
     // We save sizes for dynamic interaction between options
     hSlider_2_max = ui->horizontalSlider_2->maximumSize();
@@ -400,4 +401,9 @@ void MuphicConfig::on_horizontalSlider_3_valueChanged(int position)
     ui->noiseLabel->setText(a);//our_itoa(poslog,a,10));
 }
 
-
+void MuphicConfig::on_horizontalSlider_AnalisisDepth_valueChanged(int value)
+{
+    usrConf->setPhicAnalysisDetail(value);
+    char a[10];
+    ui->labelAnalysisDepth->setText(our_itoa(value,a,10));
+}
