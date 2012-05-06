@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'muphicconfig.ui'
 **
-** Created: Sat 5. May 20:36:18 2012
+** Created: Sun 6. May 15:44:18 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -65,6 +65,10 @@ public:
     QLabel *label_ColorLevels;
     QSlider *horizontalSlider_colorLevels;
     QLabel *labelColorLevels;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_analysisDepth;
+    QSlider *horizontalSlider_AnalisisDepth;
+    QLabel *labelAnalysisDepth;
     QWidget *tab2;
     QGroupBox *groupBox_3;
     QSplitter *splitter;
@@ -220,7 +224,7 @@ public:
         horizontalLayout_7->addWidget(labelPolSimp);
 
 
-        gridLayout->addLayout(horizontalLayout_7, 1, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_7, 2, 0, 1, 1);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
@@ -253,7 +257,7 @@ public:
         horizontalLayout_8->addWidget(tLabel);
 
 
-        gridLayout->addLayout(horizontalLayout_8, 2, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_8, 3, 0, 1, 1);
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
@@ -284,7 +288,7 @@ public:
         horizontalLayout_9->addWidget(labelThresholdH);
 
 
-        gridLayout->addLayout(horizontalLayout_9, 3, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_9, 4, 0, 1, 1);
 
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
@@ -315,7 +319,7 @@ public:
         horizontalLayout_10->addWidget(labelThresholdS);
 
 
-        gridLayout->addLayout(horizontalLayout_10, 4, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_10, 5, 0, 1, 1);
 
         horizontalLayout_11 = new QHBoxLayout();
         horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
@@ -346,7 +350,7 @@ public:
         horizontalLayout_11->addWidget(labelThresholdV);
 
 
-        gridLayout->addLayout(horizontalLayout_11, 5, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout_11, 6, 0, 1, 1);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -377,7 +381,37 @@ public:
         horizontalLayout->addWidget(labelColorLevels);
 
 
-        gridLayout->addLayout(horizontalLayout, 6, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 7, 0, 1, 1);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        label_analysisDepth = new QLabel(groupBox_2);
+        label_analysisDepth->setObjectName(QString::fromUtf8("label_analysisDepth"));
+
+        horizontalLayout_2->addWidget(label_analysisDepth);
+
+        horizontalSlider_AnalisisDepth = new QSlider(groupBox_2);
+        horizontalSlider_AnalisisDepth->setObjectName(QString::fromUtf8("horizontalSlider_AnalisisDepth"));
+        horizontalSlider_AnalisisDepth->setMaximum(100);
+        horizontalSlider_AnalisisDepth->setSliderPosition(50);
+        horizontalSlider_AnalisisDepth->setOrientation(Qt::Horizontal);
+        horizontalSlider_AnalisisDepth->setTickPosition(QSlider::TicksBelow);
+        horizontalSlider_AnalisisDepth->setTickInterval(5);
+
+        horizontalLayout_2->addWidget(horizontalSlider_AnalisisDepth);
+
+        labelAnalysisDepth = new QLabel(groupBox_2);
+        labelAnalysisDepth->setObjectName(QString::fromUtf8("labelAnalysisDepth"));
+        sizePolicy.setHeightForWidth(labelAnalysisDepth->sizePolicy().hasHeightForWidth());
+        labelAnalysisDepth->setSizePolicy(sizePolicy);
+        labelAnalysisDepth->setMinimumSize(QSize(30, 0));
+        labelAnalysisDepth->setFrameShape(QFrame::StyledPanel);
+        labelAnalysisDepth->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_2->addWidget(labelAnalysisDepth);
+
+
+        gridLayout->addLayout(horizontalLayout_2, 1, 0, 1, 1);
 
         MuphicConfig->addTab(tab1, QString());
         tab2 = new QWidget();
@@ -646,6 +680,8 @@ public:
         labelThresholdV->setText(QApplication::translate("MuphicConfig", "50", 0, QApplication::UnicodeUTF8));
         label_ColorLevels->setText(QApplication::translate("MuphicConfig", "Color levels", 0, QApplication::UnicodeUTF8));
         labelColorLevels->setText(QApplication::translate("MuphicConfig", "3", 0, QApplication::UnicodeUTF8));
+        label_analysisDepth->setText(QApplication::translate("MuphicConfig", "Anaysis Depth", 0, QApplication::UnicodeUTF8));
+        labelAnalysisDepth->setText(QApplication::translate("MuphicConfig", "50", 0, QApplication::UnicodeUTF8));
         MuphicConfig->setTabText(MuphicConfig->indexOf(tab1), QApplication::translate("MuphicConfig", "Graphic Config", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("MuphicConfig", "Mu Options", 0, QApplication::UnicodeUTF8));
         label_reconColors->setText(QApplication::translate("MuphicConfig", "Color System", 0, QApplication::UnicodeUTF8));

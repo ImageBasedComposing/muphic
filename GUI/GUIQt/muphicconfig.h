@@ -59,7 +59,9 @@ private slots:
     void on_comboBox_v3Composer_3_currentIndexChanged(int index);
 
     void on_horizontalSlider_3_valueChanged(int value);
-    
+
+    void on_horizontalSlider_AnalisisDepth_valueChanged(int value);
+
 private:
     Ui::MuphicConfig *ui;
 
