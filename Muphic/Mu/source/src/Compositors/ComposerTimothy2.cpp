@@ -144,7 +144,8 @@ string ComposerTimothy2::compose()
 	//m->toMidi();
 
 	m->setMidizator(new MidizatorABC());
-
+	cout << "Composition done!" << endl;
+	cout << endl << "Making midi output..." << endl;
 	std::string out = m->toMidi(); 
 
 	// We make the music using the midizator previously selected
