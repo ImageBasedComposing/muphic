@@ -1,11 +1,11 @@
 #include "Compositors/ComposerRitmo.h"
 
-ComposerRitmo::ComposerRitmo()
+ComposerRitmo::ComposerRitmo() : Composer()
 {
     //ctor
 }
 
-ComposerRitmo::ComposerRitmo(Music* m, int numSeg)
+ComposerRitmo::ComposerRitmo(Music* m, int numSeg) : Composer()
 {
 	ritmo = m;
 	NUMSEGMENTOS = numSeg;
@@ -18,7 +18,7 @@ ComposerRitmo::~ComposerRitmo()
 
 Music* ComposerRitmo::composeMusic()
 {
-	
+
 	figuras = new FiguresMusic();
 	figuras->cargar(pic);
 
@@ -271,7 +271,7 @@ void ComposerRitmo::calcularSegmento(FigureMusic* f, Segmento* seg, Nota* n)
 		double pownum = 2;
 
 
-		
+
 		for(int k = 0; k < 8; k++)
 		{
 			if (notas[k] == 0)

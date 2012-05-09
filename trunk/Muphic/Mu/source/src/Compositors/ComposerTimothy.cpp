@@ -1,6 +1,6 @@
 #include "Compositors/ComposerTimothy.h"
 
-ComposerTimothy::ComposerTimothy()
+ComposerTimothy::ComposerTimothy() : Composer()
 {
     //ctor
 }
