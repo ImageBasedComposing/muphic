@@ -250,10 +250,7 @@ void Launcher::launch(int argc, Program pname, std::string argv[], Options optio
 
 		//std::string* argv2 = static_cast<std::string*>(malloc((argc + 1)*sizeof(std::string)));
 		std::string * argv2;
-		if(pname != 4)
-			argv2 = new std::string[argc + 1];
-		else
-			argv2 = new std::string[argc + 3];
+		argv2 = new std::string[argc + 1];
 
 		argv2[0] = parseConfFile(confFile, pname);
 		for (int i = 0; i < argc; i++)
@@ -261,15 +258,6 @@ void Launcher::launch(int argc, Program pname, std::string argv[], Options optio
 			argv2[i+1] = argv[i];
 		}
 		argc++;
-
-		if(pname == 4)
-		{
-			argv2[argc] = "-o";		
-			argc++;
-			int pos = argv[argc-3].find(".");
-			argv2[argc] = argv[argc-3].substr(0,pos)+".mid";
-			argc++;
-		}
 
 		launch(argc, argv2);
 

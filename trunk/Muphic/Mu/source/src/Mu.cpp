@@ -57,7 +57,11 @@ int main( int argc, const char* argv[] )
 		default : 
 			cs = new Scriabin();
 	}
+
 	//All the compositors:
+	vector<int> instruments;
+
+	//1º Voice
 	ComposerVoice* compVoice1;
 	switch(usrConf->getMuCompVoice1()){
 		case 2:	
@@ -65,6 +69,11 @@ int main( int argc, const char* argv[] )
 		default : 
 			compVoice1 = new ComposerFigMelody2(cs);
 	}
+	instruments.clear();
+	instruments.push_back(usrConf->getMuInstrVoice1());
+	compVoice1->setInstruments(instruments);
+
+	//2º Voice
 	ComposerVoice* compVoice2;
 	switch(usrConf->getMuCompVoice2()){
 		case 2:	
@@ -72,6 +81,11 @@ int main( int argc, const char* argv[] )
 		default : 
 			compVoice2 = new ComposerFigMelody2(cs);
 	}
+	instruments.clear();
+	instruments.push_back(usrConf->getMuInstrVoice2());
+	compVoice2->setInstruments(instruments);
+
+	//3º Voice
 	ComposerVoice* compVoice3;
 	switch(usrConf->getMuCompVoice3()){
 		case 2:	
@@ -79,6 +93,11 @@ int main( int argc, const char* argv[] )
 		default : 
 			compVoice3 = new ComposerFigBass2(cs);
 	}
+	instruments.clear();
+	instruments.push_back(usrConf->getMuInstrVoice3());
+	compVoice3->setInstruments(instruments);
+
+	//4º Voice
 	ComposerVoice* compVoice4;
 	switch(usrConf->getMuCompVoice4()){
 		case 2:	
@@ -86,24 +105,18 @@ int main( int argc, const char* argv[] )
 		default : 
 			compVoice4 = new ComposerFigRitmo2(cs);
 	}
-
-	//Now we assign the instruments
-	//Se podría hacer mientras se crea el compositor (dentro del switch)
-	vector<int> instruments;
 	instruments.clear();
-	instruments.push_back(PIZZICATO_STRINGS);
-	compVoice1->setInstruments(instruments);
-	instruments.clear();
-	instruments.push_back(FLUTE);
-	compVoice2->setInstruments(instruments);
-	instruments.clear();
-	instruments.push_back(ELECTRIC_BASS_PICK);
-	compVoice3->setInstruments(instruments);
-	instruments.clear();
-	instruments.push_back(17);
-	instruments.push_back(36);
+	switch(usrConf->getMuInstrVoice4())
+	{
+		case 128:
+			instruments.push_back(17);
+			instruments.push_back(36); break;
+		default:
+			instruments.push_back(17);
+			instruments.push_back(36);
+	}
 	compVoice4->setInstruments(instruments);
-	instruments.clear();
+
 
 	//The compositor that is going to mix everything
 	Composer* compMix;
@@ -116,11 +129,11 @@ int main( int argc, const char* argv[] )
 	
 	compMix->setTmpMIDIPath(analysedPic);
 	compMix->compose(analysedPic, usrConfPath);
-
+	
 	Launcher* l = new Launcher();
-	string args[] = {analysedPic+".mid", "-Ow", "-o", analysedPic+".wav"};
-
-	l->launch(4, Launcher::TIMIDITY, args);
+	string args[] = {analysedPic+".mid", "-R 700", "-OwU", "-o", analysedPic+".wav"};
+	cout << endl << "Making wav output..." << endl;
+	l->launch(5, Launcher::TIMIDITY, args);
 
 	delete l;
 	delete compMix;

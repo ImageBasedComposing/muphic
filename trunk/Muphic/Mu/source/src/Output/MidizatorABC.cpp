@@ -42,11 +42,12 @@ string MidizatorABC::toMidi(Music* music)
 
 	// Escribimos en el fichero
 	// Cabecera
-	*f << "X:23\n";
+	*f << "X:1\n";
 	*f << "T:" + fName << endl;
 	*f << "M:" << "C" << endl;
 	*f << "L:" << music->getBaseLenght().first << "/" << music->getBaseLenght().second << endl;
-	*f << "%            End of header, start of tune body:" << endl;
+	*f << "K:C\n";
+	*f << "V:1\n";
 
 	// Conseguimos las voces
 	Voz* v;
@@ -63,7 +64,7 @@ string MidizatorABC::toMidi(Music* music)
 	{
 		v = music->getVoces()->getAt(i);
 		tablaTransf = new TableTransform(v->getTonalidad());
-		*f << "V:" << i << endl;
+		*f << "V:" << i+1 << endl;
 		*f << printInstrumento(v->getInstrumento()) << endl;
 		*f << "K:" << tablaTransf->transformTonalidad(v->getTonalidad()); //<< endl; Ya se hace cuando se pone metrica por primera vez
 		lastTempo = 0;  //Por cada voz que se escriba el tempo y metrica.
@@ -217,9 +218,9 @@ string MidizatorABC::toMidi(Music* music)
 
 
 	Launcher* l = new Launcher();
-	string args[] = {fName + ".abc"};
+	string args[] = {fName + ".abc", "-o", fName + ".mid" };
 
-	l->launch(1, Launcher::ABC2MIDI, args);
+	l->launch(3, Launcher::ABC2MIDI, args);
 
     return fName + ".mid";
 }
