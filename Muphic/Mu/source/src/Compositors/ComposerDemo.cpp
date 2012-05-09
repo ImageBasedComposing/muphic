@@ -1,7 +1,7 @@
 #include "Compositors/ComposerDemo.h"
 
 
-ComposerDemo::ComposerDemo(Music* msc)
+ComposerDemo::ComposerDemo(Music* msc) : Composer()
 {
 	music = msc;
 }
@@ -32,7 +32,7 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	seg1->setTempo(180);
 
 	Segmentos* segs = new Segmentos();
-	
+
 
 	Simbolos* smb1 = new Simbolos();
 	Nota* n;
@@ -44,9 +44,9 @@ string ComposerDemo::compose(string picPath, string usrConfPath)
 	smb1->pushBack(n);
 	n = new Nota(16,(LA_C));
 	smb1->pushBack(n);
-	
+
 	n = new Nota(16,(LA_C+1));
-	smb1->pushBack(n);	
+	smb1->pushBack(n);
 	n = new Nota(16,(LA_C+1));
 	smb1->pushBack(n);
 	n = new Nota(16,(LA_C));

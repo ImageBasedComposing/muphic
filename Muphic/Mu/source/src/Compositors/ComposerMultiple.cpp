@@ -1,12 +1,12 @@
 #include "Compositors/ComposerMultiple.h"
 #include "Compositors/ComposerMelodia.h"
 
-ComposerMultiple::ComposerMultiple()
+ComposerMultiple::ComposerMultiple(): Composer()
 {
     //ctor
 }
 
-ComposerMultiple::ComposerMultiple(Music* m)
+ComposerMultiple::ComposerMultiple(Music* m): Composer()
 {
 	musica = m;
 }

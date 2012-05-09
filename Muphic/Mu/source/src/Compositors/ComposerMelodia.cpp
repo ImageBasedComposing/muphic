@@ -1,12 +1,12 @@
 #include "Compositors/ComposerMelodia.h"
 
 /*------Constructoras------*/
-ComposerMelodia::ComposerMelodia()
+ComposerMelodia::ComposerMelodia() : Composer()
 {
 	// ctor
 }
 
-ComposerMelodia::ComposerMelodia(Music* m, int numSegmentos)
+ComposerMelodia::ComposerMelodia(Music* m, int numSegmentos) : Composer()
 {
 	melodia = m;
 	NUMSEGMENTOS = numSegmentos;
@@ -78,7 +78,7 @@ Music* ComposerMelodia::composeMusic()
 
 
 	vs->pushBack(v1);
-	
+
 	melodia->setVoces(vs);
 	melodia->setComposer("MelodyComposer");
 	melodia->setName("Melodia");
@@ -248,7 +248,7 @@ int ComposerMelodia::calcularNota(double angulo, int* esc)
 	while (i != 0)
 	{
 		while (j + 1 != 5)
-		{			
+		{
 			tmp2 = esc[j + 1];
 			esc[j + 1] = esc[j];
 			esc[j] = tmp1;
