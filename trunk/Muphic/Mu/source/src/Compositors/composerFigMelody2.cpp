@@ -510,6 +510,7 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 		if(durations->at(pos) < minDur)
 		{
 			posAux = (pos + 1) % durations->size();
+			divided = false;
 			while(!divided && posAux != pos)
 				if(durations->at(posAux) < minDur)
 					posAux = (posAux + 1) % durations->size();
