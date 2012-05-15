@@ -160,7 +160,7 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 
 void GuiMupic::on_pushButton_Generate_clicked()
 {
-    mediaSource = Phonon::MediaSource("");
+    //mediaSource = Phonon::MediaSource("");
     mediaObject->setCurrentSource(mediaSource);
 
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
@@ -195,7 +195,7 @@ void GuiMupic::on_pushButton_pause_clicked()
 void GuiMupic::on_pushButton_Stop_clicked()
 {
     mediaObject->stop();
-    mediaSource = Phonon::MediaSource("");
+    //mediaSource = Phonon::MediaSource("");
     mediaObject->setCurrentSource(mediaSource);
     ui->pushButton_pause->setEnabled(false);
 }
