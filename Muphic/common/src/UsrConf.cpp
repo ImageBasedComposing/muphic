@@ -60,6 +60,12 @@ void UsrConf::readMuphic(std::string path)
         phicThresholdH = atoi(phicNode->FirstChild("thresholdH")->ToElement()->GetText());
         phicThresholdS = atoi(phicNode->FirstChild("thresholdS")->ToElement()->GetText());
         phicThresholdV = atoi(phicNode->FirstChild("thresholdV")->ToElement()->GetText());
+
+        // Debug
+        TiXmlNode* debugNode = phicNode->FirstChild("debug");
+
+        if (debugNode != NULL)
+            phicDebug = true;
     }
 
 	muNode->ToElement();
@@ -70,6 +76,32 @@ void UsrConf::readMuphic(std::string path)
 		if(strcmp(none.c_str(),"true") == 0)
 			muActive = false;
 	}
+
+    if(muActive)
+    {
+        // Leemos los nodos
+        muCompMix = atoi(muNode->FirstChild("compositorMix")->ToElement()->GetText());
+        muCompVoice1 = atoi(muNode->FirstChild("compositor_voice1")->ToElement()->GetText());
+        muCompVoice2 = atoi(muNode->FirstChild("compositor_voice2")->ToElement()->GetText());
+        muCompVoice3 = atoi(muNode->FirstChild("compositor_voice3")->ToElement()->GetText());
+        muCompVoice4 = atoi(muNode->FirstChild("compositor_voice4")->ToElement()->GetText());
+
+        muInstrVoice1 = atoi(muNode->FirstChild("instrument_voice1")->ToElement()->GetText());
+        muInstrVoice2 = atoi(muNode->FirstChild("instrument_voice2")->ToElement()->GetText());
+        muInstrVoice3 = atoi(muNode->FirstChild("instrument_voice3")->ToElement()->GetText());
+        muInstrVoice4 = atoi(muNode->FirstChild("instrument_voice4")->ToElement()->GetText());
+
+        muReconColors = atoi(muNode->FirstChild("color-system")->ToElement()->GetText());
+        muTempo = atoi(muNode->FirstChild("tempo")->ToElement()->GetText());
+        muOutputFile = muNode->FirstChild("muOutputFile")->ToElement()->GetText();
+
+
+        // Debug
+        TiXmlNode* debugNode = muNode->FirstChild("debug");
+
+        if (debugNode != NULL)
+            muDebug = true;
+    }
 }
 
 
@@ -128,6 +160,7 @@ void UsrConf::readMu(std::string path)
 
 	muReconColors = atoi(muNode->FirstChild("color-system")->ToElement()->GetText());
 	muTempo = atoi(muNode->FirstChild("tempo")->ToElement()->GetText());
+    muOutputFile = muNode->FirstChild("muOutputFile")->ToElement()->GetText();
 
 
     // Debug
@@ -277,6 +310,11 @@ void UsrConf::write(std::string path)
 		TiXmlElement* muTempoNode = new TiXmlElement("tempo");
 		muTempoNode->LinkEndChild(new TiXmlText(our_itoa(muTempo,a,10)));
 		muNode->LinkEndChild(muTempoNode);
+
+        //Node for MuOutputFile
+        TiXmlElement* muOutputFileNode = new TiXmlElement("muOutputFile");
+        muOutputFileNode->LinkEndChild(new TiXmlText(muOutputFile.c_str()));
+        muNode->LinkEndChild(muOutputFileNode);
     }
 
 
@@ -408,6 +446,11 @@ int UsrConf::getMuTempo()
 	return muTempo;
 }
 
+std::string UsrConf::getMuOutputFile()
+{
+    return muOutputFile;
+}
+
 // SETTERS
 
 void UsrConf::setPhicActive(bool b)
@@ -530,4 +573,7 @@ void UsrConf::setMuTempo(int t)
 	muTempo = t;
 }
 
-
+void UsrConf::setMuOutputFile(std::string o)
+{
+    muOutputFile = o;
+}

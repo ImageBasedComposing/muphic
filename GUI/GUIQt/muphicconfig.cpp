@@ -23,6 +23,12 @@ void MuphicConfig::initialize()
     usrConf->setPhicNoiseSelec(0);
     usrConf->setPhicPolygonSimp(2);
     usrConf->setPhicColorLevels(3);
+    usrConf->setPhicAnalysisDetail(50);
+    usrConf->setPhicFilterSelect(2);
+    usrConf->setPhicThresholdSelec(50);
+    usrConf->setPhicThresholdH(35);
+    usrConf->setPhicThresholdS(20);
+    usrConf->setPhicThresholdV(50);
 
     //We initialize Mu
     usrConf->setMuReconColors(1);
@@ -31,7 +37,7 @@ void MuphicConfig::initialize()
     usrConf->setMuCompVoice2(2);
     usrConf->setMuInstrVoice2(73);
     usrConf->setMuCompVoice3(2);
-    usrConf->setMuInstrVoice3(34);
+    usrConf->setMuInstrVoice3(32);
     usrConf->setMuCompVoice4(2);
     usrConf->setMuInstrVoice4(128);
     usrConf->setMuCompMix(2);
@@ -234,7 +240,9 @@ void MuphicConfig::on_pushButton_Generate_clicked()
     mediaObject->setCurrentSource(mediaSource);
 
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
+    std::string muFile = ui->lineEdit_OutputMidi->text().toStdString();
 
+    usrConf->setMuOutputFile(muFile);
     usrConf->setPhicActive(false);
     usrConf->setMuDebug(false);
     usrConf->setMuActive(true);
@@ -555,7 +563,52 @@ void MuphicConfig::on_comboBox_v1Composer_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v1Instrument_currentIndexChanged(int index)
 {
-    usrConf->setMuInstrVoice1(index);
+    int instrument = 45;
+
+    switch(index)
+    {
+    case 0:
+        instrument = 0;
+        break;
+    case 1:
+        instrument = 6;
+        break;
+    case 2:
+        instrument = 20;
+        break;
+    case 3:
+        instrument = 24;
+        break;
+    case 4:
+        instrument = 32;
+        break;
+    case 5:
+        instrument = 88;
+        break;
+    case 6:
+        instrument = 45;
+        break;
+    case 7:
+        instrument = 52;
+        break;
+    case 8:
+        instrument = 55;
+        break;
+    case 9:
+        instrument = 56;
+        break;
+    case 10:
+        instrument = 66;
+        break;
+    case 11:
+        instrument = 73;
+        break;
+    case 12:
+        instrument = 85;
+        break;
+    }
+
+    usrConf->setMuInstrVoice1(instrument);
 }
 
 void MuphicConfig::on_comboBox_v2Composer_currentIndexChanged(int index)
@@ -565,7 +618,51 @@ void MuphicConfig::on_comboBox_v2Composer_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v2Instruments_currentIndexChanged(int index)
 {
-    usrConf->setMuInstrVoice2(index);
+    int instrument = 73;
+
+    switch(index)
+    {
+    case 0:
+        instrument = 0;
+        break;
+    case 1:
+        instrument = 6;
+        break;
+    case 2:
+        instrument = 20;
+        break;
+    case 3:
+        instrument = 24;
+        break;
+    case 4:
+        instrument = 32;
+        break;
+    case 5:
+        instrument = 88;
+        break;
+    case 6:
+        instrument = 45;
+        break;
+    case 7:
+        instrument = 52;
+        break;
+    case 8:
+        instrument = 55;
+        break;
+    case 9:
+        instrument = 56;
+        break;
+    case 10:
+        instrument = 66;
+        break;
+    case 11:
+        instrument = 73;
+        break;
+    case 12:
+        instrument = 85;
+        break;
+    }
+    usrConf->setMuInstrVoice2(instrument);
 }
 
 void MuphicConfig::on_comboBox_v3Composer_currentIndexChanged(int index)
@@ -575,12 +672,58 @@ void MuphicConfig::on_comboBox_v3Composer_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v3Instrument_currentIndexChanged(int index)
 {
-    usrConf->setMuInstrVoice3(index);
+    int instrument = 32;
+
+    switch(index)
+    {
+    case 0:
+        instrument = 0;
+        break;
+    case 1:
+        instrument = 6;
+        break;
+    case 2:
+        instrument = 20;
+        break;
+    case 3:
+        instrument = 24;
+        break;
+    case 4:
+        instrument = 32;
+        break;
+    case 5:
+        instrument = 88;
+        break;
+    case 6:
+        instrument = 45;
+        break;
+    case 7:
+        instrument = 52;
+        break;
+    case 8:
+        instrument = 55;
+        break;
+    case 9:
+        instrument = 56;
+        break;
+    case 10:
+        instrument = 66;
+        break;
+    case 11:
+        instrument = 73;
+        break;
+    case 12:
+        instrument = 85;
+        break;
+    }
+
+    usrConf->setMuInstrVoice3(instrument);
 }
 
 void MuphicConfig::on_comboBox_v4Composer_currentIndexChanged(int index)
 {
-    usrConf->setMuCompVoice4(index);
+    int instrument = 128;
+    usrConf->setMuCompVoice4(instrument);
 }
 
 void MuphicConfig::on_comboBox_v4Instrument_currentIndexChanged(int index)

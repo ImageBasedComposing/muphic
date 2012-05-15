@@ -51,6 +51,7 @@ class UsrConf/* : public Conf*/
 			int getMuInstrVoice4();
 			int getMuReconColors();
 			int getMuTempo();
+            std::string getMuOutputFile();
 
         // write
         void write(std::string path);
@@ -83,6 +84,7 @@ class UsrConf/* : public Conf*/
 			void setMuInstrVoice4(int i);
 			void setMuReconColors(int cs);
 			void setMuTempo(int t);
+            void setMuOutputFile(std::string o);
 
     protected:
 		// MUPHIC
@@ -112,6 +114,7 @@ class UsrConf/* : public Conf*/
 			int muInstrVoice4;
 			int muReconColors;
 			int muTempo;
+            std::string muOutputFile;
 
     private:
 };
