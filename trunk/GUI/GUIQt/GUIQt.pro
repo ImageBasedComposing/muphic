@@ -47,8 +47,7 @@ HEADERS  += \
     volumebar.h \
     muphicconfig.h
 
-FORMS    += guimupic.ui \
-    muphicconfig.ui
+FORMS    += muphicconfig.ui
 
 INCLUDEPATH += ../../Muphic/common/include
 INCLUDEPATH += ../../Muphic/TinyXML/include

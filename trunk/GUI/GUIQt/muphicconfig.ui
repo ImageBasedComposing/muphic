@@ -94,12 +94,16 @@
           <item>
            <widget class="QLabel" name="label_OutputMidi">
             <property name="text">
-             <string> Output Midi</string>
+             <string> Output Sound</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_OutputMidi"/>
+           <widget class="QLineEdit" name="lineEdit_OutputMidi">
+            <property name="text">
+             <string>./test1</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QToolButton" name="toolButton_OutputMidi">
@@ -1052,7 +1056,7 @@
             <string>Voice 1</string>
            </property>
            <layout class="QFormLayout" name="formLayout_3">
-            <item row="0" column="0">
+            <item row="0" column="0" colspan="2">
              <layout class="QGridLayout" name="gridLayout_9">
               <item row="0" column="0">
                <widget class="QLabel" name="label_v1Composer">
@@ -1105,11 +1109,64 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>0</number>
+                 <number>6</number>
+                </property>
+                <property name="insertPolicy">
+                 <enum>QComboBox::InsertAtBottom</enum>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Strings</string>
+                  <string>Piano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Harpsichord</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Reed Organ</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nylon String Guitar</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acoustic Bass</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>String Instruments</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pizzicato Strings</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Choir Aahs</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Orchestra Hit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Trumpet</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tenor Sax</string>
                  </property>
                 </item>
                 <item>
@@ -1119,7 +1176,7 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Electric Bass</string>
+                  <string>Syn Voice</string>
                  </property>
                 </item>
                </widget>
@@ -1147,7 +1204,7 @@
             <string>Voice 2</string>
            </property>
            <layout class="QFormLayout" name="formLayout_4">
-            <item row="0" column="0">
+            <item row="0" column="0" colspan="2">
              <layout class="QGridLayout" name="gridLayout_8">
               <item row="0" column="0">
                <widget class="QLabel" name="label_v2Composer">
@@ -1200,11 +1257,61 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>11</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Strings</string>
+                  <string>Piano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Harpsichord</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Reed Organ</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nylon String Guitar</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acoustic Bass</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>String Instruments</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pizzicato Strings</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Choir Aahs</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Orchestra Hit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Trumpet</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tenor Sax</string>
                  </property>
                 </item>
                 <item>
@@ -1214,7 +1321,7 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Electric Bass</string>
+                  <string>Syn Voice</string>
                  </property>
                 </item>
                </widget>
@@ -1248,7 +1355,7 @@
             <bool>false</bool>
            </property>
            <layout class="QFormLayout" name="formLayout_2">
-            <item row="0" column="0">
+            <item row="0" column="0" colspan="2">
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="0" column="0">
                <widget class="QLabel" name="label_v3Composer">
@@ -1301,11 +1408,61 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>2</number>
+                 <number>4</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Strings</string>
+                  <string>Piano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Harpsichord</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Reed Organ</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nylon String Guitar</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acoustic Bass</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>String Instruments</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pizzicato Strings</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Choir Aahs</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Orchestra Hit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Trumpet</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tenor Sax</string>
                  </property>
                 </item>
                 <item>
@@ -1315,7 +1472,7 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Electric Bass</string>
+                  <string>Syn Voice</string>
                  </property>
                 </item>
                </widget>
@@ -1343,7 +1500,7 @@
             <string>Voice 4</string>
            </property>
            <layout class="QFormLayout" name="formLayout">
-            <item row="0" column="0">
+            <item row="0" column="0" colspan="2">
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="0" column="0">
                <widget class="QLabel" name="label_v4Composer">

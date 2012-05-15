@@ -7,8 +7,8 @@ all:
 	$(MAKE) -C ./Muphic/Mu/mu-codeblocks
 	$(MAKE) -C ./GUI/GUIQt
 	mv ./GUI/GUIQt/GUIQt ./Muphic/bin/Debug/GUIQt_linux
-	$(MAKE) -C ./Muphic/timidity
-	mv ./Muphic/timidity/timidity/timidity ./Muphic/bin/Debug/
+	sudo $(MAKE) -C ./Muphic/timidity
+	sudo mv ./Muphic/timidity/timidity/timidity ./Muphic/bin/Debug/
 
 clean:
 
