@@ -1,5 +1,10 @@
 #!/bin/bash
 
+mkdir Muphic/bin/Debug
+cd 'Installation files - linux'
+cp -R * ../Muphic/bin/Debug/
+cd ..
+sudo chmod -R 777 Muphic/bin/Debug/
 cd ./Resources/cbp2make
 make
 cd ./../..
