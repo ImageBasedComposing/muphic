@@ -66,7 +66,14 @@ inline double angleOf2Lines(std::pair<int, int> p1, std::pair<int, int> p2, std:
 	// tan a =  |_______| =  _______ ;  => a = atan(...)       ~~           atan2( _______ )
 	//			|1+m2*m1|	|1+m2*m1|											 (|1+m2*m1|)
 
-	double alpha = atan2((m2 - m1) , abs(1+(m2*m1)));
+	
+	double absolutem;
+	if (1+(m2*m1) > 0)
+	    absolutem = 1+(m2*m1);
+	else
+	    absolutem = - (1+(m2*m1));
+
+	double alpha = atan2((m2 - m1) , absolutem);
 
 	return alpha;
 }
