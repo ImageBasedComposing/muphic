@@ -1,12 +1,13 @@
 #include "muphicconfig.h"
-#include "ui_muphicconfig.h"
-#include "muphicconfig.h"
 
 MuphicConfig::MuphicConfig(QWidget *parent) :
     QTabWidget(parent),
     ui(new Ui::MuphicConfig)
 {
     ui->setupUi(this);
+
+    l = new Launcher();
+    pidPlay = -1;
 }
 
 MuphicConfig::~MuphicConfig()
@@ -93,7 +94,240 @@ void MuphicConfig::initialize()
     ui->labelThresholdV->setMaximumSize(0,0);
     ui->horizontalSliderTV->setVisible(false);
     ui->horizontalSliderTV->setMaximumSize(0,0);
+
+    newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
+    ui->graphicsView_Pic->setScene(newScene);
+
+    QPixmap pixImg(DEFAULT_PIC);
+    pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->graphicsView_Pic->scene()->addPixmap(pixImg);
+    imageFile = DEFAULT_PIC;
+
+    ui->pushButton_Generate->setEnabled(false);
+
+    //Phonon thinguies
+    audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory,this);
+    mediaObject = new Phonon::MediaObject(this);
+    mediaObject->setTickInterval(1000);
+    connect(mediaObject, SIGNAL(tick(qint64)), this, SLOT(tick(qint64)));
+    connect(mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)),
+                this, SLOT(stateChanged(Phonon::State,Phonon::State)));
+    Phonon::createPath(mediaObject, audioOutput);
+
+    is_paused = false;
+    ui->pushButton_pause->setEnabled(false);
+    ui->timeLcd->display("00:00");
+    ui->seekSlider->setMediaObject(mediaObject);
+    ui->volumeSlider->setAudioOutput(audioOutput);
+
+    setupActions();
 }
+
+void MuphicConfig::setupActions()
+{
+    playAction = new QAction(style()->standardIcon(QStyle::SP_MediaPlay), tr("Play"), this);
+    playAction->setShortcut(tr("Ctrl+P"));
+    playAction->setDisabled(true);
+    pauseAction = new QAction(style()->standardIcon(QStyle::SP_MediaPause), tr("Pause"), this);
+    pauseAction->setShortcut(tr("Ctrl+A"));
+    pauseAction->setDisabled(true);
+    stopAction = new QAction(style()->standardIcon(QStyle::SP_MediaStop), tr("Stop"), this);
+    stopAction->setShortcut(tr("Ctrl+S"));
+    stopAction->setDisabled(true);
+
+    connect(playAction, SIGNAL(triggered()), mediaObject, SLOT(play()));
+    connect(pauseAction, SIGNAL(triggered()), mediaObject, SLOT(pause()) );
+    connect(stopAction, SIGNAL(triggered()), mediaObject, SLOT(stop()));
+}
+
+void MuphicConfig::tick(qint64 time)
+{
+    QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
+
+    ui->timeLcd->display(displayTime.toString("mm:ss"));
+    //ui->horizontalSlider_Seek->setSliderPosition(mediaObject->currentTime()*1000 / mediaObject->totalTime());
+}
+
+void MuphicConfig::stateChanged(Phonon::State newState, Phonon::State /* oldState */)
+{
+    switch (newState) {
+        case Phonon::ErrorState:
+            if (mediaObject->errorType() == Phonon::FatalError) {
+                QMessageBox::warning(this, tr("Fatal Error"),
+                mediaObject->errorString());
+            } else {
+                QMessageBox::warning(this, tr("Error"),
+                mediaObject->errorString());
+            }
+            break;
+        case Phonon::PlayingState:
+                playAction->setEnabled(false);
+                pauseAction->setEnabled(true);
+                stopAction->setEnabled(true);
+                break;
+        case Phonon::StoppedState:
+                stopAction->setEnabled(false);
+                playAction->setEnabled(true);
+                pauseAction->setEnabled(false);
+                ui->timeLcd->display("00:00");
+                break;
+        case Phonon::PausedState:
+                pauseAction->setEnabled(false);
+                stopAction->setEnabled(true);
+                playAction->setEnabled(true);
+                break;
+        case Phonon::BufferingState:
+                break;
+        default:
+            ;
+    }
+}
+
+void MuphicConfig::on_toolButton_OutputMidi_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "",
+        tr("(*.mid)"));
+
+    if (fileName != "") {
+        QFile file(fileName);
+        if (file.exists()) {
+         QMessageBox::critical(this, tr("Warning"),
+             tr("Already have a file with this name!"));
+
+        }
+        ui->lineEdit_OutputMidi->setText(fileName);
+    }
+}
+
+void MuphicConfig::on_toolButton_InputPic_clicked()
+{
+    imageFile = QFileDialog::getOpenFileName(this, tr("Open File"), "",
+        tr("(*.jpg *.png *.bmp)"));
+
+    if (imageFile != "") {
+        QFile file(imageFile);
+        if (!file.exists()) {
+         QMessageBox::critical(this, tr("Error"),
+             tr("Could not open file, not exists"));
+         return;
+        }
+        ui->lineEdit_InputPic->setText(imageFile);
+
+        delete newScene; newScene = NULL;
+        newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
+        ui->graphicsView_Pic->setScene(newScene);
+
+        QPixmap pixImg(imageFile);
+        pixImg = pixImg.scaled(ui->graphicsView_Pic->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->graphicsView_Pic->scene()->addPixmap(pixImg);
+
+        repaint();
+    }
+}
+
+void MuphicConfig::on_pushButton_Generate_clicked()
+{
+    #ifdef __WINDOWS
+        mediaSource = Phonon::MediaSource("");
+    #endif
+
+    mediaObject->setCurrentSource(mediaSource);
+
+    std::string picFile = ui->lineEdit_InputPic->text().toStdString();
+
+    usrConf->setPhicActive(false);
+    usrConf->setMuDebug(false);
+    usrConf->setMuActive(true);
+    //std::string name = changeExtension(fileName.toStdString(), "xml");
+    usrConf->write("user_conf.xml");
+    std::string userConfFile = "user_conf.xml";
+
+    std::string args[] = {userConfFile, picFile};
+    l->launch(2, Launcher::MUPHIC, args);
+}
+
+void MuphicConfig::on_pushButton_pause_clicked()
+{
+    if(!is_paused)
+    {
+        mediaObject->pause();
+        mediaTime = mediaObject->currentTime();
+        is_paused = true;
+    }
+    else
+    {
+        mediaObject->seek(mediaTime);
+        mediaObject->play();
+        is_paused = false;
+    }
+}
+
+void MuphicConfig::on_pushButton_Stop_clicked()
+{
+    mediaObject->stop();
+    #ifdef __WINDOWS
+        mediaSource = Phonon::MediaSource("");
+    #endif
+
+    mediaObject->setCurrentSource(mediaSource);
+    ui->pushButton_pause->setEnabled(false);
+}
+
+void MuphicConfig::paintEvent(QPaintEvent*)
+{/*
+  QPainter painter(this);
+  painter.setRenderHint(QPainter::Antialiasing, true);
+  painter.setPen(QPen(Qt::black, 12, Qt::DashDotLine, Qt::RoundCap));
+  painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
+  painter.drawEllipse(80, 80, 400, 240);*/
+}
+
+
+void MuphicConfig::on_pushButton_Play_clicked()
+{
+    if(!is_paused)
+    {
+        std::string analysedPic = changeExtension(imageFile.toStdString(), "");
+        mediaSource = Phonon::MediaSource((analysedPic+".wav").c_str());
+        mediaObject->setCurrentSource(mediaSource);
+        mediaObject->play();
+        ui->pushButton_pause->setEnabled(true);
+    }
+    else
+    {
+        mediaObject->seek(mediaTime);
+        mediaObject->play();
+        is_paused = false;
+    }
+
+}
+
+void MuphicConfig::on_pushButton_Analyze_clicked()
+{
+     if (imageFile != "") {
+         QFile file(imageFile);
+         if (!file.exists()) {
+          QMessageBox::critical(this, tr("Error"),
+              tr("Could not open file, not exists"));
+          return;
+         }
+
+        usrConf->setPhicActive(true);
+        usrConf->setPhicDebug(false);
+        usrConf->setMuActive(false);
+        //std::string name = changeExtension(imageFile.toStdString(), "xml");
+        usrConf->write("user_conf.xml");
+
+        std::string args[] = {"user_conf.xml", imageFile.toStdString()};
+        l->launch(2, Launcher::MUPHIC, args);
+
+        ui->polyWidget->load(imageFile.toStdString());
+        ui->polyWidget->setMinimumHeight(ui->polyWidget->iHeight);
+        ui->polyWidget->setMinimumWidth(ui->polyWidget->iWidth);
+        ui->pushButton_Generate->setEnabled(true);
+     }
+}
+
 
 void MuphicConfig::on_filterSelComboBox_currentIndexChanged(int index)
 {
