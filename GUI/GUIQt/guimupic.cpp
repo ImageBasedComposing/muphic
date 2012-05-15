@@ -160,7 +160,8 @@ void GuiMupic::on_toolButton_InputPic_clicked()
 
 void GuiMupic::on_pushButton_Generate_clicked()
 {
-    //mediaSource = Phonon::MediaSource("");
+    if(__WINDOWS)
+        mediaSource = Phonon::MediaSource("");
     mediaObject->setCurrentSource(mediaSource);
 
     std::string picFile = ui->lineEdit_InputPic->text().toStdString();
@@ -195,7 +196,8 @@ void GuiMupic::on_pushButton_pause_clicked()
 void GuiMupic::on_pushButton_Stop_clicked()
 {
     mediaObject->stop();
-    //mediaSource = Phonon::MediaSource("");
+    if(__WINDOWS)
+        mediaSource = Phonon::MediaSource("");
     mediaObject->setCurrentSource(mediaSource);
     ui->pushButton_pause->setEnabled(false);
 }
@@ -212,20 +214,6 @@ void GuiMupic::paintEvent(QPaintEvent*)
 
 void GuiMupic::on_pushButton_Play_clicked()
 {
-/*    if (pidPlay != -1)
-    {
-        l->killProcess(pidPlay);
-        pidPlay = -1;
-    }
-
-    if (pidPlay == -1)
-    {
-        std::string args[] = {"./MelodyTimothy1.mid"};
-        //pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
-
-        pidPlay = l->launchAndGo(1, Launcher::MPLAYER, args);
-    }*/
-
     if(!is_paused)
     {
         std::string analysedPic = changeExtension(imageFile.toStdString(), "");
