@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="yes" ?>
+<muphic_conf>
+    <phic_conf none="true" />
+    <mu_conf>
+		<compositorMix>2</compositorMix>
+		<compositor_voice1>2</compositor_voice1>
+		<compositor_voice2>2</compositor_voice2>
+		<compositor_voice3>2</compositor_voice3>
+		<compositor_voice4>2</compositor_voice4>
+		<instrument_voice1>45</instrument_voice1>
+		<instrument_voice2>73</instrument_voice2>
+		<instrument_voice3>34</instrument_voice3>
+		<instrument_voice4>128</instrument_voice4>
+		<color-system>1</color-system>
+		<tempo>120</tempo>
+        <debug />
+    </mu_conf>
+</muphic_conf>

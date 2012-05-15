@@ -38,7 +38,7 @@ LNK=gcc
 INSTALL=install
 
 prefix=/usr/local
-binaries=abc2midi midi2abc abc2abc mftext yaps midicopy abcmatch
+binaries=abc2midi
 
 docdir=share/doc/abcmidi
 bindir=bin
