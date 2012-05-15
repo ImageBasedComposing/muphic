@@ -1,11 +1,11 @@
 #include <QtGui/QApplication>
-#include "guimupic.h"
+#include "muphicconfig.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setApplicationName("MuphicGUI");
-    GuiMupic w;
+    MuphicConfig w;
     w.show();
     w.initialize();
 

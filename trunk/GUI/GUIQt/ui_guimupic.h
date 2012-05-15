@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'guimupic.ui'
 **
-** Created: Sat 5. May 20:36:18 2012
+** Created: Tue May 15 17:14:59 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -31,9 +31,9 @@
 #include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
-#include <volumebar.h>
 #include "polygonwidget.h"
 #include "seekbar.h"
+#include "volumebar.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -80,7 +80,7 @@ public:
     {
         if (GuiMupic->objectName().isEmpty())
             GuiMupic->setObjectName(QString::fromUtf8("GuiMupic"));
-        GuiMupic->resize(967, 545);
+        GuiMupic->resize(967, 548);
         centralWidget = new QWidget(GuiMupic);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
@@ -181,7 +181,7 @@ public:
         scrollArea->setWidgetResizable(true);
         polyWidget = new PolygonWidget();
         polyWidget->setObjectName(QString::fromUtf8("polyWidget"));
-        polyWidget->setGeometry(QRect(0, 0, 436, 333));
+        polyWidget->setGeometry(QRect(0, 0, 430, 309));
         QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
