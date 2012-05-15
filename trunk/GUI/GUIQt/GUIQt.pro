@@ -13,7 +13,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        guimupic.cpp \
     ../../Muphic/common/src/launcher.cpp \
     Pincel.cpp \
     Escena.cpp \
@@ -30,7 +29,7 @@ SOURCES += main.cpp\
     volumebar.cpp \
     muphicconfig.cpp
 
-HEADERS  += guimupic.h \
+HEADERS  += \
     ../../Muphic/common/include/launcher.h \
     Pincel.h \
     Escena.h \
