@@ -75,7 +75,6 @@ std::string Launcher::parseConfFile(std::string file, Program pname)
 	}
 }
 
-
 void Launcher::launch(int argc, std::string argv[], Options options)
 {
     #ifdef __WINDOWS
@@ -84,7 +83,7 @@ void Launcher::launch(int argc, std::string argv[], Options options)
 
 		for (int i = 1; i < argc; i++)
 		{
-			exeFile += " " + argv[i];
+                    exeFile += " \"" + argv[i] + "\"";
 		}
 
 		system(exeFile.c_str());
@@ -147,7 +146,9 @@ int Launcher::launchAndGo(int argc, std::string argv[], Options options)
 		for (int i = 1; i < argc; i++)
 		{
 			exeFile.push_back(' ');
+			exeFile.push_back('\"');
 			exeFile.insert(exeFile.end(), argv[i].begin(), argv[i].end());
+			exeFile.push_back('\"');
 		}
 		exeFile.push_back('\0');
 

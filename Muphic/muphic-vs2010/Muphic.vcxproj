@@ -38,7 +38,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)\..\source\include;$(ProjectDir)\..\common\include;$(IncludePath);$(ProjectDir)\..\TinyXML\include;</IncludePath>
-    <OutDir>$(ProjectDir)\..\..\Installation files - windows\</OutDir>
+    <OutDir>$(ProjectDir)..\..\Installation files - windows\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
