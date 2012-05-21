@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerWorkingDirectory>$(ProjectDir)\..\..\..\bin\Debug\</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)..\..\..\Installation files - windows\</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>phic_conf.xml estofalla.png</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"$(ProjectDir)..\debug resource\phic_conf.xml" "$(ProjectDir)..\debug resource\2.png"</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
