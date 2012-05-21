@@ -1,0 +1,49 @@
+\subsubsection{Interfáz Gráfica}
+
+A la hora de empezar el desarrollo de la interfáz gráfica nos tuvimos que plantear la posibilidad de usar algún tipo de framework que nos ayudase a construirla más rápido, ahora bien, como nuestra aplicación iba a ser multiplatadorma era necesario utilizar un programa que fuera compatible tanto con Windows, como distintas distribuciones de Linux. Tras barajar varias opciones nos decantamos al final por Qt, este framework nos ofrecía tanto la posibilidad de trabajar en distintos sistemas operativos, utilizaba C++ como lenguaje de programación, con el que hemos trabajado en todo el núcleo de la aplicación, y ofrecía facilidades a la hora de integrar audio a través de la librería Phonon o componentes personalizados en una interfaz.\\
+\newline
+Nuestra interfaz gráfica esta construida usando principalmente componentes ofrecidos por Qt, esta compuesta de tres pestañas cada una encargada de una parte de la funcionalidad:
+\newline
+\\\underline{Main Window:}
+\\Esta pestaña se encarga de la interacción directa con el usuario, muestra los resultados obtenidos y permite lanzar los distintos componentes de la aplicación. 
+\\Esta compuesta por los siguientes elementos tal y como se puede ver en la imagen adjunta:
+\newline
+\\\textit{Barras de exploracion:} Son dos barras en las que el usuario puede elegir las direcciones en las que se cargará la imagen a analizar y se guardarán los archivos de audio, para elegir la dirección podrá insertar el texto a mano con el nombre que desee o utilizar los botones para usar el explorador del sistema operativo correspondiente.
+\\\textit{Input Image y Analysis output:} En el primero de estos dos componentes se muestra la imagen que se va a analizar, en el segundo se mostrará el resultado del análisis una vez lanzado Phic a ejecución.
+\\\textit{Botones de Analyze y Compose:} Tal y como su nombre indica Analyze realiza el analisis de la imagen pasada como parámetro de entrada lanzando a ejecución el programa Phic, uno de los módulos de la aplicación. Compose realiza la composición musical a partir de los datos analizados, para ello lanza a ejecución el programa Mu, otro de los módulos de la aplicación.
+\\\textit{Botones del reproductor:} Estas erramientas estan comunicadas con la librería Phonon que se encarga de la interacción con el archivo de audio creado, y una vez compuesta la melodía tomarán el parametro de entrada como referencia y cuando el usuario pulse los distintos botones realizara las distintas funciones de play, pause, stop, cambiar el volumen, o moverse a lo largo de la melodía.
+\newline
+\\\underline{Graphic Config:}
+\\En esta pestaña se encuentran todas las opciones relacionadas con el análisis de la imagen, las distintas configuraciones se transmitirán a los módulos de la aplicación a través de un documento XML que se genera cuando en la "Main Window" se le da al boton de "Analyze".
+\\Los distintos componentes de esta pestaña van variando según el filtro que se seleccione, sin embargo algunos de ellos son comunes para todos los filtros:
+\newline
+\\\textit{Filter:} Este combo box permite seleccionar entre los distintos filtros que se pueden usar en la aplicación.
+\\\textit{Noise Selection:} Con esta barra de desplazamiento podremos elegir a partir de que tamaño, relativo al area del mayor polígono de la imagen, se ignorarán los poligonos encontrados durante el análisis de la imagen.
+\\\textit{Analysis Depth:} Esta barra nos permite seleccionar cuanto deseamos comprimir la imagen original antes de analizarla, cuando menor sea su valor menor será el nivel de detalle obtenido y más rápido se realizará el análisis.
+\\\textit{Polygon Simplification:} Esta barra nos permite seleccionar cuanto deseamos simplificar los poligonos obtenidos a partir de la imagen original, cuanto mayor sea su valor menos vertices tendrán los poligonos obtenidos y por lo tanto menos fiel será el resultado del análisis, sin embargo, este se realizará más rápido.
+\newline
+\\Según el filtro que elijamos aparecerán mas componentes:
+\newline
+\\\textit{Threshold} (Filtro Threshold): 
+\\\textit{Hue Division} (Filtro Hue Division):
+\\\textit{Threshold H} (Filtro Multiple Threshold):
+\\\textit{Threshold S} (Filtro Multiple Threshold):
+\\\textit{Threshold V} (Filtro Multiple Threshold):
+\newline
+\\\underline{Composition Config:}
+\\En esta pestaña podemos encontrar todas las opciones disponibles para el compositor musical, estás serán transmitidas a nuestros modulos cuando se pulse el boton de "Compose" en la "Main Window" a través del documento XML mencionado anteriormente.
+\\Podemos ver que hay opciones para cuatro voces, que son aquellas con las que trabajan nuestros compositores siendo normalmente la "Voice 1" la melodía principal, la "Voice 2" un acompañamiento, la "Voice 3" el bajo y la "Voice 4" la percusión. Las opciones disponibles son las siguientes:
+\newline
+\\textit{Color System:} Se refiere a la teoría sinestésica que se utilizará como base para la relación de color-notas durante la composición musical.
+\\textit{Composer:} En las cuatro voces se refiere a que compositor se utilizará para esa voz, al darle click se desplegarán los distintos compositores que estan disponibles para que el usuario elija el que mas le guste.
+\\textit{Instrument:} En las cuatro voces se refiere a que instrumento se utilizará para esa voz en concreto, al darle click se desplegarán los instrumentos que hemos incluido en nuestra aplicación.
+\\textit {Composer Mixer:} Hace referencia a que "compositor" se utilizará para combinar las cuatro voces anteriores
+\\textit{Tempo que no es tempo:} Pues eso...
+\newline
+\\{\bf Libreria Phonon}
+\\Esta es una librería que nos proporciona Qt para la reproducción de audio, al ser un módulo externo requiere una serie de librerias extra que hemos incluido en la instalación de windows pero que tienen que instalarse en linux utilizando alguno de los gestores de software disponibles realizando una busqueda con la palabra clave Phonon.
+\\Las librerías requeridas son las siguientes: (LISTA DE LIBRERIAS)
+\\En el caso de que no funcione el sistema de reproducción, se pueden encontrar los archivos de audio en la ruta especificada en "Midi Output"
+\newline
+\\La interacción con phonon no es especialmente destacable, utilizando una funcionalidad proporcionada por el framework asociamos nuestro fichero multimedia a un tipo proporcionado por Phonon que a su vez lo conecta con el sistema de audio predeterminado para cada sistema operativo.
+\\El uso de Phonon nos era conveniente porque a pesar de sus complicaciones nos ofrecía una manera sencilla de incluir un reproductor en nuestra interfaz que a su vez fuese multiplataforma sin obligar al usuario a buscar el archivo de audio o forzar nosotros una llamada a un tercer programa para reproducir la musica que hemos generado.
