@@ -3,6 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>$(ProjectDir)..\..\..\Installation files - windows\</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>user_conf.xml toad_img</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"$(ProjectDir)..\debug resource\mu_conf.xml" "$(ProjectDir)..\debug resource\test1"</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
