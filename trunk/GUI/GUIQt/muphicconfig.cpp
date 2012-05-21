@@ -7,7 +7,10 @@ MuphicConfig::MuphicConfig(QWidget *parent) :
     ui->setupUi(this);
 
     l = new Launcher();
-    pidPlay = -1;
+    pidAnal = pidComp = -1;
+
+    analysing = false;
+    composing = false;
 }
 
 MuphicConfig::~MuphicConfig()
@@ -233,25 +236,42 @@ void MuphicConfig::on_toolButton_InputPic_clicked()
 
 void MuphicConfig::on_pushButton_Generate_clicked()
 {
-    #ifdef __WINDOWS
-        mediaSource = Phonon::MediaSource("");
-    #endif
 
-    mediaObject->setCurrentSource(mediaSource);
+    if (composing)
+    {
+        #ifdef __WINDOWS
+            system("taskkill /F /T /IM Muphic.exe");
+        #endif
+        #ifdef __LINUX
+            l->killProcess(pidComp);
+        #endif
+        composing = false;
+        ui->pushButton_Generate->setText("Compose");
+    }
+    else
+    {
+        #ifdef __WINDOWS
+            mediaSource = Phonon::MediaSource("");
+        #endif
 
-    std::string picFile = ui->lineEdit_InputPic->text().toStdString();
-    std::string muFile = ui->lineEdit_OutputMidi->text().toStdString();
+        mediaObject->setCurrentSource(mediaSource);
 
-    usrConf->setMuOutputFile(muFile);
-    usrConf->setPhicActive(false);
-    usrConf->setMuDebug(false);
-    usrConf->setMuActive(true);
-    //std::string name = changeExtension(fileName.toStdString(), "xml");
-    usrConf->write("user_conf.xml");
-    std::string userConfFile = "user_conf.xml";
+        std::string picFile = ui->lineEdit_InputPic->text().toStdString();
+        std::string muFile = ui->lineEdit_OutputMidi->text().toStdString();
 
-    std::string args[] = {userConfFile, picFile};
-    l->launch(2, Launcher::MUPHIC, args);
+        usrConf->setMuOutputFile(muFile);
+        usrConf->setPhicActive(false);
+        usrConf->setMuDebug(false);
+        usrConf->setMuActive(true);
+        //std::string name = changeExtension(fileName.toStdString(), "xml");
+        usrConf->write("user_conf.xml");
+        std::string userConfFile = "user_conf.xml";
+
+        std::string args[] = {userConfFile, picFile};
+        pidComp = l->launchAndGo(2, Launcher::MUPHIC, args);
+        ui->pushButton_Generate->setText("Stop");
+        composing = true;
+    }
 }
 
 void MuphicConfig::on_pushButton_pause_clicked()
@@ -282,12 +302,38 @@ void MuphicConfig::on_pushButton_Stop_clicked()
 }
 
 void MuphicConfig::paintEvent(QPaintEvent*)
-{/*
-  QPainter painter(this);
-  painter.setRenderHint(QPainter::Antialiasing, true);
-  painter.setPen(QPen(Qt::black, 12, Qt::DashDotLine, Qt::RoundCap));
-  painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
-  painter.drawEllipse(80, 80, 400, 240);*/
+{
+    if (analysing)
+    {
+        FILE *f=NULL;
+        f = fopen("analysis_log","r");
+        if (f)
+        {
+            fclose(f);
+            ui->polyWidget->load(imageFile.toStdString());
+            ui->polyWidget->setMinimumHeight(ui->polyWidget->iHeight);
+            ui->polyWidget->setMinimumWidth(ui->polyWidget->iWidth);
+            ui->pushButton_Generate->setEnabled(true);
+            analysing = false;
+            remove("analysis_log");
+            ui->pushButton_Analyze->setText("Analyze");
+        }
+    }
+    if (composing)
+    {
+        FILE *f=NULL;
+        f = fopen("composition_log","r");
+        if (f)
+        {
+            fclose(f);
+
+            composing = false;
+            remove("composition_log");
+            ui->pushButton_Generate->setText("Compose");
+        }
+    }
+
+
 }
 
 
@@ -312,6 +358,20 @@ void MuphicConfig::on_pushButton_Play_clicked()
 
 void MuphicConfig::on_pushButton_Analyze_clicked()
 {
+    if (analysing)
+    {
+        #ifdef __WINDOWS
+            system("taskkill /F /T /IM Muphic.exe");
+        #endif
+        #ifdef __LINUX
+            l->killProcess(pidAnal);
+        #endif
+
+        analysing = false;
+        ui->pushButton_Analyze->setText("Analyze");
+    }
+    else
+    {
      if (imageFile != "") {
          QFile file(imageFile);
          if (!file.exists()) {
@@ -327,13 +387,17 @@ void MuphicConfig::on_pushButton_Analyze_clicked()
         usrConf->write("user_conf.xml");
 
         std::string args[] = {"user_conf.xml", imageFile.toStdString()};
-        l->launch(2, Launcher::MUPHIC, args);
+        pidAnal = l->launchAndGo(2, Launcher::MUPHIC, args);
+        analysing = true;
+        ui->pushButton_Analyze->setText("Stop");
 
+/*
         ui->polyWidget->load(imageFile.toStdString());
         ui->polyWidget->setMinimumHeight(ui->polyWidget->iHeight);
         ui->polyWidget->setMinimumWidth(ui->polyWidget->iWidth);
-        ui->pushButton_Generate->setEnabled(true);
+        ui->pushButton_Generate->setEnabled(true);*/
      }
+    }
 }
 
 
