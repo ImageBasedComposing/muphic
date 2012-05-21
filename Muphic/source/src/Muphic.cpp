@@ -61,6 +61,11 @@ int main( int argc, const char* argv[] )
         cout << endl << "Image analysis completed" << endl;
         /*cin.get();
         cin.ignore(cin.rdbuf()->in_avail());*/
+
+		ofstream myfile;
+		myfile.open ("analysis_log");
+		myfile << "Delete me. I'm useless\n";
+		myfile.close();
 	}
 
 	if (usrConf->getMuActive())
@@ -78,7 +83,15 @@ int main( int argc, const char* argv[] )
         cout << endl << "Image-based composing completed" << endl;
        /* cin.get();
         cin.ignore(cin.rdbuf()->in_avail());*/
+	
+		ofstream myfile;
+		myfile.open ("composition_log");
+		myfile << "Delete me. I'm useless\n";
+		myfile.close();
+
 	}
+
+
 
 	return 0;
 }

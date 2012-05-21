@@ -14,11 +14,11 @@ ps: $(DVI)
 
 toc.stamp:
 	$(TeX) $(TEXMAIN)
-	rm $(DVI)
+	del $(DVI)
 	touch toc.stamp
 
 $(DVI): $(TEXFILES)
 	$(TeX) $(TEXMAIN)
 
 clean:
-	rm -f *.log *.dvi *.aux *.toc *.lof *.lot *.out *.pdf toc.stamp
+	del -f *.log *.dvi *.aux *.toc *.lof *.lot *.out *.pdf toc.stamp

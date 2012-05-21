@@ -298,7 +298,7 @@ bool Launcher::killProcess(int pid)
 	#ifdef __WINDOWS
 		bool out = TerminateProcess((HANDLE) pid, 0);
 
-		CloseHandle( (HANDLE) pid );
+                CloseHandle( (HANDLE) pid );
 
 		// thread handle should DEFINITELY be closed, but
 		// this works for now and linux only needs one integer, so yeah

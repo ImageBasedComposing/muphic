@@ -142,7 +142,11 @@ private:
 
     QString imageFile;
     Launcher* l;
-    pid_t pidPlay;
+    pid_t pidAnal, pidComp;
+
+    bool analysing;
+    bool composing;
+
 
     Phonon::MediaObject *mediaObject;
     Phonon::AudioOutput *audioOutput;
