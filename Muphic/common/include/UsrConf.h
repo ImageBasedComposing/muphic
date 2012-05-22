@@ -65,7 +65,7 @@ class UsrConf/* : public Conf*/
             void setPhicThresholdSelec(int t);
             void setPhicPolygonSimp(int i);
 			void setPhicAnalysisDetail(int i);
-            void setPhicNoiseSelec(int n);
+            void setPhicNoiseSelec(double n);
             void setPhicColorLevels(int c);
             void setPhicThresholdH(int t);
             void setPhicThresholdS(int t);
@@ -95,7 +95,7 @@ class UsrConf/* : public Conf*/
             int  phicThresholdSelec;
             int  phicPolygonSimp;
 			int  phicAnalysisDetail;
-            int  phicNoiseSelec;
+            double  phicNoiseSelec;
             int  phicColorLevels;
             int  phicThresholdH;
             int  phicThresholdS;

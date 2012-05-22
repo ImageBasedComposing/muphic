@@ -23,10 +23,10 @@ void MuphicConfig::initialize()
 {
     //We initialize Phic
     usrConf = new UsrConf();
-    usrConf->setPhicNoiseSelec(0);
+    usrConf->setPhicNoiseSelec(1.4);
     usrConf->setPhicPolygonSimp(2);
     usrConf->setPhicColorLevels(3);
-    usrConf->setPhicAnalysisDetail(50);
+    usrConf->setPhicAnalysisDetail(45);
     usrConf->setPhicFilterSelect(3);
     usrConf->setPhicThresholdSelec(50);
     usrConf->setPhicThresholdH(35);

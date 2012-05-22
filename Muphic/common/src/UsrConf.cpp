@@ -483,7 +483,7 @@ void UsrConf::setPhicAnalysisDetail(int i)
 	phicAnalysisDetail = i;
 }
 
-void UsrConf::setPhicNoiseSelec(int n)
+void UsrConf::setPhicNoiseSelec(double n)
 {
     phicNoiseSelec = n;
 }
