@@ -468,7 +468,10 @@
             <number>10</number>
            </property>
            <property name="value">
-            <number>0</number>
+            <number>26</number>
+           </property>
+           <property name="sliderPosition">
+            <number>26</number>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -505,7 +508,7 @@
             <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="text">
-            <string>0.0</string>
+            <string>1.4</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -898,7 +901,7 @@
             <number>100</number>
            </property>
            <property name="sliderPosition">
-            <number>50</number>
+            <number>45</number>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -929,7 +932,7 @@
             <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="text">
-            <string>50</string>
+            <string>45</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
