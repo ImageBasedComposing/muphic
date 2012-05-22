@@ -27,7 +27,7 @@ void MuphicConfig::initialize()
     usrConf->setPhicPolygonSimp(2);
     usrConf->setPhicColorLevels(3);
     usrConf->setPhicAnalysisDetail(50);
-    usrConf->setPhicFilterSelect(2);
+    usrConf->setPhicFilterSelect(3);
     usrConf->setPhicThresholdSelec(50);
     usrConf->setPhicThresholdH(35);
     usrConf->setPhicThresholdS(20);
@@ -71,14 +71,6 @@ void MuphicConfig::initialize()
     ui->tLabel->setMaximumSize(0,0);
     ui->label_2->setVisible(false);
     ui->label_2->setMaximumSize(0,0);
-
-    //We deactivate colorLevels operations
-    ui->horizontalSlider_colorLevels->setVisible(false);
-    ui->horizontalSlider_colorLevels->setMaximumSize(0,0);
-    ui->labelColorLevels->setVisible(false);
-    ui->labelColorLevels->setMaximumSize(0,0);
-    ui->label_ColorLevels->setVisible(false);
-    ui->label_ColorLevels->setMaximumSize(0,0);
 
     //We deactivate threshold H operations
     ui->label_ThresholdH->setVisible(false);
