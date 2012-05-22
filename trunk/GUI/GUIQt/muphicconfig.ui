@@ -184,8 +184,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>228</width>
-                  <height>286</height>
+                  <width>234</width>
+                  <height>317</height>
                  </rect>
                 </property>
                 <property name="sizePolicy">
@@ -398,7 +398,7 @@
          <item>
           <widget class="QComboBox" name="filterSelComboBox">
            <property name="currentIndex">
-            <number>2</number>
+            <number>3</number>
            </property>
            <item>
             <property name="text">
