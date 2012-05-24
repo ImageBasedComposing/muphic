@@ -1,22 +1,22 @@
 #include "Compositors/ComposerFigMelody.h"
 
 /*------Constructoras------*/
-ComposerFigMelody::ComposerFigMelody()
+ComposerFigMelody::ComposerFigMelody(ColorSystem* cs) : ComposerVoice(cs)
 {
 	// ctor
 }
 
-ComposerFigMelody::ComposerFigMelody(TableScale* tbScale)
+ComposerFigMelody::ComposerFigMelody(ColorSystem* cs, TableScale* tbScale) : ComposerVoice(cs, tbScale)
 {
-	tableScale = tbScale;
+	// ctor
 }
 
 /*------Destructora------*/
 ComposerFigMelody::~ComposerFigMelody()
 {
 	//// dtor
-	//delete tableScale;
-	//tableScale = NULL;
+	//delete tb;
+	//tb = NULL;
 }
 
 //Hacemos una melodia de duracion limitada y que sea a partir de la figura dada.
@@ -24,9 +24,8 @@ bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 {
 	//Vemos el color y en que nos movemos.
 	Color color = f->getRGB();
-	Scriabin* scriabin = new Scriabin();
 
-	int nota = scriabin->getNota(color);
+	int nota = cs->getNota(color);
 
 	//Ordenamos los vertices de la figura teniendo en cuenta el focus... (nada por ahora) CAMBIAR!
 	vector< Vertice* > vertices;
@@ -78,12 +77,15 @@ bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 	double propor = 0.0;
 	while(durActual < dur)
 	{
-		for(int i = 0; i < numVertices; i++)
+		candidato = 0;
+		propor = distWithNext.at(candidato);
+		for(int i = 0; i < numVertices; i++){
 			if(propor < distWithNext.at(i))		//Cogemos al que mayor fracción de decimales le salió
 			{
 				candidato = i;
 				propor = distWithNext.at(i);
 			}
+		}
 		distWithNext.at(candidato) -= proporDurDist;
 		durVertice.at(candidato) += durBase;
 		durActual += durBase;
@@ -96,8 +98,9 @@ bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 	int step;	// El cambio de tono que vamos a hacer.
 	Nota* lastNote,* note;
 	//La primera nota es el color de la figura (no disponemos de más info)
-	lastNote = new Nota(durVertice.at(0), scriabin->getNota(color));
-	seg->getSimbolos()->pushBack(lastNote);
+	lastNote = new Nota(durVertice.at(0), cs->getNota(color));
+	if(lastNote->getDuracion() > 0)
+		seg->pushBack(lastNote);
 	//Ahora el resto de vértices desde 1 a numVertices
 	for(int i = 1; i < numVertices; i++)
 	{
@@ -109,45 +112,45 @@ bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 			if(durVertice.at(i) > HALFNOTE)
 			{
 				if(step > 0)
-					note = new Nota(QUARTERNOTE, tableScale->nextTone(lastNote->getTono()));
+					note = new Nota(QUARTERNOTE, tb->nextTone(lastNote->getTono()));
 				else
-					note = new Nota(QUARTERNOTE, tableScale->prevTone(lastNote->getTono()));
+					note = new Nota(QUARTERNOTE, tb->prevTone(lastNote->getTono()));
 				seg->getSimbolos()->pushBack(note); //añadimos la nota intermedia
 
 				if(step > 0)
-					note = new Nota(durVertice.at(i)-QUARTERNOTE, tableScale->nextNTone(lastNote->getTono(),3));
+					note = new Nota(durVertice.at(i)-QUARTERNOTE, tb->nextNTone(lastNote->getTono(),3));
 				else
-					note = new Nota(durVertice.at(i)-QUARTERNOTE, tableScale->prevNTone(lastNote->getTono(),3));
+					note = new Nota(durVertice.at(i)-QUARTERNOTE, tb->prevNTone(lastNote->getTono(),3));
 			}
 			else
 			{
 				if(step > 0)
-					note = new Nota(durVertice.at(i)-QUARTERNOTE, tableScale->nextTone(lastNote->getTono()));
+					note = new Nota(durVertice.at(i)-QUARTERNOTE, tb->nextTone(lastNote->getTono()));
 				else
-					note = new Nota(durVertice.at(i)-QUARTERNOTE, tableScale->prevTone(lastNote->getTono()));
+					note = new Nota(durVertice.at(i)-QUARTERNOTE, tb->prevTone(lastNote->getTono()));
 				seg->getSimbolos()->pushBack(note); //añadimos la nota intermedia
 
 				if(step > 0)
-					note = new Nota(QUARTERNOTE, tableScale->nextNTone(lastNote->getTono(),3));
+					note = new Nota(QUARTERNOTE, tb->nextNTone(lastNote->getTono(),3));
 				else
-					note = new Nota(QUARTERNOTE, tableScale->prevNTone(lastNote->getTono(),3));
+					note = new Nota(QUARTERNOTE, tb->prevNTone(lastNote->getTono(),3));
 			}
 		}
 		else
 		{
 			if(step > 0)
-				note = new Nota(durVertice.at(i), tableScale->nextNTone(lastNote->getTono(), step));
+				note = new Nota(durVertice.at(i), tb->nextNTone(lastNote->getTono(), step));
 			else
-				note = new Nota(durVertice.at(i), tableScale->prevNTone(lastNote->getTono(), step));
+				note = new Nota(durVertice.at(i), tb->prevNTone(lastNote->getTono(), step));
 		}
 
-		seg->getSimbolos()->pushBack(note);  //La nota respecto al vertice.
+		if(note->getDuracion() > 0){
+			seg->pushBack(note);  //La nota respecto al vertice.
+		}
 		lastNote = note;
 	}
 	lastNote = NULL;
 	note = NULL;
-	delete scriabin;
-	scriabin = NULL;
 
 	return true;
 }

@@ -8,8 +8,7 @@
 #include "Music/FiguresMusic.h"
 #include "Compositors/PatternGen.h"
 #include "Compositors/Patterns.h"
-#include "Compositors/ComposerFigMelody.h"
-#include "Compositors/ComposerFigRitmo.h"
+#include "Compositors/ComposerVoice.h"
 #include "Outputs/MidizatorABC.h"
 #include "Outputs/MidizatorWAV.h"
 
@@ -21,7 +20,7 @@ using namespace std;
 class ComposerTimothy : public Composer
 {
     public:
-        ComposerTimothy();
+        ComposerTimothy(ComposerVoice* fm = NULL, ComposerVoice* fm2 = NULL, ComposerVoice* fb = NULL, ComposerVoice* fr = NULL);
         virtual ~ComposerTimothy();
 
         string compose();
@@ -40,14 +39,8 @@ class ComposerTimothy : public Composer
         void setTmpMIDIPath(string m);
 
     protected:
-        string usrConfFile;
-        string pic;
-        string tmpMIDIPath;
-
 		//Duración de la obra musical:
 		int DURACION;
-
-        Conf* config;
 
     private:
 		std::list< std::pair<FigureMusic*, int> > calcularDuracion(std::list<FigureMusic*> f);

@@ -1,5 +1,21 @@
 #include "Compositors/ComposerFigRitmo.h"
 
+/*------Constructoras------*/
+ComposerFigRitmo::ComposerFigRitmo(ColorSystem* sc) : ComposerVoice(sc)
+{
+	// ctor
+}
+
+ComposerFigRitmo::ComposerFigRitmo(ColorSystem* sc, TableScale* tbScale) : ComposerVoice(sc, tbScale)
+{
+	// ctor
+}
+
+/*------Destructora------*/
+ComposerFigRitmo::~ComposerFigRitmo()
+{
+	//// dtor
+}
 
 bool ComposerFigRitmo::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int compas, bool quick)
 {
@@ -43,7 +59,7 @@ bool ComposerFigRitmo::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int 
 			{
 				duracion = ((QUARTERNOTE*2)/(int)pow(pownum,notas[k]));
 				duracionTotal += duracion;
-				s = new Nota(duracion,getDrumTone(duracion));
+				s = new Nota(duracion,getDrumTone());
 				simbtmp->pushBack(s);
 			}
 		}
@@ -58,7 +74,7 @@ bool ComposerFigRitmo::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int 
 		for(int f=0; f < 4; f++)
 		{
 			duracionTotal += duracion;
-			simbtmp->pushBack(new Nota(duracion,getDrumTone(duracion)));
+			simbtmp->pushBack(new Nota(duracion,getDrumTone()));
 		}
 	}
 
@@ -92,15 +108,17 @@ bool ComposerFigRitmo::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int 
 	{
 		for (int i = 0; i < simbtmp->size(); i++)
 		{
-			seg->getSimbolos()->pushBack(simbtmp->getAt(i));
-			duracionTotal += simbtmp->getAt(i)->getDuracion();
+			if(simbtmp->getAt(i)->getDuracion() > 0){
+				seg->pushBack(simbtmp->getAt(i));
+				duracionTotal += simbtmp->getAt(i)->getDuracion();
+			}
 		}
 	}
 
 	// como utilizamos factor (float) como entero, quedará un resto por ahí que rezo que no moleste, lo pongo como negra
 	if (duracionTotal < dur)
 	{
-		seg->getSimbolos()->pushBack(new Nota(dur-duracionTotal, 0));
+		seg->pushBack(new Nota(dur-duracionTotal, 0));
 		duracionTotal += dur - duracionTotal;
 	}
 
@@ -108,7 +126,7 @@ bool ComposerFigRitmo::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int 
 }
 
 
-int ComposerFigRitmo::getDrumTone(int duracion)
+int ComposerFigRitmo::getDrumTone()
 {
-	return LA_C; // por ejemplo
+	return instruments.front();
 }

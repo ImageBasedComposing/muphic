@@ -42,7 +42,7 @@ string ComposerTimothy2::compose()
 
 	// We create the scale by which we pretend to work, set by default to DOM
 	MajorScale scale;
-	Scriabin sc;
+	ScriabinColor sc;
 	TableScale* tbScaleBase = new TableScale(scale.getScaleSteps(), DO);
 	TableScale* tbScale = new TableScale(scale.getScaleSteps(), sc.getNota(padres.front()->getRGB(), tbScaleBase));
 
@@ -65,7 +65,7 @@ string ComposerTimothy2::compose()
 	{
 		seg1 = new Segmento();
 		
-		fm->compMelodyFig((*it), seg1, /*fake-int*/150); 
+		fm->compMelodyFig((*it), seg1, /*fake-int*/128); 
 
 		seg3 = new Segmento();
 		fb->compBassFig((*it),seg3,seg1->getDuration());
@@ -78,7 +78,7 @@ string ComposerTimothy2::compose()
 			child = (FigureMusic*)(*it)->getHijoAt(i);
 			seg2 = new Segmento();
 			if( isLittleFig(child, (*it)) )
-				fm->decMelodyFig(child, seg1, seg2, seg1->getDuration());
+				fm2->decMelodyFig(child, seg1, seg2, seg1->getDuration());
 			/*else //isMediumFig
 				seg2 = fm->interMelodyFig(child, seg);*/
 			segs1->pushBack(seg1);
@@ -133,7 +133,7 @@ string ComposerTimothy2::compose()
 
 	// We set the parameters in music, and also we asign the voices previously created to this music
 	Music* m = new Music();
-	m->setComposer("Timothy");
+	m->setComposer("Timothy2");
 	m->setBaseLenght(std::make_pair(1,WHOLE));
 	m->setName(getTmpMIDIPath());
 	m->setVoces(vs);
@@ -248,6 +248,8 @@ void ComposerTimothy2::setPic(string p)
 
 void ComposerTimothy2::setTmpMIDIPath(string m)
 {
-	tmpMIDIPath = m;
+	tmpMIDIPath = m.substr(0,m.find_last_of("."));
+	if(tmpMIDIPath.compare("") == 0)
+		tmpMIDIPath = m;
 }
 

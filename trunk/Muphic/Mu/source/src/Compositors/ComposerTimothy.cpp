@@ -1,6 +1,7 @@
 #include "Compositors/ComposerTimothy.h"
 
-ComposerTimothy::ComposerTimothy() : Composer()
+ComposerTimothy::ComposerTimothy(ComposerVoice* fm, ComposerVoice* fm2, ComposerVoice* fb, ComposerVoice* fr) :
+Composer(fm, fm2, fb, fr)
 {
     //ctor
 }
@@ -44,8 +45,8 @@ string ComposerTimothy::compose()
 	TableScale* tbScale = new TableScale(scale.getScaleSteps(), DO);
 
 	// We create the composers we will use to make the melody and rithm
-	ComposerFigMelody* fm = new ComposerFigMelody(tbScale);
-	ComposerFigRitmo* fr = new ComposerFigRitmo();
+	fm->setTableScale(tbScale);
+	fr->setTableScale(tbScale);
 
 	// We create the segments where we will put the different notes from the melody
 	Segmentos* segs1 = new Segmentos();
@@ -55,25 +56,27 @@ string ComposerTimothy::compose()
 	// We make the calls to the different composers with different figures sorted by vistosidad and with their timing assigned
 	for(std::list< std::pair<FigureMusic*, int> >::iterator it = aux.begin(); it != aux.end(); it++)
 	{
-		seg = new Segmento();
-		fm->compMelodyFig((*it).first, seg, (*it).second);
-		segs1->pushBack(seg);
+		if((*it).second > 0){
+			seg = new Segmento();
+			fm->compMelodyFig((*it).first, seg, (*it).second);
+			segs1->pushBack(seg);
 
-		seg = new Segmento();
-		fr->compRythmFig((*it).first, seg, (*it).second);
-		segs2->pushBack(seg);
+			seg = new Segmento();
+			fr->compRythmFig((*it).first, seg, (*it).second);
+			segs2->pushBack(seg);
+		}
 	}
 
 	// We create the voices we will use in this song and we assign them the segments we created
 	Voz* v1 = new Voz();
 	v1->setSegmentos(segs1);
-	// TO DO BY EGGTOR
 	v1->setTonalidad(DOM);
+	v1->setInstrumento(fm->getInstrument());
 
 	Voz* v2 = new Voz();
 	v2->setSegmentos(segs2);
 	v2->setTonalidad(DOM);
-	v2->setInstrumento(WOODBLOCK);
+	v2->setInstrumento(DRUMS);
 
 	Voces* vs = new Voces();
 
@@ -82,20 +85,23 @@ string ComposerTimothy::compose()
 
 	// We set the parameters in music, and also we asign the voices previously created to this music
 	Music* m = new Music();
-	m->setComposer("Timothy");
+	m->setComposer("Timothy1");
 	m->setBaseLenght(std::make_pair(1,WHOLE));
-	m->setName("MelodyTimothy");
+	m->setName(getTmpMIDIPath());
 	m->setVoces(vs);
 
 	// We assign the element that will create the music from our structures
-	m->setMidizator(new MidizatorWAV());
+	//m->setMidizator(new MidizatorWAV());
 
-	m->toMidi();
+	//m->toMidi();
 
 	m->setMidizator(new MidizatorABC());
+	cout << "Composition done!" << endl;
+	cout << endl << "Making midi output..." << endl;
+	std::string out = m->toMidi(); 
 
 	// We make the music using the midizator previously selected
-	return m->toMidi();
+	return out;
 }
 
 string ComposerTimothy::compose(string picPath, string usrConfPath)
@@ -171,6 +177,8 @@ void ComposerTimothy::setPic(string p)
 
 void ComposerTimothy::setTmpMIDIPath(string m)
 {
-	tmpMIDIPath = m;
+	tmpMIDIPath = m.substr(0,m.find_last_of("."));
+	if(tmpMIDIPath.compare("") == 0)
+		tmpMIDIPath = m;
 }
 

@@ -1,10 +1,15 @@
 #include "Mu.h"
+
 #include "Compositors/ComposerDemo.h"
 #include "Compositors/ComposerMultiple.h"
+#include "Compositors/ComposerTimothy.h"
 #include "Compositors/ComposerTimothy2.h"
+#include "Compositors/ComposerFigMelody.h"
 #include "Compositors/ComposerFigMelody2.h"
 #include "Compositors/ComposerFigBass2.h"
+#include "Compositors/ComposerFigRitmo.h"
 #include "Compositors/ComposerFigRitmo2.h"
+
 #include "launcher.h"
 #include "Music/Acorde.h"
 
@@ -52,10 +57,14 @@ int main( int argc, const char* argv[] )
 	//Color system we use in the composition:
 	ColorSystem* cs;
 	switch(usrConf->getMuReconColors()){
+		case 1:
+			cs = new NewtonColor(); break;
 		case 2:	
-			cs = new Scriabin(); break;
+			cs = new ScriabinColor(); break;
+		case 3:
+			cs = new BertrandCastelColor(); break;
 		default : 
-			cs = new Scriabin();
+			cs = new ScriabinColor();
 	}
 
 	//All the compositors:
@@ -64,6 +73,8 @@ int main( int argc, const char* argv[] )
 	//1º Voice
 	ComposerVoice* compVoice1;
 	switch(usrConf->getMuCompVoice1()){
+		case 1:	
+			compVoice1 = new ComposerFigMelody(cs); break;
 		case 2:	
 			compVoice1 = new ComposerFigMelody2(cs); break;
 		default : 
@@ -100,6 +111,8 @@ int main( int argc, const char* argv[] )
 	//4º Voice
 	ComposerVoice* compVoice4;
 	switch(usrConf->getMuCompVoice4()){
+		case 1:	
+			compVoice4 = new ComposerFigRitmo(cs); break;
 		case 2:	
 			compVoice4 = new ComposerFigRitmo2(cs); break;
 		default : 
@@ -121,17 +134,28 @@ int main( int argc, const char* argv[] )
 	//The compositor that is going to mix everything
 	Composer* compMix;
 	switch(usrConf->getMuCompMix()){
+		case 1:	
+			compMix = new ComposerTimothy(compVoice1,compVoice2,compVoice3,compVoice4); break;
 		case 2:	
 			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4); break;
 		default : 
 			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4);
 	}
-	
-	compMix->setTmpMIDIPath(analysedPic);
+
+	string midiPath = usrConf->getMuOutputFile();
+	if(midiPath.compare("") == 0)
+		compMix->setTmpMIDIPath(analysedPic);
+	else
+		compMix->setTmpMIDIPath(midiPath);
+
+
+	/* Componemos la música y la pasamos a midi*/
 	compMix->compose(analysedPic, usrConfPath);
-	
+
+
+	/* Ahora vamos a pasarla a wav */
 	Launcher* l = new Launcher();
-	string args[] = {analysedPic+".mid", "-R 700", "-OwU", "-o", analysedPic+".wav"};
+	string args[] = {compMix->getTmpMIDIPath()+".mid", "-R 700", "-OwU", "-o", compMix->getTmpMIDIPath()+".wav"};
 	cout << endl << "Making wav output..." << endl;
 	l->launch(5, Launcher::TIMIDITY, args);
 
@@ -143,6 +167,10 @@ int main( int argc, const char* argv[] )
 	delete compVoice4;
 	delete cs;
 	delete usrConf;
+
+	if(usrConf->getMuDebug()){
+		system("PAUSE");
+	}
 
 	return 0;
 }

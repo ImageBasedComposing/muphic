@@ -38,6 +38,7 @@ Music* ComposerMelodia::composeMusic()
 
 	// Cosas del compositor
 	FigureMusic* f;
+	ColorSystem * cs = new ScriabinColor();
 	Segmento* seg = new Segmento();
 	list< pair<Segmento*,int> > segs;
 	pair<Segmento*,int> par;
@@ -45,7 +46,7 @@ Music* ComposerMelodia::composeMusic()
 	/***********************************************************************/
 	PentatonicMajScale scale;
 	TableScale* tbScale = new TableScale(scale.getScaleSteps(), DO);
-	ComposerFigMelody* compPrueba = new ComposerFigMelody(tbScale);
+	ComposerFigMelody* compPrueba = new ComposerFigMelody(cs,tbScale);
 	/******************************************************************/
 
 	// Recorro las figuras y calculo su melodía
@@ -83,6 +84,9 @@ Music* ComposerMelodia::composeMusic()
 	melodia->setComposer("MelodyComposer");
 	melodia->setName("Melodia");
 	melodia->setBaseLenght(make_pair(1,32));
+
+	delete cs;
+	cs = NULL;
 
 	return melodia;
 
@@ -305,7 +309,7 @@ int ComposerMelodia::notaFigura(FigureMusic* f)
 		sumarArea(colores, (FigureMusic*) f->getHijoAt(j));
 	}
 
-	Scriabin* s = new Scriabin();
+	ScriabinColor* s = new ScriabinColor();
 
 	int aux = 0;
 	Color sol;
