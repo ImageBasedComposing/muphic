@@ -3,14 +3,34 @@
 UsrConf::UsrConf()
 {
     //ctor
-    phicActive = true;
-    phicDebug = false;
-
+// MUPHIC
+	// PHIC
+	phicActive = true;
+	phicDebug = false;
     phicFilterSelec = 2;        //Filtro Canny
     phicThresholdSelec = 50;    //Mismo valor que en Phic
+	phicPolygonSimp = 0;
 	phicAnalysisDetail = 50;
-
-    muActive = true;
+    phicNoiseSelec = 0;
+    phicColorLevels = 0;
+    phicThresholdH = 0;
+    phicThresholdS = 0;
+    phicThresholdV = 0;
+	// MU
+	muActive = true;
+    muDebug = false;
+	muCompMix = 2;
+	muCompVoice1 = 2;
+	muCompVoice2 = 2;
+	muCompVoice3 = 2;
+	muCompVoice4 = 2;
+	muInstrVoice1 = 45;
+	muInstrVoice2 = 52;
+	muInstrVoice3 = 32;
+	muInstrVoice4 = 128;
+	muReconColors = 2;
+	muTempo = 120;
+    muOutputFile = "";
 }
 
 UsrConf::~UsrConf()

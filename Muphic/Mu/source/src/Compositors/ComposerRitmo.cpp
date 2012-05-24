@@ -153,7 +153,7 @@ int ComposerRitmo::nota(FiguresMusic* f)
 		sumarArea(colores, (FigureMusic*)f->getFigAt(j));
 	}
 
-	Scriabin* s = new Scriabin();
+	ScriabinColor* s = new ScriabinColor();
 
 	int aux = 0;
 	Color sol;

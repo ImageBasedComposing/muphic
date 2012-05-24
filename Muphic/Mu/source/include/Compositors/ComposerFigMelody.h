@@ -3,7 +3,7 @@
 #ifndef COMPOSERFIGMELODY_H
 #define COMPOSERFIGMELODY_H
 
-#include "Compositors/Composer.h"
+#include "Compositors/ComposerVoice.h"
 #include "Music/music_elements.h"
 //#include "math_functions.h"
 #include "Music/FigureMusic.h"
@@ -16,7 +16,7 @@ class FiguresMusic;
 
 using namespace std;
 
-class ComposerFigMelody
+class ComposerFigMelody : public ComposerVoice
 {
 
 	protected:
@@ -25,8 +25,8 @@ class ComposerFigMelody
 		TableScale* tableScale;
 
     public:
-		ComposerFigMelody();
-		ComposerFigMelody(TableScale* tbScale);
+		ComposerFigMelody(ColorSystem* cs);
+		ComposerFigMelody(ColorSystem* cs, TableScale* tbScale);
 		virtual ~ComposerFigMelody();
 
 		//Se pide que haga una melodia dada una figura. Devuelve el segmento con la melodia

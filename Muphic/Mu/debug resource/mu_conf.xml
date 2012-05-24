@@ -2,7 +2,8 @@
 <muphic_conf>
     <phic_conf none="true" />
     <mu_conf>
-        <compositorMix>2</compositorMix>
+	<debug/>
+        <compositorMix>1</compositorMix>
         <compositor_voice1>2</compositor_voice1>
         <compositor_voice2>2</compositor_voice2>
         <compositor_voice3>2</compositor_voice3>
@@ -11,8 +12,8 @@
         <instrument_voice2>73</instrument_voice2>
         <instrument_voice3>32</instrument_voice3>
         <instrument_voice4>128</instrument_voice4>
-        <color-system>1</color-system>
-        <tempo>120</tempo>
+        <color-system>2</color-system>
+        <tempo>100</tempo>
         <muOutputFile>./test1</muOutputFile>
     </mu_conf>
 </muphic_conf>
