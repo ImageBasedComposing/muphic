@@ -23,14 +23,20 @@ class Composer
         virtual string getUsrConfFile();
         virtual string getPic();
         virtual string getTmpMIDIPath();
+		
+		int getTempo();
 
 /*------Setters------*/
         virtual void setConfig(string usrConfFile);          //Leemos el fichero de usuario y modificamos config
         virtual void setUsrConfFile(string f);
         virtual void setPic(string p);
         virtual void setTmpMIDIPath(string m);
+		
+		virtual void setTempo(int t);
 
     protected:
+		int tempo;
+	
 		ComposerVoice* fm;
 		ComposerVoice* fm2;
 		ComposerVoice* fb;

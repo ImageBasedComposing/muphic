@@ -8,6 +8,29 @@
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 
+\usepackage{color}
+%\usepackage{colordvi}
+\usepackage{ifthen} % para TODOs
+%   TODO
+\newcommand{\todoLong}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{~\\{\fcolorbox{red}{yellow}{\begin{minipage}{.985\textwidth}{#1}\end{minipage}}}}{}
+} % para TODO's, depende de \todoFlag
+% \newcommand{\todo}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{red}{yellow}{#1}}{}} % para TODO's, depende de \todoFlag
+%\newcommand{\todo}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\textcolor{red} {#1}}{}} % para TODO's, depende de \todoFlag
+
+
+
+\newcommand{\todo}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{red}{yellow}{ \begin{minipage}{12cm}#1\end{minipage}}}{}}
+
+
+\newcommand{\todobis}[2]{\ifthenelse{\equal{\todoFlag}{ON}}{~\\{\fcolorbox{red}{#1}{\begin{minipage}{.985\textwidth}{#2}\end{minipage}}}}{}
+} % \todobis{color}{contenido}para TODO's, depende de \todoFlag
+\newcommand{\duda}[1]{\ifthenelse{\equal{\dudaFlag}{ON}}{~\\{\fcolorbox{yellow}{Azure}{\begin{minipage}{.985\textwidth}{#1}\end{minipage}}}}{}
+}% cosas dudosas
+\newcommand{\todoFlag}{ON} % si vale ON aparecen los TODO's en cajas, sino desaparecen
+\newcommand{\dudaFlag}{ON} %
+
+
+
 \title{Muphic: Composición Musical Automática basada en Imágenes} % Título tentativo
 \author{Johan Bertrand \and Carlos Catalán \and Vladimir Georgiev}
 % \date{7 de Mayo de 2012}

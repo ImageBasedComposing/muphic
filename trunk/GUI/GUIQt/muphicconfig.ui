@@ -1009,17 +1009,32 @@
            </property>
            <item>
             <property name="text">
-             <string>Demo1</string>
+             <string>Newton</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Demo2</string>
+             <string>Bertrand Castel</string>
             </property>
            </item>
            <item>
             <property name="text">
              <string>Scriabin</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>G. Field</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Jameson</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Seeman</string>
             </property>
            </item>
           </widget>
@@ -1077,21 +1092,16 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>2</number>
+                 <number>0</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Demo1</string>
+                  <string>Simple Figure</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Demo2</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>FigMelody2</string>
+                  <string>Complex Figure</string>
                  </property>
                 </item>
                </widget>
@@ -1225,21 +1235,11 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>2</number>
+                 <number>0</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Demo1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Demo2</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>FigMelody2</string>
+                  <string>Complex Figure</string>
                  </property>
                 </item>
                </widget>
@@ -1376,21 +1376,11 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>2</number>
+                 <number>0</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Demo1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Demo2</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>FigBass2</string>
+                  <string>Figure Bass</string>
                  </property>
                 </item>
                </widget>
@@ -1521,21 +1511,16 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>2</number>
+                 <number>1</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Demo1</string>
+                  <string>Rythm Figure</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Demo2</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>FigRithm2</string>
+                  <string>Advanced Rythm Figure</string>
                  </property>
                 </item>
                </widget>
@@ -1556,18 +1541,8 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>2</number>
+                 <number>0</number>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>Demo1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Demo2</string>
-                 </property>
-                </item>
                 <item>
                  <property name="text">
                   <string>Drums &amp; Clanks</string>
@@ -1624,21 +1599,16 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>1</number>
            </property>
            <item>
             <property name="text">
-             <string>Demo1</string>
+             <string>Jimmy</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Demo2</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Timothy2</string>
+             <string>Timothy</string>
             </property>
            </item>
           </widget>
@@ -1691,7 +1661,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_v3Composer_3">
+          <widget class="QComboBox" name="comboBox_Tempo">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -1711,21 +1681,56 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>5</number>
            </property>
            <item>
             <property name="text">
-             <string>1/4</string>
+             <string>Larghissimo</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>2/4</string>
+             <string>Grave</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>3/4</string>
+             <string>Largo</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Adagio</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Andante</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Moderato</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Allegro</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Vivace</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Presto</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Prestissimo</string>
             </property>
            </item>
           </widget>

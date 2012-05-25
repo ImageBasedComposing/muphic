@@ -28,3 +28,8 @@ void Composer::setConfig(string usrConfFile) {}
 void Composer::setUsrConfFile(string f) {}
 void Composer::setPic(string p) {}
 void Composer::setTmpMIDIPath(string m) {}
+
+
+void Composer::setTempo(int t) { tempo = t; }
+
+int Composer::getTempo() { return tempo; }

@@ -87,3 +87,8 @@ void Music::setMidizator(Midizator* m)
 	delete midizator;
 	midizator = m;
 }
+
+void Music::changeTempo(int t)
+{
+
+}
