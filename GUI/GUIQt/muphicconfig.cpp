@@ -250,7 +250,7 @@ void MuphicConfig::on_pushButton_Generate_clicked()
 
         std::string picFile = ui->lineEdit_InputPic->text().toStdString();
         std::string muFile = ui->lineEdit_OutputMidi->text().toStdString();
-
+        outputFile = QString(muFile.c_str());
         usrConf->setMuOutputFile(muFile);
         usrConf->setPhicActive(false);
         usrConf->setMuDebug(false);
@@ -333,7 +333,7 @@ void MuphicConfig::on_pushButton_Play_clicked()
 {
     if(!is_paused)
     {
-        std::string analysedPic = changeExtension(imageFile.toStdString(), "");
+        std::string analysedPic = changeExtension(outputFile.toStdString(), "");
         mediaSource = Phonon::MediaSource((analysedPic+".wav").c_str());
         mediaObject->setCurrentSource(mediaSource);
         mediaObject->play();
@@ -778,17 +778,54 @@ void MuphicConfig::on_comboBox_v3Instrument_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v4Composer_currentIndexChanged(int index)
 {
-    int instrument = 128;
-    usrConf->setMuCompVoice4(instrument);
+    usrConf->setMuCompVoice4(index);
 }
 
 void MuphicConfig::on_comboBox_v4Instrument_currentIndexChanged(int index)
 {
-    usrConf->setMuInstrVoice4(index);
+    int instrument = 128;
+    usrConf->setMuInstrVoice4(instrument);
 }
 
 void MuphicConfig::on_comboBox_composerMixer_currentIndexChanged(int index)
 {
+    //Cargar desde archivo de configuración
+    switch(index)
+    {
+    case 0:
+        //Tymothy
+        /*
+        ui->label_v1Composer->setEnabled(true);
+        ui->comboBox_v1Composer->setEnabled(true);
+        ui->label_v1Instrument->setEnabled(true);
+        ui->comboBox_v1Instrument->setEnabled(true);
+        ui->label_v2Composer->setEnabled(false);
+        ui->comboBox_v2Composer->setEnabled(false);
+        ui->label_v2Instrument->setEnabled(false);
+        ui->comboBox_v2Instruments->setEnabled(false);
+        ui->label_v3Composer->setEnabled(false);
+        ui->comboBox_v3Composer->setEnabled(false);
+        ui->label_v3Instrument->setEnabled(false);
+        ui->comboBox_v3Instrument->setEnabled(false);
+        ui->label_v4Composer->setEnabled(true);
+        ui->comboBox_v4Composer->setEnabled(true);
+        ui->label_v4Instrument->setEnabled(true);
+        ui->comboBox_v4Instrument->setEnabled(true);
+        */
+        ui->groupBox_v1->setEnabled(true);
+        ui->groupBox_v2->setEnabled(false);
+        ui->groupBox_v3->setEnabled(false);
+        ui->groupBox_v4->setEnabled(true);
+        break;
+    case 1:
+        //Tymothy_2
+        ui->groupBox_v1->setEnabled(true);
+        ui->groupBox_v2->setEnabled(true);
+        ui->groupBox_v3->setEnabled(true);
+        ui->groupBox_v4->setEnabled(true);
+        break;
+    }
+
     usrConf->setMuCompMix(index);
 }
 
@@ -839,4 +876,44 @@ void MuphicConfig::on_horizontalSlider_AnalisisDepth_valueChanged(int value)
     usrConf->setPhicAnalysisDetail(value);
     char a[10];
     ui->labelAnalysisDepth->setText(our_itoa(value,a,10));
+}
+
+void MuphicConfig::on_comboBox_Tempo_currentIndexChanged(int index)
+{
+    int tempo = 120;
+    switch(index)
+    {
+    case 0:
+        tempo = 20;
+        break;
+    case 1:
+        tempo = 40;
+        break;
+    case 2:
+        tempo = 60;
+        break;
+    case 3:
+        tempo = 76;
+        break;
+    case 4:
+        tempo = 108;
+        break;
+    case 5:
+        tempo = 120;
+        break;
+    case 6:
+        tempo = 140;
+        break;
+    case 7:
+        tempo = 168;
+        break;
+    case 8:
+        tempo = 200;
+        break;
+    case 9:
+        tempo = 220;
+        break;
+    }
+
+    usrConf->setMuTempo(tempo);
 }

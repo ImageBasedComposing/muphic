@@ -57,12 +57,18 @@ int main( int argc, const char* argv[] )
 	//Color system we use in the composition:
 	ColorSystem* cs;
 	switch(usrConf->getMuReconColors()){
-		case 1:
+		case 0:
 			cs = new NewtonColor(); break;
+		case 1:
+			cs = new BertrandCastelColor(); break;
 		case 2:	
 			cs = new ScriabinColor(); break;
 		case 3:
-			cs = new BertrandCastelColor(); break;
+			cs = new GFieldColor(); break;
+		case 4:
+			cs = new JamesonColor(); break;
+		case 5:
+			cs = new SeemanColor(); break;
 		default : 
 			cs = new ScriabinColor();
 	}
@@ -73,9 +79,9 @@ int main( int argc, const char* argv[] )
 	//1º Voice
 	ComposerVoice* compVoice1;
 	switch(usrConf->getMuCompVoice1()){
-		case 1:	
+		case 0:	
 			compVoice1 = new ComposerFigMelody(cs); break;
-		case 2:	
+		case 1:	
 			compVoice1 = new ComposerFigMelody2(cs); break;
 		default : 
 			compVoice1 = new ComposerFigMelody2(cs);
@@ -87,7 +93,7 @@ int main( int argc, const char* argv[] )
 	//2º Voice
 	ComposerVoice* compVoice2;
 	switch(usrConf->getMuCompVoice2()){
-		case 2:	
+		case 0:	
 			compVoice2 = new ComposerFigMelody2(cs); break;
 		default : 
 			compVoice2 = new ComposerFigMelody2(cs);
@@ -99,7 +105,7 @@ int main( int argc, const char* argv[] )
 	//3º Voice
 	ComposerVoice* compVoice3;
 	switch(usrConf->getMuCompVoice3()){
-		case 2:	
+		case 0:	
 			compVoice3 = new ComposerFigBass2(cs); break;
 		default : 
 			compVoice3 = new ComposerFigBass2(cs);
@@ -111,9 +117,9 @@ int main( int argc, const char* argv[] )
 	//4º Voice
 	ComposerVoice* compVoice4;
 	switch(usrConf->getMuCompVoice4()){
-		case 1:	
+		case 0:	
 			compVoice4 = new ComposerFigRitmo(cs); break;
-		case 2:	
+		case 1:	
 			compVoice4 = new ComposerFigRitmo2(cs); break;
 		default : 
 			compVoice4 = new ComposerFigRitmo2(cs);
@@ -134,14 +140,17 @@ int main( int argc, const char* argv[] )
 	//The compositor that is going to mix everything
 	Composer* compMix;
 	switch(usrConf->getMuCompMix()){
-		case 1:	
+		case 0:	
 			compMix = new ComposerTimothy(compVoice1,compVoice2,compVoice3,compVoice4); break;
-		case 2:	
+		case 1:	
 			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4); break;
 		default : 
 			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4);
 	}
 
+	compMix->setTempo(usrConf->getMuTempo());
+	
+	
 	string midiPath = usrConf->getMuOutputFile();
 	if(midiPath.compare("") == 0)
 		compMix->setTmpMIDIPath(analysedPic);

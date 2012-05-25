@@ -62,6 +62,8 @@ public:
 
     void setVoces(Voces* v);
     void setMidizator(Midizator* m);
+	
+	void changeTempo(int t);
 
 protected:
 

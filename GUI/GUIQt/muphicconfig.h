@@ -118,6 +118,8 @@ private slots:
 
     void on_pushButton_pause_clicked();
 
+    void on_comboBox_Tempo_currentIndexChanged(int index);
+
 private:
     Ui::MuphicConfig *ui;
 
@@ -141,6 +143,7 @@ private:
     PolygonWidget * poly;
 
     QString imageFile;
+    QString outputFile;
     Launcher* l;
     pid_t pidAnal, pidComp;
 

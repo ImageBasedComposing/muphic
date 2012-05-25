@@ -143,6 +143,7 @@ string ComposerTimothy2::compose()
 
 	//m->toMidi();
 
+	m->changeTempo(tempo);
 	m->setMidizator(new MidizatorABC());
 	cout << "Composition done!" << endl;
 	cout << endl << "Making midi output..." << endl;
