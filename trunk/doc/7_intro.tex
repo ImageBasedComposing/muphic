@@ -1,11 +1,58 @@
 \section{Introducción}
 
-\todo{no poner morralla}
 
-	Muphic es blablobloabliblalo
-	Y aquí hacemos prueba de citar (ver \cite{portutesis}).
+	\subsection{¿Qué es Muphic?}
 	
-	Compositor automático de música que, en base a una entrada gráfica estática, componga una pieza musical acorde a la imagen.
+		\vspace{0.2in}
+		Muphic es un software capaz de producir piezas musicales compuestas automáticamente a partir de una entrada gráfica estática. Es el resultado de un proyecto de investigación y desarrollo comenzado en octubre del 2011 por 3 alumnos de Ingeniería Informática, cuyo propósito es obtener una correlación entre música e imágenes.\\
+		
+		De forma resumida, dado que se entrará en detalles en secciones siguientes, la aplicación analiza una imagen de entrada y utiliza el contenido de dicho análisis para generar una pieza musical mediante algoritmos de composición automática.\\
+		
+		Este proyecto trata por tanto 3 temas distintos:
+		
+		\begin{itemize}
+		
+		\item Análisis de imágenes: la imagen de entrada se debe procesar y estudiar hasta obtener la información deseada.
+		\item Correlación entre música e imágenes: Los datos obtenidos se interpretan y relacionan con notas y ritmos musicales.
+		\item Composición algoritmica: Con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, una pieza musical completa.
+		\end{itemize}
+		
+		El tercer punto va a depender enormemente del segundo, ya que la forma distintas correlaciones música-imágen van a conllevar diferentes estructuras y diseños de algoritmos de composición.\\
+		
+		En el desarrollo de este proyecto hay ciertos detalles importantes que se han considerado y es necesario mencionar.
+		
+		\todo{esto es más rollo "subtitulo: *nueva linea* contenido indentado un poco" que un itemize o una subsubsection, pero no sabía ponerlo. De todas formas algunos de estos son requisistos no funcionales y asi ya tenemos apartado nuevo para la parte de sistema :)}
+		
+		
+		En el ámbito del análisis gráfico, tenemos que:
+		\begin{itemize}
+		
+		\item \underline{No se tienen en cuenta objetos físicos}:\\
+			El objetivo del análisis no es tanto obtener información de qué es lo que la imagen representa, si no los colores y formas que contiene, y su distribución y características dentro de la misma.
+		\end{itemize}
+		
+		En el ámbio de la composición y correlación imagen-música:
+		
+		\begin{itemize}
+		
+		\item \underline{El único componente de entrada usado es la imagen dada}:\\
+			El objetivo de este proyecto es obtener piezas musicales en base a imágenes, por lo que, en lo que a composición se refiere, no se usará más información que la proporcionada por la imagen. Esta caracteríca impide usar ningún tipo de pista musical externa, base de datos o cualquier tipo de entrada o ayuda externa en el proceso de composición.
+		\item \underline{La imagen es estática}:\\
+			Se consideran para el análisis formatos de imagen estática (tales como bmp, jpg o png), y no animada (video o archivos de animación). Este planteamiento condiciona el proceso de correlación imágen-música, ya que se pretende obtener una salida no estática, como es la música, a partir de una imágen inmóvil. Veremos más adelante cómo se obtiene ese efecto de \emph{dinamismo} a partir de la información proporcionada por una imágen.
+		\item \underline{La base de la correlación será la sinestesia}:\\	
+			La sinestesia, que se explica en posteriores secciones, es la pieza clave en la creación de música basada en imágenes, y no la reacción psicológica del cerebro humano ante los colores. Esto es, concepciones tales como \emph{el azul es un color frío} o \emph{el rojo produce apetito} no se tienen en cuenta.\\
+			\todo{poner referencia a estas relaciones, que las hay}
+		\item \underline{Generación de contenido frente a acoplamiento de creaciones preestablecidas}:\\				
+			Es importante recalcar que, en el proceso de composición, como ya se adelantaba en el primer punto, se da especial importancia a que las piezas generadas sean generadas de cero y no partan de ninguna estructura predefinida. No se usarán por tanto piezas ya compuestas o estructuras conocidas como \emph{ladrillos} para construír una pieza nueva.
+		\item \underline{Compromiso entre \emph{sonar bien} y \emph{ser interesante}}:\\
+			Durante todo el proyecto se ha intentado abarcar bien ambos conceptos, deseando que las piezas compuestas no sean en ningún momento desagradables de escuchar, pero permitiendo cierta libertad para que los algoritmos puedan producir resultados frescos e interesantes.
+		\item \underline{Se trata de un campo muy estudiado pero a la vez muy \emph{verde}}:\\	
+			Aunque existen gran cantidad de estudios sobre la sinestesia y la composición musical en base a imagenes, es un ámbito muy abierto y en el que todavía queda mucho por estudiar. Más adelante se explicará con detalle este aspecto.
+			
+		\end{itemize}
+			
+		Teniendo eso en cuenta, comentaremos en las siguientes secciones cómo se ha abordado el proceso. 
+	
 
 \input{9_motivacion}
 \input{10_estado-del-arte}
