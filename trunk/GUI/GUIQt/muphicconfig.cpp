@@ -32,9 +32,10 @@ void MuphicConfig::initialize()
     usrConf->setPhicThresholdH(35);
     usrConf->setPhicThresholdS(20);
     usrConf->setPhicThresholdV(50);
+    usrConf->setPhicAnalysisDetail(50);
 
     //We initialize Mu
-    usrConf->setMuReconColors(1);
+    usrConf->setMuReconColors(8);
     usrConf->setMuCompVoice1(2);
     usrConf->setMuInstrVoice1(45);
     usrConf->setMuCompVoice2(2);
@@ -45,7 +46,7 @@ void MuphicConfig::initialize()
     usrConf->setMuInstrVoice4(128);
     usrConf->setMuCompMix(2);
     usrConf->setMuTempo(120);
-    usrConf->setPhicAnalysisDetail(50);
+
 
     // We save sizes for dynamic interaction between options
     hSlider_2_max = ui->horizontalSlider_2->maximumSize();
