@@ -237,6 +237,7 @@ void MuphicConfig::on_pushButton_Generate_clicked()
         #endif
         #ifdef __LINUX
             l->killProcess(pidComp);
+            system("killall Mu");
         #endif
         composing = false;
         ui->pushButton_Generate->setText("Compose");
@@ -358,6 +359,7 @@ void MuphicConfig::on_pushButton_Analyze_clicked()
         #endif
         #ifdef __LINUX
             l->killProcess(pidAnal);
+            system("killall Phic");
         #endif
 
         analysing = false;
@@ -790,7 +792,7 @@ void MuphicConfig::on_comboBox_v4Instrument_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_composerMixer_currentIndexChanged(int index)
 {
-    //Cargar desde archivo de configuración
+    //Cargar desde archivo de configuraci\F3n
     switch(index)
     {
     case 0:
