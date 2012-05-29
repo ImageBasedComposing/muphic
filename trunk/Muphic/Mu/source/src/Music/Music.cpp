@@ -90,5 +90,6 @@ void Music::setMidizator(Midizator* m)
 
 void Music::changeTempo(int t)
 {
-
+	for(int i = 0; i < voces->size(); i++)
+		voces->getAt(i)->setTempo(t);
 }

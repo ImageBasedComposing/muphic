@@ -42,3 +42,9 @@ void Voz::setTonalidad(Tonalidad k)
 {
 	tonalidad = k;
 }
+
+void Voz::setTempo(int t)
+{
+	for(int i = 0; i < segmentos->size(); i++)
+		segmentos->getAt(i)->setTempo(t);
+}

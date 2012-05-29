@@ -27,6 +27,7 @@ class Voz
         void setInstrumento(int i);
         void setSegmentos(Segmentos* s);
 		void setTonalidad(Tonalidad c);
+		void setTempo(int t);
 
     protected:
 
