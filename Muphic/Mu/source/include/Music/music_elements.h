@@ -512,18 +512,18 @@ class SeemanColor : public ColorSystem
 	public:
 		SeemanColor()
 		{
-			jameson.push_back(pair<Color,int>(Color(196,10,9), DO_C)); //Carmine
-			jameson.push_back(pair<Color,int>(Color(250,11,12), RE_F_C)); //scarlet
-			jameson.push_back(pair<Color,int>(Color(248,128,16), RE_C)); //orange
-			jameson.push_back(pair<Color,int>(Color(241,210,59), MI_F_C)); //yellow-orange
-			jameson.push_back(pair<Color,int>(Color(251,250,60), MI_C)); //yellow
-			jameson.push_back(pair<Color,int>(Color(20,144,51), FA_C)); //Green
-			jameson.push_back(pair<Color,int>(Color(27,144,129), SOL_F_C)); //Blue-green
-			jameson.push_back(pair<Color,int>(Color(28,13,130), SOL_C)); //Blue
-			jameson.push_back(pair<Color,int>(Color(127,8,124), LA_F_C)); //indigo
-			jameson.push_back(pair<Color,int>(Color(215,19,134), LA_C)); //violet
-			jameson.push_back(pair<Color,int>(Color(106,28,28), SI_F_C)); //brown
-			jameson.push_back(pair<Color,int>(Color(7,7,7), SI_C)); //black
+			seeman.push_back(pair<Color,int>(Color(196,10,9), DO_C)); //Carmine
+			seeman.push_back(pair<Color,int>(Color(250,11,12), RE_F_C)); //scarlet
+			seeman.push_back(pair<Color,int>(Color(248,128,16), RE_C)); //orange
+			seeman.push_back(pair<Color,int>(Color(241,210,59), MI_F_C)); //yellow-orange
+			seeman.push_back(pair<Color,int>(Color(251,250,60), MI_C)); //yellow
+			seeman.push_back(pair<Color,int>(Color(20,144,51), FA_C)); //Green
+			seeman.push_back(pair<Color,int>(Color(27,144,129), SOL_F_C)); //Blue-green
+			seeman.push_back(pair<Color,int>(Color(28,13,130), SOL_C)); //Blue
+			seeman.push_back(pair<Color,int>(Color(127,8,124), LA_F_C)); //indigo
+			seeman.push_back(pair<Color,int>(Color(215,19,134), LA_C)); //violet
+			seeman.push_back(pair<Color,int>(Color(106,28,28), SI_F_C)); //brown
+			seeman.push_back(pair<Color,int>(Color(7,7,7), SI_C)); //black
 						
 		}
 
@@ -532,7 +532,7 @@ class SeemanColor : public ColorSystem
 		//Devuelve la nota correspondiente al color según Scriabin
 		int getNota(Color color)
 		{
-			list< pair<Color,int> >::iterator it = jameson.begin();
+			list< pair<Color,int> >::iterator it = seeman.begin();
 			bool found = false;
 			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
 			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
@@ -542,7 +542,7 @@ class SeemanColor : public ColorSystem
 			note = it->second;
 			found = distBetter < minDist;
 			it++;
-			while(!found && it != jameson.end())
+			while(!found && it != seeman.end())
 			{
 				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
 				if(dist < distBetter)
@@ -560,24 +560,24 @@ class SeemanColor : public ColorSystem
 		//Devuelve la nota más cercana al color dado dentro de una escala.
 		int getNota(Color color, TableScale* tb)
 		{
-			list< pair<Color,int> > jamesonPart; //Solo vamos a colocar parte de scribin aqui
-			list< pair<Color,int> >::iterator it = jameson.begin();
+			list< pair<Color,int> > seemanPart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = seeman.begin();
 			//Cogemos solo las notas que aparecen en la escala
-			while( it != jameson.end() )
+			while( it != seeman.end() )
 			{
 				if( tb->containsTone(it->second) )
-					jamesonPart.push_back((*it));
+					seemanPart.push_back((*it));
 				it++;
 			}
 			
-			it = jamesonPart.begin();
+			it = seemanPart.begin();
 			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
 			double dist, distBetter;
 
 			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
 			note = it->second;
 			it++;
-			while(it != jamesonPart.end())
+			while(it != seemanPart.end())
 			{
 				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
 				if(dist < distBetter)
@@ -594,9 +594,474 @@ class SeemanColor : public ColorSystem
 
 	protected:
 	private:
-		list< pair<Color,int> > jameson;
+		list< pair<Color,int> > seeman;
 };
 
+
+//Clase WallaceRimingtonColor contiene los 12 colores
+class WallaceRimingtonColor : public ColorSystem
+{
+
+	public:
+		WallaceRimingtonColor()
+		{
+			wallace.push_back(pair<Color,int>(Color(250,11,12), DO_C)); //Deep red
+			wallace.push_back(pair<Color,int>(Color(160,12,9), RE_F_C)); //crimson
+			wallace.push_back(pair<Color,int>(Color(244,71,18), RE_C)); //orange-crimson
+			wallace.push_back(pair<Color,int>(Color(248,128,16), MI_F_C)); //orange
+			wallace.push_back(pair<Color,int>(Color(251,250,60), MI_C)); //yellow
+			wallace.push_back(pair<Color,int>(Color(112,146,38), FA_C)); //yellow-Green
+			wallace.push_back(pair<Color,int>(Color(20,144,51), SOL_F_C)); //green
+			wallace.push_back(pair<Color,int>(Color(39,164,129), SOL_C)); //Blueish green
+			wallace.push_back(pair<Color,int>(Color(27,144,129), LA_F_C)); //Blue green
+			wallace.push_back(pair<Color,int>(Color(127,8,124), LA_C)); //indigo
+			wallace.push_back(pair<Color,int>(Color(28,13,130), SI_F_C)); //deep blue
+			wallace.push_back(pair<Color,int>(Color(215,19,134), SI_C)); //violet
+						
+		}
+
+		~WallaceRimingtonColor(){};
+
+		//Devuelve la nota correspondiente al color según Scriabin
+		int getNota(Color color)
+		{
+			list< pair<Color,int> >::iterator it = wallace.begin();
+			bool found = false;
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			found = distBetter < minDist;
+			it++;
+			while(!found && it != wallace.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+					found = distBetter < minDist; //Si mejora la distancia minima, automaticamente salimos
+				}
+				it++;
+			}
+
+			return note;
+		}
+
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		int getNota(Color color, TableScale* tb)
+		{
+			list< pair<Color,int> > wallacePart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = wallace.begin();
+			//Cogemos solo las notas que aparecen en la escala
+			while( it != wallace.end() )
+			{
+				if( tb->containsTone(it->second) )
+					wallacePart.push_back((*it));
+				it++;
+			}
+			
+			it = wallacePart.begin();
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			it++;
+			while(it != wallacePart.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+				}
+				it++;
+			}
+
+			return note;
+
+		}
+
+	protected:
+	private:
+		list< pair<Color,int> > wallace;
+};
+
+
+//Clase BishopColor contiene los 12 colores
+class BishopColor : public ColorSystem
+{
+
+	public:
+		BishopColor()
+		{
+			bishop.push_back(pair<Color,int>(Color(250,11,12), DO_C)); //red
+			bishop.push_back(pair<Color,int>(Color(160,12,9), RE_F_C)); //scarlet
+			bishop.push_back(pair<Color,int>(Color(248,128,16), RE_C)); //orange
+			bishop.push_back(pair<Color,int>(Color(246,209,17), MI_F_C)); //gold or yellow-orange
+			bishop.push_back(pair<Color,int>(Color(251,250,60), MI_C)); //yellow or green-gold
+			bishop.push_back(pair<Color,int>(Color(188,224,57), FA_C)); //yellow-green
+			bishop.push_back(pair<Color,int>(Color(20,144,51), SOL_F_C)); //green
+			bishop.push_back(pair<Color,int>(Color(39,164,129), SOL_C)); //greenish-blue or aquamarine
+			bishop.push_back(pair<Color,int>(Color(127,8,124), LA_F_C)); //indigo or violet-blue
+			bishop.push_back(pair<Color,int>(Color(215,19,134), LA_C)); //violet
+			bishop.push_back(pair<Color,int>(Color(217,25,81), SI_F_C)); //violet-red
+			bishop.push_back(pair<Color,int>(Color(250,11,10), SI_C)); //red
+						
+		}
+
+		~BishopColor(){};
+
+		//Devuelve la nota correspondiente al color según Scriabin
+		int getNota(Color color)
+		{
+			list< pair<Color,int> >::iterator it = bishop.begin();
+			bool found = false;
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			found = distBetter < minDist;
+			it++;
+			while(!found && it != bishop.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+					found = distBetter < minDist; //Si mejora la distancia minima, automaticamente salimos
+				}
+				it++;
+			}
+
+			return note;
+		}
+
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		int getNota(Color color, TableScale* tb)
+		{
+			list< pair<Color,int> > bishopPart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = bishop.begin();
+			//Cogemos solo las notas que aparecen en la escala
+			while( it != bishop.end() )
+			{
+				if( tb->containsTone(it->second) )
+					bishopPart.push_back((*it));
+				it++;
+			}
+			
+			it = bishopPart.begin();
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			it++;
+			while(it != bishopPart.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+				}
+				it++;
+			}
+
+			return note;
+
+		}
+
+	protected:
+	private:
+		list< pair<Color,int> > bishop;
+};
+
+
+//Clase HemlholtzColor contiene los 12 colores
+class HemlholtzColor : public ColorSystem
+{
+
+	public:
+		HemlholtzColor()
+		{
+			hemlholtz.push_back(pair<Color,int>(Color(245,244,60), DO_C)); //yellow
+			hemlholtz.push_back(pair<Color,int>(Color(20,144,51), RE_F_C)); //green
+			hemlholtz.push_back(pair<Color,int>(Color(27,144,129), RE_C)); //greenish blue
+			hemlholtz.push_back(pair<Color,int>(Color(28,91,160), MI_F_C)); //cayan-blue
+			hemlholtz.push_back(pair<Color,int>(Color(127,8,124), MI_C)); //indigo blue
+			hemlholtz.push_back(pair<Color,int>(Color(215,19,134), FA_C)); //violet
+			hemlholtz.push_back(pair<Color,int>(Color(157,14,85), SOL_F_C)); //end of red
+			hemlholtz.push_back(pair<Color,int>(Color(250,11,10), SOL_C)); //red
+			hemlholtz.push_back(pair<Color,int>(Color(211,44,10), LA_F_C)); //red-carmin
+			hemlholtz.push_back(pair<Color,int>(Color(211,44,11), LA_C)); //red-carmin
+			hemlholtz.push_back(pair<Color,int>(Color(246,46,13), SI_F_C)); //red orange
+			hemlholtz.push_back(pair<Color,int>(Color(241,122,15), SI_C)); //orange
+						
+		}
+
+		~HemlholtzColor(){};
+
+		//Devuelve la nota correspondiente al color según Scriabin
+		int getNota(Color color)
+		{
+			list< pair<Color,int> >::iterator it = hemlholtz.begin();
+			bool found = false;
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			found = distBetter < minDist;
+			it++;
+			while(!found && it != hemlholtz.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+					found = distBetter < minDist; //Si mejora la distancia minima, automaticamente salimos
+				}
+				it++;
+			}
+
+			return note;
+		}
+
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		int getNota(Color color, TableScale* tb)
+		{
+			list< pair<Color,int> > hemlholtzPart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = hemlholtz.begin();
+			//Cogemos solo las notas que aparecen en la escala
+			while( it != hemlholtz.end() )
+			{
+				if( tb->containsTone(it->second) )
+					hemlholtzPart.push_back((*it));
+				it++;
+			}
+			
+			it = hemlholtzPart.begin();
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			it++;
+			while(it != hemlholtzPart.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+				}
+				it++;
+			}
+
+			return note;
+
+		}
+
+	protected:
+	private:
+		list< pair<Color,int> > hemlholtz;
+};
+
+
+//Clase KleinColor contiene los 12 colores
+class KleinColor : public ColorSystem
+{
+
+	public:
+		KleinColor()
+		{
+			klein.push_back(pair<Color,int>(Color(196,10,9), DO_C)); //dark red
+			klein.push_back(pair<Color,int>(Color(255,11,12), RE_F_C)); //red
+			klein.push_back(pair<Color,int>(Color(244,71,18), RE_C)); //red orange
+			klein.push_back(pair<Color,int>(Color(248,128,16), MI_F_C)); //orange
+			klein.push_back(pair<Color,int>(Color(245,244,60), MI_C)); //yellow
+			klein.push_back(pair<Color,int>(Color(188,224,57), FA_C)); //yellow green
+			klein.push_back(pair<Color,int>(Color(20,144,51), SOL_F_C)); //green
+			klein.push_back(pair<Color,int>(Color(27,144,129), SOL_C)); //blue-green
+			klein.push_back(pair<Color,int>(Color(28,13,130), LA_F_C)); //blue
+			klein.push_back(pair<Color,int>(Color(120,24,135), LA_C)); //blue violet
+			klein.push_back(pair<Color,int>(Color(215,19,134), SI_F_C)); //violet
+			klein.push_back(pair<Color,int>(Color(157,14,85), SI_C)); //dark violet
+						
+		}
+
+		~KleinColor(){};
+
+		//Devuelve la nota correspondiente al color según Scriabin
+		int getNota(Color color)
+		{
+			list< pair<Color,int> >::iterator it = klein.begin();
+			bool found = false;
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			found = distBetter < minDist;
+			it++;
+			while(!found && it != klein.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+					found = distBetter < minDist; //Si mejora la distancia minima, automaticamente salimos
+				}
+				it++;
+			}
+
+			return note;
+		}
+
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		int getNota(Color color, TableScale* tb)
+		{
+			list< pair<Color,int> > kleinPart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = klein.begin();
+			//Cogemos solo las notas que aparecen en la escala
+			while( it != klein.end() )
+			{
+				if( tb->containsTone(it->second) )
+					kleinPart.push_back((*it));
+				it++;
+			}
+			
+			it = kleinPart.begin();
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			it++;
+			while(it != kleinPart.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+				}
+				it++;
+			}
+
+			return note;
+
+		}
+
+	protected:
+	private:
+		list< pair<Color,int> > klein;
+};
+
+
+//Clase AeppliColor contiene los 12 colores
+class AeppliColor : public ColorSystem
+{
+
+	public:
+		AeppliColor()
+		{
+			//Falta por asignar bien:
+			klein.push_back(pair<Color,int>(Color(196,10,9), DO_C)); //dark red
+			klein.push_back(pair<Color,int>(Color(255,11,12), RE_F_C)); //red
+			klein.push_back(pair<Color,int>(Color(244,71,18), RE_C)); //red orange
+			klein.push_back(pair<Color,int>(Color(248,128,16), MI_F_C)); //orange
+			klein.push_back(pair<Color,int>(Color(245,244,60), MI_C)); //yellow
+			klein.push_back(pair<Color,int>(Color(188,224,57), FA_C)); //yellow green
+			klein.push_back(pair<Color,int>(Color(20,144,51), SOL_F_C)); //green
+			klein.push_back(pair<Color,int>(Color(27,144,129), SOL_C)); //blue-green
+			klein.push_back(pair<Color,int>(Color(28,13,130), LA_F_C)); //blue
+			klein.push_back(pair<Color,int>(Color(120,24,135), LA_C)); //blue violet
+			klein.push_back(pair<Color,int>(Color(215,19,134), SI_F_C)); //violet
+			klein.push_back(pair<Color,int>(Color(157,14,85), SI_C)); //dark violet
+						
+		}
+
+		~AeppliColor(){};
+
+		//Devuelve la nota correspondiente al color según Scriabin
+		int getNota(Color color)
+		{
+			list< pair<Color,int> >::iterator it = klein.begin();
+			bool found = false;
+			double minDist = 38.85/2; //Minima distancia entre dos colores contiguos(/2) para saber que es el color buscado sin pasar por todos
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			found = distBetter < minDist;
+			it++;
+			while(!found && it != klein.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+					found = distBetter < minDist; //Si mejora la distancia minima, automaticamente salimos
+				}
+				it++;
+			}
+
+			return note;
+		}
+
+		//Devuelve la nota más cercana al color dado dentro de una escala.
+		int getNota(Color color, TableScale* tb)
+		{
+			list< pair<Color,int> > kleinPart; //Solo vamos a colocar parte de scribin aqui
+			list< pair<Color,int> >::iterator it = klein.begin();
+			//Cogemos solo las notas que aparecen en la escala
+			while( it != klein.end() )
+			{
+				if( tb->containsTone(it->second) )
+					kleinPart.push_back((*it));
+				it++;
+			}
+			
+			it = kleinPart.begin();
+			int note = SILENCIO; //Voy a dejarlo que ponga silencio si no lo encuentra, que -1 me da errores
+			double dist, distBetter;
+
+			distBetter = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+			note = it->second;
+			it++;
+			while(it != kleinPart.end())
+			{
+				dist = dist3DPoints(color.r, color.g, color.b, it->first.r, it->first.g, it->first.b);
+				if(dist < distBetter)
+				{	//Hemos encontrado uno mejor
+					note = it->second;
+					distBetter = dist;
+				}
+				it++;
+			}
+
+			return note;
+
+		}
+
+	protected:
+	private:
+		list< pair<Color,int> > klein;
+};
 
 inline bool isConsonantInterval(int firstNote, int secondNote)
 {

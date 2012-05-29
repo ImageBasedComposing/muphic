@@ -69,6 +69,16 @@ int main( int argc, const char* argv[] )
 			cs = new JamesonColor(); break;
 		case 5:
 			cs = new SeemanColor(); break;
+		case 6:
+			cs = new WallaceRimingtonColor(); break;
+		case 7:
+			cs = new BishopColor(); break;
+		case 8:
+			cs = new HemlholtzColor(); break;
+		case 9:
+			cs = new KleinColor(); break;
+		case 10:
+			cs = new AeppliColor(); break;
 		default : 
 			cs = new ScriabinColor();
 	}
