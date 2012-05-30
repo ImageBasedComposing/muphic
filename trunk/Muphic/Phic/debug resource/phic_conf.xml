@@ -3,7 +3,7 @@
     <phic_conf>
         <filter>2</filter>
         <threshold>50</threshold>
-        <noise>0</noise>
+        <noise>0.56</noise>
         <polSimp>2</polSimp>
         <anlDet>50</anlDet>
         <colLvl>3</colLvl>

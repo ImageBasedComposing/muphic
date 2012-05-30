@@ -11,7 +11,7 @@ UsrConf::UsrConf()
     phicThresholdSelec = 50;    //Mismo valor que en Phic
 	phicPolygonSimp = 0;
 	phicAnalysisDetail = 50;
-    phicNoiseSelec = 0;
+    phicNoiseSelec = 1.4;
     phicColorLevels = 0;
     phicThresholdH = 0;
     phicThresholdS = 0;
@@ -73,7 +73,8 @@ void UsrConf::readMuphic(std::string path)
     {
         phicFilterSelec = atoi(phicNode->FirstChild("filter")->ToElement()->GetText());
         phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
-        phicNoiseSelec = atoi(phicNode->FirstChild("noise")->ToElement()->GetText());
+		std::string str = phicNode->FirstChild("noise")->ToElement()->GetText(); 
+			phicNoiseSelec = std::atof(str.c_str());
         phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
 		phicAnalysisDetail = atoi(phicNode->FirstChild("anlDet")->ToElement()->GetText());
         phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
@@ -139,7 +140,8 @@ void UsrConf::readPhic(std::string path)
 	TiXmlNode* phicNode = muphicNode->FirstChild("phic_conf");
     phicFilterSelec = atoi(phicNode->FirstChild("filter")->ToElement()->GetText());
     phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
-    phicNoiseSelec = atoi(phicNode->FirstChild("noise")->ToElement()->GetText());
+		std::string str = phicNode->FirstChild("noise")->ToElement()->GetText(); 
+	phicNoiseSelec = std::atof(str.c_str());
     phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
 	phicAnalysisDetail = atoi(phicNode->FirstChild("anlDet")->ToElement()->GetText());
     phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
@@ -229,7 +231,9 @@ void UsrConf::write(std::string path)
 
         //Node for ignored area setting
         TiXmlElement * phicNoiseNode = new TiXmlElement( "noise" );
-        phicNoiseNode->LinkEndChild(new TiXmlText(our_itoa(phicNoiseSelec,a,10)));
+		char* str = new char[30];
+		sprintf(str, "%.4g", phicNoiseSelec ); 
+        phicNoiseNode->LinkEndChild(new TiXmlText(str));
         phicNode->LinkEndChild(phicNoiseNode);
 
         //Node for polygon simplification setting
