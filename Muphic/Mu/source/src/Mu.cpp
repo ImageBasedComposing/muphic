@@ -185,7 +185,6 @@ int main( int argc, const char* argv[] )
 	delete compVoice3;
 	delete compVoice4;
 	delete cs;
-	delete usrConf;
 
 	if(usrConf->getMuDebug()){
 		system("PAUSE");
