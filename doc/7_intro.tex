@@ -6,7 +6,16 @@
 		\vspace{0.2in}
 		Muphic es un software capaz de producir piezas musicales compuestas automáticamente a partir de una entrada gráfica estática. Es el resultado de un proyecto de investigación y desarrollo comenzado en octubre del 2011 por 3 alumnos de Ingeniería Informática, cuyo propósito es obtener una correlación entre música e imágenes.\\
 		
-		De forma resumida, dado que se entrará en detalles en secciones siguientes, la aplicación analiza una imagen de entrada y utiliza el contenido de dicho análisis para generar una pieza musical mediante algoritmos de composición automática.\\
+		Antes de proceder a describir el proyecto, es necesario explicar qué es la sinestesia, un término de gran importancia a lo largo del documento. Tal y como afirman Ramachandran y Hubbard en \cite[p.~4]{paperSyn}:
+		
+		\begin{quote}
+		\emph{``Sinestesia es una curiosa condición según la cual un individuo de cualquier otra manera normal experimenta sensaciones en una modalidad cuando una segunda modalidad es estimulada. Por ejemplo, un sinésteta puede experimentar un color determinado siempre que se encuentre con un tono particular(p. ej., C\# puede ser azul) o puede ver un número dado tintado siempre de un cierto color (p. ej., ‘5’ puede ser verde y ‘6’ puede ser rojo).''}
+		\end{quote}
+		
+		Dentro de la sinestesia, nos centraremos en la sinestesia auditivo-visual (aquella que relaciona los sentidos del oído y la vista), y más concretamente la sinestesia musical, es decir, en la asociación neurológica de las sensaciones visuales con las piezas musicales. Estudiaremos cómo reproducir esa asociación para generar composiciones musicales a partir de un estímulo visual (la imagen de entrada).\\
+		 
+		
+		De forma resumida, dado que se entrará en detalle en secciones siguientes, la aplicación desarrollada analiza una imagen de entrada y utiliza el contenido de dicho análisis para generar una pieza musical mediante algoritmos de composición automática.\\
 		
 		Este proyecto trata por tanto 3 temas distintos:
 		
@@ -14,45 +23,45 @@
 		
 		\item Análisis de imágenes: la imagen de entrada se debe procesar y estudiar hasta obtener la información deseada.
 		\item Correlación entre música e imágenes: Los datos obtenidos se interpretan y relacionan con notas y ritmos musicales.
-		\item Composición algoritmica: Con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, una pieza musical completa.
+		\item Composición algoritmica: Con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, todas las partes que componen una pieza musical completa: ritmo, melodía y armonía.
 		\end{itemize}
 		
-		El tercer punto va a depender enormemente del segundo, ya que la forma distintas correlaciones música-imágen van a conllevar diferentes estructuras y diseños de algoritmos de composición.\\
+		El tercer punto va a depender enormemente del segundo, ya que distintas correlaciones música-imágen van a conllevar diferentes estructuras y diseños de algoritmos de composición.\\
 		
-		En el desarrollo de este proyecto hay ciertos detalles importantes que se han considerado y es necesario mencionar.
-		
-		\todo{esto es más rollo "subtitulo: *nueva linea* contenido indentado un poco" que un itemize o una subsubsection, pero no sabía ponerlo. De todas formas algunos de estos son requisistos no funcionales y asi ya tenemos apartado nuevo para la parte de sistema :)}
-		
+		En el desarrollo de este proyecto hay ciertos detalles importantes que se ha considerado y es necesario mencionar.\\		
 		
 		En el ámbito del análisis gráfico, tenemos que:
 		\begin{itemize}
 		
-		\item \underline{No se tienen en cuenta objetos físicos}:\\
-			El objetivo del análisis no es tanto obtener información de qué es lo que la imagen representa, si no los colores y formas que contiene, y su distribución y características dentro de la misma.
+		\item \emph{La base de la correlación será la sinestesia}:
+			\vspace{0.1in}
+			\\La sinestesia, como ya se ha comentado, es la pieza clave en la creación de música basada en imágenes frente a otras alternativas de planteamiento.\\
+			Entre estas alternativas, cabe destacar la la reacción psicológica sociocultural del cerebro humano ante la música y los colores. Es decir, estudios muestran que el verde, el azul y otros colores con longitud de onda bajas se relacionan con la calma, mientras que colores con con longitudes de onda altas aumentan el nerviosismo y la inestabilidad (como se ve en \cite{colorpsy}). Hay, por otro lado, multitud de investigaciones sobre la psicología de la música y su relación con distintas emociones y sensaciones \todo{poner referencia a esto}. Una posible rama de desarrollo procedería juntando ambos ámbitos, la psicología del color y la de la música, para generar la música deseada en función de la imagen dada.\\
+			Sin embargo, en el desarrollo de este proceso se usará un enfoque distinto: la sinestesia. Los distintos estudios realizados sobre la misma (ver Sección~\ref{subsubsec:estudioSinestesia}) servirán de base a la hora de diseñar los algoritmos de composición automática.
+		\item \emph{No se tienen en cuenta objetos físicos}:
+			\vspace{0.1in}
+			\\El objetivo del análisis no es tanto obtener información de qué es lo que la imagen representa, si no los colores y formas que contiene, y su distribución y características dentro de la misma.
+		\item \emph{El único componente de entrada usado es la imagen dada}:
+			\vspace{0.1in}
+			\\El objetivo de este proyecto es obtener piezas musicales en base a imágenes, por lo que, en lo que a composición se refiere, no se usará más información que la proporcionada por la imagen. Esta caracteríca impide usar ningún tipo de pista musical externa, base de datos o cualquier tipo de entrada o ayuda externa en el proceso de composición.
+		\item \emph{La imagen es estática}:
+			\vspace{0.1in}
+			\\Se consideran para el análisis formatos de imagen estática (tales como bmp, jpg o png), y no animada (video o archivos de animación). Este planteamiento condiciona el proceso de correlación imágen-música, ya que se pretende obtener una salida no estática, como es la música, a partir de una imágen inmóvil. Veremos más adelante cómo se obtiene ese efecto de \emph{dinamismo} a partir de la información proporcionada por una imágen.
+		\item \emph{Generación de contenido frente a acoplamiento de creaciones preestablecidas}:
+			\vspace{0.1in}
+			\\Es importante recalcar que, en el proceso de composición, como ya se adelantaba en el primer punto, se da especial importancia a que las piezas generadas sean generadas de cero y no partan de ninguna estructura predefinida. No se usarán por tanto piezas ya compuestas o estructuras conocidas como \emph{ladrillos} para construír una pieza nueva.
 		\end{itemize}
 		
-		En el ámbio de la composición y correlación imagen-música:
+		Además, resulta importante resaltar cuál ha sido el objetivo del proyecto en todo el desarrollo. No se ha buscado tanto la generación de música que compita con obras de grandes compositores sino la creación de la llamada música de ambiente; es decir, música que, siendo voluntariamente no atrayente ni excesivamente interesante, tiene como requisito principal el no ser molesta. Se sigue por tanto la línea de la música mostrada por Brian Eno en \emph{Música para Aeropuertos (1978)}:
 		
-		\begin{itemize}
+		\begin{quote}
+		\emph{``[La música ambiente es] Algo de lo que puedes entrar o salir discretamente. Puedes atender o puedes elegir no distraerte con ella si quisieras hacer algo mientras la música está reproduciéndose.''}, (\cite{BrianEnoInterview}, entrevista con Brian Eno).
+		\end{quote}		
 		
-		\item \underline{El único componente de entrada usado es la imagen dada}:\\
-			El objetivo de este proyecto es obtener piezas musicales en base a imágenes, por lo que, en lo que a composición se refiere, no se usará más información que la proporcionada por la imagen. Esta caracteríca impide usar ningún tipo de pista musical externa, base de datos o cualquier tipo de entrada o ayuda externa en el proceso de composición.
-		\item \underline{La imagen es estática}:\\
-			Se consideran para el análisis formatos de imagen estática (tales como bmp, jpg o png), y no animada (video o archivos de animación). Este planteamiento condiciona el proceso de correlación imágen-música, ya que se pretende obtener una salida no estática, como es la música, a partir de una imágen inmóvil. Veremos más adelante cómo se obtiene ese efecto de \emph{dinamismo} a partir de la información proporcionada por una imágen.
-		\item \underline{La base de la correlación será la sinestesia}:\\	
-			La sinestesia, que se explica en posteriores secciones, es la pieza clave en la creación de música basada en imágenes, y no la reacción psicológica del cerebro humano ante los colores. Es decir, concepciones tales como \emph{el azul es un color frío} o \emph{el rojo inspira agresividad} no se tienen en cuenta.\\
-			\todo{poner referencia a estas relaciones, que las hay}
-		\item \underline{Generación de contenido frente a acoplamiento de creaciones preestablecidas}:\\				
-			Es importante recalcar que, en el proceso de composición, como ya se adelantaba en el primer punto, se da especial importancia a que las piezas generadas sean generadas de cero y no partan de ninguna estructura predefinida. No se usarán por tanto piezas ya compuestas o estructuras conocidas como \emph{ladrillos} para construír una pieza nueva.
-		\item \underline{Compromiso entre \emph{sonar bien} y \emph{ser interesante}}:\\
-			Durante todo el proyecto se ha intentado abarcar bien ambos conceptos, deseando que las piezas compuestas no sean en ningún momento desagradables de escuchar, pero permitiendo cierta libertad para que los algoritmos puedan producir resultados frescos e interesantes.
-		\item \underline{Se trata de un campo muy estudiado pero a la vez muy \emph{verde}}:\\	
-			Aunque existen gran cantidad de estudios sobre la sinestesia y la composición musical en base a imagenes, es un ámbito muy abierto y en el que todavía queda mucho por estudiar. Más adelante se explicará con detalle este aspecto.
-			
-		\end{itemize}
-			
-		Teniendo eso en cuenta, comentaremos en las siguientes secciones cómo se ha abordado el proceso. 
-	
+		Por último, se ha de decir que el ámbito de la composición basada en imágenes es uno muy estudiado pero a la vez muy poco desarrollado. Es decir, aunque existe una gran cantidad de estudios sobre la sinestesia y la composición musical automática (como se puede ver en la Sección~\ref{sec:estadodelarte}), aún quedan muchas cuestiones que investigar y áreas que profundizar.\\
+		
+		Teniendo todo eso en cuenta, comentaremos en las siguientes secciones cómo se ha abordado el proceso.
+		
 
 \input{9_motivacion}
 \input{10_estado-del-arte}
