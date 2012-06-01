@@ -4,7 +4,57 @@ morralla
 
 \input{13_guia_de_uso}
 \subsection{requisitos}
-
+\todo{Ampliar, desarrollar, repasar y juntar las que sean redundantes o juntables (valgama la reredundancia)}
+Los usuarios con los que trabajaremos para delimitar los requisitos son:
+\begin{itemize}
+	\item Usuario: Personas con un conocimiento mínimo o nulo sobré música y ofimática que hayan leído o se les haya explicado el funcionamiento de la aplicación
+	\item Desarrollador: Personas con un conocimiento amplio de programación y con conocimiento básico o avanzado de música.
+\end{itemize}
+Los requisitos funcionales del proyecto son:
+\\Para la interfáz gráfica:
+ \begin{itemize}
+	 \item La interfaz deberá ser capaz de interpretar archivos de imagen del formato .png y mostrarlos por pantalla
+	 \item La interfaz deberá ser capaz de interpretar archivos de audio del formato .wav y permitir funciones básicas de reproducción sobre los mismos
+	 \item La interfaz deberá ser capaz de generar un archivo de configuración interpretable por tanto Mu como Phic a partir de los parametros de entrada establecidos por el usuario.
+	 \item La interfaz deberá de ser capaz de, mediante una llamada a otro programa, mostrar la partitura de la música compuesta trás haber sido generada.
+	 \item La interfaz deberá controlar posibles errores cometidos por el usuario por tocar parámetros no disponibles para la configuración seleccionada, a su vez deberá de limitar las acciones del usuarilo a la hora de modificár dichos parámetros según las configuraciones elejidas.
+ \end{itemize}
+ Para Phy:
+ \begin{itemize}
+	\item El analizador deberá recibir un archivo de configuración que determine como realizar el análisis y un archivo de imagen que analizar
+	\item El analizador deberá generar un archivo XML con los siguientes datos:
+	\begin{itemize}
+		\item Los vértices de las figuras que componen la imagen de entrada y el número total de vértices por figura.
+		\item Los  colores que contienen dichas figuras en formato RGB
+		\item Las figuras estarán organizadas jerárquicamente al igual que se presentan en la imagen, es decir, si una figura está dentro de otra en el XML se verá reflejado siendo la segunda figura un elemento incluido en la primera.
+	\end{itemize}
+	\item El analizador deberá de devolver una imagén con la representación poligonal de la imagen de entrada.
+ \end{itemize}
+ Para Mu:
+ \begin{itemize}
+	\item El compositor deberá de recibir un archivo de configuración y un archivo con los resultados del análisis correctamente estructurados.
+	\item El compositor deberá generar un archivo abc interpretable por cualquier programa que pueda recibir como entrada dicho tipo de archivos.
+	\item El compositor debera de ser capaz de llamar a terceros que transformen el archivo abc generado a los formatos midi y wav.
+ \end{itemize}
+Requisitos no funcionales:
+\\Generales o/y GUI:
+\begin{itemize}
+	\item La aplicación facilitará al usuario la entrada de datos de configuración o imágenes que desee analizar.
+	\item La aplicación facilitará al usuario los resultados del análisis hecho de la imagén de entrada.
+	\item La aplicación producirá archivos de audio como resultados de la composición reproducibles en cualquier sistema con soporte básico de audio.
+	\item La aplicación facilitará la reproducción de estos archivos al usuario con un reproductor de música incrustado.
+	\item La aplicación facilitará el establecimiento del directorio destino de los archivos de audio.
+	\item La aplicación facilitará la partitura compuesta por ella misma tras haberse generádo la música.
+\end{itemize}
+Phic:
+\begin{itemize}
+	\item Al menos uno de los analizadores devolverá un análisis que se asemeje a ''primera vista'' a la imagen original
+\end{itemize}
+Mu:
+\begin{itemize}
+	\item El compositor mediante su estructura interna facilitará al desarrollador la creación de nuevos algoritmos de composición.
+	\item El compositor principal de la aplicación deberá de ser capaz de generar una música que no tenga porque ser ''interesante'' pero que ''no sonará mal'' en ambos casos los resultados en ultima instancia dependerán de la opinión subjetiva del usuario
+\end{itemize}
 \todo{TENEMOS QUE HABLAR DE ESTO Y COSAS}
 
 	usuarios\\
@@ -18,7 +68,7 @@ morralla
 	\begin{itemize}
 		\item analizar imagenes a un formato directo de composicion
 		componer analisis
-		\item peromitir variar parametros de analisis
+		\item permitir variar parametros de analisis
 		\item permitir variar parametros de composicion
 		\item multiplataforma\\
 	\end{itemize}
