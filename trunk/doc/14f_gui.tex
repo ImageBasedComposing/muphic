@@ -5,16 +5,6 @@ El desarrollo de la interfáz gráfica se decidió realizar a través de un fram
 \newline
 La interfáz esta compuesta de tres pestañas cada una encargada de una parte de la funcionalidad:
 \newline
-\\\underline{Main Window:}
-\\Esta pestaña se encarga de la interacción directa con el usuario, muestra los resultados obtenidos y permite lanzar los distintos componentes de la aplicación. 
-\\Esta compuesta por los siguientes elementos tal y como se puede ver en la imagen adjunta:
-\\\todo{Adjuntar imagen}
-\newline
-\\\textit{Barras de exploracion:} Son dos barras en las que el usuario puede elegir las direcciones en las que se cargará la imagen a analizar y se guardarán los archivos de audio. Para elegir la dirección podrá insertar el texto a mano con el nombre que desee o utilizar los botones para usar el explorador del sistema operativo correspondiente.
-\\\textit{Input Image y Analysis output:} En el primero de estos dos componentes se muestra la imagen que se va a analizar, en el segundo se mostrará el resultado del análisis una vez lanzado Phic a ejecución.
-\\\textit{Botones de Analyze y Compose:} Tal y como su nombre indica Analyze realiza el analisis de la imagen pasada como parámetro de entrada lanzando a ejecución el programa Phic, uno de los módulos de la aplicación. Compose realiza la composición musical a partir de los datos analizados, para ello lanza a ejecución el programa Mu, otro de los módulos de la aplicación.
-\\\textit{Botones del reproductor:} Estas erramientas estan comunicadas con la librería Phonon que se encarga de la interacción con el archivo de audio creado, y una vez compuesta la melodía tomarán el parametro de entrada como referencia y cuando el usuario pulse los distintos botones realizara las distintas funciones de play, pause, stop, cambiar el volumen, o moverse a lo largo de la melodía.
-\newline
 \\\underline{Graphic Config:}
 \\En esta pestaña se encuentran todas las opciones relacionadas con el análisis de la imagen, las distintas configuraciones se transmitirán a los módulos de la aplicación a través de un documento XML que se genera cuando en la "Main Window" se le da al boton de "Analyze".
 \\Los distintos componentes de esta pestaña van variando según el filtro que se seleccione, sin embargo algunos de ellos son comunes para todos los filtros:
