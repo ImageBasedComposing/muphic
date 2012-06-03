@@ -11,6 +11,18 @@ Segmento::Segmento()
 Segmento::~Segmento()
 {
 	delete simbolos;
+	simbolos = NULL;
+}
+
+Segmento* Segmento::clone()
+{
+	Segmento* out = new Segmento();
+	out->setTempo(tempo);
+	out->setMetrica(metrica);
+	out->setSimbolos(simbolos->clone());
+	out->setDuration(duration);
+
+	return out;
 }
 
 //-----Getters-----//

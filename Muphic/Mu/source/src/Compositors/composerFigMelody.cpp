@@ -4,11 +4,13 @@
 ComposerFigMelody::ComposerFigMelody(ColorSystem* cs) : ComposerVoice(cs)
 {
 	// ctor
+	typeScale = 5;
 }
 
 ComposerFigMelody::ComposerFigMelody(ColorSystem* cs, TableScale* tbScale) : ComposerVoice(cs, tbScale)
 {
 	// ctor
+	typeScale = 5;
 }
 
 /*------Destructora------*/
@@ -20,7 +22,7 @@ ComposerFigMelody::~ComposerFigMelody()
 }
 
 //Hacemos una melodia de duracion limitada y que sea a partir de la figura dada.
-bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
+bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur)
 {
 	//Vemos el color y en que nos movemos.
 	Color color = f->getRGB();
@@ -105,7 +107,7 @@ bool ComposerFigMelody::compMelodyFig(FigureMusic* f, Segmento* seg, int dur)
 	for(int i = 1; i < numVertices; i++)
 	{
 		angle = angleOf2Lines2(vertices.at(mod((i-1),numVertices))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%numVertices)->getPair());
-		step = (int) floor(sin(angle)*2); //Como mucho dejamos que de un salto de 3 tonos-Escala (que no semitonos)
+		step = (int) floor(sin(angle*(PI/180))*2.5); //Como mucho dejamos que de un salto de 2 tonos-Escala (que no semitonos)
 
 		if((step == 3 || step == -3) && durVertice.at(i) > QUARTERNOTE+EIGHTHNOTE-1) //Usamos una nota intermedia (lo pide a gritos XD)
 		{

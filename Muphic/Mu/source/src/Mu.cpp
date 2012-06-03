@@ -1,9 +1,8 @@
 #include "Mu.h"
 
-#include "Compositors/ComposerDemo.h"
-#include "Compositors/ComposerMultiple.h"
 #include "Compositors/ComposerTimothy.h"
 #include "Compositors/ComposerTimothy2.h"
+#include "Compositors/ComposerFigSilence.h"
 #include "Compositors/ComposerFigMelody.h"
 #include "Compositors/ComposerFigMelody2.h"
 #include "Compositors/ComposerFigBass2.h"
@@ -89,10 +88,14 @@ int main( int argc, const char* argv[] )
 	//1º Voice
 	ComposerVoice* compVoice1;
 	switch(usrConf->getMuCompVoice1()){
+		case -1:
+			compVoice1 = new ComposerFigSilence(cs); break;
 		case 0:	
 			compVoice1 = new ComposerFigMelody(cs); break;
 		case 1:	
 			compVoice1 = new ComposerFigMelody2(cs); break;
+		case 2:
+			compVoice1 = new ComposerFigBass2(cs); break;
 		default : 
 			compVoice1 = new ComposerFigMelody2(cs);
 	}
@@ -103,6 +106,8 @@ int main( int argc, const char* argv[] )
 	//2º Voice
 	ComposerVoice* compVoice2;
 	switch(usrConf->getMuCompVoice2()){
+		case -1:
+			compVoice2 = new ComposerFigSilence(cs); break;
 		case 0:	
 			compVoice2 = new ComposerFigMelody2(cs); break;
 		default : 
@@ -115,8 +120,14 @@ int main( int argc, const char* argv[] )
 	//3º Voice
 	ComposerVoice* compVoice3;
 	switch(usrConf->getMuCompVoice3()){
+		case -1:
+			compVoice3 = new ComposerFigSilence(cs); break;
 		case 0:	
 			compVoice3 = new ComposerFigBass2(cs); break;
+		case 1:
+			compVoice3 = new ComposerFigMelody(cs); break;
+		case 2: 
+			compVoice3 = new ComposerFigMelody2(cs); break;
 		default : 
 			compVoice3 = new ComposerFigBass2(cs);
 	}
@@ -127,6 +138,8 @@ int main( int argc, const char* argv[] )
 	//4º Voice
 	ComposerVoice* compVoice4;
 	switch(usrConf->getMuCompVoice4()){
+		case -1:
+			compVoice4 = new ComposerFigSilence(cs); break;
 		case 0:	
 			compVoice4 = new ComposerFigRitmo(cs); break;
 		case 1:	
@@ -180,15 +193,13 @@ int main( int argc, const char* argv[] )
 
 	delete l;
 	delete compMix;
-	delete compVoice1;
-	delete compVoice2;
-	delete compVoice3;
-	delete compVoice4;
 	delete cs;
 
 	if(usrConf->getMuDebug()){
 		system("PAUSE");
 	}
+
+	delete usrConf;
 
 	return 0;
 }

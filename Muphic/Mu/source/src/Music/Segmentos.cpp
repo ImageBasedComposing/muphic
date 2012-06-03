@@ -12,6 +12,7 @@ Segmentos::~Segmentos()
     while (it != segmentos.end())
     {
         delete (*it);
+		(*it) = NULL;
         it++;
     }
     segmentos.clear();
@@ -46,6 +47,8 @@ bool Segmentos::insert(int n, Segmento* s)
 	}
 
 	segmentos.insert(it, s);
+
+	return true;
 }
 
 Segmento* Segmentos::getAt(int n)

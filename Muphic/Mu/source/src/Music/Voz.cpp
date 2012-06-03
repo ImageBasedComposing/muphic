@@ -9,6 +9,7 @@ Voz::Voz()
 Voz::~Voz()
 {
     delete segmentos;
+	segmentos = NULL;
 }
 
 //-----Getters-----//

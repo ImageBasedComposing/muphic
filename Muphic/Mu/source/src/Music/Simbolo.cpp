@@ -10,6 +10,12 @@ Simbolo::~Simbolo()
 
 }
 
+Simbolo* Simbolo::clone()
+{
+	Simbolo* out = new Simbolo(duracion);
+	return out;
+}
+
 //------Getters------//
 int Simbolo::getDuracion()
 {

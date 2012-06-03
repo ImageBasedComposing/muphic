@@ -117,22 +117,10 @@
     <ClInclude Include="..\source\include\Compositors\Composer.h">
       <Filter>Archivos de encabezado\Compositors</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\include\Compositors\ComposerDemo.h">
-      <Filter>Archivos de encabezado\Compositors</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\include\Compositors\ComposerFigMelody.h">
       <Filter>Archivos de encabezado\Compositors</Filter>
     </ClInclude>
     <ClInclude Include="..\source\include\Compositors\ComposerFigRitmo.h">
-      <Filter>Archivos de encabezado\Compositors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Compositors\ComposerMelodia.h">
-      <Filter>Archivos de encabezado\Compositors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Compositors\ComposerMultiple.h">
-      <Filter>Archivos de encabezado\Compositors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\include\Compositors\ComposerRitmo.h">
       <Filter>Archivos de encabezado\Compositors</Filter>
     </ClInclude>
     <ClInclude Include="..\source\include\Compositors\ComposerTimothy.h">
@@ -180,6 +168,9 @@
     <ClInclude Include="..\source\include\Compositors\ComposerVoice.h">
       <Filter>Archivos de encabezado\Compositors</Filter>
     </ClInclude>
+    <ClInclude Include="..\source\include\Compositors\composerFigSilence.h">
+      <Filter>Archivos de encabezado\Compositors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\src\Mu.cpp">
@@ -221,22 +212,10 @@
     <ClCompile Include="..\source\src\Compositors\Composer.cpp">
       <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\src\Compositors\ComposerDemo.cpp">
-      <Filter>Archivos de código fuente\Compositors</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\src\Compositors\composerFigMelody.cpp">
       <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
     <ClCompile Include="..\source\src\Compositors\composerFigRitmo.cpp">
-      <Filter>Archivos de código fuente\Compositors</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Compositors\ComposerMelodia.cpp">
-      <Filter>Archivos de código fuente\Compositors</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Compositors\ComposerMultiple.cpp">
-      <Filter>Archivos de código fuente\Compositors</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\src\Compositors\ComposerRitmo.cpp">
       <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
     <ClCompile Include="..\source\src\Compositors\ComposerTimothy.cpp">
@@ -291,6 +270,9 @@
       <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
     <ClCompile Include="..\source\src\Compositors\composerFigBass2.cpp">
+      <Filter>Archivos de código fuente\Compositors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\src\Compositors\composerFigSilence.cpp">
       <Filter>Archivos de código fuente\Compositors</Filter>
     </ClCompile>
   </ItemGroup>

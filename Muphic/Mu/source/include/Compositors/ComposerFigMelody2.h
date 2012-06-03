@@ -21,7 +21,7 @@ class ComposerFigMelody2 : public ComposerVoice
 		int getNextDegreeTone(int degree, double actualAngle, double lastAngle, int lastTone);
 		int getNextTone(int degree, double actualAngle, double lastAngle, int lastTone, int actualDuration, int lastDuration);
 		int makeConsonant(int tone, int toneToModif);
-		void adaptDurations(vector<int>* durations, int duration, int minDur = EIGHTHNOTE);
+		void adaptDurations(vector<int>* durations, int duration, int minDur = EIGHTHNOTE, int maxDur = HALFNOTE);
 		vector< int > calcDurDirect(FigureMusic * f, vector< Vertice* > vertices, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE);
 		vector< int > calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices, vector<int> duraciones);
 		vector< int > calcTonesCounterPoint(FigureMusic * f, vector< Vertice* > vertices, Segmento* seg1, int pos, vector<int> duraciones);
@@ -35,11 +35,18 @@ class ComposerFigMelody2 : public ComposerVoice
 		inline bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur){ return compMelodyFig(f,seg,dur,HALFNOTE,EIGHTHNOTE);};
 		inline bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur, int maxDur){ return compMelodyFig(f,seg,dur,maxDur,EIGHTHNOTE);};
 		bool compMelodyFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur);
+
 		inline bool decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur){ return decMelodyFig(f,seg1,seg,dur,HALFNOTE,EIGHTHNOTE);};
 		inline bool decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur){ return decMelodyFig(f,seg1,seg,dur,maxDur,EIGHTHNOTE);};
 		bool decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur, int minDur);
-		bool interMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE);
+
+		inline bool compBassFig(FigureMusic* f, Segmento* seg, int dur){ return compBassFig(f,seg,dur,HALFNOTE,EIGHTHNOTE);};
+		inline bool compBassFig(FigureMusic* f, Segmento* seg, int dur, int maxDur){ return compBassFig(f,seg,dur,maxDur,EIGHTHNOTE);};
+		bool compBassFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur);
+
 		bool composeVoice(FigureMusic* f, Segmento* seg, int dur, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE, Segmento* seg1 = NULL);
+		bool interMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* seg, int dur, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE);
+		
 		
 
 

@@ -42,15 +42,30 @@ string ComposerTimothy2::compose()
 
 	// We create the scale by which we pretend to work, set by default to DOM
 	MajorScale scale;
-	ScriabinColor sc;
+	PentatonicMajScale scalePent;
 	TableScale* tbScaleBase = new TableScale(scale.getScaleSteps(), DO);
-	TableScale* tbScale = new TableScale(scale.getScaleSteps(), sc.getNota(padres.front()->getRGB(), tbScaleBase));
-
+	TableScale* tbScale = new TableScale(scale.getScaleSteps(), fm->getColorSystem()->getNota(padres.front()->getRGB(), tbScaleBase));
+	TableScale* tbPentScale = new TableScale(scalePent.getScaleSteps(), tbScale->getFirstNote());
 	// We create the composers we will use to make the melody and rithm
-	fm->setTableScale(tbScale);
-	fm2->setTableScale(tbScale);
-	fb->setTableScale(tbScale);
-	fr->setTableScale(tbScale);
+	if(fm->getTypeScale() == 5)
+		fm->setTableScale(tbPentScale);
+	else
+		fm->setTableScale(tbScale);
+
+	if(fm2->getTypeScale() == 5)
+		fm2->setTableScale(tbPentScale);
+	else
+		fm2->setTableScale(tbScale);
+
+	if(fb->getTypeScale() == 5)
+		fb->setTableScale(tbPentScale);
+	else
+		fb->setTableScale(tbScale);
+
+	if(fr->getTypeScale() == 5)
+		fr->setTableScale(tbPentScale);
+	else
+		fr->setTableScale(tbScale);
 
 	// We create the segments where we will put the different notes from the melody
 	Segmentos* segs1 = new Segmentos();
@@ -64,8 +79,7 @@ string ComposerTimothy2::compose()
 	for(std::list< FigureMusic* >::iterator it = padres.begin(); it != padres.end(); it++)
 	{
 		seg1 = new Segmento();
-		
-		fm->compMelodyFig((*it), seg1, /*fake-int*/128); 
+		fm->compMelodyFig((*it), seg1, WHOLE*4/*Cuatro compases 4/4*/); 
 
 		seg3 = new Segmento();
 		fb->compBassFig((*it),seg3,seg1->getDuration());
@@ -76,11 +90,19 @@ string ComposerTimothy2::compose()
 		for(int i = 0; i < (*it)->sizeHijos(); i++)
 		{
 			child = (FigureMusic*)(*it)->getHijoAt(i);
-			seg2 = new Segmento();
 			if( isLittleFig(child, (*it)) )
+			{
+				seg2 = new Segmento();
 				fm2->decMelodyFig(child, seg1, seg2, seg1->getDuration());
+			}
 			/*else //isMediumFig
 				seg2 = fm->interMelodyFig(child, seg);*/
+			if(i > 0)
+			{
+				seg1 = seg1->clone();
+				seg3 = seg3->clone();
+				seg4 = seg4->clone();
+			}
 			segs1->pushBack(seg1);
 			segs2->pushBack(seg2);
 			segs3->pushBack(seg3);
@@ -101,6 +123,8 @@ string ComposerTimothy2::compose()
 
 	delete tbScaleBase;
 	delete tbScale;
+	delete tbPentScale;
+	delete fgs;
 
 	// We create the voices we will use in this song and we assign them the segments we created
 	Voz* v1 = new Voz();
@@ -147,9 +171,10 @@ string ComposerTimothy2::compose()
 	m->setMidizator(new MidizatorABC());
 	cout << "Composition done!" << endl;
 	cout << endl << "Making midi output..." << endl;
+	// We make the music using the midizator previously selected
 	std::string out = m->toMidi(); 
 
-	// We make the music using the midizator previously selected
+	delete m;
 	return out;
 }
 
@@ -192,6 +217,23 @@ bool ComposerTimothy2::isLittleFig(FigureMusic* child, FigureMusic* parent)
 	return true;
 }
 
+//Crea un segmento de duración dada sólo con silencios
+Segmento* ComposerTimothy2::emptyMelody(int durTotal)
+{
+	int dur = 0;
+	Segmento* out = new Segmento();
+	dur = durTotal;
+	while(dur > WHOLE)
+	{
+		out->pushBack(new Nota(WHOLE, 0));
+		dur = dur - WHOLE;
+	}
+	if(dur > 0)
+		out->pushBack(new Nota(dur, 0));
+
+	return out;
+}
+
 //Crea un segmento que sea de la misma duración que el dado pero en silencio.
 Segmento* ComposerTimothy2::emptyMelody(Segmento* seg)
 {
@@ -204,11 +246,12 @@ Segmento* ComposerTimothy2::emptyMelody(Segmento* seg)
 		out->pushBack(new Nota(WHOLE, 0));
 		dur = dur - WHOLE;
 	}
-	out->pushBack(new Nota(dur, 0));
+	if(dur > 0)
+		out->pushBack(new Nota(dur, 0));
 
 	return out;
-
 }
+
 
 /*------Getters------*/
 Conf* ComposerTimothy2::getConfig()

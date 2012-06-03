@@ -4,11 +4,13 @@
 ComposerFigBass2::ComposerFigBass2(ColorSystem* sc) : ComposerVoice(sc)
 {
 	// ctor
+	typeScale = 7;
 }
 
 ComposerFigBass2::ComposerFigBass2(ColorSystem* sc, TableScale* tbScale) : ComposerVoice(sc, tbScale)
 {
 	// ctor
+	typeScale = 7;
 }
 
 /*------Destructora------*/
