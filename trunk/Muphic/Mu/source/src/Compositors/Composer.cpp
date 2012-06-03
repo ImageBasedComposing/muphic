@@ -11,6 +11,10 @@ Composer::Composer(ComposerVoice* fm, ComposerVoice* fm2, ComposerVoice* fb, Com
 Composer::~Composer()
 {
     //dtor
+	delete fm;
+	delete fm2;
+	delete fb;
+	delete fr;
 }
 
 

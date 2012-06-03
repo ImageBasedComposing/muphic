@@ -119,6 +119,23 @@ public:
 		firstNote = DO;
 	}
 
+	int getFirstNote(){ return firstNote;}
+	vector<int> getScaleSteps(){ return scaleSteps;}
+	void setFirstNote(int fNote)
+	{ 
+		if(fNote > 0){
+			firstNote = fNote%ESCALA;
+		}
+		if(firstNote == 0)
+			firstNote = SI;
+	}
+
+	void setScaleSteps(vector<int> scaSteps)
+	{
+		scaleSteps = scaSteps;
+	}
+
+
 	//**************************************//
 
 	//Devuelve si la nota pertenece o no a la escala actual.

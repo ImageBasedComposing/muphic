@@ -14,12 +14,15 @@ class Segmento
 		Segmento();
 		~Segmento();
 
+		Segmento* clone();
+
 /*------Getters------*/
         Simbolos* getSimbolos();
 		Simbolo* getAt(int i);
 		bool insert(int pos, Simbolo* s);
 		void pushBack(Simbolo *s);
 		int size() { return simbolos->size(); };
+		
 
         Metrica getMetrica();
 		Tempo getTempo();

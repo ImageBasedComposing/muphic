@@ -4,11 +4,13 @@
 ComposerFigMelody2::ComposerFigMelody2(ColorSystem* cs) : ComposerVoice(cs)
 {
 	// ctor
+	typeScale = 7;
 }
 
 ComposerFigMelody2::ComposerFigMelody2(ColorSystem* cs, TableScale* tbScale) : ComposerVoice(cs, tbScale)
 {
 	// ctor
+	typeScale = 7;
 }
 
 /*------Destructora------*/
@@ -44,6 +46,51 @@ bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg, int dur, i
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
 		seg->pushBack(new Nota(durations.at(i), tones.at(i)));
+
+	return true;
+}
+
+//Hacemos una melodia de duracion limitada y que sea a partir de la figura dada.
+bool ComposerFigMelody2::compBassFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur)
+{
+	//Ordenamos los vertices de la figura teniendo en cuenta el focus... (nada por ahora) CAMBIAR!
+	vector< Vertice* > vertices;
+	int numVertices = f->getNumVertices();
+	for(int i = 0; i < numVertices; i++)
+		vertices.push_back(f->getVerticeAt(i));
+
+	//Componemos:
+
+		// Duracion ***************
+
+	vector< int > durations = calcDurDirect(f, vertices, maxDur, minDur);
+
+	//Hay que adaptarnos a la duración
+	adaptDurations(&durations, dur);
+
+		//Tono **************
+
+	vector< int > tones = calcTonesDiff(f, vertices, durations);
+
+	//Comprobamos el tono más alto y el más bajo para saber cuantas octavas podemos bajar
+	int maxTone = 0, minTone = SI_C+ESCALA*2;
+	for(int i = 0; i < tones.size(); i++)
+	{
+		if(tones.at(i) > maxTone)
+			maxTone = tones.at(i);
+		if(tones.at(i) < minTone)
+			minTone = tones.at(i);
+	}
+	int diff = 1;
+	if(minTone - (ESCALA*2) > 1)
+		diff++;
+	if(maxTone > (ESCALA*6) )
+		diff++;
+
+
+	//Añadimos las notas
+	for(int i = 0; i < vertices.size(); i++)
+		seg->pushBack(new Nota(durations.at(i), tones.at(i) - (ESCALA*diff)/*Quitamos octavas*/));
 
 	return true;
 }
@@ -492,7 +539,7 @@ int ComposerFigMelody2::makeConsonant(int tone, int toneToModif)
 //Vamos a adaptar el vector de duraciones que nos han pasado a la duración dada intentando 
 // hacer que en general todas las notas vayan decreciendo.
 //minDur: intenta no bajar la duración de esa marca.
-void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, int minDur)
+void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, int minDur, int maxDur)
 {
 	int durationTotal = 0;
 	for(int i = 0; i < durations->size(); i++)
@@ -532,5 +579,44 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 			durationTotal -= durations->at(pos);
 		}
 	} //Fin bucle while
+
+	bool duplicated = false;
+	//Ajustamos del todo:
+	while(durationTotal < duration)
+	{
+		pos = rand() % durations->size();
+		if(((durations->at(pos)) > (duration - durationTotal)) || durations->at(pos) > maxDur)
+		{
+			posAux = (pos + 1) % durations->size();
+			duplicated = false;
+			while(!duplicated && posAux != pos)
+				if(((durations->at(posAux)) > (duration - durationTotal)) || (durations->at(posAux) > maxDur))
+					posAux = (posAux + 1) % durations->size();
+				else
+				{
+					durationTotal += durations->at(posAux);
+					durations->at(posAux) = durations->at(posAux) * 2;
+					duplicated = true;
+				}
+			if(posAux == pos) //Ya se ha dado la vuelta y no hemos podido hacer split de ninguna nota
+			{ //Rompemos la barrera de minDur. No hay otra solución
+				if((durations->at(posAux)) > (duration - durationTotal))
+				{
+					durations->at(posAux) = durations->at(posAux) + duration - durationTotal;
+					durationTotal += duration - durationTotal;
+				}
+				else
+				{
+					durationTotal += durations->at(posAux);
+					durations->at(posAux) = durations->at(posAux) * 2;
+				}
+			}
+		}
+		else
+		{
+			durationTotal += durations->at(pos);
+			durations->at(pos) = durations->at(pos) * 2;
+		}
+	}
 
 }

@@ -12,6 +12,8 @@ class Nota : public Simbolo
 		Nota(int tono);
 		Nota(int duracion, int tono);
 
+		Nota* clone();
+
 		~Nota();
 
 		/*------Getters------*/

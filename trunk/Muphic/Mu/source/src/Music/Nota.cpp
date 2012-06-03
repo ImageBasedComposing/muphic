@@ -21,6 +21,12 @@ Nota::~Nota()
 {
 }
 
+Nota* Nota::clone()
+{
+	Nota* out = new Nota(duracion,tono);
+	return out;
+}
+
 //------Getters------//
 
 int Nota::getTono()

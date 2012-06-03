@@ -25,6 +25,9 @@ Music::Music(Midizator * mdztor)
 Music::~Music()
 {
 	delete voces;
+	voces = NULL;
+	delete midizator;
+	midizator = NULL;
 }
 
 string Music::toMidi()

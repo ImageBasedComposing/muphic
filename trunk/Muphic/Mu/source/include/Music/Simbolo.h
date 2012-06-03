@@ -11,6 +11,8 @@ class Simbolo
 		Simbolo(int duracion = QUARTERNOTE); //Por defecto una negra.
         virtual ~Simbolo();
 
+		Simbolo* clone();
+
 		/*------Getters------*/
         virtual int getDuracion();
 

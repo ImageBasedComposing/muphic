@@ -48,17 +48,20 @@ class ComposerVoice
 /*------Getters------*/
 		inline ColorSystem* getColorSystem(){return cs;};
 		inline TableScale* getTableScale(){return tb;};
+		inline int getTypeScale(){return typeScale;};
 		inline vector<int> getInstruments(){return instruments;};
 		inline int getInstrument(){return instruments.front();};
 
 /*------Setters------*/
 		void setColorSystem(ColorSystem* cs){this->cs = cs;}
 		void setTableScale(TableScale* tb){this->tb = tb;};
+		void setTypeScale(int t){this->typeScale = t;};
 		void setInstruments(vector<int> i){instruments = i;};
 
     protected:
 		ColorSystem* cs;
 		TableScale* tb;
+		int typeScale;
 		vector<int> instruments;
 };
 

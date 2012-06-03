@@ -17,7 +17,7 @@ class ComposerFigRitmo2 : public ComposerVoice
 		//Se pide que haga un ritmo dada una figura. Devuelve el segmento con el ritmo, de duracion dur
 		inline bool compRythmFig(FigureMusic* f, Segmento* seg, int dur){return compRythmFig(f,seg,dur,WHOLE,EIGHTHNOTE);};
 		inline bool compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur){return compRythmFig(f,seg,dur,maxDur,EIGHTHNOTE);};
-		bool compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, /*fake-int*/int minDur);
+		bool compRythmFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, /*No se usa*/int minDur);
 
 		
 /*------Getters------*/

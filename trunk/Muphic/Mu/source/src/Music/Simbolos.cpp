@@ -9,9 +9,24 @@ Simbolos::~Simbolos()
 {
 	list<Simbolo*>::iterator it;
 	for (it = simbolos.begin(); it != simbolos.end(); it++)
+	{
 		delete (*it);
+		(*it) = NULL;
+	}
 
 	simbolos.clear();
+}
+
+Simbolos* Simbolos::clone()
+{
+	Simbolos* out = new Simbolos();
+	list<Simbolo*>::iterator it;
+	for (it = simbolos.begin(); it != simbolos.end(); it++)
+	{
+		out->pushBack(((Nota*)(*it))->clone());
+	}
+	
+	return out;
 }
 
 bool Simbolos::empty()

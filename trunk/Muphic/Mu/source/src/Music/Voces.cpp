@@ -19,6 +19,7 @@ Voces::~Voces()
     while (it != voces.end())
     {
         delete (*it);
+		(*it) = NULL;
         it++;
     }
     voces.clear();

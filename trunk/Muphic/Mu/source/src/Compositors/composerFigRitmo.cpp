@@ -4,11 +4,13 @@
 ComposerFigRitmo::ComposerFigRitmo(ColorSystem* sc) : ComposerVoice(sc)
 {
 	// ctor
+	typeScale = 5;
 }
 
 ComposerFigRitmo::ComposerFigRitmo(ColorSystem* sc, TableScale* tbScale) : ComposerVoice(sc, tbScale)
 {
 	// ctor
+	typeScale = 5;
 }
 
 /*------Destructora------*/

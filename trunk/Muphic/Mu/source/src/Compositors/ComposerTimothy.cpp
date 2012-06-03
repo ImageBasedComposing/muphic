@@ -41,12 +41,21 @@ string ComposerTimothy::compose()
 	std::list< std::pair<FigureMusic*, int> > aux = calcularDuracion(fPatronizada);
 
 	// We create the scale by which we pretend to work, set by default to DOM
-	PentatonicMajScale scale;
-	TableScale* tbScale = new TableScale(scale.getScaleSteps(), DO);
-
+	MajorScale scale;
+	PentatonicMajScale scalePent;
+	TableScale* tbScaleBase = new TableScale(scale.getScaleSteps(), DO);
+	TableScale* tbScale = new TableScale(scale.getScaleSteps(), fm->getColorSystem()->getNota(padres.front()->getRGB(), tbScaleBase));
+	TableScale* tbPentScale = new TableScale(scalePent.getScaleSteps(), tbScale->getFirstNote());
 	// We create the composers we will use to make the melody and rithm
-	fm->setTableScale(tbScale);
-	fr->setTableScale(tbScale);
+	if(fm->getTypeScale() == 5)
+		fm->setTableScale(tbPentScale);
+	else
+		fm->setTableScale(tbScale);
+
+	if(fr->getTypeScale() == 5)
+		fr->setTableScale(tbPentScale);
+	else
+		fr->setTableScale(tbScale);
 
 	// We create the segments where we will put the different notes from the melody
 	Segmentos* segs1 = new Segmentos();

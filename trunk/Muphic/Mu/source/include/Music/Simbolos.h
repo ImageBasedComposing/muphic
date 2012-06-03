@@ -4,6 +4,7 @@
 #define SIMBOLOS_H
 
 #include "Music/Simbolo.h"
+#include "Music/Nota.h"
 
 #include <list>
 
@@ -14,6 +15,8 @@ class Simbolos
     public:
         Simbolos();
         virtual ~Simbolos();
+
+		Simbolos* clone();
 
         /* envoltorio de la lista stl */
 

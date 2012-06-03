@@ -44,6 +44,7 @@ class ComposerTimothy2 : public Composer
 		std::list< std::pair<FigureMusic*, int> > calcularDuracion(std::list<FigureMusic*> f);
 		bool isLittleFig(FigureMusic* child, FigureMusic* parent);
 		Segmento* emptyMelody(Segmento* seg);
+		Segmento* emptyMelody(int durTotal);
 };
 
 #endif // COMPOSERTIMOTHY2_H
