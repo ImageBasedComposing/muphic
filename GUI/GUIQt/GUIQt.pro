@@ -51,7 +51,7 @@ FORMS    += muphicconfig.ui
 
 INCLUDEPATH += ../../Muphic/common/include
 INCLUDEPATH += ../../Muphic/TinyXML/include
-DEFINES += __LINUX=1
+DEFINES += __WINDOWS=1
 
 # wince*{
 # DEPLOYMENT_PLUGIN += phonon_ds9 phonon_waveout

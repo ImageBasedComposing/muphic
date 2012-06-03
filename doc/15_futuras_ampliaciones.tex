@@ -1,1 +1,29 @@
 \subsection{Futuras ampliaciones}
+
+\todo{Esto es solo un boceto inicial, repasar, ampliar, corregir, dar formato etc...}
+\todo{Ideas planteadas:
+\\Portar a móbiles
+\\Crear compositores nuevos
+}
+Inicialmente el proyecto fue planteado como una aplicación para dispositivos móbiles, tanto debido a la falta de tiempo como a la complicación que suponía adaptar las librerías utilizadas a sistemas operativos portables esta parte quedó aplazada como una posible ampliación.
+\newline
+El trabajo a realizar consistiría en portar OpenCV, la librería encargada del tratamiento de imágenes, a android y/o iPhone, buscar una librería o un app que trabajase con abc y midi en dichos dispositivos, esta parte no debería ser complicada pues, por ejemplo, existen muchos recursos puestos a disposición por la comunidad de java, lenguaje que gracias a que trabaja a través de una máquina virtual es compatible con los sistemas operativos de ambos tipos de dispositivos.
+\\Y por último modificar la presentación de la interfaz gráfica para que sea mas manejable con dispositivos móbiles. Dado que Qt es un framework diseñado para trabajar con este tipo de dispositivos la portabilidad no sería un problema.
+\newline
+Otra ampliación disponible y para la que fue diseñado originalmente el proyecto es la posibilidad de hacer más compositores.
+\\Según el diseño planteado habrá que tener en cuenta tres elementos:
+\begin{itemize}
+
+\item El o los compositores que se desean hacer:
+\\El desarrollador tendrá la libertad de elejir si simplemente desea añadir un compositor a los mezcladores ya creados o construir un ''compositor completo'', es decir, melodía con varias voces, bajo y ritmo. (p.e. Uno de melodía y uno de ritmo, dos de ritmo uno de melodía...)
+
+\item El o los compositores que se vayan a encargar de juntar los compositores creados:
+\\Con esto nos referimos a la clase que se encarga de juntar las melodías creadas por los compositores anteriores para que suente correctamente, o la manera en la que se interpretarán los compositores creados a la hora de generar el archivo abc. También podría tenerse en ceunta a la hora de generar el archivo de audio si no se quiere que este sea un midi.
+
+\item La inclusión en la interfáz gráfica de quererse usar:
+\\Al estar diseñado de manera modular si el usuario prefiere utilizar la aplicación a través de una consola en lugar 	de la interfaz que hemos creado es libre de hacerlo por lo que no tendría porque añadir su compositor a la interfáz gráfica ofrecida.
+
+\end{itemize} 
+
+Para crear tanto los compositores como el mezclador deberá de crearse clases que hereden de Composer y a partír de ahí programar la lógica que se haya planteado previamente.
+Para la interfáz necesitará tener instalado en su sistema el Qt SDK y simplemente añadir una entrada más a la lista de compositores, y a la de mezcladores. Podrá asociar su compositor a un único mezclador en la interfaz, con lo que deberá en la clase principal de Mu añadir la referencia al mezclador en cuestión con el índice que le haya asignado, o dejarlo asociado a todos los mezcladores, con lo que tendrá que añadir las referencias a su/s compositor/es a todos los mezcladores que hay en Mu.

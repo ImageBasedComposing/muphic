@@ -74,7 +74,7 @@ void UsrConf::readMuphic(std::string path)
         phicFilterSelec = atoi(phicNode->FirstChild("filter")->ToElement()->GetText());
         phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
 		std::string str = phicNode->FirstChild("noise")->ToElement()->GetText(); 
-			phicNoiseSelec = std::atof(str.c_str());
+                        phicNoiseSelec = atof(str.c_str());
         phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
 		phicAnalysisDetail = atoi(phicNode->FirstChild("anlDet")->ToElement()->GetText());
         phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());
@@ -141,7 +141,7 @@ void UsrConf::readPhic(std::string path)
     phicFilterSelec = atoi(phicNode->FirstChild("filter")->ToElement()->GetText());
     phicThresholdSelec = atoi(phicNode->FirstChild("threshold")->ToElement()->GetText());
 		std::string str = phicNode->FirstChild("noise")->ToElement()->GetText(); 
-	phicNoiseSelec = std::atof(str.c_str());
+        phicNoiseSelec = atof(str.c_str());
     phicPolygonSimp = atoi(phicNode->FirstChild("polSimp")->ToElement()->GetText());
 	phicAnalysisDetail = atoi(phicNode->FirstChild("anlDet")->ToElement()->GetText());
     phicColorLevels = atoi(phicNode->FirstChild("colLvl")->ToElement()->GetText());

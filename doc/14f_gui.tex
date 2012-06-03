@@ -4,26 +4,8 @@ El desarrollo de la interfáz gráfica se decidió realizar a través de un fram
 \todo{Este párrafo no se si abriría mejor la parte de arquitectura}
 \newline
 La interfáz esta compuesta de tres pestañas cada una encargada de una parte de la funcionalidad:
-\newline
-\\\underline{Graphic Config:}
-\\En esta pestaña se encuentran todas las opciones relacionadas con el análisis de la imagen, las distintas configuraciones se transmitirán a los módulos de la aplicación a través de un documento XML que se genera cuando en la "Main Window" se le da al boton de "Analyze".
-\\Los distintos componentes de esta pestaña van variando según el filtro que se seleccione, sin embargo algunos de ellos son comunes para todos los filtros:
-\newline
-\\\textit{Filter:} Este combo box permite seleccionar entre los distintos filtros que se pueden usar en la aplicación.
-\\\textit{Noise Selection:} Con esta barra de desplazamiento se podrá elegir a partir de que tamaño, relativo al area del mayor polígono de la imagen, se ignorarán los poligonos encontrados durante el análisis de la imagen.
-\\\textit{Analysis Depth:} Esta barra permite seleccionar cuanto deseamos comprimir la imagen original antes de analizarla, cuando menor sea su valor menor será el nivel de detalle obtenido y más rápido se realizará el análisis.
-\\\textit{Polygon Simplification:} Esta barra permite seleccionar cuanto deseamos simplificar los poligonos obtenidos a partir de la imagen original, cuanto mayor sea su valor menos vertices tendrán los poligonos obtenidos y por lo tanto menos fiel será el resultado del análisis, sin embargo, este se realizará más rápido.
-\newline
-\\Según el filtro que se elija aparecerán mas componentes:
-\newline
-\\\todo{Rellenar esto de manera experta y didáctica}
-\\\textit{Threshold} (Filtro Threshold): 
-\\\textit{Hue Division} (Filtro Hue Division):
-\\\textit{Threshold H} (Filtro Multiple Threshold):
-\\\textit{Threshold S} (Filtro Multiple Threshold):
-\\\textit{Threshold V} (Filtro Multiple Threshold):
-\newline
-\\\underline{Composition Config:}
+
+\underline{Composition Config:}
 \\En esta pestaña se pueden encontrar todas las opciones disponibles para el compositor musical, estás serán transmitidas a los modulos de la aplicacióncuando se pulse el boton de "Compose" en la "Main Window" a través del documento XML mencionado anteriormente.
 \\Como se puede ver en la imagen adjunta, hay opciones para cuatro voces, que son aquellas con las que trabajan los compositores de la aplicación siendo, normalmente, la "Voice 1" la melodía principal, la "Voice 2" un acompañamiento, la "Voice 3" el bajo y la "Voice 4" la percusión. Las opciones disponibles son las siguientes:
 \\\todo{Adjuntar imagen}

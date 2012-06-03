@@ -277,7 +277,11 @@
           <item>
            <widget class="QPushButton" name="pushButton_pause">
             <property name="text">
-             <string>Pause</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>pause.png</normaloff>pause.png</iconset>
             </property>
            </widget>
           </item>
