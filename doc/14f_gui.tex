@@ -1,5 +1,7 @@
 \subsection{Interfaz Gráfica}
 
+\todo{rehacer reusando parte de esto}
+
 El desarrollo de la interfáz gráfica se decidió realizar a través de un framework que facilitase la construcción de la misma. Qt, la herramienta que se utilizó se eligió debido a dos criterios, era multiplataforma, al igual que la aplicación, servía para trabajar con móviles, siguiendo así uno de los enfoques iniciales del proyecto que más adelante fue descartado. Además Qt trabaja con C++ como lenguaje de programación, el mismo que el núcleo de la aplicación y ofrece facilidades a la hora de integrar audio, a través de la librería Phonon, o componentes personalizados en una interfaz.\\
 \todo{Este párrafo no se si abriría mejor la parte de arquitectura}
 \newline
@@ -25,3 +27,11 @@ La interfáz esta compuesta de tres pestañas cada una encargada de una parte de
 \\\todo{Claramente esta parte va en arquitectura, sin embargo no se que más comentar de la arquitectura de la GUI puesto que casi todo esta hecho con QT, como no digamos el widget de carlos...}
 \\La interacción con phonon se realiza utilizando la funcionalidad proporcionada por el framework. Se asocia el fichero multimedia a un tipo proporcionado por Phonon que a su vez lo conecta con el sistema de audio predeterminado para cada sistema operativo.
 \\El uso de Phonon es conveniente porque a pesar de sus complicaciones ofrece una manera sencilla de incluir un reproductor en la interfaz, que a su vez, es multiplataforma sin obligar al usuario a buscar el archivo de audio o forzar una llamada a un tercer programa que reproducir la musica que generada.
+
+\subsubsection{Uso de la librería Qt}
+
+\subsubsection{Vista general}
+
+\subsubsection{Widget Gráfico}
+
+\subsubsection{Uso de la librería Phonon}
