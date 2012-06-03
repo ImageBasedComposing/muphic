@@ -1,4 +1,4 @@
-\documentclass[11pt]{article} 
+\documentclass[11pt]{report} 
 
 % Preamble section
 \newcommand{\bs}{\ensuremath{\backslash}} % Alias para backslash
@@ -6,6 +6,7 @@
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{fancyhdr}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \usepackage{wrapfig}
@@ -37,17 +38,27 @@
 \title{Muphic: Composición Musical Automática basada en Imágenes} % Título tentativo
 \author{Johan Bertrand \and Carlos Catalán \and Vladimir Georgiev}
 % \date{7 de Mayo de 2012}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
 
 
 \begin{document}
+
+\pagenumbering{roman}
 
 \include{1_titulo}
 \include{2_prefacio}
 \include{3_4_tagsfirmas}
 \include{5_agradecimientos}
-% 6
+% 6_índice
 \tableofcontents
 \newpage
+
+\pagestyle{fancy}
+\fancyhead[L]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[R]{\textit{\nouppercase{\leftmark}}}
+\pagenumbering{arabic}
+
+\pagenumbering{arabic}
 \include{7_intro}
 \include{11_algoritmosdecomposicion}
 \include{12_sistema}

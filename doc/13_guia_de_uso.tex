@@ -17,7 +17,7 @@
 		
 		Se procede por tanto a explicar cada pestaña una por una.
 
-		\subsubsection{Ventana principal}
+	\subsection{Ventana principal}
 		
 		Se encarga de la interacción directa con el usuario; muestra los resultados obtenidos y permite lanzar los distintos componentes de la aplicación. 
 		\\Esta compuesta por los siguientes elementos tal y como se puede ver en la Figura~\ref{fig:interfaz}:\\
@@ -39,9 +39,9 @@
 		
 		\noindent\textit{Analysis output [B]:} En este panel se muestra el resultado del último análisis realizado pulsando el botón "Analyze".\\
 		
-		\noindent\textit{Botón Analyze [2]:} Tal y como su nombre indica, Analyze, realiza el analisis de la imagen pasada como parámetro de entrada lanzando a ejecución el programa Phic, uno de los módulos de la aplicación. Tras analizarse, el resultado podrá observarse en el \textit{[B]}.\\
+		\noindent\textit{Botón Analyze [2]:} Tal y como su nombre indica, Analyze, realiza el analisis de la imagen pasada como parámetro de entrada lanzando a ejecución el programa Phic, uno de los módulos de la aplicación. Tras analizarse, el resultado podrá observarse en el \textit{[B]}. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje "STOP", pudiendo pulsarlo de nuevo para detener el análisis manualmente.\\
 		
-		\noindent\textit{Botón Compose [1]:} Realiza la composición musical a partir de los datos analizados, para ello lanza a ejecución el programa Mu, otro de los módulos de la aplicación. Una vez compuesta la pieza musical, se podrá escuchar mediante los controles de control de sonido.\\
+		\noindent\textit{Botón Compose [1]:} Realiza la composición musical a partir de los datos analizados, para ello lanza a ejecución el programa Mu, otro de los módulos de la aplicación. Una vez compuesta la pieza musical, se podrá escuchar mediante los controles de control de sonido. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje "STOP", pudiendo pulsarlo de nuevo para detener la composición manualmente.\\
 		
 		\noindent\textit{Botón de Inicio de Reproducción [3]:} Permite al usuario iniciar la reproducción de la pieza musical compuesta por el módulo Mu.\\
 		
@@ -52,7 +52,7 @@
 		\noindent\textit{Barra de sonido [6]:} Modifica el volumen de la reproducción en curso.
 
 		
-		\subsubsection{Configuración gráfica}
+	\subsection{Configuración gráfica}
 		
 		En esta pestaña se encuentran todas las opciones relacionadas con el análisis de la imagen. En ella se podrán configurar opciones que hagan que el proceso de análisis varíe en velocidad, precisión o estilo.\\
 		
@@ -82,9 +82,6 @@
 		
 		Todo filtro en la aplicación que nos ocupa, como ya se comentó anteriormente, realizan la misma función: detectar formas y expresarlas como superficies blancas. A continuación se explica de forma general el funcionamiento de cada filtro y sus parámetros ``específicos''.\\
 		
-		
-		\todo{HACER REFERENCIA A CADA ALGORTIMO QUE NO SEA NUESTRO (TODO MENOS HUE SELECTIONS Y MULTIPLE THRESHOLD) A LA DOC DE OPENCV O A ALGO}
-		
 	\noindent\textbf{Threshold}\\
 		
 		\begin{figure}[htbp]
@@ -95,7 +92,7 @@
 		\label{fig:interfazthreshold}
 		\end{figure}
 		
-		Este filtro transforma la imagen a escala de grises para luego marcar como blancos todos los píxeles con un valor de gris superiores a un umbral dado, y como negros el resto.\\
+		Este filtro, contenido en varias librerías de procesado de imágenes (ver \cite{opencvDoc}), transforma la imagen a escala de grises para luego marcar como blancos todos los píxeles con un valor de gris superiores a un umbral dado, y como negros el resto.\\
 		
 		Los parámetros específicos que usa, vistos en la Figura~\ref{fig:interfazthreshold}, son:\\		
 		
@@ -103,13 +100,13 @@
 		
 	\noindent\textbf{Adaptative Threshold}\\
 
-		Mientras que el filtro anterior utiliza un mismo umbral para toda la imagen, Adaptative Threshold analiza cada parte de la imagen en escala de grises y decide qué umbral es mejor para cada sección.\\ 
+		Mientras que el filtro anterior utiliza un mismo umbral para toda la imagen, Adaptative Threshold (ver \cite{opencvDoc}) analiza cada parte de la imagen en escala de grises y decide qué umbral es mejor para cada sección.\\ 
 		
 		Este filtro no usa parámetros específicos, ya que recalcula el valor del umbral cada vez que le resulta necesario.\\
 		
 	\noindent\textbf{Canny}\\
 
-		Utiliza el algoritmo de detección de regiones del mismo nombre, desarrollado en 1986 por John F. Canny. Una vez encontrados los bordes, establece las figuras que estos delimitan.\\
+		Utiliza el algoritmo de detección de regiones del mismo nombre, desarrollado en 1986 por John F. Canny (ver \cite{opencvDoc}). Una vez encontrados los bordes, establece las figuras que estos delimitan.\\
 		
 		Este filtro no usa parámetros específicos.\\
 		
@@ -177,4 +174,29 @@
 
 		\noindent\textit{Tempo[11]:} Como su nombre indica, su valor determina el tempo con el que sonará la pieza musical compuesta.\\
 		
+	\subsection{Requisitos de instalación}
+	
+		Muphic es una aplicación multiplaforma con soporte para Linux y Windows de 32 y 64 bits, siendo en ambos una aplicación portable. Para finalizar este capítulo, se detallará a continuación las peculiaridades de ejecución en cada plataforma.
 		
+		\subsubsection{Windows}
+		
+		Para ejecutar la aplicación basta con descomprimir el archivo descargado y ejecutar la aplicación.
+		
+		\subsubsection{Linux}
+		
+		Para utilizar la aplicación en cualquier distribución de Linux, habrá que descomprimir el archivo y generar los ejecutables con la herramienta make. Ciertos elementos del sistema (la interfaz gráfica y los controles de reproducción de sonido) requieren que el usuario tenga instaladas ciertas librerías que no se incluyen en la descarga de la aplicación. Estos paquetes son:
+		
+		\begin{itemize}
+			\item Librerías de qt versión 4.7.4, disponibles en su página web (ver \cite{qtlibs}).		
+			\item \emph{libphonon-dev (multimedia framework from KDE-development files)} 
+			\item \emph{libphonon4 (multimedia framework from KDE-core library)}
+			\item \emph{phonon (multimedia framework from KDE-metapackage)}
+			\item \emph{phonon-backend-gstreamer (Phonon GStreamer 0.10.x backend)}
+			\item \emph{libqt4script4-phonon (Qt Script bindings for the Qt 4 Phonon library)}
+			
+		\end{itemize}
+	
+		Si el paquete \emph{phonon-backend-gstreamer}, por cualquier razón, fuera el origen de algún fallo; el usario puede elegir probar con otros tipos de backend, como por ejemplo \emph{phonon-backend-vlc}.
+		
+		
+		\todo{probar en Mac, que es UNIX y no hay razón por la que no deba ir}
