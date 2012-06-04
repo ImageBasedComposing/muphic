@@ -4,9 +4,16 @@
 
 \todo{Repasar formalizar}
 
-La estructura para representar la música propuesta en el proyecto está determinada por un árbol que trabaja desde el elemento más general, la canción que se va a componer, al más específico, cada una de las notas que componen dicha canción.
-\todo{Poner una imagen con la relación de ``clases''}
-\newline
+La estructura para representar la música propuesta en el proyecto está determinada por un árbol que trabaja desde el elemento más general, la canción que se va a componer, al más específico, cada una de las notas que componen dicha canción, como muestra la Figura~\ref{fig:structmusic}.\\
+	
+	\begin{figure}[htbp]
+	\centering
+	\hspace*{-0.67in}
+	\includegraphics[scale=0.57]{graphics/musica-estructura.png}
+	\caption{Estructura de la música}
+	\label{fig:structmusic}
+	\end{figure}
+
 
 \textbf{Música}: Al nivel de la Música, trabajamos con la información relativa a toda la canción que se va a componer, por un lado está información relativa al nombre de la composición y del compositor que la ha hecho, también dispone de una serie de voces a partir de las cuales estará formada la canción y su tempo. Por último a un nivel mas cercano a la implementación permitirá elegir con que herramienta querremos crear el archivo de audio de salida.
 \newline
