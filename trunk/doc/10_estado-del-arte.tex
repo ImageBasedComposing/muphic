@@ -3,7 +3,7 @@
 
 \input{10a_estudio-sobre-sinestesia}
 
-\subsection{Composicion (algoritmica o no) basada en imagenes}
+\subsection{Composición basada en imagenes}
 
 \todo{Elejir correctamente el titulo y rellenar la sección}
 
@@ -13,17 +13,17 @@
 \item Pequeña conclusión o coletilla...
 \end{itemize}
 
-Para poder componer música a partir de datos gráficos necesitamos crear una correlación entre los elementos que tenemos en la parte gráfica y en la parte musical. Esta correspondencia no es fácil de conseguir ya que a través de la historia se han desarrollado varias teorías que se han puesto en práctica. Los primeros intentos de síntesis fueron los instrumentos llamados "organos de color" que mostraban acompañando al sonido una muestra visual.
+Para poder componer música a partir de datos gráficos necesitamos crear una correlación entre los elementos que tenemos en la parte gráfica y en la parte musical. Esta correspondencia no es fácil de conseguir, y a través de la historia se han desarrollado varias teorías que se han puesto en práctica. Los primeros intentos de síntesis fueron los instrumentos llamados ``órganos de color'' que mostraban acompañando al sonido una muestra visual.
 
-El primer instrumento que se construyó fue por parte de Louis Bertrand Castel (1730)y se trataba de un clavecín al que le incorporaron una pantalla encima y un sistema de iluminación. Cuando se apretaban las teclas se iluminaban los colores correspondientes en la pantalla (\cite{OrganosColor}). A este experimento le continuaron muchos otros, pero al ser una correspondencia muy directa entre nota y color da poca diversidad, además es una correspondecia de música a visual.
+El primer instrumento que se construyó fue por parte de Louis Bertrand Castel (1730) y se trataba de un clavecín al que le incorporaron una pantalla encima y un sistema de iluminación. Cuando se apretaban las teclas se iluminaban los colores correspondientes en la pantalla (\cite{organosColor}). A este experimento le continuaron muchos otros, pero al ser una correspondencia muy directa entre nota y color da poca diversidad, además es una correspondecia de música a visual.
 
-Desde hace unas décadas, gracias a los ordenadores, se han investigado activamente en algoritmos automáticos de composición. Una posible clasificación de los diferentes algoritmos basado en su característica principal sería: modelos matemáticos, sistemas basados en conocimiento, gramáticas, evolutivos, sistemas con aprendizaje e hibridos (\cite{AIMethodsForComposition}). Pero no solo la algoritmia es variada, también podemos clasificar en diferentes forma según el tipo de música que se quiera componer: micro-composición (diseño de sonidos) y la macro-composición (combinación de sonidos ya diseñados) (\cite{AudioVisualSurvey}).
+Desde hace unas décadas, gracias a los ordenadores, se ha investigado activamente algoritmos automáticos de composición. Una posible clasificación de los diferentes algoritmos basada en su característica principal sería: modelos matemáticos, sistemas basados en conocimiento, gramáticas, evolutivos, sistemas con aprendizaje e hibridos (\cite{AIMethodsForComposition}). Pero no solo la algoritmia es variada, también podemos clasificar en diferentes forma según el tipo de música que se quiera componer: micro-composición (diseño de sonidos) y la macro-composición (combinación de sonidos ya diseñados) (\cite{AudioVisualSurvey}).
 
-Hay varias aproximaciones de compositores basados en imagen , algunos de ellos como Phonogramme (\cite{Phonogramme}Lesbros, 1996) que es un editor gráfico, interpreta la imagen como una partitura. La imagen representa la relación bidimensional de tonos y duración de los sonidos. El problema de este algoritmo desde el punto de vista de la sinestesia es que las imágenes son partituras y deben estar diseñadas para se usadas para ese fin, no acepta cualquier entrada gráfica. 
+Hay varias aproximaciones de compositores basados en imagen , algunos de ellos como Phonogramme (\cite{Phonogramme} Lesbros, 1996) que es un editor gráfico, interpreta la imagen como una partitura. La imagen representa la relación bidimensional de tonos y duración de los sonidos. El problema de este algoritmo desde el punto de vista de la sinestesia es que las imágenes son partituras y deben estar diseñadas para se usadas para ese fin, no acepta cualquier entrada gráfica. 
 
-Otra opción interesante es la propuesta basada en el concepto de "croma" (o índice de cromatismo). Se subdivide la imagen en bloques (ladrillos cromáticos) los cuales tienen un índice de cromatismo y sirve para generar o asignar trozos de música (\cite{bricksConvertMusic}). Estos trozos de música pueden cogerse de una base de datos o ser creados por un experto (compositor).
+Otra opción interesante es la propuesta basada en el concepto de ``croma'' (o índice de cromatismo). Se subdivide la imagen en bloques (ladrillos cromáticos) los cuales tienen un índice de cromatismo y sirve para generar o asignar trozos de música (\cite{bricksConvertsMusic}). Estos trozos de música pueden cogerse de una base de datos o ser creados por un experto (compositor).
 
-Por último destacamos el trabajo realizado por Xiaoying Wu y Ze-Nian Li (\cite{ImageBaseComposition}) en el que analizan la imagen en tres pasos. Primero \emph{Particionan} la imagen en piezas (divisiones, trozos) más pequeñas. Segundo \emph{Secuenciación} de esas piezas para darles un orden en el tiempo. Por último \emph{Mapeado} de las piezas de imagen en notas musicales.
+Por último destacamos el trabajo realizado por Xiaoying Wu y Ze-Nian Li (\cite{ImageBaseComposition}) en el que analizan la imagen en tres pasos. Primero \emph{Particionan} la imagen en piezas (divisiones, trozos) más pequeñas. Segundo realizan la \emph{Secuenciación} de esas piezas para darles un orden en el tiempo. Por último aplican un \emph{Mapeado} de las piezas de imagen en notas musicales.
 
 Todos estos algoritmos tienen en común un problema, que está implicito, y es que dada una imagen cada persona espera una música diferente como correspondencia. Por tanto es difícil determinar el fitness o validez de cada algoritmo sabiendo además que la entrada gráfica puede tener infinidad de valores posibles.
 
