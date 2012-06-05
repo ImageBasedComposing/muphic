@@ -1,7 +1,67 @@
 \chapter{Diseño de la aplicación}
 \todo{Pendiente de hacerse}
 \section{Algoritmos de Análisis}
-\todo{Pendiente de hacerse: Mencionar los filtros de opencv}
+\todo{Pendiente de hacerse: Mencionar los filtros de opencv\\
+
+esquema\\
+\begin{itemize}
+\renewcommand{\labelitemi}{\tiny$\blacksquare$}
+\item intro al analisis: objetivos, restricciones, la libreria opencv y el proceso (pasar a blanco y negro, detectar contornos y analizar poligonos) 2 caras
+\item cada proceso: todos los filtros explicados con imagenes y detallados varias caras
+\item detectar contornos: opencv media cara
+\item analizar poligonos: easy media cara
+\end{itemize}
+}
+
+\subsection{Introducción}
+
+Esta sección explicará con detalle los algoritmos de análisis de imágemes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{mierde}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
+
+Puesto que nos interesa la eficiencia temporal del proceso de análisis para aumentar la comodidad de la experiencia de usuario, será necesario que los procesos de análisis no consuman mucho tiempo o, al menos, que permitan aumentar su velocidad mediante configuración externa. Es por ello que cada proceso de análisis contendrá parámetros mediante los cuales se podrá modificar la velocidad del análisis a costa de menor precisión en el mismo.\\
+
+Para el diseño e implementación de los mismos se ha hecho uso de la librería multiplataforma de procesado de imágenes OpenCV {\cite{opencvDoc}), que se explica en la siguiente sección.
+
+\subsection{Uso de librería OpenCV}
+
+Esta librería, desarrollada por Intel y orientada a la visión por computador, ofrece multitud de funciones centradas principalmente en el procesado en tiempo real de imágenes.\\
+
+Aunque en nuestros análisis no hagamos uso de sus funciones en tiempo real, sí que nos apoyaremos en sus subrutinas de procesado de imágenes para conseguir algoritmos que funcionen a velocidades deseadas. Estas subrutinas, que se detallarán más adelante en la Sección~\ref{sec:asas}, permiten detectar contornos y aproximarlos a polígonos, así como usar y operar imágenes de forma cómoda.\\
+
+\subsection{el proceso}
+
+
+	
+\subsubsection{Detección de formas}
+
+\subsubsection{Detección de contornos}
+
+\subsubsection{Estudio de polígonos}
+
+
 \section{Algoritmos de Composición}
 \label{sec:algcomp}
 \todo{Pendiente de hacerse}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
