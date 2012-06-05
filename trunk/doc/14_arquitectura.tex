@@ -29,10 +29,30 @@ La estructura para representar la música propuesta en el proyecto está determi
 \item \textbf{Notas}: Estos símbolos tienen asociada una duración, determinada por el componente anterior, y un tono establecido por un número que posteriormente será interpretado con la herramienta que generará el archivo de audio.
 \item \textbf{Acordes}: Los acordes están formados de la misma manera que las notas pero en lugar de tener asociado un único tono pueden tener de dos a tres tonos diferentes, en la práctica esto resultará en todos los tonos sonando a la vez durante el mismo tiempo una vez generada la canción.
 \end{itemize}
-
+ 
 \subsection{Formato de representación de imágenes}
 
-\todo{está en google docs, sólo es pasarlo a limpio}
+\todo{Añadir el diagrama y hacer referencia a el cuando una explicación textual no sea suficiente}
+Las imágenes vienen representadas por un documento XML  estructurado de la siguiente manera:
+
+\begin{itemize}
+\item \textbf{Shapes}: Representa la imagen completa, contiene un listado de las figuras resultantes del análisis.
+\item \textbf{Figure}: Contiene la información relativa a una figura.
+\item \textbf{Id}: Identificador único de la figura.
+\item \textbf{Color}: Identificador para delimitar la información sobre el color.
+\item \textbf {RGB}: Identificador para delimitar la información sobre los valores RGB del color.
+\item \textbf{R}: Valor referente a la escala de rojo en la escala RGB.
+\item \textbf{G}: Valor referente a la cantidad de verde en la escala RGB.
+\item \textbf{B}: Valor referente a la cantidad de azul presente en escala RGB.
+\item \textbf{VertexList}: Lista de vértices que componen el polígono.
+\item \textbf{Vertex [type=``normal'']}: Identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
+\item \textbf{Position}: Identificador para delimitar la posición de un vértice en la imagen.
+\item \textbf{X}: Componente x de la posición del vértice.
+\item \textbf{Y}: Componente y de la posición del vértice.
+\item \textbf{Vertex [type=``center'']}: Identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
+\item \textbf{Area}: Valor numérico del área de una figura.
+\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
+\end{itemize}
 
 \subsection{Sistema de análisis de Imágenes: Phic}
 
