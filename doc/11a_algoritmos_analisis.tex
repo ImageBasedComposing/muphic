@@ -1,0 +1,76 @@
+\section{Algoritmos de Análisis}
+\todo{Pendiente de hacerse: Mencionar los filtros de opencv\\
+
+esquema\\
+\begin{itemize}
+\renewcommand{\labelitemi}{\tiny$\blacksquare$}
+\item intro al analisis: objetivos, restricciones, la libreria opencv y el proceso (pasar a blanco y negro, detectar contornos y analizar poligonos) 2 caras
+\item cada proceso: todos los filtros explicados con imagenes y detallados varias caras
+\item detectar contornos: opencv media cara
+\item analizar poligonos: easy media cara
+\end{itemize}
+}
+
+Esta sección explicará con detalle los algoritmos de análisis de imágemes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{mierde}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
+
+Puesto que nos interesa la eficiencia temporal del proceso de análisis para aumentar la comodidad de la experiencia de usuario, será necesario que los procesos de análisis no consuman mucho tiempo o, al menos, que permitan aumentar su velocidad mediante configuración externa. Es por ello que cada proceso de análisis contendrá parámetros mediante los cuales se podrá modificar la velocidad del análisis a costa de menor precisión en el mismo.\\
+
+Para el diseño e implementación de los mismos se ha hecho uso de la librería multiplataforma de procesado de imágenes OpenCV {\cite{opencvDoc}). Esta librería, desarrollada por Intel y orientada a la visión por computador, ofrece multitud de funciones centradas principalmente en el procesado en tiempo real de imágenes.\\
+
+Aunque en nuestros análisis no hagamos uso de sus funciones en tiempo real, sí que nos apoyaremos en sus subrutinas de procesado de imágenes para conseguir algoritmos que funcionen a velocidades deseadas. Estas subrutinas, que se detallarán más adelante en la Sección~\ref{sec:asas}, permiten detectar contornos y aproximarlos a polígonos, así como usar y operar imágenes de forma cómoda.\\
+
+Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a cabo consiste en:
+
+\begin{itemize}
+
+	\item \textbf{Detección de formas:} La imagen dada se transforma en una sucesión de imágenes binarias (únicamente en blanco y negro), donde las manchas blancas representan figuras independientes. Dado que varias figuras pueden superponerse (una figura contiene a otra), si se devolviera una única imagen binaria, sólo podría representarse una de las figuras (la que envuelve a las demás, ya que todas se pintaría como superficies blancas por ser figuras independientes), perdiendo información en el análisis. Es por ello que, siempre que resulte necesario, se devolverán varias imagenes de salida en esta fase del proceso, para asegurar que todas las figuras presentes se tienen en cuenta.\\
+	
+	En numerosas ocasiones se referirá a esta fase como ``filtrado de la imagen'', debido a que, para llevarse a cabo, se aplicarán filtros de procesado de imágenes sobre la imagen de entrada.
+	
+	\item\textbf{Detección de contornos y aproximación a polígonos:} Por cada mancha blancha, se recorre el perímetro en el mapa de bits y se almacena en una lista de puntos. Para finalizar, cada contorno se aproxima a un polígono y se analiza por separado, con el fin de desechar información no deseada y calcular datos relevantes. 
+	
+\end{itemize}
+
+	Mientras que para la última fase existen rutinas de openCV que realizan casi toda la funcionalidad deseada, la primera fase requiere un estudio más exhaustivo.\\
+	
+	\subsection{Detección de formas}
+	
+	Para llevar a cabo esta primera fase se han probado y evaluado cinco métodos distintos. Se detallarán a continuación todos ellos.
+	
+	\subsubsection{Threshold}
+	
+	También llamado Filtro Paso Alto\cite{pajares}
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Prueba de todo}
+		\label{fig:tal}
+		\end{figure}
+	
+	\subsubsection{Adaptive Threshold}
+	
+	\subsubsection{Canny}
+	
+	\subsubsection{Hue Division}
+	
+	\subsubsection{Color Threshold}
+
+
+
+	\subsection{Detección de contornos y aproximación a polígonos}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
