@@ -1,0 +1,96 @@
+\chapter{Diseño de la aplicación}
+\todo{Pendiente de hacerse}
+\section{Algoritmos de Análisis}
+\todo{Pendiente de hacerse: Mencionar los filtros de opencv\\
+
+esquema\\
+\begin{itemize}
+\renewcommand{\labelitemi}{\tiny$\blacksquare$}
+\item intro a la composición: separado por voces.
+\item cada voz: con cada compositor que lo haga
+\item coletilla de final sin decidir todavía
+\end{itemize}
+}
+
+Para componer la música vamos a separarlo en voces que suele tener una pieza musical. En este caso en 4 voces diferentes dando un papel especial a cada una. Cada una de ellas son un proceso independiente aunque deben concordar en algunos aspecto para la correcta unión de todos ellos como por ejemplo duración total. Todos los compositores de forma imprescindible reciben una figura, en la que se van a basar para componer, y una duración que será el tiempo que dura el trozo de música. 
+
+\subsection{1ª Voz: Melodía Principal}
+
+Normalmente en una composición suele haber una voz que destaca de la demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, hemos separado el proceso en 4 fases: procesar la figura, obtener duraciones, obtener tonos y sintetizar. 
+La primera fase que consiste en procesar la figura de entrada. Sacamos sus vértices ordenados y seguidamente los lados con sus longitudes de forma que la figura se puede leer desde arriba en sentido horario.
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada ordenada con las longitudes de los lados}
+		\label{fig:Figura1Voz1}
+		\end{figure}
+
+A continuación, en la segunda fase calculamos la longitud media de los lados y el lado más largo y el más corto. Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima con las longitudes recién calculadas. Se tiene en cuenta las duraciones fundamentales de las notas en música obviando las compuestas, es decir, que se asignan duraciones de blancas, negras, corcheas y así en vez de usar, por ejemplo, negra con doble puntillo que es una nota de duración negra más una corchea más una semicorchea. Buscar una equivalencia perfecta entre la longitud de los lados y la duración de las notas sería lo primero que pensaría el lector que podría ser la correspondencia más fiel, pero tras varias pruebas realizadas no hemos podido averiguar cómo hacerlo sin que se perdiera completamente el concepto de ritmo musical.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada con el ritmo producido}
+		\label{fig:Figura2Voz1}
+		\end{figure}
+
+La tercera fase se centra en sacar los tonos de las notas que vamos a crear. Se tienen varias formas diferentes de conseguirlo que además se han llevado a cabo en diferentes trabajos (\cite{bricksConvertsMusic} \cite{ImageBaseComposition}). Nuestra aproximación se basa en la idea de estabilidad introducida por A. Pintado (\cite{portutesis}). Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos o irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, nosotros lo vamos a usar para calcular tonos.
+
+La obtención de los tonos viene de los ángulos de las figura, para ello se coge el primer vértice y se calcula su ángulo. Por ser la primera nota le asignamos el tono correspondiente al color de la figura dentro del sistema de colores usado. A partir de ahí dependiendo de cuanto ha variado el ángulo del siguiente vértice respecto al anterior vamos asignando un tono más alto o más bajo (si sube o baja la diferencia de ángulo).
+
+De forma experimental hemos obtenido una correspondencia entre la variación de ángulos y la cantidad de tonos que debe variar el nuevo tono respecto al anterior. De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono vecino dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. Usamos el acorde de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. Este hecho se basa en la asociación que tiene Scriabin con los colores(``Referencia Aquí''), él hacía corresponder un color a un acorde........Aqui buscar info de acorde....... sin distinguir entre acorde mayor o menor.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Tabla correspondencias entre grados y tonos}
+		\label{fig:Figura3Voz1}
+		\end{figure}
+
+De esta manera conseguimos que una figura simétrica con todos sus ángulos iguales suene la misma nota ya que su estabilidad es muy alta. El círculo sería la figura de mayor estabilidad y se correspondería a una nota de larga duración, pero por el proceso de análisis, el círculo se aproxima a un polígono regular de muchos lados.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada con los ángulos y los tonos producidos que produce}
+		\label{fig:Figura4Voz1}
+		\end{figure}
+
+Por último, la fase tercera que combina las duraciones con los tonos para crear las notas. Al final hemos obtenido un trozo de música de una de las voces.
+
+Este algoritmo está implementado en la clase ComposerFigMelody2. Además hemos dejado otro compositor que cambia La fase 1 y 2 
+
+
+\subsection{2ª Voz: Melodía Secundaria}
+
+\subsection{2ª Voz: Bajo}
+
+\subsection{4ª Voz: Ritmo}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
