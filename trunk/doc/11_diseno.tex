@@ -27,15 +27,34 @@ Esta librería, desarrollada por Intel y orientada a la visión por computador, 
 
 Aunque en nuestros análisis no hagamos uso de sus funciones en tiempo real, sí que nos apoyaremos en sus subrutinas de procesado de imágenes para conseguir algoritmos que funcionen a velocidades deseadas. Estas subrutinas, que se detallarán más adelante en la Sección~\ref{sec:asas}, permiten detectar contornos y aproximarlos a polígonos, así como usar y operar imágenes de forma cómoda.\\
 
-\subsection{el proceso}
+\subsection{El proceso}
 
+Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a cabo consiste en:
 
+\begin{itemize}
+
+	\item \textbf{Detección de formas:} La imagen dada se transforma en una sucesión de imágenes binarias (únicamente en blanco y negro), donde las manchas blancas representan figuras independientes.
 	
-\subsubsection{Detección de formas}
+	\item\textbf{Detección de contornos:} Por cada mancha blancha, se recorre el perímetro en el mapa de bits.
+	
+	\item\textbf{Estudio de polígonos:} Para finalizar, cada contorno se aproxima a un polígono y se analiza por separado, con el fin de desechar información no deseada y calcular datos relevantes
+	
+\end{itemize}
 
-\subsubsection{Detección de contornos}
+	Mientras que para las dos últimas fases existen rutinas de openCV que realizan casi toda la funcionalidad deseada, la primera fase requiere un estudio más exhaustivo.\\
+	
+	Para llevar a cabo esta primera fase se han probado y evaluado cinco métodos distintos. Se detallarán a continuación todos ellos.
+	
+	\subsection{Threshold}
+	
+	\subsection{Adaptive Threshold}
+	
+	\subsection{Canny}
+	
+	\subsection{Hue Division}
+	
+	\subsection{Color Threshold}
 
-\subsubsection{Estudio de polígonos}
 
 
 \section{Algoritmos de Composición}
