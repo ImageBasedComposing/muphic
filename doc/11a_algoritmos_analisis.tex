@@ -39,38 +39,188 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	\subsubsection{Threshold}
 	
-	También llamado Filtro Paso Alto\cite{pajares}
+	Consiste en aplicar un filtro de paso alta con respecto a un umbral de gris dado como entrada. Para ello, la imagen se convierte de 3 canales (rojo, verde y azul) a una de 1 único canal (escala de grises). Posteriormente se le aplica la siguiente transformación a cada píxel de la imagen:
+
+	\begin{center}
+		$pixel(x,y) = \left\{
+		\begin{array}{cc}
+		MAXVAL 	& \text{ cuando } pixel(x,y) > umbral\\ 
+		0 	    & 	\text{e.o.c.}
+		\end{array}\right.$
+	\end{center}
+
+	donde $MAXVAL$ representa el máximo valor que puede tener un pixel en un canal determinado (será 255 o 1, dependiendo de la representación de la imagen).\\
+	
+	Este filtro produce una única imagen de salida donde las zonas blancas conexas se interpretan como figuras independientes. Es por ello que, si dos manchas de color se comportan de igual manera ante el filtro (porque su color predominante es inferior o superior al umbral en ambas manchas), y se encuentran superpuestas una respecto de la otra, en la salida aparecerán como una única mancha blanca conexa, por lo que se considerará como una única figura (Figura~\ref{fig:threshold1}.)\\
 	
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{-0.3in}
 		\includegraphics[scale=0.47]{graphics/todo.png}
-		\caption{Prueba de todo}
-		\label{fig:tal}
+		\caption{Ejemplo de filtrado threshold con umbral a 200}
+		\label{fig:threshold1}
 		\end{figure}
+		
+	Si, dado un caso similar en el que dos figuras estén superpuestas, pero que se comporten de forma distinta ante la aplicación del filtro (una se encuentra por debajo del umbral y otra por encima), entonces sí que se interpretará como dos figuras distintas (Figura~\ref{fig:threshold2}). Esto se produce debido a que, como se explica en la Sección~\ref{sec:deteccionContornos}, los contornos se buscan tanto en los perímetros externos de las figuras como en los internos.
 	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Ejemplo de filtrado threshold con umbral a 150}
+		\label{fig:threshold2}
+		\end{figure}
+		
+	Se trata de un algoritmo muy sencillo y rápido, pero en el que él éxito de los resultados depende tanto del umbral de entrada como de la imagen a analizar.
+		
 	\subsubsection{Adaptive Threshold}
+	
+	Se trata de una modificación del algoritmo anterior, donde el valor del umbral varía en cada regíón de la imagen. Este algoritmo también devuelve una sóla imagen binaria, pero aplica sobre ella un filtro más sofisticado que repara la mayor parte de los fallos del filtro anterior:
+
+	\begin{center}
+		$pixel(x,y) = \left\{
+		\begin{array}{cc}
+		MAXVAL 	& \text{ cuando } pixel(x,y) > T(x,y)\\ 
+		0 	    & 	\text{e.o.c.}
+		\end{array}\right.$
+	\end{center}
+	
+	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante c que en nuestro caso es 3.\\
+	
+	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold, aunque sigue sin tener en cuenta toda la información presente en la imagen.\\
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Ejemplo de filtrado adaptive}
+		\label{fig:adaptive}
+		\end{figure}
 	
 	\subsubsection{Canny}
 	
+	Usando como base el algoritmo de detección de bordes creado por John F. Canny en 1986 (cuya especificación se puede ver en \cite{pajares}), este filtro aborda el problema de la detección de figuras de una forma diferente: en vez de detectar el contenido de la figura, detecta el perímetro de las mismas.\\
+	
+	Usando el algoritmo de canny, que también devuelve una única imagen, se obtiene el resultado mostrado en la Figura~\ref{fig:canny}.\\
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Ejemplo de filtrado canny}
+		\label{fig:adaptive}
+		\end{figure}
+		
+	Esta nueva aproximación produce resultados satisfactorios, pero origina nuevos problemas: el perímetro detectado en el algoritmo puede no estar cerrado, provocando que la figura resultante no se represente de forma correcta en la estructura de salida.
+	
 	\subsubsection{Hue Division}
+	
+	Este algoritmo se basa en un concepto más simple: buscar manchas de color como agrupaciones de píxeles vecinos con colores ``parecidos''. Es decir, se dividen los tres canales de color en diferentes rangos, y se agrupan los píxeles contiguos cuyos valores de color caigan dentro de un mismo rango en todos los canales.\\
+	
+	Para establecer los rangos, se divide cada canal de color (rojo, verde y azul) en un número $n$ de intervalos. El parámetro $n$ es de entrada y común para los tres canales. De esta forma, se recorre la imagen por cada intervalo existente de colores, devolviendo las figuras encontradas en cada intervalo en imágenes de salida distintas.\\
+	
+	Por ejemplo, si $n$ es 3, quiere decir que por cada canal se establecerán 3 intervalos, en total cada color podrá caer dentro de uno de los $3*3*3=27$ intervalos. Por cada intervalo se devuelve una imagen con las figuras presentes en él, únicamente si no está vacía (no existen figuras con colores dentro de ese intervalo). Se puede ver un ejemplo en la Figura~\ref{fig:canny}.
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Ejemplo de filtrado hue division}
+		\label{fig:canny}
+		\end{figure}
 	
 	\subsubsection{Color Threshold}
 
-
-
+	Se trata de una expansión del filtro Threshold para intentar resolver uno de sus principales problemas: dado que el filtro Threshold convierte la imagen en escala de grises para buscar píxeles que superen el umbral, puede darse el caso de que dos figuras con colores distintos se conviertan en el mismo tono de gris al convertirse a escala de grises. Este problema es independiente al método de transformación de RGB a escala de grises, e inherente al proceso en sí: al pasar de tres canales de color a un único canal, necesariamente varios valores de entrada van a coincidir en el mismo valor de salida (la función es sobreyectiva y el dominio de entrada es más grande que el de salida).\\
+	
+	Para resolver ese fallo, se realiza un filtro Threshold con tres umbrales distintos, uno para cada canal de color. Dado que estos umbrales van a poder ser manipulados por el usuario, se transformará previamente la imagen de RGB (rojo, verde y azul) a HSV (matiz, saturación y valor), que es un modelo más intuitivo para el ojo humano.\\
+	
+	Se pueden ver diferentes resultados de este filtro en las Figuras~\ref{fig:colorthres1} y ~\ref{fig:colorthres2}.
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Ejemplo de filtrado hue division}
+		\label{fig:colorthres1}
+		\end{figure}
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Ejemplo de filtrado hue division}
+		\label{fig:colorthres2}
+		\end{figure}
+	
+	
+	
 	\subsection{Detección de contornos y aproximación a polígonos}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	\label{sec:deteccionContornos}
+	
+	Una vez que tenemos la lista de imágenes binarias con las figuras localizadas, deberemos proceder a representarlas en forma de polígonos. Para ello, primero detectaremos los contornos y posteriormente aproximaremos los mismos a polígonos.\\
+	
+	Para la primera parte (detección de contornos en base a una imagen binaria) haremos uso de la función \emph{cvFindContours} de OpenCV, cuyo resultado se puede ver en la Figura~\ref{fig:findcontours}.\\
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Detección de contornos mediante OpenCV}
+		\label{fig:findcontours}
+		\end{figure}
+		
+	El ejemplo mostrado se ha basado en el una imagen filtrada mediante el algoritmo Adaptive Threshold. Como se puede ver, una misma figura ha dado lugar a varios contornos. Este es un problema inherente a nuestro enfoque de detección de formas que se tratará más adelante.\\
+	
+	Posteriormente se usa otra función de OpenCV, \emph{cvApproxPoly}, para aproximar los contornos detectados a secuencias cerradas de vértices que podremos tratar con facilidad. El usuario puede decidir el grado de aproximación (de más simple a más fiel). Un ejemplo del resultado de esta función se ve en la Figura~\ref{fig:aproxpoly}.\\
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Aproximación de polígonos mediante OpenCV}
+		\label{fig:findcontours}
+		\end{figure}
+				
+	Teniendo los polígonos listados, sólo resta organizar la información obtenida y archivarla en un archivo XML.\\
+	
+	Para ello se procede a calcular el área de cada polígono. Si es menor que la especificada como ruido por el usuario (ver Guía de Usuario \todo{citar esto bien} ), entonces se desechará. Si no, se almacenará dentro de la estructura de figuras a archivar en XML. El color de cada polígono, por otro lado, se calculará haciendo la media del color de todos los píxeles que contiene.\\
+	
+	Para acabar, necesitamos estructurar los polígonos resultantes en forma de árbol, de forma que los polígonos que se encuentran dentro de otro polígono sean sus hijos en el árbol resultante. Es aquí donde surge el principal problema del análisis de imágenes: \textbf{los polígonos repetidos}.\\
+	
+	Como ya hemos comentado anteriormente, una misma mancha de color puede originar varios contornos, debido a que la figura se ha detectado dos veces en el proceso de filtrado (por ejemplo, sis se encuentra dentro de dos umbrales en el filtro Color threshold) o a que el proceso de detección de contornos ha devuelto dos contornos similares a la figura dada, por particularidades internas del algoritmo de OpenCV.\\
+	
+	Esto va a originar que, irremediablemente, haya ocasiones en las que aparecerán varios contornos (y posteriormente polígonos) similares. Se procede pues, antes de continuar el análisis, a eliminar los polígonos repetidos. Para ello, se comprueba primero que tengan el mismo número de vértices y que los rectángulos mínimos que los contiene tengan área y posición similares. Una vez asegurado ese aspecto, se procede a calcular la siguiente condición:
+	
+	\begin{center}
+		$sonSimilares(pol1,pol2,i,j) =$
+	\end{center}
+	\begin{center}
+		
+		$\left\{
+		\begin{array}{ccc}
+		cierto 	& \text{ si } & (dist(vertice(pol1,i), vertice(pol2,j)) < \epsilon)\wedge \forall k, 0 < k < N \\
+				&             &  ((dist(vertice(pol1,(i + k) \%N), vertice(pol2,(j + k)\%N)) < \epsilon))\\
+		 & & \\
+		falso 	& 	          & \text{e.o.c.}
+		\end{array}\right.$
+		\end{center}
+	
+	, para algún valor par de valores $i$ y $j$. $N$ es el número de vértices de ambos polígonos, $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional y $vertice(pol, i)$ devuelve el vértice $i$ de la lista de vertices del polígono $pol$. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos. \\
+	
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{-0.3in}
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Caso de polígonos similares que no deben ser eliminados}
+		\label{fig:colorsimilares}
+		\end{figure}
+	
+	Sin embargo, puede darse el caso en que dos polígnos similares sean distintos y diferenciarse principalmente por el color (uno es la silueta del otro, ver Figura~\ref{fig:colorsimilares}. Dado que nunca trabajamos con el color, y éste se calcula \emph{a posteriori} (mirando los píxeles que contiene el polígono), no podremos saber de qué caso se trata, ya que carecemos de la información necesaria debido a la naturaleza del proceso realizado. A pesar de todo, este caso es muy particular y no afecta al correcto desarrollo de la aplicación, por lo que no supone un problema en el análisis.\\
+	
+	Una vez eliminados las figuras repetidas, se puede estructurar los polígonos en árboles, teniendo en cuenta que un poligono está dentro de otro cuanto todos sus vértices están dentro de él. El rectángulo principal (que delimita el lienzo de la imagen) se elimina del análisis si ha sido detectado como polígono, ya que se encuentra en todas las imágenes y no aporta ninguna información relevante.\\
+	
+	El color calculado para cada polígono tenía en cuenta todos los píxeles que este contenía. Sin embargo, los polígonos que contienen otros polígonos han introducido información de más a la hora de calcular este color, ya que dentro de los polígonos que contienen se han tenido en cuenta los de sus hijos también. Es ahora que se conoce la estructura arbórea de la imagen cuando se pueden resolver estos detalles, recalculando el color de los polígonos que contienen a otros de forma que no se tenga en cuenta el color de sus polígonos internos.\\
+	
+	Finalmente, se guarda el contenido del análisis en un fichero XML, dando por terminado este proceso.
+	
