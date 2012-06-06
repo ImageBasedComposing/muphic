@@ -1,3 +1,23 @@
 \subsection{Módulo de composición}
 
 \todo{figuras referneciar, musica referenciar,	composers, midizators, etc}
+
+\subsubsection{Figuras Musicales}
+\todo{colocar esto donde corresponda, y... ¿hacerlo menos caca?}
+
+Para tener en cuenta la relevancia de una figura respecto a las demás el módulo de composición trata las figuras según sus necesidades, para ello hereda de las clases ``Figuras'' y ``Figura'' mencionadas anteriormente \todo{referencia}.
+
+\todo{Imagen mostrando la herencia?}
+
+A la clase ``Figura'' se le añade la siguiente funcionalidad:
+\begin{itemize}
+\item{calcularVistosidad}: Estableciendo de más a menos importantes en el orden mencionado los siguientes valores: cantidad de rojo de la figura, cantidad de verde de la figura, cantidad de azul de la figura, área de la figura y distancia al centro de la imagen; se crea un valor de prioridad para las figuras.
+\item{compare}: Compara dos figuras según el valor de la vistosidad.
+\end{itemize}
+\todo{incluirlo con el resto de esta sección con lago como: Esto es utilizado a la hora de...}
+
+A ``Figuras'' se le añaden los elementos necesarios para poder considerar y utilizar la nueva funcionalidad añadida a ``Figure''
+\begin{itemize}
+\item{calcuteVisibility}:Calcula el valor total de la visibilidad de las figuras.
+\item{sortMusicFigures}: Permite volver a ordenar las figuras teniendo en cuenta la funcionalidad que tienen añadidas para este módulo.
+\end{itemize}
