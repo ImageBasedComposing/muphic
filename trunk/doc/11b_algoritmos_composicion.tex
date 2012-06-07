@@ -1,8 +1,5 @@
-\chapter{Diseño de la aplicación}
-\todo{Pendiente de hacerse}
-\section{Algoritmos de Análisis}
-\todo{Pendiente de hacerse: Mencionar los filtros de opencv\\
-
+\section{Algoritmos de Composición}
+\todo{
 esquema\\
 \begin{itemize}
 \renewcommand{\labelitemi}{\tiny$\blacksquare$}
@@ -26,7 +23,7 @@ La primera fase que consiste en procesar la figura de entrada. Sacamos sus vért
 		\label{fig:Figura1Voz1}
 		\end{figure}
 
-A continuación, en la segunda fase calculamos la longitud media de los lados y el lado más largo y el más corto. Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima con las longitudes recién calculadas. Se tiene en cuenta las duraciones fundamentales de las notas en música obviando las compuestas, es decir, que se asignan duraciones de blancas, negras, corcheas y así en vez de usar, por ejemplo, negra con doble puntillo que es una nota de duración negra más una corchea más una semicorchea. Buscar una equivalencia perfecta entre la longitud de los lados y la duración de las notas sería lo primero que pensaría el lector que podría ser la correspondencia más fiel, pero tras varias pruebas realizadas no hemos podido averiguar cómo hacerlo sin que se perdiera completamente el concepto de ritmo musical.
+A continuación, en la segunda fase calculamos la longitud media de los lados y el lado más largo y el más corto. Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima con las longitudes recién calculadas. Se tiene en cuenta las duraciones simples (figuras simples) de las notas en música obviando las compuestas (figuras compuestas), es decir, que se asignan duraciones de blancas, negras, corcheas, semicorcheas,... en vez de usar, por ejemplo, negra con doble puntillo que es una nota de duración negra más una corchea más una semicorchea. Buscar una equivalencia perfecta entre la longitud de los lados y la duración de las notas sería lo primero que pensaría el lector que podría ser la correspondencia más fiel, pero tras varias pruebas realizadas no hemos podido averiguar cómo hacerlo sin que se perdiera completamente el concepto de ritmo musical.
 
 		\begin{figure}[htbp]
 		\centering
@@ -40,7 +37,7 @@ La tercera fase se centra en sacar los tonos de las notas que vamos a crear. Se 
 
 La obtención de los tonos viene de los ángulos de las figura, para ello se coge el primer vértice y se calcula su ángulo. Por ser la primera nota le asignamos el tono correspondiente al color de la figura dentro del sistema de colores usado. A partir de ahí dependiendo de cuanto ha variado el ángulo del siguiente vértice respecto al anterior vamos asignando un tono más alto o más bajo (si sube o baja la diferencia de ángulo).
 
-De forma experimental hemos obtenido una correspondencia entre la variación de ángulos y la cantidad de tonos que debe variar el nuevo tono respecto al anterior. De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono vecino dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. Usamos el acorde de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. Este hecho se basa en la asociación que tiene Scriabin con los colores(``Referencia Aquí''), él hacía corresponder un color a un acorde........Aqui buscar info de acorde....... sin distinguir entre acorde mayor o menor.
+De forma experimental y tras varias pruebas, hemos obtenido una correspondencia entre la variación de ángulos y la cantidad de tonos que debe variar el nuevo tono respecto al anterior. De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono vecino dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. Usamos el acorde de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. Este hecho se basa en la asociación que tiene Scriabin con los colores(``Referencia Aquí''), él hacía corresponder un color a un tono y su acorde fundamental sin distinguir entre acorde mayor o menor para cada una de las notas de la escala cromática.
 
 		\begin{figure}[htbp]
 		\centering
@@ -56,20 +53,95 @@ De esta manera conseguimos que una figura simétrica con todos sus ángulos igua
 		\centering
 		\hspace*{0.0in}
 		\includegraphics[scale=0.57]{graphics/todo.png}
-		\caption{Figura de entrada con los ángulos y los tonos producidos que produce}
+		\caption{Figura de entrada con los ángulos y los tonos que produce}
 		\label{fig:Figura4Voz1}
 		\end{figure}
 
 Por último, la fase tercera que combina las duraciones con los tonos para crear las notas. Al final hemos obtenido un trozo de música de una de las voces.
 
-Este algoritmo está implementado en la clase ComposerFigMelody2. Además hemos dejado otro compositor que cambia La fase 1 y 2 
+Este algoritmo está implementado en la clase ComposerFigMelody2. Además hemos dejado otro compositor ComposerFigMelody que cambia la segunda y tercera fase, fruto de las primeras pruebas en la composición. En la segunda fase, al hacer corresponder las duraciones con las longitudes de los lados, se usan las duraciones compuestas con unidad mínima indivisible la semicorchea o unidades más pequeñas si la duración pedida del segmento de música es especial (no divisible en semicorcheas).
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada con los lados y el ritmo conseguido}
+		\label{fig:Figura5Voz1}
+		\end{figure}
+
+En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cuenta la variación respecto al anterior ángulo examinado, se usa una correspondencia directa donde mayor águlo implica mayor salto de tono y el signo del ángulo es la dirección del salto.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada con los ángulos y los tonos producidos}
+		\label{fig:Figura6Voz1}
+		\end{figure}
 
 
 \subsection{2ª Voz: Melodía Secundaria}
 
-\subsection{2ª Voz: Bajo}
+Para crear el acompañamiento o segunda voz, se usa la misma estructura que a la hora de componer la melodía principal aunque también necesitamos el segmento de melodía principal como entrada. 
+La primera fase es igual que en la primera voz. La segunda fase también es igual salvo que al final introducimos un paso de adaptación. Debemos hacer una adaptación de la duración del total obtenido al analizar la figura. Eso ocurre ya que queremos que el segmento de música que se genere tenga una duración determinada normalmente menor a la melodía principal. Además debemos decidir en qué momento de la melodía principal vamos a decorarla introduciendo la segunda voz.
+
+ 		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figuras de entrada con los lados de la figura interior y las duraciones obtenidas}
+		\label{fig:Figura1Voz2}
+		\end{figure}
+
+Esta función se encarga de ir dividiendo a la mitad diferentes duraciones para reducir la duración total del segmento (o ir aumentando, duplicando duraciones, si se necesita aumentar la duración total). 
+
+El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos se va analizando el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar la primera y la segunda voz. Por ello mientras generamos la nueva melodía iremos haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usado están basados en las técnicas básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayora a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué es el menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figuras de entrada con los ángulos y los tonos producidos sin técnicas contrapuntísticas}
+		\label{fig:Figura2Voz2}
+		\end{figure}
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figuras de entrada con los ángulos y los tonos producidos con técnicas contrapuntísticas}
+		\label{fig:Figura3Voz2}
+		\end{figure}
+
+En la mayoría de ocasiones, la segunda voz se pide una duración menor que el segmento de primera voz que va acompañandolo, esto ocurre porque normalmente se pasa una figura de entrada menor que la usada para componer la melodía principal. Para que el segmento tenga la misma duración que el segmento de la primera voz se rellena los huecos (delante y/o detrás) del acompañamiento compuesto con silencios.
+
+\subsection{3ª Voz: Bajo}
+
+Para el bajo, se ha cogido un algortimo simple que consiste en notas de duración dada (por defecto redondas) que tengan como tono el color de la figura de entrada y que rellene la duración completa dada.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada con los lados y los tonos producidos}
+		\label{fig:Figura1Voz3}
+		\end{figure}
+
+Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz pero trasponiendola una o varias octavas más abajo. El número de octavas depende del tono más agudo y el tono más grave que hay en la melodía compuesta.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada con los lados y los tonos producidos}
+		\label{fig:Figura2Voz3}
+		\end{figure}
 
 \subsection{4ª Voz: Ritmo}
+
+Para el ritmo se creo una primera versión que consistía en 
+
+\subsection{Mixer}
 
 
 
