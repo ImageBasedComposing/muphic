@@ -55,9 +55,8 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
-		\caption{Ejemplo de filtrado threshold con umbral a 200}
+		\includegraphics[scale=0.47]{graphics/threshold1.png}
+		\caption{Ejemplo de filtrado threshold con umbral a 100}
 		\label{fig:threshold1}
 		\end{figure}
 		
@@ -65,8 +64,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/threshold2.png}
 		\caption{Ejemplo de filtrado threshold con umbral a 150}
 		\label{fig:threshold2}
 		\end{figure}
@@ -87,12 +85,11 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante c que en nuestro caso es 3.\\
 	
-	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold, aunque sigue sin tener en cuenta toda la información presente en la imagen.\\
+	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold para figuras con este grado de simplicidad.\\
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/adaptive.png}
 		\caption{Ejemplo de filtrado adaptive}
 		\label{fig:adaptive}
 		\end{figure}
@@ -105,8 +102,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/canny.png}
 		\caption{Ejemplo de filtrado canny}
 		\label{fig:adaptive}
 		\end{figure}
@@ -123,8 +119,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/huedivision.png}
 		\caption{Ejemplo de filtrado hue division}
 		\label{fig:canny}
 		\end{figure}
@@ -139,17 +134,15 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
-		\caption{Ejemplo de filtrado hue division}
+		\includegraphics[scale=0.47]{graphics/colorthreshold.png}
+		\caption{Ejemplo de filtrado color threshold: $Umbral_{H} = 55, Umbral_{S} = 150, Umbral_{V} = 205$}
 		\label{fig:colorthres1}
 		\end{figure}
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
-		\caption{Ejemplo de filtrado hue division}
+		\includegraphics[scale=0.47]{graphics/colorthreshold2.png}
+		\caption{Ejemplo de filtrado color threshold: $Umbral_{H} = 105, Umbral_{S} = 100, Umbral_{V} = 125$}
 		\label{fig:colorthres2}
 		\end{figure}
 	
@@ -164,8 +157,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/contourdetection.png}
 		\caption{Detección de contornos mediante OpenCV}
 		\label{fig:findcontours}
 		\end{figure}
@@ -176,8 +168,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/aproxpoly.png}
 		\caption{Aproximación de polígonos mediante OpenCV}
 		\label{fig:findcontours}
 		\end{figure}
@@ -210,8 +201,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/todo.png}
+		\includegraphics[scale=0.47]{graphics/reppoly.png}
 		\caption{Caso de polígonos similares que no deben ser eliminados}
 		\label{fig:colorsimilares}
 		\end{figure}
