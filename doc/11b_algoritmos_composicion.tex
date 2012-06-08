@@ -11,6 +11,7 @@ esquema\\
 
 Para componer la música vamos a separarlo en voces que suele tener una pieza musical. En este caso en 4 voces diferentes dando un papel especial a cada una. Cada una de ellas son un proceso independiente aunque deben concordar en algunos aspecto para la correcta unión de todos ellos como por ejemplo duración total. Todos los compositores de forma imprescindible reciben una figura, en la que se van a basar para componer, y una duración que será el tiempo que dura el trozo de música. 
 
+%----------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{1ª Voz: Melodía Principal}
 
 Normalmente en una composición suele haber una voz que destaca de la demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, hemos separado el proceso en 4 fases: procesar la figura, obtener duraciones, obtener tonos y sintetizar. 
@@ -79,6 +80,7 @@ En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cu
 		\label{fig:Figura6Voz1}
 		\end{figure}
 
+%----------------------------------------------------------------------------------------------------------------------------------------------------
 
 \subsection{2ª Voz: Melodía Secundaria}
 
@@ -95,7 +97,7 @@ La primera fase es igual que en la primera voz. La segunda fase también es igua
 
 Esta función se encarga de ir dividiendo a la mitad diferentes duraciones para reducir la duración total del segmento (o ir aumentando, duplicando duraciones, si se necesita aumentar la duración total). 
 
-El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos se va analizando el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar la primera y la segunda voz. Por ello mientras generamos la nueva melodía iremos haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usado están basados en las técnicas básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayora a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué es el menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono.
+El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos se va analizando el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar la primera y la segunda voz. Por ello mientras generamos la nueva melodía iremos haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usado están basados en las técnicas básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayor a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué es el menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono.
 
 		\begin{figure}[htbp]
 		\centering
@@ -114,6 +116,8 @@ El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos 
 		\end{figure}
 
 En la mayoría de ocasiones, la segunda voz se pide una duración menor que el segmento de primera voz que va acompañandolo, esto ocurre porque normalmente se pasa una figura de entrada menor que la usada para componer la melodía principal. Para que el segmento tenga la misma duración que el segmento de la primera voz se rellena los huecos (delante y/o detrás) del acompañamiento compuesto con silencios.
+
+%----------------------------------------------------------------------------------------------------------------------------------------------------
 
 \subsection{3ª Voz: Bajo}
 
@@ -137,6 +141,8 @@ Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz
 		\label{fig:Figura2Voz3}
 		\end{figure}
 
+%----------------------------------------------------------------------------------------------------------------------------------------------------
+
 \subsection{4ª Voz: Ritmo}
 
 Para el ritmo se creó una primera versión basada en la localización de los vértices. Se dividía la figura en varias secciones de ángulos dejando cada vértice dentro de una sección. Estas secciones son configurables para hacerlas en distintas proporciones. Una vez se tienen los vértices de cada sección, se sustituyen por ritmos. De tal modo que si no hay un vértice en una sección, esta tiene un silencio y si hay un vértice, entonces hay un golpe de ritmo. Este ritmo se repite durante la duración dada por entrada.
@@ -149,7 +155,7 @@ Para el ritmo se creó una primera versión basada en la localización de los v�
 		\label{fig:Figur1Voz4}
 		\end{figure}
 
-El otro ritmo implementado se basa en el concepto de inestabilidad de una figura de A. Pintado (\cite{portutesis}). Por defecto creamos un ritmo que consiste en notas largas (estas notas se pueden configurar). A cada nota le es asignado una serie de vértices dependiendo de la densidad de vértices de la figura. Después se va calculando cuanto de desviación se produce en esos vértices respecto al círculo de área igual a la figura y con centro el punto de equilibrio de la figura. A mayor desviación, mayor inestabilidad luego el ritmo se subdivide.
+El otro ritmo implementado se basa en el concepto de inestabilidad de una figura de A. Pintado (\cite{portutesis}). Por defecto creamos un ritmo que consiste en notas largas (estas notas se pueden configurar). A cada nota le es asignado una serie de vértices dependiendo de la densidad de vértices de la figura. Después se va calculando cuanto de desviación se produce en esos vértices respecto al círculo de área igual a la figura y con centro el punto de equilibrio de la figura. A mayor desviación, mayor inestabilidad luego el ritmo se subdivide en más notas y de menor duración.
 
 		\begin{figure}[htbp]
 		\centering
@@ -159,28 +165,38 @@ El otro ritmo implementado se basa en el concepto de inestabilidad de una figura
 		\label{fig:Figura2Voz4}
 		\end{figure}
 
+%----------------------------------------------------------------------------------------------------------------------------------------------------
+
 \subsection{Mixer}
 
+Los anteriores algoritmos son para crear una pieza musical a partir de una figura, pero tenemos que saber en qué momento vamos a llamar a cada algoritmo y con qué figuras. Para ello está el Mixer.
 
+En una primera implementación el mixer se encargaba de ordenar las figuras en orden de relevancia siguiente el parámetro de vistosidad calculado a partir de tres características de la figura.
+La primera es lo vistosidad del color de la figura. Para ello descomponemos el color en sus tres componentes principales RGB y damos peso a cada uno de ellos \todo{Decir de donde se ha sacado el peso de los colores} y lo multiplicamos la saturación del color.
+La segunda componente es el área que ocupa la figura. Cuanto más grande sea, más vistosa será.
+La tercera componente es la distancia que tiene del centro de la imagen. El ojo humano enfoca de centro a laterales cuando ve una imagen por primera vez \todo{Decir de donde se ha sacado esto tmb}.
 
+\todo{ Formula guay que nos va a hacer Catalán.
+// vistosidad priority consts
+	A = 0.5f;
+	B = 0.3f;
+	C = 0.2f;
+// Color priority consts
+	pR = 0.45f;
+	pG = 0.35f;
+	pB = 0.20f;
 
+vistosidad = A*getSaturation()*(rgb.r*pR + rgb.g*pG + rgb.b*pB) + B*area + C*distanceCenter;
+}
 
+Tras haber ordenado las figuras por vistosidad vamos componiendo con cada una de forma iterativa la melodía y el ritmo. Las otras dos voces no estaban disponibles. Para la segunda versión del mixer se sigue calculando la vistosidad como se explicó pero en vez de ordenar todas las figuras, ordenamos solo las figuras que están en la imagen sin estar dentro de otra (figuras padre). Una vez las tenemos vamos iterando por cada figura padre componiendo su melodía, bajo y ritmo. Si la figura tiene otras figuras dentro de ella (figuras hijas), entonces también se añade la segunda melodía dando como entrada al algoritmo esta segunda figura (figura hija). Por cada figura interior se compone un nuevo bloque de la figura padre con diferentes acompañamientos.
 
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada y los ritmos producidos}
+		\label{fig:Figura1Mixer}
+		\end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Una vez tenemos compuestas todas las voces, es el mixer el que se encarga de juntarlas y llamar a la creación de la partitura y posterior conversión a midi.
