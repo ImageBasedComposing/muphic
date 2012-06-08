@@ -127,7 +127,7 @@ Para el bajo, se ha cogido un algortimo simple que consiste en notas de duració
 		\label{fig:Figura1Voz3}
 		\end{figure}
 
-Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz pero trasponiendola una o varias octavas más abajo. El número de octavas depende del tono más agudo y el tono más grave que hay en la melodía compuesta.
+Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz pero transportandola una o varias octavas más abajo. El número de octavas depende del tono más agudo y el tono más grave que hay en la melodía compuesta.
 
 		\begin{figure}[htbp]
 		\centering
@@ -139,7 +139,25 @@ Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz
 
 \subsection{4ª Voz: Ritmo}
 
-Para el ritmo se creo una primera versión que consistía en 
+Para el ritmo se creó una primera versión basada en la localización de los vértices. Se dividía la figura en varias secciones de ángulos dejando cada vértice dentro de una sección. Estas secciones son configurables para hacerlas en distintas proporciones. Una vez se tienen los vértices de cada sección, se sustituyen por ritmos. De tal modo que si no hay un vértice en una sección, esta tiene un silencio y si hay un vértice, entonces hay un golpe de ritmo. Este ritmo se repite durante la duración dada por entrada.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada y los ritmos producidos}
+		\label{fig:Figur1Voz4}
+		\end{figure}
+
+El otro ritmo implementado se basa en el concepto de inestabilidad de una figura de A. Pintado (\cite{portutesis}). Por defecto creamos un ritmo que consiste en notas largas (estas notas se pueden configurar). A cada nota le es asignado una serie de vértices dependiendo de la densidad de vértices de la figura. Después se va calculando cuanto de desviación se produce en esos vértices respecto al círculo de área igual a la figura y con centro el punto de equilibrio de la figura. A mayor desviación, mayor inestabilidad luego el ritmo se subdivide.
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=0.57]{graphics/todo.png}
+		\caption{Figura de entrada y los ritmos producidos}
+		\label{fig:Figura2Voz4}
+		\end{figure}
 
 \subsection{Mixer}
 
