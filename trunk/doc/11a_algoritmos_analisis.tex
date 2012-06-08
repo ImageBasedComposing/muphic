@@ -1,15 +1,5 @@
 \section{Algoritmos de Análisis}
-\todo{Pendiente de hacerse: Mencionar los filtros de opencv\\
-
-esquema\\
-\begin{itemize}
-\renewcommand{\labelitemi}{\tiny$\blacksquare$}
-\item intro al analisis: objetivos, restricciones, la libreria opencv y el proceso (pasar a blanco y negro, detectar contornos y analizar poligonos) 2 caras
-\item cada proceso: todos los filtros explicados con imagenes y detallados varias caras
-\item detectar contornos: opencv media cara
-\item analizar poligonos: easy media cara
-\end{itemize}
-}
+\todo{Ser más exhaustivos en algunos filtros, quizás}
 
 Esta sección explicará con detalle los algoritmos de análisis de imágemes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{mierde}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
 
@@ -164,18 +154,18 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		
 	El ejemplo mostrado se ha basado en el una imagen filtrada mediante el algoritmo Adaptive Threshold. Como se puede ver, una misma figura ha dado lugar a varios contornos. Este es un problema inherente a nuestro enfoque de detección de formas que se tratará más adelante.\\
 	
-	Posteriormente se usa otra función de OpenCV, \emph{cvApproxPoly}, para aproximar los contornos detectados a secuencias cerradas de vértices que podremos tratar con facilidad. El usuario puede decidir el grado de aproximación (de más simple a más fiel). Un ejemplo del resultado de esta función se ve en la Figura~\ref{fig:aproxpoly}.\\
+	Posteriormente se usa otra función de OpenCV, \emph{cvApproxPoly}, para aproximar los contornos detectados a secuencias cerradas de vértices que podremos tratar con facilidad. El usuario puede decidir el grado de aproximación (de más simple a más fiel). Un ejemplo del resultado de esta función se ve en la Figura~\ref{fig:aproxpoly}\\
 	
 		\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/aproxpoly.png}
 		\caption{Aproximación de polígonos mediante OpenCV}
-		\label{fig:findcontours}
+		\label{fig:aproxpoly}
 		\end{figure}
 				
 	Teniendo los polígonos listados, sólo resta organizar la información obtenida y archivarla en un archivo XML.\\
 	
-	Para ello se procede a calcular el área de cada polígono. Si es menor que la especificada como ruido por el usuario (ver Guía de Usuario \todo{citar esto bien} ), entonces se desechará. Si no, se almacenará dentro de la estructura de figuras a archivar en XML. El color de cada polígono, por otro lado, se calculará haciendo la media del color de todos los píxeles que contiene.\\
+	Para ello se procede a calcular el área de cada polígono. Si es menor que la especificada como ruido por el usuario (ver Guía de Usuario, Capítulo~\ref{chap:guiauso}), entonces se desechará. Si no, se almacenará dentro de la estructura de figuras a archivar en XML. El color de cada polígono, por otro lado, se calculará haciendo la media del color de todos los píxeles que contiene.\\
 	
 	Para acabar, necesitamos estructurar los polígonos resultantes en forma de árbol, de forma que los polígonos que se encuentran dentro de otro polígono sean sus hijos en el árbol resultante. Es aquí donde surge el principal problema del análisis de imágenes: \textbf{los polígonos repetidos}.\\
 	
