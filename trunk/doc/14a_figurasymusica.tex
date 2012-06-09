@@ -1,28 +1,93 @@
-\section{Formato de representación de las figuras}
+\section{Representación de la imagen analizada}
 
-\todo{Añadir el diagrama y hacer referencia a el cuando una explicación textual no sea suficiente}
-Las imágenes vienen representadas por un documento XML  estructurado de la siguiente manera:
+Tanto en el análisis de imágenes como en el proceso de composición hay un aspecto fundamental a estudiar: la representación de datos de las figuras.\\
 
-\begin{itemize}
-\item \textbf{Shapes}: Representa la imagen completa, contiene un listado de las figuras resultantes del análisis.
-\item \textbf{Figure}: Contiene la información relativa a una figura.
-\item \textbf{Id}: Identificador único de la figura.
-\item \textbf{Color}: Identificador para delimitar la información sobre el color.
-\item \textbf {RGB}: Identificador para delimitar la información sobre los valores RGB del color.
-\item \textbf{R}: Valor referente a la escala de rojo en la escala RGB.
-\item \textbf{G}: Valor referente a la cantidad de verde en la escala RGB.
-\item \textbf{B}: Valor referente a la cantidad de azul presente en escala RGB.
-\item \textbf{VertexList}: Lista de vértices que componen el polígono.
-\item \textbf{Vertex [type=``normal'']}: Identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
-\item \textbf{Position}: Identificador para delimitar la posición de un vértice en la imagen.
-\item \textbf{X}: Componente x de la posición del vértice.
-\item \textbf{Y}: Componente y de la posición del vértice.
-\item \textbf{Vertex [type=``center'']}: Identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
-\item \textbf{Area}: Valor numérico del área de una figura.
-\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
-\end{itemize}
+De acuerdo con lo explicado en previas secciones, el producto de salida  (y el de entrada de la composición musical) es un archivo XML que almacena el análisis imagen dada como entrada. Este archivo contiene toda la información que se considera para representar los elementos de una imagen, y servirá como base para explicar el contenido y estructura lógica de los datos analizados.\\
 
-\todo{Esto es un primer boceto del sistema de clases de figuras que trabaja sobre el XML, técnicamente correcto pero le falta un repaso}
+Por otro lado, en esta sección se mostrará también la estructura usada en la implementación de los objetos relacionados con estos datos y sus usos. Dado que tanto el módulo de análisis como el de composición hacen uso de esta información, se introducirá también las extensiones y posibilidades de la estructura de datos creada.
+
+\subsection{Almacenamiento y estructura}
+\label{subsec:xmlstruct}
+
+	La información correspondiente a la salida del análisis de imágenes es tal y como muestra la Figura~\ref{fig:estructuraFiguras}.\\
+
+			\begin{figure}[htbp]
+			\centering
+			\includegraphics[scale=0.47]{graphics/todo.png}
+			\caption{Estructura del archivo xml de análisis}
+			\label{fig:estructuraFiguras}
+			\end{figure}
+		
+	La estructura (representada en formato XML) es:\\
+\todo{esto no lo he repasado, supongo que está bienes, mañana lo miro o algo}
+	\begin{itemize}
+	\item \textbf{Shapes}: Representa la imagen completa, contiene un listado de las figuras resultantes del análisis.
+	\item \textbf{Figure}: Contiene la información relativa a una figura.
+	\item \textbf{Id}: Identificador único de la figura.
+	\item \textbf{Color}: Identificador para delimitar la información sobre el color.
+	\item \textbf {RGB}: Identificador para delimitar la información sobre los valores RGB del color.
+	\item \textbf{R}: Valor referente a la escala de rojo en la escala RGB.
+	\item \textbf{G}: Valor referente a la cantidad de verde en la escala RGB.
+	\item \textbf{B}: Valor referente a la cantidad de azul presente en escala RGB.
+	\item \textbf{VertexList}: Lista de vértices que componen el polígono.
+	\item \textbf{Vertex [type=``normal'']}: Identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
+	\item \textbf{Position}: Identificador para delimitar la posición de un vértice en la imagen.
+	\item \textbf{X}: Componente x de la posición del vértice.
+	\item \textbf{Y}: Componente y de la posición del vértice.
+	\item \textbf{Vertex [type=``center'']}: Identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
+	\item \textbf{Area}: Valor numérico del área de una figura.
+	\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
+	\end{itemize}
+	
+	\todo{explicación un poco de palabra de lo anterior, para dar una idea general del asunto en conjunto}
+
+
+\subsection{Vista de Implementación}
+
+	La vista principal de la estructura en un sistema basado en objetos como el tratado se muestra en la Figura~\ref{fig:diagramaClasesFigure}.\\
+
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Diagrama de clases de la estructura de datos \emph{Figuras}}
+		\label{fig:diagramaClasesFigure}
+		\end{figure}
+		
+		\todo{este diagrama debe contener variables como color, x, y, area y demás, para reflejar la información mostrada arriba}
+		
+	Como se puede ver, se ha implementado mediante tres clases principales:
+	
+	\begin{itemize}
+	
+		\item \textbf{Figures:} Almacena la lista de figuras presentes en la imagen, y permite manipular y acceder a ellas tanto en forma de lista (colocándose todas las figuras existentes de forma seguida y sin jerarquías) como en forma de árbol (jerarquizándolas según quién está dentro de quién: una figura que contiene en su interior todos los vértices de otra será su ``padre''), ocupandose de forma autosuficiente de mantener ésta última estructura al añadir figuras nuevas.\\
+	
+		Posee funcionalidad para guardar y cargar su información en formato XML, así como para eliminar repetidos y recalcular el color de cada figura teniendo en cuenta las figuras que contiene (ver Sección~\ref{sec:algAnalisis} para más detalles sobre estas funcionalidades nombradas).
+		
+		\item \textbf{Figure:} Representa cada elemento almacenado en la clase Figures. Contiene, como nodo de la estructura arbórea creada en Figures, los atributos necesarios para referenciar a sus padres, sus hijos y sus hermanos, y como elemento representativo de una figura en la imagen (Sección~\ref{subsec:xmlstruct}), el color, area y lista de vértices correspondiente a la imagen.\\
+		
+		Presenta métodos para poder acarrear funciones geométricas básicas (como transformar su representación de vértices de coordenadas cartesianas a euclídeas) que simplifican el desarrollo de los algoritmos explicados en la Sección~\ref{sec:algComposicion}.
+		
+		\item \textbf{Vertice:} Se trata de la unidad más pequeña de esta estructura, y representa las coordenadas en 2 dimensiones de un vértice en el plano cartesiano. Como se detalla en la Sección~\ref{subsec:xmlstruct}, da la opción de ser considerado un ``centro'', de forma que, en la lista de vértices de la Figura que lo almacene, puede actuar como el centro entre el vértice anterior y el siguiente, formando por tanto un arco entre los 3 vértices y permitiendo realizar curvas en las figuras.
+	
+	\end{itemize}
+			
+\subsection{Usos de la estructura}	
+
+	Como ya se ha comentado, tanto el proceso de análisis como el de composición hacen uso de esta estructura y, dado que para la implementación de ambos módulos se ha seleccionado el mismo lenguaje orientado a objetos (C++), estos compartirán la implementación de esta estructura.\\
+	
+	Sin embargo, existen diferencias entre los usos y ampliaciones que cada módulo aplica, y es por ello que no hacen uso de la estructura de forma directa,  sino que cada módulo heredará la clase \emph{Figure} para satisfacer sus propias necesidades. El resultado es el diagrama mostrado en la Figura~\ref{fig:diagramaFigMupPhic}, con diferenciación entre \emph{FigureImg} y \emph{FigureMusic}.\\
+
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.47]{graphics/todo.png}
+		\caption{Diagrama de clases de los diferentes tipos de Figura}
+		\label{fig:diagramaFigMupPhic}
+		\end{figure}
+		
+	Los detalles de cada clase hija serán explicados en posteriores secciones.	
+	
+	
+\todo{lo que había antes, que me da cosa borrarlo
 
 Para poder tratar toda esta información el proyecto dispone de un sistema de clases que permite cargar o guardar y manejar los datos del XMLy tratarlos como figuras:
 \\\todo{Imagen con el diagrama de Figuras}
@@ -31,7 +96,7 @@ Para poder tratar toda esta información el proyecto dispone de un sistema de cl
 \\Permite tratar con las figuras permitiendo calcular el centro de la misma o expresar sus coordenadas como un ángulo y longitud, también mantiene la fidelidad al resto de las figuras permitiendo acceder a las figuras que están en su interior y a la figura en la que ellos estén situados. Además permite tratar con todos sus elementos para recoger información sobre su color o si tiene un punto o figura determinado en su interior. A raíz de esta clase se heredan dos clases más específicas una que ofrece funcionalidad para las figuras utilizadas durante el análisis gráfico y otra que añade funcionalidad para las figuras a la hora de componer, se hablará de ello más adelante \todo{referencia a la sección}
 \newline
 La clase ``Figures'' representa la imagen como dos conjuntos de figuras, el primero incluye todas las figuras de la imagen mientras que el segundo contiene solo a aquellas figuras que estén situadas directamente sobre el fondo de la imagen. A través de esta clase se puede acceder a todas las figuras y realizar operaciones que las afecten a todas, su funcionalidad permite calcular el centro relativo de todas las figuras, borrar figuras que estén repetidas  y más importante es la encargada de escribir o leer los datos en el XML, para ello ofrece los procedimientos de guardar y cargar que hacen el proceso automático facilitando así su uso.
-A su vez al igual que ``Figure'' se hereda de ella para añadir la funcionalidad necesitada según se haga referencia a figuras del análisis gráfico o de la composición musical.
+A su vez al igual que ``Figure'' se hereda de ella para añadir la funcionalidad necesitada según se haga referencia a figuras del análisis gráfico o de la composición musical.}
 
 
 \section{Formato de representación de música}
