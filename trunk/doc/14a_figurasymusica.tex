@@ -24,31 +24,15 @@ Las imágenes vienen representadas por un documento XML  estructurado de la sigu
 
 \todo{Esto es un primer boceto del sistema de clases de figuras que trabaja sobre el XML, técnicamente correcto pero le falta un repaso}
 
-Para poder tratar toda esta información el proyecto dispone de un sistema de clases que permite cargar o guardar y manejar los datos del XML, el siguiente diagrama muestra como está estructurado:
-\\\todo{Imagen con el diagrama de Figuras (con o sin phicfigures y mufigures?)}
+Para poder tratar toda esta información el proyecto dispone de un sistema de clases que permite cargar o guardar y manejar los datos del XMLy tratarlos como figuras:
+\\\todo{Imagen con el diagrama de Figuras}
 \newline
-\\La clase ``Figura'' esta compuesta por una lista de elementos ``Vertice'', formados por unas coordenadas 'x' e 'y', que determinan su forma, su área y el color expresado en RGB \todo{referencia?}, esto determinaría el polígono al que se refiere. Debido a la procedencia de las figuras y la interpretación que se ha realizado de ellas se dispone también de: un puntero a su figura padre, de estar incluida en otra figura, una lista ordenada arbitrariamente de figuras hijas, en el caso de ser ``padre'' y punteros a las figuras adyacentes a ella según la prioridad que se haya querido tener en cuenta. Además de los elementos mencionados ``Figura'' dispone de la siguiente funcionalidad:
-\begin{itemize}
-\item \textbf{getSimpleCenter}: Permite adquirir una aproximación del centro del polígono al que representa la figura.
-\item \textbf{getBaryCenter}: Permite adquirir el baricentro del polígono al que representa la figura.
-\item \textbf{polarize}: Devuelve la figura como una lista de vértices en coordenadas expresadas como un ángulo y longitudes relativas. 
-\item \textbf{radialDivision}: Devuelve una división radial de la figura.
-\item \textbf{getSaturation}: Calcula el valor de la saturación de la figura.
-\item \textbf{isPointInside}: Devuelve si un punto está o no dentro de la figura.
-\item \textbf{isFigureInside}: Determina si una figura está o no envuelta por esta.
-\end{itemize}
-Además también permite el acceso a sus elementos y el manejo de su lista de hijos a través de las funciones pertinentes.
+\\La clase ``Figure'' representa cada uno de los polígonos que se han analizado y guardado en el XML, para ello utiliza una lista de vértices definidos por un las coordenadas ``x'' e ``y'' en el plano de la imagen. 
+\\Permite tratar con las figuras permitiendo calcular el centro de la misma o expresar sus coordenadas como un ángulo y longitud, también mantiene la fidelidad al resto de las figuras permitiendo acceder a las figuras que están en su interior y a la figura en la que ellos estén situados. Además permite tratar con todos sus elementos para recoger información sobre su color o si tiene un punto o figura determinado en su interior. A raíz de esta clase se heredan dos clases más específicas una que ofrece funcionalidad para las figuras utilizadas durante el análisis gráfico y otra que añade funcionalidad para las figuras a la hora de componer, se hablará de ello más adelante \todo{referencia a la sección}
 \newline
-\todo{mencionar o no las funciones de setParentSon structure, no me queda claro que hacen o si son relevantes para esta parte...}
-\\``Figuras'' se caracteriza por tener dos listas de elementos ``Figura'', una con todas las figuras que se le hayan añadido y otra que solo contiene las figuras que están situadas sobre el fondo de la imagen, es decir, que no están envueltas por ninguna otra figura. Además de estos elementos dispone también de la siguiente funcionalidad:
-\begin{itemize}
-\item \textbf{guardar}: Esta función se encarga de escribir toda la información que contiene en un fichero XML, tras escribir toda la cabecera del fichero se irá recorriendo la lista de figuras padre escribiéndolas como elementos de ``shapes'', cada vez que se escriba una figura se recorrerá su lista de hijas y se irán guardando como elementos de la figura padre en su elemento XML mencionado anteriormente: ``canvas''. \todo{(referencia?)}, de esta manera mantiene la relación padre-hijos en el XML.
-\item \textbf{cargar}: Esta función se encargará de leer el fichero XML interpretando su estructura para guardar correctamente la información en figuras, haciendo la distinción de aquellas directamente situadas en ``shapes'' para la segunda lista de figuras y construyendo todos los elementos ``Figura'' con todos sus atributos inicializados a sus valores correspondientes.
-\item \textbf{calcularCentro}: Calcula el centro relativo de todas las figuras de la imagen.
-\item \textbf{deleteReps}: Borra las figuras repetidas que pueden aparecer como resultado de algunos de los análisis utilizados \todo{referencia}
-\item \textbf{redoColorFig}: Vuelve a calcular valores relativos al color de todas las figuras juntas y su variación respecto a las demás. \todo{repasar, no se si es correcto} 
-\end{itemize}
-Además de lo mencionado anteriormente permite también tratar con sus listas y trabajar con sus elementos.
+La clase ``Figures'' representa la imagen como dos conjuntos de figuras, el primero incluye todas las figuras de la imagen mientras que el segundo contiene solo a aquellas figuras que estén situadas directamente sobre el fondo de la imagen. A través de esta clase se puede acceder a todas las figuras y realizar operaciones que las afecten a todas, su funcionalidad permite calcular el centro relativo de todas las figuras, borrar figuras que estén repetidas  y más importante es la encargada de escribir o leer los datos en el XML, para ello ofrece los procedimientos de guardar y cargar que hacen el proceso automático facilitando así su uso.
+A su vez al igual que ``Figure'' se hereda de ella para añadir la funcionalidad necesitada según se haga referencia a figuras del análisis gráfico o de la composición musical.
+
 
 \section{Formato de representación de música}
 
