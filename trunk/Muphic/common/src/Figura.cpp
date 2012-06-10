@@ -237,6 +237,53 @@ void Figura::sortHijo()
 	hijos.sort(compare);
 }
 
+void Figura::sortVertices()
+{
+	list<Vertice*>::iterator it = listaVertices.begin();
+	int pos = 0;
+	int minX = (*it)->x;
+	int minY = (*it)->y;
+	int n = listaVertices.size();
+
+	//Sacamos el vértice más alto y cercano a la izquierda
+	for(int i = 0; i < n; i++)
+	{
+		if(minY > (*it)->y)
+		{
+			minY = (*it)->y;
+			minX = (*it)->x;
+			pos = i;
+		}
+			
+		if((minY == (*it)->y) && (minX > (*it)->x))
+		{
+			minY = (*it)->y;
+			minX = (*it)->x;
+			pos = i;
+		}				
+		it++;
+	}
+
+	//Comprobamos hacia qué dirección están puestos los vértices
+	//Nos interesa que estén en dirección de las agujas del reloj:
+	Vertice * v1 = getVerticeAt( mod((pos-1),n) );
+	Vertice * v2 = getVerticeAt( pos );
+	Vertice * v3 = getVerticeAt( (pos+1)%n );
+	bool correctOrder = angleOf2Lines2(v1->getPair(), v2->getPair(), v3->getPair(), v2->getPair()) <= 0;
+
+	list<Vertice*> nListaVertices;
+
+	for(int i = 0; i < n; i++)
+	{
+		if(correctOrder)
+			nListaVertices.push_back(getVerticeAt( (pos+i)%n ));
+		else
+			nListaVertices.push_back(getVerticeAt( mod((pos-i),n) ));
+	}
+
+	listaVertices = nListaVertices;
+}
+
 Vertice* Figura::getVerticeAt(int n)
 {
 	list<Vertice*>::iterator it = listaVertices.begin();
@@ -304,6 +351,7 @@ list<Vertice*> Figura::getVertices()
 {
     return listaVertices;
 }
+
 
 list<Figura*> Figura::getHijos()
 {

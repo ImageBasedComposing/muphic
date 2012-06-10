@@ -20,6 +20,7 @@ ComposerFigBass2::~ComposerFigBass2()
 }
 
 //Hacemos un bajo que respete las normas del contrapunto en cierta medida.
+//Sin terminar
 bool ComposerFigBass2::compBassFig(Segmento* seg1, Segmento* seg2, Segmento* seg3, int maxDur, int minDur)
 {
 	int duracionTotal = 0;

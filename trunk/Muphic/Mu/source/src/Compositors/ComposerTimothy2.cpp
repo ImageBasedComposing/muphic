@@ -18,9 +18,10 @@ string ComposerTimothy2::compose()
 	FiguresMusic* fgs = new FiguresMusic();
 	fgs->cargar(pic);
 
-	// We calculate figure visibility
-
+	// We calculate figure visibility and sort operations
 	fgs->calculateVisibility();
+
+	//fgs->guardar(pic+"DEBUG.xml");
 
 	DURACION = fgs->getTotalVertices()*EIGHTHNOTE;
 
