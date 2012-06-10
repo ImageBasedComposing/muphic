@@ -5,18 +5,11 @@
 
 El módulo de análisis, como ya se ha comentado, es el encargado de, dada una imagen dada y una configuración de entrada, producir un archivo XML con la lista de polígonos que componen la imagen. Esta lista debe componer una nueva imagen lo más fiel posible a la imagen de entrada, teniendo en cuenta los ajustes especificados en el archivo de configuración.\\
 
-Este módulo hace un gran uso de la librería OpenCV, de la cual se ayuda tanto para tratar imágenes como para componer formas y polígonos.\\
+Este módulo hace un gran uso de la librería externa OpenCV, de la cual se ayuda tanto para tratar imágenes como para componer formas y polígonos.
 
-La estructura general del módulo se ve en la Figura~\ref{fig:diagramageneralPHIC}.\\
+\subsection{Vista de implementación}
 
-		\begin{figure}[htbp]
-		\centering
-		\includegraphics[scale=0.47]{graphics/todo.png}
-		\caption{Vista general del módulo de anális}
-		\label{fig:diagramageneralPHIC}
-		\end{figure}
-	
-La vista clase por clase se ve en la Figura~\ref{fig:diagramaclasesPHIC}.\\
+La estructura general del módulo se ve en la Figura~\ref{fig:diagramaclasesPHIC}.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -25,7 +18,23 @@ La vista clase por clase se ve en la Figura~\ref{fig:diagramaclasesPHIC}.\\
 		\label{fig:diagramaclasesPHIC}
 		\end{figure}
 		
-Y el flujo de ejecución se ve en la Figura~\ref{fig:diagramaflujoPHIC}.\\
+	\todo{este diagrama contiene el nombre de ciertas funcionas (las que aparecen en el diagrame de flujo)}
+		
+En ella, se pueden observar las siguientes clases:\\
+
+\begin{itemize}
+
+	\item \textbf{Phic:} Se trata de la clase que controla la completa ejecución de este módulo. Se ocupa de coordinar el resto de clases para que realicen las operaciones requeridas para completar el análisis.
+	
+	\item \textbf{Analizer:} realiza todas las operaciones de análisis y se comunica con la librería OpenCV.
+	
+	\item \textbf{UsrConf:} como se explica en posteriores secciones, es una clase común que se ocupa de la lectura de los archivos de configuración.
+	
+	\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.
+	
+\end{itemize}	
+			
+El flujo de ejecución de un análisis cualquiera realizado con este módulo se ve en la Figura~\ref{fig:diagramaflujoPHIC}.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -34,7 +43,12 @@ Y el flujo de ejecución se ve en la Figura~\ref{fig:diagramaflujoPHIC}.\\
 		\label{fig:diagramaflujoPHIC}
 		\end{figure}
 		
-Una vista final del módulo como paquetes se ve en la Figura~\ref{fig:diagramapaquetesPHIC}.\\
+\todo{resumen pequeño que se hace mucho mas rapido con el diagrama ya hecho}
+		
+\subsection{Vista de despliegue}
+\todo{puede que sobre porque es obvio y UBERrepetitivo, pero es para que se vea que opencv está como dll ahí}
+		
+Por último, la vista final del módulo como paquetes se ve en la Figura~\ref{fig:diagramapaquetesPHIC}.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -42,3 +56,5 @@ Una vista final del módulo como paquetes se ve en la Figura~\ref{fig:diagramapa
 		\caption{Diagrama de paquetes del módulo de anális}
 		\label{fig:diagramapaquetesPHIC}
 		\end{figure}
+		
+El sistema se basa en la librería externa OpenCV para relizar sus funciones.
