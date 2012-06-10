@@ -63,17 +63,17 @@ class ScriabinColor : public ColorSystem
 		ScriabinColor()
 		{
 			scriabin.push_back(pair<Color,int>(Color(255,0,0), DO_C)); //Rojo
-			scriabin.push_back(pair<Color,int>(Color(255,127,0), SOL_C)); //Naranja
-			scriabin.push_back(pair<Color,int>(Color(255,255,0), RE_C)); //Amarillo
-			scriabin.push_back(pair<Color,int>(Color(51,204,51), LA_C)); //Verde
-			scriabin.push_back(pair<Color,int>(Color(195,242,255), MI_C)); //Cian-Blanco
-			scriabin.push_back(pair<Color,int>(Color(142,201,255), SI_C)); //Azul
-			scriabin.push_back(pair<Color,int>(Color(127,139,253), SOL_F_C)); //AzulMarino
 			scriabin.push_back(pair<Color,int>(Color(144,0,255), RE_F_C)); //Purpura
-			scriabin.push_back(pair<Color,int>(Color(187,117,252), LA_F_C)); //Violeta
+			scriabin.push_back(pair<Color,int>(Color(255,255,0), RE_C)); //Amarillo
 			scriabin.push_back(pair<Color,int>(Color(183,70,139), MI_F_C)); //Morado
-			scriabin.push_back(pair<Color,int>(Color(169,103,124), SI_F_C)); //Salmon
+			scriabin.push_back(pair<Color,int>(Color(195,242,255), MI_C)); //Cian-Blanco
 			scriabin.push_back(pair<Color,int>(Color(171,0,52), FA_C)); //Granate
+			scriabin.push_back(pair<Color,int>(Color(127,139,253), SOL_F_C)); //AzulMarino
+			scriabin.push_back(pair<Color,int>(Color(255,127,0), SOL_C)); //Naranja
+			scriabin.push_back(pair<Color,int>(Color(187,117,252), LA_F_C)); //Violeta
+			scriabin.push_back(pair<Color,int>(Color(51,204,51), LA_C)); //Verde
+			scriabin.push_back(pair<Color,int>(Color(169,103,124), SI_F_C)); //Salmon
+			scriabin.push_back(pair<Color,int>(Color(142,201,255), SI_C)); //Azul
 		}
 
 		~ScriabinColor(){};

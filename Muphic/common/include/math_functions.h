@@ -31,7 +31,7 @@ inline double dist2DPoints(std::pair<int, int> p1, std::pair<int, int> p2)
 
 inline double dist3DPoints(int x1, int y1, int z1, int x2, int y2, int z2)
 {
-	double dist = sqrt(pow(double(x2-y2), int(2)) + pow(double(y2-y1), int(2)) + pow(double(z2-z1), int(2)));
+	double dist = sqrt(pow(double(x2-x1), int(2)) + pow(double(y2-y1), int(2)) + pow(double(z2-z1), int(2)));
 	return dist;
 }
 

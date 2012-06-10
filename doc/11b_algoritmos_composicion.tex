@@ -64,6 +64,7 @@ De esta manera conseguimos que una figura simétrica con todos sus ángulos igua
 		\centering
 		\hspace*{0.0in}
 		\includegraphics[scale=1.0]{graphics/simpletest1-F3.png}
+		\includegraphics[scale=1.0]{graphics/simpletest1-MELpartitura.png}
 		\caption{Figura de entrada con los ángulos y los tonos que produce}
 		\label{fig:Figura4Voz1}
 		\end{figure}
@@ -86,6 +87,7 @@ En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cu
 		\centering
 		\hspace*{0.0in}
 		\includegraphics[scale=1]{graphics/simpletest1-F3_2.png}
+		\includegraphics[scale=1]{graphics/simpletest1_2-MELpartitura.png}
 		\caption{Figura de entrada con los ángulos y los tonos producidos}
 		\label{fig:Figura6Voz1}
 		\end{figure}
@@ -95,34 +97,44 @@ En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cu
 \subsection{2ª Voz: Melodía Secundaria}
 
 Para crear el acompañamiento o segunda voz, se usa la misma estructura que a la hora de componer la melodía principal aunque también necesitamos el segmento de melodía principal como entrada para poder componer sobre ella. 
-La primera fase es igual que en la primera voz. La segunda fase también es igual salvo que al final introducimos un paso de adaptación. Debemos hacer una adaptación de la duración del total obtenido al analizar la figura (Figura~\ref{fig:Figura1Voz2}). Eso ocurre ya que se quiere que el segmento de música que se genera tenga una duración determinada normalmente menor a la melodía principal. Además se debe decidir en qué momento de la melodía principal se empieza a decorarla introduciendo la segunda voz.
+La primera fase es igual que en la primera voz. La segunda fase también es igual salvo que al final introducimos un paso de adaptación. Debemos hacer una adaptación de la duración del total obtenido al analizar la figura (Figura~\ref{fig:Figura1Voz2} sin adaptar y Figura~\ref{fig:Figura2Voz2} con adaptación). Eso ocurre ya que se quiere que el segmento de música que se genera tenga una duración determinada menor o igual a la melodía principal. Además se debe decidir en qué momento de la melodía principal se empieza a decorarla introduciendo la segunda voz.
 
  		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
-		\caption{Figuras de entrada con los lados de la figura interior y las duraciones obtenidas}
+		\includegraphics[scale=1]{graphics/simpletest4-F2.png}
+		\caption{Figuras de entrada con los lados de la figura interior y las duraciones obtenidas sin adaptación}
 		\label{fig:Figura1Voz2}
+		\end{figure}
+
+		\begin{figure}[htbp]
+		\centering
+		\hspace*{0.0in}
+		\includegraphics[scale=1]{graphics/simpletest4-F2_2.png}
+		\caption{Figuras de entrada con la duración de la figura exterior y con las duraciones adaptadas de la interior}
+		\label{fig:Figura2Voz2}
 		\end{figure}
 
 Esta función de adaptación se encarga de ir dividiendo a la mitad diferentes duraciones para reducir la duración total del segmento (o ir aumentando, duplicando duraciones, si se necesita aumentar la duración total). 
 
-El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos se va analizando el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar la primera y la segunda voz (Figura~\ref{fig:Figura2Voz2}). Por ello mientras se genera la nueva melodía se va haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usados siguen los principios de las técnicas básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayor a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué implica un menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono (Figura~\ref{fig:Figura3Voz2}).
+El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos se va analizando el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar la primera y la segunda voz (Figura~\ref{fig:Figura3Voz2}). Por ello mientras se genera la nueva melodía se va haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usados siguen los principios de las técnicas más básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayor a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué implica un menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono (Figura~\ref{fig:Figura3Voz2}).
 
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
+		\includegraphics[scale=1]{graphics/simpletest4-F3.png}
+		\includegraphics[scale=1]{graphics/simpletest4-F3-MEL2partitura.png}
 		\caption{Figuras de entrada con los ángulos y los tonos producidos sin técnicas contrapuntísticas}
-		\label{fig:Figura2Voz2}
+		\label{fig:Figura3Voz2}
 		\end{figure}
 
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
+		\includegraphics[scale=1]{graphics/simpletest4-F3_2.png}
+		\includegraphics[scale=1]{graphics/simpletest4-F3_2-MEL2partitura.png}
 		\caption{Figuras de entrada con los ángulos y los tonos producidos con técnicas contrapuntísticas}
-		\label{fig:Figura3Voz2}
+		\label{fig:Figura4Voz2}
 		\end{figure}
 
 En la mayoría de ocasiones, la segunda voz se pide una duración menor que el segmento de primera voz que va acompañandolo, esto ocurre porque normalmente se pasa una figura de entrada menor que la usada para componer la melodía principal. Para que el segmento tenga la misma duración que el segmento de la primera voz se rellenan los huecos (delante y/o detrás) del trozo de música compuesto con silencios.
@@ -136,8 +148,9 @@ Para el bajo, se ha cogido un algortimo simple que consiste en notas de duració
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
-		\caption{Figura de entrada con los lados y los tonos producidos}
+		\includegraphics[scale=1]{graphics/simpletest2-F2F3.png}
+		\includegraphics[scale=1]{graphics/simpletest2-BASSpartitura.png}
+		\caption{Figura de entrada con los tonos producidos}
 		\label{fig:Figura1Voz3}
 		\end{figure}
 
@@ -146,8 +159,9 @@ Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
-		\caption{Figura de entrada con los lados y los tonos producidos}
+		\includegraphics[scale=1]{graphics/simpletest2-F2F3_2.png}
+		\includegraphics[scale=1]{graphics/simpletest3_2-BASSpartitura.png}
+		\caption{Figura de entrada con los tonos producidos}
 		\label{fig:Figura2Voz3}
 		\end{figure}
 
@@ -170,7 +184,7 @@ El otro ritmo implementado se basa en el concepto de inestabilidad de una figura
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
+		\includegraphics[scale=1]{graphics/simpletest2-Circulo.png}
 		\caption{Figura de entrada y el círculo equivalente}
 		\label{fig:Figura2Voz4}
 		\end{figure}
@@ -178,7 +192,8 @@ El otro ritmo implementado se basa en el concepto de inestabilidad de una figura
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
+		\includegraphics[scale=1]{graphics/simpletest2-F2F3_3.png}
+		\includegraphics[scale=1]{graphics/simpletest2-PERpartitura.png}
 		\caption{Figura de entrada y los ritmos producidos}
 		\label{fig:Figura3Voz4}
 		\end{figure}
@@ -213,7 +228,8 @@ Tras haber ordenado las figuras por vistosidad vamos componiendo con cada una de
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{0.0in}
-		\includegraphics[scale=0.57]{graphics/todo.png}
+		\includegraphics[scale=1]{graphics/simpletest5.png}
+		\includegraphics[scale=1]{graphics/simpletest5-partitura.png}
 		\caption{Figuras de entrada las voces producidas}
 		\label{fig:Figura1Mixer}
 		\end{figure}

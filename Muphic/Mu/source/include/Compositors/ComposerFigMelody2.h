@@ -22,6 +22,7 @@ class ComposerFigMelody2 : public ComposerVoice
 		int getNextTone(int degree, double actualAngle, double lastAngle, int lastTone, int actualDuration, int lastDuration);
 		int makeConsonant(int tone, int toneToModif);
 		void adaptDurations(vector<int>* durations, int duration, int minDur = EIGHTHNOTE, int maxDur = HALFNOTE);
+		int getPosBest(vector<int>* durations, bool min = false);
 		vector< int > calcDurDirect(FigureMusic * f, vector< Vertice* > vertices, int maxDur = HALFNOTE, int minDur = EIGHTHNOTE);
 		vector< int > calcTonesDiff(FigureMusic * f, vector< Vertice* > vertices, vector<int> duraciones);
 		vector< int > calcTonesCounterPoint(FigureMusic * f, vector< Vertice* > vertices, Segmento* seg1, int pos, vector<int> duraciones);
