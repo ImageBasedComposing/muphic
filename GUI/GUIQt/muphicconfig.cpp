@@ -214,6 +214,7 @@ void MuphicConfig::on_toolButton_InputPic_clicked()
          return;
         }
         ui->lineEdit_InputPic->setText(imageFile);
+        ui->lineEdit_OutputMidi->setText(changeExtension(imageFile.toStdString(),"wav").c_str());
 
         delete newScene; newScene = NULL;
         newScene = new QGraphicsScene(0,0,ui->graphicsView_Pic->width(),ui->graphicsView_Pic->height());
@@ -251,8 +252,8 @@ void MuphicConfig::on_pushButton_Generate_clicked()
         mediaObject->setCurrentSource(mediaSource);
 
         std::string picFile = ui->lineEdit_InputPic->text().toStdString();
+        outputFile = QString(ui->lineEdit_OutputMidi->text());
         std::string muFile = ui->lineEdit_OutputMidi->text().toStdString();
-        outputFile = QString(muFile.c_str());
         usrConf->setMuOutputFile(muFile);
         usrConf->setPhicActive(false);
         usrConf->setMuDebug(false);
