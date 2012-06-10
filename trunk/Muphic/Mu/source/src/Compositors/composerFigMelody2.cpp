@@ -202,7 +202,7 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 	lastTone = cs->getNota(color, tb);
 	out.push_back(lastTone);
 	int degree = tb->getDegreeTone(lastTone);
-	lastAngle = angleOf2Lines2(vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair(), vertices.at(0)->getPair(), vertices.at(1)->getPair());
+	lastAngle = angleOf2Lines2(vertices.at(1)->getPair(), vertices.at(0)->getPair(), vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair());
 
 	int movement1 = 0, movement2 = 0; //Movimiento de la voz igual=0, arriba=1, abajo=2
 	int lastMovement = 0, numSameMovement = 0;//MovDirecto = 0, MovContrario = 1, MovOblicuo = 2;
@@ -240,7 +240,7 @@ vector< int > ComposerFigMelody2::calcTonesCounterPoint(FigureMusic * f, vector<
 			movement1 = 0;
 
 		
-		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
+		actualAngle = angleOf2Lines2(vertices.at((i+1)%vertices.size())->getPair(), vertices.at(i)->getPair(), vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair());
 
 		tone = getNextTone(degree, actualAngle, lastAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 
@@ -557,8 +557,8 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 	//Mientras no conseguimos el objetivo...
 	while(durationTotal > duration)
 	{
-		pos = rand() % durations->size();
-		if(durations->at(pos) < minDur)
+		pos = getPosBest(durations);
+		if(durations->at(pos) <= minDur)
 		{
 			posAux = (pos + 1) % durations->size();
 			divided = false;
@@ -597,7 +597,7 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 	//Ajustamos del todo:
 	while(durationTotal < duration)
 	{
-		pos = rand() % durations->size();
+		pos = getPosBest(durations,true);
 		if(((durations->at(pos)) > (duration - durationTotal)) || durations->at(pos) > maxDur)
 		{
 			posAux = (pos + 1) % durations->size();
@@ -656,4 +656,31 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 		}
 	}
 
+}
+
+//Devuelve la posición del mejor buscado (máximo o mínimo) con cierta aleatoriedad
+// si hay dos o más posiciones buenas.
+int ComposerFigMelody2::getPosBest(vector<int>* durations, bool min)
+{
+	int posBest = 0;
+	int durBest = durations->at(0);
+	for(int i = 1; i < durations->size(); i++)
+	{
+		if( durBest == durations->at(i) && ((rand()%3) == 0))
+		{
+			posBest = i;
+		}
+		else if( !min && durBest < durations->at(i))
+		{
+			durBest = durations->at(i);
+			posBest = i;
+		}
+		else if(min && durBest > durations->at(i))
+		{
+			durBest = durations->at(i);
+			posBest = i;
+		}
+	}
+
+	return posBest;
 }
