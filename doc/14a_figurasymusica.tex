@@ -19,27 +19,48 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 			\end{figure}
 		
 	La estructura (representada en formato XML) es:\\
-\todo{esto no lo he repasado, supongo que está bienes, mañana lo miro o algo}
-	\begin{itemize}
-	\item \textbf{Shapes}: Representa la imagen completa, contiene un listado de las figuras resultantes del análisis.
-	\item \textbf{Figure}: Contiene la información relativa a una figura.
-	\item \textbf{Id}: Identificador único de la figura.
-	\item \textbf{Color}: Identificador para delimitar la información sobre el color.
-	\item \textbf {RGB}: Identificador para delimitar la información sobre los valores RGB del color.
-	\item \textbf{R}: Valor referente a la escala de rojo en la escala RGB.
-	\item \textbf{G}: Valor referente a la cantidad de verde en la escala RGB.
-	\item \textbf{B}: Valor referente a la cantidad de azul presente en escala RGB.
-	\item \textbf{VertexList}: Lista de vértices que componen el polígono.
-	\item \textbf{Vertex [type=``normal'']}: Identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
-	\item \textbf{Position}: Identificador para delimitar la posición de un vértice en la imagen.
-	\item \textbf{X}: Componente x de la posición del vértice.
-	\item \textbf{Y}: Componente y de la posición del vértice.
-	\item \textbf{Vertex [type=``center'']}: Identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
-	\item \textbf{Area}: Valor numérico del área de una figura.
-	\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
-	\end{itemize}
 	
-	\todo{explicación un poco de palabra de lo anterior, para dar una idea general del asunto en conjunto}
+	\newlist{longenum}{enumerate}{5}
+	\setlist[longenum,1]{label=\tiny$\blacksquare$}
+	\setlist[longenum,2]{label=\tiny$\blacksquare$}
+	\setlist[longenum,3]{label=\tiny$\blacksquare$}
+	\setlist[longenum,4]{label=\tiny$\blacksquare$}
+	\setlist[longenum,5]{label=\tiny$\blacksquare$}
+	
+	\begin{longenum}
+	\item \textbf{Shapes}: Representa la imagen completa y contiene un listado de las figuras resultantes del análisis.
+	\item \textbf{Width}: Almacena el ancho total de la imagen.
+	\item \textbf{Height}: Almacena el alto total de la imagen.
+	\item \textbf{Figure}: Contiene la información relativa a un polígono en la imagen.
+		\begin{longenum}
+		\item \textbf{Id}: Identificador único de la figura.
+		\item \textbf{Color}: Identificador para almacenar la información sobre el color de la figura.
+			\begin{longenum}
+			\item \textbf {RGB}: Delimitar la información sobre los valores RGB del color.
+				\begin{longenum}
+				\item \textbf{R}: Valor referente a la cantidad de rojo en la escala RGB.
+				\item \textbf{G}: Valor referente a la cantidad de verde en la escala RGB.
+				\item \textbf{B}: Valor referente a la cantidad de azul presente en escala RGB.
+				\end{longenum}
+			\end{longenum}
+		\item \textbf{VertexList}: Lista de vértices que componen el polígono.
+			\begin{longenum}
+			\item \textbf{Vertex [type=``normal'']}: Identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
+				\begin{longenum}
+					\item \textbf{Position}: Identificador para delimitar la posición de un vértice en la imagen.
+						\begin{longenum}
+						\item \textbf{X}: Componente x de la posición del vértice.
+						\item \textbf{Y}: Componente y de la posición del vértice.
+						\end{longenum}
+					\item \textbf{Vertex [type=``center'']}: Identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
+				\end{longenum}
+			\end{longenum}
+		\end{longenum}
+		\item \textbf{Area}: Valor numérico del área de una figura.
+		\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
+	\end{longenum}
+	
+	Como se puede ver, la imagen analizada está compuesta por una lista de figuras (o polígonos) jerarquidas según su posición geométrica. Cada figura guarda información además de sus vértices, color y area, y representa una mancha de color detectada por el analizador de imágenes.
 
 
 \subsection{Vista de Implementación}
@@ -68,8 +89,11 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 		Presenta métodos para poder acarrear funciones geométricas básicas (como transformar su representación de vértices de coordenadas cartesianas a euclídeas) que simplifican el desarrollo de los algoritmos explicados en la Sección~\ref{sec:algComposicion}.
 		
 		\item \textbf{Vertice:} Se trata de la unidad más pequeña de esta estructura, y representa las coordenadas en 2 dimensiones de un vértice en el plano cartesiano. Como se detalla en la Sección~\ref{subsec:xmlstruct}, da la opción de ser considerado un ``centro'', de forma que, en la lista de vértices de la Figura que lo almacene, puede actuar como el centro entre el vértice anterior y el siguiente, formando por tanto un arco entre los 3 vértices y permitiendo realizar curvas en las figuras.
+		
+		\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.
 	
 	\end{itemize}
+	
 			
 \subsection{Usos de la estructura}	
 
@@ -85,18 +109,6 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 		\end{figure}
 		
 	Los detalles de cada clase hija serán explicados en posteriores secciones.	
-	
-	
-\todo{lo que había antes, que me da cosa borrarlo
-
-Para poder tratar toda esta información el proyecto dispone de un sistema de clases que permite cargar o guardar y manejar los datos del XMLy tratarlos como figuras:
-\\\todo{Imagen con el diagrama de Figuras}
-\newline
-\\La clase ``Figure'' representa cada uno de los polígonos que se han analizado y guardado en el XML, para ello utiliza una lista de vértices definidos por un las coordenadas ``x'' e ``y'' en el plano de la imagen. 
-\\Permite tratar con las figuras permitiendo calcular el centro de la misma o expresar sus coordenadas como un ángulo y longitud, también mantiene la fidelidad al resto de las figuras permitiendo acceder a las figuras que están en su interior y a la figura en la que ellos estén situados. Además permite tratar con todos sus elementos para recoger información sobre su color o si tiene un punto o figura determinado en su interior. A raíz de esta clase se heredan dos clases más específicas una que ofrece funcionalidad para las figuras utilizadas durante el análisis gráfico y otra que añade funcionalidad para las figuras a la hora de componer, se hablará de ello más adelante \todo{referencia a la sección}
-\newline
-La clase ``Figures'' representa la imagen como dos conjuntos de figuras, el primero incluye todas las figuras de la imagen mientras que el segundo contiene solo a aquellas figuras que estén situadas directamente sobre el fondo de la imagen. A través de esta clase se puede acceder a todas las figuras y realizar operaciones que las afecten a todas, su funcionalidad permite calcular el centro relativo de todas las figuras, borrar figuras que estén repetidas  y más importante es la encargada de escribir o leer los datos en el XML, para ello ofrece los procedimientos de guardar y cargar que hacen el proceso automático facilitando así su uso.
-A su vez al igual que ``Figure'' se hereda de ella para añadir la funcionalidad necesitada según se haga referencia a figuras del análisis gráfico o de la composición musical.}
 
 
 \section{Formato de representación de música}
