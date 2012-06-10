@@ -250,10 +250,18 @@ void MuphicConfig::on_pushButton_Generate_clicked()
         #endif
 
         mediaObject->setCurrentSource(mediaSource);
-
+        std::string muFile;
         std::string picFile = ui->lineEdit_InputPic->text().toStdString();
-        outputFile = QString(ui->lineEdit_OutputMidi->text());
-        std::string muFile = ui->lineEdit_OutputMidi->text().toStdString();
+        if(ui->lineEdit_OutputMidi->text() != "")
+        {
+            outputFile = QString(ui->lineEdit_OutputMidi->text());
+            muFile = ui->lineEdit_OutputMidi->text().toStdString();
+        }
+        else
+        {
+            outputFile = QString(ui->lineEdit_InputPic->text());
+            muFile = ui->lineEdit_InputPic->text().toStdString();
+        }
         usrConf->setMuOutputFile(muFile);
         usrConf->setPhicActive(false);
         usrConf->setMuDebug(false);
