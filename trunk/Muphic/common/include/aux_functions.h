@@ -12,6 +12,8 @@ inline std::string changeExtension(std::string picPath, std::string extension)
 {
 	int i = picPath.find_last_of('.');
 
+    if (i == 0) i = picPath.length();
+
 	if (extension == "")
 		return picPath.substr(0, i);
 	else
