@@ -24,7 +24,7 @@ ComposerFigMelody2::~ComposerFigMelody2()
 //Hacemos una melodia de duracion limitada y que sea a partir de la figura dada.
 bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg, int dur, int maxDur, int minDur)
 {
-	//Ordenamos los vertices de la figura teniendo en cuenta el focus... (nada por ahora) CAMBIAR!
+	//Los vértices nos llegan ya ordenados
 	vector< Vertice* > vertices;
 	int numVertices = f->getNumVertices();
 	for(int i = 0; i < numVertices; i++)
@@ -45,7 +45,8 @@ bool ComposerFigMelody2::compMelodyFig(FigureMusic* f, Segmento* seg, int dur, i
 
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
-		seg->pushBack(new Nota(durations.at(i), tones.at(i)));
+		if(durations.at(i) > 0)
+			seg->pushBack(new Nota(durations.at(i), tones.at(i)));
 
 	return true;
 }
@@ -90,7 +91,8 @@ bool ComposerFigMelody2::compBassFig(FigureMusic* f, Segmento* seg, int dur, int
 
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
-		seg->pushBack(new Nota(durations.at(i), tones.at(i) - (ESCALA*diff)/*Quitamos octavas*/));
+		if(durations.at(i) > 0)
+			seg->pushBack(new Nota(durations.at(i), tones.at(i) - (ESCALA*diff)/*Quitamos octavas*/));
 
 	return true;
 }
@@ -121,7 +123,7 @@ vector< int > ComposerFigMelody2::calcDurDirect(FigureMusic * f, vector< Vertice
 	//Vamos a separar las longitudes en 3 tipos de duraciones:
 	double dur0 = minLong;
 	double dur1 = minLong + ((mediumLong - minLong)/2);
-	double dur2 = mediumLong + ((maxLong - mediumLong)/2);
+	double dur2 = mediumLong + (1*(maxLong - mediumLong)/2);
 	double dur3 = maxLong;
 	vector< int > durVertice; //Las duraciones que dispone cada vértice
 
@@ -168,11 +170,11 @@ vector< int > ComposerFigMelody2::calcTonesDiff(FigureMusic * f, vector< Vertice
 	//Cambiamos la escala a la nueva tonalidad.
 	tb = new tb(scale.getScaleSteps(), lastTone);*/
 	int degree = tb->getDegreeTone(lastTone);
-	lastAngle = angleOf2Lines2(vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair(), vertices.at(0)->getPair(), vertices.at(1)->getPair());
+	lastAngle = angleOf2Lines2(vertices.at(1)->getPair(), vertices.at(0)->getPair(), vertices.at(vertices.size()-1)->getPair(), vertices.at(0)->getPair());
 	//Ahora el resto de vértices desde 1 a numVertices
 	for(int i = 1; i < vertices.size(); i++)
 	{
-		actualAngle = angleOf2Lines2(vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair(), vertices.at(i)->getPair(), vertices.at((i+1)%vertices.size())->getPair());
+		actualAngle = angleOf2Lines2(vertices.at((i+1)%vertices.size())->getPair(), vertices.at(i)->getPair(), vertices.at(mod((i-1),vertices.size()))->getPair(), vertices.at(i)->getPair());
 
 		tone = getNextTone(degree, actualAngle, lastAngle, lastTone, duraciones.at(i), duraciones.at(i-1));
 
@@ -393,7 +395,8 @@ bool ComposerFigMelody2::decMelodyFig(FigureMusic* f, Segmento* seg1, Segmento* 
 
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
-		seg->pushBack(new Nota(durations.at(i), tones.at(i)));
+		if(durations.at(i) > 0)
+			seg->pushBack(new Nota(durations.at(i), tones.at(i)));
 
 	//Añadimos los silencios finales
 	while(seg->getDuration() < seg1->getDuration())
@@ -431,7 +434,8 @@ bool ComposerFigMelody2::interMelodyFig(FigureMusic* f, Segmento* seg1, Segmento
 
 	//Añadimos las notas
 	for(int i = 0; i < vertices.size(); i++)
-		seg->pushBack(new Nota(durations.at(i), tones.at(i)));
+		if(durations.at(i) > 0)
+			seg->pushBack(new Nota(durations.at(i), tones.at(i)));
 
 	return true;
 }
@@ -564,19 +568,28 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 				else
 				{
 					durations->at(posAux) = durations->at(posAux) / 2;
-					durationTotal -= durations->at(posAux);
+					if(durations->at(posAux) <= 0)
+						durationTotal -= 1;
+					else
+						durationTotal -= durations->at(posAux);
 					divided = true;
 				}
 			if(posAux == pos) //Ya se ha dado la vuelta y no hemos podido hacer split de ninguna nota
 			{ //Rompemos la barrera de minDur. No hay otra solución
 				durations->at(posAux) = durations->at(posAux) / 2;
-				durationTotal -= durations->at(posAux);
+				if(durations->at(posAux) <= 0)
+					durationTotal -= 1;
+				else
+					durationTotal -= durations->at(posAux);
 			}
 		}
 		else
 		{
 			durations->at(pos) = durations->at(pos) / 2;
-			durationTotal -= durations->at(pos);
+			if(durations->at(pos) <= 0)
+				durationTotal -= 1;
+			else
+				durationTotal -= durations->at(pos);
 		}
 	} //Fin bucle while
 
@@ -594,8 +607,16 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 					posAux = (posAux + 1) % durations->size();
 				else
 				{
-					durationTotal += durations->at(posAux);
-					durations->at(posAux) = durations->at(posAux) * 2;
+					if(durations->at(posAux) <= 0)
+					{
+						durations->at(posAux) = 1;
+						durationTotal += 1;
+					}
+					else
+					{
+						durationTotal += durations->at(posAux);
+						durations->at(posAux) = durations->at(posAux) * 2;
+					}
 					duplicated = true;
 				}
 			if(posAux == pos) //Ya se ha dado la vuelta y no hemos podido hacer split de ninguna nota
@@ -607,15 +628,31 @@ void ComposerFigMelody2::adaptDurations(vector<int>* durations, int duration, in
 				}
 				else
 				{
-					durationTotal += durations->at(posAux);
-					durations->at(posAux) = durations->at(posAux) * 2;
+					if(durations->at(posAux) <= 0)
+					{
+						durations->at(posAux) = 1;
+						durationTotal += 1;
+					}
+					else
+					{
+						durationTotal += durations->at(posAux);
+						durations->at(posAux) = durations->at(posAux) * 2;
+					}
 				}
 			}
 		}
 		else
 		{
-			durationTotal += durations->at(pos);
-			durations->at(pos) = durations->at(pos) * 2;
+			if(durations->at(pos) <= 0)
+			{
+				durations->at(pos) = 1;
+				durationTotal += 1;
+			}
+			else
+			{
+				durationTotal += durations->at(pos);
+				durations->at(pos) = durations->at(pos) * 2;
+			}
 		}
 	}
 

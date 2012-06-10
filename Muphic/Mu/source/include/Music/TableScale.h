@@ -379,7 +379,10 @@ public:
 			if(interval > PER5)
 			{
 				interval = ESCALA - interval;
-				tonesDegree.at(i) -= ESCALA;
+				if( tonesDegree.at(i) >= lasTone )
+					tonesDegree.at(i) -= ESCALA;
+				else
+					tonesDegree.at(i) += ESCALA;
 			}
 			
 			if(minDist >= interval)

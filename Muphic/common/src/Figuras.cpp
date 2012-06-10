@@ -212,7 +212,7 @@ void Figuras::cargarRec(TiXmlNode* f, Figura* id)
 		{
 			v = new Vertice();
 			v->x = atoi(vertice->FirstChildElement("position")->FirstChildElement("x")->GetText());
-			v->y = atoi(vertice->FirstChildElement("position")->FirstChildElement("y")->GetText());
+			v->y = sheetHeight - atoi(vertice->FirstChildElement("position")->FirstChildElement("y")->GetText());
 
 			// Comprobamos que tenga atributo
 			if(vertice->ToElement()->Attribute("type") != 0)

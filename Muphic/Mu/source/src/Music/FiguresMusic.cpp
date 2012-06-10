@@ -116,6 +116,7 @@ list<Figura*> FiguresMusic::sortMusicFigures(list<Figura*> figs)
 
 	for(list<FigureMusic*>::iterator it = aux.begin(); it != aux.end(); it++)
 	{
+		(*it)->sortVertices();
 		aux2.push_back((*it));
 	}
 

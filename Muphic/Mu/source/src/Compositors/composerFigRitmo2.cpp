@@ -104,9 +104,9 @@ bool ComposerFigRitmo2::compRythmFig(FigureMusic* f, Segmento* seg, int dur, int
 	for(int i = 0; i < numNotas-1; i++)
 	{
 		dist1 = distWithNext.at(j);
-		j++;
+		j = (j+1)%numNotas;
 		dist2 = distWithNext.at(j);
-		j++;
+		j = (j+1)%numNotas;
 
 		if( dist1 > range1 )
 			if ( dist2 > range1 )

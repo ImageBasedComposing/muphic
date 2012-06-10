@@ -38,6 +38,7 @@ class Figura
 		void insertarVertice(Vertice* v, int n);		//Añade un elemento en la pos n empujando el que ya estaba
 		void insertarHijo(Figura* f, int n);
 		void sortHijo();
+		void sortVertices();
 
 		Vertice* getVerticeAt(int n);
 		Vertice* verticeSig(Vertice* v);
