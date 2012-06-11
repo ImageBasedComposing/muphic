@@ -1,10 +1,11 @@
 \section{Representación de la imagen analizada}
 
+\torev{Falta Primera Revisión}
 Tanto en el análisis de imágenes como en el proceso de composición hay un aspecto fundamental a estudiar: la representación de datos de las figuras.\\
 
-De acuerdo con lo explicado en previas secciones, el producto de salida  (y el de entrada de la composición musical) es un archivo XML que almacena el análisis imagen dada como entrada. Este archivo contiene toda la información que se considera para representar los elementos de una imagen, y servirá como base para explicar el contenido y estructura lógica de los datos analizados.\\
+De acuerdo con lo explicado en previas secciones, el producto de salida  (y el de entrada de la composición musical) es un archivo XML que almacena el análisis de la imagen dada como entrada. Este archivo contiene toda la información que se considera para representar los elementos de una imagen, y servirá como base para explicar el contenido y estructura lógica de los datos analizados.\\
 
-Por otro lado, en esta sección se mostrará también la estructura usada en la implementación de los objetos relacionados con estos datos y sus usos. Dado que tanto el módulo de análisis como el de composición hacen uso de esta información, se introducirá también las extensiones y posibilidades de la estructura de datos creada.
+Por otro lado, en esta sección se mostrará también la estructura usada en la implementación de los objetos relacionados con estos datos y sus usos. Dado que tanto el módulo de análisis como el de composición hacen uso de esta información , se introducirán también en esta sección las extensiones y capacidades de la estructura de datos creada.
 
 \subsection{Almacenamiento y estructura}
 \label{subsec:xmlstruct}
@@ -60,7 +61,7 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 		\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
 	\end{longenum}
 	
-	Como se puede ver, la imagen analizada está compuesta por una lista de figuras (o polígonos) jerarquidas según su posición geométrica. Cada figura guarda información además de sus vértices, color y area, y representa una mancha de color detectada por el analizador de imágenes.
+	Como se puede ver, la imagen analizada está compuesta por una lista de figuras (o polígonos) jerárquicas según su posición geométrica. Cada figura representa una mancha de color detectada por el analizador de imágenes para ello guarda la información de sus vértices, color y área.
 
 
 \subsection{Vista de Implementación}
@@ -78,9 +79,9 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 	
 	\begin{itemize}
 	
-		\item \textbf{Figures:} Almacena la lista de figuras presentes en la imagen, y permite manipular y acceder a ellas tanto en forma de lista (colocándose todas las figuras existentes de forma seguida y sin jerarquías) como en forma de árbol (jerarquizándolas según quién está dentro de quién: una figura que contiene en su interior todos los vértices de otra será su ``padre''), ocupandose de forma autosuficiente de mantener ésta última estructura al añadir figuras nuevas.\\
-	
-		Posee funcionalidad para guardar y cargar su información en formato XML, así como para eliminar repetidos y recalcular el color de cada figura teniendo en cuenta las figuras que contiene (ver Sección~\ref{sec:algAnalisis} para más detalles sobre estas funcionalidades nombradas).
+		\item \textbf{Figures:} Almacena la lista de figuras presentes en la imagen, permite manipular y acceder a ellas tanto en forma de lista (colocándose todas las figuras existentes de forma seguida y sin jerarquías) como en forma de árbol (jerarquizándolas según quién está dentro de quién: una figura que contiene en su interior todos los vértices de otra será su ``padre''), ocupándose de forma autosuficiente de mantener ésta última estructura al añadir nuevas figuras.\\
+
+		Además posee también funcionalidad para guardar y cargar su información en formato XML, así como para eliminar figuras repetidas o volver a calcular el color de cada figura teniendo en cuenta las figuras que contiene (ver Sección~\ref{sec:algAnalisis} para más detalles sobre estas funcionalidades).
 		
 		\item \textbf{Figure:} Representa cada elemento almacenado en la clase Figures. Contiene, como nodo de la estructura arbórea creada en Figures, los atributos necesarios para referenciar a sus padres, sus hijos y sus hermanos, y como elemento representativo de una figura en la imagen (Sección~\ref{subsec:xmlstruct}), el color, area y lista de vértices correspondiente a la imagen.\\
 		
@@ -97,7 +98,7 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 
 	Como ya se ha comentado, tanto el proceso de análisis como el de composición hacen uso de esta estructura y, dado que para la implementación de ambos módulos se ha seleccionado el mismo lenguaje orientado a objetos (C++), estos compartirán la implementación de esta estructura.\\
 	
-	Sin embargo, existen diferencias entre los usos y ampliaciones que cada módulo aplica, y es por ello que no hacen uso de la estructura de forma directa,  sino que cada módulo heredará la clase \emph{Figure} para satisfacer sus propias necesidades. El resultado es el diagrama mostrado en la Figura~\ref{fig:diagramaFigMupPhic}, con diferenciación entre \emph{FigureImg} y \emph{FigureMusic}.\\
+	Sin embargo, existen diferencias entre los usos y ampliaciones que cada módulo aplica, y es por eso que no hacen uso de la estructura de forma directa,  sino que cada módulo heredará la clase \emph{Figure} para satisfacer sus propias necesidades. El resultado es el diagrama mostrado en la Figura~\ref{fig:diagramaFigMupPhic}, con diferenciación entre \emph{FigureImg} y \emph{FigureMusic}.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -111,7 +112,7 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 
 \section{Formato de representación de música}
 
-\torev{Última revisión:; 05-06-1012}
+\todo{Reescribir}
 
 La estructura para representar la música propuesta en el proyecto está determinada por un árbol que trabaja desde el elemento más general, la canción que se va a componer, al más específico, cada una de las notas que componen dicha canción, como muestra la Figura~\ref{fig:structmusic}.\\
 	
