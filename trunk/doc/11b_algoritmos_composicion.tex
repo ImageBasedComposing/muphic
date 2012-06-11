@@ -1,15 +1,15 @@
 \section{Algoritmos de Composición}
 \label{sec:algComposicion}
 
-\torev{  PENDIENTE DE PRIMERA REVISIÓN }\\
+\todo{ Revisar y luego: PENDIENTE DE PRIMERA REVISIÓN }\\
 
-Para componer la música separamos en diferentes voces el proceso de composición. De tal modo que la unión de todas las voces da como resultado una pieza musical. En el estado actual del proyecto hemos identificado 4 voces diferentes dando un papel especial a cada una. Cada una de ellas son un proceso independiente aunque deben concordar en algunos aspectos para la correcta unión de todas ellas como por ejemplo la duración total de las mismas. Todos los compositores de forma imprescindible reciben una figura, en la que se van a basar para componer, y una duración dada que será el tiempo que dura el trozo de música a componer.
+Para generar la música separamos en diferentes voces el proceso de composición, de tal modo que la unión de todas las voces da como resultado una pieza musical. En el estado actual del proyecto hemos identificado cuatro voces diferentes cada una con un papel especial dentro de la composición. Cada voz sigue un proceso de composición independiente aunque concuerdan en algunos aspectos para la poder realizar una unión correcta de todas ellas, como por ejemplo, la duración total de las mismas. Todos los compositores de forma imprescindible reciben una figura, en la que se van a basar para componer, y una duración dada que será el tiempo que dura el trozo de música a componer.
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{1ª Voz: Melodía Principal}
 
-Normalmente en una composición suele haber una voz que destaca de la demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, hemos separado el proceso en cuatro fases: procesar la figura, obtener duraciones, obtener tonos y sintetizar o unir las duraciones con los tonos. 
-La primera fase consiste en procesar la figura de entrada. Sacamos sus vértices ordenados y los lados con sus longitudes de forma que la figura se pueda leer desde arriba en sentido horario. Si observamos el ejemplo (Figura~\ref{fig:Figura1Voz1}) se puede ver el orden de los vértices identificados con números.
+Normalmente en una composición suele haber una voz que destaca sobre las demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, hemos separado el proceso en cuatro fases: procesar la figura, obtener duraciones, obtener tonos y sintetizar o unir las duraciones con los tonos. 
+La primera fase consiste en procesar la figura de entrada, para ello, sacamos sus vértices ordenados y los lados con sus longitudes de tal forma que la figura se pueda leer desde arriba en sentido horario. Si observamos el ejemplo (Figura~\ref{fig:Figura1Voz1}) se puede ver el orden de los vértices identificados con números.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -27,7 +27,10 @@ La primera fase consiste en procesar la figura de entrada. Sacamos sus vértices
 		\label{fig:Figura1Voz1}
 		\end{figure}
 
-A continuación, en la segunda fase se calcula la longitud media de los lados y el lado más largo y más corto. Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima de las notas con las longitudes recién calculadas. Se usan las duraciones simples (figuras simples) de las notas en música obviando las compuestas (figuras compuestas), es decir, que se asignan duraciones de blancas, negras, corcheas, semicorcheas,... en vez de usar, por ejemplo, negra con doble puntillo que es una nota de duración negra más una corchea más una semicorchea. Buscar una equivalencia perfecta entre la longitud de los lados y la duración de las notas sería lo primero que pensaría el lector que podría ser la correspondencia más fiel, pero tras varias pruebas realizadas (Figura~\ref{fig:Figura5Voz1}) no se ha podido averiguar cómo hacerlo sin que se perdiera completamente el concepto de ritmo musical.
+\todo{Esta frase está mal expresada: Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima de las notas con las longitudes recién calculadas\\
+Veamos, a partir de esa frase el texto es muy difícil de comprender, para empezar que son figuras simples y compuestas falta una referencia o algo? luego, porque explicas lo que es una negra con doble puntillo, no se supone que eso esta explicado más arriba en una sección de términos musicales o explicación básica de la música? si no la tenemos habra que hacerlo porque aquí solo te lía mas, además yo no haría referencia al lector sino que lo dejaría como algo general, propondría escribir todo esto así o con algo parecido a esto:\\
+Se utilizan las duraciones simples de las notas en música: blancas, negras, corcheas, semicorcheas... como aproximación de las longitudes obtenidas en lugar de las compuestas que permitirían una equivalencia perfecta entre la longitud de los lados y la duración de las notas. Puede parecer preferible conseguir la equivalencia perfecta entre longitud y duración, sin embargo, tras varias pruebas  (Figura~\ref{fig:Figura5Voz1}) no se ha conseguido un resultado que cumpliese esa propiedad y al mismo tiempo no perdiese el concepto de ritmo musical.}
+A continuación, en la segunda fase, se calculan la longitud media de los lados, el lado más largo y el lado más corto. Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima de las notas con las longitudes recién calculadas. Se usan las duraciones simples (figuras simples) de las notas en música obviando las compuestas (figuras compuestas), es decir, que se asignan duraciones de blancas, negras, corcheas, semicorcheas... en vez de usar, por ejemplo, negra con doble puntillo que es una nota de duración negra más una corchea más una semicorchea. Buscar una equivalencia perfecta entre la longitud de los lados y la duración de las notas sería lo primero que pensaría el lector que podría ser la correspondencia más fiel, pero tras varias pruebas realizadas (Figura~\ref{fig:Figura5Voz1}) no se ha podido averiguar cómo hacerlo sin que se perdiera completamente el concepto de ritmo musical.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -37,13 +40,16 @@ A continuación, en la segunda fase se calcula la longitud media de los lados y 
 		\label{fig:Figura2Voz1}
 		\end{figure}
 
-En el ejemplo (Figura~\ref{fig:Figura2Voz1}) se puede apreciar cómo el lado más largo obtiene una duración mayor (blanca) que los otros dos lados (negra). Aunque los dos lados más pequeños tienen diferentes longitudes, se ha aproximado su valor al mismo valor de duración.
+En el ejemplo (Figura~\ref{fig:Figura2Voz1}) se puede apreciar cómo el lado más largo obtiene una duración mayor (blanca) que los otros dos lados (negra). A pesar de que los dos lados más pequeños tienen diferentes longitudes, se ha aproximado su longitud a una misma duración.\\
 
-La tercera fase se centra en obtener los tonos de las notas que vamos a crear. Se tienen varias formas diferentes de conseguirlo que además se han llevado a cabo en diferentes trabajos (\cite{bricksConvertsMusic} \cite{ImageBaseComposition}). La aproximación usada se basa en la idea de estabilidad que desarrolla el trabajo de A. Pintado (\cite{portutesis}). Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos o irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos.
+\todo{A que te refieres con una figura es estable?}
+La tercera fase se centra en obtener los tonos de las notas que se van a crear. En otros trabajos se han obtenido de diferentes manera(\cite{bricksConvertsMusic} \cite{ImageBaseComposition}). La aproximación que se usa en este proyecto se basa en la idea de estabilidad que se desarrolla en el trabajo de A. Pintado (\cite{portutesis}). Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos o irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos.\\
 
-La obtención de los tonos viene de los ángulos de las figura, para ello se coge el primer vértice y se calcula su ángulo. Por ser la primera nota le asignamos el tono correspondiente al color de la figura dentro del sistema de colores usado (p. ej: Rojo en el sistema Scriabin es C ``do'', amarillo es D ``re''). A partir de ahí dependiendo de cuanto ha variado el ángulo del siguiente vértice respecto al anterior vamos asignando un tono más alto o más bajo (si sube o baja el diferencial de ángulo).
+\todo{El diferencial del ángulo esta bien dicho?}
+La obtención de los tonos viene de los ángulos de las figuras, para ello se coge el primer vértice y se calcula su ángulo. Por ser la primera nota le asignamos el tono correspondiente al color de la figura dentro del sistema de colores usado (p. ej: Rojo en el sistema Scriabin es C ``do'', amarillo es D ``re''...). A partir de ahí, dependiendo de cuanto ha variado el ángulo del siguiente vértice respecto al anterior, vamos asignando un tono más alto o más bajo según sube o baja el diferencial de ángulo.
 
-De forma experimental y tras varias pruebas, hemos obtenido una correspondencia entre la variación de ángulos y la cantidad de tonos que debe variar el nuevo tono respecto al anterior (Figura~\ref{fig:Figura3Voz1}). 
+\todo{y la cantidad de tonos que debe variar el nuevo tono: no hay otra manera de expresarlo? es redundante. Aparte la frase me suena raro pero no veo otra forma de decirlo}
+De forma experimental y tras varias pruebas, se ha obtenido una correspondencia entre la variación de ángulos y la cantidad de tonos que deberá variar el nuevo tono respecto al anterior (Figura~\ref{fig:Figura3Voz1}). 
 
 		\begin{figure}[htbp]
 		\centering
@@ -53,9 +59,15 @@ De forma experimental y tras varias pruebas, hemos obtenido una correspondencia 
 		\label{fig:Figura3Voz1}
 		\end{figure}
 
-De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono vecino dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde del color de la figura, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. Usamos el acorde fundamental con tono fundamental la nota del color de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. Este hecho se basa en la asociación que tiene Scriabin con los colores(\cite{ScriabinQuintasColor}), él hacía corresponder un color a un tono y su acorde fundamental sin distinguir entre acorde mayor o menor para cada una de las notas de la escala cromática.
+\todo{En cuanto a lo de se usa el tono vecino no sería mejor decir algo como: se usa uno de los tonos adyacentes dentro de la escala cromática. no se, con lo del tono vecino no queda claro lo que quieres decir\\
+Del acorde del color de la figura: no hemos hablado de acordes hasta ahora, a que te refieres?\\
+Qué es el acorde fundamental, está explicado en alguna otra parte?\\
+No entiendo esta frase: Se usa el acorde fundamental con tono fundamental la nota del color de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura.\\
+Habrá que mencionar la escala cromática en algún lado, referencia?}
+De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono vecino dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde del color de la figura, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. Se usa el acorde fundamental con tono fundamental la nota del color de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. Esta relación se basa en la asociación que tiene Scriabin con los colores(\cite{ScriabinQuintasColor}), él hacía corresponder un color a un tono y a su acorde fundamental sin distinguir entre acorde mayor o menor para cada una de las notas de la escala cromática.
 
-De esta manera conseguimos que una figura simétrica con todos sus ángulos iguales suene la misma nota ya que su estabilidad es muy alta. El círculo sería la figura de mayor estabilidad y se correspondería a una nota de larga duración, pero por el proceso de análisis, el círculo se aproxima a un polígono regular de muchos lados y por tanto a muchas notas con el mismo tono.
+\todo{Su estabilidad es muy alta creo que haces referencia a lo de la portutesis, no habría otra manera de decirlo que sea mas simple: la variación de sus ángulos es constante o algo así}
+De esta manera se consigue que en una figura simétrica con todos sus ángulos iguales suene la misma nota ya que su estabilidad es muy alta. Normalmente el círculo sería la figura de mayor estabilidad y se correspondería a una nota de larga duración, pero, por el proceso de análisis, el círculo se aproxima a un polígono regular de muchos lados y por tanto a muchas notas con el mismo tono.
 
 		\begin{figure}[htbp]
 		\centering
@@ -66,11 +78,16 @@ De esta manera conseguimos que una figura simétrica con todos sus ángulos igua
 		\label{fig:Figura4Voz1}
 		\end{figure}
 
-Como se puede observar en el ejemplo (Figura~\ref{fig:Figura4Voz1}), tenemos los 3 ángulos con su nota correspondiente ya calculado. Para conseguirlo primero tenemos que ver qué nota corresponde al color de la figura (en nuestro caso se usa Scriabin en el que el amarillo es D ``re''). Una vez tenemos la nota y su ángulo calculamos la diferencia el nuevo ángulo y el anterior. Sale negativo, luego tenemos que bajar el tono y como está entre el rango de 10º y 30º sólo tenemos que bajar un escalón en la escala actual (que en este ejemplo es la de Re Mayor), así que la nueva nota es C "do". Y por último calculamos el diferencial con el último vértice restando el ángulo del vértice tercero con el segundo. Nos da un valor positivo, luego tenemos que subir el tono. Al estar entre 30º y 120º se sube un salto en el acorde de nota fundamental el color de la figura (en nuestro caso es el acorde de D ``re'': D-F ``fa''-A ``la''). Cómo no estamos en el acorde con el último tono obtenido (C ``do'') viajamos al tono más cercano que pertenezca al acorde, es decir, a D ``re''. Y de ahí damos el salto de una nota dentro del acorde y como el ángulo es positivo lo hacemos ascendente, saltamos a F ``fa''.
+\todo{No se entiende bien que pasa aquí: se sube de un salto en el acorde de nota fundamental el color de la figura\\
+primero hablas de saltar tonos y luego al final de este párrafo dices dar el salto de una nota}
+Como se puede observar en el ejemplo (Figura~\ref{fig:Figura4Voz1}), se tienen los 3 ángulos con su nota correspondiente ya calculada. Para conseguirlo primero se tiene que ver qué nota corresponde al color de la figura (en este caso se usa la correspondencia propuesta por Scriabin en la que el amarillo es D ``re''). Una vez se tiene la nota y su ángulo, se calcula la diferencia entre el nuevo ángulo y el anterior, el resultado es negativo por lo que se tiene que bajar de tono y como la diferencia está entre los 10º y 30º, sólo se baja un escalón en la escala actual (en este ejemplo la de Re Mayor), obteniendo la nueva nota: C ``do''. Para conseguir el último tono, se calcula el diferencial del último vértice restando el ángulo del tercer vértice con el del segundo. Se obtiene un valor positivo, luego se tiene que subir el tono, all estar entre 30º y 120º se sube de un salto en el acorde de nota fundamental el color de la figura (en este caso es el acorde de D ``re'': D-F ``fa''-A ``la''). Cómo no se está en el acorde del último tono obtenido (C ``do'') se viaja al tono más cercano que pertenezca a ``do'', es decir, D ``re''. Y de ahí se da el salto de una nota dentro del acorde y como el ángulo es positivo se salta a la nota superior: F ``fa''.
 
-Por último, la cuarta fase que combina las duraciones con los tonos para crear las notas. Al final hemos obtenido un trozo de música de una de las voces (Partitura de Figura~\ref{fig:Figura4Voz1}).
+Por último, la cuarta fase se encarga de combinar las duraciones con los tonos para crear las notas. Al final se obtiene un trozo de música de una de las voces (Partitura de Figura~\ref{fig:Figura4Voz1}).
+\todo{El ejemplo quizas haciendolo más esquemático quedaría más claro, ahora mismo es bastante lioso}
 
-Este algoritmo está implementado en la clase ComposerFigMelody2. Además hemos dejado otro compositor ComposerFigMelody que cambia la segunda y tercera fase, fruto de las primeras pruebas en la composición. En la segunda fase, al hacer corresponder las duraciones con las longitudes de los lados, se usan las duraciones compuestas (buscando la máxima exactitud entre longitud de lado y duración) con unidad mínima indivisible la semicorchea o unidades más pequeñas si la duración pedida del segmento de música es especial (no divisible en semicorcheas) (Figura~\ref{fig:Figura5Voz1}).
+\todo{Esto está mal estructurado, empiezas hablando de la composición musical en general pero de repente tras contar el ejemplo dices que es de tal compositor, debería de ser mas al estilo del analizador de figuras, hablas de las 4 fases de la composición y luego dices compositor tal: fase uno asi y asi, fase dos asa y asa etc..., y si eso el ejemplo para ayudar a entenderlo, luego compositor cual: asi y asa... etc... ahora mismo con este salto se vuelve todo lioso y uno falla en ver la estructura del tema\\
+A partir de o unidades más pequeñas... al final del parrado, no se entiende a que te refieres}
+Este algoritmo está implementado en la clase ComposerFigMelody2. Además hay otro compositor, ComposerFigMelody, que se desarrolló durante las primeras pruebas de composición, que trabaja de manera diferente en la segunda y tercera fase. En la segunda fase, al hacer corresponder las duraciones con las longitudes de los lados se usan las duraciones compuestas (buscando la máxima exactitud entre longitud de lado y duración) siendo la unidad mínima indivisible la semicorchea o unidades más pequeñas si la duración pedida del segmento de música es especial (no divisible en semicorcheas) (Figura~\ref{fig:Figura5Voz1}).
 
 		\begin{figure}[htbp]
 		\centering
@@ -80,7 +97,7 @@ Este algoritmo está implementado en la clase ComposerFigMelody2. Además hemos 
 		\label{fig:Figura5Voz1}
 		\end{figure}
 
-En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cuenta la variación respecto al anterior ángulo examinado, se usa una correspondencia directa donde mayor águlo implica mayor salto de tono y el signo del ángulo es la dirección del salto (Figura~\ref{fig:Figura6Voz1}).
+En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cuenta la variación respecto al anterior ángulo examinado, se usa una correspondencia directa donde: cuanto mayor sea el ángulo mayor será el salto de tono. Además el signo del ángulo determina la dirección del salto (Figura~\ref{fig:Figura6Voz1}).
 
 		\begin{figure}[htbp]
 		\centering
@@ -95,8 +112,9 @@ En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cu
 
 \subsection{2ª Voz: Melodía Secundaria}
 
-Para crear el acompañamiento o segunda voz, se usa la misma estructura que a la hora de componer la melodía principal aunque también necesitamos el segmento de melodía principal como entrada para poder componer sobre ella. 
-La primera fase es igual que en la primera voz. La segunda fase también es igual salvo que al final introducimos un paso de adaptación. Debemos hacer una adaptación de la duración del total obtenido al analizar la figura (Figura~\ref{fig:Figura1Voz2} sin adaptar y Figura~\ref{fig:Figura2Voz2} con adaptación). Eso ocurre ya que se quiere que el segmento de música que se genera tenga una duración determinada menor o igual a la melodía principal. Además se debe decidir en qué momento de la melodía principal se empieza a decorarla introduciendo la segunda voz.
+\todo{A estas alturas debes odiarme: El tema de la adaptación no queda nada claro...}
+Para crear la segunda voz que sirve de acompañamiento a la primera, se usa la misma estructura que a la hora de componer la melodía principal, aunque también se necesita el segmento de melodía principal como entrada para poder basarse en ella para componer. 
+La primera fase es igual que en la primera voz. La segunda fase también es igual salvo que al final se introduce un paso de adaptación. Debemos hacer una adaptación de la duración del total obtenido al analizar la figura (Figura~\ref{fig:Figura1Voz2} sin adaptar y Figura~\ref{fig:Figura2Voz2} con adaptación). Eso ocurre ya que se quiere que el segmento de música que se genera tenga una duración determinada menor o igual a la melodía principal. Además se debe decidir en qué momento de la melodía principal se empieza a decorar introduciendo así la segunda voz.
 
  		\begin{figure}[htbp]
 		\centering
@@ -114,9 +132,11 @@ La primera fase es igual que en la primera voz. La segunda fase también es igua
 		\label{fig:Figura2Voz2}
 		\end{figure}
 
+\todo{No sería conveniente explicar esto antes de explicar que se adapta? ademas habría que estructurar todo esto por fases como mencioné anteriormente, esta todo muy caótico}
 Esta función de adaptación se encarga de ir dividiendo a la mitad diferentes duraciones para reducir la duración total del segmento (o ir aumentando, duplicando duraciones, si se necesita aumentar la duración total). 
 
-El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos se va analizando el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar la primera y la segunda voz (Figura~\ref{fig:Figura3Voz2}). Por ello mientras se genera la nueva melodía se va haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usados siguen los principios de las técnicas más básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayor a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué implica un menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono (Figura~\ref{fig:Figura3Voz2}).
+\todo{Vale... en lugar de decir cambios y luego decir cambios siguen principios de, y luego cambios se activan en habría que ponerlo de manera que sea, por ejemplo: mientras se genera el acompañamiento se va analizando el resultado para cambiar el tono subiendo o bajando a una nueva nota de tal manera que la melodía cumpla las reglas contrapuntísticas más básicas consiguiendo un acompañamiento que no sea disonante con la melodía principal}
+El otro cambio se hace en la tercera fase. Mientras se generan los tonos se analiza el comportamiento de la segunda voz respecto a la melodía principal. Este paso es necesario para disminuir las disonancias que puedan aparecer al juntar ambas voces (Figura~\ref{fig:Figura3Voz2}). Por ello mientras se genera la nueva melodía se van haciendo pequeños cambios en la segunda voz que lleven a un resultado mejorado. Los cambios usados siguen los principios de las técnicas más básicas contrapuntísticas. Estos cambios se activan cuando el intervalo entre la voz primera y la voz segunda es disonante y se mantiene un periodo alargado en el tiempo (igual o mayor a la duración media de las notas, normalmente una negra). Cómo se intenta minimizar los cambios, se suele hacer que si el cambio de tono era para subir, se sube menos o más el nuevo tono dependiendo de qué implica un menor cambio. Lo mismo cuando el cambio de tono es para bajar, se baja un poco más o menos el nuevo tono (Figura~\ref{fig:Figura3Voz2}).
 
 		\begin{figure}[htbp]
 		\centering
@@ -136,13 +156,13 @@ El otro cambio que hacemos es en la fase tercera. Mientras se generan los tonos 
 		\label{fig:Figura4Voz2}
 		\end{figure}
 
-En la mayoría de ocasiones, la segunda voz se pide una duración menor que el segmento de primera voz que va acompañandolo, esto ocurre porque normalmente se pasa una figura de entrada menor que la usada para componer la melodía principal. Para que el segmento tenga la misma duración que el segmento de la primera voz se rellenan los huecos (delante y/o detrás) del trozo de música compuesto con silencios.
+En la mayoría de ocasiones, el segmento de la segunda voz tiene una duración menor que el segmento de primera voz a la que va acompañando, esto ocurre porque normalmente la figura de entrada es menor que la figura que se usó para componer la melodía principal. Para que el segmento de la segunda voz tenga la misma duración se rellenan los huecos antes y después del trozo de melodía compuesto con silencios.
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------
 
 \subsection{3ª Voz: Bajo}
 
-Para el bajo, se ha cogido un algortimo simple que consiste en notas de duración dada (por defecto redondas) que tengan como tono el color de la figura de entrada y que rellene la duración completa dada (Figura~\ref{fig:Figura1Voz3}).
+Para el bajo, el algoritmo consiste en usar siempre notas de una misma duración (por defecto redondas) cuyo tono sea el color de la figura de entrada y cuya duración sea la de la figura dada (Figura~\ref{fig:Figura1Voz3}).
 
 		\begin{figure}[htbp]
 		\centering
@@ -153,7 +173,8 @@ Para el bajo, se ha cogido un algortimo simple que consiste en notas de duració
 		\label{fig:Figura1Voz3}
 		\end{figure}
 
-Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz pero transportandola una o varias octavas más abajo (Figura~\ref{fig:Figura2Voz3}). El número de octavas depende del tono más agudo y el tono más grave que hay en la melodía compuesta. Si se tiene que al transportar la melodía dos octavas más grave se sale del límite de representación de las notas, entonces sólo se hace más grave una octava.
+\todo{Solo tienes en cuenta el transportar la melodía dos octavas más grave, este fallo no se puede expresar de manera más general?}
+Otra posibilidad disponible para el bajo es usar la el algoritmo de la primera voz pero transportando los tonos una o varias octavas más abajo (Figura~\ref{fig:Figura2Voz3}). El número de octavas depende del tono más agudo y del tono más grave de la melodía compuesta hasta el momento. Si al transportar la melodía a dos octavas más grave se sale del límite de representación de las notas, entonces sólo se transportara una octava más grave.
 
 		\begin{figure}[htbp]
 		\centering
@@ -168,7 +189,11 @@ Otra posibilidad habilitada para el bajo es usar la algoritmia de la primera voz
 
 \subsection{4ª Voz: Ritmo}
 
-Para el ritmo se creó una primera versión basada en la disposición de los vértices. Se dividía la figura en varias secciones de ángulos dejando cada vértice dentro de una sección. Estas secciones son configurables para hacerlas en distintas proporciones. Una vez se tienen los vértices de cada sección, se sustituyen por ritmos. De tal modo que si no hay un vértice en una sección, esta tiene un silencio y si hay un vértice, entonces hay un pulso de ritmo (Figura~\ref{fig:Figura1Voz4}). Este ritmo se repite durante la duración dada por entrada.
+\todo{Estructuración: primera version: blah blah blah, segunda versión: blah balh\\
+Que es dividir la figura en varias secciones de ángulos? no se podría decir: se divide la figura de tal manera que cada vértice queda dentro de una sección?\\
+Que son las proporciones?\\
+A que  se refiere la duración dada por la entrada, no has mencionado en ningún sitio que se diese una duración al algoritmo}
+Para el ritmo hay una primera versión basada en la disposición de los vértices. Se divide la figura en varias secciones de ángulos dejando los vértices en diferentes secciones. Estas secciones son configurables de tal manera que se pueden cambiar las proporciones. Una vez se tienen los vértices de cada sección, se sustituyen por ritmos de tal modo que si no hay un vértice en una sección se coloca un silencio y si hay un vértice entonces se coloca un pulso de ritmo (Figura~\ref{fig:Figura1Voz4}). Este ritmo se repite durante la duración dada por entrada.
 
 		\begin{figure}[htbp]
 		\centering
@@ -178,7 +203,9 @@ Para el ritmo se creó una primera versión basada en la disposición de los vé
 		\label{fig:Figur1Voz4}
 		\end{figure}
 
-El otro ritmo implementado se basa en el concepto de inestabilidad de una figura de A. Pintado (\cite{portutesis}). Por defecto creamos un ritmo que consiste en pulsos largos (la duración de estos pulsos se pueden configurar). A cada nota le es asignado una serie de vértices dependiendo de la densidad de vértices de la figura. Después se va calculando cuanto de desviación se produce en esos vértices respecto al círculo de área igual a la figura y con centro el punto de equilibrio de la figura (Figura~\ref{fig:Figura2Voz4}). A mayor desviación, mayor inestabilidad luego el ritmo se subdivide en más notas y de menor duración (Figura~\ref{fig:Figura3Voz4}).
+\todo{una serie de vértices dependiendo de la densidad de vertices de la figura? a que se refiere?\\
+no entiendo nada del tema de desviación respecto al circulo del área igual a la figura... igualmente, aparte de expresar eso bien tendría que estar más estructurado, se me ocurre algo en plan: las notas dependerán de dos elementos: los vertices y el punto de equilibrio. la relación con los vértices se produce cuando... la relación con el punto de equilibrio se calcula de la siguiente manera... al juntar ambos calculos los vertices producen blah y el punto de equilibrio bleh consiguiendo asi un ritmo blah blah}
+El otro ritmo implementado se basa en el concepto de inestabilidad de una figura de A. Pintado (\cite{portutesis}). Por defecto se crea un ritmo que consiste en pulsos largos de duración configurable. A cada nota le es asignada una serie de vértices dependiendo de la densidad de vértices de la figura. Después se va calculando cuanta desviación producen esos vértices respecto al círculo de área igual a la figura y con centro el punto de equilibrio de la figura (Figura~\ref{fig:Figura2Voz4}). A mayor desviación, mayor inestabilidad luego el ritmo se subdivide en más notas de menor duración (Figura~\ref{fig:Figura3Voz4}).
 
 		\begin{figure}[htbp]
 		\centering
@@ -201,9 +228,11 @@ El otro ritmo implementado se basa en el concepto de inestabilidad de una figura
 
 \subsection{Mixer}
 
-Los anteriores algoritmos son para crear un trozo de musica de una voz a partir de una figura, pero tenemos que saber en qué momento vamos a llamar a cada algoritmo y con qué figuras. Para ello está el Mixer.
+\todo{Sería conveniente cambiar mixer por algún tecnicismo}
+Los anteriores algoritmos sirven para crear un trozo de música de una voz a partir de una figura, el siguiente paso es juntar las distintas voces para formar una melodía, para ello se utiliza el ``Mixer''
 
-En una primera implementación el mixer se encargaba de ordenar las figuras en orden de relevancia siguiendo el parámetro de vistosidad calculado a partir de tres características de la figura.
+\todo{En una primera implementacion? ya no se hace así? si es el caso para que esta mencionado aqui?, aparte lo de siempre estructurar las cosas, al mencionar las características se puede hacer una lista etc... y cambiar todos los tonos personales como cambiamos a se cambia, aparte lo mismo de antes estructura, se podría poner: mezclador, se encarga de blah balh,en el proyecto se usan dos mezcladores: mezclador uno: blah balh, Mezclador 2: blah blah y demás...}
+En una primera implementación el Mixer se encargaba de ordenar las figuras en orden de relevancia siguiendo el parámetro de vistosidad calculado a partir de tres características de la figura.
 La primera es lo vistosidad del color de la figura. Para ello descomponemos el color en sus tres componentes principales RGB y damos peso a cada uno de ellos y lo multiplicamos por la saturación del color.
 La segunda componente es el área que ocupa la figura. Cuanto más grande sea, más vistosa es.
 La tercera componente es la distancia que tiene del centro de la imagen. El ojo humano enfoca de centro a laterales cuando ve una imagen por primera vez, por ello tiene más vistosidad una figura que se encuentra en el centro de la imagen que en un lateral.
@@ -222,7 +251,7 @@ La tercera componente es la distancia que tiene del centro de la imagen. El ojo 
 		\end{array}\right.$
 	\end{center}
 
-Tras haber ordenado las figuras por vistosidad vamos componiendo con cada una de forma iterativa las distintas voces. En el primer mixer que hicimos, sólo se componía  de melodía y ritmo. Para la segunda versión del mixer se sigue calculando la vistosidad como se explicó pero en vez de ordenar todas las figuras, ordenamos solo las figuras que están en la imagen sin estar dentro de otra figura, las llamadas figuras padre. Una vez las tenemos vamos iterando por cada figura padre componiendo su melodía, bajo y ritmo. Si la figura padre tiene otras figuras dentro de ella (figuras hijas), entonces también se añade la segunda melodía dando como entrada al algoritmo de composición de acompañamiento esta segunda figura (la figura hija). Por cada figura interior se compone un nuevo bloque de la figura padre con diferentes acompañamientos (Figura~\ref{fig:Figura1Mixer}).
+Tras haber ordenado las figuras por vistosidad vamos componiendo con cada una de forma iterativa las distintas voces. En el primer Mixer que hicimos, sólo se componía  de melodía y ritmo. Para la segunda versión del Mixer se sigue calculando la vistosidad como se explicó pero en vez de ordenar todas las figuras, ordenamos solo las figuras que están en la imagen sin estar dentro de otra figura, las llamadas figuras padre. Una vez las tenemos vamos iterando por cada figura padre componiendo su melodía, bajo y ritmo. Si la figura padre tiene otras figuras dentro de ella (figuras hijas), entonces también se añade la segunda melodía dando como entrada al algoritmo de composición de acompañamiento esta segunda figura (la figura hija). Por cada figura interior se compone un nuevo bloque de la figura padre con diferentes acompañamientos (Figura~\ref{fig:Figura1Mixer}).
 
 		\begin{figure}[htbp]
 		\centering
@@ -233,4 +262,4 @@ Tras haber ordenado las figuras por vistosidad vamos componiendo con cada una de
 		\label{fig:Figura1Mixer}
 		\end{figure}
 
-Una vez tenemos compuestas todas las voces, es el mixer el que se encarga de juntarlas y llamar a la creación de la partitura y posterior conversión a midi.
+Una vez tenemos compuestas todas las voces, es el Mixer el que se encarga de juntarlas y llamar a la creación de la partitura y posterior conversión a midi.
