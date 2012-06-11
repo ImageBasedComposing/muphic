@@ -1,11 +1,12 @@
 \chapter{Guía de Uso}
 \label{chap:guiauso}
 
-	\todo{poner ejemplos de analisis}
+	\torev{Última Revisión: 05-06-2012}
+
 
 	\section{Introducción}
 		
-		Esta sección pretende mostrar una vista general de la aplicación y sus opciones. A lo largo de ella se explicarán todos los módulos del programa con los que el usuario puede interactuar y detallará la función de determinados mecanismos.\\
+		Esta sección pretende mostrar una vista general de la aplicación y sus opciones. \color{blue} A lo largo de ella se explicarán todos los módulos del programa con los que el usuario puede interactuar y detallará la función de determinados mecanismos.\color{black}\\
 		
 		\begin{figure}[htbp]
 		\centering
@@ -15,7 +16,7 @@
 		\label{fig:interfazoverview}
 		\end{figure}
 		
-		Como vemos en la Figura~\ref{fig:interfazoverview}, la aplicación dispone de tres pestañas: \emph{Main Window}, \emph{Graphic Config} y \emph{Composition Config}. La primera dispone de toda la funcionalidad necesaria para lanzar la aplicación, mientras que las otras dos aportan opciones para configurar el comportamiento del análisis y la composición.\\
+		Como vemos en la Figura~\ref{fig:interfazoverview}, la aplicación dispone de tres pestañas:\color{blue} \emph{Main Window}, \emph{Graphic Config} y \emph{Composition Config}. La primera dispone de toda la funcionalidad necesaria para lanzar la aplicación, mientras que las otras dos aportan opciones para configurar el comportamiento del análisis y la composición.\color{black}\\
 		
 		De forma general, todo usuario, experto o inexperto, se puede valer de la primera pestaña para usar la composición. Sin embargo, un usuario avanzado con conocimientos musicales y de qué tipos de análisis gráficos se realizan puede navegar por las pestañas restantes para configurar los procesos de composición y análisis de imagen, respectivamente.\\
 		
@@ -23,8 +24,8 @@
 
 	\section{Ventana principal}
 		
-		Se encarga de la interacción básica con el usuario; muestra los resultados obtenidos y permite lanzar los principales componentes de la aplicación. 
-		\\Esta compuesta por los siguientes elementos tal y como se puede ver en la Figura~\ref{fig:interfaz}:\\
+		\color{blue}Se encarga de la interacción básica con el usuario; muestra los resultados obtenidos y permite lanzar los principales componentes de la aplicación. 
+		\\Esta compuesta por los siguientes elementos tal y como se puede ver en la Figura~\ref{fig:interfaz}:\\\color{black}
 		
 		
 		\begin{figure}[htbp]
@@ -35,29 +36,31 @@
 		\label{fig:interfaz}
 		\end{figure}
 		
-		\noindent\textit{Carga de imagen de entrada [F]:}  Mediante esta opción el usuario puede elegir la dirección desde donde se cargará la imagen de entrada que se usará en el análisis. Para elegir la dirección podrá insertar el texto a mano o utilizar el botón para usar el explorador del sistema operativo correspondiente.\\
+		\color{blue}\noindent\textit{Carga de imagen de entrada [F]:}  \color{black}Mediante esta opción el usuario puede elegir la dirección desde donde se cargará la imagen de entrada que se usará en el análisis. Para elegir la dirección podrá insertar el texto a mano o utilizar el botón para usar el explorador del sistema operativo correspondiente.\\
 		
-		\noindent\textit{Selección del archivo de audio de salida [G]:}  Mediante esta opción el usuario puede la dirección donde se guardará el archivo de salida. Para elegir la dirección podrá insertar el texto a mano o utilizar el botón para usar el explorador del sistema operativo correspondiente.\\
+		\color{blue}\noindent\textit{Selección del archivo de audio de salida [G]:}\color{black}  Mediante esta opción el usuario puede la dirección donde se guardará el archivo de salida. Para elegir la dirección podrá insertar el texto a mano o utilizar el botón para usar el explorador del sistema operativo correspondiente.\\
 		
-		\noindent\textit{Input Image [H]:} En este panel se muestra la imagen elegida para el análisis.\\
+		\color{blue}\noindent\textit{Input Image [H]:}\color{black} En este panel se muestra la imagen elegida para el análisis.\\
 		
-		\noindent\textit{Analysis output [I]:} En este panel se muestra el resultado del último análisis realizado pulsando el botón ``Analyze''.\\
+		\color{blue}\noindent\textit{Analysis output [I]:}\color{black} En este panel se muestra el resultado del último análisis realizado pulsando el botón ``Analyze''.\\
 		
-		\noindent\textit{Botón Analyze [B]:} Tal y como su nombre indica, Analyze, realiza el analisis de la imagen pasada como parámetro de entrada. Tras analizarse, el resultado podrá observarse en el panel \textit{[I]}. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP'', pudiendo pulsarlo de nuevo para detener el análisis manualmente. Esta opción es bastante útil para imagenes grandes o complejas (con muchas variaciones de color que originan gran cantidad de formas), ya que el análisis puede tardar más de lo esperado y el usuario puede de esta manera detenerlo para luego relanzarlo con otra configuración más rápida.\\
+		\color{blue}\noindent\textit{Botón Analyze [B]:} Tal y como su nombre indica, Analyze, realiza el analisis de la imagen pasada como parámetro de entrada. Tras analizarse, el resultado podrá observarse en el panel \textit{[I]}. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP'', pudiendo pulsarlo de nuevo para detener el análisis manualmente. Esta opción es bastante útil para imagenes grandes o complejas (con muchas variaciones de color que originan gran cantidad de formas), ya que el análisis puede tardar más de lo esperado y el usuario puede de esta manera detenerlo para luego relanzarlo con otra configuración más rápida.\color{black}\\
 		
-		\noindent\textit{Botón Compose [A]:} Realiza la composición musical a partir de los datos analizados. Una vez compuesta la pieza musical, se podrá escuchar mediante los controles de control de sonido. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP', pudiendo pulsarlo de nuevo para detener la composición manualmente.\\
+		\color{blue}\noindent\textit{Botón Compose [A]:}\color{black} Realiza la composición musical a partir de los datos analizados.\color{blue} Una vez compuesta la pieza musical, se podrá escuchar mediante los controles de control de sonido.\color{black} Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP', pudiendo pulsarlo de nuevo para detener la composición manualmente.\\
 		
-		\noindent\textit{Botón de Inicio de Reproducción [C]:} Permite al usuario iniciar la reproducción de la pieza musical compuesta previamente.\\
+		\color{blue}\noindent\textit{Botón de Inicio de Reproducción [C]:} Permite al usuario iniciar la reproducción de la pieza musical compuesta previamente.\color{black}\\
 		
-		\noindent\textit{Botón de Pausa de Reproducción [D]:} Pausa la pieza musical en reproducción.\\
+		\color{blue}\noindent\textit{Botón de Pausa de Reproducción [D]:}\color{black} Pausa la pieza musical en reproducción.\\
 		
-		\noindent\textit{Botón de Detención de Reproducción [E]:} Detiene la reproducción completamente.\\
+		\color{blue}\noindent\textit{Botón de Detención de Reproducción [E]:}\color{black} Detiene la reproducción completamente.\\
 		
-		\noindent\textit{Barra de sonido [F]:} Modifica el volumen de la reproducción en curso.
+		\color{blue}\noindent\textit{Barra de sonido [F]:}\color{black} Modifica el volumen de la reproducción en curso.
 
 		
 	\section{Configuración gráfica}
-		
+		\torev{Última revisión 05-06-12\\
+Falta: poner ejemplos de analisis\\
+Falta: quitar las referencias a imagenes que ya no estén}
 		En esta pestaña se encuentran todas las opciones relacionadas con el análisis de la imagen. En ella se podrán configurar opciones que hagan que el proceso de análisis varíe en velocidad, precisión o estilo.\\
 		
 		De entre los parámetros de configuración, existen los llamados ``generales'', que siempre aparecen visibles al usuario, y los ``específicos'', que complementan a los generales y sólo aparecen cuando el contexto lo especifica. En la Figura~\ref{fig:interfazgraphic} podemos ver detalladamente los parámetros generales.\\
@@ -74,7 +77,7 @@
 		
 		\noindent\textit{Selección de ruido [B]:} Mediante esta barra el usuario puede elegir el tamaño mínimo de las formas por debajo del cual no se considerarán relevantes en el análisis. El valor representa un porcentaje respecto al área total de la imagen, de forma que un valor $n$ de Selección de Ruido determina que todas las formas con área menor a un $n$\% del área total de la imagen se considerarán ruido y no serán estudiadas.\\
 		
-		\noindent\textit{Profundidad del análisis [C]:} Permite variar el nivel de detalle con el que se realizará el análisis, o para ser más precisos: determina el número de píxeles respecto del total que se tienen en cuenta para el anális. Un valor grande de profundidad hará que el análisis se realice examinando la mayor parte de los píxeles de la imagen (se establece como restricción que nunca se examinen más de 1000x1000 píxeles, por cuestiones de optimización), mientras que un valores pequeños aumentarán la velocidad del proceso a costa de tener en cuenta menos píxeles en la imagen. \\
+		\color{blue}\noindent\textit{Profundidad del análisis [C]:} Permite variar el nivel de detalle con el que se realizará el análisis, o para ser más precisos: determina el número de píxeles respecto del total que se tienen en cuenta para el anális. Un valor grande de profundidad hará que el análisis se realice examinando la mayor parte de los píxeles de la imagen (se establece como restricción que nunca se examinen más de 1000x1000 píxeles, por cuestiones de optimización), mientras que un valores pequeños aumentarán la velocidad del proceso a costa de tener en cuenta menos píxeles en la imagen. \color{black}\\
 		
 		\noindent\textit{Simplificación de polígonos [D]:} Una vez detectadas las formas de color, es necesario que se aproximen a una lista de vértices para reducir el peso de la información sin modificar la carga de la misma. El nivel de fidelidad en la transformación de formas a polígonos se establece con este parámetro: un valor alto determina una gran fidelidad a costa de mayor tiempo de análisis, y viceversa.\\
 
@@ -93,7 +96,7 @@
 		
 	\noindent\textbf{Adaptive Threshold}\\
 
-		Mientras que el filtro anterior utiliza un mismo umbral para toda la imagen, Adaptative Threshold (ver implementación en \cite{opencvDoc}, y su descripción formal en \cite{pajares}) usa un filtro distinto para diferentes regiones de la imagen, en función de los valores de los píxeles tratados.\\ 
+		Mientras que el filtro anterior utiliza un mismo umbral para toda la imagen, Adaptative Threshold (ver implementación en \cite{opencvDoc},\color{blue} y su descripción formal en \cite{pajares}) usa un filtro distinto para diferentes regiones de la imagen, en función de los valores de los píxeles tratados.\color{black}\\ 
 		
 		Este filtro no usa parámetros específicos, ya que modifica el valor del umbral cada vez que le resulta necesario.\\
 		
