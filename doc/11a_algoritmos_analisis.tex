@@ -95,7 +95,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\centering
 		\includegraphics[scale=0.47]{graphics/canny.png}
 		\caption{Ejemplo de filtrado canny}
-		\label{fig:adaptive}
+		\label{fig:canny}
 		\end{figure}
 		
 	Esta nueva aproximación produce resultados satisfactorios, pero origina nuevos problemas: el perímetro detectado en el algoritmo puede no estar cerrado, provocando que la figura resultante no se represente de forma correcta en la estructura de salida.
@@ -106,13 +106,13 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Para establecer los rangos, se divide cada canal de color (rojo, verde y azul) en un número $n$ de intervalos. El parámetro $n$ es de entrada y común para los tres canales. De esta forma, se recorre la imagen por cada intervalo existente de colores, devolviendo las figuras encontradas en cada intervalo en imágenes de salida distintas.\\
 	
-	Por ejemplo, si $n$ es 3, quiere decir que por cada canal se establecerán 3 intervalos, en total cada color podrá caer dentro de uno de los $3*3*3=27$ intervalos. Por cada intervalo se devuelve una imagen con las figuras presentes en él, únicamente si no está vacía (no existen figuras con colores dentro de ese intervalo). Se puede ver un ejemplo en la Figura~\ref{fig:canny}.
+	Por ejemplo, si $n$ es 3, quiere decir que por cada canal se establecerán 3 intervalos, en total cada color podrá caer dentro de uno de los $3*3*3=27$ intervalos. Por cada intervalo se devuelve una imagen con las figuras presentes en él, únicamente si no está vacía (no existen figuras con colores dentro de ese intervalo). Se puede ver un ejemplo en la Figura~\ref{fig:huedivision}.
 	
 		\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/huedivision.png}
 		\caption{Ejemplo de filtrado hue division}
-		\label{fig:canny}
+		\label{fig:huedivision}
 		\end{figure}
 	
 	\subsubsection{Color Threshold}
