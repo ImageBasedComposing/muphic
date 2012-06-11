@@ -23,10 +23,15 @@
 } % para TODO's, depende de \todoFlag
 % \newcommand{\todo}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{red}{yellow}{#1}}{}} % para TODO's, depende de \todoFlag
 %\newcommand{\todo}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\textcolor{red} {#1}}{}} % para TODO's, depende de \todoFlag
-
+% \newcommand{\torev}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{black}{cyan}{#1}}{}} % para TODO's, depende de \todoFlag
+% \newcommand{\gotrev}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{black}{green}{#1}}{}} % para TODO's, depende de \todoFlag
 
 
 \newcommand{\todo}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{red}{yellow}{ \begin{minipage}{12cm}#1\end{minipage}}}{}}
+
+\newcommand{\torev}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{black}{cyan}{ \begin{minipage}{12cm}#1\end{minipage}}}{}}
+
+\newcommand{\gotrev}[1]{\ifthenelse{\equal{\todoFlag}{ON}}{\fcolorbox{black}{green}{ \begin{minipage}{12cm}#1\end{minipage}}}{}}
 
 
 \newcommand{\todobis}[2]{\ifthenelse{\equal{\todoFlag}{ON}}{~\\{\fcolorbox{red}{#1}{\begin{minipage}{.985\textwidth}{#2}\end{minipage}}}}{}
