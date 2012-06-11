@@ -3,6 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>$(ProjectDir)..\..\..\Installation files - windows\</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>"$(ProjectDir)..\debug resource\phic_conf.xml" "$(ProjectDir)..\debug resource\2.png"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"$(ProjectDir)..\debug resource\phic_conf.xml" "$(ProjectDir)..\debug resource\test1.png"</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>
