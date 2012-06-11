@@ -118,7 +118,7 @@ void Escena::paintFigura(Figura* fig)
     if (tmpList.size() == 1)
     {
         painter->setBrush(QBrush(QColor(( (float) fig->getRGB().r / 255), ( (float) fig->getRGB().g / 255), ( (float) fig->getRGB().b / 255))));
-        points->push_back(QPointF(lastVertex->x, yTop - lastVertex->y));
+        points->push_back(QPointF(lastVertex->x, /*yTop - */lastVertex->y));
     }
     else
     {
@@ -159,7 +159,7 @@ void Escena::paintFigura(Figura* fig)
         }
         else
         {
-            points->push_back(QPointF((*it)->x, yTop - (*it)->y));
+            points->push_back(QPointF((*it)->x, /*yTop -*/ (*it)->y));
         }
 
         it++;
