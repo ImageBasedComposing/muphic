@@ -74,7 +74,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\end{array}\right.$
 	\end{center}
 	
-	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante c que en nuestro caso es 3.\\ \todo{Porqué 3 y porqué se le resta una constante si ya usas la media ponderada?}
+	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante teórica c.
 	
 	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold para figuras con este grado de simplicidad.\\
 	
@@ -197,7 +197,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\label{fig:colorsimilares}
 		\end{figure}
 	
-	Sin embargo, puede darse el caso en que dos polígnos similares sean distintos y diferenciarse principalmente por el color (uno es la silueta del otro, ver Figura~\ref{fig:colorsimilares}. Dado que nunca trabajamos con el color, y éste se calcula \emph{a posteriori} (mirando los píxeles que contiene el polígono), no podremos saber de qué caso se trata \todo{esto suena raro}, ya que carecemos de la información necesaria debido a la naturaleza del proceso realizado. A pesar de todo, este caso es muy particular y no afecta al correcto desarrollo de la aplicación, por lo que no supone un problema en el análisis.\\
+	Sin embargo, puede darse el caso en que dos polígnos similares sean distintos y diferenciarse principalmente por el color (uno es la silueta del otro, ver Figura~\ref{fig:colorsimilares}. Dado que nunca trabajamos con el color, y éste se calcula \emph{a posteriori} (haciendo una media del color de los píxeles que contiene el polígono), no podremos usar el color de cada figura para distinguirlas, ya que sería bastante parecido (ambas figuras encierran aproximadamente los mismos píxeles), por lo que carecemos de la información necesaria debido a la naturaleza del proceso realizado. A pesar de todo, este caso es muy particular y no afecta al correcto desarrollo de la aplicación, por lo que no supone un problema en el análisis.\\
 	
 	Una vez eliminadas las figuras repetidas, se puede estructurar los polígonos en árboles, teniendo en cuenta que un polígono está dentro de otro cuando todos sus vértices están dentro de él. El rectángulo principal (que delimita el lienzo de la imagen) se elimina del análisis si ha sido detectado como polígono, ya que se encuentra en todas las imágenes y no aporta ninguna información relevante.\\
 	
