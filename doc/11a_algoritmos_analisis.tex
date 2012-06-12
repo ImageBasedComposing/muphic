@@ -2,11 +2,11 @@
 \label{sec:algAnalisis}
 \torev{Primera Revisión Pendiente}
 
-Esta sección explicará con detalle los algoritmos de análisis de imágemes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{mierde}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
+Esta sección explicará con detalle los algoritmos de análisis de imágenes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{mierde}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
 
 Puesto que nos interesa la eficiencia temporal del proceso de análisis para aumentar la comodidad de la experiencia de usuario, será necesario que los procesos de análisis no consuman mucho tiempo o, al menos, que permitan aumentar su velocidad mediante configuración externa. Es por ello que cada proceso de análisis contendrá parámetros mediante los cuales se podrá modificar la velocidad del análisis a costa de menor precisión en el mismo.\\
 
-Para el diseño e implementación de los mismos se ha hecho uso de la librería multiplataforma de procesado de imágenes OpenCV {\cite{opencvDoc}). Esta librería, desarrollada por Intel y orientada a la visión por computador, ofrece multitud de funciones centradas principalmente en el procesado en tiempo real de imágenes.\\
+Para el diseño e implementación de los mismos se ha hecho uso de la librería multiplataforma de procesado de imágenes OpenCV {\cite{opencvDoc}). Esta librería, desarrollada por Intel y orientada a la visión por computador, ofrece multitud de funciones centradas principalmente en el procesado de imágenes en tiempo real.\\
 
 Aunque en nuestros análisis no hagamos uso de sus funciones en tiempo real, sí que nos apoyaremos en sus subrutinas de procesado de imágenes para conseguir algoritmos que funcionen a velocidades deseadas. Estas subrutinas, que se detallarán más adelante en la Sección~\ref{sec:asas}, permiten detectar contornos y aproximarlos a polígonos, así como usar y operar imágenes de forma cómoda.\\
 
@@ -16,7 +16,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 
 	\item \textbf{Detección de formas:} La imagen dada se transforma en una sucesión de imágenes binarias (únicamente en blanco y negro), donde las manchas blancas representan figuras independientes. Dado que varias figuras pueden superponerse (una figura contiene a otra), si se devolviera una única imagen binaria, sólo podría representarse una de las figuras (la que envuelve a las demás, ya que todas se pintaría como superficies blancas por ser figuras independientes), perdiendo información en el análisis. Es por ello que, siempre que resulte necesario, se devolverán varias imagenes de salida en esta fase del proceso, para asegurar que todas las figuras presentes se tienen en cuenta.\\
 	
-	En numerosas ocasiones se referirá a esta fase como ``filtrado de la imagen'', debido a que, para llevarse a cabo, se aplicarán filtros de procesado de imágenes sobre la imagen de entrada.
+	En numerosas ocasiones se referirá a esta fase como ``filtrado de la imagen'' debido a que, para llevarse a cabo, se aplicarán filtros de procesado de imágenes sobre la imagen de entrada.
 	
 	\item\textbf{Detección de contornos y aproximación a polígonos:} Por cada mancha blancha, se recorre el perímetro en el mapa de bits y se almacena en una lista de puntos. Para finalizar, cada contorno se aproxima a un polígono y se analiza por separado, con el fin de desechar información no deseada y calcular datos relevantes. 
 	
@@ -64,7 +64,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		
 	\subsubsection{Adaptive Threshold}
 	
-	Se trata de una modificación del algoritmo anterior, donde el valor del umbral varía en cada regíón de la imagen. Este algoritmo también devuelve una sóla imagen binaria, pero aplica sobre ella un filtro más sofisticado que repara la mayor parte de los fallos del filtro anterior:
+	Se trata de una modificación del algoritmo anterior, donde el valor del umbral varía en cada región de la imagen. Este algoritmo también devuelve sólo una imagen binaria, pero aplica sobre ella un filtro más sofisticado que repara la mayor parte de los fallos del filtro anterior:
 
 	\begin{center}
 		$pixel(x,y) = \left\{
@@ -74,7 +74,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\end{array}\right.$
 	\end{center}
 	
-	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante c que en nuestro caso es 3.\\
+	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante c que en nuestro caso es 3.\\ \todo{Porqué 3 y porqué se le resta una constante si ya usas la media ponderada?}
 	
 	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold para figuras con este grado de simplicidad.\\
 	
@@ -106,7 +106,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Para establecer los rangos, se divide cada canal de color (rojo, verde y azul) en un número $n$ de intervalos. El parámetro $n$ es de entrada y común para los tres canales. De esta forma, se recorre la imagen por cada intervalo existente de colores, devolviendo las figuras encontradas en cada intervalo en imágenes de salida distintas.\\
 	
-	Por ejemplo, si $n$ es 3, quiere decir que por cada canal se establecerán 3 intervalos, en total cada color podrá caer dentro de uno de los $3*3*3=27$ intervalos. Por cada intervalo se devuelve una imagen con las figuras presentes en él, únicamente si no está vacía (no existen figuras con colores dentro de ese intervalo). Se puede ver un ejemplo en la Figura~\ref{fig:huedivision}.
+	Por ejemplo, si $n$ es 3, quiere decir que por cada canal se establecerán 3 intervalos, en total cada color podrá caer dentro de uno de los $3*3*3=27$ intervalos. Por cada intervalo se devuelve una imagen con las figuras presentes en él, comprobando antes que no esté vacía (no existen figuras con colores dentro de ese intervalo). Se puede ver un ejemplo en la Figura~\ref{fig:huedivision}.
 	
 		\begin{figure}[htbp]
 		\centering
@@ -142,7 +142,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	\subsection{Detección de contornos y aproximación a polígonos}
 	\label{sec:deteccionContornos}
 	
-	Una vez que tenemos la lista de imágenes binarias con las figuras localizadas, deberemos proceder a representarlas en forma de polígonos. Para ello, primero detectaremos los contornos y posteriormente aproximaremos los mismos a polígonos.\\
+	Una vez que tenemos la lista de imágenes binarias con las figuras localizadas, debemos proceder a representarlas en forma de polígonos. Para ello, primero detectaremos los contornos y posteriormente aproximaremos los mismos a polígonos.\\
 	
 	Para la primera parte (detección de contornos en base a una imagen binaria) haremos uso de la función \emph{cvFindContours} de OpenCV, cuyo resultado se puede ver en la Figura~\ref{fig:findcontours}.\\
 	
@@ -153,7 +153,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\label{fig:findcontours}
 		\end{figure}
 		
-	El ejemplo mostrado se ha basado en el una imagen filtrada mediante el algoritmo Adaptive Threshold. Como se puede ver, una misma figura ha dado lugar a varios contornos. Este es un problema inherente a nuestro enfoque de detección de formas que se tratará más adelante.\\
+	El ejemplo mostrado se ha basado en una imagen filtrada mediante el algoritmo Adaptive Threshold. Como se puede observar, una misma figura (el círculo) ha dado lugar a varios contornos. Este es un problema inherente a nuestro enfoque de detección de formas que se tratará más adelante.\\
 	
 	Posteriormente se usa otra función de OpenCV, \emph{cvApproxPoly}, para aproximar los contornos detectados a secuencias cerradas de vértices que podremos tratar con facilidad. El usuario puede decidir el grado de aproximación (de más simple a más fiel). Un ejemplo del resultado de esta función se ve en la Figura~\ref{fig:aproxpoly}\\
 	
@@ -164,13 +164,13 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\label{fig:aproxpoly}
 		\end{figure}
 				
-	Teniendo los polígonos listados, sólo resta organizar la información obtenida y archivarla en un archivo XML.\\
+	Teniendo los polígonos listados, sólo resta organizar la información obtenida y guardarla en un archivo XML.\\
 	
 	Para ello se procede a calcular el área de cada polígono. Si es menor que la especificada como ruido por el usuario (ver Guía de Usuario, Capítulo~\ref{chap:guiauso}), entonces se desechará. Si no, se almacenará dentro de la estructura de figuras a archivar en XML. El color de cada polígono, por otro lado, se calculará haciendo la media del color de todos los píxeles que contiene.\\
 	
-	Para acabar, necesitamos estructurar los polígonos resultantes en forma de árbol, de forma que los polígonos que se encuentran dentro de otro polígono sean sus hijos en el árbol resultante. Es aquí donde surge el principal problema del análisis de imágenes: \textbf{los polígonos repetidos}.\\
+	Para acabar, necesitamos organizar los polígonos resultantes en estructura de árbol, de forma que los polígonos que se encuentran dentro de otro polígono sean sus hijos en el árbol resultante. Es aquí donde surge el principal problema del análisis de imágenes: \textbf{los polígonos repetidos}.\\
 	
-	Como ya hemos comentado anteriormente, una misma mancha de color puede originar varios contornos, debido a que la figura se ha detectado dos veces en el proceso de filtrado (por ejemplo, sis se encuentra dentro de dos umbrales en el filtro Color threshold) o a que el proceso de detección de contornos ha devuelto dos contornos similares a la figura dada, por particularidades internas del algoritmo de OpenCV.\\
+	Como ya hemos comentado anteriormente, una misma mancha de color puede originar varios contornos, debido a que la figura se ha detectado dos veces en el proceso de filtrado (por ejemplo, si se encuentra dentro de dos umbrales en el filtro Color threshold) o a que el proceso de detección de contornos ha devuelto dos contornos similares a la figura dada, por particularidades internas del algoritmo de OpenCV.\\
 	
 	Esto va a originar que, irremediablemente, haya ocasiones en las que aparecerán varios contornos (y posteriormente polígonos) similares. Se procede pues, antes de continuar el análisis, a eliminar los polígonos repetidos. Para ello, se comprueba primero que tengan el mismo número de vértices y que los rectángulos mínimos que los contiene tengan área y posición similares. Una vez asegurado ese aspecto, se procede a calcular la siguiente condición:
 	
@@ -188,7 +188,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\end{array}\right.$
 		\end{center}
 	
-	, para algún valor par de valores $i$ y $j$. $N$ es el número de vértices de ambos polígonos, $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional y $vertice(pol, i)$ devuelve el vértice $i$ de la lista de vertices del polígono $pol$. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos. \\
+	para algún par de valores $i$ y $j$. $N$ es el número de vértices de ambos polígonos, $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional y $vertice(pol, i)$ devuelve el vértice $i$ de la lista de vertices del polígono $pol$. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos. \\
 	
 		\begin{figure}[htbp]
 		\centering
@@ -197,9 +197,9 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\label{fig:colorsimilares}
 		\end{figure}
 	
-	Sin embargo, puede darse el caso en que dos polígnos similares sean distintos y diferenciarse principalmente por el color (uno es la silueta del otro, ver Figura~\ref{fig:colorsimilares}. Dado que nunca trabajamos con el color, y éste se calcula \emph{a posteriori} (mirando los píxeles que contiene el polígono), no podremos saber de qué caso se trata, ya que carecemos de la información necesaria debido a la naturaleza del proceso realizado. A pesar de todo, este caso es muy particular y no afecta al correcto desarrollo de la aplicación, por lo que no supone un problema en el análisis.\\
+	Sin embargo, puede darse el caso en que dos polígnos similares sean distintos y diferenciarse principalmente por el color (uno es la silueta del otro, ver Figura~\ref{fig:colorsimilares}. Dado que nunca trabajamos con el color, y éste se calcula \emph{a posteriori} (mirando los píxeles que contiene el polígono), no podremos saber de qué caso se trata \todo{esto suena raro}, ya que carecemos de la información necesaria debido a la naturaleza del proceso realizado. A pesar de todo, este caso es muy particular y no afecta al correcto desarrollo de la aplicación, por lo que no supone un problema en el análisis.\\
 	
-	Una vez eliminados las figuras repetidas, se puede estructurar los polígonos en árboles, teniendo en cuenta que un poligono está dentro de otro cuanto todos sus vértices están dentro de él. El rectángulo principal (que delimita el lienzo de la imagen) se elimina del análisis si ha sido detectado como polígono, ya que se encuentra en todas las imágenes y no aporta ninguna información relevante.\\
+	Una vez eliminadas las figuras repetidas, se puede estructurar los polígonos en árboles, teniendo en cuenta que un polígono está dentro de otro cuando todos sus vértices están dentro de él. El rectángulo principal (que delimita el lienzo de la imagen) se elimina del análisis si ha sido detectado como polígono, ya que se encuentra en todas las imágenes y no aporta ninguna información relevante.\\
 	
 	El color calculado para cada polígono tenía en cuenta todos los píxeles que este contenía. Sin embargo, los polígonos que contienen otros polígonos han introducido información de más a la hora de calcular este color, ya que dentro de los polígonos que contienen se han tenido en cuenta los de sus hijos también. Es ahora que se conoce la estructura arbórea de la imagen cuando se pueden resolver estos detalles, recalculando el color de los polígonos que contienen a otros de forma que no se tenga en cuenta el color de sus polígonos internos.\\
 	
