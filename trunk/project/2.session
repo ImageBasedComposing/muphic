@@ -1,0 +1,13 @@
+window_sizes 1800 945 282 656 728 82
+diagrams
+  active  classdiagram_ref 134658 // phic
+    1512 787 100 4 0 0
+end
+show_stereotypes
+selected 
+  package_ref 134530 // OpenCV
+open
+  class_ref 135042 // Analyzer
+  class_ref 135170 // UsrConf
+end
+end

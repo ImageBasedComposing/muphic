@@ -1,6 +1,6 @@
 format 76
 "project"
-  revision 1
+  revision 3
   modified_by 2 "Lexis"
 
 
@@ -101,6 +101,20 @@ format 76
       end
 
       simplerelation 128002
+	-_->
+	  stereotype "uses"
+	  on 
+	  package_ref 128002 // tinyXML
+      end
+
+      classrelation 135298 // <directional aggregation>
+	relation 135298 o-->
+	  a role_name "" multiplicity "*" private
+	    classrelation_ref 135298 // <directional aggregation>
+	  b multiplicity "1" parent class_ref 134786 // FigureImg
+      end
+
+      simplerelation 134658
 	-_->
 	  stereotype "uses"
 	  on 
@@ -212,7 +226,205 @@ format 76
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
+
+    classdiagram 134658 "phic"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    class 134786 "FigureImg"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 135426 // <directional aggregation>
+	relation 135426 o-->
+	  a role_name "" multiplicity "*" private
+	    classrelation_ref 135426 // <directional aggregation>
+	  b multiplicity "1" parent class_ref 128258 // Vertice
+      end
+    end
+
+    class 134914 "Phic"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 135554 // <directional aggregation>
+	relation 135554 o-->
+	  a role_name "" private
+	    classrelation_ref 135554 // <directional aggregation>
+	  b parent class_ref 135170 // UsrConf
+      end
+
+      classrelation 135682 // <dependency>
+	relation 135682 -_->
+	  a default
+	    classrelation_ref 135682 // <dependency>
+	  b parent class_ref 135042 // Analyzer
+      end
+
+      classrelation 135810 // <realization>
+	relation 135810 -_-|>
+	  a public
+	    classrelation_ref 135810 // <realization>
+	  b parent class_ref 135042 // Analyzer
+      end
+
+      classrelation 135938 // <dependency>
+	relation 135938 -_->
+	  stereotype "uses"
+	  a package
+	    classrelation_ref 135938 // <dependency>
+	  b parent class_ref 135042 // Analyzer
+      end
+
+      classrelation 136194 // <unidirectional association>
+	relation 136194 --->
+	  a role_name "" private
+	    classrelation_ref 136194 // <unidirectional association>
+	  b parent class_ref 135042 // Analyzer
+      end
+
+      classrelation 136322 // <unidirectional association>
+	relation 136322 --->
+	  a role_name "" private
+	    classrelation_ref 136322 // <unidirectional association>
+	  b parent class_ref 128002 // Figures
+      end
+    end
+
+    class 135042 "Analyzer"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 134530 "analizeByFilter"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "imagesrc" explicit_type ""
+	  param in name "filter" explicit_type ""
+	  param in name "threshold" explicit_type ""
+	
+	
+	
+	
+	
+      end
+
+      operation 135170 "analyzePerRegions"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135042 "analyzeHSV"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 135298 "addFiguresFromPic"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134658 "addFiguresfromPics"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 136066 // <dependency>
+	relation 136066 -_->
+	  a default
+	    classrelation_ref 136066 // <dependency>
+	  b parent class_ref 135042 // Analyzer
+      end
+
+      classrelation 136450 // <unidirectional association>
+	relation 136450 --->
+	  a role_name "" private
+	    classrelation_ref 136450 // <unidirectional association>
+	  b parent class_ref 134786 // FigureImg
+      end
+
+      simplerelation 134786
+	-_->
+	  stereotype "uses"
+	  on 
+	  package_ref 134530 // OpenCV
+      end
+    end
+
+    class 135170 "UsrConf"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 134786 "read"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134914 "write"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      simplerelation 134530
+	-_->
+	  stereotype "uses"
+	  on 
+	  package_ref 128002 // tinyXML
+      end
+    end
   end
 
   package_ref 128002 // tinyXML
+
+  package_ref 134530 // OpenCV
 end
