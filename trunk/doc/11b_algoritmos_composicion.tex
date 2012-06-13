@@ -1,36 +1,34 @@
 \section{Algoritmos de Composición}
 \label{sec:algComposicion}
 
-\todo{ Revisar y luego: PENDIENTE DE PRIMERA REVISIÓN }\\
+\todo{ Revisar y reestructurar}\\
 
-Para generar la música separamos en diferentes voces el proceso de composición, de tal modo que la unión de todas las voces da como resultado una pieza musical. En el estado actual del proyecto hemos identificado cuatro voces diferentes cada una con un papel especial dentro de la composición. Cada voz sigue un proceso de composición independiente aunque concuerdan en algunos aspectos para la poder realizar una unión correcta de todas ellas, como por ejemplo, la duración total de las mismas. Todos los compositores de forma imprescindible reciben una figura, en la que se van a basar para componer, y una duración dada que será el tiempo que dura el trozo de música a componer.
+En esta sección se explicará de forma exhaustiva los procesos que se siguen para componer música a partir de los datos que nos proporciona el análisis de imagen.\\
+
+Para generar la música separamos el proceso de composición en diferentes voces, de tal modo que la unión de todas las voces da como resultado una pieza musical completa. En el estado actual del proyecto se ha identificado cuatro voces diferentes cada una con un papel especial dentro de la composición. 
+
+Cada voz sigue un proceso de composición independiente aunque concuerdan en algunos aspectos para poder realizar una unión correcta de todas ellas, como por ejemplo, la duración total de las mismas. Todos los compositores de forma imprescindible reciben una figura, en la que se van a basar para componer, y una duración dada que será el tiempo que se prolonga el trozo de música a componer.\\
+
+A continuación se explicará el funcionamiento de los algoritmos de cada voz y al final se presentará el algoritmo que se encarga de ir usando cada una de las voces.
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{1ª Voz: Melodía Principal}
 
-Normalmente en una composición suele haber una voz que destaca sobre las demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, hemos separado el proceso en cuatro fases: procesar la figura, obtener duraciones, obtener tonos y sintetizar o unir las duraciones con los tonos. 
-La primera fase consiste en procesar la figura de entrada, para ello, sacamos sus vértices ordenados y los lados con sus longitudes de tal forma que la figura se pueda leer desde arriba en sentido horario. Si observamos el ejemplo (Figura~\ref{fig:Figura1Voz1}) se puede ver el orden de los vértices identificados con números.\\
+Normalmente en una composición suele haber una voz que destaca sobre las demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, vamos a componer a nivel de notas y la relación entre ellas. En nuestro caso, una nota se separa en dos dimensiones: duración y tono. Siguiendo esta separación se ha dividido el proceso de composición en cuatro fases: procesar la figura, calcular duraciones, obtener tonos y sintetizar o unir las duraciones con los tonos.\\
+Para voz principal se ha dejado la posibilidad de elegir entre dos versiones diferentes del compositor. La primera que se desarrolló tiene algunos pequeños defectos que luego en la segunda versión del compositor se corrigieron.\\
 
-		\begin{figure}[htbp]
-		\centering
-		\hspace*{0.0in}
-		\includegraphics[scale=1.0]{graphics/simpletest1.png}
-		\caption{Figura de entrada}
-		\label{fig:Figura0Voz1}
-		\end{figure}
+La primera versión (ComposerFigMelody):
+\begin{itemize}
+	\item Procesar la figura: El algoritmo de entrada dispone de una figura, en la que se va a basar más adelante para componer. Antes hace falta un proceso de normalización para que todas las figuras puedan ser interpretadas correctamente. Para ello se saca los vértices ordenados de la figura de tal forma que el primer vértice sea el más alto de la figura y los siguientes estén en sentido horario. Además, durante el proceso, se irá calculando la longitud de los lados de la figura.
 
-		\begin{figure}[htbp]
-		\centering
-		\hspace*{0.0in}
-		\includegraphics[scale=1.0]{graphics/simpletest1-F1.png}
-		\caption{Figura de entrada con los vértices ordenados y con las longitudes de los lados}
-		\label{fig:Figura1Voz1}
-		\end{figure}
+	\item Calcular duraciones: Para poder obtener las duraciones de las futuras notas se hace una correpondencia directa con la longitud de los lados. De este modo la duración total del trozo de música a componer es la suma de todas la longitudes y para cada lado se calcula cuanta duración le corresponde. Obviamente se hace una aproximación ya que los valores de duración de las notas son limitados respecto al rango de valores de los números reales.
 
-\todo{Esta frase está mal expresada: Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima de las notas con las longitudes recién calculadas\\
-Veamos, a partir de esa frase el texto es muy difícil de comprender, para empezar que son figuras simples y compuestas falta una referencia o algo? luego, porque explicas lo que es una negra con doble puntillo, no se supone que eso esta explicado más arriba en una sección de términos musicales o explicación básica de la música? si no la tenemos habra que hacerlo porque aquí solo te lía mas, además yo no haría referencia al lector sino que lo dejaría como algo general, propondría escribir todo esto así o con algo parecido a esto:\\
-Se utilizan las duraciones simples de las notas en música: blancas, negras, corcheas, semicorcheas... como aproximación de las longitudes obtenidas en lugar de las compuestas que permitirían una equivalencia perfecta entre la longitud de los lados y la duración de las notas. Puede parecer preferible conseguir la equivalencia perfecta entre longitud y duración, sin embargo, tras varias pruebas  (Figura~\ref{fig:Figura5Voz1}) no se ha conseguido un resultado que cumpliese esa propiedad y al mismo tiempo no perdiese el concepto de ritmo musical.}
-A continuación, en la segunda fase, se calculan la longitud media de los lados, el lado más largo y el lado más corto. Se asignan duraciones a cada lado teniendo en cuenta la duración máxima y la duración mínima de las notas con las longitudes recién calculadas. Se usan las duraciones simples (figuras simples) de las notas en música obviando las compuestas (figuras compuestas), es decir, que se asignan duraciones de blancas, negras, corcheas, semicorcheas... en vez de usar, por ejemplo, negra con doble puntillo que es una nota de duración negra más una corchea más una semicorchea. Buscar una equivalencia perfecta entre la longitud de los lados y la duración de las notas sería lo primero que pensaría el lector que podría ser la correspondencia más fiel, pero tras varias pruebas realizadas (Figura~\ref{fig:Figura5Voz1}) no se ha podido averiguar cómo hacerlo sin que se perdiera completamente el concepto de ritmo musical.\\
+	\item Obtener tonos: Hallamos los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo(\cite{bricksConvertsMusic} \cite{ImageBaseComposition}). El proceso de cálculo de tono se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado (\cite{portutesis}). Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos. De tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa.
+En la tercera fase, en vez de usar un algoritmo diferencial donde se tiene en cuenta la variación respecto al anterior ángulo examinado, se usa una correspondencia directa donde: cuanto mayor sea el ángulo mayor será el salto de tono. Además el signo del ángulo determina la dirección del salto (Figura~\ref{fig:Figura6Voz1}).
+
+\end{itemize}
+----------
+A continuación, en la segunda fase, se calculan la longitud media de los lados, el lado más largo y el lado más corto. Se asignan duraciones a cada lado teniendo en cuenta sus longitudes.Se utilizan las duraciones simples de las notas en música: blancas, negras, corcheas, semicorcheas... como aproximación de las longitudes obtenidas en lugar de las compuestas que permitirían una equivalencia perfecta entre la longitud de los lados y la duración de las notas. Puede parecer preferible conseguir la equivalencia perfecta entre longitud y duración, sin embargo, tras varias pruebas  (Figura~\ref{fig:Figura5Voz1}) no se ha conseguido un resultado que cumpliese esa propiedad y al mismo tiempo no perdiese el concepto de ritmo musical.\\
 
 		\begin{figure}[htbp]
 		\centering
@@ -42,14 +40,14 @@ A continuación, en la segunda fase, se calculan la longitud media de los lados,
 
 En el ejemplo (Figura~\ref{fig:Figura2Voz1}) se puede apreciar cómo el lado más largo obtiene una duración mayor (blanca) que los otros dos lados (negra). A pesar de que los dos lados más pequeños tienen diferentes longitudes, se ha aproximado su longitud a una misma duración.\\
 
-\todo{A que te refieres con una figura es estable?}
-La tercera fase se centra en obtener los tonos de las notas que se van a crear. En otros trabajos se han obtenido de diferentes manera(\cite{bricksConvertsMusic} \cite{ImageBaseComposition}). La aproximación que se usa en este proyecto se basa en la idea de estabilidad que se desarrolla en el trabajo de A. Pintado (\cite{portutesis}). Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos o irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos.\\
+\todo{A que te refieres con una figura es estable? -> solved?}
+La tercera fase se centra en obtener los tonos de las notas que se van a crear. En otros trabajos se han obtenido de diferentes manera(\cite{bricksConvertsMusic} \cite{ImageBaseComposition}). La aproximación que se usa en este proyecto se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado (\cite{portutesis}). Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos.\\
 
-\todo{El diferencial del ángulo esta bien dicho?}
-La obtención de los tonos viene de los ángulos de las figuras, para ello se coge el primer vértice y se calcula su ángulo. Por ser la primera nota le asignamos el tono correspondiente al color de la figura dentro del sistema de colores usado (p. ej: Rojo en el sistema Scriabin es C ``do'', amarillo es D ``re''...). A partir de ahí, dependiendo de cuanto ha variado el ángulo del siguiente vértice respecto al anterior, vamos asignando un tono más alto o más bajo según sube o baja el diferencial de ángulo.
+\todo{El diferencial del ángulo esta bien dicho? -> solved}
+La obtención de los tonos viene de los ángulos de las figuras, para ello se coge el primer vértice y se calcula su ángulo. Por ser la primera nota le asignamos el tono correspondiente al color de la figura dentro del sistema de colores usado (p. ej: Rojo en el sistema Scriabin es C ``do'', amarillo es D ``re''...). A partir de ahí, dependiendo de cuánto ha variado el ángulo del siguiente vértice respecto al anterior, vamos asignando un tono más alto o más bajo según sea positivo o negativo la diferencia de ángulos.
 
-\todo{y la cantidad de tonos que debe variar el nuevo tono: no hay otra manera de expresarlo? es redundante. Aparte la frase me suena raro pero no veo otra forma de decirlo}
-De forma experimental y tras varias pruebas, se ha obtenido una correspondencia entre la variación de ángulos y la cantidad de tonos que deberá variar el nuevo tono respecto al anterior (Figura~\ref{fig:Figura3Voz1}). 
+\todo{y la cantidad de tonos que debe variar el nuevo tono: no hay otra manera de expresarlo? es redundante. Aparte la frase me suena raro pero no veo otra forma de decirlo  -> solved?}
+De forma experimental y tras varias pruebas, se ha obtenido una correspondencia entre la variación de ángulos y la cantidad que deberá variar el nuevo tono respecto al anterior (Figura~\ref{fig:Figura3Voz1}). 
 
 		\begin{figure}[htbp]
 		\centering
@@ -59,15 +57,15 @@ De forma experimental y tras varias pruebas, se ha obtenido una correspondencia 
 		\label{fig:Figura3Voz1}
 		\end{figure}
 
-\todo{En cuanto a lo de se usa el tono vecino no sería mejor decir algo como: se usa uno de los tonos adyacentes dentro de la escala cromática. no se, con lo del tono vecino no queda claro lo que quieres decir\\
+\todo{En cuanto a lo de se usa el tono vecino no sería mejor decir algo como: se usa uno de los tonos adyacentes dentro de la escala cromática. no se, con lo del tono vecino no queda claro lo que quieres decir -> solved\\
 Del acorde del color de la figura: no hemos hablado de acordes hasta ahora, a que te refieres?\\
 Qué es el acorde fundamental, está explicado en alguna otra parte?\\
-No entiendo esta frase: Se usa el acorde fundamental con tono fundamental la nota del color de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura.\\
+No entiendo esta frase: Se usa el acorde fundamental con tono fundamental la nota del color de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. -> cambiada\\
 Habrá que mencionar la escala cromática en algún lado, referencia?}
-De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono vecino dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde del color de la figura, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. Se usa el acorde fundamental con tono fundamental la nota del color de la figura para los grandes saltos porque conseguimos notas consonantes con el color de la figura. Esta relación se basa en la asociación que tiene Scriabin con los colores(\cite{ScriabinQuintasColor}), él hacía corresponder un color a un tono y a su acorde fundamental sin distinguir entre acorde mayor o menor para cada una de las notas de la escala cromática.
+De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono adyacente dentro de la escala, si está entre 30º y 120º el segundo tono más cercano del acorde, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. El acorde que se usa es el acorde fundamental del tono que da el color de la figura. Esta relación se basa en la asociación que tiene Scriabin con los colores(\cite{ScriabinQuintasColor}), él hacía corresponder un color a un tono y a su acorde fundamental sin distinguir entre acorde mayor o menor para cada una de las notas de la escala cromática.
 
-\todo{Su estabilidad es muy alta creo que haces referencia a lo de la portutesis, no habría otra manera de decirlo que sea mas simple: la variación de sus ángulos es constante o algo así}
-De esta manera se consigue que en una figura simétrica con todos sus ángulos iguales suene la misma nota ya que su estabilidad es muy alta. Normalmente el círculo sería la figura de mayor estabilidad y se correspondería a una nota de larga duración, pero, por el proceso de análisis, el círculo se aproxima a un polígono regular de muchos lados y por tanto a muchas notas con el mismo tono.
+\todo{Su estabilidad es muy alta creo que haces referencia a lo de la portutesis, no habría otra manera de decirlo que sea mas simple: la variación de sus ángulos es constante o algo así ->solved?}
+De esta manera se consigue que en una figura simétrica con todos sus ángulos iguales sea una figura muy estable y por tanto suena la misma nota. Normalmente el círculo sería la figura de mayor estabilidad y se correspondería a una nota de larga duración, pero, por el proceso de análisis, el círculo se aproxima a un polígono regular de muchos lados y por tanto a muchas notas con el mismo tono.
 
 		\begin{figure}[htbp]
 		\centering
@@ -79,11 +77,11 @@ De esta manera se consigue que en una figura simétrica con todos sus ángulos i
 		\end{figure}
 
 \todo{No se entiende bien que pasa aquí: se sube de un salto en el acorde de nota fundamental el color de la figura\\
-primero hablas de saltar tonos y luego al final de este párrafo dices dar el salto de una nota}
-Como se puede observar en el ejemplo (Figura~\ref{fig:Figura4Voz1}), se tienen los 3 ángulos con su nota correspondiente ya calculada. Para conseguirlo primero se tiene que ver qué nota corresponde al color de la figura (en este caso se usa la correspondencia propuesta por Scriabin en la que el amarillo es D ``re''). Una vez se tiene la nota y su ángulo, se calcula la diferencia entre el nuevo ángulo y el anterior, el resultado es negativo por lo que se tiene que bajar de tono y como la diferencia está entre los 10º y 30º, sólo se baja un escalón en la escala actual (en este ejemplo la de Re Mayor), obteniendo la nueva nota: C ``do''. Para conseguir el último tono, se calcula el diferencial del último vértice restando el ángulo del tercer vértice con el del segundo. Se obtiene un valor positivo, luego se tiene que subir el tono, all estar entre 30º y 120º se sube de un salto en el acorde de nota fundamental el color de la figura (en este caso es el acorde de D ``re'': D-F ``fa''-A ``la''). Cómo no se está en el acorde del último tono obtenido (C ``do'') se viaja al tono más cercano que pertenezca a ``do'', es decir, D ``re''. Y de ahí se da el salto de una nota dentro del acorde y como el ángulo es positivo se salta a la nota superior: F ``fa''.
+primero hablas de saltar tonos y luego al final de este párrafo dices dar el salto de una nota -> Eso es que de la nota re, das un salto a fa, que es la siguiente nota dentro del acorde(re-fa-la). Nose creo que eso para explicarlo mejor tengo que bajar a muy bajo nivel. Si se sabe que es acorde, no debería de haber problema.}
+Como se puede observar en el ejemplo (Figura~\ref{fig:Figura4Voz1}), se tienen los 3 ángulos con su nota correspondiente ya calculada. Para conseguirlo primero se tiene que ver qué nota corresponde al color de la figura (en este caso se usa la correspondencia propuesta por Scriabin en la que el amarillo es D ``re''). Una vez se tiene la nota y su ángulo, se calcula la diferencia entre el nuevo ángulo y el anterior, el resultado es negativo por lo que se tiene que bajar de tono y como la diferencia está entre los 10º y 30º, sólo se baja un escalón en la escala actual (en este ejemplo la de Re Mayor), obteniendo la nueva nota: C ``do''. Para conseguir el último tono, se calcula el diferencial del último vértice restando el ángulo del tercer vértice con el del segundo. Se obtiene un valor positivo, luego se tiene que subir el tono, all estar entre 30º y 120º se sube de un salto en el acorde de nota fundamental el color de la figura (en este caso es el acorde de D ``re'': D - F ``fa''- A ``la''). Cómo no se está en el acorde con el último tono obtenido (C ``do'') se viaja al tono más cercano que pertenezca al acorde, es decir, D ``re''. Y de ahí se da un salto dentro del acorde y como el ángulo es positivo se salta a la nota superior: F ``fa''.
 
 Por último, la cuarta fase se encarga de combinar las duraciones con los tonos para crear las notas. Al final se obtiene un trozo de música de una de las voces (Partitura de Figura~\ref{fig:Figura4Voz1}).
-\todo{El ejemplo quizas haciendolo más esquemático quedaría más claro, ahora mismo es bastante lioso}
+\todo{El ejemplo quizas haciendolo más esquemático quedaría más claro, ahora mismo es bastante lioso -> Se podrían poner más imágenes con pasos intermedios, pero podrían pensar que estamos engordando la memoria}
 
 \todo{Esto está mal estructurado, empiezas hablando de la composición musical en general pero de repente tras contar el ejemplo dices que es de tal compositor, debería de ser mas al estilo del analizador de figuras, hablas de las 4 fases de la composición y luego dices compositor tal: fase uno asi y asi, fase dos asa y asa etc..., y si eso el ejemplo para ayudar a entenderlo, luego compositor cual: asi y asa... etc... ahora mismo con este salto se vuelve todo lioso y uno falla en ver la estructura del tema\\
 A partir de o unidades más pequeñas... al final del parrado, no se entiende a que te refieres}
