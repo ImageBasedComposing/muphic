@@ -1,6 +1,6 @@
 \section{Algoritmos de Análisis}
 \label{sec:algAnalisis}
-\torev{Primera Revisión Pendiente}
+\torev{Última revisión: 13/06/12. Se ha modificado la colocación de imágenes para que aparezcan lo más cerca posible del filtro al que corresponden.}
 
 Esta sección explicará con detalle los algoritmos de análisis de imágenes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{mierde}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
 
@@ -8,7 +8,7 @@ Puesto que nos interesa la eficiencia temporal del proceso de análisis para aum
 
 Para el diseño e implementación de los mismos se ha hecho uso de la librería multiplataforma de procesado de imágenes OpenCV {\cite{opencvDoc}). Esta librería, desarrollada por Intel y orientada a la visión por computador, ofrece multitud de funciones centradas principalmente en el procesado de imágenes en tiempo real.\\
 
-Aunque en nuestros análisis no hagamos uso de sus funciones en tiempo real, sí que nos apoyaremos en sus subrutinas de procesado de imágenes para conseguir algoritmos que funcionen a velocidades deseadas. Estas subrutinas, que se detallarán más adelante en la Sección~\ref{sec:asas}, permiten detectar contornos y aproximarlos a polígonos, así como usar y operar imágenes de forma cómoda.\\
+Aunque en nuestros análisis no hagamos uso de sus funciones en tiempo real, sí que nos apoyaremos en sus subrutinas de procesado de imágenes para conseguir algoritmos que funcionen a velocidades deseadas. Estas subrutinas, que se detallarán más adelante, permiten detectar contornos y aproximarlos a polígonos, así como usar y operar imágenes de forma cómoda.\\
 
 Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a cabo consiste en:
 
@@ -44,7 +44,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Este filtro produce una única imagen de salida donde las zonas blancas conexas se interpretan como figuras independientes. Es por ello que, si dos manchas de color se comportan de igual manera ante el filtro (porque su color predominante es inferior o superior al umbral en ambas manchas), y se encuentran superpuestas una respecto de la otra, en la salida aparecerán como una única mancha blanca conexa, por lo que se considerará como una única figura (Figura~\ref{fig:threshold1}.)\\
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/threshold1.png}
 		\caption{Ejemplo de filtrado threshold con umbral a 100}
@@ -53,7 +53,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		
 	Si, dado un caso similar en el que dos figuras estén superpuestas, pero que se comporten de forma distinta ante la aplicación del filtro (una se encuentra por debajo del umbral y otra por encima), entonces sí que se interpretará como dos figuras distintas (Figura~\ref{fig:threshold2}). Esto se produce debido a que, como se explica en la Sección~\ref{sec:deteccionContornos}, los contornos se buscan tanto en los perímetros externos de las figuras como en los internos.
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/threshold2.png}
 		\caption{Ejemplo de filtrado threshold con umbral a 150}
@@ -74,14 +74,14 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\end{array}\right.$
 	\end{center}
 	
-	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante teórica c.
+	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. \color{blue}Tras haber realizado la suma, se le resta una constante teórica c, que especifica cuánto debe alejarse el valor de un píxel dado respecto al de la media calculada para que se considere que ha sobrepasado el umbral. En la implementación de este filtro se usará 3 como valor de esta constante, ya que proporciona resultados acordes a nuestros intereses.\color{black}
 	
 	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold para figuras con este grado de simplicidad.\\
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/adaptive.png}
-		\caption{Ejemplo de filtrado adaptive}
+		\caption{Ejemplo de filtrado adaptive threshold}
 		\label{fig:adaptive}
 		\end{figure}
 	
@@ -91,7 +91,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Usando el algoritmo de canny, que también devuelve una única imagen, se obtiene el resultado mostrado en la Figura~\ref{fig:canny}.\\
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/canny.png}
 		\caption{Ejemplo de filtrado canny}
@@ -108,7 +108,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Por ejemplo, si $n$ es 3, quiere decir que por cada canal se establecerán 3 intervalos, en total cada color podrá caer dentro de uno de los $3*3*3=27$ intervalos. Por cada intervalo se devuelve una imagen con las figuras presentes en él, comprobando antes que no esté vacía (no existen figuras con colores dentro de ese intervalo). Se puede ver un ejemplo en la Figura~\ref{fig:huedivision}.
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/huedivision.png}
 		\caption{Ejemplo de filtrado hue division}
@@ -117,20 +117,20 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	\subsubsection{Color Threshold}
 
-	Se trata de una expansión del filtro Threshold para intentar resolver uno de sus principales problemas: dado que el filtro Threshold convierte la imagen en escala de grises para buscar píxeles que superen el umbral, puede darse el caso de que dos figuras con colores distintos se conviertan en el mismo tono de gris al convertirse a escala de grises. Este problema es independiente al método de transformación de RGB a escala de grises, e inherente al proceso en sí: al pasar de tres canales de color a un único canal, necesariamente varios valores de entrada van a coincidir en el mismo valor de salida (la función es sobreyectiva y el dominio de entrada es más grande que el de salida).\\
+	Se trata de una expansión del filtro Threshold para intentar resolver uno de sus principales problemas: dado que el filtro Threshold convierte la imagen en escala de grises para buscar píxeles que superen el umbral, puede darse el caso de que dos figuras con colores distintos se conviertan en el mismo tono de gris al convertirse a escala de grises. Este problema es independiente del método de transformación de RGB a escala de grises, e inherente al proceso en sí: al pasar de tres canales de color a un único canal, necesariamente varios valores de entrada van a coincidir en el mismo valor de salida (la función es sobreyectiva y el dominio de entrada es más grande que el de salida).\\
 	
 	Para resolver ese fallo, se realiza un filtro Threshold con tres umbrales distintos, uno para cada canal de color. Dado que estos umbrales van a poder ser manipulados por el usuario, se transformará previamente la imagen de RGB (rojo, verde y azul) a HSV (matiz, saturación y valor), que es un modelo más intuitivo para el ojo humano.\\
 	
 	Se pueden ver diferentes resultados de este filtro en las Figuras~\ref{fig:colorthres1} y ~\ref{fig:colorthres2}.
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/colorthreshold.png}
 		\caption{Ejemplo de filtrado color threshold: $Umbral_{H} = 55, Umbral_{S} = 150, Umbral_{V} = 205$}
 		\label{fig:colorthres1}
 		\end{figure}
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/colorthreshold2.png}
 		\caption{Ejemplo de filtrado color threshold: $Umbral_{H} = 105, Umbral_{S} = 100, Umbral_{V} = 125$}
@@ -146,7 +146,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Para la primera parte (detección de contornos en base a una imagen binaria) haremos uso de la función \emph{cvFindContours} de OpenCV, cuyo resultado se puede ver en la Figura~\ref{fig:findcontours}.\\
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/contourdetection.png}
 		\caption{Detección de contornos mediante OpenCV}
@@ -157,7 +157,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Posteriormente se usa otra función de OpenCV, \emph{cvApproxPoly}, para aproximar los contornos detectados a secuencias cerradas de vértices que podremos tratar con facilidad. El usuario puede decidir el grado de aproximación (de más simple a más fiel). Un ejemplo del resultado de esta función se ve en la Figura~\ref{fig:aproxpoly}\\
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/aproxpoly.png}
 		\caption{Aproximación de polígonos mediante OpenCV}
@@ -172,7 +172,9 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Como ya hemos comentado anteriormente, una misma mancha de color puede originar varios contornos, debido a que la figura se ha detectado dos veces en el proceso de filtrado (por ejemplo, si se encuentra dentro de dos umbrales en el filtro Color threshold) o a que el proceso de detección de contornos ha devuelto dos contornos similares a la figura dada, por particularidades internas del algoritmo de OpenCV.\\
 	
-	Esto va a originar que, irremediablemente, haya ocasiones en las que aparecerán varios contornos (y posteriormente polígonos) similares. Se procede pues, antes de continuar el análisis, a eliminar los polígonos repetidos. Para ello, se comprueba primero que tengan el mismo número de vértices y que los rectángulos mínimos que los contiene tengan área y posición similares. Una vez asegurado ese aspecto, se procede a calcular la siguiente condición:
+	Esto va a originar que, irremediablemente, haya ocasiones en las que aparecerán varios contornos (y posteriormente polígonos) similares. Se procede pues, antes de continuar el análisis, a eliminar los polígonos repetidos. Para ello, se comprueba primero que tengan el mismo número de vértices y que los rectángulos mínimos que los contienen tengan área y posición similares. \color{blue}Podría darse el caso de que un polígono A, teniendo más vértices que otro polígono B, sea idéntico a él, si se da que un mismo vértice de B aproxima varios en A. Sin embargo, la librería OpenCV nunca devuelve en un mismo polígono dos vértices lo suficientemente cercanos como para que sean considerados ``idénticos'' según nuestro criterio, por lo que no se estudiará ese caso.\\
+
+	Posteriormente, se procede a calcular si son efectivamente similares o no, es decir, si todos los vértices de un polígono tienen un vértice idéntico en el otro polígono y éstos pares siguen el ``orden'' de los polígonos (si el vértice 1 del polígono A es idéntico al vértice 3 del polígono B, entonces el siguiente vértice de A debe ser idéntico al siguiente vértice de B para que sean similares. Alternativamente, puede ser idéntico al anterior vértice de B. Para simplificar, en este documento se supondrá que tanto A como B tienen listados sus vértices similares en el mismo sentido). De una manera más formal:\color{black}
 	
 	\begin{center}
 		$sonSimilares(pol1,pol2,i,j) =$
@@ -188,9 +190,9 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\end{array}\right.$
 		\end{center}
 	
-	para algún par de valores $i$ y $j$. $N$ es el número de vértices de ambos polígonos, $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional y $vertice(pol, i)$ devuelve el vértice $i$ de la lista de vertices del polígono $pol$. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos. \\
+	para algún par de valores $i$ y $j$. $N$ es el número de vértices de ambos polígonos, $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional y $vertice(pol, i)$ devuelve el vértice $i$ de la lista de vertices del polígono $pol$. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos.\\
 	
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 		\centering
 		\includegraphics[scale=0.47]{graphics/reppoly.png}
 		\caption{Caso de polígonos similares que no deben ser eliminados}

@@ -1,8 +1,10 @@
 \chapter{Diseño y Especificación}
+\label{chap:diseno}
 
 
 \section{Requisitos}
-\torev{PENDIENTE DE PRIMERA REVISIÓN}\\
+\torev{Última revisión: 13/06/12
+Hay que introducir ABC en algún lado}\\
 	Esta sección describirá las funcionalidades del sistema: su comportamiento esperado así como sus restricciones de rendimiento y capacidad. Aunque el proyecto que nos ocupa ha sido desarrollado sin ningún cliente específico, se han elaborado requisitos basados en nuestra visión de la aplicación como conjunto, de forma que tanto la planificación como el desarrollo se pudieran abordar más fácilmente.\\
 	
 	Se comenzará determinando qué usuarios harán uso de la aplicación, para posteriormente determinar cuáles son los requisitos funcionales y los no funcionales.
@@ -19,18 +21,19 @@
 
 	\subsection{Requisitos funcionales}
 	
-	En el caso de la interfaz gráfica y la estructura general de la aplicación:
-
+	En el caso de la interfaz gráfica y la estructura general de la aplicación. \color{blue}La interfaz deberá ser capaz de:\color{black}
+	
 	 \begin{itemize}
-		 \item La interfaz deberá ser capaz de lanzar tanto el módulo de análisis como el módulo de composición de forma independiente.
-		 \item La interfaz deberá ser capaz de interpretar archivos de imagen del formato .png y mostrarlos por pantalla.
-		 \item La interfaz deberá ser capaz de interpretar archivos de audio del formato .wav y permitir funciones básicas de reproducción sobre los mismos.
-		 \item La interfaz deberá ser capaz de generar un archivo de configuración interpretable tanto por la aplicación de análisis y composición a partir de los parámetros de entrada establecidos por el usuario.
-		 \item La interfaz deberá de ser capaz de, mediante un programa externo o por sí misma, mostrar la partitura de la música compuesta tras haber sido generada.
-		 \item La interfaz deberá de ser capaz de, mediante un programa externo o por sí misma, mostrar la salida del proceso de análisis de imagen, en forma de polígonos con color plano distribuidos unos dentro de otros.
-		 \item La interfaz deberá controlar posibles errores cometidos por el usuario, surgidos al tocar parámetros no disponibles para la configuración seleccionada, a su vez deberá de limitar las acciones del usuario a la hora de modificar dichos parámetros según las configuraciones elegidas.
-		 \item La interfaz deberá prestar la opción de detener módulos lanzados para que el usuario pueda pararlos, si estos no han acabado aún.
+		 \item Lanzar tanto el módulo de análisis como el módulo de composición de forma independiente.
+		 \item Interpretar archivos de imagen del formato .png y mostrarlos por pantalla.
+		 \item Interpretar archivos de audio del formato .wav y permitir funciones básicas de reproducción sobre los mismos.
+		 \item Generar un archivo de configuración interpretable tanto por la aplicación de análisis y composición a partir de los parámetros de entrada establecidos por el usuario.
+		 \item Mostrar la partitura de la música compuesta tras haber sido generada mediante un programa externo o por sí misma.
+		 \item Mostrar la salida del proceso de análisis de imagen (mediante un programa externo o por sí misma), en forma de polígonos con color plano distribuidos unos dentro de otros.
+		 \item Controlar posibles errores cometidos por el usuario, surgidos al tocar parámetros no disponibles para la configuración seleccionada, a su vez deberá de limitar las acciones del usuario a la hora de modificar dichos parámetros según las configuraciones elegidas.
+		 \item Prestar la opción de detener módulos lanzados para que el usuario pueda pararlos, si estos no han acabado aún.
 	 \end{itemize}
+	 
  
  En el caso del módulo de análisis de imágenes:
  \begin{itemize}
@@ -40,11 +43,13 @@
 		\item Los colores que contienen dichas figuras en formato RGB
 		\item Una estructura jerarquizada de figuras al igual que se presentan en la imagen, es decir, si una figura está dentro de otra en el XML se verá reflejado siendo la segunda figura un elemento incluido en la primera.
 	\end{itemize}
+	La estructura detallada de este documento se mostrará en la Sección~\ref{sec:representacionFiguras}.
  \end{itemize}
-  En el caso del módulo de análisis de composición:
+ \color{blue}
+  En el caso del módulo de análisis de composición, el compositor deberá ser capaz de:\color{black}
  \begin{itemize}
-	\item El compositor deberá, dado un archivo de configuración y un archivo con los resultados del análisis correctamente estructurados, generar un archivo abc interpretable por cualquier programa que pueda recibir como entrada dicho tipo de archivos.
-	\item El compositor deberá de ser capaz de comunicarse con programas externos para que transformen el archivo abc generado a los formatos de audio midi y wav.
+	\item Generar un archivo abc interpretable por cualquier programa que pueda recibir como entrada dicho tipo de archivos, dado un archivo de configuración y un archivo con los resultados del análisis correctamente estructurados.
+	\item Comunicarse con programas externos para que transformen el archivo abc generado a los formatos de audio midi y wav.
  \end{itemize}
  
 \subsection{Requisitos no funcionales}
@@ -77,7 +82,7 @@ Para el módulo de composición;
 	\item El compositor principal de la aplicación deberá de ser capaz de generar una música que, aunque no sea ``interesante'', nunca ''no suene mal''. En ambos casos los resultados en ultima instancia dependerán de la opinión subjetiva del usuario
 \end{itemize}
 
-Para finalizar, resta decir que, por comodidad para el lector, no se detallará la totalidad de los casos de uso (en el caso de la interfaz se detallará toda la información correspondiente en la sección de arquitectura), si no que se aboradarán detalladamente los dos principales y su consiguiente especificación: realizar un análisis de imagenes y componer una pieza musical.
+Para finalizar, resta decir que, por comodidad para el lector, no se detallará la totalidad de los casos de uso (en el caso de la interfaz se detallará toda la información correspondiente en la sección de arquitectura), sino que se aboradarán detalladamente los dos principales y su consiguiente especificación: realizar un análisis de imagenes y componer una pieza musical.
 
 
 \input{11a_algoritmos_analisis}
