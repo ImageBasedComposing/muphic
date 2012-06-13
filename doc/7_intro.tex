@@ -1,6 +1,6 @@
 \chapter{Introducción}
 
-\torev{Última revisión hecha el 11-06-2012}\\
+\gotrev{Última revisión hecha el 13-06-2012}\\
 
 	\section{¿Qué es Muphic?}
 	
@@ -18,19 +18,16 @@
 		
 		De forma resumida, dado que se entrará en detalle en secciones siguientes, la aplicación desarrollada analiza una imagen de entrada y utiliza el contenido de dicho análisis para generar una pieza musical mediante algoritmos de composición automática.\\
 
-\color{blue}
-		Este proyecto por tanto se puede dividir en dos fases críticas:
-		%Este proyecto trata por tanto 2 temas distintos:
-\color{black}
+		El compositor trabaja en dos etapas secueciadas:
 		
 		\begin{itemize}
 		
 		\item Análisis de imágenes: la imagen de entrada se debe procesar y estudiar hasta obtener la información deseada (formas, colores, tamaños, ...).
 
-		\item Composición algorítmica: Con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, todas las partes que \color{blue}forman \color{black} nuestra pieza musical: ritmo, melodía y armonía.
+		\item Composición algorítmica: Con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, todas las partes que forman nuestra pieza musical: ritmo, melodía y armonía.
 		\end{itemize}
 		
-		\color{blue}El segundo punto va a depender enormemente del primero, con distintos análisis de imagen se obtiene pequeñas diferencias en las descripciones de las imágenes de entrada. Y por tanto las composiciones musicales serán parcialmente diferentes, ya que la información procesada por el compositor será distinta en cada caso. Además, la elección de los algoritmos de composición cambiarán de forma significativa la pieza musical final.\\\color{black}
+		Naturalmente, la segunda etapa va a depender del resultado del análisis de la primera: con distintos análisis de imagen se obtiene pequeñas diferencias en las descripciones de las imágenes de entrada. Y por tanto las composiciones musicales serán parcialmente diferentes, ya que la información procesada por el compositor será distinta en cada caso. Además, la elección de los algoritmos de composición cambiará de forma significativa la pieza musical final.\\
 		
 		En el desarrollo de este proyecto hay ciertos aspectos importantes que se ha considerado y es necesario mencionar:	
 
@@ -39,16 +36,16 @@
 		\item \emph{La base de la correlación audio-musical será la sinestesia}:
 			\vspace{0.1in}
 			\\La sinestesia, como ya se ha comentado, es la pieza clave en la creación de música basada en imágenes (ver Sección~\ref{subsubsec:estudioSinestesia}) frente a otras alternativas de planteamiento.\\
-			Entre estas alternativas, cabe destacar la reacción psicológica sociocultural del cerebro humano ante la música y los colores. Es decir, estudios muestran que el verde, el azul y otros colores con \color{blue}longitudes \color{black} de onda bajas se relacionan con la calma, mientras que colores con longitudes de onda altas aumentan el nerviosismo y la inestabilidad (\cite{colorpsy}). Hay, por otro lado, multitud de investigaciones sobre la psicología de la música y su relación con distintas emociones y sensaciones, como las asociaciones entre los modos griegos y los estados de ánimo (\cite{micrologus}). Una posible rama de desarrollo procedería juntando ambos ámbitos, la psicología del color y la de la música, para generar la música deseada en función de la imagen dada.\\
+			Entre estas alternativas, cabe destacar la reacción psicológica sociocultural del cerebro humano ante la música y los colores. Es decir, estudios muestran que el verde, el azul y otros colores con longitudes de onda bajas se relacionan con la calma, mientras que colores con longitudes de onda altas aumentan el nerviosismo y la inestabilidad (\cite{colorpsy}). Hay, por otro lado, multitud de investigaciones sobre la psicología de la música y su relación con distintas emociones y sensaciones, como las asociaciones entre los modos griegos y los estados de ánimo (\cite{micrologus}). Una posible rama de desarrollo procedería juntando ambos ámbitos, la psicología del color y la de la música, para generar la música deseada en función de la imagen dada.\\
 		\item \emph{No se tienen en cuenta objetos físicos}:
 			\vspace{0.1in}
-			\\El objetivo del análisis no es tanto obtener información de qué es lo que la imagen representa (reconocimiento e interpretación), sino los colores y formas que contiene, y su distribución y características dentro de la misma (segmentación y descripción). \color{blue}Es decir, si tenemos una imagen con un elefante no queremos reconocer el ``elefante'' sino que hay una figura  redondeada con una parte alargada (la trompa) y que tiene un colo azul grisáceo y se encuentra en el centro de la imagen.\color{black}
+			\\El objetivo del análisis no es tanto obtener información de qué es lo que la imagen representa (reconocimiento e interpretación), sino los colores y formas que contiene, y su distribución y características dentro de la misma (segmentación y descripción). Es decir, si tenemos una imagen con un elefante no queremos reconocer el ``elefante'' sino que hay una figura  redondeada con una parte alargada (la trompa) y que tiene un colo azul grisáceo y se encuentra en el centro de la imagen.
 		\item \emph{La imagen es estática}:
 			\vspace{0.1in}
 			\\Se consideran para el análisis formatos de imagen estática (tales como bmp, jpg o png), y no animada (vídeo o archivos de animación). Este planteamiento condiciona el proceso de correlación imagen-música, ya que se pretende obtener una salida no estática, como es la música, a partir de una imagen inmóvil. Veremos más adelante cómo se obtiene ese efecto de \emph{dinamismo} a partir de la información proporcionada por una imagen.
 		\item \emph{Generación de contenido frente a acoplamiento de creaciones preestablecidas}:
 			\vspace{0.1in}
-			\color{blue}\\Es importante recalcar que en el proceso de composición las piezas generadas se construyen desde cero y no parten de ninguna estructura predefinida. No se usarán por tanto piezas ya compuestas o estructuras conocidas como ``ladrillos'' para construir una pieza nueva, como una base de datos o adaptaciones de piezas musicales enteras. Es cierto que se pueden seleccionar ciertos parámetros de la composición pero sirven para matizar las composiciones (tempo, instrumentos, ...). \color{black}
+			\\Es importante recalcar que en el proceso de composición las piezas generadas se construyen desde cero y no parten de ninguna estructura predefinida. No se usarán por tanto piezas ya compuestas o estructuras conocidas como ``ladrillos'' para construir una pieza nueva, como una base de datos o adaptaciones de piezas musicales enteras. Es cierto que se pueden seleccionar ciertos parámetros de la composición pero sirven para matizar las composiciones (tempo, instrumentos, ...).
 		\end{itemize}
 		
 		Además, resulta importante resaltar que siendo el objetivo final del proyecto generar música no se ha buscado que compita con obras de grandes compositores. Nuestro modelo es la creación de la llamada música de ambiente; es decir, música que, siendo voluntariamente no atrayente ni excesivamente interesante, tiene como requisito principal el no ser molesta. Se sigue por tanto la línea de la música mostrada por Brian Eno en \emph{Música para Aeropuertos (1978)}:
@@ -57,10 +54,9 @@
 		\emph{``[La música ambiente es] Algo de lo que puedes entrar o salir discretamente. Puedes atender o puedes elegir no distraerte con ella si quisieras hacer algo mientras la música está reproduciéndose.''}, (\cite{BrianEnoInterview}, entrevista con Brian Eno).
 		\end{quote}		
 		
-		Por último, se ha de \color{blue}añadir \color{black} que el ámbito de la composición basada en imágenes es uno muy estudiado pero a la vez poco desarrollado. Es decir, aunque existe una gran cantidad de estudios sobre la sinestesia y la composición musical automática (como se puede ver en la Sección~\ref{sec:estadodelarte}), aún quedan muchas cuestiones que investigar y áreas que profundizar \color{blue}así como la conexión entre la música y la imagen.\\ \color{black}
+		Por último, se ha de añadir que el ámbito de la composición basada en imágenes es uno muy estudiado pero a la vez poco desarrollado. Es decir, aunque existe una gran cantidad de estudios sobre la sinestesia y la composición musical automática (como se puede ver en la Sección~\ref{sec:estadodelarte}), aún quedan muchas cuestiones que investigar y áreas que profundizar así como la conexión entre la música y la imagen.\\
 		
-		\color{blue}Teniendo todo eso en cuenta, comentaremos en las siguientes secciones cómo se ha abordado el proceso. En primer lugar hablaremos del estado del arte y las diferentes investigaciones y pruebas realizadas hasta el momento. Seguidamente se expone la forma de usar la herramienta que se ha desarrollado. Más adelante, en la tercera sección, exponemos de forma detallada los algoritmos usados tanto en el análisis de imagen como en la composición musical. Por último se explica el sistema en detalle y cómo se ha realizado. \color{black}
-		
+		Teniendo todo eso en cuenta, comentaremos en las siguientes secciones cómo se ha abordado el proceso. En primer lugar hablaremos del estado del arte y las diferentes investigaciones y pruebas realizadas hasta el momento (Sección~\ref{sec:estadodelarte}). Seguidamente, en el Capítulo~\ref{chap:guiauso} se expone la forma de usar la herramienta que se ha desarrollado. Más adelante, en el Capítulo~\ref{chap:diseno}, exponemos de forma detallada los algoritmos usados tanto en el análisis de imagen como en la composición musical. Por último, en el Capítulo~\ref{chap:arquitectura} se explica el sistema en detalle y cómo se ha realizado.
 
 \input{9_motivacion}
 \input{10_estado-del-arte}
