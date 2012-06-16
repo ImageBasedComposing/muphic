@@ -1,5 +1,7 @@
 \section{Módulo de análisis}
 
+\torev{Falta Primera Revisión}
+
 El módulo de análisis, como ya se ha comentado, es el encargado de, dada una imagen dada y una configuración de entrada, producir un archivo XML con la lista de polígonos que componen la imagen. Esta lista debe componer una nueva imagen lo más fiel posible a la imagen de entrada, teniendo en cuenta los ajustes especificados en el archivo de configuración.\\
 
 Este módulo hace un gran uso de la librería externa OpenCV, de la cual se ayuda tanto para tratar imágenes como para componer formas y polígonos.
@@ -44,17 +46,3 @@ El flujo de ejecución de un análisis cualquiera realizado con este módulo se 
 		\caption{Flujo de ejecución del módulo de anális}
 		\label{fig:diagramaflujoPHIC}
 		\end{figure}
-		
-\subsection{Vista de despliegue}
-\todo{puede que sobre porque es obvio y UBERrepetitivo, pero es para que se vea que opencv está como dll ahí}
-		
-Por último, la vista final del módulo como paquetes se ve en la Figura~\ref{fig:diagramapaquetesPHIC}.\\
-
-		\begin{figure}[htbp]
-		\centering
-		\includegraphics[scale=0.47]{graphics/todo.png}
-		\caption{Diagrama de paquetes del módulo de anális}
-		\label{fig:diagramapaquetesPHIC}
-		\end{figure}
-		
-El sistema se basa en la librería externa OpenCV para relizar sus funciones.
