@@ -10,7 +10,7 @@ El módulo de conexión se encarga de lanzar los módulos de análisis y/o el de
 		\label{fig:muphic-deploy-diagram}
 		\end{figure}
 		
-Es aquí donde surge el principal problema de que la aplicación sea multiplataforma, ya que distintos sistemas operativos, como Windows o los basados en UNIX, proponen distintas maneras de lanzar archivos ejecutables. Para solventar estos problemas, se han concentrado las consiguientes diferencias del código para cada sistema operativo en la clase \emph{Launcher}, como se ve en la Figura~\ref{}.\\
+Es aquí donde surge el principal problema de que la aplicación sea multiplataforma, ya que distintos sistemas operativos, como Windows o los basados en UNIX, proponen distintas maneras de lanzar archivos ejecutables. Para solventar estos problemas, se han concentrado las consiguientes diferencias del código para cada sistema operativo en la clase \emph{Launcher}, como se ve en la Figura~\ref{fig:muphic-class-diagram}.\\
 
 		\begin{figure}[!htbp]
 		\centering
@@ -21,7 +21,7 @@ Es aquí donde surge el principal problema de que la aplicación sea multiplataf
 		
 La clase Launcher ofrece funcionalidad para ejecutar una aplicación interrumpiendo la ejecución en curso (\emph{Launcher::launch()}), o bien en paralelo (\emph{Launcher::launchAndGo()}), así como para detener la ejecución de un programa lanzado (\emph{Launcher::killProcess()}). De esta forma, la totalidad del resto del código del proyecto se ha realizado sin preocuparse de la plataforma de ejecución, delegando de Launcher siempre que era necesario realizar operaciones propias de cada sistema operativo.\\
 
-En la Figura~\ref{fig:muphic-sec-diagram} se muestra un ejemplo de ejecución del módulo, en el que se ejecutan tanto el módulo de análisis como el de composición.
+En la Figura~\ref{fig:muphic-sec-diagram} se muestra un ejemplo de ejecución del módulo, en el que se ejecutan tanto el módulo de análisis como el de composición.\\
 
 		\begin{figure}[!htbp]
 		\centering
@@ -30,7 +30,7 @@ En la Figura~\ref{fig:muphic-sec-diagram} se muestra un ejemplo de ejecución de
 		\label{fig:muphic-sec-diagram}
 		\end{figure}
 		
-\todo{EXPLICAR USR CONF}
+Cabe destacar en esta sección el uso de la clase \emph{UsrConf}, encargada de administrar el archivo de configuración del completo proceso de análisis y composición. Este archivo, estructurado en forma de XML, contiene tanto los parámetros necesarios para la ejecución del módulo de análisis (vistos en la Sección~\ref{sec:algAnalisis}) como los necesarios para la ejecución del módulo de composición. Además, permite indicar qué módulo se debe ejecutar, de forma que se puede ejecutar únicamente uno de los dos módulos o los dos a la vez. La clase \emph{UsrConf} ofrece funcionalidad para escribir y leer (ya sea en su totalidad o la parte relativa a un único módulo) el archivo XML.
 
 \section{Interfaz Gráfica}
 
