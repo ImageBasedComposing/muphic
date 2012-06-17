@@ -1,6 +1,34 @@
 \section{Módulo de conexión}
 
-\todo{hablar de muphic}
+El módulo de conexión se encarga de lanzar los módulos de análisis y/o el de composición, según la demanda del usuario. Para ello, debe ejecutar los correspondientes programas asociados a cada módulo, de tal forma que la vista de despliegue es tal y como muestra la Figura~\ref{fig:muphic-deploy-diagram}.\\
+
+
+		\begin{figure}[!htbp]
+		\centering
+		\includegraphics[scale=0.6]{graphics/muphic-deploy-diagram.png}
+		\caption{Diagrama de despliegue del módulo de interconexión}
+		\label{fig:muphic-deploy-diagram}
+		\end{figure}
+		
+Es aquí donde surge el principal problema de que la aplicación sea multiplataforma, ya que distintos sistemas operativos, como Windows o los basados en UNIX, proponen distintas maneras de lanzar archivos ejecutables. Para solventar estos problemas, se han concentrado las consiguientes diferencias del código para cada sistema operativo en la clase \emph{Launcher}, como se ve en la Figura~\ref{}.\\
+
+		\begin{figure}[!htbp]
+		\centering
+		\includegraphics[scale=0.6]{graphics/muphic-class-diagram.png}
+		\caption{Diagrama de clases del módulo de interconexión}
+		\label{fig:muphic-class-diagram}
+		\end{figure}
+		
+La clase Launcher ofrece funcionalidad para ejecutar una aplicación interrumpiendo la ejecución en curso (\emph{Launcher::launch()}), o bien en paralelo (\emph{Launcher::launchAndGo()}), así como para detener la ejecución de un programa lanzado (\emph{Launcher::killProcess()}). De esta forma, la totalidad del resto del código del proyecto se ha realizado sin preocuparse de la plataforma de ejecución, delegando de Launcher siempre que era necesario realizar operaciones propias de cada sistema operativo.\\
+
+En la Figura~\ref{fig:muphic-sec-diagram} se muestra un ejemplo de ejecución del módulo, en el que se ejecutan tanto el módulo de análisis como el de composición.
+
+		\begin{figure}[!htbp]
+		\centering
+		\includegraphics[scale=0.6]{graphics/muphic-sec-diagram.png}
+		\caption{Diagrama de flujo del módulo de interconexión}
+		\label{fig:muphic-sec-diagram}
+		\end{figure}
 
 \section{Interfaz Gráfica}
 
