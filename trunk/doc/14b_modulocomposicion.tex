@@ -1,6 +1,6 @@
 \section{Módulo de composición}
 
-\todo{Revisar por nuestra parte antes de poder enseñarlo}
+\torev{Pendiente de Primera Revisión}
 
 El módulo de composición es el encargado de crear un archivo de audio a partir de un archivo XML con información de figuras. Previo a crear el archivo de audio, será necesario componer la música en base a la configuración del usuario y a los datos de las figuras. La composición se verá plasmada en un fichero ABC siguiendo la notación musical ABC (Referencia aquí). De esta manera nos facilita la conversión en archivos de audio y además la posibilidad de mostrar la partitura de la pieza musical creada.
 
@@ -21,15 +21,15 @@ Las clases más importante que podemos observar son:\\
 
 \begin{itemize}
 
-	\item \textbf{Mu:} se trata de la clase que controla la ejecución de este módulo. Se ocupa de crear y coordinar las clases principales de la composición. Además al final se encarga de llamar al programa Timidity para que realice la conversión de Midi a Wav.
+	\item \textbf{Mu:} se trata de la clase que controla la ejecución de este módulo. Se ocupa de crear y coordinar las clases principales de la composición. Además, al final se encarga de llamar al programa Timidity para que realice la conversión de Midi a Wav.
 	
 	\item \textbf{UsrConf:} como se explica en posteriores secciones, es una clase común que se ocupa de la lectura de los archivos de configuración que el usuario a especificado mediante la interfaz gráfica.
 	
-	\item \textbf{FiguresMusic:} es necesario crear una clase a partir de Figures que nos brinde una funcionalidad extra necesaria para el módulo de composición. Se explica más adelante los motivos
+	\item \textbf{FiguresMusic:} es necesario crear una clase a partir de Figures que nos brinde una funcionalidad extra necesaria para el módulo de composición. Se explica más adelante los motivos de esta necesidad.
 	
-	\item \textbf{FigureMusic:} se trata de una extensión de la clase Figure, que toma como padre. Se explica más adelante los motivos
+	\item \textbf{FigureMusic:} se trata de una extensión de la clase Figure, a la que toma como padre. Se explica más adelante los motivos de su creación.
 
-	\item \textbf{Launcher:} ofrece la funcionalidad para ejecutar una aplicación externa. Se detalla más adelante, en Sección 4.5 \todo{Hacer cosas de referencia aqui con labels}
+	\item \textbf{Launcher:} ofrece la funcionalidad para ejecutar una aplicación externa. Se detalla más adelante, en la Sección~\ref{sec:arqMuphic}.
 
 	\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.
 
@@ -43,11 +43,11 @@ Compositores - Algoritmia (color verde Figura~\ref{fig:diagramaclasesMu}):
 	
 	\item \textbf{Composer:} encargado de procesar las figuras de entrada y crear la estructura de los datos de música. Su principal cometido es componer la música sirviendose de los métodos de composición que albergan los compositores de voces. Otra responsabilidad importante es crear el tipo de conversor adecuado para transformar nuestra notación musical en archivos de audio.
 
-	\item \textbf{ComposerVoice:} la tarea principal de un compositor de voz es crear un segmento de música a partir de una figura de entrada. Existe la posibilidad de componer música para las cuatro diferentes voces identificadas (ver Sección 3.3 \todo{más refs de labels}). De esta clase extienden los diferentes algoritmos de composición implementados.
+	\item \textbf{ComposerVoice:} la tarea principal de un compositor de voz es crear un segmento de música a partir de una figura de entrada. Existe la posibilidad de componer música para las cuatro diferentes voces identificadas (ver Sección~\ref{sec:algComposicion}). De esta clase extienden los diferentes algoritmos de composición implementados.
 
 	\item \textbf{ComposerFigMelody2:} un ejemplo de clase que extiende de ComposerVoice que implementa la funcionalidad de crear música para las voces primera, segunda y tercera con los métodos compMelodyFig( ), decMelodyFig( ) y compBassFig( ).
 
-	\item \textbf{ComposerFigBass2, ComposerFigRythm2:} se explican con mayor minuciosidad los algoritmos implementados en las Sección 3.3. \todo{ref de antes}
+	\item \textbf{ComposerFigBass2, ComposerFigRythm2:} se explican con mayor minuciosidad los algoritmos implementados en la Sección~\ref{sec:algComposicion}).
 
 	\item \textbf{ComposerFigSilence:} clase encargada de crear una voz que esté en silencio. Esto ocurre cuando el usuario desactiva alguna de las voces de composición.
 
@@ -59,11 +59,11 @@ Representación - Datos (color salmón Figura~\ref{fig:diagramaclasesMu}):
 
 \begin{itemize}
 	
-	\item \textbf{Music:} encargado de almacenar la pieza musical que se está componiendo. Además debe comunicarse con AudioConvert para generar el archivo de audio. Esta clase se detalla con mayor detalle en la Sección 4.2. \todo{mas refs}
+	\item \textbf{Music:} encargado de almacenar la pieza musical que se está componiendo. Además debe comunicarse con AudioConvert para generar el archivo de audio. Esta clase se detalla con mayor detalle en la Sección~\ref{sec:repMusic}.
 
-	\item \textbf{Voices, Voice, Segments:} Todas estas clases se detallan en la Sección 4.2. \todo{la ref de antes}
+	\item \textbf{Voices, Voice, Segments:} Todas estas clases se detallan en la Sección~\ref{sec:repMusic}.
 
-	\item \textbf{Segment:} es la unidad sobre la que trabajan los compositores de voces. Se usa como contenedor de las notas creadas por los diferentes algoritmos. Más información en la Sección 4.2 \todo{me empizo a parecerme a alguien con tanta ref!}
+	\item \textbf{Segment:} es la unidad sobre la que trabajan los compositores de voces. Se usa como contenedor de las notas creadas por los diferentes algoritmos. Más información en la Sección~\ref{sec:repMusic}.
 
 \end{itemize}
 
@@ -71,11 +71,11 @@ Conversión - Audio (color azul Figura~\ref{fig:diagramaclasesMu}):
 
 \begin{itemize}
 	
-	\item \textbf{AudioConvert:} la principal función es convertir los datos que se manejan en los compositores dentro del sistema, en un archivo de audio que permita reproducirse.
+	\item \textbf{AudioConvert:} la principal función es convertir los datos que se manejan en los compositores dentro del sistema en un archivo de audio que permita reproducirse.
 
-	\item \textbf{AudioConvertABC:} esta clase implementa una posible solución a la conversión entre nuestra notación musical y una salida estandar de audio. En este caso primera se transforma nuestra notación en un archivo con notación ABC y seguidamente se usa la aplicación externa Abc2midi para convertir el archivo ABC en un archivo de sonido Midi
+	\item \textbf{AudioConvertABC:} esta clase implementa una posible solución a la conversión entre nuestra notación musical y una salida estandar de audio. En este caso primero se transforma nuestra notación en un archivo con notación ABC y seguidamente se usa la aplicación externa Abc2midi para convertir el archivo ABC en un archivo de sonido Midi
 
-	\item \textbf{AudioConvertWAV:} de forma experimental se desarrolló un sintetizador de sonido que apartir de nuestra notación directamente generaba un archivo wav sin compresión. Actualmente no se usa ya que se obtienen con Abc2midi y Timidity archivos de sonido con mejor calidad y riqueza.
+	\item \textbf{AudioConvertWAV:} de forma experimental se desarrolló un sintetizador de sonido que, a partir de nuestra notación, generaba directamente un archivo wav sin compresión. Actualmente no se usa, ya que se obtienen con Abc2midi y Timidity archivos de sonido con mejor calidad y riqueza.
 
 	\item \textbf{Abc2midi:} aplicación externa encargada de convertir un archivo de entrada con formato ABC en un archivo de sonido midi.
 
@@ -104,7 +104,7 @@ El fujo de ejecución de una composición completa viene representado la Figura~
 %--------------------------------------------------------------------------------------------------------------
 \subsection{Figuras Musicales}
 
-El módulo de composición trata las figuras según sus necesidades. Por ello, lo que necesita saber de cada figura además de todos los datos que se encuentran dentro de Figures es la relevancia o vistosidad de cada una, para ello hereda de las clases Figures y Figure mencionadas anteriormente \todo{referencia} clases nuevas llamadas FiguresMusic y FigureMusic (Figura~\ref{fig:diagramaClasesFigureMusic}).
+El módulo de composición trata las figuras según sus necesidades. Por ello, lo que necesita saber de cada figura además de todos los datos que se encuentran dentro de Figures es la relevancia o vistosidad de cada una, para ello hereda de las clases Figures y Figure mencionadas anteriormente en la Sección~\ref{subsec:usosFigure}, con las clases nuevas llamadas FiguresMusic y FigureMusic (Figura~\ref{fig:diagramaClasesFigureMusic}).
 
 		\begin{figure}[!htbp]
 		\centering
@@ -117,7 +117,7 @@ A la clase FigureMusic se le añade la siguiente funcionalidad:
 
 \begin{itemize}
 
-	\item{calcularVistosidad}: Se calcula la relevancia de una figura dentro de una imagen con los siguientes valores: cantidad de rojo de la figura, cantidad de verde de la figura, cantidad de azul de la figura, área de la figura y distancia al centro de la imagen. Cada característica tiene su propio peso. La fórmula que relaciona todas estas características viene en \todo{referencia a la fórmula de la parte de algorítmia}. Es necesario este valor para poder clasificar las figuras y así los compositores puedan usar las figuras de forma organizada.
+	\item{calcularVistosidad}: Se calcula la relevancia de una figura dentro de una imagen con los siguientes valores: cantidad de rojo de la figura, cantidad de verde de la figura, cantidad de azul de la figura, área de la figura y distancia al centro de la imagen. Cada característica tiene su propio peso. La fórmula que relaciona todas estas características se ve con detalle en la Sección~\ref{sec:algComposicion}. Es necesario este valor para poder clasificar las figuras y así los compositores puedan usar las figuras de forma organizada.
 
 	\item{compare}: Compara dos figuras según el valor de la vistosidad. Si dos figuras tienen misma vistosidad entonces tienen misma relevancia dentro de la imagen. Se emplea para poder ordenar las figuras.
 
@@ -129,6 +129,6 @@ A FiguresMusic se le añaden los elementos necesarios para poder considerar y ut
 
 	\item{calcuteVisibility}: Primero calcula la vistosidad de cada figura si es que no se ha calculado ya, tomando los valores. Después se normalizan esos valores teniendo en cuenta el total de todas las figuras y la media. Función que usa sortMusicFigures para poder después ordenar las figuras.
 
-	\item{sortMusicFigures}: Dado una lista de figuras, te devuelve la lista ordenada según la vistosidad de las figuras. Esta funcionalidad se utiliza por parte de los compositores, para ordenar las figuras por su criterio de relevancia dentro de la imagen.
+	\item{sortMusicFigures}: Dada una lista de figuras, devuelve la lista ordenada según la vistosidad de las figuras. Esta funcionalidad se utiliza por parte de los compositores, para ordenar las figuras por su criterio de relevancia dentro de la imagen.
 
 \end{itemize}

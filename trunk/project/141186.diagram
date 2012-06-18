@@ -1,270 +1,269 @@
 format 76
 
-classcanvas 128002 class_ref 141698 // Mu
-  draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 304.53 88.49 2000
+classinstance 128002 class_ref 134914 // Phic
+  name ""   xyz 118 8 2000 life_line_z 2000
+classinstance 128130 class_ref 135042 // Analyzer
+  name ""   xyz 271 8 2000 life_line_z 4035
+classinstance 128642 class_ref 135170 // UsrConf
+  name ""   xyz 193 8 2000 life_line_z 2000
+note 130306 "La imagen se reduce hasta que contenga la cantidad de píxeles que establece analysis depth."
+  xyzwh 20 345 2030 93 119
+note 131458 "En caso de usar otro filtro distinto a Canny, Threshold o Adaptive Threshold, se llamará a analyzePerRegions (para Hue Division) o analyzeHSV (para Color Thresholding)"
+  xyzwh 325 225 4040 127 137
+note 132738 "Si las imágenes resultantes del proceso de filtrado son varias, se llamará a addFiguresFromPics()"
+  xyzwh 324 373 4040 151 89
+note 133506 "Uso explícito de la librería OpenCV"
+  xyzwh 496 473 2000 87 61
+fragment 135938 "loop"
+  color lightred xyzwh 247 551 1995 499 373
 end
-classcanvas 128130 class_ref 141826 // UsrConf
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 370.12 21.27 2000
+note 136066 "Por cada polígono, se calcula el área y, si procede (el parámetro Noise Selection no la desecha por ser excesivamente pequeña), se almacena en una instancia de la clase FiguraImg"
+  xyzwh 629 555 2015 113 179
+classinstance 136194 class_ref 134786 // FigureImg
+  name ""   xyz 398 9 2000 life_line_z 4035
+classinstance 136962 class_ref 128002 // Figures
+  name ""   xyz 591 10 2000 life_line_z 2000
+fragment 137474 "loop"
+  color lightgreen xyzwh 256 648 2020 184 73
 end
-classcanvas 128386 class_ref 142210 // FigureMusic
-  draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 435.47 144.22 2000
+note 139010 "Calcula el color preeliminar de una imagen (sin tener en cuenta las figuras que tiene dentro)"
+  xyzwh 453 741 2000 139 87
+note 142338 "Finalmente, se borran las Figuras repetidas, se establece la estructura arbórea de figuras y se calcula el color final de las figuras, teniendo en cuenta sus hijos."
+  xyzwh 683 971 2000 145 127
+durationcanvas 128770 classinstance_ref 128002 // :Phic
+  xyzwh 137 61 2010 11 1102
+  overlappingdurationcanvas 130050
+    xyzwh 143 273 2020 11 39
+  end
 end
-classcanvas 128514 class_ref 142338 // FiguresMusic
-  draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 433.41 96.07 2000
+durationcanvas 128898 classinstance_ref 128642 // :UsrConf
+  xyzwh 215 104 2010 11 37
 end
-classcanvas 129154 class_ref 142466 // Composer
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 295.63 234.04 2000
+durationcanvas 129282 classinstance_ref 128642 // :UsrConf
+  xyzwh 215 60 2010 11 35
 end
-classcanvas 129282 class_ref 142594 // ComposerVoice
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 427.29 211.95 2000
+durationcanvas 129666 classinstance_ref 128130 // :Analyzer
+  xyzwh 295 200 2010 11 36
 end
-classcanvas 129794 class_ref 142850 // ComposerFigMelody2
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 535.52 225.07 2000
+durationcanvas 130562 classinstance_ref 128130 // :Analyzer
+  xyzwh 295 362 2010 11 51
 end
-classcanvas 129922 class_ref 142978 // ComposerFigBass2
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 416.86 409.76 2000
+durationcanvas 132482 classinstance_ref 128130 // :Analyzer
+  xyzwh 295 461 4040 11 497
+  overlappingdurationcanvas 132994
+    xyzwh 301 484 2020 11 29
+  end
+  overlappingdurationcanvas 133250
+    xyzwh 301 523 2020 11 25
+  end
+  overlappingdurationcanvas 138754
+    xyzwh 301 795 4050 11 25
+  end
 end
-classcanvas 130050 class_ref 143106 // ComposerFigRythm2
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 547.37 316.97 2000
+durationcanvas 137602 classinstance_ref 136194 // :FigureImg
+  xyzwh 423 671 4045 11 40
 end
-classcanvas 130178 class_ref 143234 // ComposerFigSilence
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 480.51 363.94 2005
+durationcanvas 137986 classinstance_ref 136194 // :FigureImg
+  xyzwh 423 577 4045 11 39
 end
-classcanvas 130306 class_ref 143490 // ComposerMixer2
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 287.69 320.33 2000
+durationcanvas 139266 classinstance_ref 136962 // :Figures
+  xyzwh 611 870 2010 11 39
 end
-classcanvas 130434 class_ref 143618 // Music
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 149.06 284.08 2000
+durationcanvas 140290 classinstance_ref 136962 // :Figures
+  xyzwh 611 140 2010 11 41
 end
-classcanvas 130562 class_ref 144770 // Launcher
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 268.03 20.33 2005
+durationcanvas 140674 classinstance_ref 136962 // :Figures
+  xyzwh 611 971 2010 11 33
 end
-classcanvas 130690 class_ref 143746 // Voices
-  draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 50.5 286.34 2000
+durationcanvas 141058 classinstance_ref 136962 // :Figures
+  xyzwh 611 1063 2010 11 35
 end
-classcanvas 130818 class_ref 143874 // Voice
-  draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 54.47 356.14 2000
+durationcanvas 141442 classinstance_ref 136962 // :Figures
+  xyzwh 611 1020 2010 11 29
 end
-classcanvas 130946 class_ref 144002 // Segments
-  draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 44.32 421.88 2005
+durationcanvas 141954 classinstance_ref 136962 // :Figures
+  xyzwh 611 1119 2010 11 36
 end
-classcanvas 131074 class_ref 144130 // Segment
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 165.58 370.02 2010
-end
-classcanvas 131202 class_ref 144258 // AudioConvert
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 162.61 195.77 2005
-end
-classcanvas 131330 class_ref 144386 // AudioConvertABC
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 138.02 118.3 2005
-end
-classcanvas 131458 class_ref 144514 // AudioConvertWAV
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 35.05 178.46 2005
-end
-packagecanvas 131714 
-  package_ref 128002 // tinyXML
-   color white  xyzwh 577 10 2000 69 71
-end
-packagecanvas 131842 
-  package_ref 141058 // Timidity
-   color white  xyzwh 133 13 2008 69 71
-end
-packagecanvas 131970 
-  package_ref 141186 // Abc2midi
-   color white  xyzwh 48 69 2010 69 71
-end
-fragment 138370 "representación - datos"
-  color verylightorange xyzwh 28.66 265.38 0 230 201
-end
-fragment 138498 "composición - algoritmia"
-  color green xyzwh 271.47 191.69 0 404 276
-end
-fragment 138626 "conversión - audio"
-  color blue xyzwh 28.66 8.2 0 230 245
-end
-relationcanvas 128258 relation_ref 142978 // <directional aggregation>
-  geometry HV
-  decenter_begin 230
-  from ref 128002 z 2001 to point 395 94
-  line 139650 z 2001 to ref 128130
-  no_role_a no_role_b
-  multiplicity_a_pos 381 76 3000 no_multiplicity_b
-end
-relationcanvas 129410 relation_ref 143234 // <unidirectional association>
-  decenter_begin 754
-  decenter_end 469
-  from ref 128002 z 2001 to ref 129154
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 129538 relation_ref 143362 // <directional aggregation>
-  from ref 129154 z 2001 to ref 129282
-  no_role_a no_role_b
-  multiplicity_a_pos 410 273 3000 multiplicity_b_pos 393 273 3000
-end
-relationcanvas 132098 relation_ref 143490 // <association>
-  decenter_begin 532
-  decenter_end 449
-  from ref 130434 z 2001 to ref 131202
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132226 relation_ref 143618 // <unidirectional association>
-  decenter_begin 754
-  decenter_end 275
-  from ref 129154 z 2001 to point 262 278
-  line 136194 z 2001 to point 262 308
-  line 138882 z 2001 to ref 130434
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132354 relation_ref 143746 // <unidirectional association>
-  decenter_begin 96
-  from ref 129154 z 2001 to point 302 216
-  line 136322 z 2001 to ref 131202
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132610 relation_ref 144002 // <generalisation>
-  decenter_begin 442
-  decenter_end 456
-  from ref 130306 z 2001 to ref 129154
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132738 relation_ref 144130 // <generalisation>
-  decenter_begin 256
-  decenter_end 879
-  from ref 130178 z 2006 to ref 129282
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 133122 relation_ref 144386 // <generalisation>
-  from ref 129794 z 2001 to ref 129282
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 134018 relation_ref 144514 // <generalisation>
-  decenter_begin 333
-  decenter_end 920
-  from ref 130050 z 2001 to point 590 304
-  line 135938 z 2001 to ref 129282
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 134146 relation_ref 144642 // <generalisation>
-  decenter_begin 495
-  decenter_end 472
-  from ref 129922 z 2001 to ref 129282
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 134530 relation_ref 144770 // <unidirectional association>
-  decenter_begin 409
-  decenter_end 323
-  from ref 128002 z 2001 to point 288 102
-  line 138114 z 2001 to ref 130562
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-simplerelationcanvas 134658 simplerelation_ref 141314
-  decenter_end 455
-  from ref 130562 z 2006 stereotype "<<uses>>" xyz 209 43 3000 to ref 131842
-end
-simplerelationcanvas 134786 simplerelation_ref 141442
-  from ref 131330 z 2011 to point 188 101
-  line 134914 z 2011 stereotype "<<uses>>" xyz 126 103 3000 to ref 131970
-end
-simplerelationcanvas 135042 simplerelation_ref 141570
-  from ref 128130 z 2001 stereotype "<<uses>>" xyz 476 44 3000 to ref 131714
-end
-simplerelationcanvas 135170 simplerelation_ref 141698
-  decenter_end 432
-  from ref 128514 z 2001 to point 604 113
-  line 138242 z 2001 stereotype "<<uses>>" xyz 542 100 3000 to ref 131714
-end
-relationcanvas 135298 relation_ref 144898 // <unidirectional association>
-  decenter_begin 150
-  decenter_end 578
-  from ref 129154 z 2001 to point 393 244
-  line 135426 z 2001 to point 393 116
-  line 140418 z 2001 to ref 128514
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 135554 relation_ref 145026 // <unidirectional association>
-  decenter_begin 104
-  decenter_end 486
-  from ref 129282 z 2001 to point 409 228
-  line 135810 z 2001 to point 409 161
-  line 135682 z 2001 to ref 128386
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 136450 relation_ref 145154 // <generalisation>
-  decenter_begin 564
-  decenter_end 430
-  from ref 131330 z 2001 to ref 131202
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 136834 relation_ref 145538 // <generalisation>
-  decenter_begin 754
-  decenter_end 358
-  from ref 131458 z 2001 to ref 131202
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 136962 relation_ref 145666 // <directional aggregation>
-  decenter_begin 337
-  decenter_end 768
-  from ref 130434 z 2001 to ref 130690
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 137090 relation_ref 145794 // <directional aggregation>
-  from ref 130690 z 2001 to ref 130818
-  no_role_a no_role_b
-  multiplicity_a_pos 61 337 3000 multiplicity_b_pos 59 331 3000
-end
-relationcanvas 137218 relation_ref 145922 // <unidirectional association>
-  decenter_begin 86
-  decenter_end 92
-  from ref 129282 z 2011 to point 436 383
-  line 137346 z 2011 to ref 131074
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 137730 relation_ref 146178 // <directional aggregation>
-  decenter_end 462
-  from ref 130818 z 2006 to ref 130946
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 137858 relation_ref 146306 // <directional aggregation>
-  decenter_begin 386
-  decenter_end 708
-  from ref 130946 z 2011 to ref 131074
-  no_role_a no_role_b
-  multiplicity_a_pos 150 445 3000 multiplicity_b_pos 122 443 3000
-end
+msg 129026 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 128898
+  yz 111 2015 msg operation_ref 134786 // "readPhic()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 156 97
+msg 129154 return
+  from durationcanvas_ref 128898
+  to durationcanvas_ref 128770
+  yz 130 2020 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 129410 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 129282
+  yz 62 2015 explicitmsg "new"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 170 47
+msg 129538 return
+  from durationcanvas_ref 129282
+  to durationcanvas_ref 128770
+  yz 81 2020 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 129794 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 129666
+  yz 205 2015 explicitmsg "new"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 226 194
+msg 129922 return
+  from durationcanvas_ref 129666
+  to durationcanvas_ref 128770
+  yz 225 2020 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+reflexivemsg 130178 synchronous
+  to durationcanvas_ref 130050
+  yz 273 2025 explicitmsg "resizeImage"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 159 259
+msg 130690 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 130562
+  yz 368 2015 msg operation_ref 134530 // "analizeByFilter(in imagesrc : , in filter : , in threshold : )"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 188 357
+msg 132354 return
+  from durationcanvas_ref 130562
+  to durationcanvas_ref 128770
+  yz 402 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 132610 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 132482
+  yz 466 2015 msg operation_ref 135298 // "addFiguresFromPic()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 169 452
+reflexivemsg 133122 synchronous
+  to durationcanvas_ref 132994
+  yz 484 2025 explicitmsg "cvFindContours"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 338 483
+reflexivemsg 133378 synchronous
+  to durationcanvas_ref 133250
+  yz 523 2025 explicitmsg "cvApproxPoly"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 341 519
+msg 137730 synchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 137602
+  yz 672 4050 msg operation_ref 141826 // "colocarVertice()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 321 658
+msg 137858 return
+  from durationcanvas_ref 137602
+  to durationcanvas_ref 132482
+  yz 700 4055 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 138114 synchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 137986
+  yz 578 4050 explicitmsg "new"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 352 564
+msg 138242 return
+  from durationcanvas_ref 137986
+  to durationcanvas_ref 132482
+  yz 605 4055 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+reflexivemsg 138882 synchronous
+  to durationcanvas_ref 138754
+  yz 795 4055 msg operation_ref 142082 // "setColorFromImage()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 319 777
+msg 139394 synchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 139266
+  yz 874 4045 msg operation_ref 141954 // "colocarFig()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 428 860
+msg 139522 return
+  from durationcanvas_ref 139266
+  to durationcanvas_ref 132482
+  yz 893 4050 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 139906 return
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 128770
+  yz 947 4045 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 140418 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 140290
+  yz 148 4040 explicitmsg "new"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 368 134
+msg 140546 return
+  from durationcanvas_ref 140290
+  to durationcanvas_ref 128770
+  yz 170 4040 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 140802 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 140674
+  yz 974 4040 msg operation_ref 142210 // "deleteReps()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 347 960
+msg 140930 return
+  from durationcanvas_ref 140674
+  to durationcanvas_ref 128770
+  yz 993 4045 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 141186 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 141058
+  yz 1068 4040 msg operation_ref 142466 // "redoColorFigs()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 342 1054
+msg 141314 return
+  from durationcanvas_ref 141058
+  to durationcanvas_ref 128770
+  yz 1084 4045 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 141570 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 141442
+  yz 1022 4040 msg operation_ref 142338 // "setParentSonStructure()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 320 1008
+msg 141826 return
+  from durationcanvas_ref 141442
+  to durationcanvas_ref 128770
+  yz 1038 4045 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 142082 synchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 141954
+  yz 1121 4040 msg operation_ref 142594 // "guardar()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 356 1107
+msg 142210 return
+  from durationcanvas_ref 141954
+  to durationcanvas_ref 128770
+  yz 1144 4040 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+line 130434 -_-_
+  from ref 130050 z 2031 to ref 130306
+line 131586 -_-_ decenter_begin 884
+  from ref 130690 z 4041 to ref 131458
+line 132866 -_-_ decenter_begin 939
+  from ref 132610 z 4041 to ref 132738
+line 135170 -_-_
+  from ref 133506 z 2021 to point 449 533
+  line 135298 z 2021 to ref 133250
+line 135426 -_-_ decenter_begin 508 decenter_end 689
+  from ref 133506 z 2021 to ref 132994
+line 139138 -_-_ decenter_begin 758
+  from ref 139010 z 4051 to ref 138754
+line 142850 -_-_
+  from ref 140674 z 2011 to ref 142338
+line 142978 -_-_
+  from ref 141442 z 2011 to ref 142338
+line 143106 -_-_
+  from ref 141058 z 2011 to ref 142338
 end

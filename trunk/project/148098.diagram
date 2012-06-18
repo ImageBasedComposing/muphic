@@ -1,0 +1,24 @@
+format 76
+
+componentcanvas 128514 component_ref 128002 // Módulo de análisis
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 115 181 2000 143 69
+end
+componentcanvas 129026 component_ref 128258 // Módulo de composición
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 297 181 2000 151 69
+end
+componentcanvas 129154 component_ref 128130 // Módulo de conexión
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 201 78 2000 143 51
+end
+simplerelationcanvas 129282 simplerelation_ref 141698
+  decenter_begin 425
+  decenter_end 643
+  from ref 129154 z 2001 to ref 128514
+end
+simplerelationcanvas 129410 simplerelation_ref 141826
+  decenter_end 344
+  from ref 129154 z 2001 to ref 129026
+end
+end
