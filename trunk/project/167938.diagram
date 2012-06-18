@@ -1,0 +1,104 @@
+format 76
+
+classcanvas 128002 class_ref 143618 // Music
+  draw_all_relations default hide_attributes no hide_operations no hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 12 9 2000 101 139
+end
+classcanvas 128130 class_ref 143746 // Voices
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 154 60 2006
+end
+classcanvas 128386 class_ref 143874 // Voice
+  draw_all_relations default hide_attributes no hide_operations no hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 133 152 3005
+end
+classcanvas 128642 class_ref 144002 // Segments
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 236 173 3011
+end
+classcanvas 128898 class_ref 144130 // Segment
+  draw_all_relations default hide_attributes no hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 223 250 3017
+end
+classcanvas 129154 class_ref 151426 // Symbols
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 324 268 2000
+end
+classcanvas 129282 class_ref 151298 // Symbol
+  draw_all_relations default hide_attributes no hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 313 343 2000 55 49
+end
+classcanvas 129410 class_ref 151554 // Note
+  draw_all_relations default hide_attributes no hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 393 409 2000
+end
+note 129922 "La música puede tener múltiples voces"
+  xyzwh 229 87 2000 129 55
+note 130178 "Una voz contiene muchos segmentos"
+  xyzwh 313 202 2005 125 49
+note 130434 "Los segmentos contienen símbolos como unidad atómica"
+  xyzwh 161 338 2000 125 71
+classcanvas 130818 class_ref 151682 // Chord
+  draw_all_relations default hide_attributes no hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 313 411 2000
+end
+note 131202 "Como tipos de símbolos se han implementado Nota y Acorde"
+  xyzwh 391 285 2005 103 75
+relationcanvas 128258 relation_ref 145666 // <directional aggregation>
+  from ref 128002 z 2007 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128514 relation_ref 145794 // <directional aggregation>
+  decenter_begin 215
+  from ref 128130 z 3006 to ref 128386
+  no_role_a no_role_b
+  multiplicity_a_pos 150 133 3000 multiplicity_b_pos 148 105 3000
+end
+relationcanvas 128770 relation_ref 146178 // <directional aggregation>
+  from ref 128386 z 3012 to ref 128642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129026 relation_ref 146306 // <directional aggregation>
+  decenter_begin 231
+  from ref 128642 z 3018 to ref 128898
+  no_role_a no_role_b
+  multiplicity_a_pos 237 231 3000 multiplicity_b_pos 235 218 3000
+end
+relationcanvas 129538 relation_ref 153218 // <directional aggregation>
+  decenter_begin 456
+  from ref 128898 z 3018 to ref 129154
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129666 relation_ref 153346 // <directional aggregation>
+  decenter_begin 261
+  from ref 129154 z 2001 to ref 129282
+  no_role_a no_role_b
+  multiplicity_a_pos 350 328 3000 multiplicity_b_pos 350 310 3000
+end
+relationcanvas 129794 relation_ref 153474 // <generalisation>
+  decenter_end 527
+  from ref 129410 z 2001 to point 413 366
+  line 130946 z 2001 to ref 129282
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131074 relation_ref 153602 // <generalisation>
+  decenter_end 453
+  from ref 130818 z 2001 to ref 129282
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+line 130050 -_-_ decenter_end 381
+  from ref 129922 z 3007 to ref 128514
+line 130306 -_-_ decenter_begin 591
+  from ref 130178 z 3019 to ref 129026
+line 130562 -_-_ decenter_begin 611 decenter_end 126
+  from ref 129666 z 2002 to ref 130434
+line 131330 -_-_ decenter_begin 879 decenter_end 675
+  from ref 131202 z 2006 to ref 129794
+line 131458 -_-_ decenter_begin 456 decenter_end 625
+  from ref 131202 z 2006 to ref 131074
+end
