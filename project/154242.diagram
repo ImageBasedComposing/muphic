@@ -1,0 +1,83 @@
+format 76
+
+classcanvas 128386 class_ref 151298 // Figures
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 128 32 2000 109 101
+end
+classcanvas 128514 class_ref 151426 // Figure
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 131 219 2000 107 107
+end
+classcanvas 128642 class_ref 151682 // Vertice
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 155 431 2000 55 65
+end
+packagecanvas 133378 
+  package_ref 147842 // tinyXML
+    xyzwh 320 48 2000 65 71
+end
+relationcanvas 128770 relation_ref 152834 // <directional aggregation>
+  decenter_begin 166
+  decenter_end 149
+  from ref 128386 z 2001 to ref 128514
+  role_a_pos 156 200 3000 no_role_b
+  multiplicity_a_pos 132 200 3000 multiplicity_b_pos 130 139 3000
+end
+relationcanvas 128898 relation_ref 153218 // <directional aggregation>
+  decenter_begin 485
+  from ref 128514 z 2001 to ref 128642
+  role_a_pos 192 412 3000 no_role_b
+  multiplicity_a_pos 168 412 3000 multiplicity_b_pos 166 332 3000
+end
+relationcanvas 129026 relation_ref 152962 // <directional aggregation>
+  decenter_begin 523
+  decenter_end 93
+  from ref 128386 z 2001 to point 56 82
+  line 129154 z 2001 to point 56 226
+  line 129282 z 2001 to ref 128514
+  role_a_pos 74 210 3000 no_role_b
+  multiplicity_a_pos 116 235 3000 multiplicity_b_pos 111 91 3000
+end
+relationcanvas 129538 relation_ref 153346 // <directional aggregation>
+  decenter_begin 465
+  decenter_end 824
+  from ref 128514 z 2001 to point 90 266
+  line 129666 z 2001 to point 90 305
+  line 129794 z 2001 to ref 128514
+  role_a_pos 98 289 3000 no_role_b
+  multiplicity_a_pos 116 314 3000 multiplicity_b_pos 114 275 3000
+end
+relationcanvas 130306 relation_ref 153474 // <directional aggregation>
+  decenter_begin 155
+  decenter_end 349
+  from ref 128514 z 2001 to point 286 233
+  line 130434 z 2001 to point 286 254
+  line 130562 z 2001 to ref 128514
+  role_a_pos 247 238 3000 no_role_b
+  multiplicity_a_pos 247 263 3000 multiplicity_b_pos 247 242 3000
+end
+relationcanvas 131202 relation_ref 153602 // <directional aggregation>
+  decenter_begin 736
+  decenter_end 915
+  from ref 128514 z 2001 to point 288 295
+  line 131330 z 2001 to point 288 314
+  line 131458 z 2001 to ref 128514
+  role_a_pos 247 298 3000 no_role_b
+  multiplicity_a_pos 247 323 3000 multiplicity_b_pos 247 304 3000
+end
+relationcanvas 131842 relation_ref 153730 // <directional aggregation>
+  decenter_begin 785
+  decenter_end 915
+  from ref 128514 z 2001 to point 212 179
+  line 131970 z 2001 to point 226 179
+  line 132738 z 2001 to ref 128514
+  role_a_pos 238 200 3000 no_role_b
+  multiplicity_a_pos 212 200 3000 multiplicity_b_pos 198 200 3000
+end
+simplerelationcanvas 133506 simplerelation_ref 148226
+  from ref 128386 z 2001 stereotype "<<uses>>" xyz 253 82 3000 to ref 133378
+end
+simplerelationcanvas 133634 simplerelation_ref 148354
+  from ref 128386 z 2001 stereotype "<<uses>>" xyz 253 82 3000 to ref 133378
+end
+end
