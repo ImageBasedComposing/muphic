@@ -1,127 +1,55 @@
 format 76
 
-classinstance 128130 class_ref 141698 // Mu
-  name ""   xyz 14 4 2000 life_line_z 2000
-classinstance 128258 class_ref 135170 // UsrConf
-  name ""   xyz 86 4 2000 life_line_z 2000
-classinstance 128386 class_ref 142466 // Composer
-  name ""   xyz 172 242 2005 life_line_z 2000
-classinstance 128514 class_ref 142594 // ComposerVoice
-  name ""   xyz 249 115 2010 life_line_z 2000
-fragment 130818 "loop"
-  color green form "[4]" xyzwh 1 142 0 343 95
+classcanvas 128002 class_ref 141698 // Muphic
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 60 44 2000 71 39
 end
-note 131458 "Se crea el compositor general elegido y se introducen los parámetros especificados por el usuario.
-Al final se llama a componer que devolverá la path donde se creó la música"
-  xyzwh 252.5 270.5 2005 125 179
-note 131586 "Se crean los compositores de cada voz elegidos por el usuario junto con sus datos"
-  xyzwh 155.5 8.5 0 101 103
-durationcanvas 128770 classinstance_ref 128130 // :Mu
-  xyzwh 33 57 2010 11 406
+packagecanvas 128130 
+  package_ref 128002 // tinyXML
+    xyzwh 326 16 2000 65 71
 end
-durationcanvas 128898 classinstance_ref 128258 // :UsrConf
-  xyzwh 108 55 2010 11 30
+classcanvas 128258 class_ref 135170 // UsrConf
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  hidden_operations
+    operation_ref 134786 // readPhic
+  xyz 197 27 2006
 end
-durationcanvas 129282 classinstance_ref 128258 // :UsrConf
-  xyzwh 108 95 2010 11 27
+classcanvas 128514 class_ref 141826 // Launcher
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 54 153 2000 87 81
 end
-durationcanvas 129666 classinstance_ref 128386 // :Composer
-  xyzwh 198 292 2010 11 25
+packagecanvas 128642 
+  package_ref 141058 // Módulo de análisis
+    xyzwh 293 235 2000 97 71
 end
-durationcanvas 130050 classinstance_ref 128514 // :ComposerVoice
-  xyzwh 289 165 2010 11 27
+packagecanvas 128770 
+  package_ref 141186 // Modulo de composición
+    xyzwh 280 139 2000 121 71
 end
-durationcanvas 130434 classinstance_ref 128514 // :ComposerVoice
-  xyzwh 289 203 2010 11 25
+simplerelationcanvas 128386 simplerelation_ref 134530
+  decenter_begin 384
+  from ref 128258 z 2007 stereotype "<<uses>>" xyz 265 51 2007 to ref 128130
 end
-durationcanvas 131842 classinstance_ref 128386 // :Composer
-  xyzwh 198 328 2010 11 27
+simplerelationcanvas 128898 simplerelation_ref 141314
+  decenter_begin 259
+  from ref 128514 z 2001 stereotype "<<uses>>" xyz 184 152 3000 to ref 128770
 end
-durationcanvas 132226 classinstance_ref 128386 // :Composer
-  xyzwh 198 379 2010 11 56
+simplerelationcanvas 129026 simplerelation_ref 141442
+  decenter_begin 801
+  from ref 128514 z 2001 to point 188 215
+  line 129282 z 2001 to point 188 267
+  line 129154 z 2001 stereotype "<<uses>>" xyz 196 271.5 3000 to ref 128642
 end
-msg 129026 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 128898
-  yz 57 2015 explicitmsg "new"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 65 43
-msg 129154 return
-  from durationcanvas_ref 128898
-  to durationcanvas_ref 128770
-  yz 74 2020 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 129410 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 129282
-  yz 97 2025 explicitmsg "readMu()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 58 83
-msg 129538 return
-  from durationcanvas_ref 129282
-  to durationcanvas_ref 128770
-  yz 111 2030 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 129794 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 129666
-  yz 292 2015 explicitmsg "new"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 140 282
-msg 129922 return
-  from durationcanvas_ref 129666
-  to durationcanvas_ref 128770
-  yz 306 2020 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 130178 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 130050
-  yz 165 3005 explicitmsg "new"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 243 155
-msg 130306 return
-  from durationcanvas_ref 130050
-  to durationcanvas_ref 128770
-  yz 181 2015 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 130562 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 130434
-  yz 203 2015 explicitmsg "setData()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 234 194
-msg 130690 return
-  from durationcanvas_ref 130434
-  to durationcanvas_ref 128770
-  yz 216 2020 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 131970 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 131842
-  yz 328 2015 explicitmsg "setData()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 132 318
-msg 132098 return
-  from durationcanvas_ref 131842
-  to durationcanvas_ref 128770
-  yz 344 2020 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 132354 synchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 132226
-  yz 380 2015 msg operation_ref 141826 // "compose()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 127 368
-msg 132482 return
-  from durationcanvas_ref 132226
-  to durationcanvas_ref 128770
-  yz 424 2015 explicitmsg "path"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 59 411
-line 131714 -_-_ decenter_begin 666 decenter_end 741
-  from ref 130818 z 1 to ref 131586
-line 132610 -_-_ decenter_begin 333 decenter_end 374
-  from ref 131842 z 2011 to ref 131458
-line 132738 -_-_ decenter_begin 658 decenter_end 159
-  from ref 131458 z 2011 to ref 132226
+relationcanvas 129410 relation_ref 149506 // <unidirectional association>
+  decenter_begin 521
+  from ref 128002 z 2001 to ref 128514
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129538 relation_ref 149634 // <unidirectional association>
+  decenter_end 537
+  from ref 128002 z 2007 to ref 128258
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
 end

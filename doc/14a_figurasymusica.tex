@@ -1,12 +1,12 @@
 \section{Representación de la imagen analizada}
 \label{sec:representacionFiguras}
 
-\torev{Falta Primera Revisión}
+\torev{Pendiente de Primera Revisión}
 Tanto en el análisis de imágenes como en el proceso de composición hay un aspecto fundamental a estudiar: la representación de datos de las figuras.\\
 
 De acuerdo con lo explicado en previas secciones, el producto de salida  (y el de entrada de la composición musical) es un archivo XML que almacena el análisis de la imagen dada como entrada. Este archivo contiene toda la información que se considera para representar los elementos de una imagen, y servirá como base para explicar el contenido y estructura lógica de los datos analizados.\\
 
-Por otro lado, en esta sección se mostrará también la estructura usada en la implementación de los \todo{(Objetos Mayuscula?} objetos relacionados con estos datos y sus usos. Dado que tanto el módulo de análisis como el de composición hacen uso de esta información , se introducirán también en esta sección las extensiones y capacidades de la estructura de datos creada.
+Por otro lado, en esta sección se mostrará también la estructura usada en la implementación de los Objetos relacionados con estos datos y sus usos. Dado que tanto el módulo de análisis como el de composición hacen uso de esta información , se introducirán también en esta sección las extensiones y capacidades de la estructura de datos creada.
 
 \subsection{Almacenamiento y estructura}
 \label{subsec:xmlstruct}
@@ -90,12 +90,13 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 		
 		\item \textbf{Vertice:} Se trata de la unidad más pequeña de esta estructura, y representa las coordenadas en 2 dimensiones de un vértice en el plano cartesiano. Como se detalla en la Sección~\ref{subsec:xmlstruct}, da la opción de ser considerado un ``centro'', de forma que, en la lista de vértices de la Figura que lo almacene, puede actuar como el centro entre el vértice anterior y el siguiente, formando por tanto un arco entre los 3 vértices y permitiendo realizar curvas en las figuras.
 		
-		\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.\todo{Referencia? o no hace falta}
+		\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.\todo{falta introducir tinyxml de forma aceptable en algún lado, o poner referencia aquí a alguna fuente buena}
 	
 	\end{itemize}
 	
 			
 \subsection{Usos de la estructura}	
+\label{subsec:usosFigure}
 
 	Como ya se ha comentado, tanto el proceso de análisis como el de composición hacen uso de esta estructura y, dado que para la implementación de ambos módulos se ha seleccionado el mismo lenguaje orientado a objetos (C++), estos compartirán la implementación de esta estructura.\\
 	
@@ -112,8 +113,9 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 
 
 \section{Formato de representación de música}
+\label{sec:repMusic}
 
-\todo{Repasar por alguno de nosotros antes de enviar}
+\torev{Pendiente de Primera Revisión}
 
 La estructura para representar la música propuesta en el proyecto está determinada por un árbol que trabaja desde el elemento más general, la canción que se va a componer, al más específico, cada una de las notas que componen dicha canción. Se puede ver la estructura en el siguiente esquema (Figura~\ref{fig:structmusic}).\\
 	
@@ -126,10 +128,10 @@ La estructura para representar la música propuesta en el proyecto está determi
 	\end{figure}
 
 
-\textbf{Music}: Al nivel de la Music trabajamos con la información relativa a toda la canción que se va a componer. Por un lado está la información relativa al nombre de la pieza y del compositor que la ha hecho así como la path del archivo de sonido cuando se guarde. Pero la parte más importante es el contenido de las voces a partir de las cuales está formada la canción. También es importante el tempo global de la pieza y la herramienta que se usará para crear el archivo de audio de salida.
+\textbf{Music}: Al nivel de la Music trabajamos con la información relativa a toda la canción que se va a componer. Por un lado está la información relativa al nombre de la pieza y del compositor que la ha hecho así como la ruta del archivo de sonido cuando se guarde. Pero la parte más importante es el contenido de las voces a partir de las cuales está formada la canción. También es importante el tempo global de la pieza y la herramienta que se usará para crear el archivo de audio de salida.
 \newline
 
-\textbf{Voices}: Esta clase es un envoltorio de un array al que se le ha añadido pequeña funcionalidad como la posibilidad de editar algún parámetro a todas las voces que contiene.
+\textbf{Voices}: Esta clase es un envoltorio de un array al que se le ha añadido pequeña funcionalidad, como la posibilidad de editar algún parámetro a todas las voces que contiene.
 \newline
 
 \textbf{Voz}: Por debajo de Music se trabaja con las voces, Voice. Dentro de cada Voice se determina el instrumento, la tonalidad y el tempo con el que será transformada esta voz en sonido. La parte sustancial de cada voz son los Segments, donde se almacena los datos musicales.
@@ -138,15 +140,15 @@ La estructura para representar la música propuesta en el proyecto está determi
 \textbf{Segments}: Al igual que Voices, es un envoltorio de un array al que se le ha añadido alguna pequeña funcionalidad adicional.
 \newline
 
-\textbf{Segment}: Su principal cometido es almacenar de forma serializable los diferentes símbolos musicales con los que está compuesta la pieza musical. A su vez, estos elementos tienen la posibilidad de establecer su propia métrica y tempo. Además es importante la duración del segmento, que se irá incrementando cada vez que se añada un nuevo símbolo.
+\textbf{Segment}: Su principal cometido es almacenar de forma serializable los diferentes símbolos musicales de los que está compuesta la pieza musical. A su vez, estos elementos tienen la posibilidad de establecer su propia métrica y tempo. Además es importante la duración del segmento, que se irá incrementando cada vez que se añada un nuevo símbolo.
 \newline
 
-\textbf{Symbol}: Son la unidad a partir de la cual se crean todos los elementos básicos de la música, Symbol está formado únicamente por una duración. Actualmente el se ha desarrollado dos tipos de elementos a partir de Symbol:
+\textbf{Symbol}: Son la unidad a partir de la cual se crean todos los elementos básicos de la música, Symbol está formado únicamente por una duración. Actualmente se ha desarrollado dos tipos de elementos a partir de Symbol:
 \begin{itemize}
 
 	\item \textbf{Note}: Estos símbolos tienen asociado además de duración, determinada por el componente anterior, un tono que viene representado por un número que posteriormente será interpretado con la herramienta que generará el archivo de audio.
 
-	\item \textbf{Chord}: Los acordes están formados de la misma manera que las notas pero en lugar de tener asociado un único tono pueden tener de dos a cuatro tonos diferentes. En la práctica esto se traduce a varios tonos sonando a la vez durante el mismo tiempo dentro de la pieza musical sin la necesidad de múltiples voces.
+	\item \textbf{Chord}: Los acordes están formados de la misma manera que las notas, pero en lugar de tener asociado un único tono pueden tener de dos a cuatro tonos diferentes. En la práctica, esto se traduce a varios tonos sonando a la vez durante el mismo tiempo dentro de la pieza musical sin la necesidad de múltiples voces.
 
 \end{itemize}
  

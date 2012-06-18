@@ -1,15 +1,15 @@
 <?xml version="1.0" standalone="yes" ?>
 <muphic_conf>
     <phic_conf>
-        <filter>2</filter>
-        <threshold>50</threshold>
+        <filter>3</filter>
+        <threshold>150</threshold>
         <noise>0.56</noise>
         <polSimp>2</polSimp>
         <anlDet>50</anlDet>
         <colLvl>3</colLvl>
-        <thresholdH>7798895</thresholdH>
-        <thresholdS>6029427</thresholdS>
-        <thresholdV>7929971</thresholdV>
+        <thresholdH>55</thresholdH>
+        <thresholdS>150</thresholdS>
+        <thresholdV>205</thresholdV>
 		<debug/>
     </phic_conf>
     <mu_conf none="true" />

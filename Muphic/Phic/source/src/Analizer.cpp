@@ -1,4 +1,4 @@
-#include "Analizer.h"
+﻿#include "Analizer.h"
 
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -98,7 +98,8 @@ void Analizer::analizePerRegions(IplImage* imagesrc, int levels, IplImage** &ima
 	for (int i = 0; i < levels; i++)
 		for (int j = 0; j < levels; j++)
 			for (int k = 0; k < levels; k++)
-			{		
+			{	
+ 
 				cvShowImage("regions", regionCube[i][j][k]);
 
 				if (debug)
@@ -249,7 +250,7 @@ void Analizer::addFiguresfromPicv2(IplImage* img, IplImage* mask, Figuras* figur
 	if( contours )
 	{
 		//convert the pixel contours to line segments in a polygon.
-		CvSeq* first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, polSimp, 1);
+		CvSeq* first_polygon = cvApproxPoly(contours, sizeof(CvContour), g_storage, CV_POLY_APPROX_DP, polSimp, 2);
 
 		CvSeq* cAux = contours;
 		double area;
@@ -278,7 +279,7 @@ void Analizer::addFiguresfromPicv2(IplImage* img, IplImage* mask, Figuras* figur
 				g_contours,
 				currentson,
 				red,			// Red
-				blue,			// Blue
+				red,			// Blue
 				3,				// Vary max_level and compare results
 				0,//CV_FILLED,//1,
 				8 );
