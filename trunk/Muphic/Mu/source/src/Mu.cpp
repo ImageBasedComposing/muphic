@@ -192,6 +192,13 @@ int main( int argc, const char* argv[] )
 	l->launch(5, Launcher::TIMIDITY, args);
 
 	delete l;
+
+	l = new Launcher();
+	string args2[] = {compMix->getTmpMIDIPath()+".abc", "-X", "-O", compMix->getTmpMIDIPath()+".xhtml"};
+	cout << endl << "Making pdf output..." << endl;
+	l->launch(4, Launcher::ABC2PS, args2);
+
+
 	delete compMix;
 	delete cs;
 

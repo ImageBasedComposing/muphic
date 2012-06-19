@@ -28,7 +28,7 @@ class Launcher
 {
     public:
 
-		enum Program{MUPHIC, MU, PHIC, QMAKE, ABC2MIDI, MPLAYER, TIMIDITY};
+		enum Program{MUPHIC, MU, PHIC, QMAKE, ABC2MIDI, MPLAYER, TIMIDITY, ABC2PS};
 		enum Options {NONE};
 
         Launcher();

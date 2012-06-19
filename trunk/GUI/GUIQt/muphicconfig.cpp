@@ -11,6 +11,7 @@ MuphicConfig::MuphicConfig(QWidget *parent) :
 
     analysing = false;
     composing = false;
+
 }
 
 MuphicConfig::~MuphicConfig()
@@ -228,6 +229,14 @@ void MuphicConfig::on_toolButton_InputPic_clicked()
     }
 }
 
+std::string removeLocalPath(std::string path)
+{
+    if (path.length() > 1 && path.at(0) == '.' && ((path.at(1) == '/') || (path.at(1) == '\\')))
+        return path.substr(2, path.length() - 1);
+    else
+        return path;
+}
+
 void MuphicConfig::on_pushButton_Generate_clicked()
 {
 
@@ -333,6 +342,8 @@ void MuphicConfig::paintEvent(QPaintEvent*)
             composing = false;
             remove("composition_log");
             ui->pushButton_Generate->setText("Compose");
+            std::string composedPDF = removeLocalPath(changeExtension(outputFile.toStdString(), "xhtml"));
+            QDesktopServices::openUrl(QUrl::fromLocalFile(composedPDF.c_str()));
         }
     }
 
