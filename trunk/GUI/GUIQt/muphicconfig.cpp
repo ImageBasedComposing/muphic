@@ -11,6 +11,7 @@ MuphicConfig::MuphicConfig(QWidget *parent) :
 
     analysing = false;
     composing = false;
+    outputFile = "./test1";
 
 }
 
@@ -342,8 +343,9 @@ void MuphicConfig::paintEvent(QPaintEvent*)
             composing = false;
             remove("composition_log");
             ui->pushButton_Generate->setText("Compose");
+
             std::string composedPDF = removeLocalPath(changeExtension(outputFile.toStdString(), "xhtml"));
-            QDesktopServices::openUrl(QUrl::fromLocalFile(composedPDF.c_str()));
+            QDesktopServices::openUrl(QUrl(composedPDF.c_str(), QUrl::TolerantMode));
         }
     }
 
@@ -405,12 +407,6 @@ void MuphicConfig::on_pushButton_Analyze_clicked()
         pidAnal = l->launchAndGo(2, Launcher::MUPHIC, args);
         analysing = true;
         ui->pushButton_Analyze->setText("Stop");
-
-/*
-        ui->polyWidget->load(imageFile.toStdString());
-        ui->polyWidget->setMinimumHeight(ui->polyWidget->iHeight);
-        ui->polyWidget->setMinimumWidth(ui->polyWidget->iWidth);
-        ui->pushButton_Generate->setEnabled(true);*/
      }
     }
 }

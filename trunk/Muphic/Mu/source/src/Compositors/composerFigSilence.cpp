@@ -1,4 +1,4 @@
-#include "Compositors/ComposerFigSilence.h"
+#include "Compositors/composerFigSilence.h"
 
 /*------Constructoras------*/
 ComposerFigSilence::ComposerFigSilence(ColorSystem* cs) : ComposerVoice(cs)
