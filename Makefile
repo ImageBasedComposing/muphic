@@ -2,6 +2,7 @@ all:
 	sudo $(SHELL) makeall3makes.sh
 	qmake -config release -o ./GUI/GUIQt/Makefile ./GUI/GUIQt/GUIQt.pro
 	$(MAKE) -C ./Muphic/abcmidi
+	$(MAKE) -C ./Muphic/abcm2ps
 	$(MAKE) -C ./Muphic/muphic-codeblocks
 	$(MAKE) -C ./Muphic/Phic/phic-codeblocks
 	$(MAKE) -C ./Muphic/Mu/mu-codeblocks
@@ -13,6 +14,7 @@ all:
 clean:
 
 	$(MAKE) clean -iC ./Muphic/abcmidi
+	$(MAKE) clean -iC ./Muphic/abcm2ps
 	$(MAKE) clean -iC ./Muphic/muphic-codeblocks
 	$(MAKE) clean -iC ./Muphic/Phic/phic-codeblocks
 	$(MAKE) clean -iC ./Muphic/Mu/mu-codeblocks

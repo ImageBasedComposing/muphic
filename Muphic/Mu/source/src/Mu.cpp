@@ -2,7 +2,7 @@
 
 #include "Compositors/ComposerTimothy.h"
 #include "Compositors/ComposerTimothy2.h"
-#include "Compositors/ComposerFigSilence.h"
+#include "Compositors/composerFigSilence.h"
 #include "Compositors/ComposerFigMelody.h"
 #include "Compositors/ComposerFigMelody2.h"
 #include "Compositors/ComposerFigBass2.h"
@@ -33,7 +33,7 @@ void showUsage()
 int main( int argc, const char* argv[] )
 {
 	/* Toma de parámetros de entrada */
-	
+
 	if (argc < 3)
 	{
 		cout << "Too few arguments in function call" << endl;
@@ -60,7 +60,7 @@ int main( int argc, const char* argv[] )
 			cs = new NewtonColor(); break;
 		case 1:
 			cs = new BertrandCastelColor(); break;
-		case 2:	
+		case 2:
 			cs = new ScriabinColor(); break;
 		case 3:
 			cs = new GFieldColor(); break;
@@ -78,7 +78,7 @@ int main( int argc, const char* argv[] )
 			cs = new KleinColor(); break;
 		case 10:
 			cs = new AeppliColor(); break;
-		default : 
+		default :
 			cs = new ScriabinColor();
 	}
 
@@ -90,13 +90,13 @@ int main( int argc, const char* argv[] )
 	switch(usrConf->getMuCompVoice1()){
 		case -1:
 			compVoice1 = new ComposerFigSilence(cs); break;
-		case 0:	
+		case 0:
 			compVoice1 = new ComposerFigMelody(cs); break;
-		case 1:	
+		case 1:
 			compVoice1 = new ComposerFigMelody2(cs); break;
 		case 2:
 			compVoice1 = new ComposerFigBass2(cs); break;
-		default : 
+		default :
 			compVoice1 = new ComposerFigMelody2(cs);
 	}
 	instruments.clear();
@@ -108,9 +108,9 @@ int main( int argc, const char* argv[] )
 	switch(usrConf->getMuCompVoice2()){
 		case -1:
 			compVoice2 = new ComposerFigSilence(cs); break;
-		case 0:	
+		case 0:
 			compVoice2 = new ComposerFigMelody2(cs); break;
-		default : 
+		default :
 			compVoice2 = new ComposerFigMelody2(cs);
 	}
 	instruments.clear();
@@ -122,13 +122,13 @@ int main( int argc, const char* argv[] )
 	switch(usrConf->getMuCompVoice3()){
 		case -1:
 			compVoice3 = new ComposerFigSilence(cs); break;
-		case 0:	
+		case 0:
 			compVoice3 = new ComposerFigBass2(cs); break;
 		case 1:
 			compVoice3 = new ComposerFigMelody(cs); break;
-		case 2: 
+		case 2:
 			compVoice3 = new ComposerFigMelody2(cs); break;
-		default : 
+		default :
 			compVoice3 = new ComposerFigBass2(cs);
 	}
 	instruments.clear();
@@ -140,11 +140,11 @@ int main( int argc, const char* argv[] )
 	switch(usrConf->getMuCompVoice4()){
 		case -1:
 			compVoice4 = new ComposerFigSilence(cs); break;
-		case 0:	
+		case 0:
 			compVoice4 = new ComposerFigRitmo(cs); break;
-		case 1:	
+		case 1:
 			compVoice4 = new ComposerFigRitmo2(cs); break;
-		default : 
+		default :
 			compVoice4 = new ComposerFigRitmo2(cs);
 	}
 	instruments.clear();
@@ -163,17 +163,17 @@ int main( int argc, const char* argv[] )
 	//The compositor that is going to mix everything
 	Composer* compMix;
 	switch(usrConf->getMuCompMix()){
-		case 0:	
+		case 0:
 			compMix = new ComposerTimothy(compVoice1,compVoice2,compVoice3,compVoice4); break;
-		case 1:	
+		case 1:
 			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4); break;
-		default : 
+		default :
 			compMix = new ComposerTimothy2(compVoice1,compVoice2,compVoice3,compVoice4);
 	}
 
 	compMix->setTempo(usrConf->getMuTempo());
-	
-	
+
+
 	string midiPath = usrConf->getMuOutputFile();
 	if(midiPath.compare("") == 0)
 		compMix->setTmpMIDIPath(analysedPic);
