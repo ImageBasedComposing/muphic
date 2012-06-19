@@ -1,13 +1,26 @@
 \section{Motivación}
 
 \todo{  No se corrige, \\
-Reescribir
+
+1 .- Descubrir los trabajos de dibujar para crear música\\
+	1.1 .- Plantearlo a la inversa, componer a través de una imagen\\
+2.- Investigar trabajos relacionados con composición con entradas gráficas (mirar bitácora para recordar que se buscó en su día)\\
+	2.1.- Ruso de las imágenes\\
+	2.3.- Portutesis\\
+3.- Descubrir la sinestesia\\
+	3.1.- Interés en la adaptación color nota\\
+Creo que a partir de aquí sobra
+4.- Plantear el trabajo como algo relacionado con la sinestesia en lugar de identificar los objetos como tales\\
+	4.1.- Algoritmos de tratamiento de imágenes como figuras -> OpenCV.\\
+5.- Querer tener una aplicación utilizable por todo tipo de público -> MP3 incorporado, interfáz gráfica sencilla\\
 }
 
-Desde el principio la motivación principal del proyecto era la música, tanto por el interés de sus participantes en ese campo (y en el de la generación automática) como por las condiciones exigidas por el tutor.
-
-La segunda motivación de este proyecto fue el interés por el tratamiento de imágenes. Dada toda la tecnología actual que trabaja con programas de captura de vídeo o análisis de imágenes, a todos los participantes les resultaba de interés ampliar sus conocimientos sobre esos campos. Esto fue lo que llevó la idea inicial de composición musical a ser algo mixto donde esa composición se basaría en los datos obtenidos a partir de una imagen.
-\\Inicialmente la intención era que la música compuesta transmitiese las mismas sensaciones que la imagen, sin embargo, tras indagar y encontrar referencias a la sinestesia, la idea derivó a profundizar en este campo en el ámbito que concierne el proyecto, ya que estaba poco estudiado y daba una base mas científica sobre la que trabajar.\\
-
-Otra de las ideas con la que se partió desde el principio era enfocar la aplicación a dispositivos móviles, de esta manera se podría profundizar en otro campo tecnológico en crecimiento hoy en día. Desgraciadamente, tras los primeros meses de desarrollo debido a las librerías utilizadas
-se determinó que la complicación que tendría portar la aplicación a móvil sería demasiado costosa en cuanto a tiempo se refiere, por ello se acabó desechando esta posibilidad.\\
+Desde el principio el objetivo fue crear una aplicación que estuviese relacionada con la música, tras investigar las distintas posibilidades que había a disposición se decidió que tendría que ser una aplicación dirigida tanto a los usuarios que no tenían conocimiento sobre la música como a compositores, por ello se descartaron los programas sintetizadores musicales al estilo de SunVox \cite{SunVox} o similares.
+\\\newline
+Tras plantear varias posibilidades el grupo se decantó por la composición a través de imágenes pero incluso en este ámbito existían ya unos cuantos trabajos, de entre ellos algunos permitieron visualizar posibles resultados que se esperarían de la aplicación, entre ellos llamó la atención un programa \cite{dibujosymusica} que permitía hacer un dibujo y sobre él crear una melodía, este era bastante limitado pero ofrecía la facilidad de uso y los resultados interesantes que se esperaban del proyecto.
+\\\newline
+El primer planteamiento que se propuso consistía en detectar el tipo de imagen que se iba a analizar y retransmitir las sensaciones que producía a través de la música, sin embargo se sabía que tanto en el ámbito del análisis como en el de la composición este planteamiento era demasiado ambicioso para un proyecto de un solo año además de no tener a disposición una tecnología con esa capacidad de análisis, por ello se siguieron investigando más posibilidades.
+\\\newline
+Tras profundizar un poco mas en la composición basada en imágenes se encontraron dos trabajos que proponían la composición a través de la sinestesia, el del ruso Lauri Gröhn \cite{rusofotos} que aplicaba distintas reglas sinestésicas a imágenes analizadas a través de un mapa de bits y el del portugués André Pintado Jorge Gonçalves \cite{portutesis} que trabajaba con las formas de las figuras como entrada a la composición. Esto animó el proyecto en la dirección de la sinestesia pues era tanto un campo poco investigado por lo que se despertaba la curiosidad y el interés además de dar una razón directa justificable entre el color, las formas y la música.
+\\\newline
+Al investigar sobre la sinestesia y la música se llegó rápidamente a los trabajos de Scriabin \cite{ScriabinQuintasColor} que ofrecía una relación directa entre las notas y los colores, a su vez en cuanto a composición musical se encontró información sobre Brian Eno \cite{BrianEnoInterview} compositor que pretendía hacer música sencilla de ambiente pero que no desviase la atención hacia ella. Estas fueron las ultimas relaciones que se necesitaban, pues ofrecieron la posibilidad de asociar la música con el color a través de los estudios de un músico famoso y a su vez un enfoque a unos resultados realistas para el proyecto: El crear una música que no sonase mal pero no fuese interesante, es decir conseguir unos resultados que no fueran desagradables de escuchar pero que no captasen la atención del oyente, en otras palabras música de ambiente.
