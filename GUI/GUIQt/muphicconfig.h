@@ -13,6 +13,9 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+#include <QDesktopServices>
+#include <QUrl>
+
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QPixmap>
