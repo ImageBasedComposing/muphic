@@ -176,9 +176,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 
 	Posteriormente, se procede a calcular si son efectivamente similares o no, es decir, si todos los vértices de un polígono tienen un vértice idéntico en el otro polígono y éstos pares siguen el ``orden'' de los polígonos (por ejemplo, si un vértice $v$ del polígono A es idéntico al vértice $v'$ del polígono B, entonces uno de los vértices contiguos a $v$ debe ser idéntico a uno de los vértices a $v'$ para que sean considerados idénticos). De una manera más formal:\\
 		
-	Diremos que $V$ es una \emph{distribución de vértices} de un polígono si lista todos los vértices del mismo y, para todo vértice $v$ que ocupa un valor $i$ en la distribución del polígono, sus dos vértices contiguos $v'$ y $v''$ ocupan posiciones adyacentes a $i$ en la distribución (considerando que el primer vértice y el último de la distribución son también adyacentes).\\
-	
-	Sean dos polígonos A y B. Los polígonos serán similares, o considerados idénticos, si existe una disposición de vértices en A $V_{A} = [v_{1}, v_{2}, ..., v_{n}]$, y otra en B $V_{B} = [v'_{1}, v'_{2}, ..., v'_{n}]$, tales que:
+	Sean dos polígonos A y B. Los polígonos serán similares, o considerados idénticos, si existe una disposición de vértices en A $V_{A} = [v_{1}, v_{2}, ..., v_{n}]$, y otra en B $V_{B} = [v'_{1}, v'_{2}, ..., v'_{n}]$ que asumen vértices contiguos tomados en sentido horario (o antihorario), tales que:
 	
 	\begin{center}
 		$\forall k, 0 < k < N, dist(v_{k}, v'_{k}) < \epsilon$
