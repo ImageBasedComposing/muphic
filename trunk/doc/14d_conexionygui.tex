@@ -31,52 +31,35 @@ En la Figura~\ref{fig:muphic-sec-diagram} se muestra un ejemplo de ejecución de
 		\label{fig:muphic-sec-diagram}
 		\end{figure}
 		
-Cabe destacar en esta sección el uso de la clase \emph{UsrConf}, encargada de administrar el archivo de configuración del completo proceso de análisis y composición. Este archivo, estructurado en forma de XML, contiene tanto los parámetros necesarios para la ejecución del módulo de análisis (vistos en la Sección~\ref{sec:algAnalisis}) como los necesarios para la ejecución del módulo de composición. Además, permite indicar qué módulo se debe ejecutar, de forma que se puede ejecutar únicamente uno de los dos módulos o los dos a la vez. La clase \emph{UsrConf} ofrece funcionalidad para escribir y leer (ya sea en su totalidad o la parte relativa a un único módulo) el archivo XML.
+Cabe destacar en esta sección el uso de la clase \emph{UsrConf}, encargada de administrar el archivo de configuración del completo proceso de análisis y composición. Este archivo de configuración es el que permite la ``comunicación'' entre los distintos módulos del sistema. Está estructurado en forma de XML y contiene tanto los parámetros necesarios para la ejecución del módulo de análisis como los necesarios para la ejecución del módulo de composición (vistos en la Sección~\ref{chap:guiauso}). Contiene también la información de la ruta destino de la composición. De forma adicional, permite indicar qué módulo se debe ejecutar, de forma que se puede ejecutar únicamente uno de los dos módulos o los dos a la vez. La clase \emph{UsrConf} ofrece funcionalidad para escribir y leer (ya sea en su totalidad o la parte relativa a un único módulo) el archivo XML.\\
 
 \section{Interfaz Gráfica}
 
-\todo{rehacer reusando parte de esto:
+La interfaz gráfica de la aplicación es la encargada de aunar todas las funcionalidades del sistema en una única aplicación. Se ocupa de la creación del archivo de configuración necesario para la ejecución de los distintos módulos, así como de facilitar el acceso a los resultados del análisis y la composición.\\
 
-El desarrollo de la interfaz gráfica se decidió realizar a través de un framework que facilitase la construcción de la misma. Qt, la herramienta que se utilizó se eligió debido a dos criterios, era multiplataforma, al igual que la aplicación, servía para trabajar con móviles, siguiendo así uno de los enfoques iniciales del proyecto que más adelante fue descartado. Además Qt trabaja con C++ como lenguaje de programación, el mismo que el núcleo de la aplicación y ofrece facilidades a la hora de integrar audio, a través de la librería Phonon, o componentes personalizados en una interfaz.\\
-\todo{Este párrafo no se si abriría mejor la parte de arquitectura}
-\newline
-La interfaz esta compuesta de tres pestañas cada una encargada de una parte de la funcionalidad:
+Para su diseño se ha usado el quit de desarrollo Qt (ver \cite{qtlibs}), debido a ser multiplataforma y a estar en sí misma orientada a móviles, facilitando así una futura movilización del sistema a máquinas portátiles. La versión de la librería usada está aplicada al lenguaje de programación C++, gracias a lo cual se ha podido reusar gran parte del código implementado en el resto del sistema, como son las clases UsrConf (encargada de almacenar la configuración de los módulos, como se vio en la Sección~\{sec:arqMuphic}), y el paquete de representación de figuras (las clases \emph{Figures} y derivadas, vistas en la Sección~\ref{sec:representacionFiguras}. La interfaz, como se ve en en los requisitos (ver Sección~\ref{sec:requisitos}), debe ser capaz tanto de lanzar el módulo de conexión como de mostrar el resultado del análisis y la partitura de la pieza musical compuesta, así como reproducir dicha pieza generada.\\
 
-\underline{Composition Config:}
-\\En esta pestaña se pueden encontrar todas las opciones disponibles para el compositor musical, estás serán transmitidas a los módulos de la aplicación cuando se pulse el botón de "Compose" en la "Main Window" a través del documento XML mencionado anteriormente.
-\\Como se puede ver en la imagen adjunta, hay opciones para cuatro voces, que son aquellas con las que trabajan los compositores de la aplicación siendo, normalmente, la "Voice 1" la melodía principal, la "Voice 2" un acompañamiento, la "Voice 3" el bajo y la "Voice 4" la percusión. Las opciones disponibles son las siguientes:
-\\\todo{Adjuntar imagen}
-\newline
-\\textit{Color System:} Hace referencia referencia a la teoría sinestésica que se utilizará como base para la relación de color-notas durante la composición musical.
-\\textit{Composer:} En las cuatro voces se refiere a que compositor se utilizará para esa voz, al presionarlo se desplegarán los distintos compositores que están disponibles para que el usuario elija el que mejor le convenga.
-\\textit{Instrument:} En las cuatro voces se refiere a que instrumento se utilizará para esa voz en concreto, al presionarlo se desplegarán los instrumentos disponibles.
-\\textit {Composer Mixer:} Hace referencia a que como se combinarán las cuatro voces anteriores.
-\\textit{Tempo:} 
-\\\todo{A rellenar con gente que sepa describirlo mejor que yo. \\También hay que repasar lo anterior}
-\newline
-\\{\bf Libreria Phonon}
-\\Esta es una librería proporcionada por Qt para la reproducción de audio, al ser un módulo externo requiere una serie de librerías añadidas que están incluidas en el paquete de instalación de windows, sin embargo tendrán que ser instaladas en linux utilizando alguno de los gestores de software disponibles realizando una búsqueda con la palabra clave: Phonon.
-\\Las librerías requeridas son las siguientes: (LISTA DE LIBRERÍAS)
-\\En el caso de que no funcione el sistema de reproducción, se pueden encontrar los archivos de audio en la ruta especificada en "Midi Output"
-\newline
-\\\todo{Claramente esta parte va en arquitectura, sin embargo no se que más comentar de la arquitectura de la GUI puesto que casi todo esta hecho con QT, como no digamos el widget de carlos...}
-\\La interacción con phonon se realiza utilizando la funcionalidad proporcionada por el framework. Se asocia el fichero multimedia a un tipo proporcionado por Phonon que a su vez lo conecta con el sistema de audio predeterminado para cada sistema operativo.
-\\El uso de Phonon es conveniente porque a pesar de sus complicaciones ofrece una manera sencilla de incluir un reproductor en la interfaz, que a su vez, es multiplataforma sin obligar al usuario a buscar el archivo de audio o forzar una llamada a un tercer programa que reproducir la música que generada.
+Mientras que para mostrar el análisis y reproducir música se podrá utilizar los mismos recursos ofrecidos por la librería Qt, para mostrar las partituras será necesario hacer uso del visor del visor de archivos gráficos predeterminado del sistema (en concreto se usa el formato de archivos xhtml, por facilidad de uso en las diferentes plataformas a las que está orientada la aplicación). Es por ello que se hace uso también de la clase \emph{Launcher} anteriormente explicada, que en esta ocasión lanzará cada aplicación en paralelo a la interfaz gráfica, permitiendo así detener la ejecución de módulos externos si el usuario considera que su período de actividad ha sido excesivo.\\
 
-\subsection{Uso de la librería Qt}
+La siguiente sección analizará con detalle la implementación de las partes más importantes de esta interfaz.
 
-\todo{Hacer, usar parte de 3.3.6}
+\subsection{Vista de implementación}
 
-\subsection{Vista general}
+La aplicación sigue la estructura básica de una interfaz diseñada sobre Qt, con un controlador encargado de manejar los eventos (\emph{QMainWindow}) y una estructura que se encarga de actualizar la parte gráfica (\emph{MuphicUI}), como se ve en la Figura~\ref{fig:gui-class-diagram}.\\
 
-\todo{Hacer, usar parte de 3.3.6}
+		\begin{figure}[!htbp]
+		\centering
+		\includegraphics[scale=0.6]{graphics/gui_diagrama_clases.png}
+		\caption{Diagrama de flujo del módulo de interconexión}
+		\label{fig:gui-class-diagram}
+		\end{figure}
 
-\subsection{Widget Gráfico}
+Para mostrar la imagen seleccionada como entrada se usa un elemento propio de la librería Qt (\emph{GraphicsView}), mientras que para la visualización del resultado final de un análisis recién realizado, se usa una clase propia: \emph{PolygonWidget}. Su estructura, como muestra la Figura~\ref{fig:gui-class-diagram}, consta de un elemento principal, la \emph{Escena}, encargada de administrar el marco de dibujo y sus contenidos. Ella hará uso de la estructura de representación de Figuras para cargar la imagen recién analizada y pintarla en el marco designado, gracias a la clase pintora \emph{QPainter} proporcionada por la librería. Con ella, y haciendo uso de la clase auxiliar \emph{Pincel} (que facilita el pintado de líneas y arcos aproximados por rectas), pintará por pantalla la escena cargada, proporcionando al usuario una visión fiel del análisis realizado.\\
 
-\todo{Hacer}
+Por otro lado, para la reproducción de audio se hace uso de una librería compaginable con Qt: Phonon \todo{referencia aquí al anexo}. Esta librería se encarga de cargar así como de iniciar, parar y modificar el transcurso de la reproducción de una pieza musical. El uso de esta librería, que soporta archivos de audio tales como wav o mp3, pero no midi, obliga a que el módulo de reproducción produzca una salida acorde a los formatos que esta librería es capaz de reproducir.
 
-\subsection{Uso de la librería Phonon}
+\subsection{Vista de despliegue}
 
-\todo{Hacer, usar parte de 3.3.6}
+A diferencia de en otros apartados, donde la totalidad de los elementos externos se incluyen en el despliegue del módulo, en este caso se exigirá como requisito de instalación a los usuarios de sistemas UNIX el tener instalados en sus máquinas anfitrionas tanto la librería Qt como la librería adicional Phonon, para ahorrar espacio en el producto final. Se encuentran detalladas estas librerías en la Sección~\ref{sec:reqinstalacion}.\\
 
-La interfaz para poder reproducir los archivos de audio generados hace uso de una librería externa proporcionada por Qt, se trata de Phonon \cite{phononOverview}. }
+En la versión para sistemas Windows, por proporcionarse un instalable y no el código fuente, no será necesario que exista ninguna librería instalada en el sistema.\\
