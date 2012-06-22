@@ -1,6 +1,6 @@
 \section{Módulo de análisis}
 
-\torev{Pendiente de Primera Revisión}
+\gotrev{Última revisión hecha el 20-06-2012}
 
 El módulo de análisis, como ya se ha comentado, es el encargado de, dada una imagen y una configuración de entrada, producir un archivo XML con la lista de polígonos que componen la imagen. Esta lista debe formar una nueva imagen lo más fiel posible a la imagen de entrada, teniendo en cuenta los ajustes especificados en el archivo de configuración.\\
 
@@ -38,11 +38,18 @@ En ella, se pueden observar las siguientes clases:\\
 	
 \end{itemize}
 			
-El flujo de ejecución de un análisis cualquiera realizado con este módulo se ve en la Figura~\ref{fig:diagramaflujoPHIC}. En él, se observa cómo es la clase Analyzer la que se comunica con OpenCV para realizar las opciones necesarias, ordenadas por Phic.\\
+El flujo de ejecución de un análisis cualquiera realizado con este módulo se ve en las Figura~\ref{fig:diagramaflujoPHIC1} y ~\ref{fig:diagramaflujoPHIC2}. En la primera imagen se observa el proceso de inicialización del módulo en su totalidad, mientras que en la segunda se observa cómo es la clase Analyzer la que se comunica con OpenCV para realizar las opciones necesarias, ordenadas por Phic.\\
 
 		\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=0.47]{graphics/diagramaflujoPHIC.png}
+		\includegraphics[scale=0.47]{graphics/diagramaflujoPHIC1.png}
+		\caption{Flujo de inicialización del módulo de anális}
+		\label{fig:diagramaflujoPHIC1}
+		\end{figure}
+		
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.47]{graphics/diagramaflujoPHIC2.png}
 		\caption{Flujo de ejecución del módulo de anális}
-		\label{fig:diagramaflujoPHIC}
+		\label{fig:diagramaflujoPHIC2}
 		\end{figure}

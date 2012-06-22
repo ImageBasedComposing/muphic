@@ -1,7 +1,7 @@
 \section{Representación de la imagen analizada}
 \label{sec:representacionFiguras}
 
-\torev{Pendiente de Primera Revisión}
+\gotrev{Última revisión hecha el 20-06-2012}
 Tanto en el análisis de imágenes como en el proceso de composición hay un aspecto fundamental a estudiar: la representación de datos de las figuras.\\
 
 De acuerdo con lo explicado en previas secciones, el producto de salida  (y el de entrada de la composición musical) es un archivo XML que almacena el análisis de la imagen dada como entrada. Este archivo contiene toda la información que se considera para representar los elementos de una imagen, y servirá como base para explicar el contenido y estructura lógica de los datos analizados.\\
@@ -15,7 +15,7 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 
 			\begin{figure}[htbp]
 			\centering
-			\includegraphics[scale=0.47]{graphics/xml-representation.png}
+			\includegraphics[scale=0.35]{graphics/xml-representation.png}
 			\caption{Estructura del archivo xml de análisis}
 			\label{fig:estructuraFiguras}
 			\end{figure}
@@ -90,7 +90,7 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 		
 		\item \textbf{Vertice:} Se trata de la unidad más pequeña de esta estructura, y representa las coordenadas en 2 dimensiones de un vértice en el plano cartesiano. Como se detalla en la Sección~\ref{subsec:xmlstruct}, da la opción de ser considerado un ``centro'', de forma que, en la lista de vértices de la Figura que lo almacene, puede actuar como el centro entre el vértice anterior y el siguiente, formando por tanto un arco entre los 3 vértices y permitiendo realizar curvas en las figuras.
 		
-		\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.\todo{falta introducir tinyxml de forma aceptable en algún lado, o poner referencia aquí a alguna fuente buena}
+		\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.
 	
 	\end{itemize}
 	
@@ -115,7 +115,7 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 \section{Formato de representación de música}
 \label{sec:repMusic}
 
-\torev{Pendiente de Primera Revisión}
+\gotrev{Última revisión hecha el 20-06-2012}
 
 La estructura para representar la música propuesta en el proyecto está determinada por un árbol que trabaja desde el elemento más general, la canción que se va a componer, al más específico, cada una de las notas que componen dicha canción. Se puede ver la estructura en el siguiente esquema (Figura~\ref{fig:structmusic}).\\
 	

@@ -1,26 +1,20 @@
 \section{Motivación}
 
-\todo{  No se corrige, \\
 
-1 .- Descubrir los trabajos de dibujar para crear música\\
-	1.1 .- Plantearlo a la inversa, componer a través de una imagen\\
-2.- Investigar trabajos relacionados con composición con entradas gráficas (mirar bitácora para recordar que se buscó en su día)\\
-	2.1.- Ruso de las imágenes\\
-	2.3.- Portutesis\\
-3.- Descubrir la sinestesia\\
-	3.1.- Interés en la adaptación color nota\\
-Creo que a partir de aquí sobra
-4.- Plantear el trabajo como algo relacionado con la sinestesia en lugar de identificar los objetos como tales\\
-	4.1.- Algoritmos de tratamiento de imágenes como figuras -> OpenCV.\\
-5.- Querer tener una aplicación utilizable por todo tipo de público -> MP3 incorporado, interfáz gráfica sencilla\\
-}
+La principal motivación de este proyecto nace, por supuesto, del interés de los participantes en la música y su aplicación en el área de la computación. Aunque existe una lista interminable de aplicaciones orientadas a esa relación música-informática (como puede ser SunVox (ver \cite{SunVox}) en el ámbito de los sintetizadores musicales, o la famosa aplicación ToneMatrix (ver \cite{toneMatrix}), por citar dos ejemplos), el interés de este proyecto parte de un área en particular: la composición algorítmica.\\
 
-Desde el principio el objetivo fue crear una aplicación que estuviese relacionada con la música, tras investigar las distintas posibilidades que había a disposición se decidió que tendría que ser una aplicación dirigida tanto a los usuarios que no tenían conocimiento sobre la música como a compositores, por ello se descartaron los programas sintetizadores musicales al estilo de SunVox \cite{SunVox} o similares.
-\\\newline
-Tras plantear varias posibilidades el grupo se decantó por la composición a través de imágenes pero incluso en este ámbito existían ya unos cuantos trabajos, de entre ellos algunos permitieron visualizar posibles resultados que se esperarían de la aplicación, entre ellos llamó la atención un programa \cite{dibujosymusica} que permitía hacer un dibujo y sobre él crear una melodía, este era bastante limitado pero ofrecía la facilidad de uso y los resultados interesantes que se esperaban del proyecto.
-\\\newline
-El primer planteamiento que se propuso consistía en detectar el tipo de imagen que se iba a analizar y retransmitir las sensaciones que producía a través de la música, sin embargo se sabía que tanto en el ámbito del análisis como en el de la composición este planteamiento era demasiado ambicioso para un proyecto de un solo año además de no tener a disposición una tecnología con esa capacidad de análisis, por ello se siguieron investigando más posibilidades.
-\\\newline
-Tras profundizar un poco mas en la composición basada en imágenes se encontraron dos trabajos que proponían la composición a través de la sinestesia, el del ruso Lauri Gröhn \cite{rusofotos} que aplicaba distintas reglas sinestésicas a imágenes analizadas a través de un mapa de bits y el del portugués André Pintado Jorge Gonçalves \cite{portutesis} que trabajaba con las formas de las figuras como entrada a la composición. Esto animó el proyecto en la dirección de la sinestesia pues era tanto un campo poco investigado por lo que se despertaba la curiosidad y el interés además de dar una razón directa justificable entre el color, las formas y la música.
-\\\newline
-Al investigar sobre la sinestesia y la música se llegó rápidamente a los trabajos de Scriabin \cite{ScriabinQuintasColor} que ofrecía una relación directa entre las notas y los colores, a su vez en cuanto a composición musical se encontró información sobre Brian Eno \cite{BrianEnoInterview} compositor que pretendía hacer música sencilla de ambiente pero que no desviase la atención hacia ella. Estas fueron las ultimas relaciones que se necesitaban, pues ofrecieron la posibilidad de asociar la música con el color a través de los estudios de un músico famoso y a su vez un enfoque a unos resultados realistas para el proyecto: El crear una música que no sonase mal pero no fuese interesante, es decir conseguir unos resultados que no fueran desagradables de escuchar pero que no captasen la atención del oyente, en otras palabras música de ambiente.
+El campo de la composición algorítmica consta de muchos estudios y trabajos realizados sobre la materia que no merece la pena precisar en el presente documento. Sin embargo, gan parte de ells caen dentro de dos casos: o bien se basan en el acoplamiento y unión de diferentes piezas previamente compuestas aplicándoles ciertas modificaciones (consiguiendo resultados auditivamente ricos y agradables, pero en ningún momento ``nuevos''), o bien busca una creación completa de la melodía. Como bien se comenta en la sección anterior, es este último campo el que motiva el desarrollo de este proyecto, a pesar de que sus resultados a lo largo de diferentes estudios y pruebas no hayan llegado a ser tan agradables. Se busca por tanto la composición genuína de piezas musicales, útil como fuente de inspiración para usuarios compositores o la generación de música de ambiente.\\
+
+Dentro de la composición algorítmica, el interés de los participantes se centra sobre todo en dos aspectos fundamentales:
+
+\begin{itemize}
+
+	\item De todas las formas posibles de generación de música algoritmica existentes, se tiene especial interés en una generación determinista. Esto es, en vez de partir de algortimos genéticos o cualquier otro tipo de diseño basado en un entrada aleatoria, se desea obtener una pieza musical que suponga la representación de un objeto constante y perteneciente a conexto no auditivo. Es esta búsqueda la que lleva a plantearse el usar imagenes como entradas a estos algoritmos.
+	
+	\item No sólo se busca la generación total y determinista de una pieza musical, sino que además esta pieza no esté sujeta a concepciones, ya sean culturales o personales, de aquellos que diseñen los algoritmos de composición. Es en esta búsqueda donde se encuentra la sinestesia, común en la mayor parte de los cerebros humanos que la experimentan (debido a su propia naturaleza), y fuertemente estudiada por la rama de la psicología.
+	
+\end{itemize}
+
+Se relacionan así dos elementos que incitan gran interés en la comunidad científica y que, si bien han sido estudiados por separado (como bien se aprecia en la siguiente sección), juntos componen un objeto de estudio apenas observado. Es la motivación de este proyecto el estudiar y experimentar en este ámbito, con el objetivo de expandir su trasfondo académico y observar las posibilidades que ofrece.\\
+
+Cabe destacar también la inclinación a crear una aplicación de esta índole para dispositivos móviles. Una versión simple y accesible de este sistema puede ser de gran interés en este mercado, ya que las entradas gráficas se pueden obtener con gran facilidad gracias a las cámaras integradas en la gran mayoría de las plataformas portátiles, facilitando enormemente el proceso de testeo de los diferentes resultados que pueden surgir en un sistema perteneciente a un ámbito tan poco estudiado, y permitiendo su rápido progreso.

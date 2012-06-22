@@ -1,6 +1,6 @@
 \section{Algoritmos de Análisis}
 \label{sec:algAnalisis}
-\torev{Última revisión: 13/06/12. Se ha modificado la colocación de imágenes para que aparezcan lo más cerca posible del filtro al que corresponden.}
+\torev{Última revisión: 20/06/12.}
 
 Esta sección explicará con detalle los algoritmos de análisis de imágenes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{sec:representacionFiguras}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
 
@@ -74,7 +74,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		\end{array}\right.$
 	\end{center}
 	
-	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. \color{blue}Tras haber realizado la suma, se le resta una constante teórica c, que especifica cuánto debe alejarse el valor de un píxel dado respecto al de la media calculada para que se considere que ha sobrepasado el umbral. En la implementación de este filtro se usará 3 como valor de esta constante, ya que proporciona resultados acordes a nuestros intereses.\color{black}
+	El umbral ya no es constante, sino que se convierte en el término $T(x,y)$ depende tanto de $x$ como de $y$. Existen muchas formas de calcular este término, pero en nuestro caso se calcula mediante la suma ponderada de los píxeles vecinos al $(x,y)$ dentro de un bloque de $3\times3$ píxeles donde el centro es el pixel a transformar. Tras haber realizado la suma, se le resta una constante teórica c, que especifica cuánto debe alejarse el valor de un píxel dado respecto al de la media calculada para que se considere que ha sobrepasado el umbral. En la implementación de este filtro se usará 3 como valor de esta constante, ya que proporciona resultados acordes a nuestros intereses.
 	
 	Con esta especificación, los resultados obtenidos son los mostrados en la Figura~\ref{fig:adaptive}. Como se puede observar, el resultado del filtro no depende de ningún valor y es más fiel que la mayoría de los resultados del threshold para figuras con este grado de simplicidad.\\
 	
