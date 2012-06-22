@@ -7,7 +7,7 @@ En esta sección se explicarán de forma exhaustiva los procesos que se siguen p
 
 Para generar la música separamos el proceso de composición en diferentes voces, de tal modo que la unión de todas las voces da como resultado una pieza musical completa. En el estado actual del proyecto se han identificado cuatro voces diferentes, cada una con un papel especial dentro de la composición. 
 
-Cada voz sigue un proceso de composición independiente, aunque concuerdan en algunos aspectos para poder realizar una unión correcta de todas ellas, como por ejemplo, la duración total de las mismas. \color{blue}Todos los compositores necesitan recibir una figura, en la que se van a basar para componer, y una duración dada que será el tiempo que se prolonga el trozo de música a componer.\\ \color{black}
+Cada voz sigue un proceso de composición independiente, aunque concuerdan en algunos aspectos para poder realizar una unión correcta de todas ellas, como por ejemplo, la duración total de las mismas. \color{blue}Todos los compositores necesitan recibir una figura, en la que se van a basar para componer, y una duración que será el tiempo que se prolonga el trozo de música a componer.\\ \color{black}
 
 A continuación se explicará el funcionamiento de los algoritmos de cada voz y al final se presentará el algoritmo que se encarga de ir usando cada una de las voces para luego juntarlas y producir una pieza musical.
 
@@ -23,7 +23,7 @@ La primera versión (ComposerFigMelody):
 
 	\item Calcular duraciones: Para poder obtener las duraciones de las futuras notas se hace una correpondencia directa con la longitud de los lados. De este modo la duración total del trozo de música a componer es la suma de todas la longitudes y para cada lado se calcula cuánta duración le corresponde. Obviamente se hace una aproximación, ya que los valores de duración de las notas son limitados respecto al rango de valores de los números reales.
 
-	\item Obtener tonos: Hallamos los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo \color{blue}( ``Croma''\cite{bricksConvertsMusic} o \cite{ImageBaseComposition}) \color{black}. El proceso de cálculo de tono usado se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado \cite{portutesis}. Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos, de tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa. La primera nota desde la cual partimos a hacer los cambios de tono es la nota correspondiente al color de la figura, la cual se saca a través del sistema de colores-notas utilizado.
+	\item Obtener tonos: Hallamos los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo \color{blue}(``Croma''\cite{bricksConvertsMusic} o \cite{ImageBaseComposition}) \color{black}. El proceso de cálculo de tono usado se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado \cite{portutesis}. Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos, de tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa. La primera nota desde la cual partimos a hacer los cambios de tono es la nota correspondiente al color de la figura, la cual se saca a través del sistema de colores-notas utilizado.
 
 	\item Sintetizar las notas: Combinamos las duraciones con los tonos obtenidos en la anterior fase teniendo en cuenta que cada vértice tiene asociado un tono y una duración. Al final se obtiene un trozo de música.
 
@@ -34,7 +34,7 @@ La segunda versión (ComposerFigMelody2):
 \begin{itemize}
 	\item Procesar la figura: Esta fase será idéntica a la realizada por la primera versión.
 
-	\item Calcular duraciones: Respecto a la anterior versión se simplifica la correspondencia entre longitud y duración usando sobre todo duraciones simples y evitando las duraciones compuestas por su irregularidad musico-temporal. \color{blue} Puede parecer que se pierde la equivalencia fiel entre la longitud de los lados y la duración de las notas, ya que para ciertos rangos de longitudes diferentes se calculan duraciones iguales. Tras varias pruebas con el primer algoritmo, usando la correspondencia directa entre duraciones y longitudes, en varias ocasiones se pierde el ritmo musical dentro de la pieza generada. Con esta modificación se intenta subsanar este problema. \color{black}
+	\item Calcular duraciones: Respecto a la anterior versión se simplifica la correspondencia entre longitud y duración usando sobre todo duraciones simples y evitando las duraciones compuestas por su irregularidad musico-temporal. \color{blue} Puede parecer que se pierde la equivalencia fiel entre la longitud de los lados y la duración de las notas, ya que para ciertos rangos de longitudes diferentes se calculan duraciones iguales. Tras varias pruebas con el primer algoritmo (ComposerFigMelody), usando la correspondencia directa entre duraciones y longitudes, en varias ocasiones se pierde el ritmo musical dentro de la pieza generada. Con esta modificación se intenta subsanar este problema. \color{black}
 
 	\item Obtener tonos: Respecto al anterior algoritmo, en este apartado se sigue sacando una correlación entre los ángulos y los tonos, pero se va a usar un proceso diferente. Para calcular el tono se tendrá en cuenta la diferencia de ángulos entre vértices adyacentes. De esta manera a mayor diferencia de ángulos, mayor será el cambio en el tono. \\
 De forma experimental y tras varias pruebas, se ha obtenido una correspondencia entre la variación de ángulos y la cantidad que deberá variar el nuevo tono respecto al anterior (Figura~\ref{fig:Figura3Voz1}). 
@@ -182,7 +182,7 @@ Veamos un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz
 		\label{fig:Figura2Voz2}
 		\end{figure}
 
-	\item Obtener tonos (Figuras ~\ref{fig:Figura3Voz2} y ~\ref{fig:Figura4Voz2}): En la primera figura podemos observar los tonos generados sin usar técnicas de contrapunto. La tercera y sexta nota generada produce una disonancia de larga duración (negra) con la voz principal. Si se aplican las técnicas contrapuntísticas \color{red}(Poner cosa a glosario?) \color{blue}podemos comprobar cómo se han cambiado por un tono cercano sin perder la idea del salto de tono que nos indicaba el ángulo de los vértices.
+	\item Obtener tonos (Figuras ~\ref{fig:Figura3Voz2} y ~\ref{fig:Figura4Voz2}): En la primera figura podemos observar los tonos generados sin usar técnicas de contrapunto. La tercera y sexta nota generada produce una disonancia de larga duración (negra) con la voz principal. Si se aplican las técnicas contrapuntísticas \color{red}(Poner en glosario? o en Apendice? o aqui mismo decir algo?) \color{blue}podemos comprobar cómo se han cambiado por un tono cercano sin perder la idea del salto de tono que nos indicaba el ángulo de los vértices.
 
 		\begin{figure}[!htbp]
 		\centering
@@ -302,7 +302,7 @@ La primera versión del Mezclador sólo tiene en cuenta la primera voz (melodía
 		$
 	\end{center}
 
-donde pR = 0.45, pG = 0.35 y pB = 0.20 son las constantes de influencia de cada color obtenidas de forma experimental. Y las constantes A = 0.5, B = 0.3 y C = 0.2 son los valores de importancia de cada atributo de la figura.
+donde pR = 0.45, pG = 0.35 y pB = 0.20 son las constantes de influencia de cada color básico obtenidas de forma experimental. Y las constantes A = 0.5, B = 0.3 y C = 0.2 son los valores de importancia de cada atributo de la figura.
 \color{black}
 
 	\item Componer voces: Tras haber ordenado las figuras por vistosidad se va componiendo con cada una de forma iterativa las distintas voces. En este caso solo se compone la melodía y el ritmo con cada una de las figuras.
