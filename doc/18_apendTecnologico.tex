@@ -1,0 +1,32 @@
+\chapter{Tecnología utilizada}
+
+\section{Notación ABC}
+\label{sec:NotacionABC}
+\todo{Repasar por alguien antes de enviar}
+
+En 1993, Chris Walshaw introdujo una nueva notación musical de texto plano, junto con abc2mtex programa que traduce la notación ABC en notación que usa MusicTeX y TeX. Como resultado se obtuvo una partitura de música. Poco después, Michael Methfessel con abc2ps y James Allwright followed con abcMIDI, empezaron a exportar la notación ABC en diferentes formatos.
+
+Inicialmente ABC se creó para escribir música tradicional. Gradualmente se fue añadiendo nuevas funcionalidades expandiendo sus posibilidades pero ante todo se ha seguido preservando la mayor ventaja de esta notación: Es fácil de crear, es ligera en almacenamiento (archivos de tamaño muy pequeño) y se puede compartir y transformar fácilmente por ser texto plano. Además si está bien formateada la información se puede leer tras adquirir cierta experiencia.
+
+Hoy en día hay un gran número de aplicaciones software que son compatibles con la notación ABC. Algunos programas comerciales permiten cargar o guardar la música producida en formato ABC. También existe la posibilidad de transformar del formato ABC a formato MIDI y viceversa. La oferta de software gratuito que maneja esta notación es amplia y variada. 
+
+Gracias a todas estas características se ha adoptado como solución al problema que surge de traducir la representación interna de la música dentro del sistema a formato audio MIDI. Para conseguirlo se transforma de la notación musical interna a notación ABC y de ésta a un archivo MIDI gracias a abc2midi que forma parte del proyecto abcMIDI.
+
+\section{abcMIDI}
+\label{sec:abcMIDI}
+
+abcMIDI consiste un paquete de programas desarrollado por James Allwright. Su cometido principal es procesar archivos con formato notación. Este paquete contiene los siguientes programas: abc2midi, abc2abc, yaps, and midi2abc. En el proyecto sólo se usa abc2midi.
+
+abc2midi sirve para convertir archivos con formato notación ABC en archivos de sonido MIDI. Es probablemente el programa más avanzado y maduro de las diferentes posibilidades de software libre disponible en la red. Además contiene funcionalidades extra como el manejo de archivos con múltiples voces, trasponer voces individuales y añadir un acompañamiento de percusión entre otros.
+
+\section{Timidity}
+\label{sec:Timidity}
+
+\section{TinyXML}
+\label{sec:TinyXML}
+
+\section{Qt}
+\label{sec:Qt}
+
+\section{Phonon}
+\label{sec:Phonon}
