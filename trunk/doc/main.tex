@@ -13,6 +13,10 @@
 \usepackage{amsmath} 
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{glossaries}
+\makeglossaries
+
+%\makeglossaries
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \usepackage{wrapfig}
@@ -76,6 +80,16 @@
 \include{11_diseno}
 \include{14_arquitectura}
 \include{16_conclusiones}
+
+\appendix
+\include{18_apendTecnologico}
+
 \include{17_bibliografia}
+
+\include{Glosario}
+
+\glsaddall
+\printglossaries
+
 
 \end{document}

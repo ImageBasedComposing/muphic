@@ -2,9 +2,11 @@
 
 \torev{Pendiente de Primera Revisión}
 
-El módulo de composición es el encargado de crear un archivo de audio a partir de un archivo XML con información de figuras. Previo a crear el archivo de audio, será necesario componer la música en base a la configuración del usuario y a los datos de las figuras. La composición se verá plasmada en un fichero ABC siguiendo la notación musical ABC (Referencia aquí). De esta manera nos facilita la conversión en archivos de audio y además la posibilidad de mostrar la partitura de la pieza musical creada.
+El módulo de composición es el encargado de crear un archivo de audio a partir de un archivo XML con información de figuras. Previo a crear el archivo de audio, será necesario componer la música en base a la configuración del usuario y a los datos de las figuras. La composición se verá plasmada en un fichero ABC siguiendo la notación musical ABC \color{blue}(Apéndice~\ref{sec:NotacionABC})\color{black}. De esta manera nos facilita la conversión en archivos de audio y además la posibilidad de mostrar la partitura de la pieza musical creada.
 
-Para la conversión y manipulación de los archivos de audio se usará los sistemas externos AbcToMidi y Timidity.
+\color{blue}
+Para la conversión y manipulación de los archivos de audio se usará los sistemas externos abcMIDI (Apéndice~\ref{sec:abcMIDI}) y Timidity (Apéndice~\ref{sec:Timidity}). abcMIDI se usará para convertir el archivo generado ABC en formato MIDI y a partir del MIDI se generará el formato WAV de sonido con Timidity. El proyecto de abcMIDI está formado por varios programas de los cuales sólo se utilizará abc2midi.
+\color{black}
 
 \subsection{Vista de Implementación}
 La implementación realizada sigue el esquema de la Figura~\ref{fig:diagramaclasesMu}.\\
