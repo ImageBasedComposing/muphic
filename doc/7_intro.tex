@@ -1,8 +1,10 @@
 \chapter{Introducción}
+\label{chap:intro}
 
 \gotrev{Última revisión hecha el 13-06-2012}\\
 
 	\section{¿Qué es Muphic?}
+	\label{sec:quees}
 	
 		\vspace{0.2in}
 		Muphic es un software capaz de producir piezas musicales compuestas automáticamente a partir de una imagen. Es el resultado de un proyecto de sistemas informáticos comenzado en octubre del 2011 por 3 alumnos de Ingeniería Informática, cuyo propósito es generar música a partir de imágenes basándose en el fenómeno de la sinestesia.\\
@@ -55,8 +57,25 @@
 		\end{quote}		
 		
 		Por último, se ha de añadir que el ámbito de la composición basada en imágenes es uno muy estudiado pero a la vez poco desarrollado. Es decir, aunque existe una gran cantidad de estudios sobre la sinestesia y la composición musical automática (como se puede ver en la Sección~\ref{sec:estadodelarte}), aún quedan muchas cuestiones que investigar y áreas que profundizar así como la conexión entre la música y la imagen.\\
-		
-		Teniendo todo eso en cuenta, comentaremos en las siguientes secciones cómo se ha abordado el proceso. En primer lugar hablaremos del estado del arte y las diferentes investigaciones y pruebas realizadas hasta el momento (Sección~\ref{sec:estadodelarte}). Seguidamente, en el Capítulo~\ref{chap:guiauso} se expone la forma de usar la herramienta que se ha desarrollado. Más adelante, en el Capítulo~\ref{chap:diseno}, exponemos de forma detallada los algoritmos usados tanto en el análisis de imagen como en la composición musical. Por último, en el Capítulo~\ref{chap:arquitectura} se explica el sistema en detalle y cómo se ha realizado.
 
 \input{9_motivacion}
 \input{10_estado-del-arte}
+
+\section{Visión general del documento}
+
+El presente documento pretende detallar el proceso mediante el cual se ha llevado a cabo el desarrollo de un sistema que cumpla los objetivos previamente mencionados.\\
+
+En primer lugar, se ha realizado una primera toma de contacto del proyecto y su contexto en el Capítulo~\ref{chap:intro}, \textit{\nameref{chap:intro}}. Este ha comenzado con una descripción del sistema a modo de introducción en la Sección~\ref{sec:quees}, \textit{\nameref{sec:quees}}, seguida de la motivación que ha llevado al desarrollo de este proyecto en la Sección~\ref{sec:motivacion}, \textit{\nameref{sec:motivacion}}. Finalmente se ha expuesto el estado del arte y los diferentes estudios sobre la materia realizados hasta el momento en la Sección~\ref{sec:estadodelarte}, \textit{\nameref{sec:estadodelarte}}.\\
+
+A continuación, se procede a explicar las diferentes características del proyecto, comenzando por un manual de usuario en el Capítulo~\ref{chap:guiauso}, \textit{\nameref{chap:guiauso}}, donde se expone la forma de usar la herramienta mediante la interfaz gráfica proporcionada. Esta guía abarca también el proceso necesario para instalar la aplicación en las distintas plataformas.\\
+
+El diseño realizado para el sistema, incluyendo la especificación de los algoritmos usados tanto en el análisis de imagen como en la composición musical, se presenta en el Capítulo~\ref{chap:diseno}, \textit{\nameref{chap:diseno}}. En él, se detallan los usuarios a los que está orientada la aplicación (Sección~\ref{sec:users}, \textit{\nameref{sec:users}},), así como la a totalidad de los requisitos que detallan las funcionalidades de la aplicación final (Sección~\ref{sec:requisitos}, \textit{\nameref{sec:requisitos}}). En el resto del capítulo se expone la especificación de los algoritmos desarrollados, ya sean pertenecientes a la fase de análisis (Sección~\ref{sec:algAnalisis}, \textit{\nameref{sec:algAnalisis}}) o a la fase de composición musical (Sección~\ref{sec:algComposicion}, \textit{\nameref{sec:algComposicion}}).\\
+
+En el siguiente Capítulo, \textit{\nameref{chap:arquitectura}}, se detalla de forma exhaustiva la implementación el sistema mediante el estandar UML. Cada sección de este capítulo hace referencia a cada uno de los módulos en los que se ha dividido la arquitectura del sistema, con la excepción de las dos primeras secciones. En ellas, se define la estructura diseñada e implementada en dos piezas claves en la realización de este proyecto: el formato de representación interna de una imagen (en la Sección~\ref{sec:representacionFiguras}, \textit{\nameref{sec:representacionFiguras}}) y el de una pieza musical (Sección~\ref{sec:repMusic}, \textit{\nameref{sec:repMusic}}; estos formatos y sus correspondientes implementaciones son usados por todos los módulos definidos a continuación. Estos módulos se ordenan en el documento por orden de importancia, siendo el primero de ellos el módulo de composición de música en la Sección~\ref{sec:modcomp}, \textit{\nameref{sec:modcomp}}, seguido del módulo de análisis de imagen (Sección~\ref{sec:modanal}, \textit{\nameref{sec:modanal}}). Finalmente se tiene en cuenta tanto el módulo que se encarga de unificar los anteriores módulos mencionados (Sección~\ref{sec:arqMuphic}, \textit{\nameref{sec:arqMuphic}}) como la interfaz gráfica desarrollada para facilitar el uso de la aplicación (Sección~\ref{sec:arqgui}, \textit{\nameref{sec:arqgui}}).\\
+
+El contenido principal del documento finaliza en el Capítulo~\ref{chap:results}, \textit{\nameref{chap:results}}. En él, se repasa el desarrollo del proyecto y los objetivos cumplidos a lo largo del mismo, dando una visión global del sistema implementado. Posteriormente se procede a explicar los diferentes usos y mercados a los que está destinada la aplicación (Sección~\ref{sec:usos}, \textit{\nameref{sec:usos}}), así como las posibles ampliaciones que se podrían realizar sobre el sistema si se continuara su desarrollo (Sección~\ref{sec:ampliaciones}, \textit{\nameref{sec:ampliaciones}}).\\
+
+De forma adicional, el documento presenta un anexo en el que puntualiza las tecnologías usadas en los diferentes módulos que componen la aplicación. Este es el Anexo~\ref{chap:techs}, \textit{\nameref{chap:techs}}.
+
+
+
