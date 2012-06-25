@@ -253,9 +253,21 @@
            </widget>
           </item>
           <item>
-           <widget class="QProgressBar" name="progressBar_Generate">
-            <property name="value">
-             <number>0</number>
+           <widget class="QPushButton" name="pushButton_score">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Music Score</string>
             </property>
            </widget>
           </item>
@@ -1143,6 +1155,11 @@
                   <string>Complex Figure</string>
                  </property>
                 </item>
+                <item>
+                 <property name="text">
+                  <string>Muted</string>
+                 </property>
+                </item>
                </widget>
               </item>
               <item row="1" column="0">
@@ -1279,6 +1296,11 @@
                 <item>
                  <property name="text">
                   <string>Complex Figure</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Muted</string>
                  </property>
                 </item>
                </widget>
@@ -1422,6 +1444,16 @@
                   <string>Figure Bass</string>
                  </property>
                 </item>
+                <item>
+                 <property name="text">
+                  <string>Complex Figure</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Muted</string>
+                 </property>
+                </item>
                </widget>
               </item>
               <item row="1" column="0">
@@ -1550,16 +1582,16 @@
                  </sizepolicy>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <item>
                  <property name="text">
-                  <string>Rythm Figure</string>
+                  <string>Advanced Rythm Figure</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Advanced Rythm Figure</string>
+                  <string>Muted</string>
                  </property>
                 </item>
                </widget>

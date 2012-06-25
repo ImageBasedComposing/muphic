@@ -172,17 +172,17 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	Como ya hemos comentado anteriormente, una misma mancha de color puede originar varios contornos, debido a que la figura se ha detectado dos veces en el proceso de filtrado (por ejemplo, si se encuentra dentro de dos umbrales en el filtro Color threshold) o a que el proceso de detección de contornos ha devuelto dos contornos similares a la figura dada, por particularidades internas del algoritmo de OpenCV.\\
 	
-	Esto va a originar que, irremediablemente, haya ocasiones en las que aparecerán varios contornos (y posteriormente polígonos) similares. Se procede pues, antes de continuar el análisis, a eliminar los polígonos repetidos. Para ello, se comprueba primero que tengan el mismo número de vértices y que los rectángulos mínimos que los contienen tengan área y posición similares. \color{blue}Podría darse el caso de que un polígono A, teniendo más vértices que otro polígono B, se considerase idéntico a él, si se da uno de los dos siguientes casos: o bien un mismo vértice de B aproxima varios en A o bien en uno de los dos polígonos existe un ``vértice falso'' (es decir, el vértice intermedio de tres vértices alineados, que no aporta ninguna información nueva a la figura) en alguna arista. Sin embargo, la librería OpenCV nunca devuelve en un mismo polígono dos vértices lo suficientemente cercanos como para que sean considerados ``idénticos'' según nuestro criterio, por lo que no se estudiará ese caso. De la misma manera, la librería no genera nunca polígonos con ``falsos vértices'', por lo que se puede asegurar que dos polígonos no serán considerados idénticos (también serán denominados ``similares'') si tienen distinto número de vértices.\\
+	Esto va a originar que, irremediablemente, haya ocasiones en las que aparecerán varios contornos (y posteriormente polígonos) similares. Se procede pues, antes de continuar el análisis, a eliminar los polígonos repetidos. Para ello, se comprueba primero que tengan el mismo número de vértices y que los rectángulos mínimos que los contienen tengan área y posición similares. Podría darse el caso de que un polígono A, teniendo más vértices que otro polígono B, se considerase idéntico a él, si se da uno de los dos siguientes casos: o bien un mismo vértice de B aproxima varios en A o bien en uno de los dos polígonos existe un ``vértice falso'' (es decir, el vértice intermedio de tres vértices alineados, que no aporta ninguna información nueva a la figura) en alguna arista. Sin embargo, la librería OpenCV nunca devuelve en un mismo polígono dos vértices lo suficientemente cercanos como para que sean considerados ``idénticos'' según nuestro criterio, por lo que no se estudiará ese caso. De la misma manera, la librería no genera nunca polígonos con ``falsos vértices'', por lo que se puede asegurar que dos polígonos no serán considerados idénticos (también serán denominados ``similares'') si tienen distinto número de vértices.\\
 
 	Posteriormente, se procede a calcular si son efectivamente similares o no, es decir, si todos los vértices de un polígono tienen un vértice idéntico en el otro polígono y éstos pares siguen el ``orden'' de los polígonos (por ejemplo, si un vértice $v$ del polígono A es idéntico al vértice $v'$ del polígono B, entonces uno de los vértices contiguos a $v$ debe ser idéntico a uno de los vértices a $v'$ para que sean considerados idénticos). De una manera más formal:\\
 		
-	Sean dos polígonos A y B. Los polígonos serán similares, o considerados idénticos, si existe una disposición de vértices en A $V_{A} = [v_{1}, v_{2}, ..., v_{n}]$, y otra en B $V_{B} = [v'_{1}, v'_{2}, ..., v'_{n}]$ que asumen vértices contiguos tomados en sentido horario (o antihorario), tales que:
+	Sean dos polígonos A y B. Los polígonos serán similares, o considerados idénticos, si existe una disposición de vértices en A, $V_{A} = [v_{1}, v_{2}, ..., v_{n}]$, y otra en B, $V_{B} = [v'_{1}, v'_{2}, ..., v'_{n}]$ que asumen vértices contiguos tomados en sentido horario (o antihorario), tales que:
 	
 	\begin{center}
 		$\forall k, 0 < k < N, dist(v_{k}, v'_{k}) < \epsilon$
 	\end{center}
 	
-	Donde $N$ es el número de vértices de ambos polígonos y $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos.\\\color{black}
+	Donde $N$ es el número de vértices de ambos polígonos que se deduce de la secuencia $v'_{1}, v'_{2}, ..., v'_{n}$ y $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos.\\
 	
 		\begin{figure}[!htbp]
 		\centering
@@ -197,7 +197,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 	
 	El color calculado para cada polígono tenía en cuenta todos los píxeles que este contenía. Sin embargo, los polígonos que contienen otros polígonos han introducido información de más a la hora de calcular este color, ya que dentro de los polígonos que contienen se han tenido en cuenta los de sus hijos también. Es ahora que se conoce la estructura arbórea de la imagen cuando se pueden resolver estos detalles, recalculando el color de los polígonos que contienen a otros de forma que no se tenga en cuenta el color de sus polígonos internos.\\
 	
-	\color{blue}Una vez realizadas estas operaciones, los polígonos detectados en el análisis son quedan tal y como se muestra en la Figura~\ref{fig:resfinal}.\\ \color{black}
+	Una vez realizadas estas operaciones, los polígonos detectados en el análisis quedan tal y como se muestra en la Figura~\ref{fig:resfinal}.\\
 	
 		\begin{figure}[!htbp]
 		\centering
