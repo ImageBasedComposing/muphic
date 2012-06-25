@@ -25,6 +25,7 @@ abcm2ps tiene como funcionalidad producir una partitura musical partiendo del ar
 
 \section{TiMidity}
 \label{sec:Timidity}
+\torev{Pendiente de primera revisión}
 
 Se trata de una herramienta de sintetización musical que puede reproducir archivos de audio en formato MIDI sin necesidad de un hardware sintetizador. La versión usada en este proyecto se denomina \emph{TiMidity++}, y ha sido desarrollada por Masanao Izumo et al. basándose en \emph{TiMidity 0.2i}, escrito por Tuuka Toivonen en 1995.\\
 
@@ -34,19 +35,22 @@ Es de gran utilidad en este proyecto para la creación de archivos de audio en f
 
 \section{TinyXML}
 \label{sec:TinyXML}
+\torev{Pendiente de primera revisión}
 
 \emph{TinyXML} es un parser para C++ del lenguaje de etiquetas XML, el mismo lenguaje en el que están escritos los archivos de configuración del proyecto. Permite leer, manipular y escribir archivos XML de forma rápida y sencilla.\\
 
 \section{Qt}
 \label{sec:Qt}
+\torev{Pendiente de primera revisión}
 
-Es un framework multiplataforma para el desarrollo de interfaces gráficas, creado inicialmente por Haavard Nord y Eirik Chambe-Eng. Esta librería usa C++ como lenguaje base, pero soporta programación o otros numerosos lenguajes.\\
+Es un framework multiplataforma para el desarrollo de interfaces gráficas, creado inicialmente por Haavard Nord y Eirik Chambe-Eng. Esta librería usa C++ como lenguaje base, pero soporta programación con otros lenguajes.\\
 
 Qt funciona sobre varias plaformas, incluídas entre ellas las máquinas portátiles y móviles. Es por esta razón que, de entre todas las tecnologías disponibles para el desarrollo de interfaces gráficas, se haya elegido \emph{Qt} para el proyecto que nos ocupa: el proceso de portar la aplicación a dispositivos móviles se simplifica enormemente si se usan las mismas herramientas que en la versión para ordenadores personales.
 
 \section{Phonon Multimedia Framework}
 \label{sec:Phonon}
+\torev{Pendiente de primera revisión}
 
-Se trata de un framework que proporciona una API multimedia muy potente y fácil de usar. Se puede conectar fácilmente con Qt, proporcionando funcionalidades de reproducción de audio a las interfaces gráficas desarrolladas en esta librería.\\
+Se trata de un framework que proporciona una API multimedia eficaz y fácil de usar. Se puede conectar fácilmente con Qt, proporcionando funcionalidades de reproducción de audio y video a las interfaces gráficas desarrolladas en esta librería.\\
 
 Esta librería permite reproducir archivos de audio en formato .wav en la interfaz desarrollada para este proyecto. Esta característica, unida a la posibilidad de generar archivos MIDI gracias al paquete \emph{abcMIDI} (ver Sección~\ref{sec:abcMIDI}) y la de transformar estos archivos MIDI en archivos de audio .wav gracias a \emph{TiMidity} (ver Sección~\ref{sec:Timidity}), hace posible que la aplicación pueda ofrecer al usuario la opción de reproducir las composiciones musicales generadas.
