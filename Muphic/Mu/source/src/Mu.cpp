@@ -94,8 +94,6 @@ int main( int argc, const char* argv[] )
 			compVoice1 = new ComposerFigMelody(cs); break;
 		case 1:
 			compVoice1 = new ComposerFigMelody2(cs); break;
-		case 2:
-			compVoice1 = new ComposerFigBass2(cs); break;
 		default :
 			compVoice1 = new ComposerFigMelody2(cs);
 	}
@@ -125,8 +123,6 @@ int main( int argc, const char* argv[] )
 		case 0:
 			compVoice3 = new ComposerFigBass2(cs); break;
 		case 1:
-			compVoice3 = new ComposerFigMelody(cs); break;
-		case 2:
 			compVoice3 = new ComposerFigMelody2(cs); break;
 		default :
 			compVoice3 = new ComposerFigBass2(cs);
@@ -141,8 +137,6 @@ int main( int argc, const char* argv[] )
 		case -1:
 			compVoice4 = new ComposerFigSilence(cs); break;
 		case 0:
-			compVoice4 = new ComposerFigRitmo(cs); break;
-		case 1:
 			compVoice4 = new ComposerFigRitmo2(cs); break;
 		default :
 			compVoice4 = new ComposerFigRitmo2(cs);
