@@ -1,5 +1,23 @@
+    \thispagestyle{plain}
+	\vspace*{\fill}
+    \begin{center}
+      {\Huge Apéndices}\\[0.5cm]
+    \end{center}
+    \vspace*{\fill}
+
+
+\appendix
+
 \chapter{Tecnologías utilizadas}
 \label{chap:techs}
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \vspace*{\fill}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
 
 \section{Notación ABC}
 \label{sec:NotacionABC}
@@ -22,6 +40,17 @@ abcMIDI consiste un paquete de programas desarrollado por James Allwright. Su co
 abc2midi sirve para convertir archivos con formato notación ABC en archivos de sonido MIDI. Es probablemente el programa más avanzado y maduro de las diferentes posibilidades de software libre disponible en la red. Además contiene funcionalidades extra como el manejo de archivos con múltiples voces, trasponer voces individuales y añadir un acompañamiento de percusión entre otros.
 
 abcm2ps tiene como funcionalidad producir una partitura musical partiendo del archivo en notación ABC de entrada. Esta partitura puede darse en numerosos formados, siendo dos de ellos ps y xhtml. A diferencia de su versión previa, abcm2ps, permite trabajar con varias voces; aunque a día de hoy existen unas pocas características de la notación ABC que no es capaz de transformar a la correspondiente partitura.
+
+
+\section{OpenCV}
+\label{sec:OpenCV}
+\torev{Pendiente de primera revisión}
+
+\emph{OpenCV} es una de las librerías más importantes de visión por computador en tiempo real que existen por el momento. Fue desarrollada por Intel en 1999, y desde entonces se ha extendido su uso en numerosos sectores tecnológicos.\\
+
+Es una librería multiplataforma que ofrece funcionalidad para todo tipo de análisis y reconocimiento de imagenes, razón por la cual se ha elegido como base para la implementación del módulo de análisis de imágenes del proyecto.
+
+
 
 \section{TiMidity}
 \label{sec:Timidity}

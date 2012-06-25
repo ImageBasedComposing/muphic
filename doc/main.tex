@@ -92,8 +92,6 @@
 \include{5_agradecimientos}
 % 6_índice
 \tableofcontents
-\newpage
-\newpage
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -149,7 +147,22 @@
 \include{14_arquitectura}
 \include{16_conclusiones}
 
-\appendix
+\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth { Apéndice \ \thechapter . #1}{}}
+\renewcommand{\sectionmark}[1]{\markright {\ \thesection . #1}}
+\makeatother
+
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \vspace*{\fill}
+  \thispagestyle{empty}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
+
+
 \include{18_apendTecnologico}
 
 \include{17_bibliografia}
