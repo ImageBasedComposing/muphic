@@ -1,17 +1,16 @@
 \chapter{Guía de Uso}
 \label{chap:guiauso}
 
-	\gotrev{Última Revisión: 20-06-2012}
-
 
 	\section{Introducción}
+	\gotrev{Última Revisión: 20-06-2012}
 		
 		Esta sección pretende mostrar una vista general de la aplicación y sus opciones. A lo largo de ella se explicarán todos los módulos del programa con los que el usuario puede interactuar y se detallará la función de determinados mecanismos.\\
 		
 		\begin{figure}[htbp]
 		\centering
 		\hspace*{-0.3in}
-		\includegraphics[scale=0.47]{graphics/interfazoverview.png}
+		\includegraphics[scale=0.40]{graphics/interfazoverview.png}
 		\caption{Vista general de la aplicación}
 		\label{fig:interfazoverview}
 		\end{figure}
@@ -23,6 +22,7 @@
 		Se procede por tanto a explicar cada pestaña una por una.
 
 	\section{Ventana principal}
+	\gotrev{Última Revisión: 20-06-2012}
 		
 		Se encarga de la interacción básica con el usuario; muestra los resultados obtenidos y permite lanzar los principales componentes de la aplicación. 
 		\\Esta compuesta por los siguientes elementos tal y como se puede ver en la Figura~\ref{fig:interfaz}:\\
@@ -30,8 +30,8 @@
 		
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.9in}
-		\includegraphics[scale=0.57]{graphics/interfaz.png}
+		\hspace*{-0.5in}
+		\includegraphics[scale=0.50]{graphics/interfaz.png}
 		\caption{Vista general de la pestaña principal de la aplicación}
 		\label{fig:interfaz}
 		\end{figure}
@@ -58,16 +58,15 @@
 
 		
 	\section{Configuración gráfica}
-		\todo{Última revisión 13-06-12\\
-			Falta: poner ejemplos de analisis\\}
+		\torev{Última revisión 13-06-12\\}
 		En esta pestaña se encuentran todas las opciones relacionadas con el análisis de la imagen. En ella se podrán configurar opciones que hagan que el proceso de análisis varíe en velocidad, precisión o estilo.\\
 		
 		De entre los parámetros de configuración, existen los llamados ``generales'', que siempre aparecen visibles al usuario, y los ``específicos'', que complementan a los generales y sólo aparecen cuando el contexto lo especifica. En la Figura~\ref{fig:interfazgraphic} podemos ver detalladamente los parámetros generales.\\
 		
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.9in}
-		\includegraphics[scale=0.57]{graphics/interfazgraphic.png}
+		\hspace*{-0.5in}
+		\includegraphics[scale=0.5]{graphics/interfazgraphic.png}
 		\caption{Vista general de la pestaña de configuración gráfica}
 		\label{fig:interfazgraphic}
 		\end{figure}
@@ -122,18 +121,39 @@
 		\noindent\textit{Valor del umbral de Saturación}\\
 		\noindent\textit{Valor del umbral de Valor}
 
+		
+		\color{blue}
+		
+		\vspace{0.5in}Para dar una vista general de las características y formas de trabajar de cada filtro de análisis, se muestran en la Figura~\ref{fig:analresults} los resultados que proporciona cada uno de ellos para una misma imagen de entrada. Todos ellos han usado como valores de entrada comunes los siguientes:
 
-
+		
+		\begin{center}
+			Noise Selection $= 0$\\
+			Analysis Depth $= 100$\\
+			Polygon Simplification $= 1$\\
+		\end{center}
+		
+			\begin{figure}[htbp]
+			\centering
+			\hspace*{-0.0in}
+			\includegraphics[scale=0.5]{graphics/analresults.png}
+			\caption{Tabla con las distintas salidas de cada filtro de análisis}
+			\label{fig:analresults}
+			\end{figure}
+		
+		
+		Como se puede observar, el filtro Hue Division es el más fiel de los cinco, captando en la representación de la imagen la mayor parte de la información que había en la imagen de entrada.		\color{black}
 
 		
 		\section{Configuración de composición}
+		\gotrev{Última Revisión: 20-06-2012}
 		
 		Esta pestaña contiene todos los parámetros que se pueden configurar relativos a la composición algorítmica. Estos, como muestra la Figura~\ref{fig:interfazcomp} son:\\
 		
 		\begin{figure}[htbp]
 		\centering
-		\hspace*{-0.9in}
-		\includegraphics[scale=0.57]{graphics/interfazcomp.png}
+		\hspace*{-0.5in}
+		\includegraphics[scale=0.5]{graphics/interfazcomp.png}
 		\caption{Vista general de la pestaña de configuración gráfica}
 		\label{fig:interfazcomp}
 		\end{figure}
@@ -156,14 +176,15 @@
 		
 	\section{Requisitos de instalación}
 	\label{sec:reqinstalacion}
+	\gotrev{Última Revisión: 20-06-2012}
 	
 		Muphic es una aplicación multiplaforma con soporte para Linux y Windows de 32 y 64 bits, siendo en ambos una aplicación portable. Para finalizar este capítulo, se detallará a continuación las peculiaridades de ejecución en cada plataforma.
 		
-		\subsubsection{Windows}
+		\subsection{Windows}
 		
 		Para ejecutar la aplicación basta con descomprimir el archivo descargado y ejecutar la aplicación.
 		
-		\subsubsection{Linux}
+		\subsection{Linux}
 		
 		Para utilizar la aplicación en cualquier distribución de Linux, habrá que descomprimir el archivo y generar los ejecutables con la herramienta make. Ciertos elementos del sistema (la interfaz gráfica y los controles de reproducción de sonido) requieren que el usuario tenga instaladas ciertas librerías que no se incluyen en la descarga de la aplicación. Estos paquetes son:
 		
