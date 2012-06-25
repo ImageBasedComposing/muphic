@@ -108,6 +108,7 @@ void MuphicConfig::initialize()
     imageFile = DEFAULT_PIC;
 
     ui->pushButton_Generate->setEnabled(false);
+    ui->pushButton_score->setEnabled(false);
 
     //Phonon thinguies
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory,this);
@@ -285,6 +286,7 @@ void MuphicConfig::on_pushButton_Generate_clicked()
         ui->pushButton_Generate->setText("Stop");
         composing = true;
     }
+    ui->pushButton_score->setEnabled(true);
 }
 
 void MuphicConfig::on_pushButton_pause_clicked()
@@ -633,7 +635,10 @@ void MuphicConfig::on_comboBox_reconColors_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v1Composer_currentIndexChanged(int index)
 {
-    usrConf->setMuCompVoice1(index);
+    if(index != 2)
+        usrConf->setMuCompVoice1(index);
+    else
+        usrConf->setMuCompVoice1(-1);
 }
 
 void MuphicConfig::on_comboBox_v1Instrument_currentIndexChanged(int index)
@@ -688,7 +693,10 @@ void MuphicConfig::on_comboBox_v1Instrument_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v2Composer_currentIndexChanged(int index)
 {
-    usrConf->setMuCompVoice2(index);
+    if(index != 1)
+        usrConf->setMuCompVoice2(index);
+    else
+        usrConf->setMuCompVoice2(-1);
 }
 
 void MuphicConfig::on_comboBox_v2Instruments_currentIndexChanged(int index)
@@ -742,7 +750,10 @@ void MuphicConfig::on_comboBox_v2Instruments_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v3Composer_currentIndexChanged(int index)
 {
-    usrConf->setMuCompVoice3(index);
+    if(index != 2)
+        usrConf->setMuCompVoice3(index);
+    else
+        usrConf->setMuCompVoice1(-1);
 }
 
 void MuphicConfig::on_comboBox_v3Instrument_currentIndexChanged(int index)
@@ -797,7 +808,10 @@ void MuphicConfig::on_comboBox_v3Instrument_currentIndexChanged(int index)
 
 void MuphicConfig::on_comboBox_v4Composer_currentIndexChanged(int index)
 {
-    usrConf->setMuCompVoice4(index);
+    if(index != 1)
+        usrConf->setMuCompVoice4(index);
+    else
+        usrConf->setMuCompVoice1(-1);
 }
 
 void MuphicConfig::on_comboBox_v4Instrument_currentIndexChanged(int index)
