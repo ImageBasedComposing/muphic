@@ -5,15 +5,15 @@
 
 \subsection{Composición basada en imagenes}
 
-\torev{Última revisión realizada: 20-06-2012}\\
+\gotrev{Última revisión realizada: 25-06-2012}\\
 
-Para poder componer música a partir de datos gráficos necesitamos crear una correlación entre los elementos que tenemos en la parte gráfica y en la parte musical. Esta correspondencia no es fácil de conseguir, y a través de la historia se han desarrollado varias teorías que se han llegado a poner en práctica. Los primeros intentos de síntesis fueron los instrumentos llamados ``órganos de color'' que acompañaban al sonido con una muestra visual.
+Para poder componer música a partir de datos gráficos necesitamos crear una correlación entre los elementos que tenemos en la parte gráfica y en la parte musical. Esta correspondencia no es fácil de conseguir, y a través de la historia se han desarrollado varias teorías que se han llegado a poner en práctica. Los primeros intentos de síntesis fueron los instrumentos llamados ``órganos de color'' que acompañaban al sonido con una muestra visual.\\
 
 El primer instrumento lo construyó Louis Bertrand Castel (1730), se trataba de un clavecín al que se le había incorporado una pantalla y un sistema de iluminación. Cuando se pulsaban las teclas se iluminaban los colores correspondientes en la pantalla \cite{organosColor}. A este experimento le continuaron muchos otros que incorporaban mejoras, pero al ser una correspondencia muy directa entre nota y color, al final se obtiene poca diversidad. Además es una correspondencia de la música a la estimulación visual mientras que nuestro interés se centra en la otra dirección, de la imagen a la música.\\
 
-Desde hace unas décadas, gracias a los avances tecnológicos, se han investigado activamente los algoritmos automáticos de composición. Una posible clasificación de los diferentes algoritmos basada en su característica principal sería: modelos matemáticos, sistemas basados en conocimiento, gramáticas, evolutivos, sistemas con aprendizaje e híbridos \cite{AIMethodsForComposition}. \\
+Desde hace unas décadas, gracias a los avances tecnológicos, se han investigado activamente los algoritmos automáticos de composición. Una posible clasificación de los diferentes algoritmos basada en su característica principal sería: modelos matemáticos, sistemas basados en conocimiento, gramáticas, evolutivos, sistemas con aprendizaje e híbridos \cite{AIMethodsForComposition}.
 
-\color{blue}
+
 \begin{itemize}
 	\item Modelos matemáticos: los más usados son los procesos basados en sistemas estocásticos y cadenas de Markov. Como ejemplo significativo de estos modelos destaca Cybernetic Composer \cite{AIMusicSurvey}. Otra subcorriente son los basados en la teoría del caos \cite{ChaosTeoriaMusica}.
 	\item Sistemas basados en conocimiento: dependiendo de cómo se represente el conocimiento y cómo se manipula podemos hacer diferentes clasificaciones. Como ejemplos relevantes se tienen CHORAL \cite{HistoryAlgorithmicComp} o SICOM \cite{SICOM}.
@@ -22,7 +22,7 @@ Desde hace unas décadas, gracias a los avances tecnológicos, se han investigad
 	\item Sistemas con aprendizaje: están abiertas varias líneas de investigación según las diferentes formas del proceso de aprendizaje (adquisición de conocimiento del sistema). Una posibilidad es través de redes neuronales artificiales, un ejemplo significativo es EBM \cite{AIMethodsForComposition}. Otra manera es con aprendizaje automático (aprendizaje máquina) donde destaca el ejemplo de MUSE \cite{AIMethodsForComposition}.
 	\item Híbridos: intentan combinar lo mejor que ofrecen los diferentes sistemas posibles, un ejemplo relevante es HARMONET \cite{AIMethodsForComposition} que combina sistemas con aprendizaje (redes neuronales) con sistemas basados en conocimiento.\\
 \end{itemize}
-\color{black}
+
 
 Pero no solo la algoritmia es variada, también podemos clasificarla de diferente forma según el tipo de música que se quiera componer: micro-composición (diseño de sonidos) y la macro-composición (combinación de sonidos ya diseñados para la creación de una obra musical) \cite{AudioVisualSurvey}. En nuestro caso nos interesan los algoritmos de macro-composición basados en el fenómeno de la sinestesia.\\ 
 
@@ -34,10 +34,10 @@ Otra opción es la propuesta basada en el concepto de ``croma'' (o índice de cr
 También destacamos el trabajo realizado por Xiaoying Wu y Ze-Nian Li \cite{ImageBaseComposition} en el que se analiza la imagen en tres pasos. Primero: hacer una \emph{Partición} de la imagen en piezas (divisiones, trozos) más pequeñas. Segundo: realizar la \emph{Secuenciación} de esas piezas para darles un orden en el tiempo. Tercero: aplicar un \emph{Mapeado} de las piezas de imagen a notas musicales.
 \\Al ser una correspondencia directa entre la imagen y la música, este trabajo sigue parcialmente la sinestesia y la psicología de las formas y colores aunque este no es su propósito final.\\ 
 
-\color{blue}De forma adicional, cabe mencionar dos trabajos interesantes en un ámbito menos académico.
+De forma adicional, cabe mencionar dos trabajos interesantes en un ámbito menos académico.
 El primero es un trabajo realizado por un equipo ruso \cite{dibujosymusica}, que permite hacer un dibujo simple (compuesto por un único trazo) y observar cómo se transforma en una melodía distinta dependiendo del trazo realizado y la herramienta con la que se ha realizado. Aunque parte de una base musical estática, a la que van ``maquillando'' de distintas formas dependiendo de la entrada gráfica, es digno de mención su facilidad de uso y la calidad de los resultados obtenidos.\\
 
-El segundo de ellos es el realizado por el físico Lauri Gröhn \cite{rusofotos}, que aplica una serie de reglas basadas en la sinestesia para realizar composiciones algorítmicas postprocesadas. Basa el análisis en un estudio por secciones de la figura de entrada, mediante el cual va generando pequeñas porciones musicales a medida que recorre distintas regiones de la imagen divididas previamente de forma uniforme.\\\color{black}
+El segundo de ellos es el realizado por el físico Lauri Gröhn \cite{rusofotos}, que aplica una serie de reglas basadas en la sinestesia para realizar composiciones algorítmicas postprocesadas. Basa el análisis en un estudio por secciones de la figura de entrada, mediante el cual va generando pequeñas porciones musicales a medida que recorre distintas regiones de la imagen divididas previamente de forma uniforme.\\
 
 Por último destacamos el trabajo de A. Pintado \cite{portutesis} en el que hace una investigación de la sinestesia y la percepción de las formas para poder generar ritmos. Analizando una imagen de entrada obtiene sus formas y líneas los cuales traduce a ritmos que genera usando  una relación directa entre el ritmo y la inestabilidad de las figuras. Este trabajo se centra en la línea de la sinestesia, especialmente en las formas de las figuras y los ritmos musicales, dejando de lado los colores y los tonos musicales. Por tanto ha sido una buena fuente de información aunque trate sólo parcialmente nuestro objetivo.\\ 
 
