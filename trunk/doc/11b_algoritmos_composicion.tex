@@ -5,7 +5,7 @@
 
 En esta sección se explicarán de forma exhaustiva los procesos que se siguen para componer música a partir de los datos que proporciona el análisis de imagen.\\
 
-Para generar la música separamos el proceso de composición en diferentes voces, de tal modo que la unión de todas las voces da como resultado una pieza musical completa. En el estado actual del proyecto se han identificado cuatro voces diferentes, cada una con un papel especial dentro de la composición. 
+Para generar la música se separa el proceso de composición en diferentes voces, de tal modo que la unión de todas las voces da como resultado una pieza musical completa. En el estado actual del proyecto se han identificado cuatro voces diferentes, cada una con un papel especial dentro de la composición. 
 
 Cada voz sigue un proceso de composición independiente, aunque concuerdan en algunos aspectos para poder realizar una unión correcta de todas ellas, como por ejemplo, la duración total de las mismas. Todos los compositores necesitan recibir una figura, en la que se van a basar para componer, y una duración que será el tiempo que se prolonga el trozo de música a componer.\\
 
@@ -19,24 +19,24 @@ Para la voz principal se ha dejado la posibilidad de elegir entre dos versiones 
 
 La primera versión (ComposerFigMelody):
 \begin{itemize}
-	\item Procesar la figura: El algoritmo de entrada dispone de una figura, en la que se va a basar más adelante para componer. Antes hace falta un proceso de normalización para que todas las figuras puedan ser interpretadas correctamente. Para ello se extraen los vértices ordenados de la figura de tal forma que el primer vértice sea el más cercano a la parte superior (en caso de tener varios candidatos se escoge el que esté más a la izquierda) de la imagen y los siguientes se recorren en sentido horario. Además, durante el proceso, se irá calculando la longitud de los lados de la figura.
+	\item Procesar la figura: el algoritmo de entrada dispone de una figura, en la que se va a basar más adelante para componer. Antes hace falta un proceso de normalización para que todas las figuras puedan ser interpretadas correctamente. Para ello se extraen los vértices ordenados de la figura de tal forma que el primer vértice sea el más cercano a la parte superior (en caso de tener varios candidatos se escoge el que esté más a la izquierda) de la imagen y los siguientes se recorren en sentido horario. Además, durante el proceso, se irá calculando la longitud de los lados de la figura.
 
-	\item Calcular duraciones: Para poder obtener las duraciones de las futuras notas se hace una correpondencia directa con la longitud de los lados. De este modo la duración total del trozo de música a componer es la suma de todas la longitudes y para cada lado se calcula cuánta duración le corresponde. Obviamente se hace una aproximación, ya que los valores de duración de las notas son limitados respecto al rango de valores de los números reales.
+	\item Calcular duraciones: para poder obtener las duraciones de las futuras notas se hace una correpondencia directa con la longitud de los lados. De este modo la duración total del trozo de música a componer es la suma de todas la longitudes y para cada lado se calcula cuánta duración le corresponde. Obviamente se hace una aproximación, ya que los valores de duración de las notas son limitados respecto al rango de valores de los números reales.
 
-	\item Obtener tonos: Se hallan los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo (``Croma''\cite{bricksConvertsMusic} o \cite{ImageBaseComposition}). El proceso de cálculo de tono usado se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado \cite{portutesis}. Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos, de tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa. La primera nota desde la cual se parte para hacer los cambios de tono es la nota correspondiente al color de la figura, la cual se saca a través del sistema de colores-notas utilizado.
+	\item Obtener tonos: se hallan los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo (``Croma''\cite{bricksConvertsMusic} o \cite{ImageBaseComposition}). El proceso de cálculo de tono usado se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado \cite{portutesis}. Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos, de tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa. La primera nota desde la cual se parte para hacer los cambios de tono es la nota correspondiente al color de la figura, la cual se saca a través del sistema de colores-notas utilizado.
 
-	\item Sintetizar las notas: Se combinan las duraciones con los tonos obtenidos en la anterior fase teniendo en cuenta que cada vértice tiene asociado un tono y una duración. Al final se obtiene un trozo de música.
+	\item Sintetizar las notas: se combinan las duraciones con los tonos obtenidos en la anterior fase teniendo en cuenta que cada vértice tiene asociado un tono y una duración. Al final se obtiene un trozo de música.
 
 \end{itemize}
 
 La segunda versión (ComposerFigMelody2):
 
 \begin{itemize}
-	\item Procesar la figura: Esta fase será idéntica a la realizada por la primera versión.
+	\item Procesar la figura: esta fase será idéntica a la realizada por la primera versión.
 
-	\item Calcular duraciones: Respecto a la anterior versión se simplifica la correspondencia entre longitud y duración usando sobre todo duraciones simples y evitando las duraciones compuestas por su irregularidad musico-temporal. Puede parecer que se pierde la equivalencia fiel entre la longitud de los lados y la duración de las notas, ya que para ciertos rangos de longitudes diferentes se calculan duraciones iguales. Tras varias pruebas con el primer algoritmo (ComposerFigMelody), usando la correspondencia directa entre duraciones y longitudes, en varias ocasiones se pierde el ritmo musical dentro de la pieza generada. Con esta modificación se intenta subsanar este problema.
+	\item Calcular duraciones: respecto a la anterior versión se simplifica la correspondencia entre longitud y duración usando sobre todo duraciones simples y evitando las duraciones compuestas por su irregularidad musico-temporal. Puede parecer que se pierde la equivalencia fiel entre la longitud de los lados y la duración de las notas, ya que para ciertos rangos de longitudes diferentes se calculan duraciones iguales. Tras varias pruebas con el primer algoritmo (ComposerFigMelody), usando la correspondencia directa entre duraciones y longitudes, en varias ocasiones se pierde el ritmo musical dentro de la pieza generada. Con esta modificación se intenta subsanar este problema.
 
-	\item Obtener tonos: Respecto al anterior algoritmo, en este apartado se sigue sacando una correlación entre los ángulos y los tonos, pero se va a usar un proceso diferente. Para calcular el tono se tendrá en cuenta la diferencia de ángulos entre vértices adyacentes. De esta manera a mayor diferencia de ángulos, mayor será el cambio en el tono. \\
+	\item Obtener tonos: respecto al anterior algoritmo, en este apartado se sigue sacando una correlación entre los ángulos y los tonos, pero se va a usar un proceso diferente. Para calcular el tono se tendrá en cuenta la diferencia de ángulos entre vértices adyacentes. De esta manera a mayor diferencia de ángulos, mayor será el cambio en el tono. \\
 De forma experimental y tras varias pruebas, se ha obtenido una correspondencia entre la variación de ángulos y la cantidad que deberá variar el nuevo tono respecto al anterior (Figura~\ref{fig:Figura3Voz1}). 
 
 		\begin{figure}[!htbp]
@@ -49,7 +49,7 @@ De forma experimental y tras varias pruebas, se ha obtenido una correspondencia 
 
 De este modo si la diferencia de ángulos es menor a 10º se sigue usando el mismo tono, si la diferencia está entre 10º y 30º se usa el tono adyacente dentro de la escala. Si está entre 30º y 120º el primer tono más cercano del acorde, entre 120º y 240º el segundo tono más cercano del acorde y hasta 360º el tercer tono más cercano del acorde. El acorde que se usa es el acorde fundamental del tono que da el color de la figura. Esta relación se basa en la asociación que tiene Scriabin con los colores \cite{ScriabinQuintasColor}: él hace corresponder un color a un tono y a su acorde fundamental sin distinguir entre acorde mayor o menor para cada una de las notas de la escala cromática.
 
-	\item Sintetizar las notas: Mismo procedimiento que en la anterior versión.
+	\item Sintetizar las notas: mismo procedimiento que en la anterior versión.
 
 \end{itemize}
 
@@ -65,7 +65,7 @@ Un ejemplo completo de composición sobre una figura de entrada (Figura~\ref{fig
 
 \begin{itemize}
 
-	\item Procesar la figura (Figura~\ref{fig:Figura1Voz1}): Se ordenan los vértices (identificados con números) y se halla la longitud de los lados. \\
+	\item Procesar la figura (Figura~\ref{fig:Figura1Voz1}): se ordenan los vértices (identificados con números) y se halla la longitud de los lados. \\
 
 		\begin{figure}[!htbp]
 		\centering
@@ -75,7 +75,7 @@ Un ejemplo completo de composición sobre una figura de entrada (Figura~\ref{fig
 		\label{fig:Figura1Voz1}
 		\end{figure}
 
-	\item Calcular duraciones (Figura~\ref{fig:Figura2Voz1}): Se puede apreciar cómo el lado más largo obtiene una duración mayor (blanca) que los otros dos lados (negra). A pesar de que los dos lados más pequeños tienen diferentes longitudes, se ha aproximado su valor a una misma duración.\\
+	\item Calcular duraciones (Figura~\ref{fig:Figura2Voz1}): se puede apreciar cómo el lado más largo obtiene una duración mayor (blanca) que los otros dos lados (negra). A pesar de que los dos lados más pequeños tienen diferentes longitudes, se ha aproximado su valor a una misma duración.\\
 		
 		\begin{figure}[!htbp]
 		\centering
@@ -85,7 +85,7 @@ Un ejemplo completo de composición sobre una figura de entrada (Figura~\ref{fig
 		\label{fig:Figura2Voz1}
 		\end{figure}
 
-	\item Obtener tonos  (Figura~\ref{fig:Figura4Voz1}): Para conseguirlo primero se tiene que ver qué nota corresponde al color de la figura (en este caso se usa la correspondencia propuesta por Scriabin en la que el amarillo es D ``re''). Una vez se tiene la nota y su ángulo, se calcula la diferencia entre el nuevo ángulo y el anterior, el resultado es negativo por lo que se tiene que bajar de tono y como la diferencia en valor absoluto está entre los 10º y 30º, sólo se baja un escalón en la escala actual (en este ejemplo escala de Re Mayor), obteniendo la nueva nota: C ``do''. \\
+	\item Obtener tonos  (Figura~\ref{fig:Figura4Voz1}): para conseguirlo primero se tiene que ver qué nota corresponde al color de la figura (en este caso se usa la correspondencia propuesta por Scriabin en la que el amarillo es D ``re''). Una vez se tiene la nota y su ángulo, se calcula la diferencia entre el nuevo ángulo y el anterior, el resultado es negativo por lo que se tiene que bajar de tono y como la diferencia en valor absoluto está entre los 10º y 30º, sólo se baja un escalón en la escala actual (en este ejemplo escala de Re Mayor), obteniendo la nueva nota: C ``do''. \\
 Para conseguir el tercero y último tono, se calcula la diferencia del último vértice restando el ángulo del tercer vértice con el del segundo. Se obtiene un valor positivo luego se tiene que subir el tono. Al estar entre 30º y 120º se sube de un salto en el acorde de nota fundamental el color de la figura (en este caso es el acorde de D ``re'': D - F ``fa''- A ``la''). Como no se está en el acorde con el último tono obtenido (C ``do'') se viaja al tono más cercano que pertenezca al acorde, es decir, D ``re''. Y de ahí como la diferencia de ángulos es positiva se va a hacer un salto ascendente (a tono superior) de una unidad dentro del acorde, se pasa al tono F ``fa''.
 	
 		\begin{figure}[!htbp]
@@ -97,7 +97,7 @@ Para conseguir el tercero y último tono, se calcula la diferencia del último v
 		\label{fig:Figura4Voz1}
 		\end{figure}
 
-	\item Sintetizar las notas (Partitura de Figura~\ref{fig:Figura4Voz1}): Se tienen las duraciones y se tienen los tonos. Sólo falta juntarlos para crear las notas teniendo en cuenta el orden de los vértices.\\
+	\item Sintetizar las notas (Partitura de Figura~\ref{fig:Figura4Voz1}): se tienen las duraciones y se tienen los tonos. Sólo falta juntarlos para crear las notas teniendo en cuenta el orden de los vértices.\\
 
 \end{itemize}
 
@@ -105,9 +105,9 @@ Y con la misma figura (Figura~\ref{fig:Figura0Voz1}), se ve cual sería la salid
 
 \begin{itemize}
 	
-	\item Procesar la figura (Figura~\ref{fig:Figura1Voz1}): Este proceso es el mismo en ambas versiones. \\
+	\item Procesar la figura (Figura~\ref{fig:Figura1Voz1}): este proceso es el mismo en ambas versiones. \\
 	
-	\item Calcular duraciones (Figura~\ref{fig:Figura5Voz1}): Se puede ver cómo el algoritmo es más fiel a la correspondencia de las longitudes de los lados con las duraciones. Ahora los lados que antes tenían la misma duración, son distintos con una pequeña diferencia.\\
+	\item Calcular duraciones (Figura~\ref{fig:Figura5Voz1}): se puede ver cómo el algoritmo es más fiel a la correspondencia de las longitudes de los lados con las duraciones. Ahora los lados que antes tenían la misma duración, son distintos con una pequeña diferencia.\\
 		
 		\begin{figure}[!htbp]
 		\centering
@@ -117,7 +117,7 @@ Y con la misma figura (Figura~\ref{fig:Figura0Voz1}), se ve cual sería la salid
 		\label{fig:Figura5Voz1}
 		\end{figure}
 
-	\item Obtener tonos  (Figura~\ref{fig:Figura6Voz1}): En esta versión el algoritmo es de correspondencia directa entre el ángulo del vértice y el tono. Al igual que en el anterior algoritmo, el primer tono lo determina el color de la figura. Después se tiene el ángulo del segundo vértice que es pequeño y por tanto genera un pequeño salto en el tono. El tercer vértice tiene un ángulo mucho mayor y como se puede observar, se da un salto mayor respecto al anterior tono.
+	\item Obtener tonos  (Figura~\ref{fig:Figura6Voz1}): en esta versión el algoritmo es de correspondencia directa entre el ángulo del vértice y el tono. Al igual que en el anterior algoritmo, el primer tono lo determina el color de la figura. Después se tiene el ángulo del segundo vértice que es pequeño y por tanto genera un pequeño salto en el tono. El tercer vértice tiene un ángulo mucho mayor y como se puede observar, se da un salto mayor respecto al anterior tono.
 	
 		\begin{figure}[!htbp]
 		\centering
@@ -128,7 +128,7 @@ Y con la misma figura (Figura~\ref{fig:Figura0Voz1}), se ve cual sería la salid
 		\label{fig:Figura6Voz1}
 		\end{figure}
 
-	\item Sintetizar las notas (Partitura de Figura~\ref{fig:Figura6Voz1}): El mismo proceso que en el algoritmo de la segunda versión.
+	\item Sintetizar las notas (Partitura de Figura~\ref{fig:Figura6Voz1}): el mismo proceso que en el algoritmo de la segunda versión.
 
 \end{itemize}
 
@@ -139,14 +139,14 @@ Y con la misma figura (Figura~\ref{fig:Figura0Voz1}), se ve cual sería la salid
 La segunda voz sirve de acompañamiento a la primera. Se usa la misma estructura que a la hora de componer la melodía principal aunque con algunos cambios. Además se necesita el segmento de melodía principal como entrada para poder basarse en ella a la hora de componer, pudiendo conseguir resultados que siguen las bases armónicas de la música.
 
 \begin{itemize}
-	\item Procesar la figura: Esta fase será la misma que la usada en la primera voz.
+	\item Procesar la figura: esta fase será la misma que la usada en la primera voz.
 
-	\item Calcular duraciones: Se usa el mismo proceso que la segunda versión de la primera voz pero en este caso se añade un paso más. Las duraciones obtenidas se adaptan para que el total sea la longitud pedida y nunca mayor que el segmento de la melodía. Además, si la duración total del acompañamiento es menor que la de la voz principal, hay que decidir en qué momento de la melodía va a empezar el acompañamiento.
+	\item Calcular duraciones: se usa el mismo proceso que la segunda versión de la primera voz pero en este caso se añade un paso más. Las duraciones obtenidas se adaptan para que el total sea la longitud pedida y nunca mayor que el segmento de la melodía. Además, si la duración total del acompañamiento es menor que la de la voz principal, hay que decidir en qué momento de la melodía va a empezar el acompañamiento.
 
-	\item Obtener tonos: Respecto al anterior algoritmo, en este apartado se sigue sacando una correlación entre los ángulos y los tonos, pero se añade un proceso intermedio. Mientras se generan los tonos se analiza el comportamiento de la segunda voz respecto a la melodía principal y si es necesario, se aplican pequeñas variaciones para disminuir las disonancias que puedan aparecer al juntar ambas voces. Estos cambios, que siguen los principios de las técnicas más básicas del contrapunto, se activan cuando el intervalo entre la primera y la segunda voz es disonante y además se mantiene un periodo alargado en el tiempo. \\
+	\item Obtener tonos: respecto al anterior algoritmo, en este apartado se sigue sacando una correlación entre los ángulos y los tonos, pero se añade un proceso intermedio. Mientras se generan los tonos se analiza el comportamiento de la segunda voz respecto a la melodía principal y si es necesario, se aplican pequeñas variaciones para disminuir las disonancias que puedan aparecer al juntar ambas voces. Estos cambios, que siguen los principios de las técnicas más básicas del contrapunto, se activan cuando el intervalo entre la primera y la segunda voz es disonante y además se mantiene un periodo alargado en el tiempo. \\
 Las variaciones aplicadas intentarán que los cambios sean mínimos, por ejemplo, si un tono ha bajado pero lo ha hecho a un tono disonante de larga duración respecto a la primera voz entonces se cambia el tono por otro que esté lo más cerca del original.
 
-	\item Sintetizar las notas: Se sigue el mismo algoritmo pero con un añadido. Hay que tener en cuenta que la segunda voz puede tener una duración menor que la primera voz. Para que sea consistente la composición, todas las voces tienen que tener la misma duración y por tanto hay que rellenar con silencios la parte que falta a la segunda voz.
+	\item Sintetizar las notas: se sigue el mismo algoritmo pero con un añadido. Hay que tener en cuenta que la segunda voz puede tener una duración menor que la primera voz. Para que sea consistente la composición, todas las voces tienen que tener la misma duración y por tanto hay que rellenar con silencios la parte que falta a la segunda voz.
 
 \end{itemize}
 
