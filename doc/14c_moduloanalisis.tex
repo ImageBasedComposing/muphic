@@ -5,7 +5,7 @@
 
 El módulo de análisis, como ya se ha comentado, es el encargado de, dada una imagen y una configuración de entrada, producir un archivo XML con la lista de polígonos que componen la imagen. Esta lista debe formar una nueva imagen lo más fiel posible a la imagen de entrada, teniendo en cuenta los ajustes especificados en el archivo de configuración.\\
 
-Este módulo hace un gran uso de la librería externa OpenCV, de la cual se ayuda tanto para tratar imágenes como para componer formas y polígonos.
+Este módulo hace un gran uso de la librería externa OpenCV (Apéndice~\ref{sec:OpenCV}) , de la cual se ayuda tanto para tratar imágenes como para componer formas y polígonos.
 
 \subsection{Vista de implementación}
 
@@ -22,7 +22,7 @@ En ella, se pueden observar las siguientes clases:\\
 
 \begin{itemize}
 
-	\item \textbf{Phic:} Se trata de la clase que controla la completa ejecución de este módulo. Se ocupa de coordinar el resto de clases para que realicen las operaciones requeridas para completar el análisis.
+	\item \textbf{Phic:} se trata de la clase que controla la completa ejecución de este módulo. Se ocupa de coordinar el resto de clases para que realicen las operaciones requeridas para completar el análisis.
 	
 	\item \textbf{Analizer:} realiza todas las operaciones de análisis y se comunica con la librería OpenCV.
 	
