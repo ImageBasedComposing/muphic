@@ -10,7 +10,7 @@
 		\vspace{0.2in}
 		Muphic es un software capaz de producir piezas musicales compuestas automáticamente a partir de una imagen. Es el resultado de un proyecto de sistemas informáticos comenzado en octubre del 2011 por 3 alumnos de Ingeniería Informática, cuyo propósito es generar música a partir de imágenes basándose en el fenómeno de la sinestesia.\\
 		
-		Antes de proceder a describir el proyecto, es necesario explicar qué es la sinestesia, un término de gran importancia a lo largo del documento. Tal y como afirman Ramachandran y Hubbard en \cite[pg.~4]{paperSyn}:
+		Antes de proceder a describir el proyecto, es necesario explicar qué es la sinestesia, un término de gran importancia a lo largo del documento. Tal y como afirman Ramachandran y Hubbard \cite{paperSyn}:
 		
 		\begin{quote}
 		\emph{``La Sinestesia es una curiosa condición según la cual un individuo de cualquier otra manera normal experimenta sensaciones en una modalidad cuando una segunda modalidad es estimulada. Por ejemplo, un sinésteta puede experimentar un color determinado siempre que se encuentre con un tono particular(p. ej., C\# puede ser azul) o puede ver un número dado tintado siempre de un cierto color (p. ej., ‘5’ puede ser verde y ‘6’ puede ser rojo).''}
@@ -21,13 +21,13 @@
 		
 		De forma resumida, dado que se entrará en detalle en secciones siguientes, la aplicación desarrollada analiza una imagen de entrada y utiliza el contenido de dicho análisis para generar una pieza musical mediante algoritmos de composición automática.\\
 
-		El compositor trabaja en dos etapas secueciadas:
+		El sistema trabaja en dos etapas secueciadas:
 		
 		\begin{itemize}
 		
 		\item Análisis de imágenes: la imagen de entrada se debe procesar y estudiar hasta obtener la información deseada (formas, colores, tamaños, ...).
 
-		\item Composición algorítmica: Con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, todas las partes que forman la pieza musical: ritmo, melodía y armonía.
+		\item Composición algorítmica: con la información obtenida a partir de la imagen y el conocimiento de cómo se relaciona con la música, se pasa a componer, de forma automática, todas las partes que forman la pieza musical: ritmo, melodía y armonía.
 		\end{itemize}
 		
 		Naturalmente, la segunda etapa va a depender del resultado del análisis de la primera: con distintos análisis de imagen se obtiene pequeñas diferencias en las descripciones de las imágenes de entrada. Y por tanto las composiciones musicales serán parcialmente diferentes, ya que la información procesada por el compositor será distinta en cada caso. Además, la elección de los algoritmos de composición cambiará de forma significativa la pieza musical final.\\
@@ -57,7 +57,7 @@
 		\emph{``[La música ambiente es] Algo de lo que puedes entrar o salir discretamente. Puedes atender o puedes elegir no distraerte con ella si quisieras hacer algo mientras la música está reproduciéndose.''}, (\cite{BrianEnoInterview}, entrevista con Brian Eno).
 		\end{quote}		
 		
-		Por último, se ha de añadir que el ámbito de la composición basada en imágenes es uno muy estudiado pero a la vez poco desarrollado. Es decir, aunque existe una gran cantidad de estudios sobre la sinestesia y la composición musical automática (como se puede ver en la Sección~\ref{sec:estadodelarte}), aún quedan muchas cuestiones que investigar y áreas que profundizar así como la conexión entre la música y la imagen.\\
+		Por último, se ha de añadir que el ámbito de la composición basada en imágenes es uno muy estudiado pero a la vez poco desarrollado. Es decir, aunque existe una gran cantidad de estudios sobre la sinestesia y la composición musical automática (como se puede ver en la Sección~\ref{sec:estadodelarte}), aún quedan muchas cuestiones que investigar y áreas que profundizar.\\
 
 \input{9_motivacion}
 \input{10_estado-del-arte}
@@ -67,14 +67,13 @@
 
 El presente documento esta estructurado del siguiente modo:\\
 
-En primer lugar, se ha realizado una primera toma de contacto del proyecto y su contexto en el Capítulo~\ref{chap:intro}, \textit{\nameref{chap:intro}}. Este ha comenzado con una descripción del sistema a modo de introducción, seguida de la motivación que ha llevado al desarrollo de este proyecto. Finalmente se ha expuesto el estado del arte y los diferentes estudios sobre la materia realizados hasta el momento .\\
+En primer lugar, se ha realizado una primera toma de contacto del proyecto y su contexto en el Capítulo~\ref{chap:intro}, \textit{\nameref{chap:intro}}. Este ha comenzado con una descripción del sistema a modo de introducción, seguida de la motivación que ha llevado al desarrollo de este proyecto. Finalmente se ha expuesto el estado del arte y los diferentes estudios sobre la materia realizados hasta el momento.\\
 
 A continuación, se procede a explicar las diferentes características del sistema, comenzando por un manual de usuario en el Capítulo~\ref{chap:guiauso}, \textit{\nameref{chap:guiauso}}, donde se expone la forma de usar la herramienta mediante la interfaz gráfica proporcionada. Esta guía abarca también el proceso necesario para instalar la aplicación en las distintas plataformas.\\
 
-El diseño realizado para el sistema, incluyendo la especificación de los algoritmos usados tanto en el análisis de imagen como en la composición musical, se presenta en el Capítulo~\ref{chap:diseno}, \textit{\nameref{chap:diseno}}. En él, se detallan los usuarios a los que está orientada la aplicación , así como la totalidad de los requisitos que detallan las funcionalidades de la aplicación final
-. En el resto del capítulo se expone la especificación de los algoritmos desarrollados, ya sean pertenecientes a la fase de análisis o a la fase de composición musical.\\
+El diseño realizado para el sistema, incluyendo la especificación de los algoritmos usados tanto en el análisis de imagen como en la composición musical, se presenta en el Capítulo~\ref{chap:diseno}, \textit{\nameref{chap:diseno}}. En él, se detallan los usuarios a los que está orientada la aplicación, así como la totalidad de los requisitos que detallan las funcionalidades de la aplicación final. En el resto del capítulo se expone la especificación de los algoritmos desarrollados, ya sean pertenecientes a la fase de análisis o a la fase de composición musical.\\
 
-En el siguiente Capítulo, \textit{\nameref{chap:arquitectura}}, se detalla de forma exhaustiva la implementación el sistema mediante el estándar UML. Cada sección de este capítulo hace referencia a cada uno de los módulos en los que se ha dividido la arquitectura del sistema, con la excepción de las dos primeras secciones. En ellas, se define la estructura diseñada e implementada en dos piezas claves en la realización de este proyecto: el formato de representación interna de una imagen y el de una pieza musical; estos formatos y sus correspondientes implementaciones son usados por todos los módulos definidos a continuación. Estos módulos se ordenan en el documento por orden de importancia, siendo el primero de ellos el módulo de composición de música, seguido del módulo de análisis de imagen. Finalmente se tiene en cuenta tanto el módulo que se encarga de unificar los anteriores módulos mencionados como la interfaz gráfica desarrollada para facilitar el uso de la aplicación.\\
+En el siguiente Capítulo, \textit{\nameref{chap:arquitectura}}, se detalla de forma exhaustiva la implementación el sistema mediante el estándar UML. Cada sección de este capítulo hace referencia a cada uno de los módulos en los que se ha dividido la arquitectura del sistema, con la excepción de las dos primeras secciones. En ellas, se define la estructura diseñada e implementada en dos piezas claves en la realización de este proyecto: el formato de representación interna de una imagen y el de una pieza musical. Estos formatos y sus correspondientes implementaciones son usados por todos los módulos definidos a continuación. Estos módulos se ordenan en el documento por orden de importancia, siendo el primero de ellos el módulo de composición de música, seguido del módulo de análisis de imagen. Finalmente se tiene en cuenta tanto el módulo que se encarga de unificar los anteriores módulos mencionados como la interfaz gráfica desarrollada para facilitar el uso de la aplicación.\\
 
 El contenido principal del documento finaliza en el Capítulo~\ref{chap:results}, \textit{\nameref{chap:results}}. En él, se repasa el desarrollo del proyecto y los objetivos cumplidos a lo largo del mismo, dando una visión global del sistema implementado. Posteriormente se procede a explicar los diferentes usos y mercados a los que está destinada la aplicación, así como las posibles ampliaciones que se podrían realizar sobre el sistema si se continuara su desarrollo.\\
 

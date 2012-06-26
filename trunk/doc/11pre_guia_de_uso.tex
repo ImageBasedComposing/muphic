@@ -17,14 +17,14 @@
 		
 		Como vemos en la Figura~\ref{fig:interfazoverview}, la aplicación dispone de tres pestañas: \emph{Main Window}, \emph{Graphic Config} y \emph{Composition Config}. La primera dispone de toda la funcionalidad necesaria para lanzar la aplicación, mientras que las otras dos aportan opciones para configurar el comportamiento del análisis y la composición.\\
 		
-		De forma general, todo usuario, experto o inexperto, se puede valer de la primera pestaña para usar la composición. Sin embargo, un usuario avanzado con conocimientos musicales y de qué tipos de análisis gráficos se realizan puede navegar por las pestañas restantes para configurar los procesos de composición y análisis de imagen, respectivamente.\\
+		De forma general, todo usuario, experto o inexperto, se puede valer de la primera pestaña para usar la composición. Sin embargo, un usuario avanzado con conocimientos musicales y de qué tipos de análisis gráficos se realizan puede navegar por las pestañas restantes para configurar los procesos de composición y análisis de imagen respectivamente.\\
 		
 		Se procede por tanto a explicar cada pestaña una por una.
 
 	\section{Ventana principal}
 	\gotrev{Última Revisión: 20-06-2012}
 		
-		Se encarga de la interacción básica con el usuario; muestra los resultados obtenidos y permite lanzar los principales componentes de la aplicación. 
+		Se encarga de la interacción básica con el usuario: muestra los resultados obtenidos y permite lanzar los principales componentes de la aplicación. 
 		\\Esta compuesta por los siguientes elementos tal y como se puede ver en la Figura~\ref{fig:interfaz}:\\
 		
 		
@@ -36,9 +36,9 @@
 		\label{fig:interfaz}
 		\end{figure}
 		
-		\noindent\textit{Carga de imagen de entrada [G]:} Permite al usuario elegir la dirección desde donde se cargará la imagen de entrada.\\
+		\noindent\textit{Carga de imagen de entrada [G]:} Permite al usuario elegir la ruta desde donde se cargará la imagen de entrada.\\
 		
-		\noindent\textit{Selección del archivo de audio de salida [H]:} Permite al usuario elegir la dirección donde se guardará el archivo de salida.\\
+		\noindent\textit{Selección del archivo de audio de salida [H]:} Permite al usuario elegir la ruta donde se guardará el archivo de salida.\\
 		
 		\noindent\textit{Input Image [I]:} En este panel se muestra la imagen elegida para el análisis.\\
 		
@@ -73,7 +73,7 @@
 		\label{fig:interfazgraphic}
 		\end{figure}
 		
-		\noindent\textit{Tipo de filtrado de imagen [A]:} Distintos filtros en la imagen producirán diferentes formas de entender las formas que hay en ellas. De forma un poco más precisa, pero sin llegar a entrar en detalles técnicos, los filtros se encargan de transformar la imagen original a un mapa de bits en blanco y negro, que posteriormente se analizará para detectar polígonos en él. Un buen filtro diferenciará las deseadas superficies de color como manchas blancas independientes.\\
+		\noindent\textit{Tipo de filtrado de imagen [A]:} Distintos filtros en la imagen producirán diferentes formas de entender las figuras que hay en ellas. De forma un poco más precisa, pero sin llegar a entrar en detalles técnicos, los filtros se encargan de transformar la imagen original a un mapa de bits en blanco y negro, que posteriormente se analizará para detectar polígonos en él. Un buen filtro diferenciará las deseadas superficies de color como manchas blancas independientes.\\
 		
 		\noindent\textit{Selección de ruido [B]:} Mediante esta barra el usuario puede elegir el tamaño mínimo de las formas por debajo del cual no se considerarán relevantes en el análisis. El valor representa un porcentaje respecto al área total de la imagen, de forma que un valor $n$ de Selección de Ruido determina que todas las formas con área menor a un $n$\% del área total de la imagen se considerarán ruido y no serán estudiadas.\\
 		
