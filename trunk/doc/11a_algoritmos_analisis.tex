@@ -1,6 +1,6 @@
 \section{Algoritmos de Análisis}
 \label{sec:algAnalisis}
-\torev{Última revisión: 20/06/12.}
+\gotrev{Última revisión: 25/06/12.}
 
 Esta sección explicará con detalle los algoritmos de análisis de imágenes que se han desarrollado a lo largo del proceso de desarrollo. El objetivo de estos análisis es obtener, a partir de una imagen dada, información de los polígonos presentes tal y como se explica en la Sección~\ref{sec:representacionFiguras}. Esta información abarca tanto el color y vértices de cada polígono como qué polígonos se encuentran dentro de cuáles.\\
 
@@ -182,7 +182,7 @@ Para realizar el análisis ayudándondos de OpenCV, el proceso que se lleva a ca
 		$\forall k, 0 < k < N, dist(v_{k}, v'_{k}) < \epsilon$
 	\end{center}
 	
-	Donde $N$ es el número de vértices de ambos polígonos que se deduce de la secuencia $v'_{1}, v'_{2}, ..., v'_{n}$ y $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos.\\
+	Donde $dist(p,q)$ es la función que calcula la distancia entre dos puntos del espacio bidimensional. La constante $\epsilon$ determina lo cerca que deben estar los vértices entre sí par considerarse idénticos.\\
 	
 		\begin{figure}[!htbp]
 		\centering
