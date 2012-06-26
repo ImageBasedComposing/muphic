@@ -18,7 +18,7 @@ La implementación realizada sigue el esquema de la Figura~\ref{fig:diagramaclas
 		\label{fig:diagramaclasesMu}
 		\end{figure}
 
-Las clases más importante que podemos observar son:\\
+Las clases más importante que podemos observar son:
 
 \begin{itemize}
 
@@ -74,7 +74,7 @@ Conversión - Audio (color azul Figura~\ref{fig:diagramaclasesMu}):
 	
 	\item \textbf{AudioConvert:} la principal función es convertir los datos que se manejan en los compositores dentro del sistema en un archivo de audio que permita reproducirse.
 
-	\item \textbf{AudioConvertABC:} esta clase implementa una posible solución a la conversión entre nuestra notación musical y una salida estandar de audio. En este caso primero se transforma nuestra notación en un archivo con notación ABC y seguidamente se usa la aplicación externa Abc2midi para convertir el archivo ABC en un archivo de sonido Midi
+	\item \textbf{AudioConvertABC:} esta clase implementa una posible solución a la conversión entre nuestra notación musical y una salida estandar de audio. En este caso primero se transforma nuestra notación en un archivo con notación ABC y seguidamente se usa la aplicación externa Abc2midi para convertir el archivo ABC en un archivo de sonido Midi.
 
 	\item \textbf{AudioConvertWAV:} de forma experimental se desarrolló un sintetizador de sonido que, a partir de nuestra notación, generaba directamente un archivo wav sin compresión. Actualmente no se usa, ya que se obtienen con Abc2midi y Timidity archivos de sonido con mejor calidad y riqueza.
 
