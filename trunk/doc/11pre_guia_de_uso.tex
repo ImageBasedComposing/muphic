@@ -44,7 +44,7 @@
 		
 		\noindent\textit{Analysis output [J]:} En este panel se muestra el resultado del último análisis realizado pulsando el botón ``Analyze''.\\
 		
-		\noindent\textit{Botón Analyze [B]:} Tal y como su nombre indica, Analyze, realiza el analisis de la imagen pasada como parámetro de entrada. Tras analizarse, el resultado podrá observarse en el panel \textit{[I]}. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP'', pudiendo pulsarlo de nuevo para detener el análisis manualmente. Esta opción es bastante útil para imagenes grandes o complejas (con muchas variaciones de color que originan gran cantidad de formas), ya que el análisis puede tardar más de lo esperado y el usuario puede de esta manera detenerlo para luego relanzarlo con otra configuración más rápida.\\
+		\noindent\textit{Botón Analyze [B]:} Tal y como su nombre indica, Analyze realiza el analisis de la imagen pasada como parámetro de entrada. Tras analizarse, el resultado podrá observarse en el panel \textit{[I]}. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP'', pudiendo pulsarlo de nuevo para detener el análisis manualmente. Esta opción es bastante útil para imagenes grandes o complejas (con muchas variaciones de color que originan gran cantidad de formas), ya que el análisis puede tardar más de lo esperado y el usuario puede de esta manera detenerlo para luego relanzarlo con otra configuración más rápida.\\
 		
 		\noindent\textit{Botón Compose [A]:}\ Realiza la composición musical a partir de los datos analizados. Una vez compuesta la pieza musical, se podrá escuchar mediante los controles de control de sonido. Una vez pulsado el botón, y mientras dure el análisis, el botón pasará a mostrar el mensaje ``STOP', pudiendo pulsarlo de nuevo para detener la composición manualmente.\\
 		
@@ -96,7 +96,7 @@
 		
 	\noindent\textbf{Adaptive Threshold}\\
 
-		Mientras que el filtro anterior utiliza un mismo umbral para toda la imagen, Adaptative Threshold (ver implementación en \cite{opencvDoc}, y su descripción formal en \cite{pajares}) usa un umbral distinto para diferentes regiones de la imagen, en función de los valores de los píxeles tratados.\\ 
+		Mientras que el filtro anterior utiliza un mismo umbral para toda la imagen, Adaptive Threshold (ver implementación en \cite{opencvDoc}) usa un umbral distinto para diferentes regiones de la imagen, en función de los valores de los píxeles tratados.\\ 
 		
 		Este filtro no usa parámetros específicos, ya que modifica el valor del umbral cada vez que le resulta necesario.\\
 		
@@ -109,13 +109,13 @@
 	\noindent\textbf{Hue Division}\\
 
 
-		Se trata de un filtro propio que busca asocia manchas de color con conjuntos de píxeles vecinos con valores RGB dentro de un mismo rango de rojo (R), azul (B) y verde (G). Los parámetros específicos son:\\
+		Se trata de un filtro propio que busca asocia manchas de color con conjuntos de píxeles vecinos con valores RGB dentro de un mismo rango de rojo (R), azul (B) y verde (G). Su parámetro específico es:\\
 		
 		\noindent\textit{Niveles de color:} Este parámetro determina el número de intervalos posibles de color que puede haber en cada canal de color, y por tanto determinará la amplitud de cada rango. Un valor igual a 3 indica que un píxel cualquiera puede entrar dentro de 3 intervalos posibles en el canal rojo, otros 3 en el azul y otros 3 en el verde. De esta forma cada píxel entra dentro de una de las $3*3*3=27$ categorías de color, simplificando el análisis. Un valor muy grande de este parámetro hará que haya más categorías de color y que por tanto colores que antes se consideraban parte de una misma forma ahora se consideren como parte de formas independientes con colores más específicos. Un valor muy pequeño hará que se interpreten formas más amplias (incluyendo píxeles más diversos).\\
 		
 	\noindent\textbf{Color Threshold}\\
 
-		Se trata de un filtro propio que adapta el filtro Threshold para una imagen de 3 canales. En vez de considerar como figuras aquellas agrupaciones de píxeles cuyos valores en escala de grises sean inferiores a un umbral, considera aquellas que en su canal de Matiz (Hue), Saturación (Saturation) y Valor (Value) sean menor que un umbral, originando cada canal formas independientes.\\
+		Se trata de un filtro propio que adapta el filtro Threshold para una imagen de 3 canales. En vez de considerar como figuras aquellas agrupaciones de píxeles cuyos valores en escala de grises sean inferiores a un umbral, considera aquellas que en su canal de Matiz (Hue), Saturación (Saturation) y Valor (Value) sean menor que un umbral, originándose en cada canal formas independientes.\\
 		
 		Los parámetros específicos de este filtro determinarán el valor de los umbrales de cada canal determinado en formato de imagen HSV.\\		
 		
