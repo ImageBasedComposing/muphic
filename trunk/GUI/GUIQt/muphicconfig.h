@@ -123,6 +123,8 @@ private slots:
 
     void on_comboBox_Tempo_currentIndexChanged(int index);
 
+    void on_pushButton_score_clicked();
+
 private:
     Ui::MuphicConfig *ui;
 

@@ -345,9 +345,6 @@ void MuphicConfig::paintEvent(QPaintEvent*)
             composing = false;
             remove("composition_log");
             ui->pushButton_Generate->setText("Compose");
-
-            std::string composedPDF = removeLocalPath(changeExtension(outputFile.toStdString(), "xhtml"));
-            QDesktopServices::openUrl(QUrl(composedPDF.c_str(), QUrl::TolerantMode));
         }
     }
 
@@ -949,4 +946,10 @@ void MuphicConfig::on_comboBox_Tempo_currentIndexChanged(int index)
     }
 
     usrConf->setMuTempo(tempo);
+}
+
+void MuphicConfig::on_pushButton_score_clicked()
+{
+    std::string composedPDF = "\"" + removeLocalPath(changeExtension(outputFile.toStdString(), "xhtml")) + "\"";
+    QDesktopServices::openUrl(QUrl(composedPDF.c_str(), QUrl::TolerantMode));
 }
