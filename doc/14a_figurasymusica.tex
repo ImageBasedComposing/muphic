@@ -30,36 +30,36 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 	\setlist[longenum,5]{label=\tiny$\blacksquare$}
 	
 	\begin{longenum}
-	\item \textbf{Shapes}: Representa la imagen completa y contiene un listado de las figuras resultantes del análisis.
-	\item \textbf{Width}: Almacena el ancho total de la imagen.
-	\item \textbf{Height}: Almacena el alto total de la imagen.
-	\item \textbf{Figure}: Contiene la información relativa a un polígono en la imagen.
+	\item \textbf{Shapes}: representa la imagen completa y contiene un listado de las figuras resultantes del análisis.
+	\item \textbf{Width}: almacena el ancho total de la imagen.
+	\item \textbf{Height}: almacena el alto total de la imagen.
+	\item \textbf{Figure}: contiene la información relativa a un polígono en la imagen.
 		\begin{longenum}
-		\item \textbf{Id}: Identificador único de la figura.
-		\item \textbf{Color}: Identificador para almacenar la información sobre el color de la figura.
+		\item \textbf{Id}: identificador único de la figura.
+		\item \textbf{Color}: identificador para almacenar la información sobre el color de la figura.
 			\begin{longenum}
-			\item \textbf {RGB}: Delimitar la información sobre los valores RGB del color.
+			\item \textbf {RGB}: delimitar la información sobre los valores RGB del color.
 				\begin{longenum}
-				\item \textbf{R}: Valor referente a la cantidad de rojo en la escala RGB.
-				\item \textbf{G}: Valor referente a la cantidad de verde en la escala RGB.
-				\item \textbf{B}: Valor referente a la cantidad de azul presente en escala RGB.
+				\item \textbf{R}: valor referente a la cantidad de rojo en la escala RGB.
+				\item \textbf{G}: valor referente a la cantidad de verde en la escala RGB.
+				\item \textbf{B}: valor referente a la cantidad de azul presente en escala RGB.
 				\end{longenum}
 			\end{longenum}
-		\item \textbf{VertexList}: Lista de vértices que componen el polígono.
+		\item \textbf{VertexList}: lista de vértices que componen el polígono.
 			\begin{longenum}
-			\item \textbf{Vertex [type=``normal'']}: Identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
+			\item \textbf{Vertex [type=``normal'']}: identificador para delimitar un vértice que pertenece a uno de los extremos de una recta o curva del polígono.
 				\begin{longenum}
-					\item \textbf{Position}: Identificador para delimitar la posición de un vértice en la imagen.
+					\item \textbf{Position}: identificador para delimitar la posición de un vértice en la imagen.
 						\begin{longenum}
-						\item \textbf{X}: Componente x de la posición del vértice.
-						\item \textbf{Y}: Componente y de la posición del vértice.
+						\item \textbf{X}: componente x de la posición del vértice.
+						\item \textbf{Y}: componente y de la posición del vértice.
 						\end{longenum}
-					\item \textbf{Vertex [type=``center'']}: Identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
+					\item \textbf{Vertex [type=``center'']}: identificador para delimitar un vértice que señala el centro de circunferencia que forma la curva que conecta el vértice anterior a este con el siguiente.
 				\end{longenum}
 			\end{longenum}
 		\end{longenum}
-		\item \textbf{Area}: Valor numérico del área de una figura.
-		\item \textbf{Canvas}: Identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
+		\item \textbf{Area}: valor numérico del área de una figura.
+		\item \textbf{Canvas}: identificador que delimita las figuras situadas dentro de la figura que contiene este elemento. 
 	\end{longenum}
 	
 	Como se puede ver, la imagen analizada está compuesta por una lista de figuras (o polígonos) jerárquicas según su posición geométrica. Cada figura representa una mancha de color detectada por el analizador de imágenes para ello guarda la información de sus vértices, color y área.
@@ -80,17 +80,17 @@ Por otro lado, en esta sección se mostrará también la estructura usada en la 
 	
 	\begin{itemize}
 	
-		\item \textbf{Figures:} Almacena la lista de figuras presentes en la imagen, permite manipular y acceder a ellas tanto en forma de lista (colocándose todas las figuras existentes de forma seguida y sin jerarquías) como en forma de árbol (jerarquizándolas según quién está dentro de quién: una figura que contiene en su interior todos los vértices de otra será su ``padre''), ocupándose de forma autosuficiente de mantener ésta última estructura al añadir nuevas figuras.\\
+		\item \textbf{Figures:} almacena la lista de figuras presentes en la imagen, permite manipular y acceder a ellas tanto en forma de lista (colocándose todas las figuras existentes de forma seguida y sin jerarquías) como en forma de árbol (jerarquizándolas según quién está dentro de quién: una figura que contiene en su interior todos los vértices de otra será su ``padre''), ocupándose de forma autosuficiente de mantener ésta última estructura al añadir nuevas figuras.\\
 
 		Además posee también funcionalidad para guardar y cargar su información en formato XML, así como para eliminar figuras repetidas o volver a calcular el color de cada figura teniendo en cuenta las figuras que contiene (ver Sección~\ref{sec:algAnalisis} para más detalles sobre estas funcionalidades).
 		
-		\item \textbf{Figure:} Representa cada elemento almacenado en la clase Figures. Contiene, como nodo de la estructura arbórea creada en Figures, los atributos necesarios para referenciar a sus padres, sus hijos y sus hermanos, y como elemento representativo de una figura en la imagen (Sección~\ref{subsec:xmlstruct}), el color, area y lista de vértices correspondiente a la imagen.\\
+		\item \textbf{Figure:} representa cada elemento almacenado en la clase Figures. Contiene, como nodo de la estructura arbórea creada en Figures, los atributos necesarios para referenciar a sus padres, sus hijos y sus hermanos, y como elemento representativo de una figura en la imagen (Sección~\ref{subsec:xmlstruct}), el color, area y lista de vértices correspondiente a la imagen.\\
 		
 		Presenta métodos para poder acarrear funciones geométricas básicas (como transformar su representación de vértices de coordenadas cartesianas a euclídeas) que simplifican el desarrollo de los algoritmos explicados en la Sección~\ref{sec:algComposicion}.
 		
-		\item \textbf{Vertice:} Se trata de la unidad más pequeña de esta estructura, y representa las coordenadas en 2 dimensiones de un vértice en el plano cartesiano. Como se detalla en la Sección~\ref{subsec:xmlstruct}, da la opción de ser considerado un ``centro'', de forma que, en la lista de vértices de la Figura que lo almacene, puede actuar como el centro entre el vértice anterior y el siguiente, formando por tanto un arco entre los 3 vértices y permitiendo realizar curvas en las figuras.
+		\item \textbf{Vertice:} se trata de la unidad más pequeña de esta estructura, y representa las coordenadas en 2 dimensiones de un vértice en el plano cartesiano. Como se detalla en la Sección~\ref{subsec:xmlstruct}, da la opción de ser considerado un ``centro'', de forma que, en la lista de vértices de la Figura que lo almacene, puede actuar como el centro entre el vértice anterior y el siguiente, formando por tanto un arco entre los 3 vértices y permitiendo realizar curvas en las figuras.
 		
-		\item \textbf{TinyXML:} Se trata de un paquete externo de código libre que permite generar y manipular archivos XML.
+		\item \textbf{TinyXML:} se trata de un paquete externo de código libre que permite generar y manipular archivos XML.
 	
 	\end{itemize}
 	
@@ -128,27 +128,27 @@ La estructura para representar la música propuesta en el proyecto está determi
 	\end{figure}
 
 
-\textbf{Music}: Al nivel de Music se trabaja con la información relativa a toda la canción que se va a componer. Por un lado está la información relativa al nombre de la pieza y del compositor que la ha hecho así como la ruta del archivo de sonido cuando se guarde. Pero la parte más importante es el contenido de las voces a partir de las cuales está formada la canción. También es importante el tempo global de la pieza y la herramienta que se usará para crear el archivo de audio de salida.
+\textbf{Music}: al nivel de Music se trabaja con la información relativa a toda la canción que se va a componer. Por un lado está la información relativa al nombre de la pieza y del compositor que la ha hecho así como la ruta del archivo de sonido cuando se guarde. Pero la parte más importante es el contenido de las voces a partir de las cuales está formada la canción. También es importante el tempo global de la pieza y la herramienta que se usará para crear el archivo de audio de salida.
 \newline
 
-\textbf{Voices}: Esta clase es un envoltorio de un array al que se le ha añadido pequeña funcionalidad, como la posibilidad de editar algún parámetro a todas las voces que contiene.
+\textbf{Voices}: esta clase es un envoltorio de un array al que se le ha añadido pequeña funcionalidad, como la posibilidad de editar algún parámetro a todas las voces que contiene.
 \newline
 
-\textbf{Voz}: Por debajo de Music se trabaja con las voces, Voice. Dentro de cada Voice se determina el instrumento, la tonalidad y el tempo con el que será transformada esta voz en sonido. La parte sustancial de cada voz son los Segments, donde se almacena los datos musicales.
+\textbf{Voz}: por debajo de Music se trabaja con las voces, Voice. Dentro de cada Voice se determina el instrumento, la tonalidad y el tempo con el que será transformada esta voz en sonido. La parte sustancial de cada voz son los Segments, donde se almacena los datos musicales.
 \newline
 
-\textbf{Segments}: Al igual que Voices, es un envoltorio de un array al que se le ha añadido alguna pequeña funcionalidad adicional.
+\textbf{Segments}: al igual que Voices, es un envoltorio de un array al que se le ha añadido alguna pequeña funcionalidad adicional.
 \newline
 
-\textbf{Segment}: Su principal cometido es almacenar de forma serializable los diferentes símbolos musicales de los que está compuesta la pieza musical. A su vez, estos elementos tienen la posibilidad de establecer su propia métrica y tempo. Además es importante la duración del segmento, que se irá incrementando cada vez que se añada un nuevo símbolo.
+\textbf{Segment}: su principal cometido es almacenar de forma serializable los diferentes símbolos musicales de los que está compuesta la pieza musical. A su vez, estos elementos tienen la posibilidad de establecer su propia métrica y tempo. Además es importante la duración del segmento, que se irá incrementando cada vez que se añada un nuevo símbolo.
 \newline
 
-\textbf{Symbol}: Son la unidad a partir de la cual se crean todos los elementos básicos de la música, Symbol está formado únicamente por una duración. Actualmente se ha desarrollado dos tipos de elementos a partir de Symbol:
+\textbf{Symbol}: son la unidad a partir de la cual se crean todos los elementos básicos de la música, Symbol está formado únicamente por una duración. Actualmente se ha desarrollado dos tipos de elementos a partir de Symbol:
 \begin{itemize}
 
-	\item \textbf{Note}: Estos símbolos tienen asociado además de duración, determinada por el componente anterior, un tono que viene representado por un número que posteriormente será interpretado con la herramienta que generará el archivo de audio.
+	\item \textbf{Note}: estos símbolos tienen asociado además de duración, determinada por el componente anterior, un tono que viene representado por un número que posteriormente será interpretado con la herramienta que generará el archivo de audio.
 
-	\item \textbf{Chord}: Los acordes están formados de la misma manera que las notas, pero en lugar de tener asociado un único tono pueden tener de dos a cuatro tonos diferentes. En la práctica, esto se traduce a varios tonos sonando a la vez durante el mismo tiempo dentro de la pieza musical sin la necesidad de múltiples voces.
+	\item \textbf{Chord}: los acordes están formados de la misma manera que las notas, pero en lugar de tener asociado un único tono pueden tener de dos a cuatro tonos diferentes. En la práctica, esto se traduce a varios tonos sonando a la vez durante el mismo tiempo dentro de la pieza musical sin la necesidad de múltiples voces.
 
 \end{itemize}
  
