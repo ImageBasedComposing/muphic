@@ -1,7 +1,7 @@
 \section{Algoritmos de Composición}
 \label{sec:algComposicion}
 
-\torev{Última revisión realizada el 25-06-2012}
+\gotrev{Última revisión realizada el 26-06-2012}
 
 En esta sección se explicarán de forma exhaustiva los procesos que se siguen para componer música a partir de los datos que nos proporciona el análisis de imagen.\\
 
@@ -19,7 +19,7 @@ Para la voz principal se ha dejado la posibilidad de elegir entre dos versiones 
 
 La primera versión (ComposerFigMelody):
 \begin{itemize}
-	\item Procesar la figura: El algoritmo de entrada dispone de una figura, en la que se va a basar más adelante para componer. Antes hace falta un proceso de normalización para que todas las figuras puedan ser interpretadas correctamente. \color{blue} Para ello se extraen los vértices ordenados de la figura de tal forma que el primer vértice sea el más cercano a la parte superior (en caso de tener varios candidatos se escoge el que esté más a la izquierda) de la imagen y los siguientes se recorren en sentido horario\color{black}. Además, durante el proceso, se irá calculando la longitud de los lados de la figura.
+	\item Procesar la figura: El algoritmo de entrada dispone de una figura, en la que se va a basar más adelante para componer. Antes hace falta un proceso de normalización para que todas las figuras puedan ser interpretadas correctamente. Para ello se extraen los vértices ordenados de la figura de tal forma que el primer vértice sea el más cercano a la parte superior (en caso de tener varios candidatos se escoge el que esté más a la izquierda) de la imagen y los siguientes se recorren en sentido horario. Además, durante el proceso, se irá calculando la longitud de los lados de la figura.
 
 	\item Calcular duraciones: Para poder obtener las duraciones de las futuras notas se hace una correpondencia directa con la longitud de los lados. De este modo la duración total del trozo de música a componer es la suma de todas la longitudes y para cada lado se calcula cuánta duración le corresponde. Obviamente se hace una aproximación, ya que los valores de duración de las notas son limitados respecto al rango de valores de los números reales.
 
@@ -182,7 +182,7 @@ Veamos un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz
 		\label{fig:Figura2Voz2}
 		\end{figure}
 
-	\item Obtener tonos (Figuras ~\ref{fig:Figura3Voz2} y ~\ref{fig:Figura4Voz2}): En la primera figura podemos observar los tonos generados sin usar técnicas de contrapunto. La tercera y sexta nota generada produce una disonancia de larga duración (negra) con la voz principal. \color{blue} Si se aplican las técnicas contrapuntísticas (reglas melódicas de intervalos horizontales e intervalos verticales, \cite{Contrapunto}) podemos comprobar cómo se han cambiado por un tono cercano sin perder la idea del salto de tono que nos indicaba el ángulo de los vértices. \color{black}
+	\item Obtener tonos (Figuras ~\ref{fig:Figura3Voz2} y ~\ref{fig:Figura4Voz2}): En la primera figura podemos observar los tonos generados sin usar técnicas de contrapunto. La tercera y sexta nota generada produce una disonancia de larga duración (negra) con la voz principal. Si se aplican las técnicas contrapuntísticas (reglas melódicas de intervalos horizontales e intervalos verticales, \cite{Contrapunto}) podemos comprobar cómo se han cambiado por un tono cercano sin perder la idea del salto de tono que nos indicaba el ángulo de los vértices.
 
 		\begin{figure}[!htbp]
 		\centering
