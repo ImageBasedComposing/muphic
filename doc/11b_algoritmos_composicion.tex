@@ -3,7 +3,7 @@
 
 \gotrev{Última revisión realizada el 26-06-2012}
 
-En esta sección se explicarán de forma exhaustiva los procesos que se siguen para componer música a partir de los datos que nos proporciona el análisis de imagen.\\
+En esta sección se explicarán de forma exhaustiva los procesos que se siguen para componer música a partir de los datos que proporciona el análisis de imagen.\\
 
 Para generar la música separamos el proceso de composición en diferentes voces, de tal modo que la unión de todas las voces da como resultado una pieza musical completa. En el estado actual del proyecto se han identificado cuatro voces diferentes, cada una con un papel especial dentro de la composición. 
 
@@ -14,7 +14,7 @@ A continuación se explicará el funcionamiento de los algoritmos de cada voz y 
 %----------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{1ª Voz: Melodía Principal}
 
-Normalmente en una composición suele haber una voz que destaca sobre las demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, vamos a componer a nivel de notas y la relación entre ellas. Una nota se separa en dos dimensiones: duración y tono. Siguiendo esta separación se ha dividido el proceso de composición en cuatro fases: procesar la figura, calcular duraciones, obtener tonos y sintetizar o unir las duraciones con los tonos.\\
+Normalmente en una composición suele haber una voz que destaca sobre las demás, que es la que el oído reconoce primero. Esta voz reproduce la melodía. Para poder crear la melodía, se va componer a nivel de notas y la relación entre ellas. Una nota se separa en dos dimensiones: duración y tono. Siguiendo esta separación se ha dividido el proceso de composición en cuatro fases: procesar la figura, calcular duraciones, obtener tonos y sintetizar o unir las duraciones con los tonos.\\
 Para la voz principal se ha dejado la posibilidad de elegir entre dos versiones diferentes del compositor. La primera que se desarrolló tiene algunos pequeños defectos que luego en la segunda versión del compositor se corrigieron.\\
 
 La primera versión (ComposerFigMelody):
@@ -23,9 +23,9 @@ La primera versión (ComposerFigMelody):
 
 	\item Calcular duraciones: Para poder obtener las duraciones de las futuras notas se hace una correpondencia directa con la longitud de los lados. De este modo la duración total del trozo de música a componer es la suma de todas la longitudes y para cada lado se calcula cuánta duración le corresponde. Obviamente se hace una aproximación, ya que los valores de duración de las notas son limitados respecto al rango de valores de los números reales.
 
-	\item Obtener tonos: Hallamos los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo (``Croma''\cite{bricksConvertsMusic} o \cite{ImageBaseComposition}). El proceso de cálculo de tono usado se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado \cite{portutesis}. Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos, de tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa. La primera nota desde la cual partimos a hacer los cambios de tono es la nota correspondiente al color de la figura, la cual se saca a través del sistema de colores-notas utilizado.
+	\item Obtener tonos: Se hallan los tonos a partir de los ángulos de la figura. En otros trabajos se han explorado diferentes maneras de conseguirlo (``Croma''\cite{bricksConvertsMusic} o \cite{ImageBaseComposition}). El proceso de cálculo de tono usado se basa en la idea de estabilidad e inestabilidad que se desarrolla en el trabajo de A. Pintado \cite{portutesis}. Una figura es estable cuanto más suave sea su contorno, es decir, cuantos menos picos, ángulos diferentes e irregularidades tenga. A. Pintado usa esta cualidad para generar ritmos a partir de figuras y líneas, aquí se va a usar para calcular tonos, de tal modo que un ángulo más abierto implica mayor cambio en el tono y viceversa. La primera nota desde la cual se parte para hacer los cambios de tono es la nota correspondiente al color de la figura, la cual se saca a través del sistema de colores-notas utilizado.
 
-	\item Sintetizar las notas: Combinamos las duraciones con los tonos obtenidos en la anterior fase teniendo en cuenta que cada vértice tiene asociado un tono y una duración. Al final se obtiene un trozo de música.
+	\item Sintetizar las notas: Se combinan las duraciones con los tonos obtenidos en la anterior fase teniendo en cuenta que cada vértice tiene asociado un tono y una duración. Al final se obtiene un trozo de música.
 
 \end{itemize}
 
@@ -65,7 +65,7 @@ Un ejemplo completo de composición sobre una figura de entrada (Figura~\ref{fig
 
 \begin{itemize}
 
-	\item Procesar la figura (Figura~\ref{fig:Figura1Voz1}): Ordenamos los vértices (identificados con números) y hallamos la longitud de los lados. \\
+	\item Procesar la figura (Figura~\ref{fig:Figura1Voz1}): Se ordenan los vértices (identificados con números) y se halla la longitud de los lados. \\
 
 		\begin{figure}[!htbp]
 		\centering
@@ -101,7 +101,7 @@ Para conseguir el tercero y último tono, se calcula la diferencia del último v
 
 \end{itemize}
 
-Y con la misma figura (Figura~\ref{fig:Figura0Voz1}), vemos cual sería la salida de la primera versión del algoritmo (ComposerFigMelody1):
+Y con la misma figura (Figura~\ref{fig:Figura0Voz1}), se ve cual sería la salida de la primera versión del algoritmo (ComposerFigMelody1):
 
 \begin{itemize}
 	
@@ -150,7 +150,7 @@ Las variaciones aplicadas intentarán que los cambios sean mínimos, por ejemplo
 
 \end{itemize}
 
-Veamos un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz2}):
+Se muestra un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz2}):
 
 		\begin{figure}[!htbp]
 		\centering
@@ -164,7 +164,7 @@ Veamos un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz
 
 	\item Procesar la figura: Igual que en los anteriores ejemplos se calcula la longitud de los lados de la figura y el orden de los vértices.
 
-	\item Calcular duraciones (Figuras ~\ref{fig:Figura1Voz2} y ~\ref{fig:Figura2Voz2}): En la primera figura vemos las duraciones obtenidas sin adaptar y en la segunda figura se puede observar cómo la duración de algunos lados ha disminuido para conseguir la duración deseada.
+	\item Calcular duraciones (Figuras ~\ref{fig:Figura1Voz2} y ~\ref{fig:Figura2Voz2}): En la primera figura se ven las duraciones obtenidas sin adaptar y en la segunda figura se puede observar cómo la duración de algunos lados ha disminuido para conseguir la duración deseada.
 
  		\begin{figure}[!htbp]
 		\centering
@@ -182,7 +182,7 @@ Veamos un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz
 		\label{fig:Figura2Voz2}
 		\end{figure}
 
-	\item Obtener tonos (Figuras ~\ref{fig:Figura3Voz2} y ~\ref{fig:Figura4Voz2}): En la primera figura podemos observar los tonos generados sin usar técnicas de contrapunto. La tercera y sexta nota generada produce una disonancia de larga duración (negra) con la voz principal. Si se aplican las técnicas contrapuntísticas (reglas melódicas de intervalos horizontales e intervalos verticales, \cite{Contrapunto}) podemos comprobar cómo se han cambiado por un tono cercano sin perder la idea del salto de tono que nos indicaba el ángulo de los vértices.
+	\item Obtener tonos (Figuras ~\ref{fig:Figura3Voz2} y ~\ref{fig:Figura4Voz2}): En la primera figura se puede observar los tonos generados sin usar técnicas de contrapunto. La tercera y sexta nota generada produce una disonancia de larga duración (negra) con la voz principal. Si se aplican las técnicas contrapuntísticas (reglas melódicas de intervalos horizontales e intervalos verticales, \cite{Contrapunto}) se puede comprobar cómo se han cambiado por un tono cercano sin perder la idea del salto de tono que indicaba el ángulo de los vértices.
 
 		\begin{figure}[!htbp]
 		\centering
@@ -202,7 +202,7 @@ Veamos un ejemplo con la siguiente figura de entrada (Figura~\ref{fig:Figura0Voz
 		\label{fig:Figura4Voz2}
 		\end{figure}
 
-	\item Sintetizar las notas (Partitura de Figura~\ref{fig:Figura4Voz2}): Igual que la primera voz pero añadimos silencios si son necesarios. En este ejemplo no son necesarios.
+	\item Sintetizar las notas (Partitura de Figura~\ref{fig:Figura4Voz2}): Igual que la primera voz pero se añaden silencios si son necesarios. En este ejemplo no lo son.
 
 \end{itemize}
 
@@ -240,7 +240,7 @@ Otra posibilidad habilitada para el bajo es usar el algoritmo de la primera voz 
 
 La cuarta voz será la encargada de la parte de percusión dentro de la pieza musical.
 
-El algoritmo desarrollado se inspira en el concepto de inestabilidad de una figura de A. Pintado \cite{portutesis}. Separamos el proceso en 3 pasos:
+El algoritmo desarrollado se inspira en el concepto de inestabilidad de una figura de A. Pintado \cite{portutesis}. Se separa el proceso en 3 pasos:
 
 \begin{itemize}
 	\item Asignación de vértices: Primero se crea un ritmo que consiste en pulsos largos de duración configurable (por defecto redondas). A cada pulso le es asignado una serie de vértices dependiendo de la densidad de vértices de la figura (a mayor número de vértices, se le asignarán más a cada pulso). Hay que tener en cuenta que los vértices están ordenados como en los anteriores algoritmos.
@@ -306,7 +306,7 @@ donde pR = 0.45, pG = 0.35 y pB = 0.20 son las constantes de influencia de cada 
 
 	\item Componer voces: Tras haber ordenado las figuras por vistosidad se va componiendo con cada una de forma iterativa las distintas voces. En este caso solo se compone la melodía y el ritmo con cada una de las figuras.
 
-	\item Mezclar voces: Una vez tenemos todas las voces compuestas las juntamos y creamos la pieza musical añadiendo todos los parámetros necesarios (tempo, armadura de clave, título de la pieza musical, ...).
+	\item Mezclar voces: Una vez se tienen todas las voces compuestas se juntan y se crea la pieza musical añadiendo todos los parámetros necesarios (tempo, armadura de clave, título de la pieza musical, ...).
 
 \end{itemize}
 
@@ -317,13 +317,13 @@ En la segunda versión del Mezclador, se tienen en cuenta las cuatro voces dispo
 
 	\item Componer voces: Para la segunda versión del Mezclador se van a diferenciar dos tipos de figuras: figuras padre y figuras hija. Las llamadas figuras hija son aquellas que se localizan dentro de otra figura. Las figuras hija pueden tener a su vez otras figuras hija. Las figuras padre son aquellas que no forman parte de otra figura (es decir, no son hijas de ninguna figura) y pueden contener figuras hija. Es fácil de clasificarlas por la estructura arbórea en la que están organizadas.
 
-Una vez las tenemos clasificadas vamos iterando por cada figura padre componiendo su melodía, bajo y ritmo y si tiene alguna figura hija, entonces también se añade la segunda melodía dando como entrada al algoritmo de composición de acompañamiento (segunda voz) la figura hija y la melodía ya compuesta. Por cada figura interior (hija) se compone un nuevo bloque de la figura padre con diferentes acompañamientos.
+Una vez están clasificadas, se va iterando por cada figura padre componiendo su melodía, bajo y ritmo y si tiene alguna figura hija, entonces también se añade la segunda melodía dando como entrada al algoritmo de composición de acompañamiento (segunda voz) la figura hija y la melodía ya compuesta. Por cada figura interior (hija) se compone un nuevo bloque de la figura padre con diferentes acompañamientos.
 
 	\item Mezclar voces: Se realiza de la misma forma que la primera versión del Mezclador.
 
 \end{itemize}
 
-Veamos un ejemplo de la segunda versión del algoritmo, para simplificar se usará las figuras vistas anteriormente (Figura~\ref{fig:Figura0Mixer}).
+Se muestra un ejemplo de la segunda versión del algoritmo, para simplificar se usará las figuras vistas anteriormente (Figura~\ref{fig:Figura0Mixer}).
 
 		\begin{figure}[!p]
 		%\begin{figure}[p]
