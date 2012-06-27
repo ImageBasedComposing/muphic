@@ -86,12 +86,14 @@
   \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
 
+
 \include{1_titulo}
 \include{2_prefacio}
 \include{3_4_tagsfirmas}
 \include{5_agradecimientos}
 % 6_índice
-\tableofcontents
+\hbox{}\newpage
+
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -140,7 +142,11 @@
   \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
 
+
 \pagenumbering{arabic}
+\tableofcontents
+\hbox{}\newpage
+\hbox{}\newpage
 \include{7_intro}
 \include{11pre_guia_de_uso}
 \include{11_diseno}
