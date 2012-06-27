@@ -414,7 +414,7 @@
          <item>
           <widget class="QComboBox" name="filterSelComboBox">
            <property name="currentIndex">
-            <number>3</number>
+            <number>0</number>
            </property>
            <item>
             <property name="text">
@@ -423,7 +423,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Adaptative Threshold</string>
+             <string>Adaptive Threshold</string>
             </property>
            </item>
            <item>
