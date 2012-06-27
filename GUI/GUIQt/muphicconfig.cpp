@@ -750,7 +750,7 @@ void MuphicConfig::on_comboBox_v3Composer_currentIndexChanged(int index)
     if(index != 2)
         usrConf->setMuCompVoice3(index);
     else
-        usrConf->setMuCompVoice1(-1);
+        usrConf->setMuCompVoice3(-1);
 }
 
 void MuphicConfig::on_comboBox_v3Instrument_currentIndexChanged(int index)
@@ -808,7 +808,7 @@ void MuphicConfig::on_comboBox_v4Composer_currentIndexChanged(int index)
     if(index != 1)
         usrConf->setMuCompVoice4(index);
     else
-        usrConf->setMuCompVoice1(-1);
+        usrConf->setMuCompVoice4(-1);
 }
 
 void MuphicConfig::on_comboBox_v4Instrument_currentIndexChanged(int index)
