@@ -438,7 +438,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Multiple Threshold</string>
+             <string>Color Threshold</string>
             </property>
            </item>
           </widget>
