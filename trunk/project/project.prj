@@ -1,7 +1,7 @@
 format 76
 "project"
-  revision 8
-  modified_by 2 "Vladimir"
+  revision 9
+  modified_by 2 "Usuario"
 
 
   
@@ -31,7 +31,7 @@ format 76
   show_infonote yes drawing_language uml show_stereotype_properties no
   
   class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white 
-  font_size 8
+  font_size 12
   diagram_format A4
 
   image_root_dir ""
@@ -228,7 +228,7 @@ format 76
     end
 
     classdiagram 134658 "phic"
-      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      draw_all_relations no hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
 
@@ -455,7 +455,7 @@ format 76
       
       classrelation 142978 // <directional aggregation>
 	relation 142978 o-->
-	  a role_name "" multiplicity "1" private
+	  a role_name "" private
 	    classrelation_ref 142978 // <directional aggregation>
 	  b parent class_ref 141826 // UsrConf
       end
@@ -1316,7 +1316,7 @@ format 76
 	-_->
 	  stereotype "uses"
 	  on 
-	  package_ref 141186 // Abc2midi
+	  package_ref 141186 // Modulo de composición
       end
 
       classrelation 145282 // <generalisation>
@@ -1324,6 +1324,13 @@ format 76
 	  a public
 	    classrelation_ref 145282 // <generalisation>
 	  b parent class_ref 144258 // AudioConvert
+      end
+
+      simplerelation 148354
+	-_->
+	  stereotype "uses"
+	  on 
+	  package_ref 147714 // abc2midi
       end
     end
 
@@ -1388,7 +1395,14 @@ format 76
 	-_->
 	  stereotype "uses"
 	  on 
-	  package_ref 141058 // Timidity
+	  package_ref 141058 // Módulo de análisis
+      end
+
+      simplerelation 148226
+	-_->
+	  stereotype "uses"
+	  on 
+	  package_ref 147842 // Timidity
       end
     end
 
@@ -1416,9 +1430,18 @@ format 76
       draw_all_relations default hide_attributes default hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
+
+    classdiagram 174466 "MuGeneralClases"
+      draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
   end
 
-  package_ref 141058 // Timidity
+  package_ref 141058 // Módulo de análisis
 
-  package_ref 141186 // Abc2midi
+  package_ref 141186 // Modulo de composición
+
+  package_ref 147714 // abc2midi
+
+  package_ref 147842 // Timidity
 end
