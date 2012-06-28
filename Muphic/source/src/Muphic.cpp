@@ -54,6 +54,8 @@ int main( int argc, const char* argv[] )
 
         cout << "Image analysis beginning" << endl << endl;
 
+		remove("analysis_log");
+
 		l = new Launcher();
 		string argsPhic[] = {usrConfPath, picPath};
 		l->launch(2, Launcher::PHIC, argsPhic);
@@ -74,6 +76,7 @@ int main( int argc, const char* argv[] )
 
         cout << "Image-based composing beginning" << endl << endl;
 
+		remove("composition_log");
         std::string analyzedPicPath = changeExtension(picPath, "");
 
 		l = new Launcher();
