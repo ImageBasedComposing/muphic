@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
 		IplImage* *images;
 		int n = 0;
 
-		analizer->analizePerRegions(imagesrc, 3, images, n);
+		analizer->analizePerRegions(imagesrc, phic->usrConf->getPhicColorLevels(), images, n);
 
 		analizer->addFiguresfromPics(imagesrc, images, n, figuras, phic->usrConf->getPhicPolygonSimp(), phic->usrConf->getPhicNoiseSelec());
 	}
