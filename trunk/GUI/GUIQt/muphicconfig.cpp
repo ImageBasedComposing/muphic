@@ -39,7 +39,7 @@ void MuphicConfig::initialize()
     //We initialize Mu
     usrConf->setMuReconColors(8);
     usrConf->setMuCompVoice1(2);
-    usrConf->setMuInstrVoice1(45);
+    usrConf->setMuInstrVoice1(0);
     usrConf->setMuCompVoice2(2);
     usrConf->setMuInstrVoice2(73);
     usrConf->setMuCompVoice3(2);
@@ -950,6 +950,12 @@ void MuphicConfig::on_comboBox_Tempo_currentIndexChanged(int index)
 
 void MuphicConfig::on_pushButton_score_clicked()
 {
-    std::string composedPDF = "\"" + removeLocalPath(changeExtension(outputFile.toStdString(), "xhtml")) + "\"";
+
+    std::string composedPDF = removeLocalPath(changeExtension(outputFile.toStdString(), "xhtml"));
+	
+	#ifdef __WINDOWS
+                composedPDF = "\"" + composedPDF + "\"";
+	#endif
+
     QDesktopServices::openUrl(QUrl(composedPDF.c_str(), QUrl::TolerantMode));
 }
