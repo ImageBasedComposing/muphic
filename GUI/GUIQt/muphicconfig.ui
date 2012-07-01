@@ -29,7 +29,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>TabWidget</string>
+   <string>Muphic</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>logo.png</normaloff>logo.png</iconset>
   </property>
   <property name="currentIndex">
    <number>0</number>
